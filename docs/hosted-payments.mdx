@@ -4,7 +4,7 @@ title: Hosted Payments
 sidebar_label: Hosted Payments
 ---
 
-## What is “Hosted Payments”?
+## What is Hosted Payments?
 
 It is one of the existing ways to implement a Payment Gateway solution (like MONEI) from any website, CMS, or e-commerce platform.
 
@@ -41,7 +41,7 @@ These two operations are quite similar and share all the same Request Params, ex
 
 The main difference is that a `sale` transaction will instantly charge the customer, while an `auth` will only check if the payment information is valid and retain/freeze the amount of money until you decide to `capture` or `void` the payment.
 
-## Capture & Void
+### Capture & Void
 
 ```
 https://api.monei.net/v1/capture
@@ -55,5 +55,29 @@ In order to finish an `auth` process, you will need to execute either a `capture
 
 :::note
 An authorized transaction can only be captured once, and that the captured amount can be equal or less than the one previously authorized.
+:::
 
 Please refer to the Request Params section to check which values are required in `capture` or `void` request.
+
+### Refunds
+
+```
+https://api.monei.net/v1/refund
+```
+
+After a successful `sale` or `capture`, a charge is placed. At this point, the only way to “go back” is to do a refund.
+
+Calling the refund endpoint will require you to specify which charge you want to refund. This will take that previous charge, and return to the customer the specified amount.
+
+On the very same charge, it is possible to do either a full refund or many partial refunds, until the whole amount is refunded. Please refer to the Request Params section to check which values are required in a refund request.
+
+## Request Params
+
+| Key                                                                                                                                              | <div style={{width: 140}}>Type</div>                          | Example                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------ |
+| **account_id** `required` <br/>Account identifier you can find in your credentials.                                                              | string                                                        | aaaaaaaa-1111-bbbb-2222-cccccccccccc |
+| **amount** `required`                                                                                                                            | string                                                        | 19.99                                |
+| **currency** `required`                                                                                                                          | [iso_4217](https://en.wikipedia.org/wiki/ISO_4217)            | EUR                                  |
+| **order_id** `required` <br/>Unique reference or identifier of an order assigned by the merchant.                                                | string <br/>(1-32)[a-zA-Z0-9]                                 | X25921                               |
+| **checkout_id** `required` for capture, void and refund. <br/>Unique identifier previously provided by MONEI during an auth or sale transaction. | string                                                        | a991c3df2afebbbda26d1d72ff8818a0     |
+| **shop_country** `required`                                                                                                                      | [iso-3166-1alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1) | ES                                   |
