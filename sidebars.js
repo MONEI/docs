@@ -1,5 +1,7 @@
 module.exports = {
-  someSidebar: {
-    Integrations: ['hosted-payments']
-  }
+  docs: [
+    {
+      'Hosted payment page': ['hosted-payment-page']
+    }
+  ]
 };
