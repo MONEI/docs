@@ -17,7 +17,8 @@
   --ifm-code-font-size: 85%;
   --ifm-font-size-base: 15px;
   --ifm-font-family-base: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
-
+  --ifm-tabs-padding-vertical: 0.5rem;
+  --ifm-tabs-padding-horizontal: 1.2rem;
 }
 
 .table-of-contents {
@@ -43,4 +44,9 @@
 
 table th {
   text-align: unset;
+}
+
+.preview-frame {
+  border-radius: var(--ifm-global-radius);
+  border: none;
 }

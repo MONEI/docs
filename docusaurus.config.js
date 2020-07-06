@@ -5,6 +5,10 @@ module.exports = {
   baseUrl: '/',
   favicon: 'https://static.monei.net/favicon.png',
   themeConfig: {
+    disableDarkMode: true,
+    prism: {
+      theme: require('prism-react-renderer/themes/nightOwl')
+    },
     navbar: {
       logo: {
         alt: 'MONEI',

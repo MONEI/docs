@@ -1,0 +1,218 @@
+---
+id: ui-components
+title: UI Components
+sidebar_label: Overview
+---
+
+MONEI UI Components enables you to collect sensitive payment information using customizable UI components.
+
+UI components includes features like:
+
+- Formatting card information automatically as it’s entered
+- Translating placeholders into your customer’s preferred language
+- Using responsive design to fit the width of your customer’s screen or mobile device
+- Customizing the styling to match the look and feel of your checkout flow
+
+## Setup monei.js components
+
+You need to include `monei.js` on your checkout page by either adding the script tag to the `head` of your HTML file, or importing it from the `monei-js` [module](https://www.npmjs.com/package/@monei-js/components):
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="html"
+  values={[
+    {label: 'HTML', value: 'html'},
+    {label: 'ES Module', value: 'module'}
+  ]}>
+<TabItem value="html">
+
+```html
+<script src="https://js.monei.net/v1/monei.js"></script>
+```
+
+</TabItem>
+<TabItem value="module">
+
+```
+npm i @monei-js/components
+```
+
+</TabItem>
+</Tabs>
+
+## Card Input Component
+
+<Tabs
+  defaultValue="js"
+  values={[
+    {label: 'HTML + JS', value: 'js'},
+    {label: 'React JS', value: 'react'}
+]}>
+<TabItem value="js">
+
+The Card Input Component lets you collect card information all within one Component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC.
+
+<Tabs
+  defaultValue="result"
+  values={[
+    {label: 'Result', value: 'result'},
+    {label: 'HTML', value: 'html'},
+    {label: 'CSS', value: 'css'},
+    {label: 'JavaScript', value: 'js'}
+  ]}>
+<TabItem value="result">
+
+<iframe
+  src="/card-input-example.html"
+  height="103px"
+  width="100%"
+  className="preview-frame"></iframe>
+
+</TabItem>
+<TabItem value="html">
+
+```html
+<script src="https://js.monei.net/v1/monei.js"></script>
+
+<form action="/charge" method="post" id="payment-form">
+  <div class="card-field">
+    <div id="card-input">
+      <!-- A MONEI Card Input Component will be inserted here. -->
+    </div>
+    <!-- Used to display card errors. -->
+    <div id="card-error"></div>
+  </div>
+  <button type="submit" id="payment-button">
+    Submit payment
+  </button>
+</form>
+```
+
+</TabItem>
+<TabItem value="css">
+
+```css
+#card-input {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  height: 38px;
+  box-sizing: border-box;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+#card-input.is-focused {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+#card-input.is-invalid {
+  border-color: #fa755a;
+}
+#card-error {
+  color: #fa755a;
+  padding: 4px 0;
+  font-size: 14px;
+}
+```
+
+</TabItem>
+<TabItem value="js">
+
+```js
+var container = document.getElementById('card-input');
+var errorText = document.getElementById('card-error');
+
+// Custom styling can be passed to options when creating a Card Input Component.
+var style = {
+  input: {
+    color: '#8961a5',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#848589'
+    }
+  },
+  invalid: {
+    color: '#fa755a'
+  }
+};
+
+// Create an instance of the card Card Input.
+var cardInput = monei.CardInput({
+  // Your MONEI account ID
+  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
+  style: style,
+  onFocus: function () {
+    container.classList.add('is-focused');
+  },
+  onBlur: function () {
+    container.classList.remove('is-focused');
+  },
+  onChange: function (props) {
+    // Handle real-time validation errors.
+    if (props.isTouched && props.error) {
+      container.classList.add('is-invalid');
+      errorText.innerText = props.error;
+    } else {
+      container.classList.remove('is-invalid');
+      errorText.innerText = '';
+    }
+  }
+});
+
+// Render an instance of the Card Input into the `card_input` <div>.
+cardInput.render(container);
+
+// Handle form submission.
+var paymentForm = document.getElementById('payment-form');
+var paymentButton = document.getElementById('payment-button');
+paymentForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  paymentButton.disabled = true;
+  monei
+    .createToken(cardInput)
+    .then(function (result) {
+      console.log(result);
+      if (result.error) {
+        // Inform the user if there was an error.
+        container.classList.add('is-invalid');
+        errorText.innerText = result.error;
+      } else {
+        // Send the token to your server.
+        moneiTokenHandler(result.token);
+      }
+      paymentButton.disabled = false;
+    })
+    .catch(function (error) {
+      paymentButton.disabled = false;
+      console.log(error);
+    });
+});
+
+// Submit the form with the token ID.
+function moneiTokenHandler(token) {
+  // Insert the token ID into the form so it gets submitted to the server
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'paymentToken');
+  hiddenInput.setAttribute('value', token);
+  paymentForm.appendChild(hiddenInput);
+
+  // Submit the form
+  paymentForm.submit();
+}
+```
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+<TabItem value="react">
+
+The Card Input Component lets you collect card information all within one Component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC.
+
+</TabItem>
+</Tabs>

@@ -3,6 +3,9 @@ module.exports = {
     {
       'Hosted payment page': ['hosted-payment-page']
     },
+    {
+      'UI Components': ['ui-components']
+    },
     'testing'
   ]
 };
