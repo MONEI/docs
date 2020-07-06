@@ -6,6 +6,7 @@ module.exports = {
     {
       'UI Components': ['ui-components']
     },
+    'charges-api',
     'testing'
   ]
 };
