@@ -32,6 +32,11 @@ POST https://api.monei.net/v1/charges
   "order_id": "aaaa123456",
   "account_id": "c03303a7-8a24-4298-a3a3-545c3205c548",
   "amount": "10.25",
-  "currency": "EUR"
+  "currency": "EUR",
+  "charges": {
+    "data": [],
+    "has_more": false,
+    "url": "/v1/charges?checkout_id=pi_1Dg58t2eZvKYlo2CgrE1NRFw"
+  }
 }
 ```

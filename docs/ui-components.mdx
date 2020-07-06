@@ -227,6 +227,7 @@ The Card Input Component lets you collect card information all within one Compon
 
 ```typescript
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import cn from 'classnames';
 import {CardInput, CardInputProps, createToken} from '@monei-js/components';
 
@@ -318,6 +319,8 @@ const App = () => {
     </form>
   );
 };
+
+ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 </TabItem>
