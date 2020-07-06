@@ -214,5 +214,141 @@ function moneiTokenHandler(token) {
 
 The Card Input Component lets you collect card information all within one Component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC.
 
+<Tabs
+  defaultValue="ts"
+  values={[
+    {label: 'TypeScript', value: 'ts'},
+    {label: 'CSS', value: 'css'}
+  ]}>
+
+<TabItem value="ts">
+
+```typescript
+import * as React from 'react';
+import cn from 'classnames';
+import {CardInput, CardInputProps, createToken} from '@monei-js/components';
+
+// Set React driver for Card Input Component
+const CardInputComponent: React.FC<CardInputProps> = CardInput.driver('react', {
+  React: React,
+  ReactDOM: ReactDOM
+});
+
+// Custom styling can be passed to options when creating a Card Input Component.
+const style = {
+  input: {
+    color: '#8961a5',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#848589'
+    }
+  },
+  invalid: {
+    color: '#fa755a'
+  }
+};
+
+const App = () => {
+  // Create ref for CardInputComponent
+  const ref = React.useRef();
+  const [isFocused, setFocused] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+
+  // POST the token ID to your backend.
+  const moneiTokenHandler = async (token) => {
+    const response = await fetch('/charge', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({token})
+    });
+
+    return response.json();
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+    event.preventDefault();
+    // Pass current CardInputComponent ref to create token
+    const result = await createToken(ref.current);
+    setLoading(false);
+    if (result.error) {
+      // Inform the user if there was an error.
+      setError(result.error);
+    } else {
+      setError(null);
+      // Send the token to your server.
+      return moneiTokenHandler(result.token);
+    }
+  };
+
+  return (
+    <form id="payment-form" onSubmit={handleSubmit}>
+      <div className="card-field">
+        <div
+          id="card-input"
+          className={cn({'is-focused': isFocused, 'is-invalid': error !== null})}>
+          <CardInputComponent
+            ref={ref}
+            accountId="fe6432a7-8a24-4288-a3a3-545c3205b549"
+            style={style}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            onChange={(props) => {
+              // Handle real-time validation errors.
+              if (props.isTouched && props.error) {
+                setError(props.error);
+              } else {
+                setError(null);
+              }
+            }}
+          />
+        </div>
+        <div id="card-error">{error}</div>
+      </div>
+      <button type="submit" disabled={isLoading}>
+        Submit payment
+      </button>
+    </form>
+  );
+};
+```
+
+</TabItem>
+
+<TabItem value="css">
+
+```css
+#card-input {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  height: 38px;
+  box-sizing: border-box;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+#card-input.is-focused {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+#card-input.is-invalid {
+  border-color: #fa755a;
+}
+#card-error {
+  color: #fa755a;
+  padding: 4px 0;
+  font-size: 14px;
+}
+```
+
+</TabItem>
+
+</Tabs>
+
 </TabItem>
 </Tabs>
