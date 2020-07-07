@@ -393,78 +393,71 @@ By default, we will refund the whole amount.
 
 ```js
 const res = {
-  id: '98f4cd8babd7af2786352836e642aa3e',
-  type: 'charge.partially_refunded',
+  id: 'b2cee2847635411b04d39d3d3be2c61e',
   accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
-  livemode: false,
-  objectId: 'b2cee2847635411b04d39d3d3be2c61e',
-  objectType: 'charge',
-  createdAt: 1593766211,
-  object: {
-    id: 'b2cee2847635411b04d39d3d3be2c61e',
-    accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
-    providerId: 'a16c4a7e-37d2-483f-9a2f-9436efb1100e',
-    checkoutId: '7ab1a6638b028f22b0338e0002faa5c9',
-    providerReferenceId: '11128bcc76d3',
-    createdAt: 1593705701,
-    updatedAt: 1593766211,
-    amount: 110,
-    acquirer: 'BBVA',
-    authorizationCode: '368459',
-    billingDetails: {
-      email: 'dmitriy.nevzorov@microapps.com',
-      name: 'Dmitriy Nevzorov',
-      company: null,
-      phone: null,
-      address: {
-        city: 'Malaga',
-        country: 'ES',
-        line1: 'Test',
-        line2: null,
-        zip: '20000',
-        state: 'MA'
-      }
-    },
-    currency: 'EUR',
-    customer: {
-      email: 'dmitriy.nevzorov@microapps.com',
-      name: 'Dmitriy Nevzorov',
-      phone: null
-    },
-    description: 'monei-hp7 - #13516173312071',
-    livemode: false,
-    orderId: '13516173312071',
-    paymentMethod: {
-      brand: 'visa',
+  providerId: 'a16c4a7e-37d2-483f-9a2f-9436efb1100e',
+  checkoutId: '7ab1a6638b028f22b0338e0002faa5c9',
+  providerReferenceId: '11128bcc76d3',
+  createdAt: 1593705701,
+  updatedAt: 1593766211,
+  amount: 110,
+  acquirer: 'BBVA',
+  authorizationCode: '368459',
+  billingDetails: {
+    email: 'dmitriy.nevzorov@microapps.com',
+    name: 'Dmitriy Nevzorov',
+    company: null,
+    phone: null,
+    address: {
+      city: 'Malaga',
       country: 'ES',
-      type: 'credit',
-      threeDSecure: false,
-      phoneNumber: null,
-      last4: '0004',
-      method: 'CREDITCARD'
-    },
-    refundedAmount: 30,
-    lastRefundAmount: 10,
-    lastRefundReason: 'Requested by customer',
-    shippingDetails: null,
-    shop: {
-      name: 'monei-hp7',
-      country: 'ES'
-    },
-    status: 'PARTIALLY_REFUNDED',
-    statusCode: '900',
-    statusMessage: 'Refund / Confirmation approved',
-    sessionDetails: {
-      ip: '31.134.191.149',
-      countryCode: null,
-      lang: 'en',
-      deviceType: 'desktop',
-      deviceModel: null,
-      browser: 'Chrome',
-      browserVersion: '83.0.4103.116',
-      os: 'Mac OS',
-      osVersion: '10.15.5'
+      line1: 'Test',
+      line2: null,
+      zip: '20000',
+      state: 'MA'
     }
-  }
+  },
+  currency: 'EUR',
+  customer: {
+    email: 'dmitriy.nevzorov@microapps.com',
+    name: 'Dmitriy Nevzorov',
+    phone: null
+  },
+  description: 'monei-hp7 - #13516173312071',
+  livemode: false,
+  orderId: '13516173312071',
+  paymentMethod: {
+    brand: 'visa',
+    country: 'ES',
+    type: 'credit',
+    threeDSecure: false,
+    phoneNumber: null,
+    last4: '0004',
+    method: 'CREDITCARD'
+  },
+  refundedAmount: 30,
+  lastRefundAmount: 10,
+  lastRefundReason: 'Requested by customer',
+  shippingDetails: null,
+  shop: {
+    name: 'monei-hp7',
+    country: 'ES'
+  },
+  status: 'PARTIALLY_REFUNDED',
+  statusCode: '900',
+  statusMessage: 'Refund / Confirmation approved',
+  sessionDetails: {
+    ip: '31.134.191.149',
+    countryCode: null,
+    lang: 'en',
+    deviceType: 'desktop',
+    deviceModel: null,
+    browser: 'Chrome',
+    browserVersion: '83.0.4103.116',
+    os: 'Mac OS',
+    osVersion: '10.15.5'
+  },
+  // there is no next action
+  nextAction: null
 };
 ```
