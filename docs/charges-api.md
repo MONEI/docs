@@ -6,7 +6,7 @@ title: Charges API
 ## Create charge (without payment)
 
 ```
-POST https://api.monei.net/v1/charges
+POST https://api.monei.net/v1/charge
 ```
 
 #### Request
@@ -174,52 +174,10 @@ const res = {
 
 You can either redirect to the next action or use the id to initialize the payment widget.
 
-## Create charge (with payment)
-
-```
-POST https://api.monei.net/v1/charges
-```
-
-#### Request
-
-```json
-{
-  "amount": 10.25,
-  "order_id": "aaaa123456",
-  "payment": {
-    "token": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
-    "save": true
-  },
-  "session": {
-    "ip": "181.164.214.150",
-    "user_agent": "Mozilla/5.0 (Win...Chrome/71.0.3578.98 Safari/537.36"
-  },
-  "transaction_type": "auth",
-  "url_callback": "https://your-shop.com/callback?order_id=aaaa123456",
-  "url_complete": "https://your-shop.com/complete?order_id=aaaa123456"
-}
-```
-
-#### Response
-
-```json
-{
-  "id": "ch_059a01f07ff1949f1fb5ab",
-  "amount": 10.25,
-  "currency": "EUR",
-  "order_id": "aaaa123456",
-  "next_action": {
-    "type": "redirect_challenge",
-    "url": "https://api.monei.net/v1/charge/ch_059a01f07ff1949f1fb5ab/challenge"
-  },
-  "status": "PENDING_CHALLENGE"
-}
-```
-
 ## Capture charge
 
 ```
-POST https://api.monei.net/v1/charges/{id}/capture
+POST https://api.monei.net/v1/charge/{id}/capture
 ```
 
 #### Request
@@ -232,20 +190,94 @@ By default, we will capture the whole amount.
 
 #### Response
 
-```json
-{
-  "id": "ch_059a01f07ff1949f1fb5ac",
-  "amount": 10.25,
-  "currency": "EUR",
-  "order_id": "aaaa123456",
-  "status": "SUCCEEDED"
-}
+```js
+const res = {
+  id: '14f236aff52f0f91efd672eaf1dcc4bd',
+  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
+  checkoutId: 'bcb5b7a42c483ce1700b630e7fd4b2bd',
+  providerReferenceId: '11126ddac3c1',
+  createdAt: 1594133609,
+  updatedAt: 1594133633,
+  amount: 110,
+  authorizationCode: '474983',
+  billingDetails: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    company: 'microapps SL',
+    phone: '+346666666666',
+    address: {
+      city: 'Lanus',
+      country: 'AR',
+      line1: 'R. Balbin 1792',
+      line2: null,
+      zip: '1824',
+      state: 'B'
+    }
+  },
+  currency: 'EUR',
+  customer: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    phone: '+346666666666'
+  },
+  description: 'monei-hp8 - #14379133960355',
+  livemode: false,
+  orderId: '14379133960355',
+  paymentMethod: {
+    brand: 'visa',
+    country: 'ES',
+    type: 'credit',
+    threeDSecure: false,
+    phoneNumber: null,
+    last4: '0004',
+    method: 'CREDITCARD'
+  },
+  refundedAmount: null,
+  lastRefundAmount: null,
+  lastRefundReason: null,
+  shippingDetails: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    company: 'microapps SL',
+    phone: '+346666666666',
+    address: {
+      city: 'Lanus',
+      country: 'AR',
+      line1: 'R. Balbin 1792',
+      line2: null,
+      zip: '1824',
+      state: 'B'
+    }
+  },
+  shop: {
+    name: 'monei-hp8',
+    country: 'ES'
+  },
+  status: 'SUCCEEDED',
+  statusCode: '0',
+  statusMessage: 'Transaction Approved',
+  sessionDetails: {
+    ip: '181.164.214.164',
+    countryCode: null,
+    lang: 'es',
+    deviceType: 'desktop',
+    deviceModel: null,
+    browser: 'Chrome',
+    browserVersion: '83.0.4103.116',
+    os: 'Mac OS',
+    osVersion: '10.15.4',
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+  },
+  // there is no next action
+  nextAction: null
+};
 ```
 
 ## Void charge
 
 ```
-POST https://api.monei.net/v1/charges/{id}/void
+POST https://api.monei.net/v1/charge/{id}/void
 ```
 
 #### Request
@@ -256,20 +288,94 @@ POST https://api.monei.net/v1/charges/{id}/void
 
 #### Response
 
-```json
-{
-  "id": "ch_059a01f07ff1949f1fb5ac",
-  "amount": 10.25,
-  "currency": "EUR",
-  "order_id": "aaaa123456",
-  "status": "CANCELED"
-}
+```js
+const res = {
+  id: '14f236aff52f0f91efd672eaf1dcc4bd',
+  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
+  checkoutId: 'bcb5b7a42c483ce1700b630e7fd4b2bd',
+  providerReferenceId: '11126ddac3c1',
+  createdAt: 1594133609,
+  updatedAt: 1594133633,
+  amount: 110,
+  authorizationCode: '474983',
+  billingDetails: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    company: 'microapps SL',
+    phone: '+346666666666',
+    address: {
+      city: 'Lanus',
+      country: 'AR',
+      line1: 'R. Balbin 1792',
+      line2: null,
+      zip: '1824',
+      state: 'B'
+    }
+  },
+  currency: 'EUR',
+  customer: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    phone: '+346666666666'
+  },
+  description: 'monei-hp8 - #14379133960355',
+  livemode: false,
+  orderId: '14379133960355',
+  paymentMethod: {
+    brand: 'visa',
+    country: 'ES',
+    type: 'credit',
+    threeDSecure: false,
+    phoneNumber: null,
+    last4: '0004',
+    method: 'CREDITCARD'
+  },
+  refundedAmount: null,
+  lastRefundAmount: null,
+  lastRefundReason: null,
+  shippingDetails: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    company: 'microapps SL',
+    phone: '+346666666666',
+    address: {
+      city: 'Lanus',
+      country: 'AR',
+      line1: 'R. Balbin 1792',
+      line2: null,
+      zip: '1824',
+      state: 'B'
+    }
+  },
+  shop: {
+    name: 'monei-hp8',
+    country: 'ES'
+  },
+  status: 'CANCELLED',
+  statusCode: '0',
+  statusMessage: 'Transaction Cancelled',
+  sessionDetails: {
+    ip: '181.164.214.164',
+    countryCode: null,
+    lang: 'es',
+    deviceType: 'desktop',
+    deviceModel: null,
+    browser: 'Chrome',
+    browserVersion: '83.0.4103.116',
+    os: 'Mac OS',
+    osVersion: '10.15.4',
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+  },
+  // there is no next action
+  nextAction: null
+};
 ```
 
 ## Refund charge
 
 ```
-POST https://api.monei.net/v1/charges/{id}/refund
+POST https://api.monei.net/v1/charge/{id}/refund
 ```
 
 #### Request
