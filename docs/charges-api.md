@@ -6,44 +6,182 @@ title: Charges API
 ## Create charge (without payment)
 
 ```
-POST https://api.monei.net/v1/charge
+POST https://api.monei.net/v1/charges
 ```
 
 #### Request
-```json
-{
-  "amount": 10.25,
-  "order_id": "aaaa123456",
-  "transaction_type": "sale",
-  "url_callback": "https://your-shop.com/callback?order_id=aaaa123456",
-  "url_complete": "https://your-shop.com/complete?order_id=aaaa123456"
-}
+
+```js
+const req = {
+  amount: 110, // amount in cents as an integer
+  currency: 'EUR', // optional as we have allowed currency for an account
+  description: 'monei-hp8 - #14379133960355',
+  orderId: '14379133960355', // this is a fixed order id the same as in generated token
+  callbackUrl: 'https://mysite.com?callback=1',
+  completeUrl: 'https://mysite.com?completed=2',
+  cancelUrl: 'https://mysite.com?cancel=3',
+  transactionType: 'auth',
+  // this is for redirect flow with our payment page, we should validate that all methods are enabled
+  paymentMethodTypes: ['CREDITCARD'],
+  paymentMethod: {
+    // token should be created with the same order id that is passed as orderId
+    token: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+    // for direct payments
+    card: {
+      cvc: '454',
+      expMonth: '05',
+      expYear: '45',
+      number: '5454545454545454'
+    },
+    // if we want to generate sticky token
+    save: true
+  },
+  customer: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    phone: '+346666666666'
+  },
+  billingDetails: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    company: 'microapps SL',
+    phone: '+346666666666',
+    address: {
+      city: 'Lanus',
+      country: 'AR',
+      line1: 'R. Balbin 1792',
+      line2: null,
+      zip: '1824',
+      state: 'B'
+    }
+  },
+  shippingDetails: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    company: 'microapps SL',
+    phone: '+346666666666',
+    address: {
+      city: 'Lanus',
+      country: 'AR',
+      line1: 'R. Balbin 1792',
+      line2: null,
+      zip: '1824',
+      state: 'B'
+    }
+  },
+  shop: {
+    name: 'monei-hp8',
+    country: 'ES'
+  },
+  // only for s2s, in all other cases we should take session from the token
+  sessionDetails: {
+    ip: '181.164.214.164',
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+  }
+};
 ```
-We will use the default currency.
 
 #### Response
-```json
-{
-  "id": "ch_059a01f07ff1949f1fb5ab",
-  "amount": 10.25,
-  "currency": "EUR",
-  "order_id": "aaaa123456",
-  "next_action": {
-    "type": "redirect_payment",
-    "url": "https://pay.monei.net/charge/ch_059a01f07ff1949f1fb5ab"
+
+```js
+const res = {
+  id: '14f236aff52f0f91efd672eaf1dcc4bd',
+  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
+  checkoutId: 'bcb5b7a42c483ce1700b630e7fd4b2bd',
+  providerReferenceId: '11126ddac3c1',
+  createdAt: 1594133609,
+  updatedAt: 1594133633,
+  amount: 110,
+  authorizationCode: '474983',
+  billingDetails: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    company: 'microapps SL',
+    phone: '+346666666666',
+    address: {
+      city: 'Lanus',
+      country: 'AR',
+      line1: 'R. Balbin 1792',
+      line2: null,
+      zip: '1824',
+      state: 'B'
+    }
   },
-  "status": "PENDING_PAYMENT"
-}
+  currency: 'EUR',
+  customer: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    phone: '+346666666666'
+  },
+  description: 'monei-hp8 - #14379133960355',
+  livemode: false,
+  orderId: '14379133960355',
+  paymentMethod: {
+    brand: 'visa',
+    country: 'ES',
+    type: 'credit',
+    threeDSecure: false,
+    phoneNumber: null,
+    last4: '0004',
+    method: 'CREDITCARD'
+  },
+  refundedAmount: null,
+  lastRefundAmount: null,
+  lastRefundReason: null,
+  shippingDetails: {
+    email: 'leandro.marty@microapps.com',
+    name: 'Leandro Marty',
+    company: 'microapps SL',
+    phone: '+346666666666',
+    address: {
+      city: 'Lanus',
+      country: 'AR',
+      line1: 'R. Balbin 1792',
+      line2: null,
+      zip: '1824',
+      state: 'B'
+    }
+  },
+  shop: {
+    name: 'monei-hp8',
+    country: 'ES'
+  },
+  status: 'PENDING',
+  statusCode: null,
+  statusMessage: null,
+  sessionDetails: {
+    ip: '181.164.214.164',
+    countryCode: null,
+    lang: 'es',
+    deviceType: 'desktop',
+    deviceModel: null,
+    browser: 'Chrome',
+    browserVersion: '83.0.4103.116',
+    os: 'Mac OS',
+    osVersion: '10.15.4',
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+  },
+  nextAction: {
+    // can be also 3D_SECURE_CHALLENGE or whatever we need, I dont think we need to include REDIRECT as type,
+    // user can just check if redirectUrl is present
+    type: 'PAYMENT_PAGE',
+    redirectUrl: 'https://pay.monei.net/checkout/14f236aff52f0f91efd672eaf1dcc4bd/payment'
+  }
+};
 ```
+
 You can either redirect to the next action or use the id to initialize the payment widget.
 
 ## Create charge (with payment)
 
 ```
-POST https://api.monei.net/v1/charge
+POST https://api.monei.net/v1/charges
 ```
 
 #### Request
+
 ```json
 {
   "amount": 10.25,
@@ -63,6 +201,7 @@ POST https://api.monei.net/v1/charge
 ```
 
 #### Response
+
 ```json
 {
   "id": "ch_059a01f07ff1949f1fb5ab",
@@ -77,21 +216,22 @@ POST https://api.monei.net/v1/charge
 }
 ```
 
-
-
 ## Capture charge
 
 ```
-POST https://api.monei.net/v1/charge/{id}/capture
+POST https://api.monei.net/v1/charges/{id}/capture
 ```
 
 #### Request
+
 ```json
 {}
 ```
+
 By default, we will capture the whole amount.
 
 #### Response
+
 ```json
 {
   "id": "ch_059a01f07ff1949f1fb5ac",
@@ -102,20 +242,20 @@ By default, we will capture the whole amount.
 }
 ```
 
-
-
 ## Void charge
 
 ```
-POST https://api.monei.net/v1/charge/{id}/void
+POST https://api.monei.net/v1/charges/{id}/void
 ```
 
 #### Request
+
 ```json
 {}
 ```
 
 #### Response
+
 ```json
 {
   "id": "ch_059a01f07ff1949f1fb5ac",
@@ -123,22 +263,25 @@ POST https://api.monei.net/v1/charge/{id}/void
   "currency": "EUR",
   "order_id": "aaaa123456",
   "status": "CANCELED"
+}
 ```
-
 
 ## Refund charge
 
 ```
-POST https://api.monei.net/v1/charge/{id}/refund
+POST https://api.monei.net/v1/charges/{id}/refund
 ```
 
 #### Request
+
 ```json
 {}
 ```
+
 By default, we will refund the whole amount.
 
 #### Response
+
 ```json
 {
   "id": "ch_059a01f07ff1949f1fb5ac",
