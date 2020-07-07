@@ -23,7 +23,7 @@ const req = {
   transactionType: 'auth',
   // this is for redirect flow with our payment page, we should validate that all methods are enabled
   paymentMethodTypes: ['CREDITCARD'],
-  paymentDetails: {
+  payment: {
     // token should be created with the same order id that is passed as orderId
     token: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
     // for direct payments
