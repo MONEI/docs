@@ -3,7 +3,7 @@ id: charges-api
 title: Charges API
 ---
 
-## Create charge (without payment)
+## Create charge
 
 ```
 POST https://api.monei.net/v1/charges
