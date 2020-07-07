@@ -6,7 +6,7 @@ title: Charges API
 ## Create charge (without payment)
 
 ```
-POST https://api.monei.net/v1/charge
+POST https://api.monei.net/v1/charges
 ```
 
 #### Request
@@ -177,7 +177,7 @@ You can either redirect to the next action or use the id to initialize the payme
 ## Capture charge
 
 ```
-POST https://api.monei.net/v1/charge/{id}/capture
+POST https://api.monei.net/v1/charges/{id}/capture
 ```
 
 #### Request
@@ -277,7 +277,7 @@ const res = {
 ## Void charge
 
 ```
-POST https://api.monei.net/v1/charge/{id}/void
+POST https://api.monei.net/v1/charges/{id}/void
 ```
 
 #### Request
@@ -375,7 +375,7 @@ const res = {
 ## Refund charge
 
 ```
-POST https://api.monei.net/v1/charge/{id}/refund
+POST https://api.monei.net/v1/charges/{id}/refund
 ```
 
 #### Request
