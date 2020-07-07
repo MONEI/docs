@@ -48,7 +48,8 @@ npm i @monei-js/components
   defaultValue="js"
   values={[
     {label: 'HTML + JS', value: 'js'},
-    {label: 'React JS', value: 'react'}
+    {label: 'React JS', value: 'react'},
+    {label: 'Vue JS', value: 'vue'}
 ]}>
 <TabItem value="js">
 
@@ -151,11 +152,11 @@ var cardInput = monei.CardInput({
   onBlur: function () {
     container.classList.remove('is-focused');
   },
-  onChange: function (props) {
+  onChange: function (event) {
     // Handle real-time validation errors.
-    if (props.isTouched && props.error) {
+    if (event.isTouched && event.error) {
       container.classList.add('is-invalid');
-      errorText.innerText = props.error;
+      errorText.innerText = event.error;
     } else {
       container.classList.remove('is-invalid');
       errorText.innerText = '';
@@ -301,10 +302,10 @@ const App = () => {
             style={style}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            onChange={(props) => {
+            onChange={(event) => {
               // Handle real-time validation errors.
-              if (props.isTouched && props.error) {
-                setError(props.error);
+              if (event.isTouched && event.error) {
+                setError(event.error);
               } else {
                 setError(null);
               }
@@ -358,6 +359,157 @@ ReactDOM.render(<App />, document.getElementById('root'));
 [![Edit monei-card-input-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/monei-card-input-react-uw2lr?fontsize=14&hidenavigation=1&theme=dark)
 
 </TabItem>
+<TabItem value="vue">
+
+The Card Input Component lets you collect card information all within one Component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC.
+
+<Tabs
+  defaultValue="vue-js"
+  values={[
+    {label: 'Vue JS', value: 'vue-js'},
+    {label: 'CSS', value: 'css'}
+  ]}>
+
+<TabItem value="vue-js">
+
+```html
+<template>
+  <form action="/charge" method="post" id="payment-form" @submit="onSubmit">
+    <div class="card-field">
+      <div id="card-input" :class="{'is-focused': isFocused, 'is-invalid': error !== null}">
+        <CardInput
+          ref="cardInput"
+          :accountId="accountId"
+          :innerStyle="innerStyle"
+          :onFocus="onFocus"
+          :onBlur="onBlur"
+          :onChange="onChange"
+        />
+      </div>
+      <!-- Used to display card errors. -->
+      <div id="card-error">{{ error }}</div>
+    </div>
+    <button type="submit" id="payment-button" :disabled="isLoading">Submit payment</button>
+  </form>
+</template>
+
+<script>
+  import Vue from 'vue';
+  import {CardInput, createToken} from '@monei-js/components';
+
+  // POST the token ID to your backend.
+  const moneiTokenHandler = async (token) => {
+    const response = await fetch('/charge', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({token})
+    });
+
+    return response.json();
+  };
+
+  export default {
+    name: 'App',
+    components: {
+      // Set Vue driver for Card Input Component
+      CardInput: CardInput.driver('vue', Vue)
+    },
+    data() {
+      return {
+        accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
+        isFocused: false,
+        isLoading: false,
+        error: null,
+        onChange: (event) => {
+          // Handle real-time validation errors.
+          if (event.isTouched && event.error) {
+            this.error = event.error;
+          } else {
+            this.error = null;
+          }
+        },
+        onFocus: (event) => {
+          this.isFocused = true;
+        },
+        onBlur: () => {
+          this.isFocused = false;
+        },
+        // Custom styling can be passed to options when creating a Card Input Component
+        innerStyle: {
+          input: {
+            color: '#8961a5',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+              color: '#848589'
+            }
+          },
+          invalid: {
+            color: '#fa755a'
+          }
+        }
+      };
+    },
+    methods: {
+      async onSubmit(event) {
+        this.isLoading = true;
+        event.preventDefault();
+        // Pass current CardInputComponent ref to create token
+        const result = await createToken(this.$refs.cardInput);
+        this.isLoading = false;
+        if (result.error) {
+          // Inform the user if there was an error.
+          this.error = result.error;
+        } else {
+          this.error = null;
+          // Send the token to your server.
+          return moneiTokenHandler(result.token);
+        }
+      }
+    }
+  };
+</script>
+```
+
+</TabItem>
+
+<TabItem value="css">
+
+```css
+#card-input {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  height: 38px;
+  box-sizing: border-box;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+#card-input.is-focused {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+#card-input.is-invalid {
+  border-color: #fa755a;
+}
+#card-error {
+  color: #fa755a;
+  padding: 4px 0;
+  font-size: 14px;
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+[![Edit monei-card-input-vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/monei-card-input-vue-iw2kr?fontsize=14&hidenavigation=1&theme=dark)
+
+</TabItem>
+
 </Tabs>
 
 Components are completely customizable. You can style MONEI Components to match the look and feel of your site, providing a seamless checkout experience for your customers. It’s also possible to style various input states, for example when the Component has focus.
