@@ -165,7 +165,7 @@
         // Insert the token ID into the form so it gets submitted to the server
         var hiddenInput = document.createElement('input');
         hiddenInput.setAttribute('type', 'hidden');
-        hiddenInput.setAttribute('name', 'paymentToken');
+        hiddenInput.setAttribute('name', 'token');
         hiddenInput.setAttribute('value', token);
         paymentForm.appendChild(hiddenInput);
 

@@ -197,7 +197,7 @@ function moneiTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
   var hiddenInput = document.createElement('input');
   hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'paymentToken');
+  hiddenInput.setAttribute('name', 'token');
   hiddenInput.setAttribute('value', token);
   paymentForm.appendChild(hiddenInput);
 
@@ -354,6 +354,8 @@ ReactDOM.render(<App />, document.getElementById('root'));
 </TabItem>
 
 </Tabs>
+
+[![Edit monei-card-input-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/monei-card-input-react-uw2lr?fontsize=14&hidenavigation=1&theme=dark)
 
 </TabItem>
 </Tabs>
