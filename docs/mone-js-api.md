@@ -135,8 +135,8 @@ Use this function to generate payment token. Pass an instance of CardInput compo
 declare const createToken: (
   component: MoneiComponent
 ) => Promise<{
-  token?: string | undefined; // payment token
-  error?: string | undefined; // validation error
+  token?: string; // payment token
+  error?: string; // validation error
 }>;
 ```
 
