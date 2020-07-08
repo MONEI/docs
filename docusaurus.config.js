@@ -8,7 +8,7 @@ module.exports = {
     disableDarkMode: true,
     sidebarCollapsible: false,
     prism: {
-      theme: require('prism-react-renderer/themes/duotoneDark')
+      theme: require('prism-react-renderer/themes/nightOwl')
     },
     navbar: {
       hideOnScroll: true,
