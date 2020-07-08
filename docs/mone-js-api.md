@@ -36,8 +36,9 @@ CardInput is a customizable UI component used to collect sensitive information i
 
 ```js
 var cardInput = monei.CardInput({
-  // Your MONEI account ID
-  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549'
+  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
+  orderId: '123456789',
+  ...otherOptions
 });
 ```
 
@@ -61,6 +62,15 @@ var cardInput = monei.CardInput({
   - `invalidExpiryDate` - Default: "Expiry date is invalid"
   - `emptyCVC` - Default: "Enter a CVC"
   - `invalidCVC` - Default: "CVC is invalid"
+- `onFocus:() => void` (function) - Callback function that is called when card input is focused
+- `onBlur:() => void` (function) - Callback function that is called when card input is blured
+- `onLoad:() => void` (function) - Callback function that is called when card input is fully loaded
+- `onEnter:() => void` (function) - Callback function that is called when user presses `Enter` key on the keyboard inside card input.
+- `onChange:(event: CardInputOnChangeEvent) => void` (function) - Callback function that is called on every user input. Used for real-time validation
+  - `event.isTouched` (boolean) - indicates if card input was touched
+  - `event.focused` (string) - indicates what input is focused. Possible values: `cardNumber`, `expiryDate`, `cvc`
+  - `cardType` (string) - detected card type
+  - `error` (string) - Card input error. Use this attribute to show an error to a user
 
 ### CardInput Style object
 
@@ -108,4 +118,44 @@ var style = {
     color: '#fa755a'
   }
 };
+
+var cardInput = monei.CardInput({
+  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
+  orderId: '123456789',
+  style: style,
+  ...otherOptions
+});
+```
+
+## `monei.createToken` function
+
+Use this function to generate payment token. Pass an instance of CardInput component.
+
+```typescript
+declare const createToken: (
+  component: MoneiComponent
+) => Promise<{
+  token?: string | undefined; // payment token
+  error?: string | undefined; // validation error
+}>;
+```
+
+Example:
+
+```js
+monei
+  .createToken(cardInput) // pass a reference to an instance of your CardInput component
+  .then(function (result) {
+    console.log(result);
+    if (result.error) {
+      // Inform the user if there was an error.
+    } else {
+      // Send the token to your server.
+      moneiTokenHandler(result.token);
+    }
+  })
+  .catch(function (error) {
+    // Something went wrong while generating token
+    console.log(error);
+  });
 ```

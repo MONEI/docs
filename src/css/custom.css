@@ -14,11 +14,12 @@
   --ifm-color-primary-light: #9572af;
   --ifm-color-primary-lighter: #9c7ab3;
   --ifm-color-primary-lightest: #ae93c2;
-  --ifm-code-font-size: 95%;
+  --ifm-code-font-size: 90%;
   --ifm-font-size-base: 15px;
   --ifm-font-family-base: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
   --ifm-tabs-padding-vertical: 0.5rem;
   --ifm-tabs-padding-horizontal: 1.2rem;
+  --ifm-list-item-margin: 0.5rem;
 }
 
 .table-of-contents {
@@ -42,8 +43,13 @@
   opacity: 0.6;
 }
 
-table th {
+.markdown table th {
   text-align: unset;
+}
+
+.markdown li > ul,
+.markdown li > ol {
+  margin-top: var(--ifm-list-item-margin);
 }
 
 .preview-frame {
