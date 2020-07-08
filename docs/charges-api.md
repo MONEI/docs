@@ -27,6 +27,9 @@ POST https://api.monei.net/v1/charges/:id/void
   "providerReferenceId": "11129ba1240d",
   "authorizationCode": "475816",
   "livemode": false,
+  "status": "PENDING",
+  "statusCode": null,
+  "statusMessage": null,
   "customer": {
     "email": "john.doe@microapps.com",
     "name": "John Doe",
@@ -40,6 +43,10 @@ POST https://api.monei.net/v1/charges/:id/void
     "phoneNumber": null,
     "last4": "0004",
     "method": "CREDITCARD"
+  },
+  "shop": {
+    "name": "Test Shop",
+    "country": "ES"
   },
   "billingDetails": {
     "email": "john.doe@microapps.com",
@@ -55,17 +62,10 @@ POST https://api.monei.net/v1/charges/:id/void
       "state": "Málaga"
     }
   },
+  "shippingDetails": null,
   "refundedAmount": null,
   "lastRefundAmount": null,
   "lastRefundReason": null,
-  "shippingDetails": null,
-  "shop": {
-    "name": "Test Shop",
-    "country": "ES"
-  },
-  "status": "PENDING",
-  "statusCode": null,
-  "statusMessage": null,
   "sessionDetails": {
     "ip": "100.100.200.100",
     "countryCode": null,
@@ -90,15 +90,26 @@ POST https://api.monei.net/v1/charges/:id/void
 ### Attributes
 
 - **id** `string` - Unique identifier for the charge.
-- **amount** `positive integer or zero` - Amount intended to be collected by this charge. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **amount** `positive integer` - Amount intended to be collected by this charge. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
 - **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
 - **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the charge with your internal system.
 - **description** `string` - An arbitrary string attached to the charge. Often useful for displaying to users.
 - **accountId** `string` - MONEI Account identifier.
-- **providerReferenceId** `string` - Unique identifier provided by the payment provider
-- **authorizationCode** `string` - Unique identifier provided by the bank performing transaction
+- **providerReferenceId** `string` - Unique identifier provided by the payment provider.
+- **authorizationCode** `string` - Unique identifier provided by the bank performing transaction.
 - **livemode** `boolean` - Has the value `true` if the charge exists in live mode or the value `false` if the charge exists in test mode.
-- **customer** `object` - Information about the customer
+- **status** `string` - Charge status, one of:
+  - `SUCCEEDED`
+  - `PENDING`
+  - `FAILED`
+  - `CANCELED`
+  - `REFUNDED`
+  - `PARTIALLY_REFUNDED`
+  - `AUTHORIZED`
+  - `EXPIRED`
+- **statusCode** `string` - Charge status code.
+- **statusMessage** `string` - Human readable status message, can be displayed to a user.
+- **customer** `object` - Information about the customer.
   - **email** `string` - The customer’s email address.
   - **name** `string` - The customer’s full name or business name.
   - **phone** `string` - The customer’s phone number.
@@ -110,6 +121,34 @@ POST https://api.monei.net/v1/charges/:id/void
   - **threeDSecure** `boolean` - `true` if this transaction used 3D Secure authentication.
   - **phoneNumber** `string` - The phone number used to pay with `BIZUM`
   - **last4** `string` - The last four digits of the card.
+- **billingDetails** `object` - Billing information associated with the payment method at the time of the transaction.
+  - **email** `string` - The customer’s billing email address.
+  - **name** `string` - The customer’s billing full name.
+  - **phone** `string` - The customer’s billing phone number.
+  - **company** `string` - Billing company name.
+  - **address** `object` - Billing address.
+    - **city** `string` - City, district, suburb, town, or village.
+    - **country** `string` - Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+    - **line1** `string` - Address line 1 (e.g., street, PO Box, or company name).
+    - **line2** `string` - Address line 2 (e.g., apartment, suite, unit, or building).
+    - **zip** `string` - ZIP or postal code.
+    - **state** `string` - State, county, province, or region.
+- **shippingDetails** `object` - Shipping information associated with the charge.
+  - The same as `billingDetails`
+- **refundedAmount** `positive integer` - Amount in cents refunded (can be less than the amount attribute on the charge if a partial refund was issued).
+- **lastRefundAmount** `positive integer` - Amount in cents refunded in the last transaction.
+- **lastRefundReason** `string` - The reason of the last refund transaction.
+- **sessionDetails** `object` - Information related to the browsing session of the user who initiated the payment.
+  - **ip** `string`
+  - **countryCode** `string`
+  - **lang** `string`
+  - **deviceType** `string`
+  - **deviceModel** `string`
+  - **browser** `string`
+  - **browserVersion** `string`
+  - **os** `string`
+  - **osVersion** `string`
+  - **userAgent** `string`
 - **createdAt** `timestamp` - Time at which the charge was created. Measured in seconds since the Unix epoch.
 - **updatedAt** `timestamp` - Time at which the charge was updated last time. Measured in seconds since the Unix epoch.
 
