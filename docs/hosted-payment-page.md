@@ -1,7 +1,6 @@
 ---
 id: hosted-payment-page
 title: Hosted payment page
-sidebar_label: Overview
 ---
 
 Use the hosted payment page to securely collect payments from your customers.

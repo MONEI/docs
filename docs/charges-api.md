@@ -3,6 +3,116 @@ id: charges-api
 title: Charges API
 ---
 
+To charge a credit or a debit card, you create a Charge object. You can retrieve, refund, void and capture individual charges. Charges are identified by a unique, random ID.
+
+We recommend that you create exactly one Charge for each order or customer session in your system.
+
+```http request title="Endpoints"
+POST https://api.monei.net/v1/charges
+POST https://api.monei.net/v1/charges/:id/refund
+POST https://api.monei.net/v1/charges/:id/capture
+POST https://api.monei.net/v1/charges/:id/void
+```
+
+## Charge object
+
+```json
+{
+  "id": "af6029f80f5fc73a8ad2753eea0b1be0",
+  "amount": 110,
+  "currency": "EUR",
+  "orderId": "84370745531439",
+  "description": "Test Shop - #84370745531439",
+  "accountId": "aa9333ba-82de-400c-9ae7-087b9f8d2242",
+  "providerReferenceId": "11129ba1240d",
+  "authorizationCode": "475816",
+  "livemode": false,
+  "customer": {
+    "email": "john.doe@microapps.com",
+    "name": "John Doe",
+    "phone": null
+  },
+  "paymentMethod": {
+    "brand": "visa",
+    "country": "ES",
+    "type": "credit",
+    "threeDSecure": false,
+    "phoneNumber": null,
+    "last4": "0004",
+    "method": "CREDITCARD"
+  },
+  "billingDetails": {
+    "email": "john.doe@microapps.com",
+    "name": "John Doe",
+    "company": null,
+    "phone": null,
+    "address": {
+      "city": "Málaga",
+      "country": "ES",
+      "line1": "Fake Street 123",
+      "line2": null,
+      "zip": "1234",
+      "state": "Málaga"
+    }
+  },
+  "refundedAmount": null,
+  "lastRefundAmount": null,
+  "lastRefundReason": null,
+  "shippingDetails": null,
+  "shop": {
+    "name": "Test Shop",
+    "country": "ES"
+  },
+  "status": "PENDING",
+  "statusCode": null,
+  "statusMessage": null,
+  "sessionDetails": {
+    "ip": "100.100.200.100",
+    "countryCode": null,
+    "lang": "es",
+    "deviceType": "desktop",
+    "deviceModel": null,
+    "browser": "Chrome",
+    "browserVersion": "83.0.4103.116",
+    "os": "Mac OS",
+    "osVersion": "10.15.4",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+  },
+  "nextAction": {
+    "type": "PAYMENT_PAGE",
+    "redirectUrl": "https://pay.monei.net/checkout/af6029f80f5fc73a8ad2753eea0b1be0/payment"
+  },
+  "createdAt": 1594215339,
+  "updatedAt": 1594215343
+}
+```
+
+### Attributes
+
+- **id** `string` - Unique identifier for the charge.
+- **amount** `positive integer or zero` - Amount intended to be collected by this charge. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
+- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the charge with your internal system.
+- **description** `string` - An arbitrary string attached to the charge. Often useful for displaying to users.
+- **accountId** `string` - MONEI Account identifier.
+- **providerReferenceId** `string` - Unique identifier provided by the payment provider
+- **authorizationCode** `string` - Unique identifier provided by the bank performing transaction
+- **livemode** `boolean` - Has the value `true` if the charge exists in live mode or the value `false` if the charge exists in test mode.
+- **customer** `object` - Information about the customer
+  - **email** `string` - The customer’s email address.
+  - **name** `string` - The customer’s full name or business name.
+  - **phone** `string` - The customer’s phone number.
+- **paymentMethod** `string` - Details about the payment method at the time of the transaction.
+  - **method** `string` - Payment method type, one of `CREDITCARD`, `BIZUM`, `GOOGLEPAY`, `APPLEPAY`
+  - **brand** `string` - Card brand, one of `visa`, `mastercard`, `diners`, `amex`, `jcb`, `unionpay` or `unknown`
+  - **country** `string` - Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you’ve collected.
+  - **type** `string` - Card type `debit` or `credit`
+  - **threeDSecure** `boolean` - `true` if this transaction used 3D Secure authentication.
+  - **phoneNumber** `string` - The phone number used to pay with `BIZUM`
+  - **last4** `string` - The last four digits of the card.
+- **createdAt** `timestamp` - Time at which the charge was created. Measured in seconds since the Unix epoch.
+- **updatedAt** `timestamp` - Time at which the charge was updated last time. Measured in seconds since the Unix epoch.
+
 ## Create charge
 
 ```

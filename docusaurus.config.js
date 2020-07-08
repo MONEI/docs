@@ -6,10 +6,12 @@ module.exports = {
   favicon: 'https://static.monei.net/favicon.png',
   themeConfig: {
     disableDarkMode: true,
+    sidebarCollapsible: false,
     prism: {
-      theme: require('prism-react-renderer/themes/nightOwl')
+      theme: require('prism-react-renderer/themes/duotoneDark ')
     },
     navbar: {
+      hideOnScroll: true,
       logo: {
         alt: 'MONEI',
         src: 'https://static.monei.net/monei-logo.svg'

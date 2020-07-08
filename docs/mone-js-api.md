@@ -1,5 +1,5 @@
 ---
-id: monei-js-api-reference
+id: monei-js-api
 title: MONEI JS Reference
 sidebar_label: API Reference
 ---
@@ -44,46 +44,46 @@ var cardInput = monei.CardInput({
 
 ### CardInput options
 
-- `accountId` (string) - Your MONEI account ID, required if you're initializing card input with account ID and order ID
-- `orderId` (string) - Unique order ID in your system. Generated payment token will be bound to this order id and can be only used for the charge with the same `orderId`
-- `chargeId` (string) - A charge ID provided by MONEI in create charge request. Instead of passing `accountId` and `orderId` you can initialize a card input with the `chargeId` directly. Generated payment token will be bound to this charge.
-- `style` (object) - Customize the appearance of this component using CSS properties passed in a [Style](#cardinput-style-object) object.
-- `placeholders` (object) - Customize input placeholders
-  - `cardNumber` (string) - Card number placeholder. Default: "Card number"
-  - `expiryDate` (string)- Expiry date placeholder. Default: "MM/YY"
-  - `cvc` (string) - CVC placeholder. Default: "CVC"
-- `errorMessages` (object) - Customize error messages
-  - `emptyCardNumber` - Default: "Enter a card number"
-  - `invalidCardNumber` - Default: "Card number is invalid"
-  - `emptyExpiryDate` - Default: "Enter an expiry date"
-  - `monthOutOfRange` - Default: "Expiry month must be between 01 and 12"
-  - `yearOutOfRange` - Default: "Expiry year cannot be in the past"
-  - `dateOutOfRange` - Default: "Expiry date cannot be in the past"
-  - `invalidExpiryDate` - Default: "Expiry date is invalid"
-  - `emptyCVC` - Default: "Enter a CVC"
-  - `invalidCVC` - Default: "CVC is invalid"
-- `onFocus:() => void` (function) - Callback function that is called when card input is focused
-- `onBlur:() => void` (function) - Callback function that is called when card input is blured
-- `onLoad:() => void` (function) - Callback function that is called when card input is fully loaded
-- `onEnter:() => void` (function) - Callback function that is called when user presses `Enter` key on the keyboard inside card input.
-- `onChange:(event: CardInputOnChangeEvent) => void` (function) - Callback function that is called on every user input. Used for real-time validation
-  - `event.isTouched` (boolean) - indicates if card input was touched
-  - `event.focused` (string) - indicates what input is focused. Possible values: `cardNumber`, `expiryDate`, `cvc`
-  - `cardType` (string) - detected card type
-  - `error` (string) - Card input error. Use this attribute to show an error to a user
+- **accountId** `string` - Your MONEI account ID, required if you're initializing card input with account ID and order ID
+- **orderId** `string` - Unique order ID in your system. Generated payment token will be bound to this order id and can be only used for the charge with the same **orderId**
+- **chargeId** `string` - A charge ID provided by MONEI in create charge request. Instead of passing **accountId** and **orderId** you can initialize a card input with the **chargeId** directly. Generated payment token will be bound to this charge.
+- **style** `object` - Customize the appearance of this component using CSS properties passed in a [Style](#cardinput-style-object) object.
+- **placeholders** `object` - Customize input placeholders
+  - **cardNumber** `string` - Card number placeholder. Default: "Card number"
+  - **expiryDate** `string`- Expiry date placeholder. Default: "MM/YY"
+  - **cvc** `string` - CVC placeholder. Default: "CVC"
+- **errorMessages** `object` - Customize error messages
+  - **emptyCardNumber** `string` - Default: "Enter a card number"
+  - **invalidCardNumber** `string` - Default: "Card number is invalid"
+  - **emptyExpiryDate** `string` - Default: "Enter an expiry date"
+  - **monthOutOfRange** `string` - Default: "Expiry month must be between 01 and 12"
+  - **yearOutOfRange** `string` - Default: "Expiry year cannot be in the past"
+  - **dateOutOfRange** `string` - Default: "Expiry date cannot be in the past"
+  - **invalidExpiryDate** `string` - Default: "Expiry date is invalid"
+  - **emptyCVC** `string` - Default: "Enter a CVC"
+  - **invalidCVC** `string` - Default: "CVC is invalid"
+- **onFocus:() => void** `function` - Callback function that is called when card input is focused
+- **onBlur:() => void** `function` - Callback function that is called when card input is blured
+- **onLoad:() => void** `function` - Callback function that is called when card input is fully loaded
+- **onEnter:() => void** `function` - Callback function that is called when user presses **Enter** key on the keyboard inside card input.
+- **onChange:(event: CardInputOnChangeEvent) => void** `function` - Callback function that is called on every user input. Used for real-time validation
+  - **event.isTouched** `boolean` - indicates if card input was touched
+  - **event.focused** `string` - indicates what input is focused. Possible values: **cardNumber**, **expiryDate**, **cvc**
+  - **cardType** `string` - detected card type
+  - **error** `string` - Card input error. Use this attribute to show an error to a user
 
 ### CardInput Style object
 
 UI components are styled using a Style object, which consists of CSS properties nested under objects for any of the following variants:
 
-- `base` - base component style
-- `loading` - base component style when component is loading
-- `invalid` - applied when the component has invalid input
-- `input` - applied to individual inputs
-- `cardNumber` - applied to card number input
-- `expiryDate` - applied to expiry date input
-- `cvc` - applied to cvc input
-- `icon` - applied to icon
+- **base** `object` - base component style
+- **loading** `object` - base component style when component is loading
+- **invalid** `object` - applied when the component has invalid input
+- **input** `object` - applied to individual inputs
+- **cardNumber** `object` - applied to card number input
+- **expiryDate** `object` - applied to expiry date input
+- **cvc** `object` - applied to cvc input
+- **icon** `object` - applied to icon
 
 The following pseudo-classes and pseudo-elements can also be styled using a nested object inside of a variant:
 

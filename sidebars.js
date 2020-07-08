@@ -1,10 +1,10 @@
 module.exports = {
   docs: [
     {
-      'Hosted payment page': ['hosted-payment-page']
+      Integrations: ['hosted-payment-page']
     },
     {
-      'UI Components': ['ui-components', 'monei-js-api-reference']
+      'MONEI JS': ['monei-js-overview', 'monei-js-api']
     },
     'charges-api',
     'testing'
