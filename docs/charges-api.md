@@ -139,16 +139,16 @@ POST https://api.monei.net/v1/charges/:id/void
 - **lastRefundAmount** `positive integer` - Amount in cents refunded in the last transaction.
 - **lastRefundReason** `string` - The reason of the last refund transaction.
 - **sessionDetails** `object` - Information related to the browsing session of the user who initiated the payment.
-  - **ip** `string`
-  - **countryCode** `string`
-  - **lang** `string`
-  - **deviceType** `string`
-  - **deviceModel** `string`
-  - **browser** `string`
-  - **browserVersion** `string`
-  - **os** `string`
-  - **osVersion** `string`
-  - **userAgent** `string`
+  - **ip** `string` - The IP address where the payment originated.
+  - **countryCode** `string` - Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+  - **lang** `string` - Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1))
+  - **deviceType** `string` - Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`
+  - **deviceModel** `string` - Information about the device used for the browser session (e.g., `iPhone`).
+  - **browser** `string` - The browser used in this browser session (e.g., `Mobile Safari`).
+  - **browserVersion** `string` - The version for the browser session (e.g., `13.1.1`).
+  - **os** `string` - Operation system (e.g., `iOS`).
+  - **osVersion** `string` - Operation system version (e.g., `13.5.1`).
+  - **userAgent** `string` - Full user agent string of the browser session
 - **createdAt** `timestamp` - Time at which the charge was created. Measured in seconds since the Unix epoch.
 - **updatedAt** `timestamp` - Time at which the charge was updated last time. Measured in seconds since the Unix epoch.
 
