@@ -4,7 +4,7 @@ module.exports = {
       'Hosted payment page': ['hosted-payment-page']
     },
     {
-      'UI Components': ['ui-components']
+      'UI Components': ['ui-components', 'monei-js-api-reference']
     },
     'charges-api',
     'testing'
