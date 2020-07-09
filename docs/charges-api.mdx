@@ -7,12 +7,12 @@ To charge a credit or a debit card, you create a Charge object. You can retrieve
 
 We recommend that you create exactly one Charge for each order or customer session in your system.
 
-```http request title="Endpoints"
-POST https://api.monei.net/v1/charges
-POST https://api.monei.net/v1/charges/:id/refund
-POST https://api.monei.net/v1/charges/:id/capture
-POST https://api.monei.net/v1/charges/:id/void
-```
+## Endpoints
+
+- [POST https://api.monei.net/v1/charges](#create-charge)
+- [POST https://api.monei.net/v1/charges/:id/refund](#refund-charge)
+- [POST https://api.monei.net/v1/charges/:id/capture](#capture-charge)
+- [POST https://api.monei.net/v1/charges/:id/void](#void-charge)
 
 ## Charge object
 
@@ -42,7 +42,7 @@ POST https://api.monei.net/v1/charges/:id/void
     "threeDSecure": false,
     "phoneNumber": null,
     "last4": "0004",
-    "method": "CREDITCARD"
+    "method": "card"
   },
   "shop": {
     "name": "Test Shop",
@@ -113,8 +113,9 @@ POST https://api.monei.net/v1/charges/:id/void
   - **email** `string` - The customer’s email address.
   - **name** `string` - The customer’s full name or business name.
   - **phone** `string` - The customer’s phone number.
-- **paymentMethod** `string` - Details about the payment method at the time of the transaction.
-  - **method** `string` - Payment method type, one of `CREDITCARD`, `BIZUM`, `GOOGLEPAY`, `APPLEPAY`
+- **paymentToken** `string` - A permanent token represents a payment method used in the charge. Pass `generatePaymentToken: true` when you creating a charge to generate it. You can pass it as `paymentToken` parameter to create other charges with the same payment method. This token does not expire and should only be used on the server side.
+- **paymentMethod** `object` - Details about the payment method at the time of the transaction.
+  - **method** `string` - Payment method type, one of `card`, `bizum`, `google_pay`, `apple_pay`
   - **brand** `string` - Card brand, one of `visa`, `mastercard`, `diners`, `amex`, `jcb`, `unionpay` or `unknown`
   - **country** `string` - Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you’ve collected.
   - **type** `string` - Card type `debit` or `credit`
@@ -159,9 +160,117 @@ POST https://api.monei.net/v1/charges/:id/void
 
 ## Create charge
 
+To charge a credit card or other payment method, you create a Charge.
+
+Charge can also be created without a payment method to initiate a payment process and redirect a customer to the hosted payment page.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="curl"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script
+curl --request POST 'https://api.monei.net/v1/charges' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "paymentToken": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
+    "callbackUrl": "https://mysite.com/checkout/callback",
+    "completeUrl": "https://mysite.com/checkout/complete"
+}'
 ```
-POST https://api.monei.net/v1/charges
+
+</TabItem>
+
+<TabItem value="node">
+
+```js
+var request = require('request');
+var options = {
+  method: 'POST',
+  url: 'https://api.monei.net/v1/charges',
+  headers: {
+    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    amount: 110,
+    currency: 'EUR',
+    orderId: '14379133960355',
+    paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+    callbackUrl: 'https://mysite.com/checkout/callback',
+    completeUrl: 'https://mysite.com/checkout/complete'
+  })
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
 ```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+<?php
+$client = new http\Client;
+$request = new http\Client\Request;
+$request->setRequestUrl('https://api.monei.net/v1/charges');
+$request->setRequestMethod('POST');
+$body = new http\Message\Body;
+$body->append('{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "paymentToken": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
+    "callbackUrl": "https://mysite.com/checkout/callback",
+    "completeUrl": "https://mysite.com/checkout/complete"
+}');
+$request->setBody($body);
+$request->setOptions(array());
+$request->setHeaders(array(
+  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00',
+  'Content-Type' => 'application/json'
+));
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+echo $response->getBody();
+```
+
+</TabItem>
+</Tabs>
+
+### Parameters
+
+- **amount** `required` `positive integer` - Amount intended to be collected by this charge. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **currency** `required` `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
+- **orderId** `required` `string` - An order ID from your system. A unique identifier that can be used to reconcile the charge with your internal system.
+- **completeUrl** `required` `string` - The URL the customer will be directed to after transaction completed (successful or failed).
+- **callbackUrl** `required` `string` - The URL to which a charge result should be sent asynchronously.
+- **cancelUrl** `string` - The URL the customer will be directed to if they decide to cancel payment and return to your website. (used in hosted payment page)
+- **paymentToken** `string` - A payment token generated by monei.js UI Components or a `paymentToken` received in a previous successful charge.
+- **generatePaymentToken** `boolean` - If set to true a permanent token that represents a payment method used in the charge will be generated.
+- **paymentMethod** `object` - An information about a payment method used for this charge. We recommend using `paymentToken` instead, as it is more secure way to pass sensitive payment information. Processing credit card information on your server requires [PCI DSS compliance](https://www.investopedia.com/terms/p/pci-compliance.asp).
+  - **card** `object` - Customer's credit card information
+    - **number** `string` - The card number, as a string without any separators.
+    - **cvc** `string` - Card security code.
+    - **expMonth** `string` - Two-digit number representing the card’s expiration month.
+    - **expYear** `string` - Two-digit number representing the card’s expiration year.
+- **allowedPaymentMethods** `array` - An array of allowed payment methods (used in hosted payment page). Must be enabled payment methods. Possible values: `card`, `bizum`, `apple_pay`, `google_pay`
+- **transactionType** `string` - Controls when the funds will be captured.
+  - `sale` - (Default) MONEI automatically captures funds when the customer authorizes the payment.
+  - `auth` - Place a hold on the funds when the customer authorizes the payment, but don’t capture the funds until later.
+- **description** `string` - An arbitrary string attached to the charge. Often useful for displaying to users.
 
 #### Request
 
@@ -171,25 +280,22 @@ const req = {
   currency: 'EUR', // optional as we have allowed currency for an account
   description: 'monei-hp8 - #14379133960355',
   orderId: '14379133960355', // this is a fixed order id the same as in generated token
-  callbackUrl: 'https://mysite.com?callback=1',
-  completeUrl: 'https://mysite.com?completed=2',
-  cancelUrl: 'https://mysite.com?cancel=3',
+  callbackUrl: 'https://mysite.com/checkout/callback',
+  completeUrl: 'https://mysite.com/checkout/complete',
+  cancelUrl: 'https://mysite.com/checkput/cancel',
   transactionType: 'auth',
   // this is for redirect flow with our payment page, we should validate that all methods are enabled
-  paymentMethodTypes: ['CREDITCARD'],
-  payment: {
-    // token should be created with the same order id that is passed as orderId
-    token: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
-    // for direct payments
+  allowedPaymentMethods: ['card'],
+  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+  paymentMethod: {
     card: {
       cvc: '454',
       expMonth: '05',
       expYear: '45',
       number: '5454545454545454'
-    },
-    // if we want to generate sticky token
-    save: true
+    }
   },
+  generatePaymentToken: true,
   customer: {
     email: 'leandro.marty@microapps.com',
     name: 'Leandro Marty',
