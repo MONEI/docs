@@ -1,6 +1,6 @@
 ---
 id: charges-api
-title: Charges API
+title: Charges
 ---
 
 To charge a credit or a debit card, you create a Charge object. You can retrieve, refund, void and capture individual charges. Charges are identified by a unique, random ID.

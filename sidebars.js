@@ -6,7 +6,9 @@ module.exports = {
     {
       'MONEI JS': ['monei-js-overview', 'monei-js-api']
     },
-    'charges-api',
+    {
+      'API Reference': ['api-authentication', 'charges-api']
+    },
     'testing'
   ]
 };
