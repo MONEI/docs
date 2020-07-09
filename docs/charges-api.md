@@ -149,6 +149,11 @@ POST https://api.monei.net/v1/charges/:id/void
   - **os** `string` - Operation system (e.g., `iOS`).
   - **osVersion** `string` - Operation system version (e.g., `13.5.1`).
   - **userAgent** `string` - Full user agent string of the browser session
+- **nextAction** `object` - If present, this property tells you what actions you need to take in order for your customer to fulfill a payment using the provided source.
+  - **type** `string` - Next action type, one of:
+    - `PAYMENT_PAGE_REDIRECT` - Your customer needs to be redirected to a hosted payment page
+    - `CHALLENGE_REDIRECT` - Your customer needs to be redirected to the 3d secure challenge page provided by the bank.
+  - **redirectUrl** `string` - Redirect your customer to this url to continue payment process.
 - **createdAt** `timestamp` - Time at which the charge was created. Measured in seconds since the Unix epoch.
 - **updatedAt** `timestamp` - Time at which the charge was updated last time. Measured in seconds since the Unix epoch.
 
