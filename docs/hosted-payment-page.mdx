@@ -12,7 +12,7 @@ MONEI Hosted payment page is a simplest way to securely collect payments from yo
     href="https://js.monei.net/v1/payment-page/#eyJzaG9wTG9nb1VybCI6Imh0dHBzOi8vbW9uZWktcHJvZC1zZXJ2aWNlLWJ1Y2tldC5zMy5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbS9wcm90ZWN0ZWQvZXUtd2VzdC0xJTNBNTI5M2JmZDItYTliYi00ZmQ1LTgwYjctYmJmNzY2YjhlMGJlL3JjLXVwbG9hZC0xNTg2NDI1MzQ2NDM0LTMuc3ZnIiwiYWNjZW50Q29sb3IiOiIjRDkyMjJBIiwiYmdDb2xvciI6IiNmMGY0ZjUiLCJ0ZXN0IjpmYWxzZSwicGF5bWVudE1ldGhvZHMiOlsiQ1JFRElUQ0FSRCIsIkJJWlVNIl0sInNob3BOYW1lIjoiTWVkaWFNYXJrdCIsImxhbmd1YWdlIjoiZW4ifQ=="
     target="_blanc"
     className="button button--primary">
-    Live preview
+    Live demo
   </a>
 </p>
 
@@ -29,8 +29,6 @@ MONEI Hosted payment page makes it easy to build a first-class payments experien
 - **Fraud and compliance** — Simplified PCI compliance and SCA-ready
 
 ## Integration
-
-![Hosted payments process overview](/img/hosted-payments-flow.png)
 
 ### 1. Create a new charge on your server.
 
@@ -205,9 +203,9 @@ Customer enters credit card information (or other payment information depending 
 
 MONEI will notify you about a charge status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [charge object](/charges-api.mdx#charge-object) in JSON format.
 
-This ensures that orders can be completed even in the case where customer's connection is terminated prematurely.
+This ensures that you get the charge status even when customer closed the browser window or lost internet connection.
 
-The request also contains a `MONEI-Signature` header with [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash of the request payload. [Verify this signature](how-to-verify-signature.mdx) to confirm that received events are sent from MONEI.
+The request also contains a `MONEI-Signature` header with [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash of the request payload. [Verify this signature](how-to-verify-signature.mdx) to confirm that received request is sent from MONEI.
 
 To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
 
