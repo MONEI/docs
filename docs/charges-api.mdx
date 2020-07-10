@@ -10,9 +10,9 @@ We recommend that you create exactly one Charge for each order or customer sessi
 ## Endpoints
 
 - [POST https://api.monei.net/v1/charges](#create-charge)
-- [POST https://api.monei.net/v1/charges/:id/refund](#refund-charge)
 - [POST https://api.monei.net/v1/charges/:id/capture](#capture-charge)
-- [POST https://api.monei.net/v1/charges/:id/void](#void-charge)
+- [POST https://api.monei.net/v1/charges/:id/cancel](#cancel-charge)
+- [POST https://api.monei.net/v1/charges/:id/refund](#refund-charge)
 
 ## Charge object
 
@@ -120,7 +120,7 @@ We recommend that you create exactly one Charge for each order or customer sessi
   - **country** `string` - Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you’ve collected.
   - **type** `string` - Card type `debit` or `credit`
   - **threeDSecure** `boolean` - `true` if this transaction used 3D Secure authentication.
-  - **phoneNumber** `string` - The phone number used to pay with `BIZUM`
+  - **phoneNumber** `string` - The phone number used to pay with `bizum`
   - **last4** `string` - The last four digits of the card.
 - **billingDetails** `object` - Billing information associated with the payment method at the time of the transaction.
   - **email** `string` - The customer’s billing email address.
@@ -139,6 +139,7 @@ We recommend that you create exactly one Charge for each order or customer sessi
 - **refundedAmount** `positive integer` - Amount in cents refunded (can be less than the amount attribute on the charge if a partial refund was issued).
 - **lastRefundAmount** `positive integer` - Amount in cents refunded in the last transaction.
 - **lastRefundReason** `string` - The reason of the last refund transaction.
+- **cancellationReason** `string` - Reason for canceling this Charge. Possible values are `duplicate`, `fraudulent`, `requested_by_customer`, `expired_uncaptured_charge` or `abandoned`
 - **sessionDetails** `object` - Information related to the browsing session of the user who initiated the payment.
   - **ip** `string` - The IP address where the payment originated.
   - **countryCode** `string` - Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
@@ -299,288 +300,221 @@ Returns the `Charge` object.
 
 ## Capture charge
 
+Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step payment flow, where first you created a charge with the `transactionType` set to `auth`.
+
+Uncaptured payments expire exactly seven days after they are created. If they are not captured by that point in time, they will be marked as expired and will no longer be capturable.
+
+<Tabs
+  defaultValue="curl"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.net/v1/charges/:id/capture"
+curl --request POST 'https://api.monei.net/v1/charges//capture' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00'
 ```
-POST https://api.monei.net/v1/charges/{id}/capture
-```
 
-#### Request
+</TabItem>
 
-```json
-{}
-```
+<TabItem value="node">
 
-By default, we will capture the whole amount.
-
-#### Response
-
-```js
-const res = {
-  id: '14f236aff52f0f91efd672eaf1dcc4bd',
-  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
-  checkoutId: 'bcb5b7a42c483ce1700b630e7fd4b2bd',
-  providerReferenceId: '11126ddac3c1',
-  createdAt: 1594133609,
-  updatedAt: 1594133633,
-  amount: 110,
-  authorizationCode: '474983',
-  billingDetails: {
-    email: 'leandro.marty@microapps.com',
-    name: 'Leandro Marty',
-    company: 'microapps SL',
-    phone: '+346666666666',
-    address: {
-      city: 'Lanus',
-      country: 'AR',
-      line1: 'R. Balbin 1792',
-      line2: null,
-      zip: '1824',
-      state: 'B'
-    }
-  },
-  currency: 'EUR',
-  customer: {
-    email: 'leandro.marty@microapps.com',
-    name: 'Leandro Marty',
-    phone: '+346666666666'
-  },
-  description: 'monei-hp8 - #14379133960355',
-  livemode: false,
-  orderId: '14379133960355',
-  paymentMethod: {
-    brand: 'visa',
-    country: 'ES',
-    type: 'credit',
-    threeDSecure: false,
-    phoneNumber: null,
-    last4: '0004',
-    method: 'CREDITCARD'
-  },
-  refundedAmount: null,
-  lastRefundAmount: null,
-  lastRefundReason: null,
-  shippingDetails: {
-    email: 'leandro.marty@microapps.com',
-    name: 'Leandro Marty',
-    company: 'microapps SL',
-    phone: '+346666666666',
-    address: {
-      city: 'Lanus',
-      country: 'AR',
-      line1: 'R. Balbin 1792',
-      line2: null,
-      zip: '1824',
-      state: 'B'
-    }
-  },
-  shop: {
-    name: 'monei-hp8',
-    country: 'ES'
-  },
-  status: 'SUCCEEDED',
-  statusCode: '0',
-  statusMessage: 'Transaction Approved',
-  sessionDetails: {
-    ip: '181.164.214.164',
-    countryCode: null,
-    lang: 'es',
-    deviceType: 'desktop',
-    deviceModel: null,
-    browser: 'Chrome',
-    browserVersion: '83.0.4103.116',
-    os: 'Mac OS',
-    osVersion: '10.15.4',
-    userAgent:
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
-  },
-  // there is no next action
-  nextAction: null
+```js title="POST https://api.monei.net/v1/charges/:id/capture"
+var request = require('request');
+var options = {
+  method: 'POST',
+  url: 'https://api.monei.net/v1/charges//capture',
+  headers: {
+    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00'
+  }
 };
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
 ```
 
-## Void charge
+</TabItem>
+<TabItem value="php">
 
+```php title="POST https://api.monei.net/v1/charges/:id/capture"
+<?php
+$client = new http\Client;
+$request = new http\Client\Request;
+$request->setRequestUrl('https://api.monei.net/v1/charges//capture');
+$request->setRequestMethod('POST');
+$request->setOptions(array());
+$request->setHeaders(array(
+  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00'
+));
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+echo $response->getBody();
 ```
-POST https://api.monei.net/v1/charges/{id}/void
+
+</TabItem>
+</Tabs>
+
+### Parameters
+
+- **amount** `positive integer` - The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
+
+### Returns
+
+Returns the `Charge` object.
+
+## Cancel charge
+
+Release customer's funds that were reserved earlier. You can only cancel a charge with the `AUTHORIZED` status.
+
+This is the second half of the two-step payment flow, where first you created a charge with the `transactionType` set to `auth`.
+
+<Tabs
+  defaultValue="curl"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.net/v1/charges/:id/cancel"
+curl --request POST 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5/cancel' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00'
 ```
 
-#### Request
+</TabItem>
 
-```json
-{}
-```
+<TabItem value="node">
 
-#### Response
-
-```js
-const res = {
-  id: '14f236aff52f0f91efd672eaf1dcc4bd',
-  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
-  checkoutId: 'bcb5b7a42c483ce1700b630e7fd4b2bd',
-  providerReferenceId: '11126ddac3c1',
-  createdAt: 1594133609,
-  updatedAt: 1594133633,
-  amount: 110,
-  authorizationCode: '474983',
-  billingDetails: {
-    email: 'leandro.marty@microapps.com',
-    name: 'Leandro Marty',
-    company: 'microapps SL',
-    phone: '+346666666666',
-    address: {
-      city: 'Lanus',
-      country: 'AR',
-      line1: 'R. Balbin 1792',
-      line2: null,
-      zip: '1824',
-      state: 'B'
-    }
-  },
-  currency: 'EUR',
-  customer: {
-    email: 'leandro.marty@microapps.com',
-    name: 'Leandro Marty',
-    phone: '+346666666666'
-  },
-  description: 'monei-hp8 - #14379133960355',
-  livemode: false,
-  orderId: '14379133960355',
-  paymentMethod: {
-    brand: 'visa',
-    country: 'ES',
-    type: 'credit',
-    threeDSecure: false,
-    phoneNumber: null,
-    last4: '0004',
-    method: 'CREDITCARD'
-  },
-  refundedAmount: null,
-  lastRefundAmount: null,
-  lastRefundReason: null,
-  shippingDetails: {
-    email: 'leandro.marty@microapps.com',
-    name: 'Leandro Marty',
-    company: 'microapps SL',
-    phone: '+346666666666',
-    address: {
-      city: 'Lanus',
-      country: 'AR',
-      line1: 'R. Balbin 1792',
-      line2: null,
-      zip: '1824',
-      state: 'B'
-    }
-  },
-  shop: {
-    name: 'monei-hp8',
-    country: 'ES'
-  },
-  status: 'CANCELLED',
-  statusCode: '0', // What is the status code and message for cancel?
-  statusMessage: 'Transaction Cancelled',
-  sessionDetails: {
-    ip: '181.164.214.164',
-    countryCode: null,
-    lang: 'es',
-    deviceType: 'desktop',
-    deviceModel: null,
-    browser: 'Chrome',
-    browserVersion: '83.0.4103.116',
-    os: 'Mac OS',
-    osVersion: '10.15.4',
-    userAgent:
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
-  },
-  // there is no next action
-  nextAction: null
+```js title="POST https://api.monei.net/v1/charges/:id/cancel"
+var request = require('request');
+var options = {
+  method: 'POST',
+  url: 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5/cancel',
+  headers: {
+    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00'
+  }
 };
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
 ```
+
+</TabItem>
+<TabItem value="php">
+
+```php title="POST https://api.monei.net/v1/charges/:id/cancel"
+<?php
+$client = new http\Client;
+$request = new http\Client\Request;
+$request->setRequestUrl('https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5/cancel');
+$request->setRequestMethod('POST');
+$request->setOptions(array());
+$request->setHeaders(array(
+  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00'
+));
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+echo $response->getBody();
+```
+
+</TabItem>
+</Tabs>
+
+### Parameters
+
+- **cancellationReason** `string` - Reason for canceling this Charge. Possible values are `duplicate`, `fraudulent`, `requested_by_customer`, `expired_uncaptured_charge` or `abandoned`
+
+### Returns
+
+Returns the `Charge` object.
 
 ## Refund charge
 
-```
-POST https://api.monei.net/v1/charges/{id}/refund
+Refund a charge that has previously been created but not yet refunded. Funds will be refunded to the credit or debit card that was originally charged.
+
+You can optionally refund only part of a charge. You can do so multiple times, until the entire charge has been refunded.
+
+Once entirely refunded, a charge can’t be refunded again. This method will throw an error when called on an already-refunded charge, or when trying to refund more money than is left on a charge.
+
+<Tabs
+  defaultValue="curl"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.net/v1/charges/:id/refund"
+curl --request POST 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5/refund' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "amount": 100,
+    "reason": "requested_by_customer"
+}'
 ```
 
-#### Request
+</TabItem>
 
-```js
-const req = {
-  amount: 10,
-  reason: 'Requested by customer'
+<TabItem value="node">
+
+```js title="POST https://api.monei.net/v1/charges/:id/refund"
+var request = require('request');
+var options = {
+  method: 'POST',
+  url: 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5/refund',
+  headers: {
+    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({amount: 100, reason: 'requested_by_customer'})
 };
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
 ```
 
-By default, we will refund the whole amount.
+</TabItem>
+<TabItem value="php">
 
-#### Response
-
-```js
-const res = {
-  id: 'b2cee2847635411b04d39d3d3be2c61e',
-  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
-  providerId: 'a16c4a7e-37d2-483f-9a2f-9436efb1100e',
-  checkoutId: '7ab1a6638b028f22b0338e0002faa5c9',
-  providerReferenceId: '11128bcc76d3',
-  createdAt: 1593705701,
-  updatedAt: 1593766211,
-  amount: 110,
-  acquirer: 'BBVA',
-  authorizationCode: '368459',
-  billingDetails: {
-    email: 'dmitriy.nevzorov@microapps.com',
-    name: 'Dmitriy Nevzorov',
-    company: null,
-    phone: null,
-    address: {
-      city: 'Malaga',
-      country: 'ES',
-      line1: 'Test',
-      line2: null,
-      zip: '20000',
-      state: 'MA'
-    }
-  },
-  currency: 'EUR',
-  customer: {
-    email: 'dmitriy.nevzorov@microapps.com',
-    name: 'Dmitriy Nevzorov',
-    phone: null
-  },
-  description: 'monei-hp7 - #13516173312071',
-  livemode: false,
-  orderId: '13516173312071',
-  paymentMethod: {
-    brand: 'visa',
-    country: 'ES',
-    type: 'credit',
-    threeDSecure: false,
-    phoneNumber: null,
-    last4: '0004',
-    method: 'CREDITCARD'
-  },
-  refundedAmount: 30,
-  lastRefundAmount: 10,
-  lastRefundReason: 'Requested by customer',
-  shippingDetails: null,
-  shop: {
-    name: 'monei-hp7',
-    country: 'ES'
-  },
-  status: 'PARTIALLY_REFUNDED',
-  statusCode: '900',
-  statusMessage: 'Refund / Confirmation approved',
-  sessionDetails: {
-    ip: '31.134.191.149',
-    countryCode: null,
-    lang: 'en',
-    deviceType: 'desktop',
-    deviceModel: null,
-    browser: 'Chrome',
-    browserVersion: '83.0.4103.116',
-    os: 'Mac OS',
-    osVersion: '10.15.5'
-  },
-  // there is no next action
-  nextAction: null
-};
+```php title="POST https://api.monei.net/v1/charges/:id/refund"
+<?php
+$client = new http\Client;
+$request = new http\Client\Request;
+$request->setRequestUrl('https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5/refund');
+$request->setRequestMethod('POST');
+$body = new http\Message\Body;
+$body->append('{
+    "amount": 100,
+    "reason": "requested_by_customer"
+}');
+$request->setBody($body);
+$request->setOptions(array());
+$request->setHeaders(array(
+  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00',
+  'Content-Type' => 'application/json'
+));
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+echo $response->getBody();
 ```
+
+</TabItem>
+</Tabs>
+
+### Parameters
+
+- **amount** `positive integer` - The amount to refund, which must be less than or equal to the original amount.
+- **cancellationReason** `string` - String indicating the reason for the refund. If set, possible values are `duplicate`, `fraudulent`, and `requested_by_customer`
+
+### Returns
+
+Returns the `Charge` object.
