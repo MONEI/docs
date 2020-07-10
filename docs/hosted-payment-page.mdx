@@ -1,0 +1,214 @@
+---
+id: hosted-payment-page
+title: Hosted payment page
+---
+
+MONEI Hosted payment page is a simplest way to securely collect payments from your customers.
+
+![Hosted payments preview](/img/payment-page-preview.png)
+
+<p>
+  <a
+    href="https://js.monei.net/v1/payment-page/#eyJzaG9wTG9nb1VybCI6Imh0dHBzOi8vbW9uZWktcHJvZC1zZXJ2aWNlLWJ1Y2tldC5zMy5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbS9wcm90ZWN0ZWQvZXUtd2VzdC0xJTNBNTI5M2JmZDItYTliYi00ZmQ1LTgwYjctYmJmNzY2YjhlMGJlL3JjLXVwbG9hZC0xNTg2NDI1MzQ2NDM0LTMuc3ZnIiwiYWNjZW50Q29sb3IiOiIjRDkyMjJBIiwiYmdDb2xvciI6IiNmMGY0ZjUiLCJ0ZXN0IjpmYWxzZSwicGF5bWVudE1ldGhvZHMiOlsiQ1JFRElUQ0FSRCIsIkJJWlVNIl0sInNob3BOYW1lIjoiTWVkaWFNYXJrdCIsImxhbmd1YWdlIjoiZW4ifQ=="
+    target="_blanc"
+    className="button button--primary">
+    Live preview
+  </a>
+</p>
+
+You can customize the appearance in your [MONEI Dashboard](https://dashboard.monei.net/settings/branding).
+
+MONEI Hosted payment page makes it easy to build a first-class payments experience:
+
+- **Designed to remove friction** — Real-time card validation with built-in error messaging
+- **Mobile-ready** — Fully responsive design
+- **International** — Supports 13 languages
+- **Multiple payment methods** — Supports multiple payments methods
+- **Customization and branding** — Customizable logo, buttons and background color
+- **3D Secure** — Supports 3D Secure verification process
+- **Fraud and compliance** — Simplified PCI compliance and SCA-ready
+
+## Integration
+
+![Hosted payments process overview](/img/hosted-payments-flow.png)
+
+### 1. Create a new charge on your server.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.net/v1/charges"
+curl --request POST 'https://api.monei.net/v1/charges' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "description": "Test Shop - #84370745531439",
+    "customer": {
+       "email": "john.doe@microapps.com"
+    },
+    "callbackUrl": "https://mysite.com/checkout/callback",
+    "completeUrl": "https://mysite.com/checkout/complete",
+    "cancelUrl": "https://mysite.com/checkout/cancel"
+}'
+```
+
+</TabItem>
+
+<TabItem value="node">
+
+```js title="POST https://api.monei.net/v1/charges"
+var request = require('request');
+var options = {
+  method: 'POST',
+  url: 'https://api.monei.net/v1/charges',
+  headers: {
+    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    amount: 110,
+    currency: 'EUR',
+    orderId: '14379133960355',
+    description: 'Test Shop - #84370745531439',
+    customer: {
+      email: 'john.doe@microapps.com'
+    },
+    callbackUrl: 'https://mysite.com/checkout/callback',
+    completeUrl: 'https://mysite.com/checkout/complete',
+    cancelUrl: 'https://mysite.com/checkout/cancel'
+  })
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php title="POST https://api.monei.net/v1/charges"
+<?php
+$client = new http\Client;
+$request = new http\Client\Request;
+$request->setRequestUrl('https://api.monei.net/v1/charges');
+$request->setRequestMethod('POST');
+$body = new http\Message\Body;
+$body->append('{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "description": "Test Shop - #84370745531439",
+    "customer": {
+       "email": "john.doe@microapps.com"
+    },
+    "callbackUrl": "https://mysite.com/checkout/callback",
+    "completeUrl": "https://mysite.com/checkout/complete"
+    "cancelUrl": "https://mysite.com/checkout/cancel"
+}');
+$request->setBody($body);
+$request->setOptions(array());
+$request->setHeaders(array(
+  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00',
+  'Content-Type' => 'application/json'
+));
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+echo $response->getBody();
+```
+
+</TabItem>
+</Tabs>
+
+The following parameters are required:
+
+- **amount** `positive integer` - Amount intended to be collected by this charge. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
+- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the charge with your internal system.
+- **completeUrl** `string` - The URL the customer will be directed to after transaction completed (successful or failed).
+- **callbackUrl** `string` - The URL to which a charge result should be sent asynchronously.
+- **cancelUrl** `string` - The URL the customer will be directed to if they decide to cancel payment and return to your website.
+
+Check all available [request parameters](/charges-api.mdx#create-charge).
+
+### 2. Redirect customer to the `redirectUrl` from the response
+
+In the response from the first request you'll get the following response:
+
+```json
+{
+  "id": "af6029f80f5fc73a8ad2753eea0b1be0",
+  "amount": 110,
+  "currency": "EUR",
+  "orderId": "84370745531439",
+  "description": "Test Shop - #84370745531439",
+  "accountId": "aa9333ba-82de-400c-9ae7-087b9f8d2242",
+  "providerReferenceId": null,
+  "authorizationCode": null,
+  "livemode": false,
+  "status": "PENDING",
+  "statusCode": null,
+  "statusMessage": null,
+  "customer": {
+    "email": "john.doe@microapps.com",
+    "name": null,
+    "phone": null
+  },
+  "paymentMethod": null,
+  "shop": null,
+  "billingDetails": null,
+  "shippingDetails": null,
+  "refundedAmount": null,
+  "lastRefundAmount": null,
+  "lastRefundReason": null,
+  "sessionDetails": null,
+  "nextAction": {
+    "type": "PAYMENT_PAGE_REDIRECT",
+    "redirectUrl": "https://secure.monei.net/checkout/af6029f80f5fc73a8ad2753eea0b1be0/payment"
+  },
+  "createdAt": 1594215339,
+  "updatedAt": null
+}
+```
+
+Redirect the customer to the `nextAction.redirectUrl` to show him a MONEI Hosted payment page.
+
+### 3. Customer pays for the order
+
+Customer enters credit card information (or other payment information depending on the selected payment method) and goes through 3D secure verification process (is redirected to the page provided by the bank issued the card for confirmation of the transaction) if required.
+
+### 4. Customer is redirected back to your server.
+
+- if customer clicks **"Back to {{shop.name}}"** link, he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
+- in any other case a customer is redirected to the `completeUrl` with the following query parameters:
+  - **charge_id** - Unique identifier for the charge.
+  - **order_id** - An order ID from your system.
+  - **status** - Charge status, one of `SUCCEEDED`, `FAILED`, `AUTHORIZED`
+  - **status_code** - Charge status code.
+  - **status_message** - Human readable status message, can be displayed to a user.
+  - **signature** - An [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash. Use this signature to verify that the request was sent by MONEI, not by a third party. [How to verify signature](/how-to-verify-signature.mdx).
+
+### 5. An asynchronous request is sent to your server.
+
+MONEI will notify you about a charge status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [charge object](/charges-api.mdx#charge-object) in JSON format.
+
+This ensures that orders can be completed even in the case where customer's connection is terminated prematurely.
+
+The request also contains a `MONEI-Signature` header with [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash of the request payload. [Verify this signature](/how-to-verify-signature.mdx) to confirm that received events are sent from MONEI.
+
+To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
+
+If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the event as failed and stops trying to send it to your endpoint.
