@@ -4,6 +4,9 @@ module.exports = {
       Integrations: ['hosted-payment-page']
     },
     {
+      Guides: ['how-to-verify-signature']
+    },
+    {
       'MONEI JS': ['monei-js-overview', 'monei-js-api']
     },
     {

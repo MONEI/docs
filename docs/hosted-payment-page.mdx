@@ -142,7 +142,7 @@ The following parameters are required:
 - **callbackUrl** `string` - The URL to which a charge result should be sent asynchronously.
 - **cancelUrl** `string` - The URL the customer will be directed to if they decide to cancel payment and return to your website.
 
-Check all available [request parameters](/charges-api.mdx#create-charge).
+Check all available [request parameters](charges-api.mdx#create-charge).
 
 ### 2. Redirect customer to the `redirectUrl` from the response
 
@@ -199,7 +199,7 @@ Customer enters credit card information (or other payment information depending 
   - **status** - Charge status, one of `SUCCEEDED`, `FAILED`, `AUTHORIZED`
   - **status_code** - Charge status code.
   - **status_message** - Human readable status message, can be displayed to a user.
-  - **signature** - An [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash. Use this signature to verify that the request was sent by MONEI, not by a third party. [How to verify signature](/how-to-verify-signature.mdx).
+  - **signature** - An [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash. Use this signature to verify that the request was sent by MONEI, not by a third party. [How to verify signature](how-to-verify-signature.mdx).
 
 ### 5. An asynchronous request is sent to your server.
 
@@ -207,7 +207,7 @@ MONEI will notify you about a charge status by sending an HTTP POST request to t
 
 This ensures that orders can be completed even in the case where customer's connection is terminated prematurely.
 
-The request also contains a `MONEI-Signature` header with [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash of the request payload. [Verify this signature](/how-to-verify-signature.mdx) to confirm that received events are sent from MONEI.
+The request also contains a `MONEI-Signature` header with [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash of the request payload. [Verify this signature](how-to-verify-signature.mdx) to confirm that received events are sent from MONEI.
 
 To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
 
