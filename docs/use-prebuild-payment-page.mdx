@@ -1,6 +1,6 @@
 ---
-id: hosted-payment-page
-title: Hosted payment page
+id: use-prebuild-payment-page
+title: Use prebuild payment page
 ---
 
 MONEI Hosted payment page is a simplest way to securely collect payments from your customers.
@@ -10,7 +10,7 @@ MONEI Hosted payment page is a simplest way to securely collect payments from yo
 <p>
   <a
     href="https://js.monei.net/v1/payment-page/#eyJzaG9wTG9nb1VybCI6Imh0dHBzOi8vbW9uZWktcHJvZC1zZXJ2aWNlLWJ1Y2tldC5zMy5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbS9wcm90ZWN0ZWQvZXUtd2VzdC0xJTNBNTI5M2JmZDItYTliYi00ZmQ1LTgwYjctYmJmNzY2YjhlMGJlL3JjLXVwbG9hZC0xNTg2NDI1MzQ2NDM0LTMuc3ZnIiwiYWNjZW50Q29sb3IiOiIjRDkyMjJBIiwiYmdDb2xvciI6IiNmMGY0ZjUiLCJ0ZXN0IjpmYWxzZSwicGF5bWVudE1ldGhvZHMiOlsiQ1JFRElUQ0FSRCIsIkJJWlVNIl0sInNob3BOYW1lIjoiTWVkaWFNYXJrdCIsImxhbmd1YWdlIjoiZW4ifQ=="
-    target="_blanc"
+    target="_blank"
     className="button button--primary">
     Live demo
   </a>
@@ -53,7 +53,7 @@ curl --request POST 'https://api.monei.net/v1/charges' \
     "amount": 110,
     "currency": "EUR",
     "orderId": "14379133960355",
-    "description": "Test Shop - #84370745531439",
+    "description": "Test Shop - #14379133960355",
     "customer": {
        "email": "john.doe@microapps.com"
     },
@@ -80,7 +80,7 @@ var options = {
     amount: 110,
     currency: 'EUR',
     orderId: '14379133960355',
-    description: 'Test Shop - #84370745531439',
+    description: 'Test Shop - #14379133960355',
     customer: {
       email: 'john.doe@microapps.com'
     },
@@ -109,7 +109,7 @@ $body->append('{
     "amount": 110,
     "currency": "EUR",
     "orderId": "14379133960355",
-    "description": "Test Shop - #84370745531439",
+    "description": "Test Shop - #14379133960355",
     "customer": {
        "email": "john.doe@microapps.com"
     },

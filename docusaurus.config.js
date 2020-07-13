@@ -36,7 +36,7 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'hosted-payment-page',
+          homePageId: 'getting-started',
           sidebarPath: require.resolve('./sidebars.js')
         },
         theme: {

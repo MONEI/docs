@@ -1,0 +1,227 @@
+---
+id: accept-card-payment
+title: Accept a card payment
+---
+
+Collecting payments on your website consists of creating a charge object, collecting card information, and submitting the payment to MONEI for processing.
+
+<iframe
+  src="/card-input-example.html"
+  height="160px"
+  width="100%"
+  className="preview-frame"></iframe>
+
+## Integration
+
+### 1. Create a Charge `Server-side`
+
+Create a [Charge](charges-api.mdx#create-charge) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.net/v1/charges"
+curl --request POST 'https://api.monei.net/v1/charges' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "description": "Test Shop - #84370745531439",
+    "customer": {
+       "email": "john.doe@microapps.com"
+    },
+    "callbackUrl": "https://mysite.com/checkout/callback",
+    "completeUrl": "https://mysite.com/checkout/complete"
+}'
+```
+
+</TabItem>
+
+<TabItem value="node">
+
+```js title="POST https://api.monei.net/v1/charges"
+var request = require('request');
+var options = {
+  method: 'POST',
+  url: 'https://api.monei.net/v1/charges',
+  headers: {
+    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    amount: 110,
+    currency: 'EUR',
+    orderId: '14379133960355',
+    description: 'Test Shop - #84370745531439',
+    customer: {
+      email: 'john.doe@microapps.com'
+    },
+    callbackUrl: 'https://mysite.com/checkout/callback',
+    completeUrl: 'https://mysite.com/checkout/complete'
+  })
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php title="POST https://api.monei.net/v1/charges"
+<?php
+$client = new http\Client;
+$request = new http\Client\Request;
+$request->setRequestUrl('https://api.monei.net/v1/charges');
+$request->setRequestMethod('POST');
+$body = new http\Message\Body;
+$body->append('{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "description": "Test Shop - #14379133960355",
+    "callbackUrl": "https://mysite.com/checkout/callback",
+    "completeUrl": "https://mysite.com/checkout/complete"
+}');
+$request->setBody($body);
+$request->setOptions(array());
+$request->setHeaders(array(
+  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00',
+  'Content-Type' => 'application/json'
+));
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+echo $response->getBody();
+```
+
+</TabItem>
+</Tabs>
+
+The following parameters are required:
+
+- **amount** `positive integer` - Amount intended to be collected by this charge. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
+- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the charge with your internal system.
+- **completeUrl** `string` - The URL the customer will be directed to after transaction completed (successful or failed).
+- **callbackUrl** `string` - The URL to which a charge result should be sent asynchronously.
+
+Check all available [request parameters](charges-api.mdx#create-charge).
+
+Included in the returned Charge object is a charge `id`, which is used on the client side to securely complete the payment process instead of passing the entire Charge object.
+
+### 2. Collect card details `Client-side`
+
+Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
+
+```html title="checkout.html"
+<head>
+  <title>Checkout</title>
+  <script src="https://js.monei.net/v1/monei.js"></script>
+</head>
+```
+
+Add MONEI [Card Input Component](monei-js-overview.mdx#card-input-component) to your payment page. Create empty DOM nodes (containers) with unique IDs in your payment form.
+
+```html title="checkout.html"
+<form
+  action="https://secure.monei.net/checkout/{{charge_id}}/payment"
+  method="post"
+  id="payment-form"
+>
+  <div class="card-field">
+    <div id="card-input">
+      <!-- A MONEI Card Input Component will be inserted here. -->
+    </div>
+    <!-- Used to display card errors. -->
+    <div id="card-error"></div>
+  </div>
+  <button type="submit" id="payment-button">
+    Submit payment
+  </button>
+</form>
+```
+
+Initialize MONEI Card Input
+
+```js title="client.js"
+var container = document.getElementById('card-input');
+var errorText = document.getElementById('card-error');
+
+// Create an instance of the Card Input using charge_id.
+var cardInput = monei.CardInput({
+  chargeId: '{{charge_id}}',
+  onChange: function (event) {
+    // Handle real-time validation errors.
+    if (event.isTouched && event.error) {
+      container.classList.add('is-invalid');
+      errorText.innerText = event.error;
+    } else {
+      container.classList.remove('is-invalid');
+      errorText.innerText = '';
+    }
+  }
+});
+
+// Render an instance of the Card Input into the `card_input` <div>.
+cardInput.render(container);
+```
+
+The Card Input Component simplifies the form and minimizes the number of required fields by inserting a single, flexible input field that securely collects all necessary card and billing details.
+
+Check [MONEI JS Reference](monei-js-api.md#moneicardinput-component) for more options.
+
+### 3. Submitting the payment to MONEI
+
+```js title="client.js"
+// Handle form submission.
+var paymentForm = document.getElementById('payment-form');
+var paymentButton = document.getElementById('payment-button');
+paymentForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  paymentButton.disabled = true;
+  monei
+    .createToken(cardInput)
+    .then(function (result) {
+      console.log(result);
+      if (result.error) {
+        // Inform the user if there was an error.
+        container.classList.add('is-invalid');
+        errorText.innerText = result.error;
+      } else {
+        // Send the token to MONEI.
+        moneiTokenHandler(result.token);
+      }
+      paymentButton.disabled = false;
+    })
+    .catch(function (error) {
+      paymentButton.disabled = false;
+      console.log(error);
+    });
+});
+
+// Submit the form with the token ID.
+function moneiTokenHandler(token) {
+  // Insert the token ID into the form
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'paymentToken');
+  hiddenInput.setAttribute('value', token);
+  paymentForm.appendChild(hiddenInput);
+
+  // Submit the form
+  paymentForm.submit();
+}
+```

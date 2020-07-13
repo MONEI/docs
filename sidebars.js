@@ -1,7 +1,8 @@
 module.exports = {
   docs: [
+    'getting-started',
     {
-      Integrations: ['hosted-payment-page']
+      Integrations: ['use-prebuild-payment-page', 'accept-card-payment']
     },
     {
       Guides: ['how-to-verify-signature']

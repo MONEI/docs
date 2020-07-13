@@ -67,7 +67,7 @@ The Card Input Component lets you collect card information all within one Compon
 
 <iframe
   src="/card-input-example.html"
-  height="120px"
+  height="160px"
   width="100%"
   className="preview-frame"></iframe>
 
@@ -77,7 +77,11 @@ The Card Input Component lets you collect card information all within one Compon
 ```html
 <script src="https://js.monei.net/v1/monei.js"></script>
 
-<form action="/charge" method="post" id="payment-form">
+<form
+  action="https://secure.monei.net/checkout/{{charge_id}}/payment"
+  method="post"
+  id="payment-form"
+>
   <div class="card-field">
     <div id="card-input">
       <!-- A MONEI Card Input Component will be inserted here. -->
@@ -146,8 +150,7 @@ var style = {
 
 // Create an instance of the Card Input.
 var cardInput = monei.CardInput({
-  // Your MONEI account ID
-  accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
+  chargeId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   style: style,
   onFocus: function () {
     container.classList.add('is-focused');
@@ -201,7 +204,7 @@ function moneiTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
   var hiddenInput = document.createElement('input');
   hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'token');
+  hiddenInput.setAttribute('name', 'paymentToken');
   hiddenInput.setAttribute('value', token);
   paymentForm.appendChild(hiddenInput);
 

@@ -199,8 +199,8 @@ curl --request POST 'https://api.monei.net/v1/charges' \
 <TabItem value="node">
 
 ```js title="POST https://api.monei.net/v1/charges"
-var request = require('request');
-var options = {
+const request = require('request');
+const options = {
   method: 'POST',
   url: 'https://api.monei.net/v1/charges',
   headers: {
@@ -325,8 +325,8 @@ curl --request GET 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f95
 <TabItem value="node">
 
 ```js title="POST https://api.monei.net/v1/charges/:id"
-var request = require('request');
-var options = {
+const request = require('request');
+const options = {
   method: 'GET',
   url: 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5',
   headers: {
@@ -394,8 +394,8 @@ curl --request POST 'https://api.monei.net/v1/charges//capture' \
 <TabItem value="node">
 
 ```js title="POST https://api.monei.net/v1/charges/:id/capture"
-var request = require('request');
-var options = {
+const request = require('request');
+const options = {
   method: 'POST',
   url: 'https://api.monei.net/v1/charges//capture',
   headers: {
@@ -463,8 +463,8 @@ curl --request POST 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9
 <TabItem value="node">
 
 ```js title="POST https://api.monei.net/v1/charges/:id/cancel"
-var request = require('request');
-var options = {
+const request = require('request');
+const options = {
   method: 'POST',
   url: 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5/cancel',
   headers: {
@@ -539,8 +539,8 @@ curl --request POST 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9
 <TabItem value="node">
 
 ```js title="POST https://api.monei.net/v1/charges/:id/refund"
-var request = require('request');
-var options = {
+const request = require('request');
+const options = {
   method: 'POST',
   url: 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5/refund',
   headers: {
@@ -624,8 +624,8 @@ curl --request POST 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9
 <TabItem value="node">
 
 ```js title="POST https://api.monei.net/v1/charges/:id/confirm"
-var request = require('request');
-var options = {
+const request = require('request');
+const options = {
   method: 'POST',
   url: 'https://api.monei.net/v1/charges/26d1f09c42bb59a29b06e280f9553cd5/confirm',
   headers: {
