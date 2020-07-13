@@ -191,13 +191,7 @@ Customer enters credit card information (or other payment information depending 
 ### 4. Customer is redirected back to your server.
 
 - if customer clicks **"Back to {{shop.name}}"** link, he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
-- in any other case a customer is redirected to the `completeUrl` with the following query parameters:
-  - **charge_id** - Unique identifier for the charge.
-  - **order_id** - An order ID from your system.
-  - **status** - Charge status, one of `SUCCEEDED`, `FAILED`, `AUTHORIZED`
-  - **status_code** - Charge status code.
-  - **status_message** - Human readable status message, can be displayed to a user.
-  - **signature** - An [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash. Use this signature to verify that the request was sent by MONEI, not by a third party. [How to verify signature](how-to-verify-signature.mdx).
+- in any other case a customer is redirected to the `completeUrl` with **charge_id** query parameter. Use [get charge](charges-api.mdx#get-charge) endpoint to get the charge status.
 
 ### 5. An asynchronous request is sent to your server.
 
@@ -205,7 +199,7 @@ MONEI will notify you about a charge status by sending an HTTP POST request to t
 
 This ensures that you get the charge status even when customer closed the browser window or lost internet connection.
 
-The request also contains a `MONEI-Signature` header with [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) hash of the request payload. [Verify this signature](how-to-verify-signature.mdx) to confirm that received request is sent from MONEI.
+The request also contains a `MONEI-Signature` with MONEI request signature. [Verify this signature](how-to-verify-signature.mdx) to confirm that received request is sent from MONEI.
 
 To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
 

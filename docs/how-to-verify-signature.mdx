@@ -2,3 +2,37 @@
 id: how-to-verify-signature
 title: How to verify signature
 ---
+
+The `MONEI-Signature` header included in each signed request contains a timestamp and the signature separated by `.` character.
+
+```yml
+MONEI-Signature: 1492774577.5257a869e7ecebeda32affa62cdca3fa51cad7e77a0e56ff536d0ce8e108d8bd
+```
+
+MONEI generates signatures using a hash-based message authentication code ([HMAC](https://en.wikipedia.org/wiki/HMAC)) with [SHA-256](https://en.wikipedia.org/wiki/SHA-2). To prevent [downgrade attacks](https://en.wikipedia.org/wiki/Downgrade_attack)
+
+## Verifying signatures manually
+
+### Step 1: Extract the timestamp and the signature from the header
+
+Split the header, using the `.` character as the separator, to get a list of elements. The first element of the array will be timestamp and the second will be the signature.
+
+### Step 2: Prepare the `signed_payload` string
+
+The `signed_payload` string is created by concatenating:
+
+- The timestamp (as a string)
+- The character `.`
+- The actual JSON payload (i.e., the request body)
+
+### Step 3: Determine the expected signature
+
+Compute an HMAC with the SHA256 hash function. Use your account’s password as the key, and use the `signed_payload` string as the message.
+
+You can get your accounts password in [MONEI Dashboard Settings](https://dashboard.monei.net/settings)
+
+### Step 4: Compare the signatures
+
+Compare the signature in the header to the expected signature. For an equality match, compute the difference between the current timestamp and the received timestamp, then decide if the difference is within your tolerance.
+
+To protect against timing attacks, use a constant-time string comparison to compare the expected signature to the received signature.
