@@ -3,19 +3,21 @@ id: how-to-verify-signature
 title: How to verify signature
 ---
 
-The `MONEI-Signature` header included in each signed request contains a timestamp and the signature separated by `.` character.
+The `MONEI-Signature` header included in each signed event contains a timestamp and one or more signatures. The timestamp is prefixed by `t=`, and each signature is prefixed by a scheme. Schemes start with `v`, followed by an integer. Currently, the only valid live signature scheme is `v1`.
 
 ```yml
-MONEI-Signature: 1492774577.5257a869e7ecebeda32affa62cdca3fa51cad7e77a0e56ff536d0ce8e108d8bd
+MONEI-Signature: t=1492774577,v1=5257a869e7ecebeda32affa62cdca3fa51cad7e77a0e56ff536d0ce8e108d8bd
 ```
 
-MONEI generates signatures using a hash-based message authentication code ([HMAC](https://en.wikipedia.org/wiki/HMAC)) with [SHA-256](https://en.wikipedia.org/wiki/SHA-2). To prevent [downgrade attacks](https://en.wikipedia.org/wiki/Downgrade_attack).
+MONEI generates signatures using a hash-based message authentication code ([HMAC](https://en.wikipedia.org/wiki/HMAC)) with [SHA-256](https://en.wikipedia.org/wiki/SHA-2). To prevent [downgrade attacks](https://en.wikipedia.org/wiki/Downgrade_attack), you should ignore all schemes that are not `v1`.
 
 ## Verifying signatures manually
 
 ### Step 1: Extract the timestamp and the signature from the header
 
-Split the header, using the `.` character as the separator, to get a list of elements. The first element of the array will be timestamp and the second will be the signature.
+Split the header, using the `,` character as the separator, to get a list of elements. Then split each element, using the `=` character as the separator, to get a prefix and value pair.
+
+The value for the prefix `t` corresponds to the timestamp, and `v1` corresponds to the signature (or signatures). You can discard all other elements.
 
 ### Step 2: Prepare the `signed_payload` string
 
