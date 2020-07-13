@@ -133,7 +133,7 @@ echo $response->getBody();
 
 The following parameters are required:
 
-- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to payment in the smallest currency unit (e.g., 100 cents to payment 1.00 USD)
+- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to payment in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
 - **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
 - **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
 - **completeUrl** `string` - The URL the customer will be directed to after transaction completed (successful or failed).
