@@ -3,7 +3,7 @@ id: accept-card-payment
 title: Accept a card payment
 ---
 
-Collecting payments on your website consists of creating a charge object, collecting card information, and submitting the payment to MONEI for processing.
+Collecting payments on your website consists of creating a payment object, collecting card information, and submitting the payment to MONEI for processing.
 
 <iframe
   src="/card-input-example.html"
@@ -13,9 +13,9 @@ Collecting payments on your website consists of creating a charge object, collec
 
 ## Integration
 
-### 1. Create a Charge `Server-side`
+### 1. Create a Payment `Server-side`
 
-Create a [Charge](charges-api.mdx#create-charge) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
+Create a [Payment](payments-api.mdx#create-payment) on your server with an amount and currency. Always decide how much to payment on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -30,8 +30,8 @@ import TabItem from '@theme/TabItem';
   ]}>
 <TabItem value="curl">
 
-```shell script title="POST https://api.monei.net/v1/charges"
-curl --request POST 'https://api.monei.net/v1/charges' \
+```shell script title="POST https://api.monei.net/v1/payments"
+curl --request POST 'https://api.monei.net/v1/payments' \
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -51,11 +51,11 @@ curl --request POST 'https://api.monei.net/v1/charges' \
 
 <TabItem value="node">
 
-```js title="POST https://api.monei.net/v1/charges"
+```js title="POST https://api.monei.net/v1/payments"
 var request = require('request');
 var options = {
   method: 'POST',
-  url: 'https://api.monei.net/v1/charges',
+  url: 'https://api.monei.net/v1/payments',
   headers: {
     Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
     'Content-Type': 'application/json'
@@ -81,11 +81,11 @@ request(options, function (error, response) {
 </TabItem>
 <TabItem value="php">
 
-```php title="POST https://api.monei.net/v1/charges"
+```php title="POST https://api.monei.net/v1/payments"
 <?php
 $client = new http\Client;
 $request = new http\Client\Request;
-$request->setRequestUrl('https://api.monei.net/v1/charges');
+$request->setRequestUrl('https://api.monei.net/v1/payments');
 $request->setRequestMethod('POST');
 $body = new http\Message\Body;
 $body->append('{
@@ -112,15 +112,15 @@ echo $response->getBody();
 
 The following parameters are required:
 
-- **amount** `positive integer` - Amount intended to be collected by this charge. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to payment in the smallest currency unit (e.g., 100 cents to payment 1.00 USD)
 - **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
-- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the charge with your internal system.
+- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
 - **completeUrl** `string` - The URL the customer will be directed to after transaction completed (successful or failed).
-- **callbackUrl** `string` - The URL to which a charge result should be sent asynchronously.
+- **callbackUrl** `string` - The URL to which a payment result should be sent asynchronously.
 
-Check all available [request parameters](charges-api.mdx#create-charge).
+Check all available [request parameters](payments-api.mdx#create-payment).
 
-Included in the returned Charge object is a charge `id`, which is used on the client side to securely complete the payment process instead of passing the entire Charge object.
+Included in the returned Payment object is a payment `id`, which is used on the client side to securely complete the payment process instead of passing the entire Payment object.
 
 ### 2. Collect card details `Client-side`
 
@@ -137,7 +137,7 @@ Add MONEI [Card Input Component](monei-js-overview.mdx#card-input-component) to 
 
 ```html title="checkout.html"
 <form
-  action="https://secure.monei.net/checkout/{{charge_id}}/payment"
+  action="https://secure.monei.net/checkout/{{payment_id}}/payment"
   method="post"
   id="payment-form"
 >
@@ -160,9 +160,9 @@ Initialize MONEI Card Input
 var container = document.getElementById('card-input');
 var errorText = document.getElementById('card-error');
 
-// Create an instance of the Card Input using charge_id.
+// Create an instance of the Card Input using payment_id.
 var cardInput = monei.CardInput({
-  chargeId: '{{charge_id}}',
+  paymentId: '{{payment_id}}',
   onChange: function (event) {
     // Handle real-time validation errors.
     if (event.isTouched && event.error) {

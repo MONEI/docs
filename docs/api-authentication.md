@@ -12,7 +12,7 @@ Your API key carry many privileges, so be sure to keep them secure! Do not share
 Include your API Key as an `Authorization` header in all MONEI API requests.
 
 ```shell script
-curl --request GET 'https://api.monei.net/v1/charges' \
+curl --request GET 'https://api.monei.net/v1/payments' \
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
 --header 'Content-Type: application/json'
 ```

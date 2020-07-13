@@ -78,7 +78,7 @@ The Card Input Component lets you collect card information all within one Compon
 <script src="https://js.monei.net/v1/monei.js"></script>
 
 <form
-  action="https://secure.monei.net/checkout/{{charge_id}}/payment"
+  action="https://secure.monei.net/checkout/{{payment_id}}/payment"
   method="post"
   id="payment-form"
 >
@@ -150,7 +150,7 @@ var style = {
 
 // Create an instance of the Card Input.
 var cardInput = monei.CardInput({
-  chargeId: 'af6029f80f5fc73a8ad2753eea0b1be0',
+  paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   style: style,
   onFocus: function () {
     container.classList.add('is-focused');
@@ -272,7 +272,7 @@ const App = () => {
 
   // POST the token ID to your backend.
   const moneiTokenHandler = async (token) => {
-    const response = await fetch('/charge', {
+    const response = await fetch('/payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -383,7 +383,7 @@ The Card Input Component lets you collect card information all within one Compon
 
 ```html
 <template>
-  <form action="/charge" method="post" id="payment-form" @submit="onSubmit">
+  <form action="/payment" method="post" id="payment-form" @submit="onSubmit">
     <div class="card-field">
       <div id="card-input" :class="{'is-focused': isFocused, 'is-invalid': error !== null}">
         <CardInput
@@ -408,7 +408,7 @@ The Card Input Component lets you collect card information all within one Compon
 
   // POST the token ID to your backend.
   const moneiTokenHandler = async (token) => {
-    const response = await fetch('/charge', {
+    const response = await fetch('/payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

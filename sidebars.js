@@ -11,7 +11,7 @@ module.exports = {
       'MONEI JS': ['monei-js-overview', 'monei-js-api']
     },
     {
-      'API Reference': ['api-authentication', 'charges-api']
+      'API Reference': ['api-authentication', 'payments-api']
     },
     'testing'
   ]

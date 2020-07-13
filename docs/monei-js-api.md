@@ -36,16 +36,16 @@ CardInput is a customizable UI component used to collect sensitive information i
 
 ```js
 var cardInput = monei.CardInput({
-  chargeId: 'af6029f80f5fc73a8ad2753eea0b1be0',
+  paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   ...otherOptions
 });
 ```
 
 ### CardInput options
 
-- **chargeId** `string` - A charge ID provided by MONEI in [create charge](charges-api.mdx#create-charge) request. Generated payment token will be bound to this charge.
-- **accountId** `string` - Your MONEI account ID. Required if you're initializing card input with account ID and order ID. Instead of passing **chargeId** you can initialize a card input with the **accountId** and **orderId**. Generate a payment token and use it to create a charge on the server-side.
-- **orderId** `string` - Unique order ID in your system. Generated payment token will be bound to this order id and can be only used for the charge with the same **orderId**
+- **paymentId** `string` - A payment ID provided by MONEI in [create payment](payments-api.mdx#create-payment) request. Generated payment token will be bound to this payment.
+- **accountId** `string` - Your MONEI account ID. Required if you're initializing card input with account ID and order ID. Instead of passing **paymentId** you can initialize a card input with the **accountId** and **orderId**. Generate a payment token and use it to create a payment on the server-side.
+- **orderId** `string` - Unique order ID in your system. Generated payment token will be bound to this order id and can be only used for the payment with the same **orderId**
 - **style** `object` - Customize the appearance of this component using CSS properties passed in a [Style](#cardinput-style-object) object.
 - **placeholders** `object` - Customize input placeholders
   - **cardNumber** `string` - Card number placeholder. Default: "Card number"
