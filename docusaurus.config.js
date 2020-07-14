@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   title: 'MONEI Documentation',
   url: 'https://docs.monei.net',
@@ -60,5 +62,5 @@ module.exports = {
       }
     ]
   ],
-  plugins: ['@docusaurus/plugin-sitemap']
+  plugins: ['@docusaurus/plugin-sitemap', path.resolve(__dirname, './inject-scripts.js')]
 };
