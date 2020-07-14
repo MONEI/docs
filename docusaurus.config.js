@@ -19,8 +19,23 @@ module.exports = {
         {
           to: 'docs/',
           activeBasePath: 'docs',
-          label: 'Docs',
-          position: 'left'
+          label: 'Documentation'
+        },
+        {
+          href: 'https://monei.net/pricing',
+          label: 'Pricing'
+        },
+        {
+          href: 'https://monei.net/blog',
+          label: 'Blog'
+        },
+        {
+          href: 'https://support.monei.net',
+          label: 'Support'
+        },
+        {
+          href: 'https://dashboard.monei.net',
+          label: 'Dashboard →'
         }
       ]
     },
