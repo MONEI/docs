@@ -46,15 +46,30 @@ function Feature({imageUrl, title, description, url}) {
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
+  const {tagline, title} = siteConfig;
   return (
     <Layout>
       <Head>
-        <meta property="og:description" content={siteConfig.tagline} />
+        <meta property="og:description" content={tagline} />
+        {/* Facebook */}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={tagline} />
+        <meta property="og:image" content="/img/preview.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={title} />
+        <meta property="og:image:alt" content={tagline} />
+
+        {/* Twitter */}
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="/img/preview.png" />
+        <meta name="twitter:description" content={tagline} />
+        <meta name="twitter:image:alt" content={tagline} />
       </Head>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">Documentation</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <p className="hero__subtitle">{tagline}</p>
           <div className={styles.buttons}>
             <Link
               className={clsx('button button--primary button--lg', styles.getStarted)}
