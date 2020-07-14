@@ -15,7 +15,7 @@ Collecting payments on your website consists of creating a payment object, colle
 
 ### 1. Create a Payment `Server-side`
 
-Create a [Payment](payments-api.mdx#create-payment) on your server with an amount and currency. Always decide how much to payment on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
+Create a [Payment](payments-api.mdx#create-payment) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -137,7 +137,7 @@ Add MONEI [Card Input Component](monei-js-overview.mdx#card-input-component) to 
 
 ```html title="checkout.html"
 <form
-  action="https://secure.monei.net/checkout/{{payment_id}}/payment"
+  action="https://secure.monei.net/confirm/{{payment_id}}"
   method="post"
   id="payment-form"
 >
@@ -183,7 +183,11 @@ The Card Input Component simplifies the form and minimizes the number of require
 
 Check [MONEI JS Reference](monei-js-api.md#moneicardinput-component) for more options.
 
-### 3. Submitting the payment to MONEI
+### 3. Submitting the payment to MONEI `Client-side`
+
+To complete the payment you need to submit a payment form with the `method="post"` and `action="https://secure.monei.net/confirm/{{payment_id}}"` (replace `{{payment_id}}` with your payment ID obtained in [step 1](#1-create-a-payment-server-side))
+
+The submitted form should include `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email` (use `.` as a separator for nested parameters). Check all available [parameters](payments-api.mdx#parameters-5).
 
 ```js title="client.js"
 // Handle form submission.
@@ -225,3 +229,25 @@ function moneiTokenHandler(token) {
   paymentForm.submit();
 }
 ```
+
+After the form is submitted a customer goes through 3D secure verification process (is redirected to the page provided by the bank issued the card for confirmation of the transaction) if required.
+
+:::note
+As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](payments-api.mdx#confirm-payment) on the server-side.
+:::
+
+### 4. Customer is redirected back to your server.
+
+A customer is redirected to the `completeUrl` with **payment_id** query parameter. Use [get payment](payments-api.mdx#get-payment) endpoint to get the payment status.
+
+### 5. An asynchronous request is sent to your server.
+
+MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](payments-api.mdx#payment-object) in JSON format.
+
+This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
+
+The request also contains a `MONEI-Signature` header. [Verify this signature](how-to-verify-signature.mdx) to confirm that received request is sent from MONEI.
+
+To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
+
+If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the request as failed and stops trying to send it to your endpoint.

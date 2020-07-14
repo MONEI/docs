@@ -16,8 +16,6 @@ MONEI Hosted payment page is a simplest way to securely collect payments from yo
   </a>
 </p>
 
-You can customize the appearance in your [MONEI Dashboard](https://dashboard.monei.net/settings/branding).
-
 MONEI Hosted payment page makes it easy to build a first-class payments experience:
 
 - **Designed to remove friction** — Real-time card validation with built-in error messaging
@@ -27,6 +25,8 @@ MONEI Hosted payment page makes it easy to build a first-class payments experien
 - **Customization and branding** — Customizable logo, buttons and background color
 - **3D Secure** — Supports 3D Secure verification process
 - **Fraud and compliance** — Simplified PCI compliance and SCA-ready
+
+You can customize the appearance in your [MONEI Dashboard → Settings → Branding](https://dashboard.monei.net/settings/branding).
 
 ## Integration
 
@@ -184,13 +184,13 @@ In the response from the first request you'll get the following response:
 
 Redirect the customer to the `nextAction.redirectUrl` to show him a MONEI Hosted payment page.
 
-### 3. Customer pays for the order
+### 3. Customer completes payment
 
 Customer enters credit card information (or other payment information depending on the selected payment method) and goes through 3D secure verification process (is redirected to the page provided by the bank issued the card for confirmation of the transaction) if required.
 
 ### 4. Customer is redirected back to your server.
 
-- if customer clicks **"Back to {{shop.name}}"** link, he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
+- if customer clicks **"Back to {{shop.name}}"** link (you can provide `shop.name` parameter when you create a charge or in [branding settings](https://dashboard.monei.net/settings/branding)), he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
 - in any other case a customer is redirected to the `completeUrl` with **payment_id** query parameter. Use [get payment](payments-api.mdx#get-payment) endpoint to get the payment status.
 
 ### 5. An asynchronous request is sent to your server.
@@ -199,8 +199,8 @@ MONEI will notify you about a payment status by sending an HTTP POST request to 
 
 This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
 
-The request also contains a `MONEI-Signature` with MONEI request signature. [Verify this signature](how-to-verify-signature.mdx) to confirm that received request is sent from MONEI.
+The request also contains a `MONEI-Signature` header. [Verify this signature](how-to-verify-signature.mdx) to confirm that received request is sent from MONEI.
 
 To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
 
-If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the event as failed and stops trying to send it to your endpoint.
+If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the request as failed and stops trying to send it to your endpoint.
