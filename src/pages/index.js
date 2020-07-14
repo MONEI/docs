@@ -9,9 +9,9 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Use prebuild payment page',
+    title: 'Use prebuilt payment page',
     description: 'Securely collect payments with MONEI Hosted payment page.',
-    url: '/docs/use-prebuild-payment-page'
+    url: '/docs/use-prebuilt-payment-page'
   },
   {
     title: 'Accept a card payment',

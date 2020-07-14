@@ -3,7 +3,7 @@ module.exports = {
     'getting-started',
     {
       Integrations: [
-        'use-prebuild-payment-page',
+        'use-prebuilt-payment-page',
         'accept-card-payment',
         'shopify-integration',
         'woocommerce-integration'

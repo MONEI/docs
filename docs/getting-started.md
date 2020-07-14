@@ -6,7 +6,7 @@ description: Find a guide to integrate MONEI into your system
 
 #### Find a guide to integrate MONEI into your system
 
-- **[Use prebuild payment page](use-prebuild-payment-page.mdx)**  
+- **[Use prebuilt payment page](use-prebuilt-payment-page.mdx)**  
   Securely collect payments with MONEI Hosted payment page.
 - **[Accept a card payment](accept-card-payment.mdx)**  
   Use MONEI UI components to build a checkout form and charge the card.
