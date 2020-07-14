@@ -174,7 +174,7 @@ In the response from the first request you'll get the following response:
   "lastRefundReason": null,
   "sessionDetails": null,
   "nextAction": {
-    "type": "PAYMENT_PAGE_REDIRECT",
+    "type": "PAYMENT_PAGE",
     "redirectUrl": "https://secure.monei.net/pay/af6029f80f5fc73a8ad2753eea0b1be0"
   },
   "createdAt": 1594215339,
@@ -195,7 +195,7 @@ Customer enters credit card information (or other payment information depending 
 
 ### 5. An asynchronous request is sent to your server.
 
-MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/payments-api.mdx#payment-object) in JSON format.
+MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](payments-api.mdx#payment-object) in JSON format.
 
 This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
 
