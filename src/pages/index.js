@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import Head from '@docusaurus/Head';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 
 const features = [
@@ -42,14 +44,17 @@ function Feature({imageUrl, title, description, url}) {
 }
 
 function Home() {
+  const context = useDocusaurusContext();
+  const {siteConfig = {}} = context;
   return (
     <Layout>
+      <Head>
+        <meta property="og:description" content={siteConfig.tagline} />
+      </Head>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">Documentation</h1>
-          <p className="hero__subtitle">
-            Explore our guides and examples to integrate MONEI
-          </p>
+          <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
               className={clsx('button button--primary button--lg', styles.getStarted)}

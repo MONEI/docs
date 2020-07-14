@@ -1,6 +1,7 @@
 ---
 id: testing
 title: Testing
+description: This page includes test card numbers and other information to make sure your integration works as planned.
 ---
 
 This page includes test card numbers and other information to make sure your integration works as planned. Use it to trigger different flows in your integration and ensure they are handled accordingly.

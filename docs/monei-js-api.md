@@ -2,6 +2,7 @@
 id: monei-js-api
 title: MONEI JS Reference
 sidebar_label: Reference
+description: You can use monei.js’ APIs to tokenize customer information, collect sensitive card data using customizable MONEI UI Components
 ---
 
 This reference documents every object and method available in MONEI’s browser-side JavaScript library, monei.js.

@@ -2,6 +2,7 @@
 id: monei-js-overview
 title: MONEI JS Overview
 sidebar_label: Overview
+description: MONEI UI Components enables you to collect sensitive payment information using customizable UI components.
 ---
 
 MONEI UI Components enables you to collect sensitive payment information using customizable UI components.
@@ -385,7 +386,10 @@ The Card Input Component lets you collect card information all within one Compon
 <template>
   <form action="/payment" method="post" id="payment-form" @submit="onSubmit">
     <div class="card-field">
-      <div id="card-input" :class="{'is-focused': isFocused, 'is-invalid': error !== null}">
+      <div
+        id="card-input"
+        :class="{'is-focused': isFocused, 'is-invalid': error !== null}"
+      >
         <CardInput
           ref="cardInput"
           :accountId="accountId"
@@ -398,7 +402,9 @@ The Card Input Component lets you collect card information all within one Compon
       <!-- Used to display card errors. -->
       <div id="card-error">{{ error }}</div>
     </div>
-    <button type="submit" id="payment-button" :disabled="isLoading">Submit payment</button>
+    <button type="submit" id="payment-button" :disabled="isLoading">
+      Submit payment
+    </button>
   </form>
 </template>
 

@@ -1,6 +1,7 @@
 ---
 id: getting-started
 title: Getting started
+description: Find a guide to integrate MONEI into your system
 ---
 
 #### Find a guide to integrate MONEI into your system
