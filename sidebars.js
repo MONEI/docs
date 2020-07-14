@@ -2,7 +2,11 @@ module.exports = {
   docs: [
     'getting-started',
     {
-      Integrations: ['use-prebuild-payment-page', 'accept-card-payment']
+      Integrations: [
+        'use-prebuild-payment-page',
+        'accept-card-payment',
+        'shopify-integration'
+      ]
     },
     {
       Guides: ['how-to-verify-signature']
