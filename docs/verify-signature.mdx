@@ -3,7 +3,7 @@ id: verify-signature
 title: Verify signature
 ---
 
-The `MONEI-Signature` header included in each signed event contains a timestamp and one or more signatures. The timestamp is prefixed by `t=`, and each signature is prefixed by a scheme. Schemes start with `v`, followed by an integer. Currently, the only valid live signature scheme is `v1`.
+The `MONEI-Signature` header included in each signed request contains a timestamp and one or more signatures. The timestamp is prefixed by `t=`, and each signature is prefixed by a scheme. Schemes start with `v`, followed by an integer. Currently, the only valid live signature scheme is `v1`.
 
 ```yml
 MONEI-Signature: t=1492774577,v1=5257a869e7ecebeda32affa62cdca3fa51cad7e77a0e56ff536d0ce8e108d8bd
