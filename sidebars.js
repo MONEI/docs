@@ -5,7 +5,8 @@ module.exports = {
       Integrations: [
         'use-prebuild-payment-page',
         'accept-card-payment',
-        'shopify-integration'
+        'shopify',
+        'woocommerce'
       ]
     },
     {
