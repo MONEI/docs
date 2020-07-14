@@ -1,6 +1,5 @@
 module.exports = {
   title: 'MONEI Documentation',
-  tagline: 'Explore our guides and examples to integrate MONEI',
   url: 'https://docs.monei.net',
   baseUrl: '/',
   favicon: 'https://static.monei.net/favicon.png',

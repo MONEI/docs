@@ -2,45 +2,29 @@ import React from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Insanely Simple</>,
-    description: (
-      <>
-        We designed MONEI in a way that anyone can use it. Today you, tomorrow your 6 years old
-        child on their way to conquer the business world. Few clicks here and there and that's all
-        there is to it.
-      </>
-    )
+    title: 'Use prebuild payment page',
+    description: 'Securely collect payments with MONEI Hosted payment page.',
+    url: '/docs/use-prebuild-payment-page'
   },
   {
-    title: <>Your Money is Your Own</>,
-    description: (
-      <>
-        When we first used payment gateways, we were shocked to see how long you need to wait to get
-        your hard earn money. It takes you time to get the business going and to start earning the
-        money and you should wait for one or two weeks more to receive it? Preposterous!
-      </>
-    )
+    title: 'Accept a card payment',
+    description: 'Use MONEI UI components to build a checkout form and charge the card.',
+    url: '/docs/accept-card-payment'
   },
   {
-    title: <>Developers (You're) Welcome</>,
-    description: (
-      <>
-        Integrate MONEI anywhere. With just a few simple lines of code you'll be ready to start
-        selling. No more hiring expensive developers, maintaining servers and all that nonsense. We
-        firmly believe that simplicity is the key. With our dev documentation and integration
-        guides, you'll be ready in no-time!
-      </>
-    )
+    title: 'Integrate with e-commerce',
+    description:
+      'Easily integrate MONEI with Shopify, WooCommerce and other popular e-commerce platforms.',
+    url: '/docs/#integrate-with-your-e-commerce-platform'
   }
 ];
 
-function Feature({imageUrl, title, description}) {
+function Feature({imageUrl, title, description, url}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx('col col--4', styles.feature)}>
@@ -49,24 +33,26 @@ function Feature({imageUrl, title, description}) {
           <img className={styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
-      <h3>{title}</h3>
+      <h3>
+        <Link to={url}>{title}</Link>
+      </h3>
       <p>{description}</p>
     </div>
   );
 }
 
 function Home() {
-  const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
   return (
     <Layout>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">Documentation</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <p className="hero__subtitle">
+            Explore our guides and examples to integrate MONEI
+          </p>
           <div className={styles.buttons}>
             <Link
-              className={clsx('button button--secondary button--lg', styles.getStarted)}
+              className={clsx('button button--primary button--lg', styles.getStarted)}
               to={useBaseUrl('docs/')}>
               Get Started
             </Link>
