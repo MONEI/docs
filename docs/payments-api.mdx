@@ -116,7 +116,7 @@ We recommend that you create exactly one Payment for each order or customer sess
   - **email** `string` - The customer’s email address.
   - **name** `string` - The customer’s full name or business name.
   - **phone** `string` - The customer’s phone number.
-- **paymentToken** `string` - A permanent token represents a payment method used in the payment. Pass `generatePaymentToken: true` when you creating a payment to generate it. You can pass it as `paymentToken` parameter to create other payments with the same payment method. This token does not expire and should only be used on the server side.
+- **paymentToken** `string` - A permanent token represents a payment method used in the payment. Pass `generatePaymentToken: true` when you creating a payment to generate it. You can pass it as `paymentToken` parameter to create other payments with the same payment method. This token does not expire, and should only be used server-side.
 - **paymentMethod** `object` - Details about the payment method at the time of the transaction.
   - **method** `string` - Payment method type, one of `card`, `bizum`, `google_pay`, `apple_pay`
   - **brand** `string` - Card brand, one of `visa`, `mastercard`, `diners`, `amex`, `jcb`, `unionpay` or `unknown`

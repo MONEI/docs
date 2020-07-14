@@ -5,12 +5,12 @@ module.exports = {
       Integrations: [
         'use-prebuild-payment-page',
         'accept-card-payment',
-        'shopify',
-        'woocommerce'
+        'shopify-integration',
+        'woocommerce-integration'
       ]
     },
     {
-      Guides: ['how-to-verify-signature']
+      Guides: ['save-payment-method', 'verify-signature']
     },
     {
       'MONEI JS': ['monei-js-overview', 'monei-js-api']

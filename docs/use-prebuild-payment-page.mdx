@@ -199,7 +199,7 @@ MONEI will notify you about a payment status by sending an HTTP POST request to 
 
 This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
 
-The request also contains a `MONEI-Signature` header. [Verify this signature](how-to-verify-signature.mdx) to confirm that received request is sent from MONEI.
+The request also contains a `MONEI-Signature` header. [Verify this signature](verify-signature.mdx) to confirm that received request is sent from MONEI.
 
 To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
 

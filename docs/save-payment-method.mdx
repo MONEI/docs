@@ -1,0 +1,216 @@
+---
+id: save-payment-method
+title: Save payment method
+---
+
+To save a payment method for the future use you need to generate `paymentToken` when you create or confirm the payment and then save it on your server.
+
+## 1. Generate payment token
+
+### When you create a payment `Server-side`
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+
+<TabItem value="curl">
+
+```shell script {8} title="POST https://api.monei.net/v1/payments"
+curl --request POST 'https://api.monei.net/v1/payments' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "generatePaymentToken": true,
+    "callbackUrl": "https://mysite.com/checkout/callback",
+    "completeUrl": "https://mysite.com/checkout/complete"
+}'
+```
+
+</TabItem>
+
+<TabItem value="node">
+
+```js {13} title="POST https://api.monei.net/v1/payments"
+const request = require('request');
+const options = {
+  method: 'POST',
+  url: 'https://api.monei.net/v1/payments',
+  headers: {
+    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    amount: 110,
+    currency: 'EUR',
+    orderId: '14379133960355',
+    generatePaymentToken: true,
+    callbackUrl: 'https://mysite.com/checkout/callback',
+    completeUrl: 'https://mysite.com/checkout/complete'
+  })
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php {11} title="POST https://api.monei.net/v1/payments"
+<?php
+$client = new http\Client;
+$request = new http\Client\Request;
+$request->setRequestUrl('https://api.monei.net/v1/payments');
+$request->setRequestMethod('POST');
+$body = new http\Message\Body;
+$body->append('{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "generatePaymentToken": true,
+    "callbackUrl": "https://mysite.com/checkout/callback",
+    "completeUrl": "https://mysite.com/checkout/complete"
+}');
+$request->setBody($body);
+$request->setOptions(array());
+$request->setHeaders(array(
+  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00',
+  'Content-Type' => 'application/json'
+));
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+echo $response->getBody();
+```
+
+</TabItem>
+</Tabs>
+
+Check all available [request parameters](payments-api.mdx#create-payment).
+
+### When you confirm a payment `Server-side`
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script {6} title="POST https://api.monei.net/v1/payments/:id/confirm"
+curl --request POST 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/confirm' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "paymentToken": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
+    "generatePaymentToken": true
+}'
+```
+
+</TabItem>
+
+<TabItem value="node">
+
+```js {11} title="POST https://api.monei.net/v1/payments/:id/confirm"
+const request = require('request');
+const options = {
+  method: 'POST',
+  url: 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/confirm',
+  headers: {
+    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+    generatePaymentToken: true
+  })
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php {9} title="POST https://api.monei.net/v1/payments/:id/confirm"
+<?php
+$client = new http\Client;
+$request = new http\Client\Request;
+$request->setRequestUrl('https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/confirm');
+$request->setRequestMethod('POST');
+$body = new http\Message\Body;
+$body->append('{
+    "paymentToken": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
+    "generatePaymentToken": true
+}');
+$request->setBody($body);
+$request->setOptions(array());
+$request->setHeaders(array(
+  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00',
+  'Content-Type' => 'application/json'
+));
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+echo $response->getBody();
+```
+
+</TabItem>
+</Tabs>
+
+Check all available [request parameters](payments-api.mdx#confirm-payment).
+
+### When you submit a payment form `Client-side`
+
+You can pass `generatePaymentToken: true` when you submit a payment form. This is useful for allowing your customers to select if they want to save payment method for future use.
+
+```html title="checkout.html"
+<form
+  action="https://secure.monei.net/confirm/{{payment_id}}"
+  method="post"
+  id="payment-form"
+>
+  <div class="card-field">
+    <div id="card-input">
+      <!-- A MONEI Card Input Component will be inserted here. -->
+    </div>
+    <!-- Used to display card errors. -->
+    <div id="card-error"></div>
+  </div>
+  <label>
+    <!-- A checkbox to save payment method -->
+    <input type="checkbox" name="generatePaymentToken" value="true" />
+    save payment method
+  </label>
+  <button type="submit" id="payment-button">
+    Submit payment
+  </button>
+</form>
+```
+
+Check [Accept a card payment](accept-card-payment.mdx) integration for more details.
+
+## 2. Obtain and store payment token
+
+After the payment is completed a customer is redirected to the `completeUrl` with **payment_id** query parameter, you can obtain permanent `paymentToken` by calling [get payment](payments-api.mdx#get-payment) endpoint.
+
+MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](payments-api.mdx#payment-object) in JSON format including permanent `paymentToken`.
+
+:::note
+Generated `paymentToken` does not expire and should only be used server-side.
+:::
