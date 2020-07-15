@@ -138,7 +138,7 @@ Add MONEI [Card Input Component](monei-js-overview.mdx#card-input-component) to 
 
 ```html title="checkout.html"
 <form
-  action="https://secure.monei.net/confirm/{{payment_id}}"
+  action="https://secure.monei.net/payments/{{payment_id}}/submit"
   method="post"
   id="payment-form"
 >
@@ -186,7 +186,7 @@ Check [MONEI JS Reference](monei-js-api.md#moneicardinput-component) for more op
 
 ### 3. Submitting the payment to MONEI `Client-side`
 
-To complete the payment you need to submit a payment form with the `method="post"` and `action="https://secure.monei.net/confirm/{{payment_id}}"` (replace `{{payment_id}}` with your payment ID obtained in [step 1](#1-create-a-payment-server-side))
+To complete the payment you need to submit a payment form with the `method="post"` and `action="https://secure.monei.net/payments/{{payment_id}}/submit"` (replace `{{payment_id}}` with your payment ID obtained in [step 1](#1-create-a-payment-server-side))
 
 The submitted form should include `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email` (use `.` as a separator for nested parameters). Check all available [parameters](payments-api.mdx#parameters-5).
 
