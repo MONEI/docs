@@ -20,6 +20,7 @@
   --ifm-tabs-padding-vertical: 0.5rem;
   --ifm-tabs-padding-horizontal: 1.2rem;
   --ifm-list-item-margin: 0.5rem;
+  --ifm-navbar-padding-horizontal: 25px;
 }
 
 body {
