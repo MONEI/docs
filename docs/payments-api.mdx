@@ -157,7 +157,7 @@ We recommend that you create exactly one Payment for each order or customer sess
   - **userAgent** `string` - Full user agent string of the browser session
 - **nextAction** `object` - If present, this property tells you what actions you need to take in order for your customer to fulfill a payment using the provided source.
   - **type** `string` - Next action type, one of:
-    - `PAYMENT_PAGE` - Your customer needs to be redirected to a hosted payment page
+    - `PAYMENT_PAGE` - Your customer needs to be redirected to a [hosted payment page](use-prebuilt-payment-page.mdx) or confirm payment using [payment token](accept-card-payment.mdx).
     - `CHALLENGE` - Your customer needs to be redirected to the 3d secure challenge page provided by the bank.
   - **redirectUrl** `string` - Redirect your customer to this url to continue payment process.
 - **createdAt** `timestamp` - Time at which the payment was created. Measured in seconds since the Unix epoch.
