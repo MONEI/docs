@@ -211,6 +211,8 @@ After the payment is completed a customer is redirected to the `completeUrl` wit
 
 MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](payments-api.mdx#payment-object) in JSON format including permanent `paymentToken`.
 
+Store this `paymentToken` in your database along with customer information. Next time the customer does a purchase, [create a payment](payments-api.mdx#create-payment) with this token to skip payment form. Keep in mind that the customer will still need to complete 3d secure verification.
+
 :::note
-Generated `paymentToken` does not expire and should only be used server-side.
+Generated **`paymentToken`** does not expire and should only be used **server-side**.
 :::
