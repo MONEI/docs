@@ -94,7 +94,7 @@ We recommend that you create exactly one Payment for each order or customer sess
 #### Attributes
 
 - **id** `string` - Unique identifier for the payment.
-- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to payment in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
 - **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
 - **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
 - **description** `string` - An arbitrary string attached to the payment. Often useful for displaying to users.
@@ -165,7 +165,7 @@ We recommend that you create exactly one Payment for each order or customer sess
 
 ## Create payment
 
-To payment a credit card or other payment method, you create a Payment.
+To charge a credit card or other payment method, you create a Payment.
 
 Payment can also be created without a payment method to initiate a payment process and redirect a customer to the hosted payment page.
 
@@ -258,7 +258,7 @@ echo $response->getBody();
 
 #### Parameters
 
-- **amount** `required` `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to payment in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **amount** `required` `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
 - **currency** `required` `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
 - **orderId** `required` `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
 - **completeUrl** `required` `string` - The URL the customer will be directed to after transaction completed (successful or failed).
