@@ -12,6 +12,13 @@ module.exports = {
     prism: {
       theme: require('prism-react-renderer/themes/nightOwl')
     },
+    announcementBar: {
+      id: 'warning',
+      content:
+        '<b>Warning!</b> Documentation is under construction and might change before the final release!',
+      backgroundColor: '#fa755a',
+      textColor: '#FFFFFF'
+    },
     navbar: {
       hideOnScroll: true,
       logo: {
