@@ -117,7 +117,7 @@ We recommend that you create exactly one Payment for each order or customer sess
   - **phone** `string` - The customer’s phone number.
 - **paymentToken** `string` - A permanent token represents a payment method used in the payment. Pass `generatePaymentToken: true` when you creating a payment to generate it. You can pass it as `paymentToken` parameter to create other payments with the same payment method. This token does not expire, and should only be used server-side.
 - **paymentMethod** `object` - Details about the payment method at the time of the transaction.
-  - **method** `string` - Payment method type, one of `card`, `bizum`, `google_pay`, `apple_pay`
+  - **method** `string` - Payment method type, one of `card`, `bizum`, `googlePay`, `applePay`
   - **brand** `string` - Card brand, one of `visa`, `mastercard`, `diners`, `amex`, `jcb`, `unionpay` or `unknown`
   - **country** `string` - Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you’ve collected.
   - **type** `string` - Card type `debit` or `credit`
@@ -272,8 +272,8 @@ echo $response->getBody();
     - **expYear** `string` - Two-digit number representing the card’s expiration year.
 - **allowedPaymentMethods** `array` - An array of allowed payment methods (used in hosted payment page). Must be enabled payment methods. Possible values: `card`, `bizum`, `apple_pay`, `google_pay`
 - **transactionType** `string` - Controls when the funds will be captured.
-  - `sale` - (Default) MONEI automatically captures funds when the customer authorizes the payment.
-  - `auth` - Place a hold on the funds when the customer authorizes the payment, but don’t capture the funds until later.
+  - `SALE` - (Default) MONEI automatically captures funds when the customer authorizes the payment.
+  - `AUTH` - Place a hold on the funds when the customer authorizes the payment, but don’t capture the funds until later.
 - **description** `string` - An arbitrary string attached to the payment. Often useful for displaying to users.
 - **customer** `object` - Information about the customer.
   - **email** `string` - The customer’s email address.
@@ -370,7 +370,7 @@ Returns the `Payment` object.
 
 ## Capture payment
 
-Capture the payment of an existing, uncaptured, payment. This is the second half of the two-step payment flow, where first you created a payment with the `transactionType` set to `auth`.
+Capture the payment of an existing, uncaptured, payment. This is the second half of the two-step payment flow, where first you created a payment with the `transactionType` set to `AUTH`.
 
 Uncaptured payments expire exactly seven days after they are created. If they are not captured by that point in time, they will be marked as expired and will no longer be capturable.
 
@@ -441,7 +441,7 @@ Returns the `Payment` object.
 
 Release customer's funds that were reserved earlier. You can only cancel a payment with the `AUTHORIZED` status.
 
-This is the second half of the two-step payment flow, where first you created a payment with the `transactionType` set to `auth`.
+This is the second half of the two-step payment flow, where first you created a payment with the `transactionType` set to `AUTH`.
 
 <Tabs
   defaultValue="curl"
