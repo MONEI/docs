@@ -124,6 +124,9 @@ We recommend that you create exactly one Payment for each order or customer sess
   - **threeDSecure** `boolean` - `true` if this transaction used 3D Secure authentication.
   - **phoneNumber** `string` - The phone number used to pay with `bizum`
   - **last4** `string` - The last four digits of the card.
+- **shop** `object` - The information about the shop (used in [hosted payment page](use-prebuilt-payment-page.mdx)).
+  - **name** - The shop name.
+  - **country** - Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
 - **billingDetails** `object` - Billing information associated with the payment method at the time of the transaction.
   - **email** `string` - The customer’s billing email address.
   - **name** `string` - The customer’s billing full name.
