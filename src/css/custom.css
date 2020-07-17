@@ -62,3 +62,12 @@ body {
   border-radius: var(--ifm-global-radius);
   border: none;
 }
+
+.menu--responsive .menu__button {
+  right: auto;
+  left: var(--ifm-navbar-padding-horizontal);
+}
+
+.navbar__toggle {
+  margin-right: 1rem;
+}
