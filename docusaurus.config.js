@@ -15,7 +15,7 @@ module.exports = {
     announcementBar: {
       id: 'warning',
       content:
-        '<b>Warning!</b> Documentation is under construction and might change before the final release!',
+        '<b>Warning!</b> Documentation is under construction and might change before the final release',
       backgroundColor: '#fa755a',
       textColor: '#FFFFFF'
     },
