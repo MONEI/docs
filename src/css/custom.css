@@ -65,7 +65,8 @@ body {
 
 .menu--responsive .menu__button {
   right: auto;
-  left: var(--ifm-navbar-padding-horizontal);
+  left: 1rem;
+  bottom: 1rem;
 }
 
 .navbar__toggle {
