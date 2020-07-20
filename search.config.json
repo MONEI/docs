@@ -1,0 +1,14 @@
+{
+  "index_name": "monei-docs",
+  "start_urls": ["https://docs.monei.net/docs"],
+  "sitemap_urls": ["http://docs.monei.net/sitemap.xml"],
+  "selectors": {
+    "lvl0": "article header h1",
+    "lvl1": "article .markdown h2",
+    "lvl2": "article .markdown h3",
+    "lvl3": "article .markdown h4",
+    "lvl4": "article .markdown h5",
+    "lvl5": "article .markdown h6",
+    "text": "article .markdown p,article .markdown ol,article .markdown ul"
+  }
+}

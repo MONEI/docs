@@ -12,6 +12,12 @@ module.exports = {
     prism: {
       theme: require('prism-react-renderer/themes/nightOwl')
     },
+    algolia: {
+      apiKey: '467829303523116db50a19af445924a9',
+      indexName: 'monei-docs',
+      appId: '0Q4XVEPSQ8', // Optional, if you run the DocSearch crawler on your own
+      algoliaOptions: {} // Optional, if provided by Algolia
+    },
     announcementBar: {
       id: 'warning',
       content:
@@ -45,7 +51,7 @@ module.exports = {
         },
         {
           href: 'https://dashboard.monei.net',
-          label: 'Dashboard →'
+          label: 'Dashboard'
         }
       ]
     },
