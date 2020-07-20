@@ -16,7 +16,7 @@
   --ifm-color-primary-lightest: #ae93c2;
   --ifm-code-font-size: 90%;
   --ifm-font-size-base: 15px;
-  --ifm-font-family-base: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+  --ifm-font-family-base: -apple-system, BlinkMacSys temFont, "Segoe UI", "Roboto", "Helvetica Neue", "Ubuntu", sans-serif;
   --ifm-tabs-padding-vertical: 0.5rem;
   --ifm-tabs-padding-horizontal: 1.2rem;
   --ifm-list-item-margin: 0.5rem;
