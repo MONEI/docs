@@ -2,6 +2,7 @@
   "index_name": "monei-docs",
   "start_urls": ["https://docs.monei.net/docs"],
   "sitemap_urls": ["http://docs.monei.net/sitemap.xml"],
+  "strip_chars": "#",
   "selectors": {
     "lvl0": "article header h1",
     "lvl1": "article .markdown h2",
