@@ -533,7 +533,7 @@ curl --request POST 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f
 --header 'Content-Type: application/json' \
 --data-raw '{
     "amount": 100,
-    "reason": "requested_by_customer"
+    "refundReason": "requested_by_customer"
 }'
 ```
 
@@ -550,7 +550,7 @@ const options = {
     Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
     'Content-Type': 'application/json'
   },
-  body: JSON.stringify({amount: 100, reason: 'requested_by_customer'})
+  body: JSON.stringify({amount: 100, refundReason: 'requested_by_customer'})
 };
 request(options, function (error, response) {
   if (error) throw new Error(error);
@@ -570,7 +570,7 @@ $request->setRequestMethod('POST');
 $body = new http\Message\Body;
 $body->append('{
     "amount": 100,
-    "reason": "requested_by_customer"
+    "refundReason": "requested_by_customer"
 }');
 $request->setBody($body);
 $request->setOptions(array());
