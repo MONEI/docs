@@ -6,7 +6,8 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "deploy": "docusaurus deploy",
+    "index": "docker run -it --env-file=.env -e \"CONFIG=$(cat search.config.json | jq -r tostring)\" algolia/docsearch-scraper"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.58",
