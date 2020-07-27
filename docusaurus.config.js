@@ -7,7 +7,18 @@ module.exports = {
   baseUrl: '/',
   favicon: 'https://static.monei.net/favicon.png',
   themeConfig: {
-    disableDarkMode: true,
+    colorMode: {
+      // "light" | "dark"
+      defaultMode: 'light',
+
+      // Hides the switch in the navbar
+      // Useful if you want to support a single color mode
+      disableSwitch: true,
+
+      // Should we use the prefers-color-scheme media-query,
+      // using user system preferences, instead of the hardcoded defaultMode
+      respectPrefersColorScheme: false
+    },
     sidebarCollapsible: false,
     prism: {
       theme: require('prism-react-renderer/themes/nightOwl')
@@ -26,32 +37,38 @@ module.exports = {
       textColor: '#FFFFFF'
     },
     navbar: {
-      hideOnScroll: true,
+      title: 'MONEI',
+      hideOnScroll: false,
       logo: {
         alt: 'MONEI',
         src: 'https://static.monei.net/monei-logo.svg'
       },
-      links: [
+      items: [
         {
           to: 'docs/',
           activeBasePath: 'docs',
-          label: 'Documentation'
+          label: 'Documentation',
+          position: 'right'
         },
         {
           href: 'https://monei.net/pricing',
-          label: 'Pricing'
+          label: 'Pricing',
+          position: 'right'
         },
         {
           href: 'https://monei.net/blog',
-          label: 'Blog'
+          label: 'Blog',
+          position: 'right'
         },
         {
           href: 'https://support.monei.net',
-          label: 'Support'
+          label: 'Support',
+          position: 'right'
         },
         {
           href: 'https://dashboard.monei.net',
-          label: 'Dashboard'
+          label: 'Dashboard',
+          position: 'right'
         }
       ]
     },
