@@ -30,7 +30,7 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.0.0-alpha.51",
+    "@docusaurus/module-type-aliases": "^2.0.0-alpha.59",
     "prettier": "^2.0.5"
   }
 }

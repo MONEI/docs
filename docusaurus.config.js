@@ -92,5 +92,5 @@ module.exports = {
       }
     ]
   ],
-  plugins: ['@docusaurus/plugin-sitemap', path.resolve(__dirname, './inject-scripts.js')]
+  plugins: [path.resolve(__dirname, './inject-scripts.js')]
 };
