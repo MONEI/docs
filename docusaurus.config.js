@@ -24,9 +24,8 @@ module.exports = {
       theme: require('prism-react-renderer/themes/nightOwl')
     },
     algolia: {
-      apiKey: '467829303523116db50a19af445924a9',
-      indexName: 'monei-docs',
-      appId: '0Q4XVEPSQ8', // Optional, if you run the DocSearch crawler on your own
+      apiKey: '4b9b0bfa1a19b86cf70a5bf9c81e9c80',
+      indexName: 'monei',
       algoliaOptions: {} // Optional, if provided by Algolia
     },
     announcementBar: {
