@@ -83,6 +83,7 @@ We recommend that you create exactly one Payment for each order or customer sess
   },
   "nextAction": {
     "type": "CONFIRM",
+    "mustRedirect": false,
     "redirectUrl": "https://secure.monei.net/payments/af6029f80f5fc73a8ad2753eea0b1be0"
   },
   "createdAt": 1594215339,
@@ -161,6 +162,7 @@ We recommend that you create exactly one Payment for each order or customer sess
     - `CONFIRM` - Your customer needs to be redirected to a [hosted payment page](use-prebuilt-payment-page.mdx) or confirm payment using [payment token](accept-card-payment.mdx#3-submitting-the-payment-to-monei-client-side). The **redirectUrl** will point to the hosted payment page.
     - `CHALLENGE` - Your customer needs to be redirected to the 3d secure challenge page provided by the bank. The **redirectUrl** will point to the 3d secure challenge page provided by the bank.
     - `COMPLETE` - The payment is completed. The **redirectUrl** will be the **completeUrl** if it was provided when the payment was created.
+  - **mustRedirect** `boolean` - If `true` you have to redirect your customer to the **redirectUrl** to continue payment process.
   - **redirectUrl** `string` - Redirect your customer to this url to continue payment process.
 - **createdAt** `timestamp` - Time at which the payment was created. Measured in seconds since the Unix epoch.
 - **updatedAt** `timestamp` - Time at which the payment was updated last time. Measured in seconds since the Unix epoch.
@@ -512,7 +514,7 @@ Returns the `Payment` object.
 
 ## Refund payment
 
-Refund a payment that has previously been created but not yet refunded. Funds will be refunded to the credit or debit card that was originally paymentd.
+Refund a payment that has previously been created but not yet refunded. Funds will be refunded to the credit or debit card that was originally charged.
 
 You can optionally refund only part of a payment. You can do so multiple times, until the entire payment has been refunded.
 

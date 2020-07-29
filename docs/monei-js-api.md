@@ -63,14 +63,14 @@ var cardInput = monei.CardInput({
   - **emptyCVC** `string` - Default: "Enter a CVC"
   - **invalidCVC** `string` - Default: "CVC is invalid"
 - **onFocus:() => void** `function` - Callback function that is called when card input is focused
-- **onBlur:() => void** `function` - Callback function that is called when card input is blured
+- **onBlur:() => void** `function` - Callback function that is called when card input is blurred
 - **onLoad:() => void** `function` - Callback function that is called when card input is fully loaded
 - **onEnter:() => void** `function` - Callback function that is called when user presses **Enter** key on the keyboard inside card input.
-- **onChange:(event: CardInputOnChangeEvent) => void** `function` - Callback function that is called on every user input. Used for real-time validation
+- **onChange:(event: CardInputOnChangeEvent) => void** `function` - Callback function that is called on every user input. Used for real-time validation.
   - **event.isTouched** `boolean` - indicates if card input was touched
   - **event.focused** `string` - indicates what input is focused. Possible values: `cardNumber`, `expiryDate`, `cvc`
   - **cardType** `string` - detected card type
-  - **error** `string` - Card input error. Use this attribute to show an error to a user
+  - **error** `string` - Card input error. Use this attribute to show an error to a user.
 
 ### CardInput Style object
 
