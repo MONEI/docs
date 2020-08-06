@@ -22,7 +22,10 @@ Genuine card information cannot be used in test mode. Instead, use any of the fo
 
 The following test cards can be used to create payments that produce specific responses—useful for testing different scenarios and error codes.
 
-| CARD NUMBER      | STATUS CODE                           | DESCRIPTION |
-| ---------------- | ------------------------------------- | ----------- |
-| 5576440022788500 | 190 (Refusal with no specific reason) |             |
-| 5410082854557833 | 184 (Authentication error)            | EMV3DS 2.1  |
+| CARD NUMBER      | STATUS CODE                           | DESCRIPTION                            |
+| ---------------- | ------------------------------------- | -------------------------------------- |
+| 5576440022788500 | 190 (Refusal with no specific reason) |
+| 4907277775205123 | 190 (Refusal with no specific reason) | EMV3DS 2.1 FRICTIONLESS with 3DSMethod |
+| 4907271141151707 | 190 (Refusal with no specific reason) | EMV3DS 2.1 CHALLENGE with 3DSMethod    |
+| 5410082854557833 | 184 (Authentication error)            | EMV3DS 2.1                             |
+| 541008820800685  | 184 (Authentication error)            | EMV3DS 2.1                             |
