@@ -391,7 +391,7 @@ Uncaptured payments expire exactly seven days after they are created. If they ar
 <TabItem value="curl">
 
 ```shell script title="POST https://api.monei.net/v1/payments/:id/capture"
-curl --request POST 'https://api.monei.net/v1/payments//capture' \
+curl --request POST 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/capture' \
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00'
 ```
 
@@ -403,7 +403,7 @@ curl --request POST 'https://api.monei.net/v1/payments//capture' \
 const request = require('request');
 const options = {
   method: 'POST',
-  url: 'https://api.monei.net/v1/payments//capture',
+  url: 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/capture',
   headers: {
     Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00'
   }
@@ -421,7 +421,7 @@ request(options, function (error, response) {
 <?php
 $client = new http\Client;
 $request = new http\Client\Request;
-$request->setRequestUrl('https://api.monei.net/v1/payments//capture');
+$request->setRequestUrl('https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/capture');
 $request->setRequestMethod('POST');
 $request->setOptions(array());
 $request->setHeaders(array(
