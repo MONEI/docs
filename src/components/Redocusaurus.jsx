@@ -99,6 +99,8 @@ const Redocusaurus = (props) => {
           scrollYOffset: 'nav',
           hideDownloadButton: true,
           requiredPropsFirst: true,
+          hideSchemaTitles: true,
+          jsonSampleExpandLevel: 1,
           theme
         }}
       />

@@ -82,3 +82,7 @@ html[data-theme="dark"] .redocusaurus code {
 .redocusaurus .menu-content .scrollbar-container div:first-of-type {
   display: none;
 }
+
+.redocusaurus .redoc-wrap div:nth-child(2) {
+  left: 20px;
+}
