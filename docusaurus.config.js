@@ -96,5 +96,8 @@ module.exports = {
       }
     ]
   ],
-  plugins: [path.resolve(__dirname, './inject-scripts.js')]
+  plugins: [
+    path.resolve(__dirname, './inject-scripts.js'),
+    path.resolve(__dirname, './webpack-config.js')
+  ]
 };

@@ -173,7 +173,7 @@ echo $response->getBody();
 </TabItem>
 </Tabs>
 
-Check all available [request parameters](/api/confirm-payment/).
+Check all available [request parameters](/api/#operation/confirmPayment).
 
 ### When you submit a payment form `Client-side`
 
@@ -207,9 +207,9 @@ Check [Accept a card payment](accept-card-payment.mdx) integration for more deta
 
 ## 2. Obtain and store payment token
 
-After the payment is completed a customer is redirected to the `completeUrl` with **payment_id** query parameter, you can obtain permanent `paymentToken` by calling [get payment](/api/get-payment/) endpoint.
+After the payment is completed a customer is redirected to the `completeUrl` with **payment_id** query parameter, you can obtain permanent `paymentToken` by calling [get payment](/api/#operation/getPayment) endpoint.
 
-MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/get-payment/) in JSON format including permanent `paymentToken`.
+MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#operation/getPayment) in JSON format including permanent `paymentToken`.
 
 Store this `paymentToken` in your database along with customer information. Next time the customer does a purchase, [create a payment](/api) with this token to skip payment form. Keep in mind that the customer will still need to complete 3d secure verification.
 

@@ -10,7 +10,7 @@ module.exports = {
       ]
     },
     {
-      Guides: ['save-payment-method', 'verify-signature', 'api-authentication']
+      Guides: ['save-payment-method', 'verify-signature']
     },
     {
       'MONEI JS': ['monei-js-overview', 'monei-js-api']
