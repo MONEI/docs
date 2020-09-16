@@ -50,6 +50,12 @@ module.exports = {
           position: 'right'
         },
         {
+          to: 'api/',
+          activeBasePath: 'api',
+          label: 'API',
+          position: 'right'
+        },
+        {
           href: 'https://monei.net/pricing',
           label: 'Pricing',
           position: 'right'
@@ -91,5 +97,13 @@ module.exports = {
       }
     ]
   ],
-  plugins: [path.resolve(__dirname, './inject-scripts.js')]
+  plugins: [
+    path.resolve(__dirname, './inject-scripts.js'),
+    [
+      'docusaurus-plugin-openapi',
+      {
+        openapiPath: require.resolve('./openapi.json')
+      }
+    ]
+  ]
 };

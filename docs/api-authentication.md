@@ -1,6 +1,6 @@
 ---
 id: api-authentication
-title: Authentication
+title: API Authentication
 ---
 
 The MONEI API uses API key to authenticate requests. You can view and manage your API key in the [MONEI Dashboard](https://dashboard.monei.net/settings/api).

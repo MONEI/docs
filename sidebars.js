@@ -10,15 +10,12 @@ module.exports = {
       ]
     },
     {
-      Guides: ['save-payment-method', 'verify-signature']
+      Guides: ['save-payment-method', 'verify-signature', 'api-authentication']
     },
     {
       'MONEI JS': ['monei-js-overview', 'monei-js-api']
     },
     'graphql-api',
-    {
-      'API Reference': ['api-authentication', 'payments-api']
-    },
     'testing'
   ]
 };

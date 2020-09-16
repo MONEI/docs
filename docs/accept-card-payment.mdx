@@ -16,7 +16,7 @@ Collecting payments on your website consists of creating a payment object, colle
 
 ### 1. Create a Payment `Server-side`
 
-Create a [Payment](payments-api.mdx#create-payment) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
+Create a [Payment](/api) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -119,7 +119,7 @@ The following parameters are required:
 - **completeUrl** `string` - The URL the customer will be directed to after transaction completed (successful or failed).
 - **callbackUrl** `string` - The URL to which a payment result should be sent asynchronously.
 
-Check all available [request parameters](payments-api.mdx#create-payment).
+Check all available [request parameters](/api).
 
 Included in the returned Payment object is a payment `id`, which is used on the client side to securely complete the payment process instead of passing the entire Payment object.
 
@@ -188,7 +188,7 @@ Check [MONEI JS Reference](monei-js-api.md#moneicardinput-component) for more op
 
 To complete the payment you need to submit a payment form with the `method="post"` and `action="https://secure.monei.net/payments/{{payment_id}}/confirm"` (replace `{{payment_id}}` with your payment ID obtained in [step 1](#1-create-a-payment-server-side))
 
-The submitted form should include `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email` (use `.` as a separator for nested parameters). Check all available [parameters](payments-api.mdx#parameters-5).
+The submitted form should include `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email` (use `.` as a separator for nested parameters). Check all available [parameters](/api/confirm-payment/).
 
 ```js title="client.js"
 // Handle form submission.
@@ -234,16 +234,16 @@ function moneiTokenHandler(token) {
 After the form is submitted a customer goes through 3D secure verification process (is redirected to the page provided by the bank issued the card for confirmation of the transaction) if required.
 
 :::note
-As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](payments-api.mdx#confirm-payment) on the server-side.
+As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/confirm-payment/) on the server-side.
 :::
 
 ### 4. Customer is redirected back to your server.
 
-A customer is redirected to the `completeUrl` with **payment_id** query parameter. Use [get payment](payments-api.mdx#get-payment) endpoint to get the payment status.
+A customer is redirected to the `completeUrl` with **payment_id** query parameter. Use [get payment](/api/get-payment/) endpoint to get the payment status.
 
 ### 5. An asynchronous request is sent to your server.
 
-MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](payments-api.mdx#payment-object) in JSON format.
+MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/get-payment/) in JSON format.
 
 This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
 
