@@ -96,13 +96,5 @@ module.exports = {
       }
     ]
   ],
-  plugins: [
-    [
-      'docusaurus-plugin-openapi',
-      {
-        openapiPath: require.resolve('./openapi.json')
-      }
-    ],
-    path.resolve(__dirname, './inject-scripts.js')
-  ]
+  plugins: [path.resolve(__dirname, './inject-scripts.js')]
 };
