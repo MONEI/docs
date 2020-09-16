@@ -1,5 +1,6 @@
 ---
 id: getting-started
+slug: /
 title: Getting started
 description: Find a guide to integrate MONEI into your system
 ---
