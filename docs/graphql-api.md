@@ -4,7 +4,7 @@ title: GraphQL API
 description: With MONEI GraphQL API you have full access to all MONEI features.
 ---
 
-With MONEI GraphQL API you have full access to all MONEI features like analytics reports, payments, events and much more. This API requires authentication and intended to be used server side.
+With MONEI GraphQL API you have full access to all MONEI features like analytics reports, payments, events and much more. This API requires authentication and is intended to be used server side.
 
 If you want to know how GraphQL API works, check out [How to GraphQL](https://www.howtographql.com/).
 

@@ -7,7 +7,7 @@ The MONEI API uses API key to authenticate requests. You can view and manage you
 
 Test mode private keys have the prefix `pk_test_` and live mode private keys have the prefix `pk_live_`.
 
-Your API key carry many privileges, so be sure to keep them secure! Do not share your secret API key in publicly accessible areas such as GitHub, client-side code, and so forth.
+Your API key carries many privileges, so be sure to keep them secure! Do not share your secret API key in publicly accessible areas such as GitHub, client-side code, and so forth.
 
 Include your API Key as an `Authorization` header in all MONEI API requests.
 
