@@ -10,10 +10,12 @@
 
 .redocusaurus h5 {
   color: var(--ifm-font-color-secondary) !important;
+  border-bottom: none !important;
 }
 
 .redocusaurus h5 > span {
   color: var(--ifm-font-color-secondary) !important;
+  font-size: inherit !important;
 }
 
 /* ------- Sidebar Overrides (Left Panel) ------- */
@@ -22,9 +24,13 @@
   border-right: 1px solid var(--ifm-toc-border-color);
 }
 
-/* Logo Background */
-.redocusaurus .menu-content div:first-child {
+.redocusaurus .menu-content div:first-child input {
+  font-size: 15px;
+  font-weight: normal;
+}
+.redocusaurus .menu-content div:first-child  {
   background-color: transparent !important;
+  padding: 10px 0;
 }
 
 /* ------- Right Panel Overrides ------- */
@@ -33,6 +39,10 @@
   color: var(--ifm-color-emphasis-100);
   background: #1b2028;
   padding: 0;
+}
+
+.redocusaurus .token.boolean {
+  color: hsl(350,40%,70%) !important;
 }
 
 html[data-theme="dark"] .redocusaurus code {
@@ -49,6 +59,10 @@ html[data-theme="dark"] .redocusaurus code {
   border: none;
 }
 
+.redocusaurus table [kind="field"] {
+  font-size: 15px;
+}
+
 .redocusaurus table:not(.security-details) td {
   border-bottom: none !important;
 }
@@ -59,4 +73,12 @@ html[data-theme="dark"] .redocusaurus code {
 
 .redocusaurus table.security-details tr {
   background-color: var(--ifm-background-color)
+}
+
+.redocusaurus button {
+  font-size: 15px !important;
+}
+
+.redocusaurus .menu-content .scrollbar-container div:first-of-type {
+  display: none;
 }

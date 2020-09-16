@@ -2,7 +2,7 @@ import React from 'react';
 import merge from 'lodash.merge';
 import {RedocStandalone} from 'redoc';
 import useThemeContext from '@theme/hooks/useThemeContext';
-import './styles.css';
+import './Redocusaurus.css';
 
 /**
  * NOTE: Colors taken from `node_modules/infima/styles/common/dark-mode.css`
@@ -10,8 +10,8 @@ import './styles.css';
  */
 const DOCUSAURUS = {
   fontFamily:
-    'system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-  fontSize: '16px',
+    '-apple-system, BlinkMacSys temFont, "Segoe UI", "Roboto", "Helvetica Neue", "Ubuntu", sans-serif',
+  fontSize: '15px',
   darkGray: '#303846',
   dark: {
     primaryText: '#f5f6f7',
@@ -72,6 +72,12 @@ function getThemeOptions(isDarkMode) {
       primary: {
         main: '#8961a5'
       }
+    },
+    typography: {
+      code: {
+        fontSize: '14px',
+        color: 'rgb(28, 30, 33)'
+      }
     }
   };
   baseTheme = merge(baseTheme, LIGHT_THEME_OPTIONS);
@@ -91,6 +97,8 @@ const Redocusaurus = (props) => {
         specUrl={props.spec}
         options={{
           scrollYOffset: 'nav',
+          hideDownloadButton: true,
+          requiredPropsFirst: true,
           theme
         }}
       />
