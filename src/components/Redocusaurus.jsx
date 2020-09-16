@@ -100,6 +100,7 @@ const Redocusaurus = (props) => {
           hideDownloadButton: true,
           requiredPropsFirst: true,
           hideSchemaTitles: true,
+          disableSearch: false,
           jsonSampleExpandLevel: 1,
           theme
         }}

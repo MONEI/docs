@@ -79,10 +79,10 @@ html[data-theme="dark"] .redocusaurus code {
   font-size: 15px !important;
 }
 
-.redocusaurus .menu-content .scrollbar-container div:first-of-type {
+.redocusaurus .menu-content a[target="_blank"] {
   display: none;
 }
 
-.redocusaurus .redoc-wrap div:nth-child(2) {
+.redocusaurus .redoc-wrap > div:nth-child(2) {
   left: 20px;
 }
