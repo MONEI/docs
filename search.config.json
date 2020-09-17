@@ -1,5 +1,6 @@
 {
   "index_name": "monei-docs",
+  "js_render": true,
   "start_urls": [
     {
       "url": "https://docs.monei.net/docs",
