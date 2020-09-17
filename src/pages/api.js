@@ -7,7 +7,7 @@ function APIDocs() {
   return (
     <Layout
       title="API Reference"
-      description="The MONEI API is organized around REST. Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.">
+      description="Complete reference documentation for the MONEI API. Includes representative code snippets and examples for our PHP and Node.js client libraries.">
       <Redoc spec={openapi} />
     </Layout>
   );
