@@ -1,0 +1,1058 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MONEI API v1",
+    "description": "The MONEI API is organized around [REST](https://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs."
+  },
+  "servers": [
+    {
+      "url": "http://api.monei.net/v1",
+      "description": "REST API at MONEI"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "APIKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "The MONEI API uses API key to authenticate requests. You can view and manage your API key in the [MONEI Dashboard](https://dashboard.monei.net/settings/api). <br/><br/> Test mode private keys have the prefix `pk_test_` and live mode private keys have the prefix `pk_live_`. <br/><br/> Your API key carries many privileges, so be sure to keep them secure! Do not share your secret API key in publicly accessible areas such as GitHub, client-side code, and so forth. <br/><br/> Include your API Key as an `Authorization` header in all MONEI API requests. <br/><br/> <br/><br/> All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTP_Secure). Calls made over plain HTTP will fail. API requests without authentication will also fail."
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "The request is incorrect or could not be processed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized error. Please check your auth credentials",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The specified resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "ServiceUnavailable": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Payment": {
+        "description": "A payment object along with the `nextAction` attribute",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Payment"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Country": {
+        "type": "string",
+        "example": "ES",
+        "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2))."
+      },
+      "CreatedAt": {
+        "type": "number",
+        "format": "timestamp",
+        "example": null,
+        "description": "Time at which the resource was created. Measured in seconds since the Unix epoch."
+      },
+      "UpdatedAt": {
+        "type": "number",
+        "format": "timestamp",
+        "example": null,
+        "description": "Time at which the resource updated last time. Measured in seconds since the Unix epoch."
+      },
+      "Address": {
+        "title": "Address",
+        "type": "object",
+        "properties": {
+          "country": {
+            "$ref": "#/components/schemas/Country"
+          },
+          "city": {
+            "type": "string",
+            "example": "Málaga",
+            "description": "City, district, suburb, town, or village."
+          },
+          "line1": {
+            "type": "string",
+            "example": "Fake Street 123",
+            "description": "Address line 1 (e.g., street, PO Box, or company name)."
+          },
+          "line2": {
+            "type": "string",
+            "example": null,
+            "description": "Address line 2 (e.g., apartment, suite, unit, or building)."
+          },
+          "zip": {
+            "type": "string",
+            "example": "1234",
+            "description": "ZIP or postal code."
+          },
+          "state": {
+            "type": "string",
+            "example": "Málaga",
+            "description": "State, county, province, or region."
+          }
+        }
+      },
+      "Card": {
+        "title": "Card",
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "The card number, as a string without any separators."
+          },
+          "cvc": {
+            "type": "string",
+            "description": "Card security code."
+          },
+          "expMonth": {
+            "type": "string",
+            "description": "Two-digit number representing the card’s expiration month."
+          },
+          "expYear": {
+            "type": "string",
+            "description": "Two-digit number representing the card’s expiration year."
+          }
+        }
+      },
+      "Payment": {
+        "title": "Payment",
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Payment-Id"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Payment-Amount"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Payment-Currency"
+          },
+          "orderId": {
+            "$ref": "#/components/schemas/Payment-OrderId"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Payment-Description"
+          },
+          "accountId": {
+            "$ref": "#/components/schemas/Payment-AccountId"
+          },
+          "authorizationCode": {
+            "$ref": "#/components/schemas/Payment-AuthorizationCode"
+          },
+          "livemode": {
+            "$ref": "#/components/schemas/Payment-Livemode"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Payment-Status"
+          },
+          "statusCode": {
+            "$ref": "#/components/schemas/Payment-StatusCode"
+          },
+          "statusMessage": {
+            "$ref": "#/components/schemas/Payment-StatusMessage"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Payment-Customer"
+          },
+          "paymentToken": {
+            "$ref": "#/components/schemas/Payment-PaymentToken"
+          },
+          "paymentMethod": {
+            "$ref": "#/components/schemas/Payment-PaymentMethod"
+          },
+          "shop": {
+            "$ref": "#/components/schemas/Payment-Shop"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/Payment-BillingDetails"
+          },
+          "shippingDetails": {
+            "$ref": "#/components/schemas/Payment-ShippingDetails"
+          },
+          "refundedAmount": {
+            "$ref": "#/components/schemas/Payment-RefundedAmount"
+          },
+          "lastRefundAmount": {
+            "$ref": "#/components/schemas/Payment-LastRefundAmount"
+          },
+          "lastRefundReason": {
+            "$ref": "#/components/schemas/Payment-LastRefundReason"
+          },
+          "cancellationReason": {
+            "$ref": "#/components/schemas/Payment-CancellationReason"
+          },
+          "sessionDetails": {
+            "$ref": "#/components/schemas/Payment-SessionDetails"
+          },
+          "nextAction": {
+            "$ref": "#/components/schemas/Payment-NextAction"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/CreatedAt"
+          },
+          "updatedAt": {
+            "$ref": "#/components/schemas/UpdatedAt"
+          }
+        }
+      },
+      "CreatePaymentRequest": {
+        "title": "CreatePaymentRequest",
+        "type": "object",
+        "required": [
+          "amount",
+          "currency",
+          "orderId",
+          "completeUrl",
+          "callbackUrl"
+        ],
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Payment-Amount"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Payment-Currency"
+          },
+          "orderId": {
+            "$ref": "#/components/schemas/Payment-OrderId"
+          },
+          "callbackUrl": {
+            "$ref": "#/components/schemas/Payment-CallbackUrl"
+          },
+          "completeUrl": {
+            "$ref": "#/components/schemas/Payment-CompleteUrl"
+          },
+          "failUrl": {
+            "$ref": "#/components/schemas/Payment-FailUrl"
+          },
+          "cancelUrl": {
+            "$ref": "#/components/schemas/Payment-CancelUrl"
+          },
+          "paymentToken": {
+            "$ref": "#/components/schemas/Payment-PaymentToken"
+          },
+          "generatePaymentToken": {
+            "$ref": "#/components/schemas/Payment-GeneratePaymentToken"
+          },
+          "paymentMethod": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodInput"
+          },
+          "allowedPaymentMethods": {
+            "$ref": "#/components/schemas/Payment-AllowedPaymentMethods"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/Payment-TransactionType"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Payment-Description"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Payment-Customer"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/Payment-BillingDetails"
+          },
+          "shippingDetails": {
+            "$ref": "#/components/schemas/Payment-ShippingDetails"
+          },
+          "sessionDetails": {
+            "$ref": "#/components/schemas/Payment-SessionDetails"
+          }
+        }
+      },
+      "ConfirmPaymentRequest": {
+        "title": "ConfirmPaymentRequest",
+        "type": "object",
+        "required": [
+          "paymentToken"
+        ],
+        "properties": {
+          "paymentToken": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Payment-PaymentToken"
+              }
+            ],
+            "description": "A payment token generated by monei.js [UI Components](https://docs.monei.net/docs/monei-js-overview) or a paymentToken [saved after a previous successful payment](https://docs.monei.net/docs/save-payment-method)."
+          },
+          "generatePaymentToken": {
+            "$ref": "#/components/schemas/Payment-GeneratePaymentToken"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Payment-Customer"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/Payment-BillingDetails"
+          },
+          "shippingDetails": {
+            "$ref": "#/components/schemas/Payment-ShippingDetails"
+          }
+        }
+      },
+      "CapturePaymentRequest": {
+        "title": "CapturePaymentRequest",
+        "type": "object",
+        "properties": {
+          "amount": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Payment-Amount"
+              }
+            ],
+            "description": "The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded."
+          }
+        }
+      },
+      "CancelPaymentRequest": {
+        "title": "CancelPaymentRequest",
+        "type": "object",
+        "properties": {
+          "cancellationReason": {
+            "$ref": "#/components/schemas/Payment-CancellationReason"
+          }
+        }
+      },
+      "RefundPaymentRequest": {
+        "title": "RefundPaymentRequest",
+        "type": "object",
+        "properties": {
+          "amount": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Payment-Amount"
+              }
+            ],
+            "description": "The amount to refund, which must be less than or equal to the original amount."
+          },
+          "refundReason": {
+            "$ref": "#/components/schemas/Payment-RefundReason"
+          }
+        }
+      },
+      "Payment-Id": {
+        "type": "string",
+        "example": "af6029f80f5fc73a8ad2753eea0b1be0",
+        "description": "Unique identifier for the payment."
+      },
+      "Payment-Amount": {
+        "type": "integer",
+        "format": "postive integer",
+        "example": 110,
+        "description": "Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)."
+      },
+      "Payment-Currency": {
+        "type": "string",
+        "example": "EUR",
+        "description": "Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency."
+      },
+      "Payment-OrderId": {
+        "type": "string",
+        "example": "14379133960355",
+        "description": "An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system."
+      },
+      "Payment-Description": {
+        "type": "string",
+        "example": "Test Shop - #84370745531439",
+        "description": "An arbitrary string attached to the payment. Often useful for displaying to users."
+      },
+      "Payment-AccountId": {
+        "type": "string",
+        "example": "aa9333ba-82de-400c-9ae7-087b9f8d2242",
+        "description": "MONEI Account identifier."
+      },
+      "Payment-AuthorizationCode": {
+        "type": "string",
+        "example": "475816",
+        "description": "Unique identifier provided by the bank performing transaction."
+      },
+      "Payment-Livemode": {
+        "type": "boolean",
+        "example": false,
+        "description": "Has the value `true` if the payment exists in live mode or the value `false` if the payment exists in test mode."
+      },
+      "Payment-Status": {
+        "type": "string",
+        "example": "PENDING",
+        "enum": [
+          "SUCCEEDED",
+          "PENDING",
+          "FAILED",
+          "CANCELED",
+          "REFUNDED",
+          "PARTIALLY_REFUNDED",
+          "AUTHORIZED",
+          "EXPIRED"
+        ],
+        "description": "The status of the payment."
+      },
+      "Payment-StatusCode": {
+        "type": "string",
+        "example": null,
+        "description": "Payment status code."
+      },
+      "Payment-StatusMessage": {
+        "type": "string",
+        "example": null,
+        "description": "Human readable status message, can be displayed to a user."
+      },
+      "Payment-RefundedAmount": {
+        "type": "integer",
+        "format": "positive integer",
+        "example": null,
+        "description": "Amount in cents refunded (can be less than the amount attribute on the payment if a partial refund was issued)."
+      },
+      "Payment-LastRefundAmount": {
+        "type": "integer",
+        "format": "positive integer",
+        "example": null,
+        "description": "Amount in cents refunded in the last transaction."
+      },
+      "Payment-LastRefundReason": {
+        "type": "string",
+        "example": null,
+        "description": "The reason of the last refund transaction."
+      },
+      "Payment-CancellationReason": {
+        "type": "string",
+        "example": null,
+        "enum": [
+          "duplicated",
+          "fraudulent",
+          "requested_by_customer"
+        ],
+        "description": "The reason for canceling the Payment."
+      },
+      "Payment-Customer": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "john.doe@microapps.com",
+            "description": "The customer’s email address."
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe",
+            "description": "The customer’s full name or business name."
+          },
+          "phone": {
+            "type": "string",
+            "example": null,
+            "description": "The customer’s phone number."
+          }
+        }
+      },
+      "Payment-PaymentToken": {
+        "type": "string",
+        "example": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
+        "description": "A permanent token represents a payment method used in the payment. Pass `generatePaymentToken: true` when you creating a payment to generate it. You can pass it as `paymentToken` parameter to create other payments with the same payment method. This token does not expire, and should only be used server-side."
+      },
+      "Payment-GeneratePaymentToken": {
+        "type": "boolean",
+        "example": false,
+        "default": false,
+        "description": "If set to true a permanent token that represents a payment method used in the payment will be generated."
+      },
+      "Payment-PaymentMethod": {
+        "type": "object",
+        "description": "Details about the payment method at the time of the transaction.",
+        "properties": {
+          "country": {
+            "$ref": "#/components/schemas/Country"
+          },
+          "brand": {
+            "type": "string",
+            "example": "visa",
+            "enum": [
+              "visa",
+              "mastercard",
+              "diners",
+              "amex",
+              "jcb",
+              "unionpay",
+              "unknown"
+            ],
+            "description": "Card brand."
+          },
+          "type": {
+            "type": "string",
+            "example": "credit",
+            "enum": [
+              "debit",
+              "credit"
+            ],
+            "description": "Card type `debit` or `credit`."
+          },
+          "threeDSecure": {
+            "type": "boolean",
+            "example": false,
+            "description": "Wether this transaction used 3D Secure authentication."
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": null,
+            "description": "The phone number used to pay with `bizum`."
+          },
+          "last4": {
+            "type": "string",
+            "example": "0004",
+            "description": "The last four digits of the card."
+          },
+          "method": {
+            "type": "string",
+            "example": "card",
+            "enum": [
+              "card",
+              "bizum",
+              "googlePay",
+              "applePay"
+            ],
+            "description": "Payment method type."
+          }
+        }
+      },
+      "Payment-PaymentMethodInput": {
+        "type": "object",
+        "description": "An information about a payment method used for this payment. We recommend using `paymentToken` instead, as it is more secure way to pass sensitive payment information. Processing credit card information on your server requires [PCI DSS compliance](https://www.investopedia.com/terms/p/pci-compliance.asp).",
+        "properties": {
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          }
+        }
+      },
+      "Payment-AllowedPaymentMethods": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "enum": [
+          "card",
+          "bizum",
+          "applePay",
+          "googlePay"
+        ],
+        "example": [
+          "card",
+          "bizum"
+        ],
+        "description": "An array of allowed payment methods (used in hosted payment page). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `applePay`\n  - `googlePay`"
+      },
+      "Payment-TransactionType": {
+        "type": "string",
+        "example": "SALE",
+        "default": "SALE",
+        "enum": [
+          "SALE",
+          "AUTH"
+        ],
+        "description": "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don’t capture the funds until later."
+      },
+      "Payment-Shop": {
+        "type": "object",
+        "description": "The information about the shop (used in [hosted payment page](https://docs.monei.net/docs/use-prebuilt-payment-page)).",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Test Shop",
+            "description": "The shop name."
+          },
+          "country": {
+            "$ref": "#/components/schemas/Country"
+          }
+        }
+      },
+      "Payment-BillingDetails": {
+        "type": "object",
+        "description": "Billing information associated with the payment method at the time of the transaction.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe",
+            "description": "The customer’s billing full name."
+          },
+          "email": {
+            "type": "string",
+            "example": "john.doe@microapps.com",
+            "description": "The customer’s billing email address."
+          },
+          "phone": {
+            "type": "string",
+            "example": null,
+            "description": "The customer’s billing phone number."
+          },
+          "company": {
+            "type": "string",
+            "example": null,
+            "description": "Billing company name."
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          }
+        }
+      },
+      "Payment-ShippingDetails": {
+        "type": "object",
+        "description": "Shipping information associated with the payment.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe",
+            "description": "The shipping customer’s full name."
+          },
+          "email": {
+            "type": "string",
+            "example": "john.doe@microapps.com",
+            "description": "The shipping customer’s email address."
+          },
+          "phone": {
+            "type": "string",
+            "example": null,
+            "description": "The shipping customer’s phone number."
+          },
+          "company": {
+            "type": "string",
+            "example": null,
+            "description": "Name of the company where the shipment is going."
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          }
+        }
+      },
+      "Payment-SessionDetails": {
+        "description": "Information related to the browsing session of the user who initiated the payment.",
+        "properties": {
+          "ip": {
+            "type": "string",
+            "example": "100.100.200.100",
+            "description": "The IP address where the payment originated."
+          },
+          "countryCode": {
+            "type": "string",
+            "example": null,
+            "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2))."
+          },
+          "lang": {
+            "type": "string",
+            "example": "es",
+            "description": "Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1))."
+          },
+          "deviceType": {
+            "type": "string",
+            "example": "desktop",
+            "description": "Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`."
+          },
+          "deviceModel": {
+            "type": "string",
+            "example": null,
+            "description": "Information about the device used for the browser session (e.g., `iPhone`)."
+          },
+          "browser": {
+            "type": "string",
+            "example": "Chrome",
+            "description": "The browser used in this browser session (e.g., `Mobile Safari`)."
+          },
+          "browserVersion": {
+            "type": "string",
+            "example": "83.0.4103.116",
+            "description": "The version for the browser session (e.g., `13.1.1`)."
+          },
+          "os": {
+            "type": "string",
+            "example": "Mac OS",
+            "description": "Operation system (e.g., `iOS`)."
+          },
+          "osVersion": {
+            "type": "string",
+            "example": "10.15.4",
+            "description": "Operation system version (e.g., `13.5.1`)."
+          },
+          "userAgent": {
+            "type": "string",
+            "example": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...",
+            "description": "Full user agent string of the browser session."
+          }
+        }
+      },
+      "Payment-NextAction": {
+        "type": "object",
+        "description": "If present, this property tells you what actions you need to take in order for your customer to fulfill a payment using the provided source.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "CONFIRM",
+            "enum": [
+              "CONFIRM",
+              "CHALLENGE",
+              "COMPLETE"
+            ],
+            "description": "- `CONFIRM` - Your customer needs to be redirected to a\n  [hosted payment page](https://docs.monei.net/docs/use-prebuilt-payment-page)\n  or confirm payment using\n  [payment token](https://docs.monei.net/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).\n  The **redirectUrl** will point to the hosted payment page.\n- `CHALLENGE` - Your customer needs to be redirected to the\n  3d secure challenge page provided by the bank. The **redirectUrl**\n  will point to the 3d secure challenge page provided by the bank.\n- `COMPLETE` - The payment is completed. The **redirectUrl** will be\n  the **completeUrl** if it was provided when the payment was created."
+          },
+          "mustRedirect": {
+            "type": "boolean",
+            "example": false,
+            "description": "If `true` you have to redirect your customer to the **redirectUrl** to continue payment process."
+          },
+          "redirectUrl": {
+            "type": "string",
+            "example": "https://secure.monei.net/payments/af6029f80f5fc73a8ad2753eea0b1be0",
+            "description": "Redirect your customer to this url to continue payment process."
+          }
+        }
+      },
+      "Payment-CallbackUrl": {
+        "type": "string",
+        "example": "https://mysite.com/checkout/callback",
+        "description": "The URL to which a payment result should be sent asynchronously."
+      },
+      "Payment-CompleteUrl": {
+        "type": "string",
+        "example": "https://mysite.com/checkout/complete",
+        "description": "The URL the customer will be directed to after transaction completed (successful or failed - except if `failUrl` is provided)."
+      },
+      "Payment-FailUrl": {
+        "type": "string",
+        "example": "https://mysite.com/checkout/fail",
+        "description": "The URL the customer will be directed to after transaction has failed, instead of `completeUrl` (used in hosted payment page). This allows to provide two different URLs for successful and failed payments."
+      },
+      "Payment-CancelUrl": {
+        "type": "string",
+        "example": "https://mysite.com/checkout/cancel",
+        "description": "The URL the customer will be directed to if they decide to cancel payment and return to your website (used in hosted payment page)."
+      },
+      "Payment-RefundReason": {
+        "type": "string",
+        "example": null,
+        "enum": [
+          "duplicated",
+          "fraudulent",
+          "requested_by_customer"
+        ],
+        "description": "The reason for refunding the Payment."
+      }
+    },
+    "parameters": {
+      "id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The payment ID",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "examples": {
+      "CreatePaymentBasicRequest": {
+        "value": {
+          "amount": "110,",
+          "currency": "EUR",
+          "orderId": "14379133960355",
+          "paymentToken": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
+          "callbackUrl": "https://mysite.com/checkout/callback",
+          "completeUrl": "https://mysite.com/checkout/complete"
+        }
+      },
+      "ConfirmPaymentBasicRequest": {
+        "value": {
+          "paymentToken": "7cc38b08ff471ccd313ad62b23b9f362b107560b"
+        }
+      },
+      "CapturePaymentFullRequest": {
+        "value": {
+          "amount": 100
+        }
+      },
+      "CancelPaymentFullRequest": {
+        "value": {
+          "cancellationReason": "requested_by_customer"
+        }
+      },
+      "RefundPaymentFullRequest": {
+        "value": {
+          "amount": 50,
+          "refundReason": "requested_by_customer"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Payments",
+      "description": "To charge a credit or a debit card, you create a Payment object. You can capture, cancel, refund and confirm individual payments. Payments are identified by a unique, random ID. <br/><br/> We recommend that you create exactly one Payment for each order or customer session in your system."
+    }
+  ],
+  "paths": {
+    "/payments": {
+      "post": {
+        "operationId": "createPayment",
+        "summary": "Create Payment",
+        "description": "To charge a credit card or other payment method, you create a Payment. <br/><br/> Payment can also be created without a payment method to initiate a payment process and redirect a customer to the hosted payment page.",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentRequest"
+              },
+              "examples": {
+                "basic": {
+                  "$ref": "#/components/examples/CreatePaymentBasicRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Payment"
+          }
+        }
+      }
+    },
+    "/payments/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/id"
+        }
+      ],
+      "get": {
+        "operationId": "getPayment",
+        "summary": "Get Payment",
+        "description": "Get the details of a payment that has previously been created. Supply the unique payment ID that was returned from your previous request.",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Payment"
+          }
+        }
+      }
+    },
+    "/payments/{id}/confirm": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/id"
+        }
+      ],
+      "post": {
+        "operationId": "confirmPayment",
+        "summary": "Confirm Payment",
+        "description": "Confirm a payment that was created without a `paymentToken` or `paymentMethod`. You can only confirm a payment with the `PENDING` status. <br/><br/> You can charge a customer in two steps. First create a payment without payment details and then confirm it after you generate a `paymentToken` on the front-end with monei.js [UI Components](https://docs.monei.net/docs/monei-js-overview). <br/><br/> You can provide additional customer information, it will override the information passed in **create payment** request.",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmPaymentRequest"
+              },
+              "examples": {
+                "full": {
+                  "$ref": "#/components/examples/ConfirmPaymentBasicRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Payment"
+          }
+        }
+      }
+    },
+    "/payments/{id}/capture": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/id"
+        }
+      ],
+      "post": {
+        "operationId": "capturePayment",
+        "summary": "Capture Payment",
+        "description": "Capture the payment of an existing, uncaptured, payment. This is the second half of the two-step payment flow, where first you created a payment with the `transactionType` set to `AUTH`. <br/><br/> Uncaptured payments expire exactly seven days after they are created. If they are not captured by that point in time, they will be marked as expired and will no longer be capturable.",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CapturePaymentRequest"
+              },
+              "examples": {
+                "full": {
+                  "$ref": "#/components/examples/CapturePaymentFullRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Payment"
+          }
+        }
+      }
+    },
+    "/payments/{id}/cancel": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/id"
+        }
+      ],
+      "post": {
+        "operationId": "cancelPayment",
+        "summary": "Cancel Payment",
+        "description": "Release customer's funds that were reserved earlier. You can only cancel a payment with the `AUTHORIZED` status. <br/><br/> This is the second half of the two-step payment flow, where first you created a payment with the `transactionType` set to `AUTH`.",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelPaymentRequest"
+              },
+              "examples": {
+                "full": {
+                  "$ref": "#/components/examples/CancelPaymentFullRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Payment"
+          }
+        }
+      }
+    },
+    "/payments/{id}/refund": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/id"
+        }
+      ],
+      "post": {
+        "operationId": "refundPayment",
+        "summary": "Refund Payment",
+        "description": "Refund a payment that has previously been created but not yet refunded. Funds will be refunded to the credit or debit card that was originally charged. <br/><br/> You can optionally refund only part of a payment. You can do so multiple times, until the entire payment has been refunded. <br/><br/> Once entirely refunded, a payment can’t be refunded again. This method will throw an error when called on an already-refunded payment, or when trying to refund more money than is left on a payment.",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundPaymentRequest"
+              },
+              "examples": {
+                "full": {
+                  "$ref": "#/components/examples/RefundPaymentFullRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Payment"
+          }
+        }
+      }
+    }
+  }
+}

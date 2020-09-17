@@ -24,8 +24,9 @@ module.exports = {
       theme: require('prism-react-renderer/themes/nightOwl')
     },
     algolia: {
-      apiKey: '4b9b0bfa1a19b86cf70a5bf9c81e9c80',
-      indexName: 'monei',
+      appId: '0Q4XVEPSQ8',
+      apiKey: '467829303523116db50a19af445924a9',
+      indexName: 'monei-docs',
       algoliaOptions: {} // Optional, if provided by Algolia
     },
     announcementBar: {
@@ -47,6 +48,12 @@ module.exports = {
           to: 'docs/',
           activeBasePath: 'docs',
           label: 'Documentation',
+          position: 'right'
+        },
+        {
+          to: 'api/',
+          activeBasePath: 'api',
+          label: 'API',
           position: 'right'
         },
         {
@@ -82,7 +89,6 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'getting-started',
           sidebarPath: require.resolve('./sidebars.js')
         },
         theme: {
@@ -91,5 +97,8 @@ module.exports = {
       }
     ]
   ],
-  plugins: [path.resolve(__dirname, './inject-scripts.js')]
+  plugins: [
+    path.resolve(__dirname, './inject-scripts.js'),
+    path.resolve(__dirname, './webpack-config.js')
+  ]
 };

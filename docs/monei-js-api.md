@@ -44,7 +44,7 @@ var cardInput = monei.CardInput({
 
 ### CardInput options
 
-- **paymentId** `string` - A payment ID provided by MONEI in [create payment](payments-api.mdx#create-payment) request. Generated payment token will be bound to this payment.
+- **paymentId** `string` - A payment ID provided by MONEI in [create payment](/api) request. Generated payment token will be bound to this payment.
 - **accountId** `string` - Your MONEI account ID. Required if you're initializing card input with account ID and order ID. Instead of passing **paymentId** you can initialize a card input with the **accountId** and **orderId**. Generate a payment token and use it to create a payment on the server-side.
 - **orderId** `string` - Unique order ID in your system. Generated payment token will be bound to this order id and can be only used for the payment with the same **orderId**
 - **style** `object` - Customize the appearance of this component using CSS properties passed in a [Style](#cardinput-style-object) object.

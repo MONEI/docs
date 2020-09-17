@@ -15,10 +15,12 @@ module.exports = {
     {
       'MONEI JS': ['monei-js-overview', 'monei-js-api']
     },
-    'graphql-api',
     {
-      'API Reference': ['api-authentication', 'payments-api']
+      type: 'link',
+      label: 'Payments API',
+      href: '/api/#tag/Payments'
     },
+    'graphql-api',
     'testing'
   ]
 };
