@@ -40,6 +40,8 @@ const Redoc = (props) => {
         hideDownloadButton: true,
         requiredPropsFirst: true,
         hideSchemaTitles: true,
+        nativeScrollbars: true,
+        onlyRequiredInSamples: true,
         disableSearch: true,
         jsonSampleExpandLevel: 1,
         theme
