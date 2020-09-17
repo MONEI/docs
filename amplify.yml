@@ -4,7 +4,7 @@ frontend:
     preBuild:
       commands:
         - yarn install
-        - aws s3 cp s3://$JS_BUCKET/api/v1/openapi.json ./openapi.json --quiet
+        - aws s3 cp s3://$JS_BUCKET/api/v1/openapi.json ./openapi.json
     build:
       commands:
         - yarn run build
