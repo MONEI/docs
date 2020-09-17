@@ -18,6 +18,7 @@
     "core-js": "^3.6.5",
     "lodash.merge": "^4.6.2",
     "mobx": "^4.2.0",
+    "polished": "^3.6.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "redoc": "^2.0.0-rc.40",
