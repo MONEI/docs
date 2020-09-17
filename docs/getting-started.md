@@ -11,7 +11,7 @@ description: Find a guide to integrate MONEI into your system
   Securely collect payments with MONEI Hosted payment page.
 - **[Accept a card payment](accept-card-payment.mdx)**  
   Use MONEI UI components to build a checkout form and charge the card.
-- **[Payments API](/api/)**  
+- **[Payments API](/api/#tag/Payments)**  
   Securely perform a server to server payments.
 
 #### Integrate with your e-commerce platform

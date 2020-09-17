@@ -4,21 +4,43 @@
 
 /* ------ Headings Overrides ------- */
 
-.redocusaurus h2,h3,h4 {
-  color: var(--ifm-font-color-base);
+.redocusaurus h1,
+.redocusaurus h2,
+.redocusaurus h3,
+.redocusaurus h4,
+.redocusaurus h5,
+.redocusaurus h6 {
+  color: var(--ifm-heading-color) !important;
+  font-weight: var(--ifm-heading-font-weight) !important;
+  line-height: var(--ifm-heading-line-height) !important;
+  margin-bottom: var(--ifm-heading-margin-bottom);
+  margin-top: var(--ifm-heading-margin-top);
+}
+
+.redocusaurus h1 {
+  font-size: var(--ifm-h1-font-size) !important;
+}
+
+.redocusaurus h2 {
+  font-size: var(--ifm-h2-font-size) !important;
+}
+
+.redocusaurus h3 {
+  font-size: var(--ifm-h3-font-size) !important;
+}
+
+.redocusaurus h4 {
+  font-size: var(--ifm-h4-font-size) !important;
 }
 
 .redocusaurus h5 {
-  color: var(--ifm-font-color-secondary) !important;
+  text-transform: none;
   border-bottom: none !important;
 }
 
 .redocusaurus h5 > span {
-  color: var(--ifm-font-color-secondary) !important;
   font-size: inherit !important;
 }
-
-/* ------- Sidebar Overrides (Left Panel) ------- */
 
 .redocusaurus .menu-content {
   border-right: 1px solid var(--ifm-toc-border-color);
@@ -28,12 +50,10 @@
   font-size: 15px;
   font-weight: normal;
 }
-.redocusaurus .menu-content div:first-child  {
-  background-color: transparent !important;
-  padding: 10px 0;
-}
 
-/* ------- Right Panel Overrides ------- */
+.redocusaurus .menu-content div:first-child {
+  background-color: transparent !important;
+}
 
 .redocusaurus code {
   color: var(--ifm-color-emphasis-100);
@@ -42,10 +62,10 @@
 }
 
 .redocusaurus .token.boolean {
-  color: hsl(350,40%,70%) !important;
+  color: hsl(350, 40%, 70%) !important;
 }
 
-html[data-theme="dark"] .redocusaurus code {
+html[data-theme='dark'] .redocusaurus code {
   color: var(--ifm-color-emphasis-900);
 }
 
@@ -53,13 +73,12 @@ html[data-theme="dark"] .redocusaurus code {
   color: #303846 !important;
 }
 
-/* ------ Schema Styling Overrides ------- */
-
-.redocusaurus table th, table td {
+.redocusaurus table th,
+table td {
   border: none;
 }
 
-.redocusaurus table [kind="field"] {
+.redocusaurus table [kind='field'] {
   font-size: 15px;
 }
 
@@ -67,22 +86,48 @@ html[data-theme="dark"] .redocusaurus code {
   border-bottom: none !important;
 }
 
-.redocusaurus table.security-details > tbody > tr  {
+.redocusaurus table.security-details > tbody > tr {
   color: var(--ifm-font-color);
 }
 
 .redocusaurus table.security-details tr {
-  background-color: var(--ifm-background-color)
+  background-color: var(--ifm-background-color);
 }
 
 .redocusaurus button {
   font-size: 15px !important;
 }
 
-.redocusaurus .menu-content a[target="_blank"] {
+.redocusaurus .menu-content a[target='_blank'] {
   display: none;
 }
 
 .redocusaurus .redoc-wrap > div:nth-child(2) {
   left: 20px;
+}
+
+.redocusaurus ul[role='navigation'] {
+  padding: 0.5rem;
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.redocusaurus ul[role='navigation'] li {
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.redocusaurus label[role='menuitem'] {
+  font-size: var(--ifm-font-size-base);
+  border-radius: 0.25rem;
+  color: var(--ifm-menu-color);
+  cursor: pointer;
+  display: flex;
+  line-height: 20px;
+  justify-content: space-between;
+  margin: 0;
+  padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
+}
+
+.redocusaurus label[role='menuitem'].active {
+  color: var(--ifm-menu-color-active);
 }
