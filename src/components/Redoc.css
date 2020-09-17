@@ -1,4 +1,5 @@
 .redoc-wrap {
+  --ifm-heading-margin-top: var(--ifm-heading-margin-bottom);
   border-bottom: 1px solid var(--ifm-toc-border-color);
 }
 
@@ -34,11 +35,13 @@
 }
 
 .redoc-wrap h5 {
+  margin-top: 0;
   text-transform: none;
   border-bottom: none !important;
 }
 
 .redoc-wrap h5 > span {
+  font-weight: normal;
   font-size: inherit !important;
 }
 

@@ -1,6 +1,6 @@
 {
   "index_name": "monei-docs",
-  "start_urls": ["https://docs.monei.net/docs"],
+  "start_urls": ["https://docs.monei.net/docs", "https://docs.monei.net/api"],
   "sitemap_urls": ["http://docs.monei.net/sitemap.xml"],
   "strip_chars": "#",
   "selectors": {

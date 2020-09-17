@@ -35,7 +35,7 @@ const Redoc = (props) => {
     <RedocStandalone
       spec={props.spec}
       options={{
-        ssr: true,
+        hideLoading: true,
         scrollYOffset: 'nav',
         hideDownloadButton: true,
         requiredPropsFirst: true,
