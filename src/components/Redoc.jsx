@@ -37,7 +37,7 @@ const Redoc = (props) => {
       options={{
         hideLoading: true,
         scrollYOffset: 'nav',
-        hideDownloadButton: true,
+        hideDownloadButton: false,
         requiredPropsFirst: true,
         hideSchemaTitles: true,
         nativeScrollbars: true,
