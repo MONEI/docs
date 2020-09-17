@@ -1,11 +1,14 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-import Redocusaurus from '../components/Redocusaurus';
+import Redoc from '../components/Redoc';
+import openapi from '../../openapi.json';
 
 function APIDocs() {
   return (
-    <Layout title={`API Docs`} description={`Open API Reference Docs for the API`}>
-      <Redocusaurus spec="/openapi.json" />
+    <Layout
+      title="API Reference"
+      description="The MONEI API is organized around REST. Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.">
+      <Redoc spec={openapi} />
     </Layout>
   );
 }

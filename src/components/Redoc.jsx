@@ -1,6 +1,6 @@
 import React from 'react';
 import {RedocStandalone} from 'redoc';
-import './Redocusaurus.css';
+import './Redoc.css';
 
 let theme = {
   colors: {
@@ -30,23 +30,22 @@ let theme = {
   }
 };
 
-const Redocusaurus = (props) => {
+const Redoc = (props) => {
   return (
-    <div className="redocusaurus">
-      <RedocStandalone
-        specUrl={props.spec}
-        options={{
-          scrollYOffset: 'nav',
-          hideDownloadButton: true,
-          requiredPropsFirst: true,
-          hideSchemaTitles: true,
-          disableSearch: true,
-          jsonSampleExpandLevel: 1,
-          theme
-        }}
-      />
-    </div>
+    <RedocStandalone
+      spec={props.spec}
+      options={{
+        ssr: true,
+        scrollYOffset: 'nav',
+        hideDownloadButton: true,
+        requiredPropsFirst: true,
+        hideSchemaTitles: true,
+        disableSearch: true,
+        jsonSampleExpandLevel: 1,
+        theme
+      }}
+    />
   );
 };
 
-export default Redocusaurus;
+export default Redoc;
