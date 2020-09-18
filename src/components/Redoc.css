@@ -58,8 +58,9 @@
   background-color: transparent !important;
 }
 
-.redoc-wrap .redoc-json code {
-  background: #1b2028;
+.redoc-wrap .redoc-json code,
+.redoc-wrap pre {
+  background-color: inherit;
   color: inherit;
 }
 

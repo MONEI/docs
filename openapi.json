@@ -871,7 +871,13 @@
           "200": {
             "$ref": "#/components/responses/Payment"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "PHP",
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->createPayment([\n  'amount' => 1210, // €/$ 12.10\n  'orderId' => '100100000003'\n]);\n"
+          }
+        ]
       }
     },
     "/payments/{id}": {
@@ -896,7 +902,13 @@
           "200": {
             "$ref": "#/components/responses/Payment"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "PHP",
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->getPayment('PAYMENT_ID');\n"
+          }
+        ]
       }
     },
     "/payments/{id}/confirm": {
@@ -935,7 +947,13 @@
           "200": {
             "$ref": "#/components/responses/Payment"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "PHP",
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->confirmPayment(\n  'PAYMENT_ID',\n  ['paymentToken' => 'PAYMENT_TOKEN']\n);\n"
+          }
+        ]
       }
     },
     "/payments/{id}/capture": {
@@ -974,7 +992,13 @@
           "200": {
             "$ref": "#/components/responses/Payment"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "PHP",
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->capturePayment('PAYMENT_ID');\n"
+          }
+        ]
       }
     },
     "/payments/{id}/cancel": {
@@ -1013,7 +1037,13 @@
           "200": {
             "$ref": "#/components/responses/Payment"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "PHP",
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->cancelPayment('PAYMENT_ID');\n"
+          }
+        ]
       }
     },
     "/payments/{id}/refund": {
@@ -1052,7 +1082,13 @@
           "200": {
             "$ref": "#/components/responses/Payment"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "PHP",
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->refundPayment('PAYMENT_ID');\n"
+          }
+        ]
       }
     }
   }
