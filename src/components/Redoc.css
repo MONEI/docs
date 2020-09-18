@@ -111,6 +111,10 @@ table td {
   font-weight: var(--ifm-font-weight-semibold);
 }
 
+.redoc-wrap ul[role='navigation'] ul {
+  margin-left: var(--ifm-menu-link-padding-horizontal);
+}
+
 .redoc-wrap ul[role='navigation'] li {
   margin-bottom: 0.25rem;
   margin-top: 0.25rem;
