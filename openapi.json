@@ -104,14 +104,14 @@
         "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2))."
       },
       "CreatedAt": {
-        "type": "number",
-        "format": "timestamp",
+        "type": "integer",
+        "format": "int64",
         "example": null,
         "description": "Time at which the resource was created. Measured in seconds since the Unix epoch."
       },
       "UpdatedAt": {
-        "type": "number",
-        "format": "timestamp",
+        "type": "integer",
+        "format": "int64",
         "example": null,
         "description": "Time at which the resource updated last time. Measured in seconds since the Unix epoch."
       },
@@ -392,7 +392,7 @@
       },
       "Payment-Amount": {
         "type": "integer",
-        "format": "postive integer",
+        "format": "int32",
         "example": 110,
         "description": "Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)."
       },
@@ -453,13 +453,13 @@
       },
       "Payment-RefundedAmount": {
         "type": "integer",
-        "format": "positive integer",
+        "format": "int32",
         "example": null,
         "description": "Amount in cents refunded (can be less than the amount attribute on the payment if a partial refund was issued)."
       },
       "Payment-LastRefundAmount": {
         "type": "integer",
-        "format": "positive integer",
+        "format": "int32",
         "example": null,
         "description": "Amount in cents refunded in the last transaction."
       },
@@ -841,7 +841,7 @@
   "paths": {
     "/payments": {
       "post": {
-        "operationId": "createPayment",
+        "operationId": "payments_create",
         "summary": "Create Payment",
         "description": "To charge a credit card or other payment method, you create a Payment. <br/><br/> Payment can also be created without a payment method to initiate a payment process and redirect a customer to the hosted payment page.",
         "security": [
@@ -875,7 +875,7 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->createPayment([\n  'amount' => 1210, // €/$ 12.10\n  'orderId' => '100100000003'\n]);\n"
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->create([\n  'amount' => 1210, // €/$ 12.10\n  'orderId' => '100100000003'\n]);\n"
           }
         ]
       }
@@ -887,7 +887,7 @@
         }
       ],
       "get": {
-        "operationId": "getPayment",
+        "operationId": "payments_get",
         "summary": "Get Payment",
         "description": "Get the details of a payment that has previously been created. Supply the unique payment ID that was returned from your previous request.",
         "security": [
@@ -906,7 +906,7 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->getPayment('PAYMENT_ID');\n"
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->get('PAYMENT_ID');\n"
           }
         ]
       }
@@ -918,7 +918,7 @@
         }
       ],
       "post": {
-        "operationId": "confirmPayment",
+        "operationId": "payments_confirm",
         "summary": "Confirm Payment",
         "description": "Confirm a payment that was created without a `paymentToken` or `paymentMethod`. You can only confirm a payment with the `PENDING` status. <br/><br/> You can charge a customer in two steps. First create a payment without payment details and then confirm it after you generate a `paymentToken` on the front-end with monei.js [UI Components](https://docs.monei.net/docs/monei-js-overview). <br/><br/> You can provide additional customer information, it will override the information passed in **create payment** request.",
         "security": [
@@ -951,7 +951,7 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->confirmPayment(\n  'PAYMENT_ID',\n  ['paymentToken' => 'PAYMENT_TOKEN']\n);\n"
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->confirm(\n  'PAYMENT_ID',\n  ['paymentToken' => 'PAYMENT_TOKEN']\n);\n"
           }
         ]
       }
@@ -963,7 +963,7 @@
         }
       ],
       "post": {
-        "operationId": "capturePayment",
+        "operationId": "payments_capture",
         "summary": "Capture Payment",
         "description": "Capture the payment of an existing, uncaptured, payment. This is the second half of the two-step payment flow, where first you created a payment with the `transactionType` set to `AUTH`. <br/><br/> Uncaptured payments expire exactly seven days after they are created. If they are not captured by that point in time, they will be marked as expired and will no longer be capturable.",
         "security": [
@@ -996,7 +996,7 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->capturePayment('PAYMENT_ID');\n"
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->capture('PAYMENT_ID');\n"
           }
         ]
       }
@@ -1008,7 +1008,7 @@
         }
       ],
       "post": {
-        "operationId": "cancelPayment",
+        "operationId": "payments_cancel",
         "summary": "Cancel Payment",
         "description": "Release customer's funds that were reserved earlier. You can only cancel a payment with the `AUTHORIZED` status. <br/><br/> This is the second half of the two-step payment flow, where first you created a payment with the `transactionType` set to `AUTH`.",
         "security": [
@@ -1041,7 +1041,7 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->cancelPayment('PAYMENT_ID');\n"
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->cancel('PAYMENT_ID');\n"
           }
         ]
       }
@@ -1053,7 +1053,7 @@
         }
       ],
       "post": {
-        "operationId": "refundPayment",
+        "operationId": "payments_refund",
         "summary": "Refund Payment",
         "description": "Refund a payment that has previously been created but not yet refunded. Funds will be refunded to the credit or debit card that was originally charged. <br/><br/> You can optionally refund only part of a payment. You can do so multiple times, until the entire payment has been refunded. <br/><br/> Once entirely refunded, a payment can’t be refunded again. This method will throw an error when called on an already-refunded payment, or when trying to refund more money than is left on a payment.",
         "security": [
@@ -1086,7 +1086,7 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->refundPayment('PAYMENT_ID');\n"
+            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->refund('PAYMENT_ID');\n"
           }
         ]
       }

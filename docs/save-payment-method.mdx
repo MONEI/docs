@@ -21,7 +21,9 @@ import TabItem from '@theme/TabItem';
     {label: 'PHP', value: 'php'}
   ]}>
 
+
 <TabItem value="curl">
+
 
 ```shell script {8} title="POST https://api.monei.net/v1/payments"
 curl --request POST 'https://api.monei.net/v1/payments' \
@@ -39,7 +41,9 @@ curl --request POST 'https://api.monei.net/v1/payments' \
 
 </TabItem>
 
+
 <TabItem value="node">
+
 
 ```js {13} title="POST https://api.monei.net/v1/payments"
 const request = require('request');
@@ -67,6 +71,7 @@ request(options, function (error, response) {
 
 </TabItem>
 <TabItem value="php">
+
 
 ```php {11} title="POST https://api.monei.net/v1/payments"
 <?php
@@ -97,6 +102,7 @@ echo $response->getBody();
 </TabItem>
 </Tabs>
 
+
 Check all available [request parameters](/api).
 
 ### When you confirm a payment `Server-side`
@@ -111,6 +117,7 @@ Check all available [request parameters](/api).
   ]}>
 <TabItem value="curl">
 
+
 ```shell script {6} title="POST https://api.monei.net/v1/payments/:id/confirm"
 curl --request POST 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/confirm' \
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
@@ -123,7 +130,9 @@ curl --request POST 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f
 
 </TabItem>
 
+
 <TabItem value="node">
+
 
 ```js {11} title="POST https://api.monei.net/v1/payments/:id/confirm"
 const request = require('request');
@@ -147,6 +156,7 @@ request(options, function (error, response) {
 
 </TabItem>
 <TabItem value="php">
+
 
 ```php {9} title="POST https://api.monei.net/v1/payments/:id/confirm"
 <?php
@@ -173,7 +183,8 @@ echo $response->getBody();
 </TabItem>
 </Tabs>
 
-Check all available [request parameters](/api/#operation/confirmPayment).
+
+Check all available [request parameters](/api/#operation/payments_confirm).
 
 ### When you submit a payment form `Client-side`
 
@@ -197,9 +208,7 @@ You can pass `generatePaymentToken: true` when you submit a payment form. This i
     <input type="checkbox" name="generatePaymentToken" value="true" />
     save payment method
   </label>
-  <button type="submit" id="payment-button">
-    Submit payment
-  </button>
+  <button type="submit" id="payment-button">Submit payment</button>
 </form>
 ```
 
@@ -207,11 +216,11 @@ Check [Accept a card payment](accept-card-payment.mdx) integration for more deta
 
 ## 2. Obtain and store payment token
 
-After the payment is completed a customer is redirected to the `completeUrl` with **payment_id** query parameter, you can obtain permanent `paymentToken` by calling [get payment](/api/#operation/getPayment) endpoint.
+After the payment is completed a customer is redirected to the `completeUrl` with **payment_id** query parameter, you can obtain permanent `paymentToken` by calling [get payment](/api/#operation/payments_get) endpoint.
 
-MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#operation/getPayment) in JSON format including permanent `paymentToken`.
+MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format including permanent `paymentToken`.
 
-Store this `paymentToken` in your database along with customer information. Next time the customer does a purchase, [create a payment](/api) with this token to skip payment form. Keep in mind that the customer will still need to complete 3d secure verification.
+Store this `paymentToken` in your database along with customer information. Next time the customer does a purchase, [create a payment](/api/#operation/payments_create) with this token to skip payment form. Keep in mind that the customer will still need to complete 3d secure verification.
 
 :::note
 Generated **`paymentToken`** does not expire and should only be used **server-side**.
