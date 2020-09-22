@@ -16,7 +16,7 @@ Collecting payments on your website consists of creating a payment object, colle
 
 ### 1. Create a Payment `Server-side`
 
-Create a [Payment](/api) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
+Create a [Payment](/api/#section/Payment-object) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -40,12 +40,13 @@ curl --request POST 'https://api.monei.net/v1/payments' \
     "amount": 110,
     "currency": "EUR",
     "orderId": "14379133960355",
-    "description": "Test Shop - #84370745531439",
+    "description": "Test Shop - #14379133960355",
     "customer": {
        "email": "john.doe@microapps.com"
     },
     "callbackUrl": "https://mysite.com/checkout/callback",
-    "completeUrl": "https://mysite.com/checkout/complete"
+    "completeUrl": "https://mysite.com/checkout/complete",
+    "cancelUrl": "https://mysite.com/checkout/cancel"
 }'
 ```
 
@@ -55,30 +56,20 @@ curl --request POST 'https://api.monei.net/v1/payments' \
 <TabItem value="node">
 
 
-```js title="POST https://api.monei.net/v1/payments"
-var request = require('request');
-var options = {
-  method: 'POST',
-  url: 'https://api.monei.net/v1/payments',
-  headers: {
-    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
-    'Content-Type': 'application/json'
+```js title="server.js"
+const {Monei} = require('@monei-js/node-sdk');
+const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+monei.payments.create({
+  amount: 110,
+  currency: 'EUR',
+  orderId: '14379133960355',
+  description: 'Test Shop - #14379133960355',
+  customer: {
+    email: 'john.doe@microapps.com'
   },
-  body: JSON.stringify({
-    amount: 110,
-    currency: 'EUR',
-    orderId: '14379133960355',
-    description: 'Test Shop - #84370745531439',
-    customer: {
-      email: 'john.doe@microapps.com'
-    },
-    callbackUrl: 'https://mysite.com/checkout/callback',
-    completeUrl: 'https://mysite.com/checkout/complete'
-  })
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
+  callbackUrl: 'https://mysite.com/checkout/callback',
+  completeUrl: 'https://mysite.com/checkout/complete'
+  cancelUrl: 'https://mysite.com/checkout/cancel'
 });
 ```
 
@@ -86,30 +77,20 @@ request(options, function (error, response) {
 <TabItem value="php">
 
 
-```php title="POST https://api.monei.net/v1/payments"
-<?php
-$client = new http\Client;
-$request = new http\Client\Request;
-$request->setRequestUrl('https://api.monei.net/v1/payments');
-$request->setRequestMethod('POST');
-$body = new http\Message\Body;
-$body->append('{
-    "amount": 110,
-    "currency": "EUR",
-    "orderId": "14379133960355",
-    "description": "Test Shop - #14379133960355",
-    "callbackUrl": "https://mysite.com/checkout/callback",
-    "completeUrl": "https://mysite.com/checkout/complete"
-}');
-$request->setBody($body);
-$request->setOptions(array());
-$request->setHeaders(array(
-  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00',
-  'Content-Type' => 'application/json'
-));
-$client->enqueue($request)->send();
-$response = $client->getResponse();
-echo $response->getBody();
+```php title="server.php"
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+$monei->payments->create([
+  'amount' => 110,
+  'currency' => 'EUR',
+  'orderId' => '14379133960355',
+  'description' => 'Test Shop - #14379133960355',
+  'customer' => [
+    'email' => 'john.doe@microapps.com'
+  ],
+  'callbackUrl' => 'https://mysite.com/checkout/callback',
+  'completeUrl' => 'https://mysite.com/checkout/complete'
+  'cancelUrl' => 'https://mysite.com/checkout/cancel'
+]);
 ```
 
 </TabItem>
