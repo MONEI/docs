@@ -45,27 +45,16 @@ curl --request POST 'https://api.monei.net/v1/payments' \
 <TabItem value="node">
 
 
-```js {13} title="POST https://api.monei.net/v1/payments"
-const request = require('request');
-const options = {
-  method: 'POST',
-  url: 'https://api.monei.net/v1/payments',
-  headers: {
-    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    amount: 110,
-    currency: 'EUR',
-    orderId: '14379133960355',
-    generatePaymentToken: true,
-    callbackUrl: 'https://mysite.com/checkout/callback',
-    completeUrl: 'https://mysite.com/checkout/complete'
-  })
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
+```js {7} title="server.js"
+const {Monei} = require('@monei-js/node-sdk');
+const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+monei.payments.create({
+  amount: 110,
+  currency: 'EUR',
+  orderId: '14379133960355',
+  generatePaymentToken: true,
+  callbackUrl: 'https://mysite.com/checkout/callback',
+  completeUrl: 'https://mysite.com/checkout/complete'
 });
 ```
 
@@ -73,30 +62,16 @@ request(options, function (error, response) {
 <TabItem value="php">
 
 
-```php {11} title="POST https://api.monei.net/v1/payments"
-<?php
-$client = new http\Client;
-$request = new http\Client\Request;
-$request->setRequestUrl('https://api.monei.net/v1/payments');
-$request->setRequestMethod('POST');
-$body = new http\Message\Body;
-$body->append('{
-    "amount": 110,
-    "currency": "EUR",
-    "orderId": "14379133960355",
-    "generatePaymentToken": true,
-    "callbackUrl": "https://mysite.com/checkout/callback",
-    "completeUrl": "https://mysite.com/checkout/complete"
-}');
-$request->setBody($body);
-$request->setOptions(array());
-$request->setHeaders(array(
-  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00',
-  'Content-Type' => 'application/json'
-));
-$client->enqueue($request)->send();
-$response = $client->getResponse();
-echo $response->getBody();
+```php {6} title="server.php"
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+$monei->payments->create([
+  'amount' => 110,
+  'currency' => 'EUR'
+  'orderId' => '14379133960355',
+  'generatePaymentToken' => true,
+  'callbackUrl' => 'https://mysite.com/checkout/callback',
+  'completeUrl' => 'https://mysite.com/checkout/complete'
+]);
 ```
 
 </TabItem>
@@ -134,23 +109,12 @@ curl --request POST 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f
 <TabItem value="node">
 
 
-```js {11} title="POST https://api.monei.net/v1/payments/:id/confirm"
-const request = require('request');
-const options = {
-  method: 'POST',
-  url: 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/confirm',
-  headers: {
-    Authorization: 'pk_test_3c140607778e1217f56ccb8b50540e00',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
-    generatePaymentToken: true
-  })
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
+```js {5} title="server.js"
+const {Monei} = require('@monei-js/node-sdk');
+const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+monei.payments.confirm({
+  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+  generatePaymentToken: true
 });
 ```
 
@@ -158,26 +122,15 @@ request(options, function (error, response) {
 <TabItem value="php">
 
 
-```php {9} title="POST https://api.monei.net/v1/payments/:id/confirm"
-<?php
-$client = new http\Client;
-$request = new http\Client\Request;
-$request->setRequestUrl('https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/confirm');
-$request->setRequestMethod('POST');
-$body = new http\Message\Body;
-$body->append('{
-    "paymentToken": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
-    "generatePaymentToken": true
-}');
-$request->setBody($body);
-$request->setOptions(array());
-$request->setHeaders(array(
-  'Authorization' => 'pk_test_3c140607778e1217f56ccb8b50540e00',
-  'Content-Type' => 'application/json'
-));
-$client->enqueue($request)->send();
-$response = $client->getResponse();
-echo $response->getBody();
+```php {6} title="server.php"
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+$monei->payments->confirm(
+  '832b77d1a4b372349a7ae0bb1b2af059',
+  [
+    'paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+    'generatePaymentToken' => true
+  ]
+);
 ```
 
 </TabItem>

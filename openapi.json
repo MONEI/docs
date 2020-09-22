@@ -875,7 +875,11 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->create([\n  'amount' => 1210, // €/$ 12.10\n  'orderId' => '100100000003'\n]);\n"
+            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n  'amount' => 110, // 1.10 EUR\n  'orderId' => '14379133960355',\n  'currency' => 'EUR'\n  'paymentToken'=> '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  'callbackUrl'=> 'https://mysite.com/checkout/callback',\n  'completeUrl'=> 'https://mysite.com/checkout/complete'\n]);\n"
+          },
+          {
+            "lang": "JavaScript",
+            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '14379133960355',\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  callbackUrl: 'https://mysite.com/checkout/callback',\n  completeUrl: 'https://mysite.com/checkout/complete'\n});\n"
           }
         ]
       }
@@ -906,7 +910,11 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->get('PAYMENT_ID');\n"
+            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->get('832b77d1a4b372349a7ae0bb1b2af059');\n"
+          },
+          {
+            "lang": "JavaScript",
+            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.get('832b77d1a4b372349a7ae0bb1b2af059');\n"
           }
         ]
       }
@@ -951,7 +959,11 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->confirm(\n  'PAYMENT_ID',\n  ['paymentToken' => 'PAYMENT_TOKEN']\n);\n"
+            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->confirm(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
+          },
+          {
+            "lang": "JavaScript",
+            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.confirm('832b77d1a4b372349a7ae0bb1b2af059', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n"
           }
         ]
       }
@@ -996,7 +1008,11 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->capture('PAYMENT_ID');\n"
+            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->capture(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['amount' => 100] // 1.00 EUR\n);\n"
+          },
+          {
+            "lang": "JavaScript",
+            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.capture(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  {amount: 100} // 1.00 EUR\n);\n"
           }
         ]
       }
@@ -1041,7 +1057,11 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->cancel('PAYMENT_ID');\n"
+            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['cancellationReason' => 'requested_by_customer']\n);\n"
+          },
+          {
+            "lang": "JavaScript",
+            "source": "const {Monei, PaymentCancellationReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.cancel('832b77d1a4b372349a7ae0bb1b2af059', {\n  cancellationReason: PaymentCancellationReason.RequestedByCustomer\n});\n"
           }
         ]
       }
@@ -1086,7 +1106,11 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('YOUR_API_KEY');\n$monei->payments->refund('PAYMENT_ID');\n"
+            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refundReason' => 'requested_by_customer']\n);\n"
+          },
+          {
+            "lang": "JavaScript",
+            "source": "const {Monei, PaymentRefundReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.refund('832b77d1a4b372349a7ae0bb1b2af059', {\n  refundReason: PaymentRefundReason.RequestedByCustomer\n});\n"
           }
         ]
       }
