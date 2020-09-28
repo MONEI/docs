@@ -6,7 +6,8 @@ module.exports = {
         'use-prebuilt-payment-page',
         'accept-card-payment',
         'shopify-integration',
-        'woocommerce-integration'
+        'woocommerce-integration',
+        'bizum-integration'
       ]
     },
     {
