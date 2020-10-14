@@ -69,16 +69,16 @@ app.listen(3000, () => console.log('Running on port 3000'));
 
 
 ```php title="server.php"
-$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec')
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
 
-$payload = @file_get_contents('php://input');
+$request_body = @file_get_contents('php://input');
 $sig_header = $_SERVER['HTTP_MONEI_SIGNATURE'];
 $payload = null;
 
 try {
-  $payload = $monei->verifySignature($payload, $sig_header);
+  $payload = $monei->verifySignature($request_body, $sig_header);
 } catch(Exception $e) {
-  // Invalid payload
+  // Invalid signature
   http_response_code(400);
   exit();
 }
