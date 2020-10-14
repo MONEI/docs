@@ -11,6 +11,87 @@ MONEI-Signature: t=1492774577,v1=5257a869e7ecebeda32affa62cdca3fa51cad7e77a0e56f
 
 MONEI generates signatures using a hash-based message authentication code ([HMAC](https://en.wikipedia.org/wiki/HMAC)) with [SHA-256](https://en.wikipedia.org/wiki/SHA-2). To prevent [downgrade attacks](https://en.wikipedia.org/wiki/Downgrade_attack), you should ignore all schemes that are not `v1`.
 
+## Verifying signatures using our official libraries
+
+Use one of our official libraries to verify signatures. You perform the verification by providing the request payload and the `MONEI-Signature` header. If verification fails, MONEI returns an error.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="node"
+  groupId="code"
+  values={[
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+
+
+  <TabItem value="node">
+
+
+```js title="server.js"
+const {Monei} = require('@monei-js/node-sdk');
+// Set your api key. Remember to switch to your live api key in production!
+// See your api key here: https://dashboard.monei.net/settings/api
+
+const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+
+// This example uses Express to receive webhooks
+const app = require('express')();
+
+// Use body-parser to retrieve the raw body as a buffer
+const bodyParser = require('body-parser');
+
+// Match the raw body to content type application/json
+app.post('/callback', bodyParser.raw({type: 'application/json'}), (request, response) => {
+  const signature = request.headers['MONEI-Signature'];
+
+  let payload;
+
+  try {
+    payload = monei.verifySignature(request.body, signature);
+  } catch (err) {
+    response.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  console.log('Payload', payload);
+
+  // Return a response to acknowledge receipt of the event
+  response.sendStatus(200);
+});
+
+app.listen(3000, () => console.log('Running on port 3000'));
+```
+
+  </TabItem>
+  <TabItem value="php">
+
+
+```php title="server.php"
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec')
+
+$payload = @file_get_contents('php://input');
+$sig_header = $_SERVER['HTTP_MONEI_SIGNATURE'];
+$payload = null;
+
+try {
+  $payload = $monei->verifySignature($payload, $sig_header);
+} catch(Exception $e) {
+  // Invalid payload
+  http_response_code(400);
+  exit();
+}
+
+echo 'Payload ' . $payload;
+
+http_response_code(200);
+```
+
+  </TabItem>
+</Tabs>
+
+
 ## Verifying signatures manually
 
 ### Step 1: Extract the timestamp and the signature from the header

@@ -15,7 +15,8 @@ const features = [
   },
   {
     title: 'Accept a card payment',
-    description: 'Use MONEI UI components to build a checkout form and charge the card.',
+    description:
+      'Use MONEI UI components to build a checkout form to get paid with multiple payment methods like Credit Cards, PayPal, Bizum, ApplePay...',
     url: '/docs/accept-card-payment'
   },
   {
