@@ -4,13 +4,26 @@ title: Accept a card payment
 description: Use MONEI UI components to build a checkout form and charge the card.
 ---
 
-Collecting payments on your website consists of creating a payment object, collecting card information, and submitting the payment to MONEI for processing.
+Collecting payments on your website consists of creating a payment object, collecting card information, and confirming the payment.
 
-<iframe
-  src="/card-input-example.html"
-  height="160px"
-  width="100%"
-  className="preview-frame"></iframe>
+<p>
+  <iframe src="/card-input-example.html" height="160px" width="100%" className="preview-frame" />
+</p>
+<p>
+  <a
+    style={{marginRight: '1em'}}
+    href="https://monei-payments-demo.herokuapp.com"
+    target="_blank"
+    className="button button--primary">
+    Live demo
+  </a>
+  <a
+    href="https://github.com/MONEI/monei-payments-demo"
+    target="_blank"
+    className="button button--secondary">
+    Source code
+  </a>
+</p>
 
 ## Integration
 
@@ -29,71 +42,74 @@ import TabItem from '@theme/TabItem';
     {label: 'Node.js', value: 'node'},
     {label: 'PHP', value: 'php'}
   ]}>
-<TabItem value="curl">
+  <TabItem value="curl">
 
 
-```shell script title="POST https://api.monei.net/v1/payments"
-curl --request POST 'https://api.monei.net/v1/payments' \
---header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
---header 'Content-Type: application/json' \
---data-raw '{
+    ```shell script title="POST https://api.monei.net/v1/payments"
+    curl --request POST 'https://api.monei.net/v1/payments' \
+    --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
     "amount": 110,
     "currency": "EUR",
     "orderId": "14379133960355",
     "description": "Test Shop - #14379133960355",
     "customer": {
-       "email": "john.doe@microapps.com"
-    },
-    "callbackUrl": "https://example.com/checkout/callback",
-    "completeUrl": "https://example.com/checkout/complete",
-    "cancelUrl": "https://example.com/checkout/cancel"
+    "email": "john.doe@microapps.com"
+
+},
+"callbackUrl": "https://example.com/checkout/callback",
+"completeUrl": "https://example.com/checkout/complete",
+"cancelUrl": "https://example.com/checkout/cancel"
 }'
-```
 
-</TabItem>
+````
 
-
-<TabItem value="node">
+  </TabItem>
 
 
-```js title="server.js"
-const {Monei} = require('@monei-js/node-sdk');
-const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-monei.payments.create({
-  amount: 110,
-  currency: 'EUR',
-  orderId: '14379133960355',
-  description: 'Test Shop - #14379133960355',
-  customer: {
+  <TabItem value="node">
+
+
+    ```js title="server.js"
+    const {Monei} = require('@monei-js/node-sdk');
+    const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+    monei.payments.create({
+    amount: 110,
+    currency: 'EUR',
+    orderId: '14379133960355',
+    description: 'Test Shop - #14379133960355',
+    customer: {
     email: 'john.doe@microapps.com'
-  },
-  callbackUrl: 'https://example.com/checkout/callback',
-  completeUrl: 'https://example.com/checkout/complete',
-  cancelUrl: 'https://example.com/checkout/cancel'
+
+},
+callbackUrl: 'https://example.com/checkout/callback',
+completeUrl: 'https://example.com/checkout/complete',
+cancelUrl: 'https://example.com/checkout/cancel'
 });
-```
+````
 
-</TabItem>
-<TabItem value="php">
+  </TabItem>
+  <TabItem value="php">
 
 
-```php title="server.php"
-$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-$monei->payments->create([
-  'amount' => 110,
-  'currency' => 'EUR',
-  'orderId' => '14379133960355',
-  'description' => 'Test Shop - #14379133960355',
-  'customer' => [
+    ```php title="server.php"
+    $monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+    $monei->payments->create([
+    'amount' => 110,
+    'currency' => 'EUR',
+    'orderId' => '14379133960355',
+    'description' => 'Test Shop - #14379133960355',
+    'customer' => [
     'email' => 'john.doe@microapps.com'
-  ],
-  'callbackUrl' => 'https://example.com/checkout/callback',
-  'completeUrl' => 'https://example.com/checkout/complete',
-  'cancelUrl' => 'https://example.com/checkout/cancel'
-]);
-```
+    ],
+    'callbackUrl' => 'https://example.com/checkout/callback',
+    'completeUrl' => 'https://example.com/checkout/complete',
+    'cancelUrl' => 'https://example.com/checkout/cancel'
+    ]);
+    ```
 
-</TabItem>
+  </TabItem>
 </Tabs>
 
 
@@ -168,11 +184,11 @@ The Card Input Component simplifies the form and minimizes the number of require
 
 Check [MONEI JS Reference](monei-js-api.md#moneicardinput-component) for more options.
 
-### 3. Submitting the payment to MONEI `Client-side`
+### 3. Confirm the payment `Client-side`
 
-To complete the payment you need to submit a payment form with the `method="post"` and `action="https://secure.monei.net/payments/{{payment_id}}/confirm"` (replace `{{payment_id}}` with your payment ID obtained in [step 1](#1-create-a-payment-server-side))
+To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js-api.md#moneiconfirmpayment-function) function
 
-The submitted form should include `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email` (use `.` as a separator for nested parameters). Check all available [parameters](/api/#operation/payments_confirm).
+You need to include a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
 
 ```js title="client.js"
 // Handle form submission.
@@ -201,31 +217,29 @@ paymentForm.addEventListener('submit', function (event) {
     });
 });
 
-// Submit the form with the token ID.
+// Confirm the payment
 function moneiTokenHandler(token) {
-  // Insert the token ID into the form
-  var hiddenInput = document.createElement('input');
-  hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'paymentToken');
-  hiddenInput.setAttribute('value', token);
-  paymentForm.appendChild(hiddenInput);
-
-  // Submit the form
-  paymentForm.submit();
+  return monei
+    .confirmPayment({paymentId: '{{payment_id}}', paymentToken: token})
+    .then(function (result) {
+      // At this moment you can show a customer the payment result
+      // But you should always rely on the result passed to the callback endpoint on your server
+      // to update the order status
+      console.log(result);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 ```
 
-After the form is submitted a customer goes through 3D secure verification process (is redirected to the page provided by the bank issued the card for confirmation of the transaction) if required.
+After the form is submitted MONEI will automatically show a popup window with 3d secure confirmation screen (if needed)
 
 :::note
 As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.
 :::
 
-### 4. Customer is redirected back to your server.
-
-A customer is redirected to the `completeUrl` with **payment_id** query parameter. Use [get payment](/api/#operation/payments_get) endpoint to get the payment status.
-
-### 5. An asynchronous request is sent to your server.
+### 4. An asynchronous request is sent to your server.
 
 MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format.
 
