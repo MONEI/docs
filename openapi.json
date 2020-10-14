@@ -758,22 +758,22 @@
       },
       "Payment-CallbackUrl": {
         "type": "string",
-        "example": "https://mysite.com/checkout/callback",
+        "example": "https://example.com/checkout/callback",
         "description": "The URL to which a payment result should be sent asynchronously."
       },
       "Payment-CompleteUrl": {
         "type": "string",
-        "example": "https://mysite.com/checkout/complete",
+        "example": "https://example.com/checkout/complete",
         "description": "The URL the customer will be directed to after transaction completed (successful or failed - except if `failUrl` is provided)."
       },
       "Payment-FailUrl": {
         "type": "string",
-        "example": "https://mysite.com/checkout/fail",
+        "example": "https://example.com/checkout/fail",
         "description": "The URL the customer will be directed to after transaction has failed, instead of `completeUrl` (used in hosted payment page). This allows to provide two different URLs for successful and failed payments."
       },
       "Payment-CancelUrl": {
         "type": "string",
-        "example": "https://mysite.com/checkout/cancel",
+        "example": "https://example.com/checkout/cancel",
         "description": "The URL the customer will be directed to if they decide to cancel payment and return to your website (used in hosted payment page)."
       },
       "Payment-RefundReason": {
@@ -805,8 +805,8 @@
           "currency": "EUR",
           "orderId": "14379133960355",
           "paymentToken": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
-          "callbackUrl": "https://mysite.com/checkout/callback",
-          "completeUrl": "https://mysite.com/checkout/complete"
+          "callbackUrl": "https://example.com/checkout/callback",
+          "completeUrl": "https://example.com/checkout/complete"
         }
       },
       "ConfirmPaymentBasicRequest": {
@@ -875,11 +875,11 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n  'amount' => 110, // 1.10 EUR\n  'orderId' => '14379133960355',\n  'currency' => 'EUR'\n  'paymentToken'=> '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  'callbackUrl'=> 'https://mysite.com/checkout/callback',\n  'completeUrl'=> 'https://mysite.com/checkout/complete'\n]);\n"
+            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n  'amount' => 110, // 1.10 EUR\n  'orderId' => '14379133960355',\n  'currency' => 'EUR'\n  'paymentToken'=> '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  'callbackUrl'=> 'https://example.com/checkout/callback',\n  'completeUrl'=> 'https://example.com/checkout/complete'\n]);\n"
           },
           {
             "lang": "JavaScript",
-            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '14379133960355',\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  callbackUrl: 'https://mysite.com/checkout/callback',\n  completeUrl: 'https://mysite.com/checkout/complete'\n});\n"
+            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '14379133960355',\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  callbackUrl: 'https://example.com/checkout/callback',\n  completeUrl: 'https://example.com/checkout/complete'\n});\n"
           }
         ]
       }

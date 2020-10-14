@@ -36,8 +36,8 @@ curl --request POST 'https://api.monei.net/v1/payments' \
     "currency": "EUR",
     "orderId": "14379133960355",
     "generatePaymentToken": true,
-    "callbackUrl": "https://mysite.com/checkout/callback",
-    "completeUrl": "https://mysite.com/checkout/complete"
+    "callbackUrl": "https://example.com/checkout/callback",
+    "completeUrl": "https://example.com/checkout/complete"
 }'
 ```
 
@@ -55,8 +55,8 @@ monei.payments.create({
   currency: 'EUR',
   orderId: '14379133960355',
   generatePaymentToken: true,
-  callbackUrl: 'https://mysite.com/checkout/callback',
-  completeUrl: 'https://mysite.com/checkout/complete'
+  callbackUrl: 'https://example.com/checkout/callback',
+  completeUrl: 'https://example.com/checkout/complete'
 });
 ```
 
@@ -71,8 +71,8 @@ $monei->payments->create([
   'currency' => 'EUR'
   'orderId' => '14379133960355',
   'generatePaymentToken' => true,
-  'callbackUrl' => 'https://mysite.com/checkout/callback',
-  'completeUrl' => 'https://mysite.com/checkout/complete'
+  'callbackUrl' => 'https://example.com/checkout/callback',
+  'completeUrl' => 'https://example.com/checkout/complete'
 ]);
 ```
 

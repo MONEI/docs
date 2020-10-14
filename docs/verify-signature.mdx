@@ -44,7 +44,7 @@ const app = require('express')();
 const bodyParser = require('body-parser');
 
 // Match the raw body to content type application/json
-app.post('/callback', bodyParser.raw({type: 'application/json'}), (request, response) => {
+app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
   const signature = request.headers['MONEI-Signature'];
 
   let payload;

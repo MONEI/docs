@@ -59,9 +59,9 @@ curl --request POST 'https://api.monei.net/v1/payments' \
     "customer": {
        "email": "john.doe@microapps.com"
     },
-    "callbackUrl": "https://mysite.com/checkout/callback",
-    "completeUrl": "https://mysite.com/checkout/complete",
-    "cancelUrl": "https://mysite.com/checkout/cancel"
+    "callbackUrl": "https://example.com/checkout/callback",
+    "completeUrl": "https://example.com/checkout/complete",
+    "cancelUrl": "https://example.com/checkout/cancel"
 }'
 ```
 
@@ -82,9 +82,9 @@ monei.payments.create({
   customer: {
     email: 'john.doe@microapps.com'
   },
-  callbackUrl: 'https://mysite.com/checkout/callback',
-  completeUrl: 'https://mysite.com/checkout/complete',
-  cancelUrl: 'https://mysite.com/checkout/cancel'
+  callbackUrl: 'https://example.com/checkout/callback',
+  completeUrl: 'https://example.com/checkout/complete',
+  cancelUrl: 'https://example.com/checkout/cancel'
 });
 ```
 
@@ -102,9 +102,9 @@ $monei->payments->create([
   'customer' => [
     'email' => 'john.doe@microapps.com'
   ],
-  'callbackUrl' => 'https://mysite.com/checkout/callback',
-  'completeUrl' => 'https://mysite.com/checkout/complete',
-  'cancelUrl' => 'https://mysite.com/checkout/cancel'
+  'callbackUrl' => 'https://example.com/checkout/callback',
+  'completeUrl' => 'https://example.com/checkout/complete',
+  'cancelUrl' => 'https://example.com/checkout/cancel'
 ]);
 ```
 
