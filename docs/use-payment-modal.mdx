@@ -142,7 +142,7 @@ paymentForm.addEventListener('submit', function (event) {
   event.preventDefault();
   paymentButton.disabled = true;
   monei
-    .confirmPayment({paymentId: '{{payment_id}}', paymentToken: token})
+    .confirmPayment({paymentId: '{{payment_id}}'})
     .then(function (result) {
       paymentButton.disabled = false;
       // At this moment you can show a customer the payment result
