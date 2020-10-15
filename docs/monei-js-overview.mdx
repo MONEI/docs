@@ -319,7 +319,6 @@ const App = () => {
           <CardInputComponent
             ref={ref}
             accountId="fe6432a7-8a24-4288-a3a3-545c3205b549"
-            orderId="12345"
             style={style}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
@@ -408,7 +407,6 @@ The Card Input Component lets you collect card information all within one Compon
         <CardInput
           ref="cardInput"
           :accountId="accountId"
-          :orderId="orderId"
           :innerStyle="innerStyle"
           :onFocus="onFocus"
           :onBlur="onBlur"
@@ -448,7 +446,6 @@ The Card Input Component lets you collect card information all within one Compon
     data() {
       return {
         accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
-        orderId: '12345',
         isFocused: false,
         isLoading: false,
         error: null,
