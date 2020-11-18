@@ -40,6 +40,9 @@ var cardInput = monei.CardInput({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   ...otherOptions
 });
+
+// render component on a page
+cardInput.render('#card_input_container');
 ```
 
 ### CardInput options
@@ -124,6 +127,9 @@ var cardInput = monei.CardInput({
   style: style,
   ...otherOptions
 });
+
+// render component on a page
+cardInput.render('#card_input_container');
 ```
 
 ## `monei.createToken` function
@@ -164,6 +170,43 @@ monei
     console.log(error);
   });
 ```
+
+## `monei.PayPal` component
+
+PayPal button UI component
+
+### Create an instance of the PayPal component.
+
+```js
+var paypal = monei.PayPal({
+  paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
+  ...otherOptions
+});
+
+// render component on a page
+paypal.render('#paypal_container');
+```
+
+### PayPal options
+
+- **paymentId** `string` - A payment ID provided by MONEI in [create payment](/api/#operation/payments_create) request. Generated payment token will be bound to this payment.
+- **accountId** `string` - Your MONEI account ID. Required if you're initializing paypal with account ID. Instead of passing **paymentId** you can initialize paypal with the **accountId** and **sessionId** (optional). Generate a payment token before you create the payment itself.
+- **sessionId** `string` - Unique session ID in your system. Provide a different **sessionId** for each customer. Use this parameter to ensure that the customer who generated the token is the same as the one doing the payment. Only required if you pass a token to your server. If you provide a **sessionId** when initializing MONEI component you will need to provide the same value when you [create a payment](/api/#section/Payment-object) on your server.
+- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD). Required if you initialize a component with **accountId**. You'll need to pass the same value when creating the payment.
+- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency. Required if you initialize a component with **accountId**. You'll need to pass the same value when creating the payment.
+- **transactionType** `string` - Controls when the funds will be captured. Required if you initialize a component with **accountId**. You'll need to pass the same value when creating the payment.
+  - **SALE** - `default`. MONEI automatically captures funds when the customer authorizes the payment.
+  - **AUTH** - Place a hold on the funds when the customer authorizes the payment, but don’t capture the funds until later.
+- **language** `string` - The language of the component. By default, MONEI smartly detects the correct language for the buyer based on their geolocation and browser preferences. It is recommended to pass this parameter only if you need the PayPal button to render in the same language as the rest of your site. [List of supported languages](https://developer.paypal.com/docs/checkout/reference/customize-sdk/#locale).
+- **style** `object` - Customize the appearance of PayPal button.
+  - **height** `string` - By default, the button adapts to the size of its container element. To customize the button width, alter the width of the container element. To customize the button height, set the style.height option to a value from `25` to `55`.
+  - **shape** `string` - Set button shape. Possible values: `rect`, `pill`
+  - **color** `string` - Set button color. Possible values: `gold`, `blue`, `silver`, `white`, `black`
+  - **layout** `string` - Determine the button layout when multiple buttons are available Possible values: `vertical`, `horizontal`
+- **onLoad:() => void** `function` - Callback function that is called when paypal is fully loaded
+- **onSuccess:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment
+  - **result.token** `string` - Payment token
+  - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
 
 ## `monei.confirmPayment` function
 
