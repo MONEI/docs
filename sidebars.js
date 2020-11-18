@@ -8,7 +8,8 @@ module.exports = {
         'accept-card-payment',
         'shopify-integration',
         'woocommerce-integration',
-        'bizum-integration'
+        'bizum-integration',
+        'paypal-integration'
       ]
     },
     {
