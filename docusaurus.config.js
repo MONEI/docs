@@ -28,13 +28,6 @@ module.exports = {
       indexName: 'monei',
       algoliaOptions: {} // Optional, if provided by Algolia
     },
-    announcementBar: {
-      id: 'warning',
-      content:
-        '<b>Warning!</b> Documentation is under construction and might change before the final release',
-      backgroundColor: '#fa755a',
-      textColor: '#FFFFFF'
-    },
     navbar: {
       title: 'MONEI',
       hideOnScroll: false,
