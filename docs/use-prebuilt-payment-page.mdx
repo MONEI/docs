@@ -10,7 +10,7 @@ MONEI Hosted payment page is the simplest way to securely collect payments from 
 
 <p>
   <a
-    href="https://js.monei.net/v1/payment-page/#eyJzaG9wTG9nb1VybCI6Imh0dHBzOi8vbW9uZWktcHJvZC1zZXJ2aWNlLWJ1Y2tldC5zMy5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbS9wcm90ZWN0ZWQvZXUtd2VzdC0xJTNBNTI5M2JmZDItYTliYi00ZmQ1LTgwYjctYmJmNzY2YjhlMGJlL3JjLXVwbG9hZC0xNjA1ODg5Njg4MDE2LTMuc3ZnIiwiYWNjZW50Q29sb3IiOiIjRDkyMjJBIiwiYmdDb2xvciI6IiNmMGY0ZjUiLCJ0ZXN0IjpmYWxzZSwicGF5bWVudE1ldGhvZHMiOlsiY2FyZCIsInBheXBhbCIsImJpenVtIl0sInNob3BOYW1lIjoiTWVkaWFNYXJrdCJ9=="
+    href="https://js.monei.net/v1/payment-page/#eyJzaG9wTG9nb1VybCI6Imh0dHBzOi8vbW9uZWktcHJvZC1zZXJ2aWNlLWJ1Y2tldC5zMy5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbS9wcm90ZWN0ZWQvZXUtd2VzdC0xJTNBNTI5M2JmZDItYTliYi00ZmQ1LTgwYjctYmJmNzY2YjhlMGJlL3JjLXVwbG9hZC0xNjA1ODg5Njg4MDE2LTMuc3ZnIiwiYWNjZW50Q29sb3IiOiIjRDkyMjJBIiwiYmdDb2xvciI6IiNmMGY0ZjUiLCJ0ZXN0IjpmYWxzZSwicGF5bWVudE1ldGhvZHMiOlsiY2FyZCIsInBheXBhbCIsImJpenVtIl0sInNob3BOYW1lIjoiTWVkaWFNYXJrdCJ9"
     target="_blank"
     className="button button--primary">
     Live demo
@@ -46,7 +46,6 @@ import TabItem from '@theme/TabItem';
   ]}>
 <TabItem value="curl">
 
-
 ```shell script title="POST https://api.monei.net/v1/payments"
 curl --request POST 'https://api.monei.net/v1/payments' \
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
@@ -67,9 +66,7 @@ curl --request POST 'https://api.monei.net/v1/payments' \
 
 </TabItem>
 
-
 <TabItem value="node">
-
 
 ```js title="server.js"
 const {Monei} = require('@monei-js/node-sdk');
@@ -91,7 +88,6 @@ monei.payments.create({
 </TabItem>
 <TabItem value="php">
 
-
 ```php title="server.php"
 $monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
 $monei->payments->create([
@@ -110,7 +106,6 @@ $monei->payments->create([
 
 </TabItem>
 </Tabs>
-
 
 The following parameters are required:
 
