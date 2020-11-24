@@ -11,9 +11,9 @@
     "index": "docker run -it --env-file=.env -e \"CONFIG=$(cat search.config.json | jq -r tostring)\" algolia/docsearch-scraper"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.68",
-    "@docusaurus/plugin-sitemap": "2.0.0-alpha.68",
-    "@docusaurus/preset-classic": "2.0.0-alpha.68",
+    "@docusaurus/core": "^2.0.0-alpha.69",
+    "@docusaurus/plugin-sitemap": "2.0.0-alpha.69",
+    "@docusaurus/preset-classic": "2.0.0-alpha.69",
     "clsx": "^1.1.1",
     "core-js": "^3.7.0",
     "lodash.merge": "^4.6.2",
@@ -37,7 +37,7 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.0-alpha.68",
+    "@docusaurus/module-type-aliases": "2.0.0-alpha.69",
     "prettier": "^2.2.0"
   }
 }
