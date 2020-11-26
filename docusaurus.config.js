@@ -72,7 +72,7 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      copyright: `Copyright © ${new Date().getFullYear()} MONEI Inc.`
+      copyright: `Copyright © ${new Date().getFullYear()} MONEI Inc. - Winner of the AWS Startup Architecture Challenge`
     }
   },
   presets: [
