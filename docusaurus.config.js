@@ -93,6 +93,12 @@ module.exports = {
   ],
   plugins: [
     path.resolve(__dirname, './inject-scripts.js'),
-    path.resolve(__dirname, './webpack-config.js')
+    path.resolve(__dirname, './webpack-config.js'),
+    [
+      require.resolve('docusaurus-gtm-plugin'),
+      {
+        id: 'GTM-NHS56QJ'
+      }
+    ]
   ]
 };
