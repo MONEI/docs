@@ -72,7 +72,7 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      copyright: `Copyright © ${new Date().getFullYear()} MONEI Inc. - Winner of the AWS Startup Architecture Challenge`
+      copyright: `Copyright © ${new Date().getFullYear()} MONEI Inc. — <a href="https://aws.amazon.com/es/blogs/startups/serverless-architecture-powers-moneis-fast-secure-and-scalable-digital-payment-solutions/" target="_blank" rel="noreferrer noopener">Winner of the AWS Startup Architecture Challenge 🏆</a>`
     }
   },
   presets: [

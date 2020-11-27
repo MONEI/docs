@@ -16,7 +16,8 @@
   --ifm-color-primary-lightest: #ae93c2;
   --ifm-code-font-size: 90%;
   --ifm-font-size-base: 15px;
-  --ifm-font-family-base: -apple-system, BlinkMacSys temFont, "Segoe UI", "Roboto", "Helvetica Neue", "Ubuntu", sans-serif;
+  --ifm-font-family-base: -apple-system, BlinkMacSys temFont, 'Segoe UI', 'Roboto', 'Helvetica Neue',
+    'Ubuntu', sans-serif;
   --ifm-tabs-padding-vertical: 0.5rem;
   --ifm-tabs-padding-horizontal: 1.2rem;
   --ifm-list-item-margin: 0.5rem;
@@ -34,7 +35,8 @@ body {
 }
 
 .hero--primary {
-  background: linear-gradient(-220deg, rgb(170, 181, 234) 0%, rgb(65, 215, 189) 100%) rgb(255, 255, 255);
+  background: linear-gradient(-220deg, rgb(170, 181, 234) 0%, rgb(65, 215, 189) 100%)
+    rgb(255, 255, 255);
 }
 
 .docusaurus-highlight-code-line {
@@ -75,4 +77,8 @@ body {
 
 .navbar__toggle {
   margin-right: 1rem;
+}
+
+.footer--dark a {
+  color: var(--ifm-footer-link-color);
 }
