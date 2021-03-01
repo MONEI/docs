@@ -23,12 +23,10 @@ import TabItem from '@theme/TabItem';
     {label: 'PHP', value: 'php'}
   ]}>
 
-
 <TabItem value="curl">
 
-
-```shell script {8} title="POST https://api.monei.net/v1/payments"
-curl --request POST 'https://api.monei.net/v1/payments' \
+```shell script {8} title="POST https://api.monei.com/v1/payments"
+curl --request POST 'https://api.monei.com/v1/payments' \
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -43,9 +41,7 @@ curl --request POST 'https://api.monei.net/v1/payments' \
 
 </TabItem>
 
-
 <TabItem value="node">
-
 
 ```js {7} title="server.js"
 const {Monei} = require('@monei-js/node-sdk');
@@ -63,7 +59,6 @@ monei.payments.create({
 </TabItem>
 <TabItem value="php">
 
-
 ```php {6} title="server.php"
 $monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
 $monei->payments->create([
@@ -79,7 +74,6 @@ $monei->payments->create([
 </TabItem>
 </Tabs>
 
-
 Check all available [request parameters](/api).
 
 ### When you confirm a payment `Server-side`
@@ -94,9 +88,8 @@ Check all available [request parameters](/api).
   ]}>
 <TabItem value="curl">
 
-
-```shell script {6} title="POST https://api.monei.net/v1/payments/:id/confirm"
-curl --request POST 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/confirm' \
+```shell script {6} title="POST https://api.monei.com/v1/payments/:id/confirm"
+curl --request POST 'https://api.monei.com/v1/payments/26d1f09c42bb59a29b06e280f9553cd5/confirm' \
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -107,9 +100,7 @@ curl --request POST 'https://api.monei.net/v1/payments/26d1f09c42bb59a29b06e280f
 
 </TabItem>
 
-
 <TabItem value="node">
-
 
 ```js {5} title="server.js"
 const {Monei} = require('@monei-js/node-sdk');
@@ -122,7 +113,6 @@ monei.payments.confirm({
 
 </TabItem>
 <TabItem value="php">
-
 
 ```php {6} title="server.php"
 $monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
@@ -138,7 +128,6 @@ $monei->payments->confirm(
 </TabItem>
 </Tabs>
 
-
 Check all available [request parameters](/api/#operation/payments_confirm).
 
 ### When you submit a payment form `Client-side`
@@ -147,7 +136,7 @@ You can pass `generatePaymentToken: true` when you submit a payment form. This i
 
 ```html title="checkout.html"
 <form
-  action="https://secure.monei.net/payments/{{payment_id}}/confirm"
+  action="https://secure.monei.com/payments/{{payment_id}}/confirm"
   method="post"
   id="payment-form"
 >

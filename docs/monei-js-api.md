@@ -11,10 +11,10 @@ You can use monei.js’ APIs to tokenize customer information, collect sensitive
 
 ## Including monei.js
 
-Include the **monei.js** script on the checkout page of your site — it should always be loaded directly from `https://js.monei.net`, rather than included in a bundle or hosted yourself.
+Include the **monei.js** script on the checkout page of your site — it should always be loaded directly from `https://js.monei.com`, rather than included in a bundle or hosted yourself.
 
 ```html
-<script src="https://js.monei.net/v1/monei.js"></script>
+<script src="https://js.monei.com/v1/monei.js"></script>
 ```
 
 ### Using monei.js as a module

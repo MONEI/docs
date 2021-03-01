@@ -3,16 +3,16 @@
   "js_render": true,
   "start_urls": [
     {
-      "url": "https://docs.monei.net/docs",
+      "url": "https://docs.monei.com/docs",
       "selectors_key": "docs"
     },
     {
-      "url": "https://docs.monei.net/api",
+      "url": "https://docs.monei.com/api",
       "selectors_key": "api"
     }
   ],
   "sitemap_urls": [
-    "http://docs.monei.net/sitemap.xml"
+    "http://docs.monei.com/sitemap.xml"
   ],
   "selectors": {
     "docs": {
