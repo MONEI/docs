@@ -2,10 +2,10 @@ const path = require('path');
 
 module.exports = {
   title: 'MONEI Documentation',
-  url: 'https://docs.monei.net',
+  url: 'https://docs.monei.com',
   tagline: 'Explore our guides and examples to integrate MONEI',
   baseUrl: '/',
-  favicon: 'https://static.monei.net/favicon.png',
+  favicon: 'https://assets.monei.com/images/icon.png',
   themeConfig: {
     colorMode: {
       // "light" | "dark"
@@ -33,7 +33,7 @@ module.exports = {
       hideOnScroll: false,
       logo: {
         alt: 'MONEI',
-        src: 'https://static.monei.net/monei-logo.svg'
+        src: 'https://assets.monei.com/images/logo.svg'
       },
       items: [
         {
@@ -49,22 +49,22 @@ module.exports = {
           position: 'right'
         },
         {
-          href: 'https://monei.net/pricing',
+          href: 'https://monei.com/pricing',
           label: 'Pricing',
           position: 'right'
         },
         {
-          href: 'https://monei.net/blog',
+          href: 'https://monei.com/blog',
           label: 'Blog',
           position: 'right'
         },
         {
-          href: 'https://support.monei.net',
+          href: 'https://support.monei.com',
           label: 'Support',
           position: 'right'
         },
         {
-          href: 'https://dashboard.monei.net',
+          href: 'https://dashboard.monei.com',
           label: 'Dashboard',
           position: 'right'
         }

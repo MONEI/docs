@@ -45,9 +45,8 @@ import TabItem from '@theme/TabItem';
   ]}>
 <TabItem value="curl">
 
-
-```shell script title="POST https://api.monei.net/v1/payments"
-curl --request POST 'https://api.monei.net/v1/payments' \
+```shell script title="POST https://api.monei.com/v1/payments"
+curl --request POST 'https://api.monei.com/v1/payments' \
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -65,9 +64,7 @@ curl --request POST 'https://api.monei.net/v1/payments' \
 
 </TabItem>
 
-
 <TabItem value="node">
-
 
 ```js title="server.js"
 const {Monei} = require('@monei-js/node-sdk');
@@ -86,9 +83,7 @@ monei.payments.create({
 
 </TabItem>
 
-
 <TabItem value="php">
-
 
 ```php title="server.php"
 $monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
@@ -106,7 +101,6 @@ $monei->payments->create([
 
   </TabItem>
 </Tabs>
-
 
 The following parameters are required:
 
@@ -128,7 +122,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 ```html title="checkout.html"
 <head>
   <title>Checkout</title>
-  <script src="https://js.monei.net/v1/monei.js"></script>
+  <script src="https://js.monei.com/v1/monei.js"></script>
 </head>
 ```
 

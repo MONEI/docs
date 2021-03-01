@@ -26,14 +26,12 @@ import TabItem from '@theme/TabItem';
     {label: 'PHP', value: 'php'}
   ]}>
 
-
   <TabItem value="node">
-
 
 ```js title="server.js"
 const {Monei} = require('@monei-js/node-sdk');
 // Set your api key. Remember to switch to your live api key in production!
-// See your api key here: https://dashboard.monei.net/settings/api
+// See your api key here: https://dashboard.monei.com/settings/api
 
 const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
 
@@ -67,7 +65,6 @@ app.listen(3000, () => console.log('Running on port 3000'));
   </TabItem>
   <TabItem value="php">
 
-
 ```php title="server.php"
 $monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
 
@@ -91,7 +88,6 @@ http_response_code(200);
   </TabItem>
 </Tabs>
 
-
 ## Verifying signatures manually
 
 ### Step 1: Extract the timestamp and the signature from the header
@@ -112,7 +108,7 @@ The `signed_payload` string is created by concatenating:
 
 Compute an HMAC with the SHA256 hash function. Use your account’s API Key as the key, and use the `signed_payload` string as the message.
 
-You can get your accounts password in [MONEI Dashboard → Settings → API](https://dashboard.monei.net/settings/api).
+You can get your accounts password in [MONEI Dashboard → Settings → API](https://dashboard.monei.com/settings/api).
 
 ### Step 4: Compare the signatures
 
