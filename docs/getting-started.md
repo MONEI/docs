@@ -10,7 +10,7 @@ description: Find a guide to integrate MONEI into your system
 - **[Use a prebuilt payment page](use-prebuilt-payment-page.mdx)**  
   Securely collect payments with the MONEI Hosted payment page.
 - **[Accept a payment](accept-card-payment.mdx)**  
-  Use MONEI UI components to build a checkout form to get paid with multiple payment methods like Credit Cards, PayPal, Bizum, ApplePay...
+  Use MONEI UI components to build a checkout form to get paid with multiple payment methods like Credit Cards, PayPal, Bizum, GooglePay...
 - **[Payments API](/api/#tag/Payments)**  
   Securely perform a server to server payment.
 
