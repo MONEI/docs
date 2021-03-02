@@ -198,13 +198,49 @@ paypal.render('#paypal_container');
   - **SALE** - `default`. MONEI automatically captures funds when the customer authorizes the payment.
   - **AUTH** - Place a hold on the funds when the customer authorizes the payment, but don’t capture the funds until later.
 - **language** `string` - The language of the component. By default, MONEI smartly detects the correct language for the buyer based on their geolocation and browser preferences. It is recommended to pass this parameter only if you need the PayPal button to render in the same language as the rest of your site. [List of supported languages](https://developer.paypal.com/docs/checkout/reference/customize-sdk/#locale).
-- **style** `object` - Customize the appearance of PayPal button.
+- **style** `object` - Customize the appearance of [PayPal button](https://developer.paypal.com/docs/archive/checkout/how-to/customize-button/#button-styles).
   - **height** `string` - By default, the button adapts to the size of its container element. To customize the button width, alter the width of the container element. To customize the button height, set the style.height option to a value from `25` to `55`.
   - **shape** `string` - Set button shape. Possible values: `rect`, `pill`
   - **color** `string` - Set button color. Possible values: `gold`, `blue`, `silver`, `white`, `black`
   - **layout** `string` - Determine the button layout when multiple buttons are available Possible values: `vertical`, `horizontal`
-- **onLoad:() => void** `function` - Callback function that is called when paypal is fully loaded
-- **onSuccess:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment
+- **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when paypal is fully loaded. If this payment method is not supported, the component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
+- **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment
+  - **result.token** `string` - Payment token
+  - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
+
+## `monei.GooglePay` component
+
+GooglePay button UI component
+
+### Create an instance of the GooglePay component.
+
+```js
+var paypal = monei.GooglePay({
+  paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
+  ...otherOptions
+});
+
+// render component on a page
+paypal.render('#gpay_container');
+```
+
+### GooglePay options
+
+- **paymentId** `string` - A payment ID provided by MONEI in [create payment](/api/#operation/payments_create) request. Generated payment token will be bound to this payment.
+- **accountId** `string` - Your MONEI account ID. Required if you're initializing paypal with account ID. Instead of passing **paymentId** you can initialize paypal with the **accountId** and **sessionId** (optional). Generate a payment token before you create the payment itself.
+- **sessionId** `string` - Unique session ID in your system. Provide a different **sessionId** for each customer. Use this parameter to ensure that the customer who generated the token is the same as the one doing the payment. Only required if you pass a token to your server. If you provide a **sessionId** when initializing MONEI component you will need to provide the same value when you [create a payment](/api/#section/Payment-object) on your server.
+- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD). Required if you initialize a component with **accountId**. You'll need to pass the same value when creating the payment.
+- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency. Required if you initialize a component with **accountId**. You'll need to pass the same value when creating the payment.
+- **language** `string` - The [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code represents the desired button language. Supported locales include `en`, `ar`, `bg`, `ca`, `cs`, `da`, `de`, `el`, `es`, `et`, `fi`, `fr`, `hr`, `id`, `it`, `ja`, `ko`, `ms`, `nl`, `no`, `pl`, `pt`, `ru`, `sk`, `sl`, `sr`, `sv`, `th`, `tr`, `uk`, and `zh`.
+- **style** `object` - Customize the appearance of Google Pay button.
+  - **height** `string` - By default, the button adapts to the size of its container element. To customize the button width, alter the width of the container element. To customize the button height, set the style.height option to a value from `25` to `55`.
+  - **type** `string` - Set button type. Possible values:
+    - **buy** - "Buy with Google Pay" button (default).
+    - **donate** - "Donate with Google Pay" button.
+    - **plain** - Google Pay button without additional text.
+  - **color** `string` - Set button color. Possible values: `default`, `black`, `white`
+- **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when paypal is fully loaded. If this payment method is not supported, the component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
+- **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment
   - **result.token** `string` - Payment token
   - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
 
