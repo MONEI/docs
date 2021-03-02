@@ -1,29 +1,10 @@
 ---
-id: accept-card-payment
-title: Accept a card payment
-description: Use MONEI UI components to build a checkout form and charge the card.
+id: google-pay
+title: Google Pay
+description: Learn how to accept Google Pay payments.
 ---
 
-Collecting payments on your website consists of creating a payment object, collecting card information, and confirming the payment.
-
-<p>
-  <iframe src="/card-input-example.html" height="160px" width="100%" className="preview-frame" />
-</p>
-<p>
-  <a
-    style={{marginRight: '1em'}}
-    href="https://payments-demo.monei.com"
-    target="_blank"
-    className="button button--primary">
-    Live demo
-  </a>
-  <a
-    href="https://github.com/MONEI/monei-payments-demo"
-    target="_blank"
-    className="button button--secondary">
-    Source code
-  </a>
-</p>
+Our [Google Pay Component](monei-js-api.md#moneigooglepay-component) renders Google Pay button in your payment form. When a customer selects Google Pay, the Component presents the Google Pay payment sheet where a customer can choose a card he wants to use. If a customer selects a card that requires 3D Secure confirmation the payment confirmation step will automatically show a 3D Secure confirmation popup.
 
 ## Integration
 
@@ -123,87 +104,41 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [Card Input Component](monei-js-overview.mdx#card-input-component) to your payment page. Create empty DOM nodes (containers) with unique IDs in your payment form.
+Add MONEI [Google Pay Component](monei-js-api.md#moneigooglepay-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
 
 ```html title="checkout.html"
-<form
-  action="https://secure.monei.com/payments/{{payment_id}}/confirm"
-  method="post"
-  id="payment-form"
->
-  <div class="card-field">
-    <div id="card-input">
-      <!-- A MONEI Card Input Component will be inserted here. -->
-    </div>
-    <!-- Used to display card errors. -->
-    <div id="card-error"></div>
-  </div>
-  <button type="submit" id="payment-button">Submit payment</button>
-</form>
+<div id="gpay_container">
+  <!-- A MONEI Google Pay Component will be inserted here. -->
+</div>
 ```
 
-Initialize MONEI Card Input
+Initialize MONEI Google Pay
 
 ```js title="client.js"
-var container = document.getElementById('card-input');
-var errorText = document.getElementById('card-error');
-
-// Create an instance of the Card Input using payment_id.
-var cardInput = monei.CardInput({
+// Create an instance of the Google Pay component.
+var googlePay = monei.GooglePay({
   paymentId: '{{payment_id}}',
-  onChange: function (event) {
-    // Handle real-time validation errors.
-    if (event.isTouched && event.error) {
-      container.classList.add('is-invalid');
-      errorText.innerText = event.error;
-    } else {
-      container.classList.remove('is-invalid');
-      errorText.innerText = '';
-    }
+  onSubmit(result) {
+    moneiTokenHandler(result.token);
+  },
+  onError(error) {
+    console.log(error);
   }
 });
 
-// Render an instance of the Card Input into the `card_input` <div>.
-cardInput.render(container);
+// Render an instance of the GooglePay component into the `gpay_container` <div>.
+googlePay.render('#gpay_container');
 ```
 
-The Card Input Component simplifies the form and minimizes the number of required fields by inserting a single, flexible input field that securely collects all necessary card and billing details.
-
-Check [MONEI JS Reference](monei-js-api.md#moneicardinput-component) for more options.
+Check [MONEI JS Reference](monei-js-api.md#moneigooglepay-component) for more options.
 
 ### 3. Confirm the payment `Client-side`
 
 To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js-api.md#moneiconfirmpayment-function) function
 
-You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
+You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Google Pay Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
 
 ```js title="client.js"
-// Handle form submission.
-var paymentForm = document.getElementById('payment-form');
-var paymentButton = document.getElementById('payment-button');
-paymentForm.addEventListener('submit', function (event) {
-  event.preventDefault();
-  paymentButton.disabled = true;
-  monei
-    .createToken(cardInput)
-    .then(function (result) {
-      console.log(result);
-      if (result.error) {
-        // Inform the user if there was an error.
-        container.classList.add('is-invalid');
-        errorText.innerText = result.error;
-      } else {
-        // Send the token to MONEI.
-        moneiTokenHandler(result.token);
-      }
-      paymentButton.disabled = false;
-    })
-    .catch(function (error) {
-      paymentButton.disabled = false;
-      console.log(error);
-    });
-});
-
 // Confirm the payment
 function moneiTokenHandler(token) {
   return monei
@@ -220,7 +155,7 @@ function moneiTokenHandler(token) {
 }
 ```
 
-After the form is submitted MONEI will automatically show a popup window with 3d secure confirmation screen (if needed)
+After the payment is submitted MONEI will automatically show a popup window with 3D Secure confirmation screen (if needed)
 
 :::note
 As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.

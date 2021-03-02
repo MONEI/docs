@@ -267,9 +267,6 @@ Check [confirm payment](/api/#operation/payments_confirm) for the full list of p
 ### Payment result
 
 - **id** `string` - Unique identifier for the payment.
-- **accountId** `string` - MONEI account ID.
-- **amount** `positive integer` - Amount of this payment. A positive integer in the smallest currency unit (e.g., 100 cents to charge 1.00 USD).
-- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase.
 - **status** `string` - The status of the payment.
 - **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
 - **statusCode** `string` - Payment status code.

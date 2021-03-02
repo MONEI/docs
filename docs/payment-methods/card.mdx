@@ -1,10 +1,10 @@
 ---
-id: accept-card-payment
-title: Accept a card payment
-description: Use MONEI UI components to build a checkout form and charge the card.
+id: card
+title: Card
+description: Learn how to accept credit and debit card payments.
 ---
 
-Collecting payments on your website consists of creating a payment object, collecting card information, and confirming the payment.
+Our [Card Input Component](monei-js-api.md#moneicardinput-component) renders a Card Input in your payment form. The Card Input Component lets you collect card information all within one Component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC. If a customer enters a card that requires 3D Secure confirmation the payment confirmation step will automatically show a 3D Secure confirmation popup.
 
 <p>
   <iframe src="/card-input-example.html" height="160px" width="100%" className="preview-frame" />
@@ -123,7 +123,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [Card Input Component](monei-js-overview.mdx#card-input-component) to your payment page. Create empty DOM nodes (containers) with unique IDs in your payment form.
+Add MONEI [Card Input Component](monei-js-api.md#moneicardinput-component) to your payment page. Create empty DOM nodes (containers) with unique IDs in your payment form.
 
 ```html title="checkout.html"
 <form
