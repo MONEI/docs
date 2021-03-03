@@ -18,6 +18,13 @@ This page explains how to add PayPal to your custom payment page. If you don't n
 To accept PayPal payments you need to connect your [PayPal business account](https://www.paypal.com/business).
 To connect your PayPal business account go to [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods).
 
+To test your integration, you must:
+
+- Use your [test mode](testing.md) Account ID and API Key.
+- Connect test [PayPal Business account](testing.md#test-paypal-accounts) in your [MONEI Dashboard](<(https://dashboard.monei.com/settings/payment-methods)>) (in test mode)
+- Use the test [PayPal Personal account](testing.md#test-paypal-accounts) for payments.
+- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+
 ## Integration
 
 ### 1. Create a Payment `Server-side`
@@ -182,3 +189,8 @@ The request also contains a `MONEI-Signature` header. [Verify this signature](gu
 To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
 
 If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the request as failed and stops trying to send it to your endpoint.
+
+## Before you go live
+
+- Make sure that you are using [live (production) mode](testing.md) Account ID and API Key.
+- Make sure that you have connected your PayPal business account in [MONEI Dashboard](https://dashboard.monei.com/settings/payment-methods).
