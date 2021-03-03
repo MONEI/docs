@@ -120,7 +120,7 @@
       // Create an instance of the card Card Input.
       var cardInput = monei.CardInput({
         // Your MONEI account ID
-        accountId: 'fe6432a7-8a24-4288-a3a3-545c3205b549',
+        paymentId: '2975bcfa-7bbc-422d-af48-c66759d87b69',
         style: style,
         onFocus: function () {
           container.classList.add('is-focused');
@@ -171,15 +171,7 @@
 
       // Submit the form with the token ID.
       function moneiTokenHandler(token) {
-        // Insert the token ID into the form so it gets submitted to the server
-        var hiddenInput = document.createElement('input');
-        hiddenInput.setAttribute('type', 'hidden');
-        hiddenInput.setAttribute('name', 'token');
-        hiddenInput.setAttribute('value', token);
-        paymentForm.appendChild(hiddenInput);
-
-        // Submit the form
-        paymentForm.submit();
+        console.log(token);
       }
     </script>
   </body>

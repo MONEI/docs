@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://js.monei.com/v1/monei.js"></script>
+    <style>
+      body {
+        margin: 0;
+        background-color: #f7f8f9;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu,
+          Droid Sans, Helvetica Neue, sans-serif;
+      }
+      #payment-form {
+        padding: 28px 10px;
+        max-width: 350px;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="payment-form">
+      <div id="gpay_container">
+        <!-- A MONEI Google Pay Component will be inserted here. -->
+      </div>
+    </div>
+    <script>
+      var payPal = monei.GooglePay({
+        accountId: '2975bcfa-7bbc-422d-af48-c66759d87b69',
+        amount: 100,
+        currency: 'EUR',
+        onSubmit(result) {
+          console.log(result);
+        },
+        onError(error) {
+          console.log(error);
+        }
+      });
+
+      // Render an instance of the PayPal component into the `gpay_container` <div>.
+      payPal.render('#gpay_container');
+    </script>
+  </body>
+</html>

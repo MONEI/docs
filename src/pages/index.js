@@ -10,13 +10,14 @@ import styles from './styles.module.css';
 const features = [
   {
     title: 'Use prebuilt payment page',
-    description: 'Securely collect payments with MONEI Hosted payment page.',
+    description:
+      'Securely get paid with multiple payment methods like Credit Cards, PayPal, Bizum, GooglePay and others with the MONEI Hosted payment page.',
     url: '/docs/use-prebuilt-payment-page'
   },
   {
     title: 'Accept a card payment',
     description:
-      'Use MONEI UI components to build a checkout form to get paid with multiple payment methods like Credit Cards, PayPal, Bizum, ApplePay...',
+      'Use MONEI UI components to build a checkout to accept credit and debit card payments.',
     url: '/docs/accept-card-payment'
   },
   {
