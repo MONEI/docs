@@ -203,6 +203,7 @@ paypal.render('#paypal_container');
   - **shape** `string` - Set button shape. Possible values: `rect`, `pill`
   - **color** `string` - Set button color. Possible values: `gold`, `blue`, `silver`, `white`, `black`
   - **layout** `string` - Determine the button layout when multiple buttons are available Possible values: `vertical`, `horizontal`
+  - **label** `string`- Set button label. Possible values: `checkout`, `credit`, `pay`, `buynow`, `paypal`, `installment`
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when paypal is fully loaded. If this payment method is not supported, the component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
 - **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment
   - **result.token** `string` - Payment token

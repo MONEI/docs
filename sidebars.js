@@ -3,14 +3,14 @@ module.exports = {
     'getting-started',
     {
       Integrations: ['use-prebuilt-payment-page', 'use-payment-modal', 'accept-card-payment'],
-      'E-commerce platforms': ['shopify-integration', 'woocommerce-integration'],
+      'E-commerce platforms': ['e-commerce/shopify', 'e-commerce/woocommerce'],
       'Payment methods': [
         'payment-methods/card',
         'payment-methods/google-pay',
         'payment-methods/paypal',
         'payment-methods/bizum'
       ],
-      Guides: ['save-payment-method', 'verify-signature'],
+      Guides: ['guides/save-payment-method', 'guides/verify-signature'],
       'MONEI JS': ['monei-js-overview', 'monei-js-api']
     },
     {

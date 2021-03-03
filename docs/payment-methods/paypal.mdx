@@ -4,8 +4,19 @@ title: PayPal
 description: Learn how to accept PayPal payments.
 ---
 
-Our [PayPal Component](monei-js-api.md#moneipaypal-component) renders PayPal in your payment form.
+Our [PayPal Component](monei-js-api.md#moneipaypal-component) renders PayPal in your payment page.
 When a customer selects PayPal, the Component presents a PayPal overlay, where a customer can log in with their PayPal account details to complete the payment process.
+
+<p>
+  <iframe src="/paypal-example.html" height="100px" width="100%" className="preview-frame" />
+</p>
+
+## Before you begin
+
+This page explains how to add PayPal to your custom payment page. If you don't need custom a checkout experience we recommend using our [prebuilt payment page](use-prebuilt-payment-page.mdx). It already supports all available payment methods and does not require coding.
+
+To accept PayPal payments you need to connect your [PayPal business account](https://www.paypal.com/business).
+To connect your PayPal business account go to [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods).
 
 ## Integration
 
@@ -94,7 +105,7 @@ Check all available [request parameters](/api/#operation/payments_create).
 
 Included in the returned Payment object is a payment `id`, which is used on the client side to securely complete the payment process instead of passing the entire Payment object.
 
-### 2. Collect card details `Client-side`
+### 2. Add PayPal to your payment page `Client-side`
 
 Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
 
@@ -113,7 +124,7 @@ Add MONEI [PayPal Component](monei-js-api.md#moneipaypal-component) to your paym
 </div>
 ```
 
-Initialize MONEI Google Pay
+Initialize PayPal Component
 
 ```js title="client.js"
 // Create an instance of the PayPal component.
@@ -156,8 +167,6 @@ function moneiTokenHandler(token) {
 }
 ```
 
-After the payment is submitted MONEI will automatically show a popup window with 3D Secure confirmation screen (if needed)
-
 :::note
 As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.
 :::
@@ -168,7 +177,7 @@ MONEI will notify you about a payment status by sending an HTTP POST request to 
 
 This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
 
-The request also contains a `MONEI-Signature` header. [Verify this signature](verify-signature.mdx) to confirm that received request is sent from MONEI.
+The request also contains a `MONEI-Signature` header. [Verify this signature](guides/verify-signature.mdx) to confirm that received request is sent from MONEI.
 
 To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
 
