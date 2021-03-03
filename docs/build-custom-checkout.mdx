@@ -1,14 +1,13 @@
 ---
-id: accept-card-payment
-title: Accept a card payment
-description: Use MONEI UI components to build a checkout form and charge the card.
+id: build-custom-checkout
+title: Build a custom checkout
+description: Use MONEI UI components to build your custom checkout and securely accept Credit Cards, PayPal, Bizum, GooglePay and others payment methods.
 ---
 
-Collecting payments on your website consists of creating a payment object, collecting card information, and confirming the payment.
+Build you custom checkout using [MONEI UI components](monei-js-overview.mdx) to securely collect payments using different payment methods.
 
-<p>
-  <iframe src="/card-input-example.html" height="160px" width="100%" className="preview-frame" />
-</p>
+![MONEI Payments Demo](/img/payments-demo.jpg)
+
 <p>
   <a
     style={{marginRight: '1em'}}
@@ -25,14 +24,33 @@ Collecting payments on your website consists of creating a payment object, colle
   </a>
 </p>
 
+**MONEI UI components:**
+
+- generate a one time `paymentToken` that can be used to securely process a payment.
+- are available in plain JavaScript, React, Vue and Angular.
+- support different styles, languages and customizations.
+- do not require PCI compliance
+
+Check the detailed guides for each payment method in our [Payment Methods](/payment-methods/card.mdx) section.
+
+## Before you begin
+
+This page explains how to add different payment methods to your custom payment page. If you don't need a custom checkout experience we recommend using our [prebuilt payment page](use-prebuilt-payment-page.mdx). It already supports all available payment methods and does not require coding.
+
+To test your integration, you must:
+
+- Use your [test mode](testing.md) Account ID and API Key.
+- Make sure you have all payment methods configured. Check [Payment Methods](/payment-methods/card.mdx) section for more details about each payment method.
+- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+
 ## Integration
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 ### 1. Create a Payment `Server-side`
 
 Create a [Payment](/api/#section/Payment-object) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs
   defaultValue="curl"
@@ -112,7 +130,7 @@ Check all available [request parameters](/api/#operation/payments_create).
 
 Included in the returned Payment object is a payment `id`, which is used on the client side to securely complete the payment process instead of passing the entire Payment object.
 
-### 2. Collect card details `Client-side`
+### 2. Add UI Component to your payment page `Client-side`
 
 Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
 
@@ -123,86 +141,61 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [Card Input Component](monei-js-overview.mdx#card-input-component) to your payment page. Create empty DOM nodes (containers) with unique IDs in your payment form.
+Create empty DOM nodes (containers) with unique IDs in your checkout page.
 
 ```html title="checkout.html"
-<form
-  action="https://secure.monei.com/payments/{{payment_id}}/confirm"
-  method="post"
-  id="payment-form"
->
-  <div class="card-field">
-    <div id="card-input">
-      <!-- A MONEI Card Input Component will be inserted here. -->
-    </div>
-    <!-- Used to display card errors. -->
-    <div id="card-error"></div>
-  </div>
-  <button type="submit" id="payment-button">Submit payment</button>
-</form>
+<div id="container">
+  <!-- A MONEI Card Input Component will be inserted here. -->
+</div>
 ```
 
-Initialize MONEI Card Input
+Initialize UI component
 
 ```js title="client.js"
-var container = document.getElementById('card-input');
-var errorText = document.getElementById('card-error');
-
 // Create an instance of the Card Input using payment_id.
 var cardInput = monei.CardInput({
   paymentId: '{{payment_id}}',
-  onChange: function (event) {
-    // Handle real-time validation errors.
-    if (event.isTouched && event.error) {
-      container.classList.add('is-invalid');
-      errorText.innerText = event.error;
-    } else {
-      container.classList.remove('is-invalid');
-      errorText.innerText = '';
-    }
-  }
+  ...otherOptions
 });
 
-// Render an instance of the Card Input into the `card_input` <div>.
-cardInput.render(container);
+// Render an instance of the Card Input into the `container` <div>.
+cardInput.render('#container');
 ```
 
-The Card Input Component simplifies the form and minimizes the number of required fields by inserting a single, flexible input field that securely collects all necessary card and billing details.
+If you have a checkout flow where you need to generate payment token before you create a payment on your server you can initialise MONEI UI Components providing following parameters:
 
-Check [MONEI JS Reference](monei-js-api.md#moneicardinput-component) for more options.
+- **accountId** `string` - Your MONEI account ID. Instead of passing **paymentId** you can initialize a card input with the **accountId** and **sessionId** (optional). Generate a payment token before you create the payment itself.
+- **sessionId** `string` - Unique session ID in your system. Provide a different **sessionId** for each customer. Use this parameter to ensure that the customer who generated the token is the same as the one doing the payment. Only required if you pass a token to your server. If you provide a **sessionId** when initializing MONEI component you will need to provide the same value when you [create a payment](/api/#section/Payment-object) on your server.
+- **amount** `positive integer` (not required for CardInput) - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD). You'll need to pass the same value when creating the payment.
+- **currency** `string` (not required for CardInput) - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency. You'll need to pass the same value when creating the payment.
+
+Check [Payment Methods](/payment-methods/card.mdx) section for more details about how to initialize components for each payment method.
 
 ### 3. Confirm the payment `Client-side`
 
 To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js-api.md#moneiconfirmpayment-function) function
 
-You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
+You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with UI Component. Check [Payment Methods](/payment-methods/card.mdx) section for more details about how to generate `paymentToken` for each payment method.
+
+You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
 
 ```js title="client.js"
-// Handle form submission.
-var paymentForm = document.getElementById('payment-form');
-var paymentButton = document.getElementById('payment-button');
-paymentForm.addEventListener('submit', function (event) {
-  event.preventDefault();
-  paymentButton.disabled = true;
-  monei
-    .createToken(cardInput)
-    .then(function (result) {
-      console.log(result);
-      if (result.error) {
-        // Inform the user if there was an error.
-        container.classList.add('is-invalid');
-        errorText.innerText = result.error;
-      } else {
-        // Send the token to MONEI.
-        moneiTokenHandler(result.token);
-      }
-      paymentButton.disabled = false;
-    })
-    .catch(function (error) {
-      paymentButton.disabled = false;
-      console.log(error);
-    });
-});
+monei
+  .createToken(cardInput)
+  .then(function (result) {
+    console.log(result);
+    if (result.error) {
+      // Inform the user if there was an error.
+    } else {
+      // Send the token to MONEI.
+      moneiTokenHandler(result.token);
+    }
+    paymentButton.disabled = false;
+  })
+  .catch(function (error) {
+    paymentButton.disabled = false;
+    console.log(error);
+  });
 
 // Confirm the payment
 function moneiTokenHandler(token) {
@@ -220,7 +213,7 @@ function moneiTokenHandler(token) {
 }
 ```
 
-After the form is submitted MONEI will automatically show a popup window with 3d secure confirmation screen (if needed)
+After you confirm the payment MONEI will automatically show a popup window with 3d secure confirmation screen (if needed, depending on the payment method)
 
 :::note
 As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.
@@ -237,3 +230,8 @@ The request also contains a `MONEI-Signature` header. [Verify this signature](gu
 To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
 
 If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the request as failed and stops trying to send it to your endpoint.
+
+## Before you go live
+
+- Make sure that you are using [live (production) mode](testing.md) Account ID and API Key.
+- Make sure that you have a [payment method configured and enabled](https://dashboard.monei.com/settings/payment-methods) in live mode.

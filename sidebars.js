@@ -2,7 +2,7 @@ module.exports = {
   docs: [
     'getting-started',
     {
-      Integrations: ['use-prebuilt-payment-page', 'use-payment-modal', 'accept-card-payment'],
+      Integrations: ['use-prebuilt-payment-page', 'use-payment-modal', 'build-custom-checkout'],
       'E-commerce platforms': ['e-commerce/shopify', 'e-commerce/woocommerce'],
       'Payment methods': [
         'payment-methods/card',
