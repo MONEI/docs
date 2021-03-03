@@ -161,7 +161,7 @@ monei
     if (result.error) {
       // Inform the user if there was an error.
     } else {
-      // Send the token to your server.
+      // Confirm payment using the token.
       moneiTokenHandler(result.token);
     }
   })
@@ -173,13 +173,24 @@ monei
 
 ## `monei.PayPal` component
 
-PayPal button UI component
+PayPal UI component
 
 ### Create an instance of the PayPal component.
 
 ```js
 var paypal = monei.PayPal({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
+  onSubmit(result) {
+    if (result.error) {
+      // Inform the user if there was an error.
+    } else {
+      // Confirm payment using the token.
+      moneiTokenHandler(result.token);
+    }
+  },
+  onError(error) {
+    console.log(error);
+  },
   ...otherOptions
 });
 
@@ -211,13 +222,24 @@ paypal.render('#paypal_container');
 
 ## `monei.GooglePay` component
 
-GooglePay button UI component
+Google Pay UI component
 
-### Create an instance of the GooglePay component.
+### Create an instance of the Google Pay component.
 
 ```js
 var paypal = monei.GooglePay({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
+  onSubmit(result) {
+    if (result.error) {
+      // Inform the user if there was an error.
+    } else {
+      // Confirm payment using the token.
+      moneiTokenHandler(result.token);
+    }
+  },
+  onError(error) {
+    console.log(error);
+  },
   ...otherOptions
 });
 
@@ -225,7 +247,7 @@ var paypal = monei.GooglePay({
 paypal.render('#gpay_container');
 ```
 
-### GooglePay options
+### Google Pay options
 
 - **paymentId** `string` - A payment ID provided by MONEI in [create payment](/api/#operation/payments_create) request. Generated payment token will be bound to this payment.
 - **accountId** `string` - Your MONEI account ID. Required if you're initializing paypal with account ID. Instead of passing **paymentId** you can initialize paypal with the **accountId** and **sessionId** (optional). Generate a payment token before you create the payment itself.
