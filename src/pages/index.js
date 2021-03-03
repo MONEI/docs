@@ -11,14 +11,14 @@ const features = [
   {
     title: 'Use prebuilt payment page',
     description:
-      'Securely get paid with multiple payment methods like Credit Cards, PayPal, Bizum, GooglePay and others with the MONEI Hosted payment page.',
+      'MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Credit Cards, PayPal, Bizum, GooglePay.',
     url: '/docs/use-prebuilt-payment-page'
   },
   {
-    title: 'Accept a card payment',
+    title: 'Build a custom checkout',
     description:
-      'Use MONEI UI components to build a checkout to accept credit and debit card payments.',
-    url: '/docs/accept-card-payment'
+      'Use MONEI UI components to build your custom checkout and securely accept Credit Cards, PayPal, Bizum, GooglePay and others payment methods.',
+    url: '/docs/build-custom-checkout'
   },
   {
     title: 'Integrate with e-commerce',
