@@ -20,7 +20,7 @@ If you want to start playing with the API immediately, you can do it in the [Gra
 
 ## Authentication
 
-The API uses API keys to authenticate requests. You can view and manage your API key in the [MONEI Dashboard](https://dashboard.monei.com/settings/api).
+The API uses API keys to authenticate requests. You can view and manage your API key in the [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api).
 
 Your API key full access to all MONEI resources, so be sure to keep it secure! Do not share your secret API key in publicly accessible areas such as GitHub, client-side code, and so forth.
 
