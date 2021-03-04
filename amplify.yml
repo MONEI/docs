@@ -10,7 +10,7 @@ frontend:
         - yarn run build
     postBuild:
       commands:
-        - aws amplify update-app --app-id $AWS_APP_ID --custom-rules file://filter.json
+        - aws amplify update-app --app-id $AWS_APP_ID --custom-rules file://redirects.json
   artifacts:
     baseDirectory: build
     files:

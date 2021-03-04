@@ -28,5 +28,17 @@
     "target": "/docs/e-commerce/woocommerce/",
     "status": "301",
     "condition": null
+  },
+  {
+    "source": "/docs/bizum-integration/<*>",
+    "target": "/docs/payment-methods/bizum/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/docs/paypal-integration/<*>",
+    "target": "/docs/payment-methods/paypal/",
+    "status": "301",
+    "condition": null
   }
 ]
