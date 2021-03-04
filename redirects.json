@@ -5,33 +5,38 @@
     "status": "404-200"
   },
   {
-    "source": "/docs/save-payment-method<*>",
+    "source": "/docs/save-payment-method/",
     "target": "/docs/guides/save-payment-method/",
     "status": "301"
   },
   {
-    "source": "/docs/verify-signature<*>",
+    "source": "/docs/verify-signature/",
     "target": "/docs/guides/verify-signature/",
     "status": "301"
   },
   {
-    "source": "/docs/shopify-integration/<*>",
+    "source": "/docs/shopify-integration/",
     "target": "/docs/e-commerce/shopify/",
     "status": "301"
   },
   {
-    "source": "/docs/woocommerce-integration/<*>",
+    "source": "/docs/woocommerce-integration/",
     "target": "/docs/e-commerce/woocommerce/",
     "status": "301"
   },
   {
-    "source": "/docs/bizum-integration/<*>",
+    "source": "/docs/bizum-integration/",
     "target": "/docs/payment-methods/bizum/",
     "status": "301"
   },
   {
-    "source": "/docs/paypal-integration/<*>",
+    "source": "/docs/paypal-integration/",
     "target": "/docs/payment-methods/paypal/",
+    "status": "301"
+  },
+  {
+    "source": "/docs/accept-card-payment/",
+    "target": "/docs/build-custom-checkout/",
     "status": "301"
   }
 ]
