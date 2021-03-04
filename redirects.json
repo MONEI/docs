@@ -1,0 +1,32 @@
+[
+  {
+    "source": "</index\\.html/>",
+    "target": "/404.html",
+    "status": "404-200",
+    "condition": null
+  },
+  {
+    "source": "/docs/save-payment-method<*>",
+    "target": "/docs/guides/save-payment-method/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/docs/verify-signature<*>",
+    "target": "/docs/guides/verify-signature/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/docs/shopify-integration/<*>",
+    "target": "/docs/e-commerce/shopify/",
+    "status": "301",
+    "condition": null
+  },
+  {
+    "source": "/docs/woocommerce-integration/<*>",
+    "target": "/docs/e-commerce/woocommerce/",
+    "status": "301",
+    "condition": null
+  }
+]
