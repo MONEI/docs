@@ -8,7 +8,7 @@ With MONEI GraphQL API you have full access to all MONEI features like analytics
 
 If you want to know how GraphQL API works, check out [How to GraphQL](https://www.howtographql.com/).
 
-If you don't have a MONEI account already, you’ll need to [create](https://dashboard.monei.com/?action=signUp) one in order to use the GraphQL API.
+If you don't have a MONEI account already, you’ll need to [create](https://dashboard.monei.com/?action=signUp) one to use the GraphQL API.
 
 ## GraphQL API Explorer
 
