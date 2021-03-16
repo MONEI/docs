@@ -4,7 +4,7 @@ title: GraphQL API
 description: With MONEI GraphQL API you have full access to all MONEI features.
 ---
 
-With MONEI GraphQL API you have full access to all MONEI features like analytics reports, payments, events and much more. This API requires authentication and is intended to be used server side.
+With MONEI GraphQL API you have full access to all MONEI features like analytics reports, payments, events, and much more. This API requires authentication and is intended to be used server side.
 
 If you want to know how GraphQL API works, check out [How to GraphQL](https://www.howtographql.com/).
 
@@ -12,7 +12,7 @@ If you don't have a MONEI account already, you’ll need to [create](https://das
 
 ## GraphQL API Explorer
 
-If you want to start playing with the API immediately, you can do it in the [GraphQL API Explorer](https://dashboard.monei.com/api-explorer) of your MONEI account. You can run Queries and Mutations in the explorer to have and idea about what the MONEI GraphQL API can offer you. The API Explorer is available to all the MONEI users.
+If you want to start playing with the API immediately, you can do it in the [GraphQL API Explorer](https://dashboard.monei.com/api-explorer) of your MONEI account. You can run Queries and Mutations in the explorer to see what the MONEI GraphQL API can offer you. The API Explorer is available to all MONEI users.
 
 :::note
 **Heads up!** MONEI's GraphQL Explorer makes use of your real, live, production data.
@@ -22,7 +22,7 @@ If you want to start playing with the API immediately, you can do it in the [Gra
 
 The API uses API keys to authenticate requests. You can view and manage your API key in the [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api).
 
-Your API key full access to all MONEI resources, so be sure to keep it secure! Do not share your secret API key in publicly accessible areas such as GitHub, client-side code, and so forth.
+Your API key enables full access to all MONEI resources, so be sure to keep it secure! Do not share your secret API key in publicly accessible areas such as GitHub, client-side code, and so forth.
 
 Include your API Key as an `Authorization` header in all your GraphQL requests.
 
