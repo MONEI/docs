@@ -11,18 +11,18 @@
     "index": "docker run -it --env-file=.env -e \"CONFIG=$(cat search.config.json | jq -r tostring)\" algolia/docsearch-scraper"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.70",
-    "@docusaurus/plugin-sitemap": "2.0.0-alpha.70",
-    "@docusaurus/preset-classic": "2.0.0-alpha.70",
+    "@docusaurus/core": "^2.0.0-alpha.72",
+    "@docusaurus/plugin-sitemap": "2.0.0-alpha.72",
+    "@docusaurus/preset-classic": "2.0.0-alpha.72",
     "clsx": "^1.1.1",
-    "core-js": "^3.8.3",
+    "core-js": "^3.9.1",
     "docusaurus-gtm-plugin": "^0.0.2",
     "lodash.merge": "^4.6.2",
-    "mobx": "^6.1.0",
-    "polished": "^4.1.0",
+    "mobx": "^6.1.8",
+    "polished": "^4.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "redoc": "^2.0.0-rc.45",
+    "redoc": "^2.0.0-rc.48",
     "styled-components": "^5.2.1"
   },
   "browserslist": {
@@ -38,7 +38,7 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.0-alpha.70",
+    "@docusaurus/module-type-aliases": "2.0.0-alpha.72",
     "prettier": "^2.2.1"
   }
 }
