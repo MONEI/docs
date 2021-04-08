@@ -9,14 +9,14 @@ MONEI UI Components enable you to collect sensitive payment information using cu
 
 UI components include features like:
 
-- Formatting card information automatically as it’s entered
-- Translating placeholders into your customer’s preferred language
-- Using responsive design to fit the width of your customer’s screen or mobile device
-- Customizing the styling to match the look and feel of your checkout flow
+- Format Credit Card information automatically as it’s entered
+- Translate placeholders to your customer’s preferred language
+- Use responsive design to fit the width of your customer’s screen or mobile device
+- Customize the styling to match the look and feel of your checkout flow
 
 ## Setup monei.js components
 
-You need to include `monei.js` on your checkout page by either adding the script tag to the `head` of your HTML file, or importing it from the `monei-js` [module](https://www.npmjs.com/package/@monei-js/components):
+You need to include `monei.js` in your checkout page by either adding the script tag to the `head` of your HTML file, or by importing it from the `monei-js` [module](https://www.npmjs.com/package/@monei-js/components):
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -220,7 +220,7 @@ function moneiTokenHandler(token) {
 </TabItem>
 <TabItem value="react">
 
-The Card Input Component lets you collect card information all within one Component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC.
+The Card Input Component lets you collect Credit Card information all within one single Component. It includes a dynamically-updating card brand icon as well as inputs for Credit Card number (PAN), Expiry Date and CVC.
 
 <Tabs
   defaultValue="ts"
@@ -369,7 +369,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 </TabItem>
 <TabItem value="vue">
 
-The Card Input Component lets you collect card information all within one Component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC.
+The Card Input Component lets you collect Credit Card information all within one single Component. It includes a dynamically-updating card brand icon as well as inputs for Credit Card number (PAN), Expiry Date and CVC.
 
 <Tabs
   defaultValue="vue-js"
@@ -523,4 +523,4 @@ The Card Input Component lets you collect card information all within one Compon
 
 </Tabs>
 
-Components are completely customizable. You can style MONEI Components to match the look and feel of your site, providing a seamless checkout experience for your customers. It’s also possible to style various input states, for example when the Component has focus.
+The Components are completely customizable. You can style MONEI Components to match the look and feel of your site, providing a seamless checkout experience for your customers. It’s also possible to style various input states, for example when the Component has focus.
