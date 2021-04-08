@@ -9,21 +9,21 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Use prebuilt payment page',
+    title: 'Use a prebuilt payment page',
     description:
-      'MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Credit Cards, PayPal, Bizum, GooglePay.',
+      'MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Credit Cards, PayPal, Bizum, GooglePay, Apple Pay & Installments by Cofidis.',
     url: '/docs/use-prebuilt-payment-page'
   },
   {
     title: 'Build a custom checkout',
     description:
-      'Use MONEI UI components to build your custom checkout and securely accept Credit Cards, PayPal, Bizum, GooglePay and others payment methods.',
+      'Use MONEI UI components to build your custom checkout and securely accept Credit Cards, PayPal, Bizum, GooglePay, Apple Pay, Installments by Cofidis and other payment methods.',
     url: '/docs/build-custom-checkout'
   },
   {
     title: 'Integrate with e-commerce',
     description:
-      'Easily integrate MONEI with Shopify, WooCommerce and other popular e-commerce platforms.',
+      'Easily integrate MONEI with Shopify, Wix, Salesforce Commerce Cloud, WooCommerce and other popular e-commerce platforms.',
     url: '/docs/#integrate-with-your-e-commerce-platform'
   }
 ];
