@@ -21,7 +21,7 @@ const features = [
     url: '/docs/build-custom-checkout'
   },
   {
-    title: 'Integrate with e-commerce',
+    title: 'Integrate with e-commerce platforms',
     description:
       'Easily integrate MONEI with Shopify, Wix, Salesforce Commerce Cloud, WooCommerce and other popular e-commerce platforms.',
     url: '/docs/#integrate-with-your-e-commerce-platform'
