@@ -52,6 +52,7 @@ function Home() {
   return (
     <Layout>
       <Head>
+        <title>{title}</title>
         <meta property="og:description" content={tagline} />
         {/* Facebook */}
         <meta property="og:title" content={title} />
