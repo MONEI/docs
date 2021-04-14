@@ -10,6 +10,8 @@ Our [Google Pay Component](monei-js-api.md#moneigooglepay-component) renders Goo
   <iframe src="/google-pay-example.html" height="100px" width="100%" className="preview-frame" />
 </p>
 
+If you prefer to integrate directly against the Google Pay API, follow our [Google Pay direct API integration guide](#google-pay-direct-api-integration).
+
 ## Before you begin
 
 This page explains how to add Google Pay to your payment page. To accept Google Pay payments you need to have at least one configured credit card processor.
@@ -114,7 +116,7 @@ Check all available [request parameters](/api/#operation/payments_create).
 
 Included in the returned Payment object is a payment `id`, which is used on the client side to securely complete the payment process instead of passing the entire Payment object.
 
-### 2. Collect card details `Client-side`
+### 2. Add Google Pay button to your payment page `Client-side`
 
 Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
 
@@ -193,6 +195,43 @@ The request also contains a `MONEI-Signature` header. [Verify this signature](gu
 To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
 
 If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the request as failed and stops trying to send it to your endpoint.
+
+## Google Pay direct API integration
+
+If you prefer to integrate directly against the Google Pay API, follow [Google’s instructions](https://developers.google.com/pay/api/web/guides/setup).
+
+Specify following tokenization specification
+
+```javascript
+const tokenizationSpecification = {
+  type: 'PAYMENT_GATEWAY',
+  parameters: {
+    gateway: 'monei',
+    gatewayMerchantId: 'MONEI_ACCOUNT_ID'
+  }
+};
+```
+
+Exchange Google Pay token for MONEI Payment Token that can be used to confirm payment as described in [step 3](#3-confirm-the-payment-client-side).
+
+```javascript
+function processPayment(paymentData) {
+  // Encode Google Pay token as a base64 string
+  const token = window.btoa(paymentData.paymentMethodData.tokenizationData.token);
+  return monei.api
+    .createToken({
+      paymentId: '{{payment_id}}',
+      paymentMethod: {
+        googlePay: {
+          token: token
+        }
+      }
+    })
+    .then(function (result) {
+      return moneiTokenHandler(result.token);
+    });
+}
+```
 
 ## Before you go live
 
