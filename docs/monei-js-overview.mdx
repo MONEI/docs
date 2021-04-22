@@ -1,11 +1,11 @@
 ---
 id: monei-js-overview
-title: MONEI JS Overview
-sidebar_label: Overview
+title: MONEI UI Components
+sidebar_label: UI Components
 description: MONEI UI Components enable you to collect sensitive payment information using customizable UI components.
 ---
 
-MONEI UI Components enable you to collect sensitive payment information using customizable UI components.
+MONEI UI Components is a set of rich, prebuilt UI components that help you create your own checkout flows across desktop and mobile.
 
 UI components include features like:
 
@@ -13,8 +13,10 @@ UI components include features like:
 - Translate placeholders to your customer’s preferred language
 - Use responsive design to fit the width of your customer’s screen or mobile device
 - Customize the styling to match the look and feel of your checkout flow
+- Apple Pay, Google Pay, PayPal, Bizum UI components for easy integration into your checkout flow
+- All UI Components are available in JavaScript, ReactJS, Vue and Angular.
 
-## Setup monei.js components
+## Setup monei.js
 
 You need to include `monei.js` in your checkout page by either adding the script tag to the `head` of your HTML file, or by importing it from the `monei-js` [module](https://www.npmjs.com/package/@monei-js/components):
 
@@ -43,7 +45,7 @@ npm i @monei-js/components
 </TabItem>
 </Tabs>
 
-## Card Input Component
+## Card Input UI Component
 
 <Tabs
   defaultValue="js"
@@ -523,4 +525,6 @@ The Card Input Component lets you collect Credit Card information all within one
 
 </Tabs>
 
-The Components are completely customizable. You can style MONEI Components to match the look and feel of your site, providing a seamless checkout experience for your customers. It’s also possible to style various input states, for example when the Component has focus.
+Card Input UI Component is completely customizable. You can style it to match the look and feel of your site, providing a seamless checkout experience for your customers. It’s also possible to style various input states, for example when the input has focus.
+
+To see all available MONEI UI Components check the [API docummentation](monei-js-api.md) or our integration guides for individual payment methods.
