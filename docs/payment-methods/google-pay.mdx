@@ -212,6 +212,15 @@ const tokenizationSpecification = {
 };
 ```
 
+To use Google Pay API directly you need to [request production access](https://developers.google.com/pay/api/web/guides/test-and-deploy/request-prod-access) and obtain your `merchantId` in Google Console (this step is not required if you are using our Google Pay component).
+
+```javascript
+paymentDataRequest.merchantInfo = {
+  merchantName: 'Example Merchant',
+  merchantId: 'GOOGLE_MERCHANT_ID'
+};
+```
+
 Exchange Google Pay token for MONEI Payment Token that can be used to confirm payment as described in [step 3](#3-confirm-the-payment-client-side).
 
 ```javascript
