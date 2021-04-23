@@ -1,10 +1,10 @@
 ---
 id: google-pay
 title: Google Pay
-description: Learn how to accept Google Pay payments.
+description: Learn how to accept Google Pay payments with MONEI.
 ---
 
-Our [Google Pay Component](monei-js-api.md#moneigooglepay-component) renders Google Pay™ in your payment page. When a customer selects Google Pay, the Component presents the Google Pay payment sheet where a customer can choose a card he wants to use. If a customer selects a card that requires 3D Secure confirmation the payment confirmation step will automatically show a 3D Secure confirmation popup.
+Our [GooglePay UI Component](monei-js/reference.md#moneigooglepay-component) renders Google Pay™ to your payment page. When a customer selects Google Pay, the component presents the Google Pay payment sheet where a customer can choose a card he wants to use. If a customer selects a card that requires 3D Secure confirmation the payment confirmation step will automatically show a 3D Secure confirmation popup.
 
 <p>
   <iframe src="/google-pay-example.html" height="100px" width="100%" className="preview-frame" />
@@ -127,7 +127,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [Google Pay Component](monei-js-api.md#moneigooglepay-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
+Add MONEI [Google Pay Component](monei-js/reference.md#moneigooglepay-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
 
 ```html title="checkout.html"
 <div id="gpay_container">
@@ -153,11 +153,11 @@ var googlePay = monei.GooglePay({
 googlePay.render('#gpay_container');
 ```
 
-Check [MONEI JS Reference](monei-js-api.md#moneigooglepay-component) for more options.
+Check [MONEI JS Reference](monei-js/reference.md#moneigooglepay-component) for more options.
 
 ### 3. Confirm the payment `Client-side`
 
-To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js-api.md#moneiconfirmpayment-function) function
+To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function
 
 You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Google Pay Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
 

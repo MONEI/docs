@@ -1,29 +1,50 @@
 ---
-id: paypal
-title: PayPal
-description: Learn how to accept PayPal payments with MONEI.
+id: payment-request
+sidebar_label: Payment Request
+title: Payment Request Component
+description: Learn how to use PaymentRequest Component to accept Apple Pay and Google Pay payments with MONEI.
 ---
 
-Our [PayPal UI Component](monei-js/reference.md#moneipaypal-component) renders PayPal button to your payment page.
-When a customer selects PayPal, the component presents a PayPal overlay, where a customer can log in with their PayPal account details to complete the payment process.
+MONEI [Payment Request Component](monei-js/reference.md#moneigooglepay-component) gives you a single integration for Apple Pay and Google Pay. Customers see a Google Pay or an Apple Pay button, depending on what their device and browser combination supports.
 
 <p>
-  <iframe src="/paypal-example.html" height="100px" width="100%" className="preview-frame" />
+  <iframe
+    src="/payment-request-example.html"
+    height="100px"
+    width="100%"
+    className="preview-frame"
+  />
 </p>
+
+:::note
+Apple Pay with the Payment Request Component requires macOS 10.12.1+ or iOS 10.1+.
+:::
 
 ## Before you begin
 
-This page explains how to add PayPal to your custom payment page. If you don't need custom a checkout experience we recommend using our [prebuilt payment page](use-prebuilt-payment-page.mdx). It already supports all available payment methods and does not require coding.
+This page explains how to add Payment Request Component to your payment page. To accept Apple Pay and Google Pay payments you need to have at least one configured credit card processor.
 
-To accept PayPal payments you need to connect your [PayPal business account](https://www.paypal.com/business).
-To connect your PayPal business account go to [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods).
+To configure credit card processors go to [MONEI Dashboard → Settings → Payment Methods → Credit card payments](https://dashboard.monei.com/settings/payment-methods/card).
+
+Before you start, you need to:
+
+- Add a payment method to your browser. For example, you can save a card in Chrome, or add a card to your Wallet for Safari.
+- Serve your application over HTTPS. This is a requirement both in development and in production. One way to get up and running is to use a service like [ngrok](https://ngrok.com/).
+- [Verify your domain with Apple Pay](#verify-your-domain-with-apple-pay), both in development and production.
 
 To test your integration:
 
 - Use your [test mode](testing.md) Account ID and API Key.
-- Connect test [PayPal Business account](testing.md#test-paypal-accounts) in your [MONEI Dashboard](https://dashboard.monei.com/settings/payment-methods) (in test mode)
-- Use the test [PayPal Personal account](testing.md#test-paypal-accounts) for payments.
-- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+- You can use any real credit card details, you will not be charged in the test mode (credit card details are automatically replaced with the test card).
+- You can check the status of the test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+
+## Verify your domain with Apple Pay
+
+- Download this [domain association file](https://assets.monei.com/apple-pay/apple-developer-merchantid-domain-association/) and host it at `/.well-known/apple-developer-merchantid-domain-association` on your site.
+
+  For example, if you’re registering https://example.com, make that file available at https://example.com/.well-known/apple-developer-merchantid-domain-association.
+
+- Next, contact [MONEI Support Team](https://support.monei.com/hc/requests/new) register your domain with Apple.
 
 ## Integration
 
@@ -112,7 +133,7 @@ Check all available [request parameters](/api/#operation/payments_create).
 
 Included in the returned Payment object is a payment `id`, which is used on the client side to securely complete the payment process instead of passing the entire Payment object.
 
-### 2. Add PayPal to your payment page `Client-side`
+### 2. Add Payment Request Component to your payment page `Client-side`
 
 Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
 
@@ -123,19 +144,19 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [PayPal Component](monei-js/reference.md#moneipaypal-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
+Add MONEI [Payment Request Component](monei-js/reference.md#paymentrequest-ui-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
 
 ```html title="checkout.html"
-<div id="paypal_container">
-  <!-- A MONEI PayPal Component will be inserted here. -->
+<div id="payment_request_container">
+  <!-- Payment Request Component will be inserted here. -->
 </div>
 ```
 
-Initialize PayPal Component
+Initialize Payment Request Component
 
 ```js title="client.js"
-// Create an instance of the PayPal component.
-var payPal = monei.PayPal({
+// Create an instance of the Google Pay component.
+var paymentRequest = monei.PaymentRequest({
   paymentId: '{{payment_id}}',
   onSubmit(result) {
     moneiTokenHandler(result.token);
@@ -145,17 +166,17 @@ var payPal = monei.PayPal({
   }
 });
 
-// Render an instance of the PayPal component into the `paypal_container` <div>.
-payPal.render('#paypal_container');
+// Render an instance of the Payment Request Component into the `payment_request_container` <div>.
+paymentRequest.render('#payment_request_container');
 ```
 
-Check [MONEI JS Reference](monei-js/reference.md#moneipaypal-component) for more options.
+Check [MONEI JS Reference](monei-js/reference.md#paymentrequest-ui-component) for more options.
 
 ### 3. Confirm the payment `Client-side`
 
 To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function
 
-You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with PayPal Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
+You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Payment Request Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
 
 ```js title="client.js"
 // Confirm the payment
@@ -193,4 +214,5 @@ If MONEI does not receive a `200` HTTP status code, the notification attempt is 
 ## Before you go live
 
 - Make sure that you are using [live (production) mode](testing.md) Account ID and API Key.
-- Make sure that you have connected your PayPal business account in [MONEI Dashboard](https://dashboard.monei.com/settings/payment-methods).
+- Make sure that you have at least one [enabled credit card processor](https://dashboard.monei.com/settings/payment-methods/card)
+- Contact our [Support Team](https://support.monei.com/hc/requests/new) to configure Google Pay in production.

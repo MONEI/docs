@@ -38,5 +38,15 @@
     "source": "/docs/accept-card-payment/",
     "target": "/docs/build-custom-checkout/",
     "status": "301"
+  },
+  {
+    "source": "/docs/monei-js-api/",
+    "target": "/docs/monei-js/reference/",
+    "status": "301"
+  },
+  {
+    "source": "/docs/monei-js-overview/",
+    "target": "/docs/monei-js/overview/",
+    "status": "301"
   }
 ]

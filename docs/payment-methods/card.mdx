@@ -4,7 +4,7 @@ title: Credit Cards
 description: Learn how to accept credit and debit card payments.
 ---
 
-Our [Card Input Component](monei-js-api.md#moneicardinput-component) renders a card input in your payment page. The Card Input Component lets you securely collect card information all within one Component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC. If a customer enters a card that requires 3D Secure confirmation the payment confirmation step will automatically show a 3D Secure confirmation popup.
+Our [CardInput UI Component](monei-js/reference.md#moneicardinput-component) renders a card input to your payment page. The CardInput UI Component lets you securely collect card information all within one component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC. If a customer enters a card that requires 3D Secure confirmation the payment confirmation step will automatically show a 3D Secure confirmation popup.
 
 <p>
   <iframe src="/card-input-example.html" height="160px" width="100%" className="preview-frame" />
@@ -136,7 +136,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [Card Input Component](monei-js-api.md#moneicardinput-component) to your payment page. Create empty DOM nodes (containers) with unique IDs in your payment form.
+Add MONEI [Card Input Component](monei-js/reference.md#moneicardinput-component) to your payment page. Create empty DOM nodes (containers) with unique IDs in your payment form.
 
 ```html title="checkout.html"
 <form
@@ -182,11 +182,11 @@ cardInput.render(container);
 
 The Card Input Component simplifies the form and minimizes the number of required fields by inserting a single, flexible input field that securely collects all necessary card details.
 
-Check [MONEI JS Reference](monei-js-api.md#moneicardinput-component) for more options.
+Check [MONEI JS Reference](monei-js/reference.md#moneicardinput-component) for more options.
 
 ### 3. Confirm the payment `Client-side`
 
-To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js-api.md#moneiconfirmpayment-function) function
+To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function
 
 You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
 
