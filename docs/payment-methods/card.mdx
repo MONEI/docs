@@ -1,10 +1,12 @@
 ---
 id: card
 title: Credit Cards
-description: Learn how to accept credit and debit card payments.
+description: Learn how to accept credit and debit card payments with MONEI.
 ---
 
-Our [CardInput UI Component](monei-js/reference.md#moneicardinput-component) renders a card input to your payment page. The CardInput UI Component lets you securely collect card information all within one component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC. If a customer enters a card that requires 3D Secure confirmation the payment confirmation step will automatically show a 3D Secure confirmation popup.
+You can start accepting credit card payments on the Web using [Hosted Payment Page](use-prebuilt-payment-page.mdx) or [Card Input Component](monei-js/reference.md#cardinput-component). No additional configuration is required for the Hosted Payment Page. It already supports all available payment methods and does not require coding.
+
+Our [Card Input Component](monei-js/reference.md#cardinput-component) renders a card input to your custom payment page. The Card Input Component lets you securely collect card information all within one component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC. It is responsive, completely customizable and localized to 14 languages.
 
 <p>
   <iframe src="/card-input-example.html" height="160px" width="100%" className="preview-frame" />
@@ -27,7 +29,7 @@ Our [CardInput UI Component](monei-js/reference.md#moneicardinput-component) ren
 
 ## Before you begin
 
-This page explains how to add card input to your custom payment page. If you don't need a custom checkout experience we recommend using our [prebuilt payment page](use-prebuilt-payment-page.mdx). It already supports all available payment methods and does not require coding.
+This page explains how to add Card Input Component to your custom payment page. If you don't need a custom checkout experience we recommend using our [Hosted Payment Page](use-prebuilt-payment-page.mdx).
 
 To accept card payments you need to have at least one configured credit card processor.
 To configure credit card processors go to [MONEI Dashboard → Settings → Payment Methods → Credit card payments](https://dashboard.monei.com/settings/payment-methods/card).
@@ -139,11 +141,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 Add MONEI [Card Input Component](monei-js/reference.md#moneicardinput-component) to your payment page. Create empty DOM nodes (containers) with unique IDs in your payment form.
 
 ```html title="checkout.html"
-<form
-  action="https://secure.monei.com/payments/{{payment_id}}/confirm"
-  method="post"
-  id="payment-form"
->
+<form id="payment-form">
   <div class="card-field">
     <div id="card-input">
       <!-- A MONEI Card Input Component will be inserted here. -->
@@ -254,4 +252,4 @@ If MONEI does not receive a `200` HTTP status code, the notification attempt is 
 ## Before you go live
 
 - Make sure that you are using [live (production) mode](testing.md) Account ID and API Key.
-- Make sure that you have at least one [enabled credit card processor](https://dashboard.monei.com/settings/payment-methods/card)
+- Make sure that you have at least one [enabled credit card processor](https://dashboard.monei.com/settings/payment-methods/card).
