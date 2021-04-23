@@ -48,5 +48,10 @@
     "source": "/docs/monei-js-overview/",
     "target": "/docs/monei-js/overview/",
     "status": "301"
+  },
+  {
+    "source": "/.well-known/apple-developer-merchantid-domain-association",
+    "target": "/apple-developer-merchantid-domain-association.txt",
+    "status": "200"
   }
 ]
