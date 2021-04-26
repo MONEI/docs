@@ -10,7 +10,7 @@ description: Find a guide to integrate MONEI into your system
 - **[Use a prebuilt payment page](integrations/use-prebuilt-payment-page.mdx)**  
   MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Credit Cards, PayPal, Bizum, GooglePay, Apple Pay and more.
 - **[Build a custom checkout](integrations/build-custom-checkout.mdx)**  
-  Use MONEI UI components to build your custom checkout and securely accept Credit Cards, PayPal, Bizum, GooglePay, Apple Pay and other payment methods.
+  Use MONEI Components to build your custom checkout and securely accept Credit Cards, PayPal, Bizum, GooglePay, Apple Pay and other payment methods.
 - **[Payments API](/api/#tag/Payments)**  
   Securely perform a server to server payment.
 
