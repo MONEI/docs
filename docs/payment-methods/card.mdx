@@ -222,7 +222,11 @@ paymentForm.addEventListener('submit', function (event) {
 // Confirm the payment
 function moneiTokenHandler(token) {
   return monei
-    .confirmPayment({paymentId: '{{payment_id}}', paymentToken: token})
+    .confirmPayment({
+      paymentId: '{{payment_id}}',
+      paymentToken: token,
+      paymentMethod: {card: {cardholderName: 'JOHN DOE'}}
+    })
     .then(function (result) {
       // At this moment you can show a customer the payment result
       // But you should always rely on the result passed to the callback endpoint on your server

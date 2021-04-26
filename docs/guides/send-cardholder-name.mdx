@@ -1,0 +1,116 @@
+---
+id: send-cardholder-name
+title: Send cardholder name
+---
+
+:::note
+Strong CustomerAuthentication and PSD2 normative requires cardholder name to be sent for each transaction.
+:::
+
+You can send cardholder name when you are confirming your payment on the client or on the server.
+
+### Confirm the payment (monei.js) `Client-side`
+
+```js title="client.js"
+// Confirm the payment
+function moneiTokenHandler(token) {
+  return monei
+    .confirmPayment({
+      paymentId: '{{payment_id}}',
+      paymentToken: token,
+      paymentMethod: {card: {cardholderName: 'JOHN DOE'}}
+    })
+    .then(function (result) {
+      // At this moment you can show a customer the payment result
+      // But you should always rely on the result passed to the callback endpoint on your server
+      // to update the order status
+      console.log(result);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+```
+
+### Confirm the payment (html form) `Client-side`
+
+```html
+<form
+  action="https://secure.monei.com/payments/{{payment_id}}/confirm"
+  method="post"
+  id="payment-form"
+>
+  <input type="hidden" name="paymentToken" value="7cc38b08ff471ccd313ad62b23b9f362b107560b" />
+  <input type="hidden" name="paymentMethod.card.cardholderName" value="JOHN DOE" />
+  <button type="submit" id="payment-button">Submit payment</button>
+</form>
+```
+
+### Confirm the payment `Server-side`
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.com/v1/payments/{id}/confirm"
+curl --request POST 'https://api.monei.com/v1/payments/832b77d1a4b372349a7ae0bb1b2af059/confirm' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "paymentToken": "7cc38b08ff471ccd313ad62b23b9f362b107560b",
+  "paymentMethod": {
+    "card": {
+      "cardholderName": "JOHN DOE"
+    }
+  }
+}'
+
+```
+
+</TabItem>
+
+<TabItem value="node">
+
+```js title="server.js"
+const {Monei} = require('@monei-js/node-sdk');
+const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+monei.payments.confirm('832b77d1a4b372349a7ae0bb1b2af059', {
+  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+  paymentMethod: {
+    card: {
+      cardholderName: 'JOHN DOE'
+    }
+  }
+});
+```
+
+</TabItem>
+
+<TabItem value="php">
+
+```php title="server.php"
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+  $monei->payments->confirm(
+  '832b77d1a4b372349a7ae0bb1b2af059',
+  [
+    'paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+    'paymentMethod' => [
+      'card' => [
+        'cardholderName' => 'JOHN DOE'
+      ]
+    ]
+  ]
+]);
+```
+
+  </TabItem>
+</Tabs>
