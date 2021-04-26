@@ -2,16 +2,21 @@ module.exports = {
   docs: [
     'getting-started',
     {
-      Integrations: ['use-prebuilt-payment-page', 'use-payment-modal', 'build-custom-checkout'],
+      Integrations: [
+        'integrations/use-prebuilt-payment-page',
+        'integrations/use-payment-modal',
+        'integrations/build-custom-checkout'
+      ],
       'E-commerce platforms': ['e-commerce/shopify', 'e-commerce/woocommerce'],
       'Payment methods': [
         'payment-methods/card',
         'payment-methods/google-pay',
+        'payment-methods/apple-pay',
         'payment-methods/paypal',
         'payment-methods/bizum'
       ],
       Guides: ['guides/save-payment-method', 'guides/verify-signature'],
-      'MONEI JS': ['monei-js-overview', 'monei-js-api']
+      'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },
     {
       type: 'link',

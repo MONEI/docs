@@ -1,44 +1,50 @@
 ---
-id: card
-title: Credit Cards
-description: Learn how to accept credit and debit card payments with MONEI.
+id: payment-request
+sidebar_label: Payment Request
+title: Payment Request Component
+description: Learn how to use PaymentRequest Component to accept Apple Pay and Google Pay payments with MONEI.
 ---
 
-You can start accepting credit card payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Card Input Component](monei-js/reference.md#cardinput-component). No additional configuration is required for the Hosted Payment Page. It already supports all available payment methods and does not require coding.
-
-Our [Card Input Component](monei-js/reference.md#cardinput-component) renders a card input to your custom payment page. The Card Input Component lets you securely collect card information all within one component. It includes a dynamically-updating card brand icon as well as inputs for number, expiry and CVC. It is responsive, optimized for mobile devices, completely customizable and localized to 14 languages.
+MONEI [Payment Request Component](monei-js/reference.md#moneigooglepay-component) gives you a single integration for Apple Pay and Google Pay. Customers see a Google Pay or an Apple Pay button, depending on what their device and browser combination supports.
 
 <p>
-  <iframe src="/card-input-example.html" height="160px" width="100%" className="preview-frame" />
+  <iframe
+    src="/payment-request-example.html"
+    height="100px"
+    width="100%"
+    className="preview-frame"
+  />
 </p>
-<p>
-  <a
-    style={{marginRight: '1em'}}
-    href="https://payments-demo.monei.com"
-    target="_blank"
-    className="button button--primary">
-    Live demo
-  </a>
-  <a
-    href="https://github.com/MONEI/monei-payments-demo"
-    target="_blank"
-    className="button button--secondary">
-    Source code
-  </a>
-</p>
+
+:::note
+Apple Pay with the Payment Request Component requires macOS 10.12.1+ or iOS 10.1+.
+:::
 
 ## Before you begin
 
-This page explains how to add Card Input Component to your custom payment page. If you don't need a custom checkout experience we recommend using our [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx).
+This page explains how to add Payment Request Component to your payment page. To accept Apple Pay and Google Pay payments you need to have at least one configured credit card processor.
 
-To accept card payments you need to have at least one configured credit card processor.
 To configure credit card processors go to [MONEI Dashboard → Settings → Payment Methods → Credit card payments](https://dashboard.monei.com/settings/payment-methods/card).
+
+Before you start, you need to:
+
+- Add a payment method to your browser. For example, you can save a card in Chrome, or add a card to your Wallet for Safari.
+- Serve your application over HTTPS. This is a requirement both in development and in production. One way to get up and running is to use a service like [ngrok](https://ngrok.com/).
+- [Verify your domain with Apple Pay](#verify-your-domain-with-apple-pay), both in development and production.
 
 To test your integration:
 
 - Use your [test mode](testing.md) Account ID and API Key.
-- Use the test [card numbers](testing.md#test-card-numbers).
-- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+- You can use any real credit card details, you will not be charged in the test mode (credit card details are automatically replaced with the test card).
+- You can check the status of the test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+
+## Verify your domain with Apple Pay
+
+- Download this [domain association file](https://assets.monei.com/apple-pay/apple-developer-merchantid-domain-association/) and host it at `/.well-known/apple-developer-merchantid-domain-association` on your site.
+
+  For example, if you’re registering https://example.com, make that file available at https://example.com/.well-known/apple-developer-merchantid-domain-association.
+
+- Next, contact [MONEI Support Team](https://support.monei.com/hc/requests/new) register your domain with Apple.
 
 ## Integration
 
@@ -123,11 +129,15 @@ The following parameters are required:
 - **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
 - **callbackUrl** `string` - The URL to which a payment result should be sent asynchronously.
 
+:::note
+Payment Request Component is also available as React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
+:::
+
 Check all available [request parameters](/api/#operation/payments_create).
 
 Included in the returned Payment object is a payment `id`, which is used on the client side to securely complete the payment process instead of passing the entire Payment object.
 
-### 2. Collect card details `Client-side`
+### 2. Add Payment Request Component to your payment page `Client-side`
 
 Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
 
@@ -138,87 +148,41 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [Card Input Component](monei-js/reference.md#cardinput-component) to your payment page. Create empty DOM nodes (containers) with unique IDs in your payment form.
+Add MONEI [Payment Request Component](monei-js/reference.md#paymentrequest-ui-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
 
 ```html title="checkout.html"
-<form id="payment-form">
-  <div class="card-field">
-    <div id="card-input">
-      <!-- A MONEI Card Input Component will be inserted here. -->
-    </div>
-    <!-- Used to display card errors. -->
-    <div id="card-error"></div>
-  </div>
-  <button type="submit" id="payment-button">Submit payment</button>
-</form>
+<div id="payment_request_container">
+  <!-- Payment Request Component will be inserted here. -->
+</div>
 ```
 
-Initialize Card Input Component
+Initialize Payment Request Component
 
 ```js title="client.js"
-var container = document.getElementById('card-input');
-var errorText = document.getElementById('card-error');
-
-// Create an instance of the Card Input using payment_id.
-var cardInput = monei.CardInput({
+// Create an instance of the Google Pay component.
+var paymentRequest = monei.PaymentRequest({
   paymentId: '{{payment_id}}',
-  onChange: function (event) {
-    // Handle real-time validation errors.
-    if (event.isTouched && event.error) {
-      container.classList.add('is-invalid');
-      errorText.innerText = event.error;
-    } else {
-      container.classList.remove('is-invalid');
-      errorText.innerText = '';
-    }
+  onSubmit(result) {
+    moneiTokenHandler(result.token);
+  },
+  onError(error) {
+    console.log(error);
   }
 });
 
-// Render an instance of the Card Input into the `card_input` <div>.
-cardInput.render(container);
+// Render an instance of the Payment Request Component into the `payment_request_container` <div>.
+paymentRequest.render('#payment_request_container');
 ```
 
-The Card Input Component simplifies the form and minimizes the number of required fields by inserting a single, flexible input field that securely collects all necessary card details.
-
-:::note
-Card Input Component is also available as React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
-:::
-
-Check [MONEI JS Reference](monei-js/reference.md#cardinput-component) for more options.
+Check [MONEI JS Reference](monei-js/reference.md#paymentrequest-ui-component) for more options.
 
 ### 3. Confirm the payment `Client-side`
 
 To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function
 
-You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
+You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Payment Request Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
 
 ```js title="client.js"
-// Handle form submission.
-var paymentForm = document.getElementById('payment-form');
-var paymentButton = document.getElementById('payment-button');
-paymentForm.addEventListener('submit', function (event) {
-  event.preventDefault();
-  paymentButton.disabled = true;
-  monei
-    .createToken(cardInput)
-    .then(function (result) {
-      console.log(result);
-      if (result.error) {
-        // Inform the user if there was an error.
-        container.classList.add('is-invalid');
-        errorText.innerText = result.error;
-      } else {
-        // Send the token to MONEI.
-        moneiTokenHandler(result.token);
-      }
-      paymentButton.disabled = false;
-    })
-    .catch(function (error) {
-      paymentButton.disabled = false;
-      console.log(error);
-    });
-});
-
 // Confirm the payment
 function moneiTokenHandler(token) {
   return monei
@@ -234,8 +198,6 @@ function moneiTokenHandler(token) {
     });
 }
 ```
-
-After the form is submitted MONEI will automatically show a popup window with 3d secure confirmation screen (if needed)
 
 :::note
 As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.
@@ -256,4 +218,5 @@ If MONEI does not receive a `200` HTTP status code, the notification attempt is 
 ## Before you go live
 
 - Make sure that you are using [live (production) mode](testing.md) Account ID and API Key.
-- Make sure that you have at least one [enabled credit card processor](https://dashboard.monei.com/settings/payment-methods/card).
+- Make sure that you have at least one [enabled credit card processor](https://dashboard.monei.com/settings/payment-methods/card)
+- Contact our [Support Team](https://support.monei.com/hc/requests/new) to configure Google Pay in production.

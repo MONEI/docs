@@ -5,6 +5,11 @@
     "status": "404-200"
   },
   {
+    "source": "/.well-known/apple-developer-merchantid-domain-association",
+    "target": "/apple-developer-merchantid-domain-association.txt",
+    "status": "200"
+  },
+  {
     "source": "/docs/save-payment-method/",
     "target": "/docs/guides/save-payment-method/",
     "status": "301"
@@ -37,6 +42,31 @@
   {
     "source": "/docs/accept-card-payment/",
     "target": "/docs/build-custom-checkout/",
+    "status": "301"
+  },
+  {
+    "source": "/docs/monei-js-api/",
+    "target": "/docs/monei-js/reference/",
+    "status": "301"
+  },
+  {
+    "source": "/docs/monei-js-overview/",
+    "target": "/docs/monei-js/overview/",
+    "status": "301"
+  },
+  {
+    "source": "/docs/build-custom-checkout/",
+    "target": "/docs/integrations/build-custom-checkout/",
+    "status": "301"
+  },
+  {
+    "source": "/docs/use-prebuilt-payment-page/",
+    "target": "/docs/integrations/use-prebuilt-payment-page/",
+    "status": "301"
+  },
+  {
+    "source": "/docs/use-payment-modal/",
+    "target": "/docs/integrations/use-payment-modal/",
     "status": "301"
   }
 ]

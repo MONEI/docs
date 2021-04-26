@@ -1,0 +1,81 @@
+---
+id: apple-pay
+title: Apple Pay
+description: Learn how to accept Apple Pay payments with MONEI.
+---
+
+You can start accepting Apple Pay payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Payment Request Component](monei-js/payment-request.mdx). No additional configuration is required to use Apple Pay in Hosted Payment Page.
+
+Our [Payment Request Component](monei-js/payment-request.mdx) gives you a single integration for Apple Pay and Google Pay. Customers see a Google Pay or an Apple Pay button, depending on what their device and browser combination supports.
+
+If you prefer to integrate directly against the Apple Pay API, follow our [Apple Pay direct API integration guide](#apple-pay-direct-api-integration).
+
+## Apple Pay direct API integration
+
+Before you start, you need to:
+
+- Add a card to your Wallet for Safari.
+- Serve your application over HTTPS. This is a requirement both in development and in production. One way to get up and running is to use a service like [ngrok](https://ngrok.com/).
+- [Verify your domain with Apple Pay](monei-js/payment-request.mdx#verify-your-domain-with-apple-pay), both in development and production.
+- Follow [Apples’s instructions](https://developer.apple.com/documentation/apple_pay_on_the_web).
+
+Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
+
+```html title="checkout.html"
+<head>
+  <title>Checkout</title>
+  <script src="https://js.monei.com/v1/monei.js"></script>
+</head>
+```
+
+Create Apple Pay Session
+
+```javascript
+const session = new window.ApplePaySession(3, request);
+session.onvalidatemerchant = async (event: any) => {
+  try {
+    const merchantSession = await monei.api.createApplePaySession({
+      accountId: 'MONEI_ACCOUNT_ID',
+      displayName: 'Test Merchant',
+      domainName: 'example.com',
+      validationUrl: event.validationURL
+    });
+    session.completeMerchantValidation(merchantSession);
+  } catch (error) {
+    session.abort();
+  }
+};
+```
+
+Exchange Apple Pay token for MONEI Payment Token that can be used to confirm payment as described in [step 3](#3-confirm-the-payment-client-side).
+
+```javascript
+session.onpaymentauthorized = async (event) => {
+  // Encode Apple Pay token as a base64 string
+  const paymentToken = JSON.stringify(event.payment.token);
+  const token = window.btoa(paymentToken);
+  try {
+    const result = await monei.api.createToken({
+      paymentId: '{{payment_id}}',
+      paymentMethod: {
+        applePay: {token}
+      }
+    });
+    session.completePayment({
+      status: window.ApplePaySession.STATUS_SUCCESS
+    });
+    return moneiTokenHandler(result.token);
+  } catch (error) {
+    session.completePayment({
+      status: window.ApplePaySession.STATUS_FAILURE
+    });
+  }
+};
+session.begin();
+```
+
+## Before you go live
+
+- Make sure that you are using [live (production) mode](testing.md) Account ID and API Key.
+- Make sure that you have at least one [enabled credit card processor](https://dashboard.monei.com/settings/payment-methods/card)
+- Contact our [Support Team](https://support.monei.com/hc/requests/new) to configure Google Pay in production.

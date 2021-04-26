@@ -25,12 +25,12 @@
   </head>
   <body>
     <div id="payment-form">
-      <div id="gpay_container">
+      <div id="payment_request_container">
         <!-- A MONEI Google Pay Component will be inserted here. -->
       </div>
     </div>
     <script>
-      var gpay = monei.GooglePay({
+      var paymentRequest = monei.PaymentRequest({
         accountId: '2975bcfa-7bbc-422d-af48-c66759d87b69',
         amount: 100,
         currency: 'EUR',
@@ -42,8 +42,8 @@
         }
       });
 
-      // Render an instance of the PayPal component into the `gpay_container` <div>.
-      gpay.render('#gpay_container');
+      // Render an instance of the PayPal component into the `payment_request_container` <div>.
+      paymentRequest.render('#payment_request_container');
     </script>
   </body>
 </html>

@@ -26,6 +26,10 @@ Collecting payments on your website consists of creating a payment object, and c
   </a>
 </p>
 
+:::note
+Apple Pay and Bizum are not available when using MONEI Payment Modal integration.
+:::
+
 ## Integration
 
 ### 1. Create a Payment `Server-side`
@@ -115,7 +119,7 @@ Included in the returned Payment object is a payment `id`, which is used on the 
 
 ### 2. Confirm the payment `Client-side`
 
-To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js-api.md#moneiconfirmpayment-function) function
+To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function
 
 Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
 
@@ -159,7 +163,7 @@ paymentForm.addEventListener('submit', function (event) {
 After the form is submitted MONEI will automatically show a popup window with a payment page to collect payment details and then a 3d secure confirmation screen (if needed)
 
 :::note
-As an alternative process you can redirect your customer to `payment.nextAction.redirectUrl` on the server-side. Check our [prebuilt payment page guide](use-prebuilt-payment-page.mdx)
+As an alternative process you can redirect your customer to `payment.nextAction.redirectUrl` on the server-side. Check our [prebuilt payment page guide](integrations/use-prebuilt-payment-page.mdx)
 :::
 
 ### 3. An asynchronous request is sent to your server.
