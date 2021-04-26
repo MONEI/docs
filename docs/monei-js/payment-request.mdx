@@ -129,6 +129,10 @@ The following parameters are required:
 - **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
 - **callbackUrl** `string` - The URL to which a payment result should be sent asynchronously.
 
+:::note
+Payment Request Component is also available as React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
+:::
+
 Check all available [request parameters](/api/#operation/payments_create).
 
 Included in the returned Payment object is a payment `id`, which is used on the client side to securely complete the payment process instead of passing the entire Payment object.

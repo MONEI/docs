@@ -4,7 +4,9 @@ title: PayPal
 description: Learn how to accept PayPal payments with MONEI.
 ---
 
-Our [PayPal Component](monei-js/reference.md#moneipaypal-component) renders PayPal button to your payment page.
+You can start accepting PayPal payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [PayPal Component](monei-js/reference.md#paypal-component). No additional configuration is required to use PayPal in Hosted Payment Page.
+
+Our [PayPal Component](monei-js/reference.md#paypal-component) renders PayPal button to your payment page.
 When a customer selects PayPal, the component presents a PayPal overlay, where a customer can log in with their PayPal account details to complete the payment process.
 
 <p>
@@ -123,7 +125,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [PayPal Component](monei-js/reference.md#moneipaypal-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
+Add MONEI [PayPal Component](monei-js/reference.md#paypal-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
 
 ```html title="checkout.html"
 <div id="paypal_container">
@@ -149,7 +151,11 @@ var payPal = monei.PayPal({
 payPal.render('#paypal_container');
 ```
 
-Check [MONEI JS Reference](monei-js/reference.md#moneipaypal-component) for more options.
+:::note
+PayPal Component is also available as React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
+:::
+
+Check [MONEI JS Reference](monei-js/reference.md#paypal-component) for more options.
 
 ### 3. Confirm the payment `Client-side`
 
