@@ -3,11 +3,11 @@
   "info": {
     "version": "1.0.0",
     "title": "MONEI API v1",
-    "description": "The MONEI API is organized around [REST](https://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs."
+    "description": "The MONEI API is organized around [REST](https://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. <br/><br/> **Base URL:** https://api.monei.com/v1 <br/><br/> **Client libraries:** <ul>\n  <li><a target=\"_blank\" href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n  <li><a target=\"_blank\" href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n  <li><a target=\"_blank\" href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n</ul>"
   },
   "servers": [
     {
-      "url": "http://api.monei.com/v1",
+      "url": "https://api.monei.com/v1",
       "description": "MONEI API v1"
     }
   ],
@@ -103,6 +103,61 @@
         "example": "ES",
         "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2))."
       },
+      "IP": {
+        "type": "string",
+        "example": "100.100.200.100",
+        "description": "The IP address where the operation originated."
+      },
+      "Lang": {
+        "type": "string",
+        "example": "es",
+        "description": "Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1))."
+      },
+      "DeviceType": {
+        "type": "string",
+        "example": "desktop",
+        "description": "Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`."
+      },
+      "DeviceModel": {
+        "type": "string",
+        "example": null,
+        "description": "Information about the device used for the browser session (e.g., `iPhone`)."
+      },
+      "Browser": {
+        "type": "string",
+        "example": "Chrome",
+        "description": "The browser used in this browser session (e.g., `Mobile Safari`)."
+      },
+      "BrowserVersion": {
+        "type": "string",
+        "example": "83.0.4103.116",
+        "description": "The version for the browser session (e.g., `13.1.1`)."
+      },
+      "Os": {
+        "type": "string",
+        "example": "Mac OS",
+        "description": "Operation system (e.g., `iOS`)."
+      },
+      "OsVersion": {
+        "type": "string",
+        "example": "10.15.4",
+        "description": "Operation system version (e.g., `13.5.1`)."
+      },
+      "Source": {
+        "type": "string",
+        "example": "MONEI/PHP",
+        "description": "The source component from where the operation was generated (mostly for our SDK's)."
+      },
+      "SourceVersion": {
+        "type": "string",
+        "example": "0.1.2",
+        "description": "The source component version from where the operation was generated (mostly for our SDK's)."
+      },
+      "UserAgent": {
+        "type": "string",
+        "example": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...",
+        "description": "Full user agent string of the browser session."
+      },
       "CreatedAt": {
         "type": "integer",
         "format": "int64",
@@ -149,6 +204,16 @@
           }
         }
       },
+      "CardholderName": {
+        "type": "string",
+        "example": "John Doe",
+        "description": "The cardholder's name, as stated in the credit card."
+      },
+      "CardholderEmail": {
+        "type": "string",
+        "example": "john.doe@monei.com",
+        "description": "The cardholder's email address."
+      },
       "Card": {
         "title": "Card",
         "type": "object",
@@ -168,6 +233,12 @@
           "expYear": {
             "type": "string",
             "description": "Two-digit number representing the card’s expiration year."
+          },
+          "cardholderName": {
+            "$ref": "#/components/schemas/CardholderName"
+          },
+          "cardholderEmail": {
+            "$ref": "#/components/schemas/CardholderEmail"
           }
         }
       },
@@ -241,6 +312,9 @@
           "sessionDetails": {
             "$ref": "#/components/schemas/Payment-SessionDetails"
           },
+          "traceDetails": {
+            "$ref": "#/components/schemas/Payment-TraceDetails"
+          },
           "nextAction": {
             "$ref": "#/components/schemas/Payment-NextAction"
           },
@@ -285,7 +359,15 @@
             "$ref": "#/components/schemas/Payment-CancelUrl"
           },
           "paymentToken": {
-            "$ref": "#/components/schemas/Payment-PaymentToken"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Payment-PaymentToken"
+              }
+            ],
+            "description": "A payment token generated by monei.js [Components](https://docs.monei.com/docs/monei-js-overview) or a paymentToken [saved after a previous successful payment](https://docs.monei.com/docs/save-payment-method). In case of the first one, you will also need to send the `sessionId` used to generate the token in the first place."
+          },
+          "sessionId": {
+            "$ref": "#/components/schemas/Payment-SessionId"
           },
           "generatePaymentToken": {
             "$ref": "#/components/schemas/Payment-GeneratePaymentToken"
@@ -294,10 +376,13 @@
             "$ref": "#/components/schemas/Payment-PaymentMethodInput"
           },
           "allowedPaymentMethods": {
-            "$ref": "#/components/schemas/Payment-AllowedPaymentMethods"
+            "$ref": "#/components/schemas/Payment-PaymentMethods"
           },
           "transactionType": {
             "$ref": "#/components/schemas/Payment-TransactionType"
+          },
+          "sequence": {
+            "$ref": "#/components/schemas/Payment-Sequence"
           },
           "description": {
             "$ref": "#/components/schemas/Payment-Description"
@@ -329,7 +414,25 @@
                 "$ref": "#/components/schemas/Payment-PaymentToken"
               }
             ],
-            "description": "A payment token generated by monei.js [UI Components](https://docs.monei.com/docs/monei-js-overview) or a paymentToken [saved after a previous successful payment](https://docs.monei.com/docs/save-payment-method)."
+            "description": "A payment token generated by monei.js [Components](https://docs.monei.com/docs/monei-js-overview) or a paymentToken [saved after a previous successful payment](https://docs.monei.com/docs/save-payment-method)."
+          },
+          "paymentMethod": {
+            "type": "object",
+            "description": "Additional information about the payment method used for this payment.",
+            "properties": {
+              "card": {
+                "type": "object",
+                "description": "Additional information about the card used for this payment.",
+                "properties": {
+                  "cardholderName": {
+                    "$ref": "#/components/schemas/CardholderName"
+                  },
+                  "cardholderEmail": {
+                    "$ref": "#/components/schemas/CardholderEmail"
+                  }
+                }
+              }
+            }
           },
           "generatePaymentToken": {
             "$ref": "#/components/schemas/Payment-GeneratePaymentToken"
@@ -382,6 +485,50 @@
           },
           "refundReason": {
             "$ref": "#/components/schemas/Payment-RefundReason"
+          }
+        }
+      },
+      "RecurringPaymentRequest": {
+        "title": "RecurringPaymentRequest",
+        "type": "object",
+        "required": [
+          "orderId"
+        ],
+        "properties": {
+          "orderId": {
+            "$ref": "#/components/schemas/Payment-OrderId"
+          },
+          "amount": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Payment-Amount"
+              }
+            ],
+            "description": "The amount to collected by this subsequent payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)."
+          },
+          "transactionType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Payment-TransactionType"
+              }
+            ],
+            "default": "(same from initial payment)",
+            "description": "Same as the `transactionType` parameter from [create payment](https://docs.monei.com/api/#operation/payments_create). If not sent, it will default in the same transaction type used in the initial payment."
+          },
+          "description": {
+            "$ref": "#/components/schemas/Payment-Description"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Payment-Customer"
+          },
+          "billingDetails": {
+            "$ref": "#/components/schemas/Payment-BillingDetails"
+          },
+          "shippingDetails": {
+            "$ref": "#/components/schemas/Payment-ShippingDetails"
+          },
+          "callbackUrl": {
+            "$ref": "#/components/schemas/Payment-CallbackUrl"
           }
         }
       },
@@ -466,6 +613,11 @@
       "Payment-LastRefundReason": {
         "type": "string",
         "example": null,
+        "enum": [
+          "duplicated",
+          "fraudulent",
+          "requested_by_customer"
+        ],
         "description": "The reason of the last refund transaction."
       },
       "Payment-CancellationReason": {
@@ -483,7 +635,7 @@
         "properties": {
           "email": {
             "type": "string",
-            "example": "john.doe@microapps.com",
+            "example": "john.doe@example.com",
             "description": "The customer’s email address."
           },
           "name": {
@@ -495,6 +647,54 @@
             "type": "string",
             "example": null,
             "description": "The customer’s phone number."
+          }
+        }
+      },
+      "Payment-SessionId": {
+        "type": "string",
+        "example": "39603551437913",
+        "description": "A unique identifier within your system that adds security to the payment process. You need to pass the same session ID as the one used on the frontend to initialize MONEI Component (if you needed to). This is required if a payment token (not permanent) was already generated in the frontend."
+      },
+      "Payment-SequenceId": {
+        "type": "string",
+        "example": "62b23b9f3627cc38b08ff471ccd313ad",
+        "description": "A permanent identifier that refers to the initial payment of a sequence of payments. This value needs to be sent in the path for `RECURRING` payments."
+      },
+      "Payment-Sequence": {
+        "type": "object",
+        "description": "This field needs to be sent in order to mark the beginning of a sequence of payments (recurring/subscriptions, installments, and so). Specific configurations can be set in the inside properties (`recurring`).",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "recurring",
+            "enum": [
+              "recurring"
+            ]
+          },
+          "recurring": {
+            "$ref": "#/components/schemas/Payment-SequenceRecurring"
+          }
+        }
+      },
+      "Payment-SequenceRecurring": {
+        "type": "object",
+        "description": "Specific configurations for recurring payments. Will only be used when `sequence`.`type` is `recurring`.",
+        "properties": {
+          "expiry": {
+            "type": "string",
+            "example": "20210630",
+            "default": "*(The payment method or card expiration)*",
+            "description": "Date after which no further recurring payments will be performed. Must be formatted as `YYYYMMDD`."
+          },
+          "frequency": {
+            "type": "integer",
+            "format": "int32",
+            "example": 30,
+            "default": 25,
+            "description": "The minimum number of **days** between the different recurring payments."
           }
         }
       },
@@ -512,6 +712,33 @@
       "Payment-PaymentMethod": {
         "type": "object",
         "description": "Details about the payment method at the time of the transaction.",
+        "properties": {
+          "method": {
+            "type": "string",
+            "example": "card",
+            "enum": [
+              "card",
+              "bizum",
+              "googlePay",
+              "applePay",
+              "paypal"
+            ],
+            "description": "Payment method type."
+          },
+          "card": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodCard"
+          },
+          "bizum": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodBizum"
+          },
+          "paypal": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodPaypal"
+          }
+        }
+      },
+      "Payment-PaymentMethodCard": {
+        "type": "object",
+        "description": "Details about the card used as payment method at the time of the transaction.",
         "properties": {
           "country": {
             "$ref": "#/components/schemas/Country"
@@ -544,26 +771,37 @@
             "example": false,
             "description": "Wether this transaction used 3D Secure authentication."
           },
-          "phoneNumber": {
+          "threeDSecureVersion": {
             "type": "string",
-            "example": null,
-            "description": "The phone number used to pay with `bizum`."
+            "example": "2.1.0",
+            "description": "The protocol version of the 3DS challenge."
           },
           "last4": {
             "type": "string",
             "example": "0004",
             "description": "The last four digits of the card."
-          },
-          "method": {
+          }
+        }
+      },
+      "Payment-PaymentMethodBizum": {
+        "type": "object",
+        "description": "Details about the Bizum account used as payment method at the time of the transaction.",
+        "properties": {
+          "phoneNumber": {
             "type": "string",
-            "example": "card",
-            "enum": [
-              "card",
-              "bizum",
-              "googlePay",
-              "applePay"
-            ],
-            "description": "Payment method type."
+            "example": null,
+            "description": "The phone number used to pay with `bizum`."
+          }
+        }
+      },
+      "Payment-PaymentMethodPaypal": {
+        "type": "object",
+        "description": "Details from Paypal order used as payment method at the time of the transaction.",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "example": null,
+            "description": "The Paypal's order ID."
           }
         }
       },
@@ -576,7 +814,7 @@
           }
         }
       },
-      "Payment-AllowedPaymentMethods": {
+      "Payment-PaymentMethods": {
         "type": "array",
         "items": {
           "type": "string"
@@ -585,13 +823,15 @@
           "card",
           "bizum",
           "applePay",
-          "googlePay"
+          "googlePay",
+          "paypal"
         ],
         "example": [
           "card",
-          "bizum"
+          "bizum",
+          "paypal"
         ],
-        "description": "An array of allowed payment methods (used in hosted payment page). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `applePay`\n  - `googlePay`"
+        "description": "An array of allowed payment methods (used in hosted payment page). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `applePay`\n  - `googlePay`\n  - `paypal`"
       },
       "Payment-TransactionType": {
         "type": "string",
@@ -628,7 +868,7 @@
           },
           "email": {
             "type": "string",
-            "example": "john.doe@microapps.com",
+            "example": "john.doe@example.com",
             "description": "The customer’s billing email address."
           },
           "phone": {
@@ -657,7 +897,7 @@
           },
           "email": {
             "type": "string",
-            "example": "john.doe@microapps.com",
+            "example": "john.doe@example.com",
             "description": "The shipping customer’s email address."
           },
           "phone": {
@@ -679,54 +919,91 @@
         "description": "Information related to the browsing session of the user who initiated the payment.",
         "properties": {
           "ip": {
-            "type": "string",
-            "example": "100.100.200.100",
-            "description": "The IP address where the payment originated."
+            "$ref": "#/components/schemas/IP"
           },
           "countryCode": {
-            "type": "string",
-            "example": null,
-            "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2))."
+            "$ref": "#/components/schemas/Country"
           },
           "lang": {
-            "type": "string",
-            "example": "es",
-            "description": "Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1))."
+            "$ref": "#/components/schemas/Lang"
           },
           "deviceType": {
-            "type": "string",
-            "example": "desktop",
-            "description": "Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`."
+            "$ref": "#/components/schemas/DeviceType"
           },
           "deviceModel": {
-            "type": "string",
-            "example": null,
-            "description": "Information about the device used for the browser session (e.g., `iPhone`)."
+            "$ref": "#/components/schemas/DeviceModel"
           },
           "browser": {
-            "type": "string",
-            "example": "Chrome",
-            "description": "The browser used in this browser session (e.g., `Mobile Safari`)."
+            "$ref": "#/components/schemas/Browser"
           },
           "browserVersion": {
-            "type": "string",
-            "example": "83.0.4103.116",
-            "description": "The version for the browser session (e.g., `13.1.1`)."
+            "$ref": "#/components/schemas/BrowserVersion"
           },
           "os": {
-            "type": "string",
-            "example": "Mac OS",
-            "description": "Operation system (e.g., `iOS`)."
+            "$ref": "#/components/schemas/Os"
           },
           "osVersion": {
-            "type": "string",
-            "example": "10.15.4",
-            "description": "Operation system version (e.g., `13.5.1`)."
+            "$ref": "#/components/schemas/OsVersion"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "sourceVersion": {
+            "$ref": "#/components/schemas/SourceVersion"
           },
           "userAgent": {
+            "$ref": "#/components/schemas/UserAgent"
+          }
+        }
+      },
+      "Payment-TraceDetails": {
+        "description": "Information related to the browsing session of the user who initiated the payment.",
+        "properties": {
+          "ip": {
+            "$ref": "#/components/schemas/IP"
+          },
+          "countryCode": {
+            "$ref": "#/components/schemas/Country"
+          },
+          "lang": {
+            "$ref": "#/components/schemas/Lang"
+          },
+          "deviceType": {
+            "$ref": "#/components/schemas/DeviceType"
+          },
+          "deviceModel": {
+            "$ref": "#/components/schemas/DeviceModel"
+          },
+          "browser": {
+            "$ref": "#/components/schemas/Browser"
+          },
+          "browserVersion": {
+            "$ref": "#/components/schemas/BrowserVersion"
+          },
+          "os": {
+            "$ref": "#/components/schemas/Os"
+          },
+          "osVersion": {
+            "$ref": "#/components/schemas/OsVersion"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "sourceVersion": {
+            "$ref": "#/components/schemas/SourceVersion"
+          },
+          "userAgent": {
+            "$ref": "#/components/schemas/UserAgent"
+          },
+          "userId": {
             "type": "string",
-            "example": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...",
-            "description": "Full user agent string of the browser session."
+            "example": null,
+            "description": "The ID of the user that started the operation."
+          },
+          "userEmail": {
+            "type": "string",
+            "example": "user@example.com",
+            "description": "The email of the user that started the operation."
           }
         }
       },
@@ -796,6 +1073,15 @@
         "schema": {
           "type": "string"
         }
+      },
+      "sequenceId": {
+        "name": "sequenceId",
+        "in": "path",
+        "required": true,
+        "description": "The sequence ID",
+        "schema": {
+          "type": "string"
+        }
       }
     },
     "examples": {
@@ -828,6 +1114,14 @@
         "value": {
           "amount": 50,
           "refundReason": "requested_by_customer"
+        }
+      },
+      "RecurringPaymentBasicRequest": {
+        "value": {
+          "amount": "110,",
+          "currency": "EUR",
+          "orderId": "14379133960366",
+          "callbackUrl": "https://example.com/checkout/callback"
         }
       }
     }
@@ -875,11 +1169,15 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n  'amount' => 110, // 1.10 EUR\n  'orderId' => '14379133960355',\n  'currency' => 'EUR'\n  'paymentToken'=> '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  'callbackUrl'=> 'https://example.com/checkout/callback',\n  'completeUrl'=> 'https://example.com/checkout/complete'\n]);\n"
+            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n  'amount' => 110, // 1.10 EUR\n  'orderId' => '14379133960355',\n  'currency' => 'EUR'\n  'paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  'callbackUrl' => 'https://example.com/checkout/callback',\n  'completeUrl' => 'https://example.com/checkout/complete'\n]);\n"
           },
           {
-            "lang": "JavaScript",
+            "lang": "Node.js",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '14379133960355',\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  callbackUrl: 'https://example.com/checkout/callback',\n  completeUrl: 'https://example.com/checkout/complete'\n});\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.create({\n    'amount': 110, # 1.10€\n    'currency': 'EUR',\n    'orderId': '14379133960355',\n    'paymentToken': '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n    'callbackUrl': 'https://example.com/checkout/callback',\n    'completeUrl': 'https://example.com/checkout/complete'\n})\n"
           }
         ]
       }
@@ -913,8 +1211,12 @@
             "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->get('832b77d1a4b372349a7ae0bb1b2af059');\n"
           },
           {
-            "lang": "JavaScript",
+            "lang": "Node.js",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.get('832b77d1a4b372349a7ae0bb1b2af059');\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.get('832b77d1a4b372349a7ae0bb1b2af059')\n"
           }
         ]
       }
@@ -928,7 +1230,7 @@
       "post": {
         "operationId": "payments_confirm",
         "summary": "Confirm Payment",
-        "description": "Confirm a payment that was created without a `paymentToken` or `paymentMethod`. You can only confirm a payment with the `PENDING` status. <br/><br/> You can charge a customer in two steps. First create a payment without payment details and then confirm it after you generate a `paymentToken` on the front-end with monei.js [UI Components](https://docs.monei.com/docs/monei-js-overview). <br/><br/> You can provide additional customer information, it will override the information passed in **create payment** request.",
+        "description": "Confirm a payment that was created without a `paymentToken` or `paymentMethod`. You can only confirm a payment with the `PENDING` status. <br/><br/> You can charge a customer in two steps. First create a payment without payment details and then confirm it after you generate a `paymentToken` on the front-end with monei.js [Components](https://docs.monei.com/docs/monei-js-overview). <br/><br/> You can provide additional customer information, it will override the information passed in **create payment** request.",
         "security": [
           {
             "APIKey": []
@@ -962,8 +1264,12 @@
             "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->confirm(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
           },
           {
-            "lang": "JavaScript",
-            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.confirm('832b77d1a4b372349a7ae0bb1b2af059', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n"
+            "lang": "Node.js",
+            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.confirm(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  {paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'}\n);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.confirm(\n    '832b77d1a4b372349a7ae0bb1b2af059',\n    confirm_payment_request={'paymentToken': '7cc38b08ff471ccd313ad62b23b9f362b107560b'}\n)\n"
           }
         ]
       }
@@ -1011,8 +1317,12 @@
             "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->capture(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['amount' => 100] // 1.00 EUR\n);\n"
           },
           {
-            "lang": "JavaScript",
+            "lang": "Node.js",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.capture(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  {amount: 100} // 1.00 EUR\n);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.capture(\n    '832b77d1a4b372349a7ae0bb1b2af059',\n    capture_payment_request={'amount': 100} # 1.00 EUR\n)\n"
           }
         ]
       }
@@ -1060,8 +1370,12 @@
             "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['cancellationReason' => 'requested_by_customer']\n);\n"
           },
           {
-            "lang": "JavaScript",
-            "source": "const {Monei, PaymentCancellationReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.cancel('832b77d1a4b372349a7ae0bb1b2af059', {\n  cancellationReason: PaymentCancellationReason.RequestedByCustomer\n});\n"
+            "lang": "Node.js",
+            "source": "const {Monei, PaymentCancellationReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  {cancellationReason: PaymentCancellationReason.RequestedByCustomer}\n);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.cancel(\n    '832b77d1a4b372349a7ae0bb1b2af059',\n    cancel_payment_request={'cancellationReason': 'requested_by_customer'}\n)\n"
           }
         ]
       }
@@ -1109,10 +1423,53 @@
             "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refundReason' => 'requested_by_customer']\n);\n"
           },
           {
-            "lang": "JavaScript",
-            "source": "const {Monei, PaymentRefundReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.refund('832b77d1a4b372349a7ae0bb1b2af059', {\n  refundReason: PaymentRefundReason.RequestedByCustomer\n});\n"
+            "lang": "Node.js",
+            "source": "const {Monei, PaymentRefundReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.refund(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  {refundReason: PaymentRefundReason.RequestedByCustomer}\n);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.refund(\n    '832b77d1a4b372349a7ae0bb1b2af059',\n    refund_payment_request={'refundReason': 'requested_by_customer'}\n)\n"
           }
         ]
+      }
+    },
+    "/payments/{sequenceId}/recurring": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/sequenceId"
+        }
+      ],
+      "post": {
+        "operationId": "payments_recurring",
+        "summary": "Recurring Payment",
+        "description": "Creates a subsequent operation for a recurring payment, previously created. The specified amount will be charged to the same credit or debit card of the originally payment. <br/><br/> If amount is not specified, it will default to the same amount from the original payment.",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecurringPaymentRequest"
+              },
+              "examples": {
+                "basic": {
+                  "$ref": "#/components/examples/RecurringPaymentBasicRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Payment"
+          }
+        }
       }
     }
   }
