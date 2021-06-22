@@ -2451,10 +2451,10 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.21.tgz#25f97a0a1b76e78c16ae5d98c6c73e1be8d89e39"
   integrity sha512-6sANhqfEHu6gdHZSrzDjN18Y48mIon8f2Os6J+IFmMHN0IhNG/0PUIIsI07kA1sZ9t6vgZNBloVmcDa5WOSe6A==
 
-"@monei-js/components@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@monei-js/components/-/components-1.2.1.tgz#7d2296325478424e42127ddaf5b09a4d40a69003"
-  integrity sha512-/JNsczGNcYjv1bDkTzfoqN6XMzggdLRWiVpKdcUDIiFlzg7i8jvlGVPvADwxvhk/uo5vXRZV6jqrg37AHzMtuw==
+"@monei-js/components@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@monei-js/components/-/components-1.3.0.tgz#c1cbb07244f8e5599fa255f61568b9bc988c9216"
+  integrity sha512-PGjKx0B3z7//rsBBg/NhOwvdi+9vIIamop7hM3F79Kg1OnjRZgWHvSgrfHbLVOocfoPoIWoUzjHI8HmUmE7Lpw==
   dependencies:
     belter "^1.0.163"
     core-js "^3.10.1"
