@@ -7,7 +7,11 @@ module.exports = {
         'integrations/use-payment-modal',
         'integrations/build-custom-checkout'
       ],
-      'E-commerce platforms': ['e-commerce/shopify', 'e-commerce/woocommerce'],
+      'E-commerce platforms': [
+        'e-commerce/shopify',
+        'e-commerce/woocommerce',
+        'e-commerce/salesforce'
+      ],
       'Payment methods': [
         'payment-methods/card',
         'payment-methods/google-pay',
