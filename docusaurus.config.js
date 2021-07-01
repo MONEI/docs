@@ -4,6 +4,7 @@ module.exports = {
   title: 'MONEI Documentation',
   url: 'https://docs.monei.com',
   tagline: 'Explore our guides and examples to integrate MONEI',
+  trailingSlash: true,
   baseUrl: '/',
   favicon: 'https://assets.monei.com/images/icon.png',
   themeConfig: {
@@ -49,22 +50,22 @@ module.exports = {
           position: 'right'
         },
         {
-          href: 'https://monei.com/pricing',
+          to: 'https://monei.com/pricing/',
           label: 'Pricing',
           position: 'right'
         },
         {
-          href: 'https://monei.com/blog',
+          to: 'https://monei.com/blog/',
           label: 'Blog',
           position: 'right'
         },
         {
-          href: 'https://support.monei.com',
+          to: 'https://support.monei.com',
           label: 'Support',
           position: 'right'
         },
         {
-          href: 'https://dashboard.monei.com',
+          to: 'https://dashboard.monei.com',
           label: 'Dashboard',
           position: 'right'
         }
