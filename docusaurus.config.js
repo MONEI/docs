@@ -91,8 +91,7 @@ module.exports = {
         },
         sitemap: {
           changefreq: 'daily',
-          priority: 0.7,
-          trailingSlash: true
+          priority: 0.7
         }
       }
     ]
