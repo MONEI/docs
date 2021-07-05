@@ -22,7 +22,8 @@ module.exports = {
     },
     sidebarCollapsible: true,
     prism: {
-      theme: require('prism-react-renderer/themes/nightOwl')
+      theme: require('prism-react-renderer/themes/nightOwl'),
+      additionalLanguages: ['php']
     },
     algolia: {
       apiKey: '4b9b0bfa1a19b86cf70a5bf9c81e9c80',
