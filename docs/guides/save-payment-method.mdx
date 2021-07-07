@@ -76,6 +76,11 @@ $monei->payments->create([
 
 Check all available [request parameters](/api).
 
+:::note
+You can create a payment with **amount: 0** to retrieve the payment token for future use without charging your customer.
+If amount is 0 it is mandatory to pass **generatePaymentToken: true**.
+:::
+
 ### When you confirm a payment `Server-side`
 
 <Tabs
@@ -160,12 +165,10 @@ Check [card payment method](payment-methods/card.mdx) integration for more detai
 
 ## 2. Obtain and store payment token
 
-After the payment is completed a customer is redirected to the `completeUrl` with **payment_id** query parameter, you can obtain permanent `paymentToken` by calling [get payment](/api/#operation/payments_get) endpoint.
-
-MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format including permanent `paymentToken`.
+After the payment is completed the customer is redirected to the `completeUrl` with **payment_id** query parameter, you can obtain permanent `paymentToken` by calling [get payment](/api/#operation/payments_get) endpoint.
 
 Store this `paymentToken` in your database along with customer information. Next time the customer does a purchase, [create a payment](/api/#operation/payments_create) with this token to skip payment form. Keep in mind that the customer will still need to complete 3d secure verification.
 
 :::note
-Generated **`paymentToken`** does not expire and should only be used **server-side**.
+MONEI will not return **paymentToken** in the HTTP POST request to the **callbackUrl** for security reasons. You have to call [get payment](/api/#operation/payments_get) endpoint to retrieve the token. Generated **paymentToken** does not expire and should only be used **server-side**.
 :::

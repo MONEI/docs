@@ -282,12 +282,6 @@
           "customer": {
             "$ref": "#/components/schemas/Payment-Customer"
           },
-          "paymentToken": {
-            "$ref": "#/components/schemas/Payment-PaymentToken"
-          },
-          "paymentMethod": {
-            "$ref": "#/components/schemas/Payment-PaymentMethod"
-          },
           "shop": {
             "$ref": "#/components/schemas/Payment-Shop"
           },
@@ -314,6 +308,21 @@
           },
           "traceDetails": {
             "$ref": "#/components/schemas/Payment-TraceDetails"
+          },
+          "paymentToken": {
+            "$ref": "#/components/schemas/Payment-PaymentToken"
+          },
+          "paymentMethod": {
+            "$ref": "#/components/schemas/Payment-PaymentMethod"
+          },
+          "sequence": {
+            "$ref": "#/components/schemas/Payment-Sequence"
+          },
+          "sequenceId": {
+            "$ref": "#/components/schemas/Payment-SequenceId"
+          },
+          "pointOfSaleId": {
+            "$ref": "#/components/schemas/Payment-PointOfSaleId"
           },
           "nextAction": {
             "$ref": "#/components/schemas/Payment-NextAction"
@@ -383,6 +392,9 @@
           },
           "sequence": {
             "$ref": "#/components/schemas/Payment-Sequence"
+          },
+          "pointOfSaleId": {
+            "$ref": "#/components/schemas/Payment-PointOfSaleId"
           },
           "description": {
             "$ref": "#/components/schemas/Payment-Description"
@@ -721,7 +733,9 @@
               "bizum",
               "googlePay",
               "applePay",
-              "paypal"
+              "clickToPay",
+              "paypal",
+              "cofidis"
             ],
             "description": "Payment method type."
           },
@@ -776,6 +790,12 @@
             "example": "2.1.0",
             "description": "The protocol version of the 3DS challenge."
           },
+          "expiration": {
+            "type": "integer",
+            "format": "int64",
+            "example": 2048544000,
+            "description": "Time at which the card will expire. Measured in seconds since the Unix epoch."
+          },
           "last4": {
             "type": "string",
             "example": "0004",
@@ -824,14 +844,16 @@
           "bizum",
           "applePay",
           "googlePay",
-          "paypal"
+          "clickToPay",
+          "paypal",
+          "cofidis"
         ],
         "example": [
           "card",
           "bizum",
           "paypal"
         ],
-        "description": "An array of allowed payment methods (used in hosted payment page). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `applePay`\n  - `googlePay`\n  - `paypal`"
+        "description": "An array of allowed payment methods (used in hosted payment page). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `applePay`\n  - `googlePay`\n  - `clickToPay`\n  - `paypal`\n  - `cofidis`"
       },
       "Payment-TransactionType": {
         "type": "string",
@@ -1062,6 +1084,11 @@
           "requested_by_customer"
         ],
         "description": "The reason for refunding the Payment."
+      },
+      "Payment-PointOfSaleId": {
+        "type": "string",
+        "example": "fb269cccfa0cc021f5d0b8eb1421646c696213e1",
+        "description": "A unique identifier of the Point of Sale. If specified the payment is attached to this Point of Sale. If there is a QR code attached to the same Point of Sale, this payment will be available by scanning the QR code."
       }
     },
     "parameters": {
@@ -1127,6 +1154,10 @@
     }
   },
   "tags": [
+    {
+      "name": "Status codes",
+      "description": "Our API returns a `statusCode` attribute along with every response. Some API calls return a successful `E000` code, along with the message `Transaction approved`.\n\nFailed transactions return a specific `statusCode`, along with it's corresponding message.\n\nHere is a list of all the possible response/error codes our API can return:\n\n<table>\n  <tr>\n    <td>Code</td>\n    <td>Message</td>\n  </tr>\n  <tr>\n    <td>E000</td>\n    <td>Transaction approved</td>\n  </tr>\n  <tr>\n    <td>E101</td>\n    <td>Error with payment processor configuration. Check this in your dashboard or contact MONEI for support</td>\n  </tr>\n  <tr>\n    <td>E102</td>\n    <td>Invalid or inactive MID. Please contact the acquiring entity</td>\n  </tr>\n  <tr>\n    <td>E103</td>\n    <td>Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support</td>\n  </tr>\n  <tr>\n    <td>E150</td>\n    <td>Invalid or malformed request. Please check the message format</td>\n  </tr>\n  <tr>\n    <td>E151</td>\n    <td>Missing or malformed signature/auth</td>\n  </tr>\n  <tr>\n    <td>E152</td>\n    <td>Error while decrypting request</td>\n  </tr>\n  <tr>\n    <td>E200</td>\n    <td>Transaction failed during payment processing</td>\n  </tr>\n  <tr>\n    <td>E201</td>\n    <td>Transaction declined by processor</td>\n  </tr>\n  <tr>\n    <td>E202</td>\n    <td>Transaction declined by issuer</td>\n  </tr>\n  <tr>\n    <td>E203</td>\n    <td>Payment method not allowed</td>\n  </tr>\n  <tr>\n    <td>E204</td>\n    <td>Wrong or not allowed currency</td>\n  </tr>\n  <tr>\n    <td>E205</td>\n    <td>Incorrect reference / transaction does not exist</td>\n  </tr>\n  <tr>\n    <td>E206</td>\n    <td>Invalid payment token</td>\n  </tr>\n  <tr>\n    <td>E207</td>\n    <td>Transaction failed: process time exceeded</td>\n  </tr>\n  <tr>\n    <td>E208</td>\n    <td>Transaction is currently being processed</td>\n  </tr>\n  <tr>\n    <td>E209</td>\n    <td>Duplicated operation</td>\n  </tr>\n  <tr>\n    <td>E210</td>\n    <td>Wrong or not allowed payment amount</td>\n  </tr>\n  <tr>\n    <td>E211</td>\n    <td>Refund declined by processor</td>\n  </tr>\n  <tr>\n    <td>E212</td>\n    <td>Transaction has already been captured</td>\n  </tr>\n  <tr>\n    <td>E213</td>\n    <td>Transaction has already been canceled</td>\n  </tr>\n  <tr>\n    <td>E214</td>\n    <td>The amount to be captured cannot exceed the pre-authorized amount</td>\n  </tr>\n  <tr>\n    <td>E215</td>\n    <td>The transaction to be captured has not been pre-authorized yet</td>\n  </tr>\n  <tr>\n    <td>E216</td>\n    <td>The transaction to be canceled has not been pre-authorized yet</td>\n  </tr>\n  <tr>\n    <td>E217</td>\n    <td>Transaction denied by processor to avoid duplicated operations</td>\n  </tr>\n  <tr>\n    <td>E218</td>\n    <td>Error during payment request validation</td>\n  </tr>\n  <tr>\n    <td>E219</td>\n    <td>Refund declined due to exceeded amount</td>\n  </tr>\n  <tr>\n    <td>E220</td>\n    <td>Transaction has already been fully refunded</td>\n  </tr>\n  <tr>\n    <td>E221</td>\n    <td>Transaction declined due to insufficient funds</td>\n  </tr>\n  <tr>\n    <td>E222</td>\n    <td>The user has canceled the payment</td>\n  </tr>\n  <tr>\n    <td>E300</td>\n    <td>Transaction declined due to security restrictions</td>\n  </tr>\n  <tr>\n    <td>E301</td>\n    <td>3D Secure authentication failed</td>\n  </tr>\n  <tr>\n    <td>E302</td>\n    <td>Authentication process timed out. Please try again</td>\n  </tr>\n  <tr>\n    <td>E303</td>\n    <td>An error occurred during the 3D Secure process</td>\n  </tr>\n  <tr>\n    <td>E304</td>\n    <td>Invalid or malformed 3D Secure request</td>\n  </tr>\n  <tr>\n    <td>E305</td>\n    <td>Exemption not allowed</td>\n  </tr>\n  <tr>\n    <td>E306</td>\n    <td>Exemption error</td>\n  </tr>\n  <tr>\n    <td>E307</td>\n    <td>Fraud control error</td>\n  </tr>\n  <tr>\n    <td>E308</td>\n    <td>External MPI received wrong. Please check the data</td>\n  </tr>\n  <tr>\n    <td>E309</td>\n    <td>External MPI not enabled. Please contact support</td>\n  </tr>\n  <tr>\n    <td>E500</td>\n    <td>Transaction declined during card payment process</td>\n  </tr>\n  <tr>\n    <td>E501</td>\n    <td>Card rejected: invalid card number</td>\n  </tr>\n  <tr>\n    <td>E502</td>\n    <td>Card rejected: wrong expiration date</td>\n  </tr>\n  <tr>\n    <td>E503</td>\n    <td>Card rejected: wrong CVC/CVV2 number</td>\n  </tr>\n  <tr>\n    <td>E504</td>\n    <td>Card number not registered</td>\n  </tr>\n  <tr>\n    <td>E505</td>\n    <td>Card is expired</td>\n  </tr>\n  <tr>\n    <td>E506</td>\n    <td>Error during card validation. Please try again</td>\n  </tr>\n  <tr>\n    <td>E507</td>\n    <td>Cardholder has canceled the payment</td>\n  </tr>\n  <tr>\n    <td>E508</td>\n    <td>Transaction declined: AMEX cards not accepted by payment processor</td>\n  </tr>\n  <tr>\n    <td>E509</td>\n    <td>Card blocked temporarily or under suspicion of fraud</td>\n  </tr>\n  <tr>\n    <td>E510</td>\n    <td>Card does not allow pre-authorization operations</td>\n  </tr>\n  <tr>\n    <td>E511</td>\n    <td>CVC/CVV2 number is required</td>\n  </tr>\n  <tr>\n    <td>E512</td>\n    <td>Transaction declined: card brand not accepted by payment processor</td>\n  </tr>\n  <tr>\n    <td>E513</td>\n    <td>Transaction declined: DINERS cards not accepted by payment processor</td>\n  </tr>\n  <tr>\n    <td>E514</td>\n    <td>Transaction type not allowed for this type of card</td>\n  </tr>\n  <tr>\n    <td>E515</td>\n    <td>Transaction declined by card issuer</td>\n  </tr>\n  <tr>\n    <td>E516</td>\n    <td>Transaction declined: DISCOVER cards not accepted by payment processor</td>\n  </tr>\n  <tr>\n    <td>E600</td>\n    <td>Transaction declined during ApplePay/GooglePay payment process</td>\n  </tr>\n  <tr>\n    <td>E601</td>\n    <td>Incorrect ApplePay or GooglePay configuration</td>\n  </tr>\n  <tr>\n    <td>E620</td>\n    <td>Transaction declined during PayPal payment process</td>\n  </tr>\n  <tr>\n    <td>E621</td>\n    <td>Transaction declined during PayPal payment process: invalid currency</td>\n  </tr>\n  <tr>\n    <td>E640</td>\n    <td>Bizum transaction declined after three authentication attempts</td>\n  </tr>\n  <tr>\n    <td>E641</td>\n    <td>Bizum transaction declined due to failed authorization</td>\n  </tr>\n  <tr>\n    <td>E642</td>\n    <td>Bizum transaction declined due to insufficient funds</td>\n  </tr>\n  <tr>\n    <td>E643</td>\n    <td>Bizum transaction canceled: the user does not want to continue</td>\n  </tr>\n  <tr>\n    <td>E644</td>\n    <td>Bizum transaction rejected by destination bank</td>\n  </tr>\n  <tr>\n    <td>E645</td>\n    <td>Bizum transaction rejected by origin bank</td>\n  </tr>\n  <tr>\n    <td>E646</td>\n    <td>Bizum transaction rejected by processor</td>\n  </tr>\n  <tr>\n    <td>E647</td>\n    <td>Bizum transaction failed while connecting with processor. Please try again</td>\n  </tr>\n  <tr>\n    <td>E680</td>\n    <td>Transaction declined during ClickToPay payment process</td>\n  </tr>\n  <tr>\n    <td>E681</td>\n    <td>Incorrect ClickToPay configuration</td>\n  </tr>\n  <tr>\n    <td>E700</td>\n    <td>Transaction declined during Cofidis payment process</td>\n  </tr>\n  <tr>\n    <td>E999</td>\n    <td>Service internal error. Please contact support</td>\n  </tr>\n</table>"
+    },
     {
       "name": "Payments",
       "description": "To charge a credit or a debit card, you create a Payment object. You can capture, cancel, refund and confirm individual payments. Payments are identified by a unique, random ID.\n\nWe recommend that you create exactly one Payment for each order or customer session in your system.\n## Payment object\n<SchemaDefinition schemaRef=\"#/components/schemas/Payment\" />"
@@ -1420,7 +1451,7 @@
         "x-codeSamples": [
           {
             "lang": "PHP",
-            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refundReason' => 'requested_by_customer']\n);\n"
+            "source": "$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->refund(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refundReason' => 'requested_by_customer']\n);\n"
           },
           {
             "lang": "Node.js",
