@@ -2416,10 +2416,10 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@heroicons/react@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.1.tgz#66d25f6441920bd5c2146ea27fd33995885452dd"
-  integrity sha512-uikw2gKCmqnvjVxitecWfFLMOKyL9BTFcU4VM3hHj9OMwpkCr5Ke+MRMyY2/aQVmsYs4VTq7NCFX05MYwAHi3g==
+"@heroicons/react@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.3.tgz#4dae106c6019e3250e36401b55b599ad41a68273"
+  integrity sha512-wdzWbDiFKzeL6xFJsgY2PqvDkx4hFmQDpEFRVj872EA71XOjr8g0DQj5rHWm0y7LwfGOFL0eQmEiMbTyGNOnTQ==
 
 "@mdx-js/mdx@^1.6.21":
   version "1.6.21"
@@ -8600,6 +8600,11 @@ prismjs@^1.23.0:
   optionalDependencies:
     clipboard "^2.0.0"
 
+prismjs@^1.24.0:
+  version "1.24.1"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.24.1.tgz#c4d7895c4d6500289482fa8936d9cdd192684036"
+  integrity sha512-mNPsedLuk90RVJioIky8ANZEwYm5w9LcvCXrxHlwf4fNVSn8jEipMybMkWUyyF0JhnC+C4VcOVSBuHRKs1L5Ow==
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -9005,10 +9010,10 @@ recursive-readdir@2.2.2:
   dependencies:
     minimatch "3.0.4"
 
-redoc@^2.0.0-rc.54:
-  version "2.0.0-rc.54"
-  resolved "https://registry.yarnpkg.com/redoc/-/redoc-2.0.0-rc.54.tgz#004d993d72d726b1aeb6c90ad1c303945f4ec5ba"
-  integrity sha512-xwukaWdoktkDAoQuhajekdC54+/lSLwIUqJCNSTVEjeYEuZPq2tFUj9H5SBt8/YSq5UF/zOmDQrXPWMgildQpQ==
+redoc@^2.0.0-rc.55:
+  version "2.0.0-rc.55"
+  resolved "https://registry.yarnpkg.com/redoc/-/redoc-2.0.0-rc.55.tgz#372b4d2ab40199eb92043fcfd14cdc5db644081f"
+  integrity sha512-32sUHhc33m8zQKz2V7xREwlf05S52dDOkn7K0WMquu2GDl6ZquxmrQfqnlj0IPoVCWQPR+XosmmIJj4rZbqjeA==
   dependencies:
     "@babel/runtime" "^7.14.0"
     "@redocly/openapi-core" "^1.0.0-beta.50"
@@ -9028,7 +9033,7 @@ redoc@^2.0.0-rc.54:
     path-browserify "^1.0.1"
     perfect-scrollbar "^1.5.1"
     polished "^4.1.3"
-    prismjs "^1.23.0"
+    prismjs "^1.24.0"
     prop-types "^15.7.2"
     react-tabs "^3.2.2"
     slugify "~1.4.7"
