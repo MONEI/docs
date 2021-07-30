@@ -20,7 +20,6 @@ module.exports = {
       // using user system preferences, instead of the hardcoded defaultMode
       respectPrefersColorScheme: false
     },
-    sidebarCollapsible: true,
     prism: {
       theme: require('prism-react-renderer/themes/nightOwl'),
       additionalLanguages: ['php']
@@ -83,9 +82,10 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          sidebarPath: require.resolve('./sidebars.js')
+          sidebarPath: require.resolve('./sidebars.js'),
           //includeCurrentVersion: true,
-          //disableVersioning: true
+          //disableVersioning: true,
+          sidebarCollapsible: true
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')
