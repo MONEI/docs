@@ -22,6 +22,7 @@
   --ifm-tabs-padding-horizontal: 1.2rem;
   --ifm-list-item-margin: 0.5rem;
   --ifm-navbar-padding-horizontal: 25px;
+  --ifm-color-secondary-contrast-background: #f3f4f6;
 }
 
 body {
