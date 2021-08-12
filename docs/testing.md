@@ -38,12 +38,12 @@ Genuine card information cannot be used in test mode. Instead, use any of the fo
 
 The following test cards can be used to create payments that produce specific responses—useful for testing different scenarios and error codes.
 
-| CARD NUMBER      | BRAND      | STATUS CODE                           |
-| ---------------- | ---------- | ------------------------------------- |
-| 4444444444444505 | Visa       | 190 (Refusal with no specific reason) |
-| 5555555555555607 | Mastercard | 190 (Refusal with no specific reason) |
-| 3680000000000118 | Diners     | 190 (Refusal with no specific reason) |
-| 3500000000000108 | JCB        | 190 (Refusal with no specific reason) |
+| CARD NUMBER      | BRAND      | STATUS CODE                              |
+| ---------------- | ---------- | -------------------------------------    |
+| 4444444444444505 | Visa       | E201 (Transaction declined by processor) |
+| 5555555555555607 | Mastercard | 501 (Card rejected: invalid card number) |
+| 3680000000000118 | Diners     | 501 (Card rejected: invalid card number) |
+| 3500000000000108 | JCB        | 501 (Card rejected: invalid card number) |
 
 ## Test PayPal Accounts
 
