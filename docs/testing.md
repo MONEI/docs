@@ -41,9 +41,9 @@ The following test cards can be used to create payments that produce specific re
 | CARD NUMBER      | BRAND      | STATUS CODE                              |
 | ---------------- | ---------- | -------------------------------------    |
 | 4444444444444505 | Visa       | E201 (Transaction declined by processor) |
-| 5555555555555607 | Mastercard | 501 (Card rejected: invalid card number) |
-| 3680000000000118 | Diners     | 501 (Card rejected: invalid card number) |
-| 3500000000000108 | JCB        | 501 (Card rejected: invalid card number) |
+| 5555555555555607 | Mastercard | E501 (Card rejected: invalid card number) |
+| 3680000000000118 | Diners     | E501 (Card rejected: invalid card number) |
+| 3500000000000108 | JCB        | E501 (Card rejected: invalid card number) |
 
 ## Test PayPal Accounts
 
