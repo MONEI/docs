@@ -27,8 +27,12 @@ Genuine card information cannot be used in test mode. Instead, use any of the fo
 | CARD NUMBER      | BRAND      | DESCRIPTION   |
 | ---------------- | ---------- | ------------- |
 | 4444444444444414 | Visa       | Non 3D secure |
-| 4444444444444406 | Visa       | 3D Secure     |
+| 4444444444444406 | Visa       | 3D Secure v1  |
+| 4444444444444422 | Visa       | 3D Secure v2.1|
+| 4444444444444430 | Visa       | 3D Secure v2.2|
 | 5555555555555508 | Mastercard | 3D Secure     |
+| 3680000000000001 | Diners     | Non 3D Secure |
+| 3680000000000001 | JCB        | Non 3D Secure |
 
 ## Testing for specific errors
 
@@ -38,6 +42,8 @@ The following test cards can be used to create payments that produce specific re
 | ---------------- | ---------- | ------------------------------------- |
 | 4444444444444505 | Visa       | 190 (Refusal with no specific reason) |
 | 5555555555555607 | Mastercard | 190 (Refusal with no specific reason) |
+| 3680000000000118 | Diners     | 190 (Refusal with no specific reason) |
+| 3500000000000108 | JCB        | 190 (Refusal with no specific reason) |
 
 ## Test PayPal Accounts
 
