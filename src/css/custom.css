@@ -123,3 +123,11 @@ body {
     flex-direction: column;
   }
 }
+
+.image-container {
+  border: 1px solid #eff1f2;
+  border-radius: 4px;
+  background-color: #fdfdfd;
+  text-align: center;
+  margin-bottom: var(--ifm-leading);
+}
