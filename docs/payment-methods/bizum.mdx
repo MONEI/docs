@@ -161,7 +161,7 @@ bizum.render('#bizum_container');
 Bizum Component is also available as a React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
 :::
 
-Check [MONEI JS Reference](monei-js/reference.md#bizum-component) for more options.
+Check the [MONEI JS Reference](monei-js/reference.md#bizum-component) for more options.
 
 ### 3. Confirm the payment `Client-side`
 
@@ -193,7 +193,7 @@ Currently Bizum only supports redirect flow. **It is not possible to confirm pay
 
 ### 4. An asynchronous request is sent to your server.
 
-MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format.
+MONEI will notify you about the payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format.
 
 This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
 

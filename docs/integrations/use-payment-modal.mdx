@@ -168,7 +168,7 @@ As an alternative process you can redirect your customer to `payment.nextAction.
 
 ### 3. An asynchronous request is sent to your server.
 
-MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format.
+MONEI will notify you about the payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format.
 
 This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
 
