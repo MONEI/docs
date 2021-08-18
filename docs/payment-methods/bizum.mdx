@@ -143,7 +143,7 @@ Initialize Bizum Component
 
 ```js title="client.js"
 // Create an instance of the Bizum component.
-var payPal = monei.Bizum({
+var bizum = monei.Bizum({
   paymentId: '{{payment_id}}',
   onSubmit(result) {
     moneiTokenHandler(result.token);
@@ -154,7 +154,7 @@ var payPal = monei.Bizum({
 });
 
 // Render an instance of the Bizum component into the `bizum_container` <div>.
-payPal.render('#bizum_container');
+bizum.render('#bizum_container');
 ```
 
 :::note

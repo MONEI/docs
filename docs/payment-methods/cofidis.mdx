@@ -19,7 +19,7 @@ import {CofidisWidget} from '../../src/components/CofidisWidget';
 </div>
 <br />
 
-We also provide a [Cofidis Widget Component](monei-js/reference.md#cofidis-widget-component) that dynamically calculates the conditions for a loan based on the given price. You can put this widget on the product page, cart or checkout to inform your customers about the commercial conditions.
+We also provide a [Cofidis Widget Component](monei-js/reference.md#cofidiswidget-component) that dynamically calculates the conditions for a loan based on the given price. You can put this widget on the product page, cart or checkout to inform your customers about the commercial conditions.
 
 <div className="preview-frame">
   <div className="payment-button">
@@ -155,7 +155,7 @@ Initialize Cofidis Component
 
 ```js title="client.js"
 // Create an instance of the Cofidis component.
-var Cofidis = monei.Cofidis({
+var cofidis = monei.Cofidis({
   paymentId: '{{payment_id}}',
   onSubmit(result) {
     // Redirect the customer to the Cofidis payment page
@@ -167,7 +167,7 @@ var Cofidis = monei.Cofidis({
 });
 
 // Render an instance of the cofidis component into the `cofidis_container` <div>.
-Cofidis.render('#cofidis_container');
+cofidis.render('#cofidis_container');
 ```
 
 :::note
