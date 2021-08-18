@@ -10,6 +10,7 @@ module.exports = {
       ],
       'E-commerce platforms': [
         'e-commerce/shopify',
+        'e-commerce/wix',
         'e-commerce/woocommerce',
         'e-commerce/salesforce'
       ],

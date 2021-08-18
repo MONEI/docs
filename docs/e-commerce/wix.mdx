@@ -1,0 +1,34 @@
+---
+id: wix
+title: WIX
+description: To accept payments through MONEI in your WIX store you simply need to install MONEI in WIX App Market.
+---
+
+To accept payments through MONEI in your WIX store you simply need to install MONEI in WIX App Market.
+
+## Before you begin
+
+To test your integration:
+
+- Use your [test mode](testing.md) API Key. You can find them in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api)
+- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+
+## Install
+
+- Go to [Accept Payments](https://www.wix.com/my-account/site-selector/?buttonText=Set%20Up%20Payments&title=Select%20a%20Site&autoSelectOnSingleSite=true&actionUrl=https://www.wix.com/dashboard/%7b%7bmetaSiteId%7d%7d/payments/) on your site's dashboard.
+  **Tip**: Check your business location at the top right. If incorrect, click the drop-down menu to change it.
+- Click **See More Payment Options**.
+- Click **Connect** beside **MONEI**.
+
+  <div className="image-container">
+    <img src="/img/configure-wix-0.png" alt="Connect MONEI to WIX" />
+  </div>
+
+- Enter your API Key. You can find your API Key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api) and click **Connect**
+
+You can also install [MONEI from WIX App Market](https://www.wix.com/market?appMarketParams=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoie1wicm91dGVcIjpcInRlc3RBcHBcIixcImFwcERlZklkXCI6XCJiZWQyMTg3OS0xMmUyLTQyNjYtYWQyYy01MGM5ZmQ1ODkyMTZcIixcInZlcnNpb25cIjpcIjAuMC4xOTZcIn0iLCJpYXQiOjE2MjgxNTM4NTF9.XfNlLXXNwmN7IrGE4Co5IOCp0Dq6MHDGNZ5Zxkowero). Get more info at [WIX Support Portal](https://support.wix.com/en/article/connecting-monei-as-a-payment-provider).
+
+## Before you go live
+
+- Make sure that you are using [live (production) mode](testing.md) API Key.
+- Make sure that you have at least one active [payment method](https://dashboard.monei.com/settings/payment-methods)
