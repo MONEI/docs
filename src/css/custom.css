@@ -86,7 +86,7 @@ body {
 
 .payment-button {
   background-color: #f7f8f9;
-  height: 100px;
+  min-height: 100px;
 }
 
 .payment-button > * {
