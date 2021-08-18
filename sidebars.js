@@ -18,7 +18,8 @@ module.exports = {
         'payment-methods/google-pay',
         'payment-methods/apple-pay',
         'payment-methods/paypal',
-        'payment-methods/bizum'
+        'payment-methods/bizum',
+        'payment-methods/cofidis'
       ],
       Guides: [
         'guides/save-payment-method',
