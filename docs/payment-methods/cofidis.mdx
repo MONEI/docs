@@ -19,7 +19,7 @@ import {CofidisWidget} from '../../src/components/CofidisWidget';
 </div>
 <br />
 
-We also provide the [Cofidis Widget Component](monei-js/reference.md#cofidiswidget-component) that dynamically calculates the conditions for a loan based on the given price. You can put this widget on the product page, cart or checkout to inform your customers about the commercial conditions.
+We also provide a [Cofidis Widget Component](monei-js/reference.md#cofidiswidget-component) that dynamically calculates the conditions for a loan based on the given price. You can put this widget on the product page, cart or checkout to inform your customers about the commercial conditions.
 
 <div className="preview-frame">
   <div className="payment-button">
@@ -171,18 +171,18 @@ cofidis.render('#cofidis_container');
 ```
 
 :::note
-Cofidis Component is also available as React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
+Cofidis Component is also available as a React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
 :::
 
-Check [MONEI JS Reference](monei-js/reference.md#Cofidis-component) for more options.
+Check the [MONEI JS Reference](monei-js/reference.md#Cofidis-component) for more options.
 
-### 3. Check payment status `Server-side`
+### 3. Check the payment status `Server-side`
 
 After the payment is completed the customer is redirected to the `completeUrl` with **payment_id** query parameter, you can obtain the status of the payment by calling [get payment](/api/#operation/payments_get) endpoint.
 
 ### 4. An asynchronous request is sent to your server.
 
-MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format.
+MONEI will notify you about the payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format.
 
 This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
 

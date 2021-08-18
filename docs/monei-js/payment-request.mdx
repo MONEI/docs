@@ -130,7 +130,7 @@ The following parameters are required:
 - **callbackUrl** `string` - The URL to which a payment result should be sent asynchronously.
 
 :::note
-Payment Request Component is also available as React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
+Payment Request Component is also available as a React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
 :::
 
 Check all available [request parameters](/api/#operation/payments_create).
@@ -174,7 +174,7 @@ var paymentRequest = monei.PaymentRequest({
 paymentRequest.render('#payment_request_container');
 ```
 
-Check [MONEI JS Reference](monei-js/reference.md#paymentrequest-ui-component) for more options.
+Check the [MONEI JS Reference](monei-js/reference.md#paymentrequest-ui-component) for more options.
 
 ### 3. Confirm the payment `Client-side`
 
@@ -205,7 +205,7 @@ As an alternative process you can submit generated `paymentToken` to your sever 
 
 ### 4. An asynchronous request is sent to your server.
 
-MONEI will notify you about a payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format.
+MONEI will notify you about the payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/api/#section/Payment-object) in JSON format.
 
 This ensures that you get the payment status even when customer closed the browser window or lost internet connection.
 
