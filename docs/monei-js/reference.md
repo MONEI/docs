@@ -431,6 +431,11 @@ cofidisWidget.render('#cofidis_widget');
 - **onLoad:() => void** `function` - Callback function that is called when payment request is fully loaded.
 - **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
 
+### CofidisWidget instance methods
+
+- **redner: (container: string | DOMElement) => void** - renders the widget to the container DOM element
+- **updateProps: (options: CofidisWidgetProps) => void ** - updates the widget with new options (use this method to update amount)
+
 ## `confirmPayment` function
 
 After you generate the **paymentToken** using one of the Components, use this function to confirm the payment passing the obtained `paymentToken`. It will automatically show a popup window with a 3D Secure confirmation screen if required.

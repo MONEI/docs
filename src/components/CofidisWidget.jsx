@@ -12,6 +12,7 @@ if (typeof window !== 'undefined') {
     return (
       <CofidisWidgetComponent
         accountId="2975bcfa-7bbc-422d-af48-c66759d87b69"
+        language="en"
         amount={100}
         onSubmit={(result) => {
           console.log(result);
