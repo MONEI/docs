@@ -12,6 +12,7 @@ if (typeof window !== 'undefined') {
     return (
       <CofidisComponent
         paymentId="e87be88ac289e26bdace8c39fff39b2a370a9446"
+        language="en"
         onSubmit={(result) => {
           console.log(result);
           alert(
