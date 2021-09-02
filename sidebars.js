@@ -25,7 +25,8 @@ module.exports = {
       Guides: [
         'guides/save-payment-method',
         'guides/verify-signature',
-        'guides/send-cardholder-name'
+        'guides/send-cardholder-name',
+        'guides/setup-cofidis-widget'
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },

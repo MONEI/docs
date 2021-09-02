@@ -65,6 +65,14 @@ body {
   margin-top: var(--ifm-list-item-margin);
 }
 
+.markdown img {
+  border: 1px solid #eff1f2;
+  border-radius: 4px;
+  background-color: #fdfdfd;
+  text-align: center;
+  margin-bottom: var(--ifm-leading);
+}
+
 .preview-frame {
   border-radius: var(--ifm-global-radius);
   border: none;
@@ -122,12 +130,4 @@ body {
   .flex-container {
     flex-direction: column;
   }
-}
-
-.image-container {
-  border: 1px solid #eff1f2;
-  border-radius: 4px;
-  background-color: #fdfdfd;
-  text-align: center;
-  margin-bottom: var(--ifm-leading);
 }

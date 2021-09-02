@@ -19,15 +19,22 @@ import {CofidisWidget} from '../../src/components/CofidisWidget';
 </div>
 <br />
 
-We also provide a [Cofidis Widget Component](monei-js/reference.md#cofidiswidget-component) that dynamically calculates the conditions for a loan based on the given price. You can put this widget on the product page, cart or checkout to inform your customers about the commercial conditions.
+We also provide a [Cofidis Widget](monei-js/reference.md#cofidiswidget-component) that dynamically calculates the conditions for a loan based on the given price.
 
 <div className="preview-frame">
   <div className="payment-button">
-    <div style={{maxWidth: 450}}>
+    <div style={{maxWidth: 500}}>
       <CofidisWidget />
     </div>
   </div>
 </div>
+<br />
+
+Check our guide [how to add it to your cart or checkout page](guides/setup-cofidis-widget.mdx).
+
+:::caution
+If you are using Cofidis payment method it is mandatory to put [view details](https://monei.com/cofidis/) link or Cofidis Widget to your cart or checkout page.
+:::
 
 ## Before you begin
 
