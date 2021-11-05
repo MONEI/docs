@@ -18,3 +18,8 @@ description: Find a guide to integrate MONEI into your system
 
 - **[Shopify](e-commerce/shopify.mdx)**
 - **[WooCommerce](e-commerce/woocommerce.mdx)**
+- **[Wix](e-commerce/wix.mdx)**
+- **[Salesforce](e-commerce/salesforce.mdx)**
+- **PrestaShop**
+- **Adobe Commerce**
+- **commercetools**
