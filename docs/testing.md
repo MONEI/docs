@@ -24,15 +24,17 @@ Genuine card information cannot be used in test mode. Instead, use any of the fo
 - For all test card numbers use **12/34** as an expiration date and **123** as CVC code
 - In 3D secure mode, in which buyer authentication is required, the personal identification code is: **123456**
 
-| CARD NUMBER      | BRAND      | DESCRIPTION    |
-| ---------------- | ---------- | -------------- |
-| 4444444444444414 | Visa       | Non 3D secure  |
-| 4444444444444406 | Visa       | 3D Secure v1   |
-| 4444444444444422 | Visa       | 3D Secure v2.1 |
-| 4444444444444430 | Visa       | 3D Secure v2.2 |
-| 5555555555555508 | Mastercard | 3D Secure      |
-| 3680000000000001 | Diners     | Non 3D Secure  |
-| 3680000000000001 | JCB        | Non 3D Secure  |
+| CARD NUMBER      | BRAND      | DESCRIPTION                 |
+| ---------------- | ---------- | --------------------------- |
+| 4444444444444414 | Visa       | Non 3D secure               |
+| 4444444444444406 | Visa       | 3D Secure v1                |
+| 4444444444444422 | Visa       | 3D Secure v2.1 Challenge    |
+| 4444444444444430 | Visa       | 3D Secure v2.1 Frictionless |
+| 4444444444444448 | Visa       | 3D Secure v2.2 Challenge    |
+| 4444444444444455 | Visa       | 3D Secure v2.2 Frictionless |
+| 5555555555555508 | Mastercard | 3D Secure                   |
+| 3680000000000001 | Diners     | Non 3D Secure               |
+| 3680000000000001 | JCB        | Non 3D Secure               |
 
 ## Testing for specific errors
 
