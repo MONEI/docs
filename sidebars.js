@@ -23,7 +23,7 @@ module.exports = {
         'payment-methods/cofidis',
         'payment-methods/click-to-pay'
       ],
-      //Subscriptions: ['subscriptions/overview'],
+      Subscriptions: ['subscriptions/integration'],
       Guides: [
         'guides/save-payment-method',
         'guides/verify-signature',

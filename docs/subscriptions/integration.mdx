@@ -1,0 +1,207 @@
+---
+id: integration
+sidebar_label: Integration
+title: Subscriptions integration
+description: Use MONEI subscriptions to charge the customer on a recurring basis.
+---
+
+Subscriptions allow you to charge a customer on a recurring basis.
+
+## Integration
+
+### 1. Create a new subscription on your server.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="curl"
+groupId="code"
+values={[
+{label: 'cURL', value: 'curl'},
+{label: 'Node.js', value: 'node'},
+{label: 'PHP', value: 'php'},
+]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.com/v1/subscriptions"
+curl --request POST 'https://api.monei.com/v1/subscriptions' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "customer": {
+    "name": "John Doe",
+    "email": "john.doe@monei.com"
+  },
+  "amount": 110,
+  "currency": "EUR",
+  "interval": "month",
+  "intervalCount": 1,
+  "description": "MoonMail Lite Monthly",
+  "callbackUrl": "https://example.com/subscription/callback",
+  "paymentCallbackUrl": "https://example.com/payment/callback"
+}'
+```
+
+</TabItem>
+
+<TabItem value="node">
+
+```js title="server.js"
+const {Monei} = require('@monei-js/node-sdk');
+const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+monei.subscriptions.create({
+  customer: {
+    name: "John Doe"
+    email: "john.doe@monei.com"
+  },
+  amount: 110,
+  currency: "EUR",
+  interval: "month",
+  intervalCount: 1,
+  description: "MoonMail Lite Monthly",
+  callbackUrl: "https://example.com/subscription/callback",
+  paymentCallbackUrl: "https://example.com/payment/callback"
+});
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php title="server.php"
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+$monei->subscriptions->create([
+  'customer'=> [
+    'name'=> 'John Doe',
+    'email'=> 'john.doe@monei.com'
+  ],
+  'amount'=> 110,
+  'currency'=> 'EUR',
+  'intervalCount'=> 'month',
+  'intervalCount'=> 1,
+  'description'=> 'MoonMail Lite Monthly',
+  'callbackUrl'=> 'https=>//example.com/subscription/callback',
+  'paymentCallbackUrl'=> 'https=>//example.com/payment/callback'
+]);
+```
+
+</TabItem>
+</Tabs>
+
+The following parameters are required:
+
+- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
+- **callbackUrl** `string` - The URL will be called each time subscription status changes.
+- **paymentCallbackUrl** `string` - The URL will be called each time subscription creates a new subscriptions.
+- **interval** `string` - Subscription interval, one of `day`, `week`, `month`, `year`
+- **intervalCount** `number` - Number of intervals between subscription subscriptions.
+
+Check all available [request parameters](/api/#operation/subscriptions_create).
+
+### 2. Activate the subscription.
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.com/v1/subscriptions/575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa/activate"
+curl --request POST 'https://api.monei.com/v1/subscriptions/575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa/activate' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "completeUrl": "https://example.com/checkout/complete",
+  "cancelUrl": "https://example.com/checkout/cancel"
+}'
+```
+
+</TabItem>
+
+<TabItem value="node">
+
+```js title="server.js"
+const {Monei} = require('@monei-js/node-sdk');
+const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+monei.subscriptions.activate('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {
+  completeUrl: 'https://example.com/checkout/complete',
+  cancelUrl: 'https://example.com/checkout/cancel'
+});
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php title="server.php"
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+$monei->subscriptions->activate(
+  '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', [
+  'completeUrl' => 'https://example.com/checkout/complete',
+  'cancelUrl' => 'https://example.com/checkout/cancel'
+]);
+```
+
+</TabItem>
+</Tabs>
+
+Check all available [request parameters](/api/#operation/subscriptions_activate).
+
+### 3. Redirect the customer to the `redirectUrl` from the response
+
+In the response from the [activate subscription](/api/#operation/subscriptions_activate) request you'll get the following response:
+
+```json
+{
+  "id": "af6029f80f5fc73a8ad2753eea0b1be0",
+  "amount": 110,
+  "currency": "EUR",
+  "orderId": "84370745531439",
+  "description": "Test Shop - #84370745531439",
+  "accountId": "aa9333ba-82de-400c-9ae7-087b9f8d2242",
+  "subscriptionId": "575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa",
+  "livemode": false,
+  "status": "PENDING",
+  "customer": {
+    "email": "john.doe@microapps.com",
+    "name": "John Doe"
+  },
+  "nextAction": {
+    "type": "CONFIRM",
+    "mustRedirect": false,
+    "redirectUrl": "https://secure.monei.com/subscriptions/af6029f80f5fc73a8ad2753eea0b1be0"
+  },
+  "createdAt": 1594215339
+}
+```
+
+Redirect the customer to the `nextAction.redirectUrl` to show him the MONEI Hosted payment page.
+
+:::note
+As an alternative process you can confirm the payment by using monei.js on the client-side. Check our [build a custom checkout guide](/integrations/build-custom-checkout.mdx).
+:::
+
+### 4. Customer completes the payment
+
+Customer enters the Credit Card information and goes through the 3D secure verification process (is redirected to the page provided by the issuer bank of the Credit Card for confirmation of the transaction) if required.
+
+### 5. Customer is redirected back to your server
+
+- if customer clicks **"Back to {{shop.name}}"** link (you can provide `shop.name` in the [public business details settings](https://dashboard.monei.com/settings)), s/he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
+- in any other case the customer is redirected to the `completeUrl` with **payment_id** and **subscription_id** query parameters. Use [get subscription](/api/#operation/subscriptions_get) endpoint to get the subscription status.
+
+### 6. An asynchronous request is sent to your server
+
+MONEI will notify you about the payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain the full [subscription object](/api/#section/Subscription-object) in JSON format.
+
+This ensures that you get the payment status even when the customer closed the browser window or lost Internet connection.
+
+The request also contains a `MONEI-Signature` header. [Verify this signature](guides/verify-signature.mdx) to confirm that the received request is sent from MONEI.
+
+To acknowledge the receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
+
+If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the request as failed and stops trying to send it to your endpoint.
