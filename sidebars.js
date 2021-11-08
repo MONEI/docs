@@ -23,6 +23,7 @@ module.exports = {
         'payment-methods/cofidis',
         'payment-methods/click-to-pay'
       ],
+      //Subscriptions: ['subscriptions/overview'],
       Guides: [
         'guides/save-payment-method',
         'guides/verify-signature',
@@ -35,6 +36,11 @@ module.exports = {
       type: 'link',
       label: 'Payments API',
       href: '/api/#tag/Payments'
+    },
+    {
+      type: 'link',
+      label: 'Subscriptions API',
+      href: '/api/#tag/Subscriptions'
     },
     'graphql-api',
     'testing'
