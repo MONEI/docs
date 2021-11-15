@@ -17,13 +17,13 @@ const features = [
   {
     title: 'Build a custom checkout',
     description:
-      'Use MONEI UI components to build your custom checkout and securely accept Credit Cards, PayPal, Bizum, GooglePay, Apple Pay, Installments by Cofidis and other payment methods.',
+      'Use MONEI UI components to build your custom checkout and securely accept Credit & Debit Cards, PayPal, Bizum, GooglePay, Apple Pay, multiple BNPL solutions, MB Way, SEPA Direct Debit and other payment methods.',
     url: '/docs/integrations/build-custom-checkout'
   },
   {
-    title: 'Integrate with e-commerce platforms',
+    title: 'Integrate with multiple platforms',
     description:
-      'Easily integrate MONEI with Shopify, Wix, Salesforce Commerce Cloud, WooCommerce and other popular e-commerce platforms.',
+      'Easily integrate MONEI with Shopify, Wix, Salesforce Commerce Cloud, WooCommerce, PrestaShop, commercetools, Fabric, Spreedly and other popular platforms.',
     url: '/docs/#integrate-with-your-e-commerce-platform'
   }
 ];
