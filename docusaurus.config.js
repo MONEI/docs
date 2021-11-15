@@ -50,16 +50,6 @@ module.exports = {
           position: 'right'
         },
         {
-          to: 'https://monei.com/pricing/',
-          label: 'Pricing',
-          position: 'right'
-        },
-        {
-          to: 'https://monei.com/blog/',
-          label: 'Blog',
-          position: 'right'
-        },
-        {
           to: 'https://support.monei.com',
           label: 'Support',
           position: 'right'
