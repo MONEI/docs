@@ -8,13 +8,13 @@ description: Find a guide to integrate MONEI into your system
 #### Find a guide to integrate MONEI into your system
 
 - **[Use a prebuilt payment page](integrations/use-prebuilt-payment-page.mdx)**  
-  MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Credit Cards, PayPal, Bizum, GooglePay, Apple Pay and more.
+  MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Credit & Debit Cards, PayPal, Bizum, GooglePay, Apple Pay, multiple BNPL, MB Way, SEPA Direct Debit and more.
 - **[Build a custom checkout](integrations/build-custom-checkout.mdx)**  
-  Use MONEI Components to build your custom checkout and securely accept Credit Cards, PayPal, Bizum, GooglePay, Apple Pay and other payment methods.
+  Use MONEI Components to build your custom checkout and securely accept Credit & Debit Cards, PayPal, Bizum, GooglePay, Apple Pay, multiple BNPL, MB Way, SEPA Direct Debit and  other payment methods.
 - **[Payments API](/api/#tag/Payments)**  
   Securely perform a server to server payment.
 
-#### Integrate with your e-commerce platform
+#### Integrate with your platform
 
 - **[Shopify](e-commerce/shopify.mdx)**
 - **[WooCommerce](e-commerce/woocommerce.mdx)**
@@ -23,3 +23,5 @@ description: Find a guide to integrate MONEI into your system
 - **PrestaShop**
 - **Adobe Commerce**
 - **commercetools**
+- **[Spreedly](https://docs.spreedly.com/payment-gateways/monei/)**
+- **Fabric**
