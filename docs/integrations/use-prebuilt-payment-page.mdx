@@ -130,32 +130,17 @@ In the response from the first request you'll get the following response:
   "orderId": "84370745531439",
   "description": "Test Shop - #84370745531439",
   "accountId": "aa9333ba-82de-400c-9ae7-087b9f8d2242",
-  "providerReferenceId": null,
-  "authorizationCode": null,
   "livemode": false,
   "status": "PENDING",
-  "statusCode": null,
-  "statusMessage": null,
   "customer": {
-    "email": "john.doe@microapps.com",
-    "name": null,
-    "phone": null
+    "email": "john.doe@microapps.com"
   },
-  "paymentMethod": null,
-  "shop": null,
-  "billingDetails": null,
-  "shippingDetails": null,
-  "refundedAmount": null,
-  "lastRefundAmount": null,
-  "lastRefundReason": null,
-  "sessionDetails": null,
   "nextAction": {
     "type": "CONFIRM",
     "mustRedirect": false,
     "redirectUrl": "https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0"
   },
-  "createdAt": 1594215339,
-  "updatedAt": null
+  "createdAt": 1594215339
 }
 ```
 
@@ -171,7 +156,7 @@ Customer enters the Credit Card information (or other payment information depend
 
 ### 4. Customer is redirected back to your server
 
-- if customer clicks **"Back to {{shop.name}}"** link (you can provide `shop.name` parameter when you create a charge or in [branding settings](https://dashboard.monei.com/settings/branding)), s/he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
+- if customer clicks **"Back to {{shop.name}}"** link (you can provide `shop.name` parameter when you create a payment or in the [public business details settings](https://dashboard.monei.com/settings)), s/he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
 - in any other case the customer is redirected to the `completeUrl` with **payment_id** query parameter. Use [get payment](/api/#operation/payments_get) endpoint to get the payment status.
 
 ### 5. An asynchronous request is sent to your server

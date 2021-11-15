@@ -1669,7 +1669,7 @@
     },
     {
       "name": "Subscriptions",
-      "description": "Subscriptions allow you to charge a customer on a recurring basis.\n## Subscription object\n<SchemaDefinition schemaRef=\"#/components/schemas/Subscription\" />"
+      "description": "Subscriptions allow you to charge a customer on a recurring basis.\n###Subscriptions are in the open beta and the API can be subject to change.\n## Subscription object\n<SchemaDefinition schemaRef=\"#/components/schemas/Subscription\" />"
     }
   ],
   "paths": {
@@ -2209,7 +2209,7 @@
           },
           {
             "lang": "Python",
-            "source": "import Monei\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.activate(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    confirm_payment_request={'paymentToken': '7cc38b08ff471ccd313ad62b23b9f362b107560b'}\n)\n"
+            "source": "import Monei\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.activate(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    payment_token='7cc38b08ff471ccd313ad62b23b9f362b107560b'\n)\n"
           }
         ]
       }
