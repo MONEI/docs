@@ -130,3 +130,8 @@ body {
     flex-direction: column;
   }
 }
+
+.footer-legal {
+  font-size: 14px;
+  opacity: 0.6;
+}
