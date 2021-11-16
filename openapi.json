@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "MONEI API v1",
-    "description": "The MONEI API is organized around [REST](https://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. <br/><br/> **Base URL:** https://api.monei.com/v1 <br/><br/> **Client libraries:** <ul>\n  <li><a target=\"_blank\" href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n  <li><a target=\"_blank\" href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n  <li><a target=\"_blank\" href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n  <li><a target=\"_blank\" href=\"https://documenter.getpostman.com/view/18088225/UV5cBGFq\">Postman Collection</a></li>\n</ul>"
+    "description": "The MONEI API is organized around [REST](https://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. <br/><br/> **Base URL:** https://api.monei.com/v1 <br/><br/> **Client libraries:** <ul>\n  <li><a target=\"_blank\" href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n  <li><a target=\"_blank\" href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n  <li><a target=\"_blank\" href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n  <li><a target=\"_blank\" href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>"
   },
   "servers": [
     {
@@ -95,9 +95,7 @@
     "schemas": {
       "Error": {
         "type": "object",
-        "required": [
-          "message"
-        ],
+        "required": ["message"],
         "properties": {
           "message": {
             "type": "string"
@@ -358,13 +356,7 @@
       "CreatePaymentRequest": {
         "title": "CreatePaymentRequest",
         "type": "object",
-        "required": [
-          "amount",
-          "currency",
-          "orderId",
-          "completeUrl",
-          "callbackUrl"
-        ],
+        "required": ["amount", "currency", "orderId", "completeUrl", "callbackUrl"],
         "properties": {
           "amount": {
             "$ref": "#/components/schemas/Payment-Amount"
@@ -439,9 +431,7 @@
       "ConfirmPaymentRequest": {
         "title": "ConfirmPaymentRequest",
         "type": "object",
-        "required": [
-          "paymentToken"
-        ],
+        "required": ["paymentToken"],
         "properties": {
           "paymentToken": {
             "allOf": [
@@ -526,9 +516,7 @@
       "RecurringPaymentRequest": {
         "title": "RecurringPaymentRequest",
         "type": "object",
-        "required": [
-          "orderId"
-        ],
+        "required": ["orderId"],
         "properties": {
           "orderId": {
             "$ref": "#/components/schemas/Payment-OrderId"
@@ -638,21 +626,13 @@
       "Payment-LastRefundReason": {
         "type": "string",
         "example": null,
-        "enum": [
-          "duplicated",
-          "fraudulent",
-          "requested_by_customer"
-        ],
+        "enum": ["duplicated", "fraudulent", "requested_by_customer"],
         "description": "The reason of the last refund transaction."
       },
       "Payment-CancellationReason": {
         "type": "string",
         "example": null,
-        "enum": [
-          "duplicated",
-          "fraudulent",
-          "requested_by_customer"
-        ],
+        "enum": ["duplicated", "fraudulent", "requested_by_customer"],
         "description": "The reason for canceling the Payment."
       },
       "Payment-Customer": {
@@ -688,16 +668,12 @@
       "Payment-Sequence": {
         "type": "object",
         "description": "This field needs to be sent in order to mark the beginning of a sequence of payments (recurring/subscriptions, installments, and so). Specific configurations can be set in the inside properties (`recurring`).",
-        "required": [
-          "type"
-        ],
+        "required": ["type"],
         "properties": {
           "type": {
             "type": "string",
             "example": "recurring",
-            "enum": [
-              "recurring"
-            ]
+            "enum": ["recurring"]
           },
           "recurring": {
             "$ref": "#/components/schemas/Payment-SequenceRecurring"
@@ -741,15 +717,7 @@
           "method": {
             "type": "string",
             "example": "card",
-            "enum": [
-              "card",
-              "bizum",
-              "googlePay",
-              "applePay",
-              "clickToPay",
-              "paypal",
-              "cofidis"
-            ],
+            "enum": ["card", "bizum", "googlePay", "applePay", "clickToPay", "paypal", "cofidis"],
             "description": "Payment method type."
           },
           "card": {
@@ -776,24 +744,13 @@
           "brand": {
             "type": "string",
             "example": "visa",
-            "enum": [
-              "visa",
-              "mastercard",
-              "diners",
-              "amex",
-              "jcb",
-              "unionpay",
-              "unknown"
-            ],
+            "enum": ["visa", "mastercard", "diners", "amex", "jcb", "unionpay", "unknown"],
             "description": "Card brand."
           },
           "type": {
             "type": "string",
             "example": "credit",
-            "enum": [
-              "debit",
-              "credit"
-            ],
+            "enum": ["debit", "credit"],
             "description": "Card type `debit` or `credit`."
           },
           "threeDSecure": {
@@ -866,30 +823,15 @@
         "items": {
           "type": "string"
         },
-        "enum": [
-          "card",
-          "bizum",
-          "applePay",
-          "googlePay",
-          "clickToPay",
-          "paypal",
-          "cofidis"
-        ],
-        "example": [
-          "card",
-          "bizum",
-          "paypal"
-        ],
+        "enum": ["card", "bizum", "applePay", "googlePay", "clickToPay", "paypal", "cofidis"],
+        "example": ["card", "bizum", "paypal"],
         "description": "An array of allowed payment methods (used in hosted payment page). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `applePay`\n  - `googlePay`\n  - `clickToPay`\n  - `paypal`\n  - `cofidis`"
       },
       "Payment-TransactionType": {
         "type": "string",
         "example": "SALE",
         "default": "SALE",
-        "enum": [
-          "SALE",
-          "AUTH"
-        ],
+        "enum": ["SALE", "AUTH"],
         "description": "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don’t capture the funds until later."
       },
       "Payment-Shop": {
@@ -1063,12 +1005,7 @@
           "type": {
             "type": "string",
             "example": "CONFIRM",
-            "enum": [
-              "CONFIRM",
-              "CHALLENGE",
-              "FRICTIONLESS_CHALLENGE",
-              "COMPLETE"
-            ],
+            "enum": ["CONFIRM", "CHALLENGE", "FRICTIONLESS_CHALLENGE", "COMPLETE"],
             "description": "- `CONFIRM` - Your customer needs to be redirected to a\n  [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)\n  or confirm payment using\n  [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).\n  The **redirectUrl** will point to the hosted payment page.\n- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless\n   3d secure challenge page provided by the bank. The **redirectUrl**\n   will point to the frictionless 3d secure challenge page provided by the bank.\n- `CHALLENGE` - Your customer needs to be redirected to the\n  3d secure challenge page provided by the bank. The **redirectUrl**\n  will point to the 3d secure challenge page provided by the bank.\n- `COMPLETE` - The payment is completed. The **redirectUrl** will be\n  the **completeUrl** if it was provided when the payment was created."
           },
           "mustRedirect": {
@@ -1106,11 +1043,7 @@
       "Payment-RefundReason": {
         "type": "string",
         "example": null,
-        "enum": [
-          "duplicated",
-          "fraudulent",
-          "requested_by_customer"
-        ],
+        "enum": ["duplicated", "fraudulent", "requested_by_customer"],
         "description": "The reason for refunding the Payment."
       },
       "Payment-PointOfSaleId": {
@@ -1269,9 +1202,7 @@
       "UpdateSubscriptionRequest": {
         "title": "UpdateSubscriptionRequest",
         "type": "object",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "amount": {
             "$ref": "#/components/schemas/Payment-Amount"
@@ -1385,15 +1316,7 @@
       "Subscription-Status": {
         "type": "string",
         "example": "PENDING",
-        "enum": [
-          "PENDING",
-          "EXPIRED",
-          "TRIALING",
-          "ACTIVE",
-          "PAST_DUE",
-          "PAUSED",
-          "CANCELED"
-        ],
+        "enum": ["PENDING", "EXPIRED", "TRIALING", "ACTIVE", "PAST_DUE", "PAUSED", "CANCELED"],
         "description": "The status of the subscription."
       },
       "Subscription-PaymentMethod": {
@@ -1403,9 +1326,7 @@
           "method": {
             "type": "string",
             "example": "card",
-            "enum": [
-              "card"
-            ],
+            "enum": ["card"],
             "description": "Subscription method type."
           },
           "card": {
@@ -1423,24 +1344,13 @@
           "brand": {
             "type": "string",
             "example": "visa",
-            "enum": [
-              "visa",
-              "mastercard",
-              "diners",
-              "amex",
-              "jcb",
-              "unionpay",
-              "unknown"
-            ],
+            "enum": ["visa", "mastercard", "diners", "amex", "jcb", "unionpay", "unknown"],
             "description": "Card brand."
           },
           "type": {
             "type": "string",
             "example": "credit",
-            "enum": [
-              "debit",
-              "credit"
-            ],
+            "enum": ["debit", "credit"],
             "description": "Card type `debit` or `credit`."
           },
           "threeDSecure": {
@@ -1479,12 +1389,7 @@
       "Subscription-Interval": {
         "type": "string",
         "example": "month",
-        "enum": [
-          "day",
-          "week",
-          "month",
-          "year"
-        ],
+        "enum": ["day", "week", "month", "year"],
         "description": "Subscription interval."
       },
       "Subscription-IntervalCount": {
@@ -1564,13 +1469,13 @@
       }
     },
     "parameters": {
-      "id": {
+      "paymentId": {
         "name": "id",
         "in": "path",
         "required": true,
-        "description": "The subscription ID",
+        "description": "The payment ID",
         "schema": {
-          "type": "string"
+          "$ref": "#/components/schemas/Payment-Id"
         }
       },
       "sequenceId": {
@@ -1579,7 +1484,16 @@
         "required": true,
         "description": "The sequence ID",
         "schema": {
-          "type": "string"
+          "$ref": "#/components/schemas/Payment-SequenceId"
+        }
+      },
+      "subscriptionId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The subscription ID",
+        "schema": {
+          "$ref": "#/components/schemas/Subscription-Id"
         }
       }
     },
@@ -1669,7 +1583,7 @@
     },
     {
       "name": "Subscriptions",
-      "description": "Subscriptions allow you to charge a customer on a recurring basis.\n###Subscriptions are in the open beta and the API can be subject to change.\n## Subscription object\n<SchemaDefinition schemaRef=\"#/components/schemas/Subscription\" />"
+      "description": "Subscriptions allow you to charge a customer on a recurring basis. <br/><br/> **Subscriptions are in open beta, and the API is subject to changes.**\n## Subscription object\n<SchemaDefinition schemaRef=\"#/components/schemas/Subscription\" />"
     }
   ],
   "paths": {
@@ -1683,9 +1597,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "requestBody": {
           "required": true,
           "content": {
@@ -1725,7 +1637,7 @@
     "/payments/{id}": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/paymentId"
         }
       ],
       "get": {
@@ -1737,9 +1649,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/Payment"
@@ -1764,7 +1674,7 @@
     "/payments/{id}/confirm": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/paymentId"
         }
       ],
       "post": {
@@ -1776,9 +1686,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1817,7 +1725,7 @@
     "/payments/{id}/capture": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/paymentId"
         }
       ],
       "post": {
@@ -1829,9 +1737,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1870,7 +1776,7 @@
     "/payments/{id}/cancel": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/paymentId"
         }
       ],
       "post": {
@@ -1882,9 +1788,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1923,7 +1827,7 @@
     "/payments/{id}/refund": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/paymentId"
         }
       ],
       "post": {
@@ -1935,9 +1839,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1988,9 +1890,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2036,9 +1936,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "requestBody": {
           "required": true,
           "content": {
@@ -2078,7 +1976,7 @@
     "/subscriptions/{id}": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/subscriptionId"
         }
       ],
       "get": {
@@ -2090,9 +1988,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/Subscription"
@@ -2113,7 +2009,7 @@
           }
         ]
       },
-      "post": {
+      "put": {
         "operationId": "subscriptions_update",
         "summary": "Update Subscription",
         "description": "Updates an existing subscription. Supply the unique subscription ID that was returned from your previous request.",
@@ -2122,9 +2018,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "requestBody": {
           "required": true,
           "content": {
@@ -2164,7 +2058,7 @@
     "/subscriptions/{id}/activate": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/subscriptionId"
         }
       ],
       "post": {
@@ -2176,9 +2070,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2217,7 +2109,7 @@
     "/subscriptions/{id}/cancel": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/subscriptionId"
         }
       ],
       "post": {
@@ -2229,9 +2121,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2270,7 +2160,7 @@
     "/subscriptions/{id}/pause": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/subscriptionId"
         }
       ],
       "post": {
@@ -2282,9 +2172,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2323,7 +2211,7 @@
     "/subscriptions/{id}/resume": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/id"
+          "$ref": "#/components/parameters/subscriptionId"
         }
       ],
       "post": {
@@ -2335,9 +2223,7 @@
             "APIKey": []
           }
         ],
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/Subscription"
