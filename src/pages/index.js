@@ -23,7 +23,7 @@ const features = [
   {
     title: 'Integrate with multiple platforms',
     description:
-      'Easily integrate MONEI with Shopify, Wix, Salesforce Commerce Cloud, WooCommerce, PrestaShop, commercetools, Fabric, Spreedly and other popular platforms.',
+      'Easily integrate MONEI with Shopify, Wix, Salesforce Commerce Cloud, WooCommerce, PrestaShop, commercetools, Fabric, Spreedly, saleor and other popular platforms.',
     url: '/docs/#integrate-with-your-e-commerce-platform'
   }
 ];
