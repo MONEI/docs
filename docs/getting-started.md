@@ -25,3 +25,4 @@ description: Find a guide to integrate MONEI into your system
 - **commercetools**
 - **[Spreedly](https://docs.spreedly.com/payment-gateways/monei/)**
 - **Fabric**
+- **saleor**
