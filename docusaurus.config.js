@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   title: 'MONEI Documentation',
-  url: 'https://docs.monei.com',
+  url: 'https://support.monei.com/hc/',
   tagline: 'Explore our guides and examples to integrate MONEI',
   trailingSlash: true,
   baseUrl: '/',
