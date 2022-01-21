@@ -23,7 +23,7 @@ description: Find a guide to integrate MONEI into your system
 - **PrestaShop**
 - **Adobe Commerce**
 - **commercetools (*)**
-- **[Spreedly](https://docs.spreedly.com/payment-gateways/monei/)**
+- **[Spreedly](https://docs.spreedly.com/payment-gateways/monei/) (*)**
 - **Fabric (*)**
 - **saleor (*)**
 - **Vtex (*)**
