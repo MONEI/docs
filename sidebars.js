@@ -21,6 +21,7 @@ module.exports = {
         'payment-methods/paypal',
         'payment-methods/bizum',
         'payment-methods/cofidis',
+        'payment-methods/cofidis-pay',
         'payment-methods/click-to-pay'
       ],
       Subscriptions: ['subscriptions/integration'],

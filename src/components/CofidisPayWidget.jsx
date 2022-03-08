@@ -3,21 +3,19 @@ if (typeof window !== 'undefined') {
   const ReactDOM = require('react-dom');
   const monei = require('@monei-js/components');
 
-  const CofidisComponent = monei.Cofidis.driver('react', {
+  const CofidisWidgetComponent = monei.CofidisPayWidget.driver('react', {
     React: React,
     ReactDOM: ReactDOM
   });
 
-  module.exports.Cofidis = () => {
+  module.exports.CofidisPayWidget = () => {
     return (
-      <CofidisComponent
-        paymentId="e33b99de3a068dd3d646f66cce5fcafe89287b82"
+      <CofidisWidgetComponent
+        accountId="2975bcfa-7bbc-422d-af48-c66759d87b69"
         language="en"
+        amount={100}
         onSubmit={(result) => {
           console.log(result);
-          alert(
-            'In the real integration at this point you will be refirected to Cofidis payment page.'
-          );
         }}
         onError={(error) => {
           console.log(error);
@@ -26,5 +24,5 @@ if (typeof window !== 'undefined') {
     );
   };
 } else {
-  module.exports.Cofidis = () => null;
+  module.exports.CofidisPayWidget = () => null;
 }
