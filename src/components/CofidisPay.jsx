@@ -3,12 +3,12 @@ if (typeof window !== 'undefined') {
   const ReactDOM = require('react-dom');
   const monei = require('@monei-js/components');
 
-  const CofidisComponent = monei.Cofidis.driver('react', {
+  const CofidisComponent = monei.CofidisPay.driver('react', {
     React: React,
     ReactDOM: ReactDOM
   });
 
-  module.exports.Cofidis = () => {
+  module.exports.CofidisPay = () => {
     return (
       <CofidisComponent
         paymentId="e33b99de3a068dd3d646f66cce5fcafe89287b82"
@@ -26,5 +26,5 @@ if (typeof window !== 'undefined') {
     );
   };
 } else {
-  module.exports.Cofidis = () => null;
+  module.exports.CofidisPay = () => null;
 }

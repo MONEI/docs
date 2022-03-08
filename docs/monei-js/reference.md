@@ -444,6 +444,87 @@ You can also use this function without a **paymentToken** attribute. It will sho
 
 You can provide additional customer information in parameters.
 
+## `CofidisPay` Component
+
+Cofidis Pay is a customizable Component that renders a Cofidis Pay payment button.
+
+### Create an instance of the Cofidis Pay Component.
+
+```js
+var cofidisPay = monei.CofidisPay({
+  paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
+  onSubmit(result) {
+    // Redirect the customer to the Cofidis payment page
+    window.location.assign(result.redirectUrl);
+  },
+  onError(error) {
+    console.log(error);
+  },
+  ...otherOptions
+});
+
+// render Component on the page
+cofidisPay.render('#cofidis');
+```
+
+### CofidisPay options
+
+- **accountId** `string` - Your MONEI account ID.
+- **language** `string` - The [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code represents the desired button language. Supported locales include `en`, `es`, `ca`, `pt`, `de`, `it`, `fr`, `nl`, `et`, `fi`, `lv`, `no`, `pl` and `ru`.
+- **style** `object` - Customize the appearance of Google Pay button.
+  - **height** `string` - By default, the button adapts to the size of its container element. To customize the button width, alter the width of the container element. To customize the button height, set the style.height option to a value from `25` to `55`.
+- **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when payment request is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
+- **onSubmit:(result: {redirectUrl: string}) => void** `function` - Callback function that is called when customer approves the payment.
+  - **result.redirectUrl** `string` - Cofidis payment page redirect url
+- **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
+
+## `CofidisPayWidget` Component
+
+Cofidis Pay Widget is a customizable Component that renders a Cofidis Pay commercial conditions.
+
+### Create an instance of the Cofidis Pay Widget Component.
+
+```js
+var cofidisPayWidget = monei.CofidisPayWidget({
+  accountId: '2975bcfa-7bbc-422d-af48-c66759d87b69',
+  amount: 100,
+  onError(error) {
+    console.log(error);
+  },
+  ...otherOptions
+});
+
+// render Component on the page
+cofidisPayWidget.render('#cofidis_widget');
+```
+
+### CofidisPayWidget options
+
+- **paymentId** `string` - A payment ID provided by MONEI in [create payment](/api/#operation/payments_create) request. Generated payment token will be bound to this payment.
+- **amountInt** `positive integer` - The amount used as a base to calculate load conditions. A positive integer in the smallest currency unit (e.g., 100 cents to charge 1.00 USD).
+- **amount** `positive float` (required if **amountInt** is not specified) - The amount used as a base to calculate load conditions.
+- **language** `string` - The [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code represents the desired button language. Supported locales include `en`, `es`, `ca`, `pt`, `de`, `it`, `fr`, `nl`, `et`, `fi`, `lv`, `no`, `pl` and `ru`.
+- **hint** `boolean` - if true will display a hint "More information" below the button. Default: `true`.
+- **style** `object` - Customize the appearance of Google Pay button.
+  - **base** `object` - base Component style
+  - **link** `object` - link style
+  - **amount** `object` - amount style
+- **onLoad:() => void** `function` - Callback function that is called when payment request is fully loaded.
+- **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
+
+### CofidisPayWidget instance methods
+
+- **redner: (container: string | DOMElement) => void** - renders the widget to the container DOM element
+- **updateProps: (options: CofidisPayWidgetProps) => void ** - updates the widget with new options (use this method to update amount)
+
+## `confirmPayment` function
+
+After you generate the **paymentToken** using one of the Components, use this function to confirm the payment passing the obtained `paymentToken`. It will automatically show a popup window with a 3D Secure confirmation screen if required.
+
+You can also use this function without a **paymentToken** attribute. It will show a payment popup window.
+
+You can provide additional customer information in parameters.
+
 ```typescript
 declare const confirmPayment: (params: ConfirmPaymentParams) => Promise<PaymentResult>;
 ```

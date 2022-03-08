@@ -1,30 +1,30 @@
 ---
-id: cofidis
-title: Cofidis 4xcard
-description: With Cofidis 4xcard, the customer can finance his purchase in 4 monthly installments using his card.
+id: cofidis-pay
+title: Cofidis 6x12x24x
+description: With Cofidis 6x12x24x, the customer can finance their purchase in up to 50 monthly installments through direct debit.
 ---
 
-You can start accepting [Cofidis](https://www.cofidis.es/) installment payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Cofidis Component](monei-js/reference.md#cofidis-component). No additional configuration is required to use Cofidis 4xcard in Hosted Payment Page.
+You can start accepting [Cofidis](https://www.cofidis.es/) installment payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Cofidis Pay Component](monei-js/reference.md#cofidispay-component). No additional configuration is required to use Cofidis Pay in Hosted Payment Page.
 
-Our [Cofidis Component](monei-js/reference.md#cofidis-component) renders Cofidis button to your payment page.
+Our [Cofidis Pay Component](monei-js/reference.md#cofidispay-component) renders Cofidis button to your payment page.
 When a customer selects "Pay with Cofidis", the component presents a Cofidis overlay, where the customer could see commercial conditions, legal information and continue to the Cofidis payment page .
 
-import {Cofidis} from '../../src/components/Cofidis';
-import {CofidisWidget} from '../../src/components/CofidisWidget';
+import {CofidisPay} from '../../src/components/CofidisPay';
+import {CofidisPayWidget} from '../../src/components/CofidisPayWidget';
 
 <div className="preview-frame">
   <div className="payment-button" style={{height: 115}}>
-    <Cofidis />
+    <CofidisPay />
   </div>
 </div>
 <br />
 
-We also provide a [Cofidis Widget](monei-js/reference.md#cofidiswidget-component) that dynamically calculates the conditions for a loan based on the given price.
+We also provide a [Cofidis Pay Widget](monei-js/reference.md#cofidispaywidget-component) that dynamically calculates the conditions for a loan based on the given price.
 
 <div className="preview-frame">
   <div className="payment-button">
     <div style={{maxWidth: 500}}>
-      <CofidisWidget />
+      <CofidisPayWidget />
     </div>
   </div>
 </div>
@@ -33,14 +33,14 @@ We also provide a [Cofidis Widget](monei-js/reference.md#cofidiswidget-component
 Check our guide [how to add it to your cart or product page](guides/setup-cofidis-widget.mdx).
 
 :::caution
-If you are using Cofidis payment method it is mandatory to put [view details](https://monei.com/cofidis/) link or Cofidis Widget to your cart or product page.
+If you are using Cofidis {ay payment method it is mandatory to put [view details](https://monei.com/cofidis-pay/) link or Cofidis Pay Widget to your cart or product page.
 :::
 
 ## Before you begin
 
-This page explains how to add Cofidis to your custom payment page. If you don't need a custom checkout experience we recommend using our [prebuilt payment page](integrations/use-prebuilt-payment-page.mdx). It already supports all available payment methods and does not require coding.
+This page explains how to add Cofidis Pay to your custom payment page. If you don't need a custom checkout experience we recommend using our [prebuilt payment page](integrations/use-prebuilt-payment-page.mdx). It already supports all available payment methods and does not require coding.
 
-Before you start, you need to make sure that you have Cofidis enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods).
+Before you start, you need to make sure that you have Cofidis Pay enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods).
 
 Unfortunately Cofidis does not provide test environment
 
@@ -150,7 +150,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [Cofidis Component](monei-js/reference.md#cofidis-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
+Add MONEI [Cofidis Pay Component](monei-js/reference.md#cofidispay-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
 
 ```html title="checkout.html"
 <div id="cofidis_container">
@@ -158,11 +158,11 @@ Add MONEI [Cofidis Component](monei-js/reference.md#cofidis-component) to your p
 </div>
 ```
 
-Initialize Cofidis Component
+Initialize Cofidis Pay Component
 
 ```js title="client.js"
 // Create an instance of the Cofidis component.
-var cofidis = monei.Cofidis({
+var cofidis = monei.CofidisPay({
   paymentId: '{{payment_id}}',
   onSubmit(result) {
     // Redirect the customer to the Cofidis payment page
@@ -181,7 +181,7 @@ cofidis.render('#cofidis_container');
 Cofidis Component is also available as a React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
 :::
 
-Check the [MONEI JS Reference](monei-js/reference.md#Cofidis-component) for more options.
+Check the [MONEI JS Reference](monei-js/reference.md#CofidisPay-component) for more options.
 
 ### 3. Check the payment status `Server-side`
 
