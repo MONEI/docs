@@ -24,7 +24,6 @@ description: Find a guide to integrate MONEI into your system
 - **PrestaShop**
 - **Adobe Commerce**
 - **commercetools (*)**
-- **Fabric (*)**
 - **Mirakl (*)**
 - **saleor (*)**
 - **Vtex (*)**
