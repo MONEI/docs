@@ -6,6 +6,7 @@ module.exports = {
         'integrations/use-prebuilt-payment-page',
         'integrations/use-payment-modal',
         'integrations/build-custom-checkout',
+        'integrations/pay-by-link',
         'integrations/use-qr-payments'
       ],
       'E-commerce platforms': [
