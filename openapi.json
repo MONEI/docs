@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "title": "MONEI API v1",
     "description": "<p>The MONEI API is organized around\n<a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a>. Our\nAPI has predictable resource-oriented URLs, accepts JSON-encoded request\nbodies, returns JSON-encoded responses, and uses standard HTTP response\ncodes, authentication, and verbs.</p>\n<h4 id=\"base-url\">Base URL:</h4>\n<p><a href=\"https://api.monei.com/v1\">https://api.monei.com/v1</a></p>\n<h4 id=\"client-libraries\">Client libraries:</h4>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>\n"
   },
@@ -26,7 +26,7 @@
     },
     {
       "name": "Subscriptions",
-      "description": "<p>Subscriptions allow you to charge a customer on a recurring basis.</p>\n<p><strong>Subscriptions are in open beta, and the API is subject to change.</strong></p>\n<h2 id=\"subscription-object\">Subscription object</h2>\n<SchemaDefinition schemaRef=\"#/components/schemas/Subscription\" />\n"
+      "description": "<p>Use our subscriptions API to accept automatic recurring payments. You&#39;ll save time on billing and make the payment process easier for customers. Set parameters like subscription names, prices, and billing cycles, and let customers log in to their account to manage subscriptions.</p>\n<p><strong>MONEI Subscriptions are in open beta, and the API is subject to change.</strong></p>\n<h2 id=\"subscription-object\">Subscription object</h2>\n<SchemaDefinition schemaRef=\"#/components/schemas/Subscription\" />\n"
     }
   ],
   "components": {
@@ -35,7 +35,7 @@
         "type": "apiKey",
         "in": "header",
         "name": "Authorization",
-        "description": "<p>The MONEI API uses API key to authenticate requests. You can view and manage your API key in\nthe <a href=\"https://dashboard.monei.com/settings/api\">MONEI Dashboard</a>.</p>\n<p>Test mode private keys have the prefix <code>pk_test_</code> and live mode private keys have the\nprefix <code>pk_live_</code>.</p>\n<p>Your API key carries many privileges, so be sure to keep them secure! Do not share your secret API\nkey in publicly accessible areas such as GitHub, client-side code, and so forth. <br/><br/> Include\nyour API Key as an <code>Authorization</code> header in all MONEI API requests.</p>\n<p>All API requests must be made over\n<a href=\"https://en.wikipedia.org/wiki/HTTP_Secure\">HTTPS</a>. Calls made over plain HTTP will fail. API\nrequests without authentication will also fail.</p>\n"
+        "description": "<p>The MONEI API uses API key to authenticate requests. You can view and manage your API key in\nthe <a href=\"https://dashboard.monei.com/settings/api\">MONEI Dashboard</a>.</p>\n<p>Test mode private keys have the prefix <code>pk_test_</code> and live mode private keys have the\nprefix <code>pk_live_</code>.</p>\n<p>Your API key carries many privileges, so be sure to keep them secure! Do not share your secret API\nkey in publicly accessible areas such as GitHub, client-side code, and so forth.</p>\n<p>Include your API Key as an <code>Authorization</code> header in all MONEI API requests.</p>\n<p>All API requests must be made over\n<a href=\"https://en.wikipedia.org/wiki/HTTP_Secure\">HTTPS</a>. Calls made over plain HTTP will fail. API\nrequests without authentication will also fail.</p>\n"
       }
     },
     "responses": {
@@ -201,6 +201,34 @@
         "type": "string",
         "example": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...",
         "description": "Full user agent string of the browser session."
+      },
+      "BrowserAccept": {
+        "type": "string",
+        "example": "text/html,application/xhtml+xml,application/json",
+        "description": "Browser accept header."
+      },
+      "BrowserColorDepth": {
+        "type": "integer",
+        "format": "string",
+        "example": 24,
+        "description": "The color depth of the browser session (e.g., `24`)."
+      },
+      "BrowserScreenHeight": {
+        "type": "integer",
+        "format": "string",
+        "example": 1152,
+        "description": "The screen height of the browser session (e.g., `1152`)."
+      },
+      "BrowserScreenWidth": {
+        "type": "integer",
+        "format": "string",
+        "example": 2048,
+        "description": "The screen width of the browser session (e.g., `2048`)."
+      },
+      "BrowserTimezoneOffset": {
+        "type": "string",
+        "example": "string",
+        "description": "The timezone offset of the browser session (e.g., `-120`)."
       },
       "CreatedAt": {
         "type": "integer",
@@ -411,9 +439,7 @@
         "required": [
           "amount",
           "currency",
-          "orderId",
-          "completeUrl",
-          "callbackUrl"
+          "orderId"
         ],
         "properties": {
           "amount": {
@@ -468,6 +494,9 @@
           },
           "subscriptionId": {
             "$ref": "#/components/schemas/Payment-SubscriptionId"
+          },
+          "autoRecover": {
+            "$ref": "#/components/schemas/Payment-AutoRecover"
           },
           "description": {
             "$ref": "#/components/schemas/Payment-Description"
@@ -614,6 +643,48 @@
           },
           "callbackUrl": {
             "$ref": "#/components/schemas/Payment-CallbackUrl"
+          }
+        }
+      },
+      "SendPaymentLinkRequest": {
+        "title": "SendPaymentLinkRequest",
+        "type": "object",
+        "properties": {
+          "customerEmail": {
+            "type": "string",
+            "example": "john.doe@example.com",
+            "description": "The customer will receive payment link on this email address."
+          },
+          "language": {
+            "type": "string",
+            "example": "en",
+            "enum": [
+              "en",
+              "es",
+              "ca"
+            ],
+            "description": "The language of the email."
+          }
+        }
+      },
+      "SendPaymentReceiptRequest": {
+        "title": "SendPaymentReceiptRequest",
+        "type": "object",
+        "properties": {
+          "customerEmail": {
+            "type": "string",
+            "example": "john.doe@example.com",
+            "description": "The customer will receive payment receipt on this email address."
+          },
+          "language": {
+            "type": "string",
+            "example": "en",
+            "enum": [
+              "en",
+              "es",
+              "ca"
+            ],
+            "description": "The language of the email."
           }
         }
       },
@@ -1052,6 +1123,21 @@
           },
           "userAgent": {
             "$ref": "#/components/schemas/UserAgent"
+          },
+          "browserAccept": {
+            "$ref": "#/components/schemas/BrowserAccept"
+          },
+          "browserColorDepth": {
+            "$ref": "#/components/schemas/BrowserColorDepth"
+          },
+          "browserScreenHeight": {
+            "$ref": "#/components/schemas/BrowserScreenHeight"
+          },
+          "browserScreenWidth": {
+            "$ref": "#/components/schemas/BrowserScreenWidth"
+          },
+          "browserTimezoneOffset": {
+            "$ref": "#/components/schemas/BrowserTimezoneOffset"
           }
         }
       },
@@ -1093,6 +1179,21 @@
           },
           "userAgent": {
             "$ref": "#/components/schemas/UserAgent"
+          },
+          "browserAccept": {
+            "$ref": "#/components/schemas/BrowserAccept"
+          },
+          "browserColorDepth": {
+            "$ref": "#/components/schemas/BrowserColorDepth"
+          },
+          "browserScreenHeight": {
+            "$ref": "#/components/schemas/BrowserScreenHeight"
+          },
+          "browserScreenWidth": {
+            "$ref": "#/components/schemas/BrowserScreenWidth"
+          },
+          "browserTimezoneOffset": {
+            "$ref": "#/components/schemas/BrowserTimezoneOffset"
           },
           "userId": {
             "type": "string",
@@ -1172,6 +1273,11 @@
         "type": "string",
         "example": "575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa",
         "description": "A unique identifier of the Subscription. If specified the payment is attached to this Subscription.\n"
+      },
+      "Payment-AutoRecover": {
+        "type": "boolean",
+        "example": false,
+        "description": "If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create \"Pay By Link\" payments)."
       },
       "Subscription": {
         "title": "Subscription",
@@ -1680,6 +1786,18 @@
           "callbackUrl": "https://example.com/checkout/callback"
         }
       },
+      "SendPaymentLinkFullRequest": {
+        "value": {
+          "customerEmail": "john.doe@example.com",
+          "language": "es"
+        }
+      },
+      "SendPaymentReceiptFullRequest": {
+        "value": {
+          "customerEmail": "john.doe@example.com",
+          "language": "es"
+        }
+      },
       "CreateSubscriptionBasicRequest": {
         "value": {
           "customer": {
@@ -1798,7 +1916,7 @@
         "x-codeSamples": [
           {
             "lang": "Node.js",
-            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '14379133960355',\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  callbackUrl: 'https://example.com/checkout/callback',\n  completeUrl: 'https://example.com/checkout/complete'\n});\n"
+            "source": "const {Monei, PaymentTransactionType} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '14379133960355',\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  callbackUrl: 'https://example.com/checkout/callback',\n  completeUrl: 'https://example.com/checkout/complete',\n  customer: {\n    name: 'John Doe',\n    email: 'example@example.com',\n    phone: '+49123456789'\n  }\n});\n"
           },
           {
             "lang": "PHP",
@@ -2111,6 +2229,112 @@
           {
             "lang": "Python",
             "source": "import Monei\nfrom Monei import RecurringPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Payments.recurring(\n    \"7cc38b08ff471ccd313ad62b23b9f362b107560b\",\n    RecurringPaymentRequest(\n        order_id=\"14379133960355\",\n        callback_url=\"https://example.com/checkout/callback\"\n    )\n)\n"
+          }
+        ]
+      }
+    },
+    "/payments/{id}/link": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/paymentId"
+        }
+      ],
+      "post": {
+        "operationId": "payments_send_link",
+        "summary": "Send Payment Link",
+        "description": "Sends a payment link to the customer via email.\n",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendPaymentLinkRequest"
+              },
+              "examples": {
+                "full": {
+                  "$ref": "#/components/examples/SendPaymentLinkFullRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Payment"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node.js",
+            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.sendLink('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: 'es'\n});\n"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendLink(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customerEmail' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nfrom Monei import SendPaymentLinkRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.send_link(\n    \"832b77d1a4b372349a7ae0bb1b2af059\",\n    SendPaymentLinkRequest(customer_email=\"john.doe@example.com\", language=\"es\")\n)\n"
+          }
+        ]
+      }
+    },
+    "/payments/{id}/receipt": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/paymentId"
+        }
+      ],
+      "post": {
+        "operationId": "payments_send_receipt",
+        "summary": "Send Payment Receipt",
+        "description": "Sends a payment receipt to the customer via email.\n",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendPaymentReceiptRequest"
+              },
+              "examples": {
+                "full": {
+                  "$ref": "#/components/examples/SendPaymentReceiptFullRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Payment"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node.js",
+            "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.sendReceipt('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: 'es'\n});\n"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendReceipt(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customerEmail' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nfrom Monei import SendPaymentReceiptRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.send_receipt(\n    \"832b77d1a4b372349a7ae0bb1b2af059\",\n    SendPaymentReceiptRequest(customer_email=\"john.doe@example.com\", language=\"es\")\n)\n"
           }
         ]
       }
