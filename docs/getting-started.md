@@ -22,7 +22,7 @@ description: Find a guide to integrate MONEI into your system
 - **[Salesforce](e-commerce/salesforce.mdx)**
 - **[Spreedly](https://docs.spreedly.com/payment-gateways/monei/)**
 - **[Magento 2](e-commerce/magento2.mdx)**
-- **PrestaShop**
+- **[PrestaShop](e-commerce/prestashop.mdx)**
 - **commercetools (*)**
 - **Mirakl (*)**
 - **saleor (*)**
