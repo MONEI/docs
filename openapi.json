@@ -2536,7 +2536,7 @@
       "post": {
         "operationId": "subscriptions_cancel",
         "summary": "Cancel Subscription",
-        "description": "Cancels the activate subscription.\n",
+        "description": "Cancels the active subscription.\n",
         "security": [
           {
             "APIKey": []
