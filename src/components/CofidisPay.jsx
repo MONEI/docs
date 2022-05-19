@@ -11,12 +11,12 @@ if (typeof window !== 'undefined') {
   module.exports.CofidisPay = () => {
     return (
       <CofidisComponent
-        paymentId="e33b99de3a068dd3d646f66cce5fcafe89287b82"
+        paymentId="10cf4d03b8c054d9d6ea19eb8c84b6cfa774e34b"
         language="en"
         onSubmit={(result) => {
           console.log(result);
           alert(
-            'In the real integration at this point you will be refirected to Cofidis payment page.'
+            'In the real integration at this point you will be redirected to Cofidis payment page.'
           );
         }}
         onError={(error) => {

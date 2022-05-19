@@ -16,7 +16,7 @@ if (typeof window !== 'undefined') {
         onSubmit={(result) => {
           console.log(result);
           alert(
-            'In the real integration at this point you will be refirected to Cofidis payment page.'
+            'In the real integration at this point you will be redirected to Cofidis payment page.'
           );
         }}
         onError={(error) => {
