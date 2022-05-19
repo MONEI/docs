@@ -13,7 +13,8 @@ module.exports = {
         'e-commerce/shopify',
         'e-commerce/wix',
         'e-commerce/woocommerce',
-        'e-commerce/salesforce'
+        'e-commerce/salesforce',
+        'e-commerce/magento2'
       ],
       'Payment methods': [
         'payment-methods/card',
