@@ -21,8 +21,8 @@ description: Find a guide to integrate MONEI into your system
 - **[Wix](e-commerce/wix.mdx)**
 - **[Salesforce](e-commerce/salesforce.mdx)**
 - **[Spreedly](https://docs.spreedly.com/payment-gateways/monei/)**
+- **[Magento 2](e-commerce/magento2.mdx)**
 - **PrestaShop**
-- **Adobe Commerce**
 - **commercetools (*)**
 - **Mirakl (*)**
 - **saleor (*)**
