@@ -11,6 +11,8 @@ You can start accepting Bizum payments on the Web using [Hosted Payment Page](in
 Our [Bizum Component](monei-js/reference.md#bizum-component) renders Bizum button to your payment page.
 When a customer selects Bizum, the component presents a Bizum overlay, where a customer can enter his phone number registered in Bizum to complete the payment process.
 
+Bizum transactions can be as high as 1.500 eur. Any transaction exceeding this amount is rejected.
+
 import {Bizum} from '../../src/components/Bizum';
 
 <div className="preview-frame">
@@ -194,10 +196,10 @@ Your customer will be redirected to the Bizum confirmation screen
 :::note
 Currently Bizum only supports redirect flow.
 
-**It is not possible to confirm payments using monei.js** [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function. As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.
+**It is not possible to confirm payments using monei.js** [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function. As an alternative process, you can submit the generated `paymentToken` to your sever and then [confirm the payment](/api/#operation/payments_confirm) on the server-side.
 
-Bizum is implementing a new payment request flow with the push notification to the banking app that will allow confirming the payment without the redirect.
-The list of banks that completed the integration: **Caixabank, BBVA, Grupo Cajamar, Banco Mediolanum, Orange Bank, Laboral Kutxa, Targobank, Banca Pueyo, Banco Caminos, Caixa Ontinyent**
+Bizum is implementing a new payment request flow with the push notification to the banking app that will allow confirming the payment without the redirect. This is what's known as RTP (Request to Pay.)
+The list of banks that completed the integration is: **Caixabank, BBVA, Grupo Cajamar, Banco Mediolanum, Orange Bank, Laboral Kutxa, Targobank, Banca Pueyo, Banco Caminos, Caixa Ontinyent**
 :::
 
 ### 4. An asynchronous request is sent to your server.
