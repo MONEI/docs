@@ -192,7 +192,12 @@ function moneiTokenHandler(token) {
 Your customer will be redirected to the Bizum confirmation screen
 
 :::note
-Currently Bizum only supports redirect flow. **It is not possible to confirm payments using monei.js** [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function. As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.
+Currently Bizum only supports redirect flow.
+
+**It is not possible to confirm payments using monei.js** [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function. As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.
+
+Bizum is implementing a new payment request flow with the push notification to the banking app that will allow confirming the payment without the redirect.
+The list of banks that completed the integration: **Caixabank, BBVA, Grupo Cajamar, Banco Mediolanum, Orange Bank, Laboral Kutxa, Targobank, Banca Pueyo, Banco Caminos, Caixa Ontinyent**
 :::
 
 ### 4. An asynchronous request is sent to your server.
