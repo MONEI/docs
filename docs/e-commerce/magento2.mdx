@@ -6,6 +6,11 @@ description: To accept payments through MONEI in your Magento 2 store you simply
 
 To accept payments through MONEI in your Magento 2 store you simply need to install and configure MONEI Magento 2 Extension.
 
+<a href="https://magento2-demo.monei.com/" target="_blank" className="button button--primary">
+  Live demo
+</a>
+
+
 ## Before you begin
 
 To test your integration:
@@ -14,6 +19,17 @@ To test your integration:
 - You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
 
 ## Install
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="composer"
+  values={[
+    {label: 'Using composer (recommended)', value: 'composer'},
+    {label: 'From the raw package', value: 'archive'}
+  ]}>
+  <TabItem value="composer">
 
 You can install MONEI Magento 2 Extension using composer by adding it to your composer file using following command:
 
@@ -32,6 +48,23 @@ Finally, run setup upgrade to enable new modules:
 ```shell
 php magento/bin/magento setup:upgrade --keep-generated
 ```
+  </TabItem>
+  <TabItem value="archive">
+
+You can install MONEI Magento 2 Extension from the raw package by downloading the [latest version](https://github.com/MONEI/MONEI-AdobeCommerce-Magento2/archive/refs/heads/main.zip).
+
+Create a directory called `app/code/Monei`, inside your magento2 project, and you unzip the downloaded archive there.
+
+Go to Magento 2 root directory and run:
+
+```shell
+  php bin/magento module:enable Monei_MoneiPayment
+  php bin/magento setup:upgrade
+  php bin/magento setup:static-content:deploy
+  php bin/magento cache:clear
+```
+  </TabItem>
+</Tabs>
 
 ## Configure
 
