@@ -14,7 +14,7 @@ module.exports = {
         'e-commerce/wix',
         'e-commerce/woocommerce',
         'e-commerce/salesforce',
-        'e-commerce/magento2',
+        'e-commerce/adobe-commerce',
         'e-commerce/prestashop'
       ],
       'Payment methods': [
