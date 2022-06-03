@@ -68,5 +68,10 @@
     "source": "/docs/use-payment-modal/",
     "target": "/docs/integrations/use-payment-modal/",
     "status": "301"
+  },
+  {
+    "source": "/docs/e-commerce/magento2/",
+    "target": "/docs/e-commerce/adobe-commerce/",
+    "status": "301"
   }
 ]
