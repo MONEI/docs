@@ -1,10 +1,10 @@
 ---
-id: magento2
-title: Magento 2
-description: To accept payments through MONEI in your Magento 2 store you simply need to install and configure MONEI Magento 2 Extension.
+id: adobe-commerce
+title: Adobe Commerce (Magento 2)
+description: To accept payments through MONEI in your Adobe Commerce (Magento 2) store you simply need to install and configure MONEI Adobe Commerce Extension.
 ---
 
-To accept payments through MONEI in your Magento 2 store you simply need to install and configure MONEI Magento 2 Extension.
+To accept payments through MONEI in your Adobe Commerce (Magento 2) store you simply need to install and configure MONEI Adobe Commerce Extension.
 
 <a href="https://magento2-demo.monei.com/" target="_blank" className="button button--primary">
   Live demo
@@ -31,7 +31,7 @@ import TabItem from '@theme/TabItem';
   ]}>
   <TabItem value="composer">
 
-You can install MONEI Magento 2 Extension using composer by adding it to your composer file using following command:
+You can install MONEI Adobe Commerce Extension using composer by adding it to your composer file using following command:
 
 ```shell
 composer require monei/module-monei-payment --update-with-all-dependencies
@@ -51,11 +51,11 @@ php magento/bin/magento setup:upgrade --keep-generated
   </TabItem>
   <TabItem value="archive">
 
-You can install MONEI Magento 2 Extension from the raw package by downloading the [latest version](https://github.com/MONEI/MONEI-AdobeCommerce-Magento2/archive/refs/heads/main.zip).
+You can install MONEI Adobe Commerce Extension from the raw package by downloading the [latest version](https://github.com/MONEI/MONEI-AdobeCommerce-Magento2/archive/refs/heads/main.zip).
 
 Create a directory called `app/code/Monei`, inside your magento2 project, and you unzip the downloaded archive there.
 
-Go to Magento 2 root directory and run:
+Go to Adobe Commerce (Magento 2) root directory and run:
 
 ```shell
   php bin/magento module:enable Monei_MoneiPayment
@@ -71,7 +71,7 @@ Go to Magento 2 root directory and run:
 To configure the extension you have to go to **Stores → Configuration→ Payment Methods (under Sales section) →
 MONEI**
 
-![Configure MONEI Magento 2](/img/configure-magento-0.jpg)
+![Configure MONEI Adobe Commerce](/img/configure-magento-0.jpg)
 
 Enter your API Key. You can find your API Key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api).
 
