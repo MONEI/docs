@@ -3,15 +3,27 @@ id: setup-cofidis-widget
 title: Cofidis Widget setup
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="4xcard"
+  values={[
+    {label: 'Cofidis 4xcard', value: '4xcard'},
+    {label: 'Cofidis 6x12x24x', value: 'loan'}
+  ]}>
+
+<TabItem value="4xcard">
+
 :::caution
-If you are using [Cofidis](../payment-methods/cofidis.mdx) payment method it is mandatory to put [view details](https://monei.com/cofidis/) link. You can put this link in you cart or checkout page.
+If you are using [Cofidis 4xcard](../payment-methods/cofidis.mdx) payment method it is mandatory to put [view details](https://monei.com/cofidis/) link. You can put this link in you cart or checkout page.
 :::
 
-To improve user experience and show additional information to the user we provide a [Cofidis Widget](monei-js/reference.md#cofidiswidget-component) that will display financial conditions based on the amount of the order. It already includes [view details](https://monei.com/cofidis/) link so if you're using our [Cofidis Widget](monei-js/reference.md#cofidiswidget-component) there is no need to put the link separately.
+To improve user experience and show additional information to the user we provide a [Cofidis 4xcard Widget](monei-js/reference.md#cofidiswidget-component) that will display financial conditions based on the amount of the order. It already includes [view details](https://monei.com/cofidis/) link so if you're using our [Cofidis 4xcard Widget](monei-js/reference.md#cofidiswidget-component) there is no need to put the link separately.
 
 Add this widget to your cart or product page to inform your customers about Cofidis 4xcard payment option, and it's conditions.
 
-![Cofidis Widget Preview](/img/cofidis-widget-preview.jpg)
+![Cofidis Widget Preview](/img/cofidis-widget-preview.png)
 
 To add the widget to your cart or product page create a container element in the HTML file where the widget will be displayed
 
@@ -35,7 +47,8 @@ Place this code snippet at the end of your page, before closing `</body>` tag an
     style: {
       base: {
         textAlign: 'right',
-        fontFamily: 'Helvetica,"Helvetica Neue",Arial,"Lucida Grande",sans-serif'
+        fontFamily: 'Helvetica,"Helvetica Neue",Arial,"Lucida Grande",sans-serif',
+        justifyContent: 'end'
       }
     }
   });
@@ -59,5 +72,71 @@ window.cofidisWidget.updateProps({amountInt: 999});
 ```
 
 :::note
-If the amount is less than 75 EUR or more than 1000 EUR the widget will not be displayed as Cofidis only allows payments in this range.
+If the amount is less than 75 EUR or more than 1000 EUR the widget will not be displayed as Cofidis 4xcard only allows payments in this range.
 :::
+
+</TabItem>
+<TabItem value="loan">
+
+:::caution
+If you are using [Cofidis 6x12x24x](../payment-methods/cofidis-pay.mdx) payment method it is mandatory to put [view details](https://monei.com/es/cofidis-pay/) link. You can put this link in you cart or checkout page.
+:::
+
+To improve user experience and show additional information to the user we provide a [Cofidis 6x12x24x Widget](monei-js/reference.md#cofidiswidget-component) that will display financial conditions based on the amount of the order. It already includes [view details](https://monei.com/es/cofidis-pay/) link so if you're using our [Cofidis Widget](monei-js/reference.md#cofidispaywidget-component) there is no need to put the link separately.
+
+Add this widget to your cart or product page to inform your customers about Cofidis 6x12x24x payment option, and it's conditions.
+
+![Cofidis Pay Widget Preview](/img/cofidis-pay-widget-preview.png)
+
+To add the widget to your cart or product page create a container element in the HTML file where the widget will be displayed
+
+```html
+<div id="cofidis_pay_widget">
+  <!-- Cofidis Widget will be rendered here -->
+</div>
+```
+
+Place this code snippet at the end of your page, before closing `</body>` tag and
+
+```html
+<script src="https://js.monei.com/v1/monei.js"></script>
+<script>
+  var cofidisPayWidget = monei.CofidisPayWidget({
+    accountId: '2975bcfa-7bbc-422d-af48-c66759d87b69', // Your MONEI Account ID
+    amountInt: {{cart.total_price}}, // The amount you want to display in cents
+    language: 'en', // Language, supported en, es
+
+    // You can pass additional styles
+    style: {
+      base: {
+        textAlign: 'right',
+        fontFamily: 'Helvetica,"Helvetica Neue",Arial,"Lucida Grande",sans-serif',
+        justifyContent: 'end'
+      }
+    }
+  });
+
+  // Render Cofidis Widget to the container element
+  cofidisPayWidget.render('#cofidis_pay_widget');
+
+  // Assign a global variable to cofidisWidget so you can update props later
+  window.cofidisPayWidget = cofidisPayWidget;
+</script>
+```
+
+:::note
+You can specify `amount` property for the amount as positive float number (9.99 is 9.99 EUR) or `amountInt` property as positive integer in the smallest currency unit (999 is 9.99 EUR)
+:::
+
+If you are updating your cart page using JavaScript (without page reload) you can update the widget amount like so:
+
+```javascript
+window.cofidisPayWidget.updateProps({amountInt: 999});
+```
+
+:::note
+If the amount is less than 90 EUR or more than 3500 EUR the widget will not be displayed as Cofidis 6x12x24x only allows payments in this range.
+:::
+
+</TabItem>
+</Tabs>
