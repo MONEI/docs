@@ -3,7 +3,7 @@
   "info": {
     "version": "1.2.0",
     "title": "MONEI API v1",
-    "description": "<p>The MONEI API is organized around\n<a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a>. Our\nAPI has predictable resource-oriented URLs, accepts JSON-encoded request\nbodies, returns JSON-encoded responses, and uses standard HTTP response\ncodes, authentication, and verbs.</p>\n<h4 id=\"base-url\">Base URL:</h4>\n<p><a href=\"https://api.monei.com/v1\">https://api.monei.com/v1</a></p>\n<h4 id=\"client-libraries\">Client libraries:</h4>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>\n"
+    "description": "<p>The MONEI API is organized around\n<a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a>. Our\nAPI has predictable resource-oriented URLs, accepts JSON-encoded request\nbodies, returns JSON-encoded responses, and uses standard HTTP response\ncodes, authentication, and verbs.</p>\n<h4 id=\"base-url\">Base URL:</h4>\n<p><a href=\"https://api.monei.com/v1\">https://api.monei.com/v1</a></p>\n<h4 id=\"client-libraries\">Client libraries:</h4>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>\n<h4 id=\"important\">Important:</h4>\n<p>If you are not using our official SDKs, you need to provide a valid <code>User-Agent</code> header in each request, otherwise your requests will be rejected.</p>\n"
   },
   "servers": [
     {
@@ -994,14 +994,15 @@
           "googlePay",
           "clickToPay",
           "paypal",
-          "cofidis"
+          "cofidis",
+          "cofidisLoan"
         ],
         "example": [
           "card",
           "bizum",
           "paypal"
         ],
-        "description": "An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `applePay`\n  - `googlePay`\n  - `clickToPay`\n  - `paypal`\n  - `cofidis`\n"
+        "description": "An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `applePay`\n  - `googlePay`\n  - `clickToPay`\n  - `paypal`\n  - `cofidis`\n  - `cofidisLoan`\n"
       },
       "Payment-TransactionType": {
         "type": "string",
@@ -2536,7 +2537,7 @@
       "post": {
         "operationId": "subscriptions_cancel",
         "summary": "Cancel Subscription",
-        "description": "Cancels the active subscription.\n",
+        "description": "Cancels the activate subscription.\n",
         "security": [
           {
             "APIKey": []
