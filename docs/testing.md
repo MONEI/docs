@@ -22,7 +22,6 @@ To test your integrations you need to switch to a **test mode** using a switch i
 Genuine card information cannot be used in test mode. Instead, use any of the following test card numbers.
 
 - For all test card numbers use **12/34** as an expiration date and **123** as CVC code
-- In 3D secure mode, in which buyer authentication is required, the personal identification code is: **123456**
 
 | CARD NUMBER      | BRAND                      | DESCRIPTION                               |
 | ---------------- | -------------------------- |-------------------------------------------|
