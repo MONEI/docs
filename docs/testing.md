@@ -24,27 +24,16 @@ Genuine card information cannot be used in test mode. Instead, use any of the fo
 - For all test card numbers use **12/34** as an expiration date and **123** as CVC code
 - In 3D secure mode, in which buyer authentication is required, the personal identification code is: **123456**
 
-| CARD NUMBER      | BRAND                      | DESCRIPTION                          |
-| ---------------- | -------------------------- |--------------------------------------|
-| 4444444444444414 | Visa                       | 3D Secure v2.1 Direct (no challenge) |
-| 4444444444444422 | Visa                       | 3D Secure v2.1 Challenge             |
-| 4444444444444430 | Visa                       | 3D Secure v2.1 Frictionless and Challenge     |
-| 4444444444444448 | Visa                       | 3D Secure v2.2 Challenge             |
-| 4444444444444455 | Visa                       | 3D Secure v2.2 Frictionless          |
-| 5555555555555508 | Mastercard                 | 3D Secure                            |
-| 3680000000000001 | Diners Club International  | Non 3D Secure                        |
-| 3680000000000001 | JCB                        | Non 3D Secure                        |
-
-## Testing for specific errors
-
-The following test cards can be used to create payments that produce specific responses—useful for testing different scenarios and error codes.
-
-| CARD NUMBER      | BRAND                      | STATUS CODE                               |
-| ---------------- | -------------------------- | ----------------------------------------- |
-| 4444444444444505 | Visa                       | E201 (Transaction declined by processor)  |
-| 5555555555555607 | Mastercard                 | E501 (Card rejected: invalid card number) |
-| 3680000000000118 | Diners Club International  | E501 (Card rejected: invalid card number) |
-| 3500000000000108 | JCB                        | E501 (Card rejected: invalid card number) |
+| CARD NUMBER      | BRAND                      | DESCRIPTION                               |
+| ---------------- | -------------------------- |-------------------------------------------|
+| 4444444444444406 | Visa                       | 3D Secure v2.1 Challenge                  |
+| 4444444444444414 | Visa                       | 3D Secure v2.1 Direct (no challenge)      |
+| 4444444444444422 | Visa                       | 3D Secure v2.1 Frictionless               |
+| 4444444444444430 | Visa                       | 3D Secure v2.1 Frictionless and Challenge |
+| 5555555555555508 | Mastercard                 | 3D Secure v2.1 Challenge                  |
+| 5555555555555524 | Mastercard                 | 3D Secure v2.1 Direct (no challenge)      |
+| 5555555555555532 | Mastercard                 | 3D Secure v2.1 Frictionless               |
+| 5555555555555540 | Mastercard                 | 3D Secure v2.1 Frictionless and Challenge |
 
 ## Test Bizum phone numbers
 
