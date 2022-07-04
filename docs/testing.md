@@ -42,7 +42,7 @@ Genuine card information cannot be used in test mode. Instead, use any of the fo
 | +34700000000 | E506 (Error during payment authorization. Please try again) |
 
 :::caution
-**In test environment Bizum only supports transactions below 10 EUR**
+**In test environment Bizum only supports transactions below 5 EUR**
 :::
 
 ## Test PayPal Accounts
