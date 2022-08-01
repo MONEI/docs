@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.2.0",
+    "version": "1.2.1",
     "title": "MONEI API v1",
-    "description": "<p>The MONEI API is organized around\n<a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a>. Our\nAPI has predictable resource-oriented URLs, accepts JSON-encoded request\nbodies, returns JSON-encoded responses, and uses standard HTTP response\ncodes, authentication, and verbs.</p>\n<h4 id=\"base-url\">Base URL:</h4>\n<p><a href=\"https://api.monei.com/v1\">https://api.monei.com/v1</a></p>\n<h4 id=\"client-libraries\">Client libraries:</h4>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>\n<h4 id=\"important\">Important:</h4>\n<p>If you are not using our official SDKs, you need to provide a valid <code>User-Agent</code> header in each request, otherwise your requests will be rejected.</p>\n"
+    "description": "<p>The MONEI API is organized around\n<a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a>. Our\nAPI has predictable resource-oriented URLs, accepts JSON-encoded request\nbodies, returns JSON-encoded responses, and uses standard HTTP response\ncodes, authentication, and verbs.</p>\n<h4 id=\"base-url\">Base URL:</h4>\n<p><a href=\"https://api.monei.com/v1\">https://api.monei.com/v1</a></p>\n<h4 id=\"client-libraries\">Client libraries:</h4>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>\n<h4 id=\"important\">Important:</h4>\n<p><strong>If you are not using our official SDKs, you need to provide a valid <code>User-Agent</code> header in each request, otherwise your requests will be rejected.</strong></p>\n"
   },
   "servers": [
     {
@@ -655,15 +655,16 @@
             "example": "john.doe@example.com",
             "description": "The customer will receive payment link on this email address."
           },
-          "language": {
+          "customerPhone": {
             "type": "string",
-            "example": "en",
-            "enum": [
-              "en",
-              "es",
-              "ca"
-            ],
-            "description": "The language of the email."
+            "example": "+34500000000",
+            "description": "Phone number in E.164 format. The customer will receive payment link on this phone number."
+          },
+          "channel": {
+            "$ref": "#/components/schemas/Payment-MessageChannel"
+          },
+          "language": {
+            "$ref": "#/components/schemas/Payment-MessageLanguage"
           }
         }
       },
@@ -676,15 +677,16 @@
             "example": "john.doe@example.com",
             "description": "The customer will receive payment receipt on this email address."
           },
-          "language": {
+          "customerPhone": {
             "type": "string",
-            "example": "en",
-            "enum": [
-              "en",
-              "es",
-              "ca"
-            ],
-            "description": "The language of the email."
+            "example": "+34500000000",
+            "description": "Phone number in E.164 format. The customer will receive payment receipt link on this phone number."
+          },
+          "channel": {
+            "$ref": "#/components/schemas/Payment-MessageChannel"
+          },
+          "language": {
+            "$ref": "#/components/schemas/Payment-MessageLanguage"
           }
         }
       },
@@ -920,12 +922,23 @@
           "threeDSecure": {
             "type": "boolean",
             "example": false,
-            "description": "Wether this transaction used 3D Secure authentication."
+            "description": "Whether this transaction used 3D Secure authentication."
           },
           "threeDSecureVersion": {
             "type": "string",
             "example": "2.1.0",
             "description": "The protocol version of the 3DS challenge."
+          },
+          "threeDSecureFlow": {
+            "type": "string",
+            "example": "CHALLENGE",
+            "enum": [
+              "CHALLENGE",
+              "FRICTIONLESS",
+              "FRICTIONLESS_CHALLENGE",
+              "DIRECT"
+            ],
+            "description": "The flow used for 3DS authentication.\n- `CHALLENGE` - In a challenge flow, the issuer requires additional shopper interaction, either through biometrics, two-factor authentication, or similar methods based on [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) factors.\n- `FRICTIONLESS` - In a frictionless flow, the acquirer, issuer, and card scheme exchange all necessary\n    information in the background through passive authentication using the shopper's device\n    fingerprint. The transaction is completed without further shopper interaction.\n- `FRICTIONLESS_CHALLENGE` - This flow is the complete 3DS flow. It is similar to the 3DS frictionless flow but\n    includes an additional authentication step (challenge) that will be invoked if the\n    information provided in the data collection step does not suffice to determine the\n    risk-level of the transaction.\n- `DIRECT` - This transaction did not require [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) due to the low risk\n"
           },
           "expiration": {
             "type": "integer",
@@ -937,6 +950,26 @@
             "type": "string",
             "example": "0004",
             "description": "The last four digits of the card."
+          },
+          "tokenizationMethod": {
+            "type": "string",
+            "example": "androidPay",
+            "enum": [
+              "applePay",
+              "googlePay",
+              "clickToPay"
+            ],
+            "description": "The digital wallet used to tokenize the card."
+          },
+          "cardholderName": {
+            "type": "string",
+            "example": "John Doe",
+            "description": "The name of the cardholder."
+          },
+          "cardholderEmail": {
+            "type": "string",
+            "example": "email@example.com",
+            "description": "The email of the cardholder."
           }
         }
       },
@@ -990,19 +1023,24 @@
         "enum": [
           "card",
           "bizum",
-          "applePay",
-          "googlePay",
-          "clickToPay",
           "paypal",
           "cofidis",
-          "cofidisLoan"
+          "cofidisLoan",
+          "multibanco",
+          "iDeal",
+          "bancontact",
+          "sofort",
+          "trustly",
+          "sepa",
+          "klarna",
+          "giropay"
         ],
         "example": [
           "card",
           "bizum",
           "paypal"
         ],
-        "description": "An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `applePay`\n  - `googlePay`\n  - `clickToPay`\n  - `paypal`\n  - `cofidis`\n  - `cofidisLoan`\n"
+        "description": "An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `paypal`\n  - `cofidis`\n  - `cofidisLoan`\n  - `multibanco`\n  - `iDeal`\n  - `bancontact`\n  - `sofort`\n  - `trustly`\n  - `sepa`\n  - `klarna`\n  - `giropay`\n"
       },
       "Payment-TransactionType": {
         "type": "string",
@@ -1013,6 +1051,29 @@
           "AUTH"
         ],
         "description": "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don’t capture the funds until later.\n"
+      },
+      "Payment-MessageChannel": {
+        "type": "string",
+        "example": "EMAIL",
+        "enum": [
+          "EMAIL",
+          "SMS"
+        ],
+        "description": "The channel used to send the payment message.\nif `customerEmail` or `customerPhone` is provided this parameter is ignored.\n"
+      },
+      "Payment-MessageLanguage": {
+        "type": "string",
+        "example": "en",
+        "enum": [
+          "en",
+          "es",
+          "ca",
+          "pt",
+          "de",
+          "it",
+          "fr"
+        ],
+        "description": "The language of message sent to the customer. If not provided the default customer language is used if available."
       },
       "Payment-Shop": {
         "type": "object",
@@ -2243,7 +2304,7 @@
       "post": {
         "operationId": "payments_send_link",
         "summary": "Send Payment Link",
-        "description": "Sends a payment link to the customer via email.\n",
+        "description": "Sends a payment link to the customer.\n",
         "security": [
           {
             "APIKey": []
@@ -2296,7 +2357,7 @@
       "post": {
         "operationId": "payments_send_receipt",
         "summary": "Send Payment Receipt",
-        "description": "Sends a payment receipt to the customer via email.\n",
+        "description": "Sends a payment receipt to the customer.\n",
         "security": [
           {
             "APIKey": []
