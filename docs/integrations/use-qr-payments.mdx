@@ -22,11 +22,19 @@ MONEI Pay is the best way to accept payments in-store.
   />
 </div>
 
-Login into [pay.monei.com](https://pay.monei.com/) with your same credentials you use to access [dashboard.monei.com](https://dashboard.monei.com/) and start creating payments
+Login into [pay.monei.com](https://pay.monei.com/) with your same credentials you use to access [dashboard.monei.com](https://dashboard.monei.com/) and start creating payments.
 
-:::note
-The payment is accessible through the QR code during **5 minutes**, after that you need to create a new payment.
-:::
+You can also download the **MONEI Pay** app to create QR codes on the go.
+
+<div style={{marginBottom: 20}}>
+  <a href="https://apps.apple.com/es/app/monei-pay/id1624647668" target="_blank" style={{marginRight: 20}}>
+    <img height={50} width={145} src="/img/app-store-icon.svg" alt="App Store" />
+  </a>
+  <a href="https://play.google.com/store/apps/details?id=com.monei.moneibusiness" target="_blank">
+    <img height={50} width={165} src="/img/google-play-icon.svg" alt="Google Play" />
+  </a>
+</div>
+
 
 ## Demo
 
@@ -39,9 +47,6 @@ import {ArrowRightIcon} from '@heroicons/react/outline';
 </div>
 
 ## Create QR payments programmatically
-
-Each QR code is associated with a Point of Sale. To create a payment associated with a specific QR code you need to pass `pointOfSaleId`.
-To get your `pointOfSaleId` please contact our [Support Team](https://support.monei.com/hc/requests/new).
 
 ### 1. Create a new payment on your server.
 
@@ -58,7 +63,7 @@ import TabItem from '@theme/TabItem';
   ]}>
 <TabItem value="curl">
 
-```shell script {8} title="POST https://api.monei.com/v1/payments"
+```shell script title="POST https://api.monei.com/v1/payments"
 curl --request POST 'https://api.monei.com/v1/payments' \
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
 --header 'Content-Type: application/json' \
@@ -66,7 +71,6 @@ curl --request POST 'https://api.monei.com/v1/payments' \
     "amount": 110,
     "currency": "EUR",
     "orderId": "14379133960355",
-    "pointOfSaleId": 'fb269cccfa0cc021f5d0b8eb1421646c696213e1',
     "callbackUrl": "https://example.com/checkout/callback"
 }'
 ```
@@ -75,14 +79,13 @@ curl --request POST 'https://api.monei.com/v1/payments' \
 
 <TabItem value="node">
 
-```js {7} title="server.js"
+```js title="server.js"
 const {Monei} = require('@monei-js/node-sdk');
 const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
 monei.payments.create({
   amount: 110,
   currency: 'EUR',
   orderId: '14379133960355',
-  pointOfSaleId: 'fb269cccfa0cc021f5d0b8eb1421646c696213e1',
   callbackUrl: 'https://example.com/checkout/callback'
 });
 ```
@@ -90,13 +93,12 @@ monei.payments.create({
 </TabItem>
 <TabItem value="php">
 
-```php {6} title="server.php"
+```php title="server.php"
 $monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
 $monei->payments->create([
   'amount' => 110,
   'currency' => 'EUR',
   'orderId' => '14379133960355',
-  'pointOfSaleId' => 'fb269cccfa0cc021f5d0b8eb1421646c696213e1',
   'callbackUrl' => 'https://example.com/checkout/callback'
 ]);
 ```
@@ -109,15 +111,11 @@ The following parameters are required:
 - **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
 - **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
 - **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
-- **pointOfSaleId** `string` - A unique identifier of the Point of Sale.
 - **callbackUrl** `string` - The URL to which a payment result should be sent asynchronously.
 
 Check all available [request parameters](/api/#operation/payments_create).
 
-After the payment is created it is immediately available through the QR code attached to the Point of Sale.
-
-:::note
-As an alternative you can present to the user a unique QR code generated for this specifc payment. To access the QR code image construct the following url `https://secure.monei.com/payments/{{payment_id}}/qr`
+Present to the user a unique QR code generated for this specific payment. To access the QR code image construct the following url `https://secure.monei.com/payments/{{payment_id}}/qr`
 
 You can directly render it on to your webpage using this html code:
 
@@ -125,11 +123,21 @@ You can directly render it on to your webpage using this html code:
 <img src="https://secure.monei.com/payments/{{payment_id}}/qr" width="300" height="300" />
 ```
 
-:::
+As an alternative you can redirect the user to our Hosted Payment Page that will show the QR code.
+
+To get the QR code add `?qr=1` parameter to the `nextAction.redirectUrl` you'll receive in the response.
+
+Example: [https://secure.monei.com/payments/7a778093da6f78c41de8bef7868ebcb464a8d070?qr=1](https://secure.monei.com/payments/7a778093da6f78c41de8bef7868ebcb464a8d070?qr=1)
+
+![Hosted Payment Page QR](/img/qr-demo-2.png)
 
 ### 2. Customer completes the payment
 
 Customer completes the payment on the hosted payment page and is redirected to the receipt page where he can optionally enter his email to receive the receipt.
+
+:::note
+The payment is accessible through the QR code during **5 minutes**, after that you need to create a new payment.
+:::
 
 ### 3. An asynchronous request is sent to your server
 
