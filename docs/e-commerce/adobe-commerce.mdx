@@ -53,7 +53,7 @@ php magento/bin/magento setup:upgrade --keep-generated
 
 You can install MONEI Adobe Commerce Extension from the raw package by downloading the [latest version](https://github.com/MONEI/MONEI-AdobeCommerce-Magento2/archive/refs/heads/main.zip).
 
-Create a directory called `app/code/Monei`, inside your magento2 project, and you unzip the downloaded archive there.
+Create a directory called `app/code/Monei/MoneiPayment`, inside your magento2 project, and you unzip the downloaded archive there.
 
 Go to Adobe Commerce (Magento 2) root directory and run:
 
@@ -61,7 +61,7 @@ Go to Adobe Commerce (Magento 2) root directory and run:
   php bin/magento module:enable Monei_MoneiPayment
   php bin/magento setup:upgrade
   php bin/magento setup:static-content:deploy
-  php bin/magento cache:clear
+  php bin/magento cache:clean
 ```
   </TabItem>
 </Tabs>
