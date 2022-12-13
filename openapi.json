@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.2.1",
+    "version": "1.2.2",
     "title": "MONEI API v1",
     "description": "<p>The MONEI API is organized around\n<a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a>. Our\nAPI has predictable resource-oriented URLs, accepts JSON-encoded request\nbodies, returns JSON-encoded responses, and uses standard HTTP response\ncodes, authentication, and verbs.</p>\n<h4 id=\"base-url\">Base URL:</h4>\n<p><a href=\"https://api.monei.com/v1\">https://api.monei.com/v1</a></p>\n<h4 id=\"client-libraries\">Client libraries:</h4>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>\n<h4 id=\"important\">Important:</h4>\n<p><strong>If you are not using our official SDKs, you need to provide a valid <code>User-Agent</code> header in each request, otherwise your requests will be rejected.</strong></p>\n"
   },
@@ -14,7 +14,7 @@
   "tags": [
     {
       "name": "Status codes",
-      "description": "<p>Our API returns a <code>statusCode</code> attribute along with every response. Some API calls return\na successful <code>E000</code> code, along with the message <code>Transaction approved</code>.</p>\n<p>Failed transactions return a specific <code>statusCode</code>, along with it&#39;s corresponding message.</p>\n<p>Here is a list of all the possible response/error codes our API can return:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E000</td>\n<td>Transaction approved</td>\n</tr>\n<tr>\n<td>E101</td>\n<td>Error with payment processor configuration. Check this in your dashboard or contact MONEI for support</td>\n</tr>\n<tr>\n<td>E102</td>\n<td>Invalid or inactive MID. Please contact the acquiring entity</td>\n</tr>\n<tr>\n<td>E103</td>\n<td>Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support</td>\n</tr>\n<tr>\n<td>E150</td>\n<td>Invalid or malformed request. Please check the message format</td>\n</tr>\n<tr>\n<td>E151</td>\n<td>Missing or malformed signature/auth</td>\n</tr>\n<tr>\n<td>E152</td>\n<td>Error while decrypting request</td>\n</tr>\n<tr>\n<td>E200</td>\n<td>Transaction failed during payment processing</td>\n</tr>\n<tr>\n<td>E201</td>\n<td>Transaction declined by processor</td>\n</tr>\n<tr>\n<td>E202</td>\n<td>Transaction declined by issuer</td>\n</tr>\n<tr>\n<td>E203</td>\n<td>Payment method not allowed</td>\n</tr>\n<tr>\n<td>E204</td>\n<td>Wrong or not allowed currency</td>\n</tr>\n<tr>\n<td>E205</td>\n<td>Incorrect reference / transaction does not exist</td>\n</tr>\n<tr>\n<td>E206</td>\n<td>Invalid payment token</td>\n</tr>\n<tr>\n<td>E207</td>\n<td>Transaction failed: process time exceeded</td>\n</tr>\n<tr>\n<td>E208</td>\n<td>Transaction is currently being processed</td>\n</tr>\n<tr>\n<td>E209</td>\n<td>Duplicated operation</td>\n</tr>\n<tr>\n<td>E210</td>\n<td>Wrong or not allowed payment amount</td>\n</tr>\n<tr>\n<td>E211</td>\n<td>Refund declined by processor</td>\n</tr>\n<tr>\n<td>E212</td>\n<td>Transaction has already been captured</td>\n</tr>\n<tr>\n<td>E213</td>\n<td>Transaction has already been canceled</td>\n</tr>\n<tr>\n<td>E214</td>\n<td>The amount to be captured cannot exceed the pre-authorized amount</td>\n</tr>\n<tr>\n<td>E215</td>\n<td>The transaction to be captured has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E216</td>\n<td>The transaction to be canceled has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E217</td>\n<td>Transaction denied by processor to avoid duplicated operations</td>\n</tr>\n<tr>\n<td>E218</td>\n<td>Error during payment request validation</td>\n</tr>\n<tr>\n<td>E219</td>\n<td>Refund declined due to exceeded amount</td>\n</tr>\n<tr>\n<td>E220</td>\n<td>Transaction has already been fully refunded</td>\n</tr>\n<tr>\n<td>E221</td>\n<td>Transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E222</td>\n<td>The user has canceled the payment</td>\n</tr>\n<tr>\n<td>E300</td>\n<td>Transaction declined due to security restrictions</td>\n</tr>\n<tr>\n<td>E301</td>\n<td>3D Secure authentication failed</td>\n</tr>\n<tr>\n<td>E302</td>\n<td>Authentication process timed out. Please try again</td>\n</tr>\n<tr>\n<td>E303</td>\n<td>An error occurred during the 3D Secure process</td>\n</tr>\n<tr>\n<td>E304</td>\n<td>Invalid or malformed 3D Secure request</td>\n</tr>\n<tr>\n<td>E305</td>\n<td>Exemption not allowed</td>\n</tr>\n<tr>\n<td>E306</td>\n<td>Exemption error</td>\n</tr>\n<tr>\n<td>E307</td>\n<td>Fraud control error</td>\n</tr>\n<tr>\n<td>E308</td>\n<td>External MPI received wrong. Please check the data</td>\n</tr>\n<tr>\n<td>E309</td>\n<td>External MPI not enabled. Please contact support</td>\n</tr>\n<tr>\n<td>E500</td>\n<td>Transaction declined during card payment process</td>\n</tr>\n<tr>\n<td>E501</td>\n<td>Card rejected: invalid card number</td>\n</tr>\n<tr>\n<td>E502</td>\n<td>Card rejected: wrong expiration date</td>\n</tr>\n<tr>\n<td>E503</td>\n<td>Card rejected: wrong CVC/CVV2 number</td>\n</tr>\n<tr>\n<td>E504</td>\n<td>Card number not registered</td>\n</tr>\n<tr>\n<td>E505</td>\n<td>Card is expired</td>\n</tr>\n<tr>\n<td>E506</td>\n<td>Error during payment authorization. Please try again</td>\n</tr>\n<tr>\n<td>E507</td>\n<td>Cardholder has canceled the payment</td>\n</tr>\n<tr>\n<td>E508</td>\n<td>Transaction declined: AMEX cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E509</td>\n<td>Card blocked temporarily or under suspicion of fraud</td>\n</tr>\n<tr>\n<td>E510</td>\n<td>Card does not allow pre-authorization operations</td>\n</tr>\n<tr>\n<td>E511</td>\n<td>CVC/CVV2 number is required</td>\n</tr>\n<tr>\n<td>E512</td>\n<td>Transaction declined: card brand not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E513</td>\n<td>Transaction declined: DINERS cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E514</td>\n<td>Transaction type not allowed for this type of card</td>\n</tr>\n<tr>\n<td>E515</td>\n<td>Transaction declined by card issuer</td>\n</tr>\n<tr>\n<td>E516</td>\n<td>Transaction declined: DISCOVER cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E600</td>\n<td>Transaction declined during ApplePay/GooglePay payment process</td>\n</tr>\n<tr>\n<td>E601</td>\n<td>Incorrect ApplePay or GooglePay configuration</td>\n</tr>\n<tr>\n<td>E620</td>\n<td>Transaction declined during PayPal payment process</td>\n</tr>\n<tr>\n<td>E621</td>\n<td>Transaction declined during PayPal payment process: invalid currency</td>\n</tr>\n<tr>\n<td>E640</td>\n<td>Bizum transaction declined after three authentication attempts</td>\n</tr>\n<tr>\n<td>E641</td>\n<td>Bizum transaction declined due to failed authorization</td>\n</tr>\n<tr>\n<td>E642</td>\n<td>Bizum transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E643</td>\n<td>Bizum transaction canceled: the user does not want to continue</td>\n</tr>\n<tr>\n<td>E644</td>\n<td>Bizum transaction rejected by destination bank</td>\n</tr>\n<tr>\n<td>E645</td>\n<td>Bizum transaction rejected by origin bank</td>\n</tr>\n<tr>\n<td>E646</td>\n<td>Bizum transaction rejected by processor</td>\n</tr>\n<tr>\n<td>E647</td>\n<td>Bizum transaction failed while connecting with processor. Please try again</td>\n</tr>\n<tr>\n<td>E680</td>\n<td>Transaction declined during ClickToPay payment process</td>\n</tr>\n<tr>\n<td>E681</td>\n<td>Incorrect ClickToPay configuration</td>\n</tr>\n<tr>\n<td>E700</td>\n<td>Transaction declined during Cofidis payment process</td>\n</tr>\n<tr>\n<td>E999</td>\n<td>Service internal error. Please contact support</td>\n</tr>\n</tbody></table>\n"
+      "description": "<p>Our API returns a <code>statusCode</code> attribute along with every response. Some API calls return\na successful <code>E000</code> code, along with the message <code>Transaction approved</code>.</p>\n<p>Failed transactions return a specific <code>statusCode</code>, along with it&#39;s corresponding message.</p>\n<p>Here is a list of all the possible response/error codes our API can return:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E000</td>\n<td>Transaction approved</td>\n</tr>\n<tr>\n<td>E101</td>\n<td>Error with payment processor configuration. Check this in your dashboard or contact MONEI for support</td>\n</tr>\n<tr>\n<td>E102</td>\n<td>Invalid or inactive MID. Please contact the acquiring entity</td>\n</tr>\n<tr>\n<td>E103</td>\n<td>Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support</td>\n</tr>\n<tr>\n<td>E104</td>\n<td>Partial captures are not enabled in your account, please contact MONEI support</td>\n</tr>\n<tr>\n<td>E105</td>\n<td>MOTO Payment are not enabled in your account, please contact MONEI support</td>\n</tr>\n<tr>\n<td>E150</td>\n<td>Invalid or malformed request. Please check the message format</td>\n</tr>\n<tr>\n<td>E151</td>\n<td>Missing or malformed signature/auth</td>\n</tr>\n<tr>\n<td>E152</td>\n<td>Error while decrypting request</td>\n</tr>\n<tr>\n<td>E153</td>\n<td>Pre-authorization is expired and cannot be canceled or captured</td>\n</tr>\n<tr>\n<td>E154</td>\n<td>The payment date cannot be less than the cancellation or capture date</td>\n</tr>\n<tr>\n<td>E155</td>\n<td>The cancellation date exceeded the date allowed for pre-authorized operations</td>\n</tr>\n<tr>\n<td>E200</td>\n<td>Transaction failed during payment processing</td>\n</tr>\n<tr>\n<td>E201</td>\n<td>Transaction declined by the card-issuing bank</td>\n</tr>\n<tr>\n<td>E202</td>\n<td>Transaction declined by the issuing bank</td>\n</tr>\n<tr>\n<td>E203</td>\n<td>Payment method not allowed</td>\n</tr>\n<tr>\n<td>E204</td>\n<td>Wrong or not allowed currency</td>\n</tr>\n<tr>\n<td>E205</td>\n<td>Incorrect reference / transaction does not exist</td>\n</tr>\n<tr>\n<td>E206</td>\n<td>Invalid payment token</td>\n</tr>\n<tr>\n<td>E207</td>\n<td>Transaction failed: process time exceeded</td>\n</tr>\n<tr>\n<td>E208</td>\n<td>Transaction is currently being processed</td>\n</tr>\n<tr>\n<td>E209</td>\n<td>Duplicated operation</td>\n</tr>\n<tr>\n<td>E210</td>\n<td>Wrong or not allowed payment amount</td>\n</tr>\n<tr>\n<td>E211</td>\n<td>Refund declined by processor</td>\n</tr>\n<tr>\n<td>E212</td>\n<td>Transaction has already been captured</td>\n</tr>\n<tr>\n<td>E213</td>\n<td>Transaction has already been canceled</td>\n</tr>\n<tr>\n<td>E214</td>\n<td>The amount to be captured cannot exceed the pre-authorized amount</td>\n</tr>\n<tr>\n<td>E215</td>\n<td>The transaction to be captured has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E216</td>\n<td>The transaction to be canceled has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E217</td>\n<td>Transaction denied by processor to avoid duplicated operations</td>\n</tr>\n<tr>\n<td>E218</td>\n<td>Error during payment request validation</td>\n</tr>\n<tr>\n<td>E219</td>\n<td>Refund declined due to exceeded amount</td>\n</tr>\n<tr>\n<td>E220</td>\n<td>Transaction has already been fully refunded</td>\n</tr>\n<tr>\n<td>E221</td>\n<td>Transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E222</td>\n<td>The user has canceled the payment</td>\n</tr>\n<tr>\n<td>E223</td>\n<td>Waiting for the transaction to be completed</td>\n</tr>\n<tr>\n<td>E224</td>\n<td>No reason to decline</td>\n</tr>\n<tr>\n<td>E225</td>\n<td>Refund not allowed</td>\n</tr>\n<tr>\n<td>E226</td>\n<td>Transaction cannot be completed, violation of law</td>\n</tr>\n<tr>\n<td>E227</td>\n<td>Stop Payment Order</td>\n</tr>\n<tr>\n<td>E228</td>\n<td>Strong Customer Authentication required</td>\n</tr>\n<tr>\n<td>E300</td>\n<td>Transaction declined due to security restrictions</td>\n</tr>\n<tr>\n<td>E301</td>\n<td>3D Secure authentication failed</td>\n</tr>\n<tr>\n<td>E302</td>\n<td>Authentication process timed out. Please try again</td>\n</tr>\n<tr>\n<td>E303</td>\n<td>An error occurred during the 3D Secure process</td>\n</tr>\n<tr>\n<td>E304</td>\n<td>Invalid or malformed 3D Secure request</td>\n</tr>\n<tr>\n<td>E305</td>\n<td>Exemption not allowed</td>\n</tr>\n<tr>\n<td>E306</td>\n<td>Exemption error</td>\n</tr>\n<tr>\n<td>E307</td>\n<td>Fraud control error</td>\n</tr>\n<tr>\n<td>E308</td>\n<td>External MPI received wrong. Please check the data</td>\n</tr>\n<tr>\n<td>E309</td>\n<td>External MPI not enabled. Please contact support</td>\n</tr>\n<tr>\n<td>E500</td>\n<td>Transaction declined during card payment process</td>\n</tr>\n<tr>\n<td>E501</td>\n<td>Card rejected: invalid card number</td>\n</tr>\n<tr>\n<td>E502</td>\n<td>Card rejected: wrong expiration date</td>\n</tr>\n<tr>\n<td>E503</td>\n<td>Card rejected: wrong CVC/CVV2 number</td>\n</tr>\n<tr>\n<td>E504</td>\n<td>Card number not registered</td>\n</tr>\n<tr>\n<td>E505</td>\n<td>Card is expired</td>\n</tr>\n<tr>\n<td>E506</td>\n<td>Error during payment authorization. Please try again</td>\n</tr>\n<tr>\n<td>E507</td>\n<td>Cardholder has canceled the payment</td>\n</tr>\n<tr>\n<td>E508</td>\n<td>Transaction declined: AMEX cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E509</td>\n<td>Card blocked temporarily or under suspicion of fraud</td>\n</tr>\n<tr>\n<td>E510</td>\n<td>Card does not allow pre-authorization operations</td>\n</tr>\n<tr>\n<td>E511</td>\n<td>CVC/CVV2 number is required</td>\n</tr>\n<tr>\n<td>E512</td>\n<td>Transaction declined: card brand not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E513</td>\n<td>Transaction declined: DINERS cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E514</td>\n<td>Transaction type not allowed for this type of card</td>\n</tr>\n<tr>\n<td>E515</td>\n<td>Transaction declined by card issuer</td>\n</tr>\n<tr>\n<td>E516</td>\n<td>Transaction declined: DISCOVER cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E517</td>\n<td>Transaction not allowed for cardholder</td>\n</tr>\n<tr>\n<td>E518</td>\n<td>The amount exceeds the card limit</td>\n</tr>\n<tr>\n<td>E600</td>\n<td>Transaction declined during ApplePay/GooglePay payment process</td>\n</tr>\n<tr>\n<td>E601</td>\n<td>Incorrect ApplePay or GooglePay configuration</td>\n</tr>\n<tr>\n<td>E620</td>\n<td>Transaction declined during PayPal payment process</td>\n</tr>\n<tr>\n<td>E621</td>\n<td>Transaction declined during PayPal payment process: invalid currency</td>\n</tr>\n<tr>\n<td>E640</td>\n<td>Bizum transaction declined after three authentication attempts</td>\n</tr>\n<tr>\n<td>E641</td>\n<td>Bizum transaction declined due to failed authorization</td>\n</tr>\n<tr>\n<td>E642</td>\n<td>Bizum transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E643</td>\n<td>Bizum transaction canceled: the user does not want to continue</td>\n</tr>\n<tr>\n<td>E644</td>\n<td>Bizum transaction rejected by destination bank</td>\n</tr>\n<tr>\n<td>E645</td>\n<td>Bizum transaction rejected by origin bank</td>\n</tr>\n<tr>\n<td>E646</td>\n<td>Bizum transaction rejected by processor</td>\n</tr>\n<tr>\n<td>E647</td>\n<td>Bizum transaction failed while connecting with processor. Please try again</td>\n</tr>\n<tr>\n<td>E648</td>\n<td>Bizum transaction failed, payee is not found</td>\n</tr>\n<tr>\n<td>E649</td>\n<td>Bizum transaction failed, payer is not found</td>\n</tr>\n<tr>\n<td>E650</td>\n<td>Bizum REST not implemented</td>\n</tr>\n<tr>\n<td>E651</td>\n<td>Bizum transaction declined due to failed authentication</td>\n</tr>\n<tr>\n<td>E680</td>\n<td>Transaction declined during ClickToPay payment process</td>\n</tr>\n<tr>\n<td>E681</td>\n<td>Incorrect ClickToPay configuration</td>\n</tr>\n<tr>\n<td>E700</td>\n<td>Transaction declined during Cofidis payment process</td>\n</tr>\n<tr>\n<td>E999</td>\n<td>Service internal error. Please contact support</td>\n</tr>\n</tbody></table>\n"
     },
     {
       "name": "ApplePay Domain",
@@ -286,34 +286,6 @@
         "example": "john.doe@monei.com",
         "description": "The cardholder's email address."
       },
-      "Card": {
-        "title": "Card",
-        "type": "object",
-        "properties": {
-          "number": {
-            "type": "string",
-            "description": "The card number, as a string without any separators."
-          },
-          "cvc": {
-            "type": "string",
-            "description": "Card security code."
-          },
-          "expMonth": {
-            "type": "string",
-            "description": "Two-digit number representing the card’s expiration month."
-          },
-          "expYear": {
-            "type": "string",
-            "description": "Two-digit number representing the card’s expiration year."
-          },
-          "cardholderName": {
-            "$ref": "#/components/schemas/CardholderName"
-          },
-          "cardholderEmail": {
-            "$ref": "#/components/schemas/CardholderEmail"
-          }
-        }
-      },
       "AccountId": {
         "type": "string",
         "example": "aa9333ba-82de-400c-9ae7-087b9f8d2242",
@@ -512,6 +484,9 @@
           },
           "sessionDetails": {
             "$ref": "#/components/schemas/Payment-SessionDetails"
+          },
+          "expireAt": {
+            "$ref": "#/components/schemas/Payment-ExpireAt"
           }
         }
       },
@@ -953,7 +928,7 @@
           },
           "tokenizationMethod": {
             "type": "string",
-            "example": "androidPay",
+            "example": "applePay",
             "enum": [
               "applePay",
               "googlePay",
@@ -1006,12 +981,54 @@
           }
         }
       },
+      "Payment-PaymentMethodCardInput": {
+        "type": "object",
+        "description": "Details about the card used as payment method.\nIf provided, MONEI will try to confirm the payment directly.\n",
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "The card number, as a string without any separators."
+          },
+          "cvc": {
+            "type": "string",
+            "description": "Card security code."
+          },
+          "expMonth": {
+            "type": "string",
+            "description": "Two-digit number representing the card’s expiration month."
+          },
+          "expYear": {
+            "type": "string",
+            "description": "Two-digit number representing the card’s expiration year."
+          },
+          "cardholderName": {
+            "$ref": "#/components/schemas/CardholderName"
+          },
+          "cardholderEmail": {
+            "$ref": "#/components/schemas/CardholderEmail"
+          }
+        }
+      },
+      "Payment-PaymentMethodBizumInput": {
+        "type": "object",
+        "description": "Details about the Bizum account used for this payment.\nIf provided phone number is valid and registered in Bizum,\nMONEI will try to confirm the payment directly.\n",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "example": null,
+            "description": "The phone number used to pay with `bizum`."
+          }
+        }
+      },
       "Payment-PaymentMethodInput": {
         "type": "object",
         "description": "An information about a payment method used for this payment.\nWe recommend using `paymentToken` instead, as it is more secure\nway to pass sensitive payment information. Processing credit\ncard information on your server requires\n[PCI DSS compliance](https://www.investopedia.com/terms/p/pci-compliance.asp).\n",
         "properties": {
           "card": {
-            "$ref": "#/components/schemas/Card"
+            "$ref": "#/components/schemas/Payment-PaymentMethodCardInput"
+          },
+          "bizum": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodBizumInput"
           }
         }
       },
@@ -1280,9 +1297,10 @@
               "CONFIRM",
               "CHALLENGE",
               "FRICTIONLESS_CHALLENGE",
+              "BIZUM_CHALLENGE",
               "COMPLETE"
             ],
-            "description": "- `CONFIRM` - Your customer needs to be redirected to a\n  [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)\n  or confirm payment using\n  [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).\n  The **redirectUrl** will point to the hosted payment page.\n- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless\n   3d secure challenge page provided by the bank. The **redirectUrl**\n   will point to the frictionless 3d secure challenge page provided by the bank.\n- `CHALLENGE` - Your customer needs to be redirected to the\n  3d secure challenge page provided by the bank. The **redirectUrl**\n  will point to the 3d secure challenge page provided by the bank.\n- `COMPLETE` - The payment is completed. The **redirectUrl** will be\n  the **completeUrl** if it was provided when the payment was created.\n"
+            "description": "- `CONFIRM` - Your customer needs to be redirected to a\n  [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)\n  or confirm payment using\n  [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).\n  The **redirectUrl** will point to the hosted payment page.\n- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless\n   3d secure challenge page provided by the bank. The **redirectUrl**\n   will point to the frictionless 3d secure challenge page provided by the bank.\n- `CHALLENGE` - Your customer needs to be redirected to the\n  3d secure challenge page provided by the bank. The **redirectUrl**\n  will point to the 3d secure challenge page provided by the bank.\n- `COMPLETE` - The payment is completed. The **redirectUrl** will be\n  the **completeUrl** if it was provided when the payment was created.\n- `BIZUM_CHALLENGE` - Your customer will be redirected to the Bizum hosted payment page.\n"
           },
           "mustRedirect": {
             "type": "boolean",
@@ -1340,6 +1358,12 @@
         "type": "boolean",
         "example": false,
         "description": "If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create \"Pay By Link\" payments)."
+      },
+      "Payment-ExpireAt": {
+        "type": "number",
+        "format": "int64",
+        "example": 1663581391,
+        "description": "Payment expiration time."
       },
       "Subscription": {
         "title": "Subscription",
