@@ -36,10 +36,14 @@ Genuine card information cannot be used in test mode. Instead, use any of the fo
 
 ## Test Bizum phone numbers
 
-| PHONE NUMBER | STATUS CODE                                                 |
-| ------------ | ----------------------------------------------------------- |
-| +34500000000 | E000 (Transaction approved)                                 |
-| +34700000000 | E506 (Error during payment authorization. Please try again) |
+For all Bizum tests, the phone number used is +34500000000
+
+| AMOUNT                    | STATUS CODE                                                 | FLOW     |
+| ------------------------- | ----------------------------------------------------------- | -------- |
+| Below 5 EUR               | E000 (Transaction approved)                                 | RTP      |
+| Between 5 EUR and 10 EUR  | E506 (Error during payment authorization. Please try again) | RTP      |
+| Between 10 EUR and 15 EUR | E000 (Transaction approved)                                 | REDIRECT |
+| Above 15 EUR              | Phone number is not registered in Bizum                     |          |
 
 :::caution
 **In test environment Bizum only supports transactions below 5 EUR**
