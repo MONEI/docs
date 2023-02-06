@@ -173,35 +173,40 @@ Check the [MONEI JS Reference](monei-js/reference.md#bizum-component) for more o
 
 ### 3. Confirm the payment `Client-side`
 
-To complete the payment you need to submit the form
+To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function
 
-You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Bizum Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
+You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with PayPal Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
 
 ```js title="client.js"
 // Confirm the payment
 function moneiTokenHandler(token) {
-  var paymentForm = document.getElementById('payment-form');
-  // Insert the token ID into the form so it gets submitted to the server
-  var hiddenInput = document.createElement('input');
-  hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'paymentToken');
-  hiddenInput.setAttribute('value', token);
-  paymentForm.appendChild(hiddenInput);
+  return monei
+    .confirmPayment({paymentId: "{{payment_id}}", paymentToken: token})
+    .then(function (result) {
+      // IMPORTANT: some banks do not support new RTP (Request to Pay) flow
+      // and require a redirect to the hosted page to complete the payment
+      // You should check if mustRedirect is true and redirect the customer
+      if (result.nextAction && result.nextAction.mustRedirect) {
+        window.location.assign(result.nextAction.redirectUrl);
+      }
+      // At this moment you can show a customer the payment result
+      // But you should always rely on the result passed to the callback endpoint on your server
+      // to update the order status
+      console.log(result);
 
-  // Submit the form
-  paymentForm.submit();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 ```
 
-Your customer will be redirected to the Bizum confirmation screen
-
 :::note
-Currently Bizum only supports redirect flow.
+As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.
+:::
 
-**It is not possible to confirm payments using monei.js** [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function. As an alternative process, you can submit the generated `paymentToken` to your sever and then [confirm the payment](/api/#operation/payments_confirm) on the server-side.
-
-Bizum is implementing a new payment request flow with the push notification to the banking app that will allow confirming the payment without the redirect. This is what's known as RTP (Request to Pay.)
-The list of banks that completed the integration is: **Caixabank, BBVA, Grupo Cajamar, Banco Mediolanum, Orange Bank, Laboral Kutxa, Targobank, Banca Pueyo, Banco Caminos, Caixa Ontinyent**
+:::caution
+Bizum is migrating to the new payment request flow with the push notification to the banking app that will allow confirming the payment without the redirect. This is what's known as RTP (Request to Pay). This flow is not fully supported by all the banks yet. It is important to check the `mustRedirect` flag in the response to determine if the redirect is required.
 :::
 
 ### 4. An asynchronous request is sent to your server.
