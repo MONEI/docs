@@ -11,7 +11,7 @@ if (typeof window !== 'undefined') {
   module.exports.Cofidis = () => {
     return (
       <CofidisComponent
-        paymentId="e33b99de3a068dd3d646f66cce5fcafe89287b82"
+        paymentId="254299d118a4d7f0eedef2fc9092ba777e9825c4"
         language="en"
         onSubmit={(result) => {
           console.log(result);
