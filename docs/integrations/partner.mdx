@@ -1,0 +1,48 @@
+---
+id: partner
+title: Partner integration
+---
+
+You can integrate with MONEI as a partner to provide payment services to your clients.
+
+## Before you begin
+
+Please contact support@monei.com to get registered as a partner. When you are registered, you will receive:
+
+- Partner API Key that allows to access our APIs on behalf of each MONEI Account bound to your Partner account.
+- Unique registration link that allows your clients to register their MONEI Account. Every client registered using this link will be bound to your Partner account.
+- Access to the Partner Dashboard, where you can see payments, aggregated analytics as well as details about each MONEI Account bound to your Partner account.
+
+## Integration
+
+To access the MONEI APIs, you need to provide your Partner API Key in the `Authorization` header of each request as well as `MONEI-Account-ID` header with the ID of the MONEI Account to indicate which account you are acting on behalf of.
+
+### [REST API](/api)
+
+```shell script title="POST https://api.monei.com/v1/payments"
+curl --request POST 'https://api.monei.com/v1/payments' \
+--header 'Authorization: <PARTNER_API_KEY>' \
+--header 'MONEI-Account-ID: <MONEI_ACCOUNT_ID>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "amount": 110,
+  "currency": "EUR",
+  "orderId": "14379133960355",
+  "description": "Test Shop - #14379133960355",
+  "customer": {
+    "email": "john.doe@microapps.com"
+   },
+  "callbackUrl": "https://example.com/checkout/callback"
+}'
+
+```
+
+### [GraphQL API](graphql-api.md)
+
+```shell script title="POST https://graphql.monei.com"
+curl --request POST 'https://graphql.monei.com' \
+--header 'Authorization: YOUR_API_KEY' \
+--header 'MONEI-Account-ID: <MONEI_ACCOUNT_ID>' \
+--header 'Content-Type: application/json' \
+--data-raw '{"query":"account {name status}"}'
+```
