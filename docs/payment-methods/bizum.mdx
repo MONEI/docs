@@ -8,12 +8,12 @@ description: Learn how to accept Bizum payments with MONEI.
 
 You can start accepting Bizum payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Bizum Component](monei-js/reference.md#bizu-component). No additional configuration is required to use Bizum in Hosted Payment Page.
 
-Our [Bizum Component](monei-js/reference.md#bizum-component) renders Bizum button to your payment page.
+Our [Bizum Component](monei-js/reference.md#bizum-component) renders a Bizum button to your payment page.
 When a customer selects Bizum, the component presents a Bizum overlay, where a customer can enter his phone number registered in Bizum to complete the payment process.
 
-Bizum transactions can be as high as 1.500 eur. Any transaction exceeding this amount is rejected.
+Bizum transactions can be as high as 1.500 EUR. Any transaction exceeding this amount is rejected.
 
-Bizum also has the possibility of carrying out the authentication and the capture of the operation separately. The difference with the standard Bizum Payment is in the type of transaction `AUTH`. Once the authentication is done, you have a maximum of 30 days to capture the operation. After that time, the authorization will not be effective. It can only be used through the RTP process.
+With Bizum, you can authorize and capture payments separately. After the payment is authorized, you have up to 30 days to capture it. Payment authorizations available only if RTP (Request to Pay) flow is supported by the customer's bank.
 
 Bizum transactions can be refunded within 365 days after the initial transaction has been processed.
 
