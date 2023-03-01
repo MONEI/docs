@@ -13,6 +13,8 @@ When a customer selects Bizum, the component presents a Bizum overlay, where a c
 
 Bizum transactions can be as high as 1.500 eur. Any transaction exceeding this amount is rejected.
 
+Bizum also has the possibility of carrying out the authentication and the capture of the operation separately. The difference with the standard Bizum Payment is in the type of transaction `AUTH`. Once the authentication is done, you have a maximum of 30 days to capture the operation. After that time, the authorization will not be effective. It can only be used through the RTP process.
+
 Bizum transactions can be refunded within 365 days after the initial transaction has been processed.
 
 import {Bizum} from '../../src/components/Bizum';
