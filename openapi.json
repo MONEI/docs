@@ -1503,10 +1503,7 @@
         "required": [
           "amount",
           "currency",
-          "callbackUrl",
-          "paymentCallbackUrl",
-          "interval",
-          "intervalCount"
+          "interval"
         ],
         "properties": {
           "amount": {
@@ -1916,7 +1913,7 @@
       },
       "CancelSubscriptionBasicRequest": {
         "value": {
-          "calncelAtPeriodEnd": true
+          "cancelAtPeriodEnd": true
         }
       },
       "PauseSubscriptionBasicRequest": {
