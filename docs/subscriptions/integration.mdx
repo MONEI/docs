@@ -77,11 +77,11 @@ $monei->subscriptions->create([
   ],
   'amount'=> 110,
   'currency'=> 'EUR',
-  'intervalCount'=> 'month',
-  'intervalCount'=> 1,
+  'interval_count'=> 'month',
+  'interval_count'=> 1,
   'description'=> 'MoonMail Lite Monthly',
-  'callbackUrl'=> 'https=>//example.com/subscription/callback',
-  'paymentCallbackUrl'=> 'https=>//example.com/payment/callback'
+  'callback_url'=> 'https://example.com/subscription/callback',
+  'payment_callback_url'=> 'https://example.com/payment/callback'
 ]);
 ```
 
@@ -141,8 +141,8 @@ monei.subscriptions.activate('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {
 $monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
 $monei->subscriptions->activate(
   '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', [
-  'completeUrl' => 'https://example.com/checkout/complete',
-  'cancelUrl' => 'https://example.com/checkout/cancel'
+  'complete_url' => 'https://example.com/checkout/complete',
+  'cancel_url' => 'https://example.com/checkout/cancel'
 ]);
 ```
 
