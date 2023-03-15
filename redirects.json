@@ -78,5 +78,10 @@
     "source": "/docs/e-commerce/magento2/",
     "target": "/docs/e-commerce/adobe-commerce/",
     "status": "301"
+  },
+  {
+    "source": "/docs/integrations/partner/",
+    "target": "/docs/integrations/monei-connect/",
+    "status": "301"
   }
 ]

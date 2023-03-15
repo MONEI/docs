@@ -8,7 +8,7 @@ module.exports = {
         'integrations/build-custom-checkout',
         'integrations/pay-by-link',
         'integrations/use-qr-payments',
-        'integrations/partner',
+        'integrations/monei-connect',
       ],
       'E-commerce platforms': [
         'e-commerce/shopify',
