@@ -1,10 +1,10 @@
 ---
 id: pay-by-link
 title: Pay By Link
-description: Use Pay By Link to send your customers a link to pay online in one click! Works with or without a website. Send payment links via email or SMS.
+description: Use Pay By Link to send your customers a link to pay online in one click! Works with or without a website. Send payment links via email, WhatsApp or SMS.
 ---
 
-Send your customers a unique link to pay online in one click!
+Send your customers a unique link via email, WhatsApp or SMS to pay online in one click!
 
 ## Before you begin
 
@@ -111,7 +111,9 @@ In the response from the first request you'll get the payment `id`:
 }
 ```
 
-Use payment `id` to send a payment link to your customer.
+Use payment `id` to send a payment link to your customer. If you provided customer `email` in the first request, MONEI will send the payment link to your customer via email. If you only provided customer `phone`, MONEI will try to send the payment link via WhatsApp, if the phone number is not registered in WhatsApp, MONEI will send the payment link via SMS.
+
+You can also specify the delivery `channel` manually in the request body.
 
 <Tabs
   defaultValue="curl"
@@ -128,7 +130,7 @@ curl --request POST 'https://api.monei.com/v1/payment/af6029f80f5fc73a8ad2753eea
 --header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "language": "es"
+  "language": "es",
 }'
 
 ```
@@ -158,3 +160,5 @@ $monei->payments->sendLink([
 
   </TabItem>
 </Tabs>
+
+See the full list of [request parameters](/api/#operation/payments_send_link).
