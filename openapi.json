@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.3.1",
+    "version": "1.3.2",
     "title": "MONEI API v1",
     "description": "<p>The MONEI API is organized around\n<a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a>. Our\nAPI has predictable resource-oriented URLs, accepts JSON-encoded request\nbodies, returns JSON-encoded responses, and uses standard HTTP response\ncodes, authentication, and verbs.</p>\n<h4 id=\"base-url\">Base URL:</h4>\n<p><a href=\"https://api.monei.com/v1\">https://api.monei.com/v1</a></p>\n<h4 id=\"client-libraries\">Client libraries:</h4>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>\n<h4 id=\"important\">Important:</h4>\n<p><strong>If you are not using our official SDKs, you need to provide a valid <code>User-Agent</code> header in each request, otherwise your requests will be rejected.</strong></p>\n"
   },
@@ -36,45 +36,12 @@
         "in": "header",
         "name": "Authorization",
         "description": "<p>The MONEI API uses API key to authenticate requests. You can view and manage your API key in\nthe <a href=\"https://dashboard.monei.com/settings/api\">MONEI Dashboard</a>.</p>\n<p>Test mode private keys have the prefix <code>pk_test_</code> and live mode private keys have the\nprefix <code>pk_live_</code>.</p>\n<p>Your API key carries many privileges, so be sure to keep them secure! Do not share your secret API\nkey in publicly accessible areas such as GitHub, client-side code, and so forth.</p>\n<p>Include your API Key as an <code>Authorization</code> header in all MONEI API requests.</p>\n<p>All API requests must be made over\n<a href=\"https://en.wikipedia.org/wiki/HTTP_Secure\">HTTPS</a>. Calls made over plain HTTP will fail. API\nrequests without authentication will also fail.</p>\n"
-      }
-    },
-    "parameters": {
-      "accountId": {
+      },
+      "AccountId": {
+        "type": "apiKey",
         "in": "header",
-        "name": "Monei-Account-ID",
-        "required": false,
-        "schema": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "description": "The ID of the account to use for this request. Only for master accounts."
-      },
-      "paymentId": {
-        "name": "id",
-        "in": "path",
-        "required": true,
-        "description": "The payment ID",
-        "schema": {
-          "$ref": "#/components/schemas/Payment-Id"
-        }
-      },
-      "sequenceId": {
-        "name": "sequenceId",
-        "in": "path",
-        "required": true,
-        "description": "The sequence ID",
-        "schema": {
-          "$ref": "#/components/schemas/Payment-SequenceId"
-        }
-      },
-      "subscriptionId": {
-        "name": "id",
-        "in": "path",
-        "required": true,
-        "description": "The subscription ID",
-        "schema": {
-          "$ref": "#/components/schemas/Subscription-Id"
-        }
+        "name": "MONEI-Account-ID",
+        "description": "<p>If you are integrating with MONEI as a partner, include your Master Account API Key as an <code>Authorization</code> header in all MONEI API requests.</p>\n<p>Include Account ID as a <code>MONEI-Account-ID</code> header in all MONEI API requests to indicate which account you are acting on behalf of.</p>\n"
       }
     },
     "responses": {
@@ -1104,18 +1071,20 @@
         "default": "SALE",
         "enum": [
           "SALE",
-          "AUTH"
+          "AUTH",
+          "PAYOUT"
         ],
-        "description": "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don’t capture the funds until later.\n"
+        "description": "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don’t capture the funds until later.\n  - `PAYOUT` - Send funds to the customer\n"
       },
       "Payment-MessageChannel": {
         "type": "string",
         "example": "EMAIL",
         "enum": [
           "EMAIL",
+          "WHATSAPP",
           "SMS"
         ],
-        "description": "The channel used to send the payment message.\nif `customerEmail` or `customerPhone` is provided this parameter is ignored.\n"
+        "description": "The channel used to send the payment message.\n"
       },
       "Payment-MessageLanguage": {
         "type": "string",
@@ -1503,10 +1472,7 @@
         "required": [
           "amount",
           "currency",
-          "callbackUrl",
-          "paymentCallbackUrl",
-          "interval",
-          "intervalCount"
+          "interval"
         ],
         "properties": {
           "amount": {
@@ -1844,6 +1810,35 @@
         "description": "Number of days the trial period lasts."
       }
     },
+    "parameters": {
+      "paymentId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The payment ID",
+        "schema": {
+          "$ref": "#/components/schemas/Payment-Id"
+        }
+      },
+      "sequenceId": {
+        "name": "sequenceId",
+        "in": "path",
+        "required": true,
+        "description": "The sequence ID",
+        "schema": {
+          "$ref": "#/components/schemas/Payment-SequenceId"
+        }
+      },
+      "subscriptionId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The subscription ID",
+        "schema": {
+          "$ref": "#/components/schemas/Subscription-Id"
+        }
+      }
+    },
     "examples": {
       "CreatePaymentBasicRequest": {
         "value": {
@@ -1916,7 +1911,7 @@
       },
       "CancelSubscriptionBasicRequest": {
         "value": {
-          "calncelAtPeriodEnd": true
+          "cancelAtPeriodEnd": true
         }
       },
       "PauseSubscriptionBasicRequest": {
@@ -1940,11 +1935,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -1972,7 +1962,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->applePayDomain->register([\n    'domainName' => 'example.com'\n]);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->applePayDomain->register([\n    'domain_name' => 'example.com'\n]);\n"
           },
           {
             "lang": "Python",
@@ -1989,11 +1979,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2026,7 +2011,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n    'amount' => 110, // 1.10 EUR\n    'orderId' => '14379133960355',\n    'currency' => 'EUR',\n    'paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n    'callbackUrl' => 'https://example.com/checkout/callback',\n    'completeUrl' => 'https://example.com/checkout/complete'\n]);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n    'amount' => 110, // 1.10 EUR\n    'orderId' => '14379133960355',\n    'currency' => 'EUR',\n    'payment_token' => '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n    'callback_url' => 'https://example.com/checkout/callback',\n    'complete_url' => 'https://example.com/checkout/complete'\n]);\n"
           },
           {
             "lang": "Python",
@@ -2048,11 +2033,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2094,11 +2074,6 @@
             "APIKey": []
           }
         ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
-          }
-        ],
         "tags": [
           "Payments"
         ],
@@ -2128,7 +2103,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->confirm(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->confirm(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['payment_token' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
           },
           {
             "lang": "Python",
@@ -2150,11 +2125,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2210,11 +2180,6 @@
             "APIKey": []
           }
         ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
-          }
-        ],
         "tags": [
           "Payments"
         ],
@@ -2244,7 +2209,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['cancellationReason' => 'requested_by_customer']\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['cancellation_reason' => 'requested_by_customer']\n);\n"
           },
           {
             "lang": "Python",
@@ -2266,11 +2231,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2302,7 +2262,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->refund(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refundReason' => 'requested_by_customer']\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->refund(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refund_reason' => 'requested_by_customer']\n);\n"
           },
           {
             "lang": "Python",
@@ -2324,11 +2284,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2360,7 +2315,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', [\n  'orderId' => '14379133960355',\n  'callbackUrl' => 'https://example.com/checkout/callback',\n]);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', [\n  'orderId' => '14379133960355',\n  'callback_url' => 'https://example.com/checkout/callback',\n]);\n"
           },
           {
             "lang": "Python",
@@ -2378,15 +2333,10 @@
       "post": {
         "operationId": "payments_send_link",
         "summary": "Send Payment Link",
-        "description": "Sends a payment link to the customer.\n",
+        "description": "Sends a payment link to the customer. If payment has customer email, the link is sent via email.\nIf payment has customer phone, the link is sent via WhatsApp, if the phone number is not registered in WhatsApp,\nthe link is sent via SMS.\n",
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2418,7 +2368,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendLink(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customerEmail' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendLink(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customer_email' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
           },
           {
             "lang": "Python",
@@ -2436,15 +2386,10 @@
       "post": {
         "operationId": "payments_send_receipt",
         "summary": "Send Payment Receipt",
-        "description": "Sends a payment receipt to the customer.\n",
+        "description": "Sends a payment receipt to the customer. If payment has customer email, the receipt is sent via email.\nIf payment has customer phone, the receipt is sent via WhatsApp, if the phone number is not registered in WhatsApp,\nthe receipt is sent via SMS.\n",
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2476,7 +2421,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendReceipt(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customerEmail' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendReceipt(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customer_email' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
           },
           {
             "lang": "Python",
@@ -2493,11 +2438,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2530,7 +2470,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->create([\n    'customer' => [\n        'name' => 'John Doe',\n        'email' => 'john.doe@monei.com'\n    ],\n    'amount' => 110,\n    'currency' => 'EUR',\n    'intervalCount' => 'month',\n    'intervalCount' => 1,\n    'description' => 'MoonMail Lite Monthly',\n    'callbackUrl' => 'https=>//example.com/subscription/callback',\n    'paymentCallbackUrl' => 'https=>//example.com/payment/callback'\n]);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->create([\n    'customer' => [\n        'name' => 'John Doe',\n        'email' => 'john.doe@monei.com'\n    ],\n    'amount' => 110,\n    'currency' => 'EUR',\n    'interval_count' => 'month',\n    'interval_count' => 1,\n    'description' => 'MoonMail Lite Monthly',\n    'callback_url' => 'https=>//example.com/subscription/callback',\n    'payment_callback_url' => 'https=>//example.com/payment/callback'\n]);\n"
           },
           {
             "lang": "Python",
@@ -2552,11 +2492,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2589,11 +2524,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2650,11 +2580,6 @@
             "APIKey": []
           }
         ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
-          }
-        ],
         "tags": [
           "Subscriptions"
         ],
@@ -2684,7 +2609,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->activate(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->activate(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['payment_token' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
           },
           {
             "lang": "Python",
@@ -2706,11 +2631,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2742,7 +2662,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->cancel(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['cancelAtPeriodEnd' => true]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->cancel(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['cancel_at_period_end' => true]\n);\n"
           },
           {
             "lang": "Python",
@@ -2764,11 +2684,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
@@ -2800,7 +2715,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->pause(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['pauseAtPeriodEnd' => true]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->pause(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['pause_at_period_end' => true]\n);\n"
           },
           {
             "lang": "Python",
@@ -2822,11 +2737,6 @@
         "security": [
           {
             "APIKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/accountId"
           }
         ],
         "tags": [
