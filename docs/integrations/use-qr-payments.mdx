@@ -120,14 +120,20 @@ Present to the user a unique QR code generated for this specific payment. To acc
 You can directly render it on to your webpage using this html code:
 
 ```html
-<img src="https://secure.monei.com/payments/{{payment_id}}/qr" width="300" height="300" />
+<img src="https://secure.monei.com/payments/{{payment_id}}/qr?format=svg&size=300" width="300" height="300" />
 ```
+
+![QR](https://secure.monei.com/payments/9407ed9d3b691dbf19f69c6b30a9a26c6821564d/qr?format=svg&size=300)
+
+By default, the format is `png` but you can also use `svg` format by adding `?format=svg` to the url. You can also modify the size of the QR code by adding `?size=400` to the url (min: 100, max: 1000).
+
+You can customize the color and icon in your [MONEI Dashboard → Settings → Branding](https://dashboard.monei.com/settings/branding).
 
 As an alternative you can redirect the user to our Hosted Payment Page that will show the QR code.
 
 To get the QR code add `?qr=1` parameter to the `nextAction.redirectUrl` you'll receive in the response.
 
-Example: [https://secure.monei.com/payments/7a778093da6f78c41de8bef7868ebcb464a8d070?qr=1](https://secure.monei.com/payments/7a778093da6f78c41de8bef7868ebcb464a8d070?qr=1)
+Example: [https://secure.monei.com/payments/9407ed9d3b691dbf19f69c6b30a9a26c6821564d?qr=1](https://secure.monei.com/payments/9407ed9d3b691dbf19f69c6b30a9a26c6821564d?qr=1)
 
 ![Hosted Payment Page QR](/img/qr-demo-2.png)
 
