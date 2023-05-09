@@ -25,13 +25,18 @@ const features = [
     description:
       'Easily integrate MONEI with Shopify, Wix, Salesforce Commerce Cloud, WooCommerce, PrestaShop, commercetools, Spreedly, saleor and other popular platforms.',
     url: '/docs/#integrate-with-your-e-commerce-platform'
+  },
+  {
+    title: 'Create a payments ecosystem',
+    description: 'Offer your merchants and clients the most advanced payments\' platform so your solution shines among your competitors.',
+    url: '/docs/monei-connect'
   }
 ];
 
 function Feature({imageUrl, title, description, url}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={clsx('col col--4', styles.feature)}>
+    <div className={clsx('col', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <img className={styles.featureImage} src={imgUrl} alt={title} />
