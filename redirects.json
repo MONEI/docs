@@ -81,7 +81,12 @@
   },
   {
     "source": "/docs/integrations/partner/",
-    "target": "/docs/integrations/monei-connect/",
+    "target": "/docs/monei-connect/",
+    "status": "301"
+  },
+  {
+    "source": "/docs/integrations/monei-connect/",
+    "target": "/docs/monei-connect/",
     "status": "301"
   }
 ]

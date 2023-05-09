@@ -1,6 +1,7 @@
 module.exports = {
   docs: [
     'getting-started',
+    'monei-connect',
     {
       Integrations: [
         'integrations/use-prebuilt-payment-page',
@@ -8,7 +9,6 @@ module.exports = {
         'integrations/build-custom-checkout',
         'integrations/pay-by-link',
         'integrations/use-qr-payments',
-        'integrations/monei-connect',
       ],
       'E-commerce platforms': [
         'e-commerce/shopify',
