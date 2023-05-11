@@ -23,6 +23,8 @@
   --ifm-list-item-margin: 0.5rem;
   --ifm-navbar-padding-horizontal: 25px;
   --ifm-color-secondary-contrast-background: #f3f4f6;
+  --ifm-container-width-xl: 1400px;
+  --ifm-spacing-horizontal: 1.5rem;
 }
 
 body {
