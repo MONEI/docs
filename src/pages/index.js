@@ -27,8 +27,8 @@ const features = [
     url: '/docs/#integrate-with-your-e-commerce-platform'
   },
   {
-    title: 'Create a payments ecosystem',
-    description: 'Offer your merchants and clients the most advanced payments\' platform so your solution shines among your competitors.',
+    title: 'Connect with business platforms and marketplaces',
+    description: 'Help your users/merchants accept more payment methods while saving time and money integrating payments into your business platform or marketplace.',
     url: '/docs/monei-connect'
   }
 ];
