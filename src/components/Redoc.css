@@ -46,6 +46,7 @@
 }
 
 .redoc-wrap .menu-content {
+  width: 280px;
   border-right: 1px solid var(--ifm-toc-border-color);
 }
 

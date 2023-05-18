@@ -112,6 +112,11 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
   <title>Checkout</title>
   <script src="https://js.monei.com/v1/monei.js"></script>
 </head>
+<body>
+  <form id="payment-form" action="https://secure.monei.com/payments/{{payment_id}}" method="GET">
+    <button id="payment-button" type="submit">Pay</button>
+  </form>
+</body>
 ```
 
 You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)). You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
