@@ -19,11 +19,15 @@ Bizum transactions can be refunded within 365 days after the initial transaction
 
 import {Bizum} from '../../src/components/Bizum';
 
-<div className="preview-frame">
+<div className="preview-frame" style={{marginBottom: 20}}>
   <div className="payment-button">
     <Bizum />
   </div>
 </div>
+
+:::note
+You can [send payment request](/api/#operation/payments_send_request) directly to the customer's phone. If Bizum payment method is available and the phone number is registered in Bizum, the customer will get a push notification to confirm the payment directly in the banking app, otherwise, he will receive a link to pay via WhatsApp. This feature does not require UI Component.
+:::
 
 ## Before you begin
 

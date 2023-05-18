@@ -436,14 +436,6 @@ cofidisWidget.render('#cofidis_widget');
 - **redner: (container: string | DOMElement) => void** - renders the widget to the container DOM element
 - **updateProps: (options: CofidisWidgetProps) => void ** - updates the widget with new options (use this method to update amount)
 
-## `confirmPayment` function
-
-After you generate the **paymentToken** using one of the Components, use this function to confirm the payment passing the obtained `paymentToken`. It will automatically show a popup window with a 3D Secure confirmation screen if required.
-
-You can also use this function without a **paymentToken** attribute. It will show a payment popup window.
-
-You can provide additional customer information in parameters.
-
 ## `CofidisPay` Component
 
 Cofidis Pay is a customizable Component that renders a Cofidis Pay payment button.
@@ -536,6 +528,8 @@ declare const confirmPayment: (params: ConfirmPaymentParams) => Promise<PaymentR
 - **generatePaymentToken** `boolean` - If set to true a permanent token that represents a payment method used in the payment will be generated.
 - **fullscreen** `boolean` - Set this parameter to true to open a fullscreen confirmation window.
 - **language** `string` - Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)). Supported locales include `en`, `es`, `ca`, `pt`, `de`, `it`, `fr`, `nl`, `et`, `fi`, `lv`, `no`, `pl` and `ru`. If provided overrides browser detected user language.
+- **allowedPaymentMethods** `string[]` - List of allowed payment methods. If provided overrides payment methods allowed in the payment. Supported payment methods: `card`, `googlePay`,`clickToPay`, `bizum`, `paypal`.
+- **customDomain** `string` - Custom domain to use for the payment popup window. If you have custom domain configured this option is required for the popup window to work correctly.
 
 Check [confirm payment](/api/#operation/payments_confirm) for the full list of parameters.
 
