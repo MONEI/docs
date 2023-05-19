@@ -8,7 +8,7 @@ MONEI Payment Modal is the simplest way to securely collect payments from your c
 
 Collecting payments on your website consists of creating a payment object, and confirming the payment.
 
-![MONEI Payment Modal preview](/img/payment-modal.jpg)
+![MONEI Payment Modal preview](/img/payment-modal.png)
 
 :::note
 Apple Pay and Bizum are not available when using MONEI Payment Modal integration.
@@ -119,7 +119,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </body>
 ```
 
-You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)). You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
+You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)). You can also provide additional parameters like `customer.email`. Check all available [parameters](/monei-js/reference.md/#confirmpayment-function).
 
 ```js title="client.js"
 // Handle form submission.

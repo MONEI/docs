@@ -529,7 +529,7 @@ declare const confirmPayment: (params: ConfirmPaymentParams) => Promise<PaymentR
 - **fullscreen** `boolean` - Set this parameter to true to open a fullscreen confirmation window.
 - **language** `string` - Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)). Supported locales include `en`, `es`, `ca`, `pt`, `de`, `it`, `fr`, `nl`, `et`, `fi`, `lv`, `no`, `pl` and `ru`. If provided overrides browser detected user language.
 - **allowedPaymentMethods** `string[]` - List of allowed payment methods. If provided overrides payment methods allowed in the payment. Supported payment methods: `card`, `googlePay`,`clickToPay`, `bizum`, `paypal`.
-- **customDomain** `string` - Custom domain to use for the payment popup window. If you have custom domain configured this option is required for the popup window to work correctly.
+- **customDomain** `string` - Custom domain to use for the payment popup window. If you have custom domain configured this option is required for the popup window to work.
 
 Check [confirm payment](/api/#operation/payments_confirm) for the full list of parameters.
 
