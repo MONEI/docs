@@ -31,7 +31,7 @@ The monei object is your entrypoint to the rest of the monei.js SDK.
 
 ## `CardInput` Component
 
-CardInput is a customizable Component used to collect sensitive credit card information in your payment forms.
+CardInput is a customizable Component used to collect sensitive card information in your payment forms.
 
 ### Create an instance of the CardInput Component.
 
