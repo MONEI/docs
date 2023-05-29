@@ -11,13 +11,13 @@ const features = [
   {
     title: 'Use a prebuilt payment page',
     description:
-      'MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Credit Cards, PayPal, Bizum, GooglePay, Apple Pay & Installments by Cofidis.',
+      'MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Cards, PayPal, Bizum, GooglePay, Apple Pay & Installments by Cofidis.',
     url: '/docs/integrations/use-prebuilt-payment-page'
   },
   {
     title: 'Build a custom checkout',
     description:
-      'Use MONEI UI components to build your custom checkout and securely accept Credit & Debit Cards, PayPal, Bizum, GooglePay, Apple Pay, multiple BNPL solutions, MB Way, SEPA Direct Debit and other payment methods.',
+      'Use MONEI UI components to build your custom checkout and securely accept Cards, PayPal, Bizum, GooglePay, Apple Pay, multiple BNPL solutions, MB Way, SEPA Direct Debit and other payment methods.',
     url: '/docs/integrations/build-custom-checkout'
   },
   {
