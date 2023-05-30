@@ -22,7 +22,7 @@
     },
     {
       "name": "Payments",
-      "description": "To charge a credit or a debit card, you create a Payment object.\nYou can capture, cancel, refund and confirm individual payments.\nPayments are identified by a unique, random ID.\n\nWe recommend that you create exactly one Payment for each\norder or customer session in your system.\n\n## Payment object\n\n<SchemaDefinition schemaRef=\"#/components/schemas/Payment\" />\n"
+      "description": "To charge a card, you create a Payment object.\nYou can capture, cancel, refund and confirm individual payments.\nPayments are identified by a unique, random ID.\n\nWe recommend that you create exactly one Payment for each\norder or customer session in your system.\n\n## Payment object\n\n<SchemaDefinition schemaRef=\"#/components/schemas/Payment\" />\n"
     },
     {
       "name": "Subscriptions",
