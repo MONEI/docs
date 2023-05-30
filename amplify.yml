@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - nvm install 14
+        - nvm install 16
         - yarn install
         - aws s3 cp s3://$JS_BUCKET/api/v1/openapi.json ./openapi.json
     build:

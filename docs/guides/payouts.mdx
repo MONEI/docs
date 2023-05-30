@@ -1,0 +1,167 @@
+---
+id: payouts
+title: Payouts
+---
+
+MONEI Payouts API allows you to send money to your clients via Bizum or card instead of charging them.
+
+:::warning
+Payouts API is currently in a closed beta. If you want to use it, please contact our [Support Team](https://support.monei.com/hc/requests/new)
+:::
+
+## Before you begin
+
+This page explains how to do payouts with Bizum or card. If you don't have Bizum payment method configured, please contact our [Support Team](https://support.monei.com/hc/requests/new).
+
+Before you start, you need to make sure that you have Bizum enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods).
+
+To test your integration:
+
+- Use your [test mode](testing.md) Account ID and API Key.
+- Use the test [phone numbers](testing.md#test-bizum-phone-numbers).
+- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+
+
+## Payouts with Bizum
+
+Bizum payouts do not require client's confirmation. You only need to know the phone number.
+
+:::caution
+Bizum payouts are not fully supported by all the banks yet. **If the client's bank doesn't support Bizum payouts, the request will fail**.
+:::
+
+### 1. Create a new payment on your server.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.com/v1/payments"
+curl --request POST 'https://api.monei.com/v1/payments' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "description": "Test Shop - #14379133960355",
+    "transactionType": "PAYOUT",
+    "paymentMethod": {
+      "bizum": {
+        "phoneNumber": "+34500000000"
+      }
+    }
+}'
+```
+
+</TabItem>
+
+<TabItem value="node">
+
+```js title="server.js"
+const {Monei, TransactionTypes} = require('@monei-js/node-sdk');
+const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+monei.payments.create({
+  amount: 110,
+  currency: 'EUR',
+  orderId: '14379133960355',
+  description: 'Test Shop - #14379133960355',
+  transactionType: TransactionTypes.PAYOUT,
+  paymentMethod: {
+    bizum: {
+      phoneNumber: "+34500000000"
+    }
+  }
+});
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php title="server.php"
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+$monei->payments->create([
+  'amount' => 110,
+  'currency' => 'EUR',
+  'orderId' => '14379133960355',
+  'description' => 'Test Shop - #14379133960355',
+  'transactionType' => 'PAYOUT',
+  'paymentMethod' => [
+    'bizum' => [
+      'phoneNumber' => '+34500000000'
+    ]
+  ]
+]);
+```
+
+</TabItem>
+</Tabs>
+
+The following parameters are required:
+
+- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
+- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
+- **transactionType** `string` - `PAYOUT`
+- **paymentMethod** `object` - Payment method object. It must contain `bizum` object with `phoneNumber` property.
+
+Check all available [request parameters](/api/#operation/payments_create).
+
+### 2. Handle the response
+
+Example response:
+
+Bizum payouts are executed immediately. If the request is successful, you will receive a `PAID_OUT` status in the response.
+
+```json
+{
+    "id": "af6029f80f5fc73a8ad2753eea0b1be0",
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "description": "Test Shop - #14379133960355",
+    "livemode": true,
+    "status": "PAID_OUT",
+    "statusCode": "E000",
+    "statusMessage": "Transaction approved",
+    "createdAt": 1685430038,
+    "updatedAt": 1685430039,
+    "paymentMethod": {
+        "method": "bizum",
+        "bizum": {
+            "phoneNumber": "+34500000000",
+            "integrationType": "REST"
+        }
+    },
+    "nextAction": {
+        "type": "COMPLETE",
+        "redirectUrl": "https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0/receipt"
+    }
+}
+```
+
+Check the full list of returned [response parameters](/api/#section/Payment-object).
+
+Optionally, you can redirect the client to the `nextAction.redirectUrl` to show the payment receipt.
+
+## Payouts with card
+
+Payouts are supported by all our integrations. You can use a prebuilt payment page or build a custom checkout to let your client enter card details to receive the payout.
+
+Pass the `transactionType` parameter with the value `PAYOUT` to create a payout in the first step of our guides.
+
+- [Use a prebuilt payment page](integrations/use-prebuilt-payment-page.mdx)
+- [Build a custom checkout](integrations/build-custom-checkout.mdx)
+
+Payouts are only supported for card and Bizum payments so, you need to pass `allowedPaymentMethods` parameter with the values of `card` and/or `bizum` (in case you have more payment methods enabled)
+
+
