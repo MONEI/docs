@@ -1,0 +1,38 @@
+---
+id: migrate-tokens
+sidebar_label: Migrate your tokenized cards
+title: Migrate your tokenized cards to MONEI
+---
+
+# Migrate your tokenized cards to MONEI
+
+If you have cards tokenized by your payment processor or in your own database, you can securely migrate them to MONEI. This way, you can use them to create payments and subscriptions without requesting your customers to confirm their card details again.
+
+Contact your payment processor to perform PCI-compliant migration. The payment processor should use MONEI Public PGP Key downloaded from [https://assets.monei.com/keys/pgp-public-key](https://assets.monei.com/keys/pgp-public-key) to securely encrypt the card details and send them directly to MONEI - [support@monei.com](mailto:support@monei.com).
+
+We will need the following information for each card:
+
+- **PAN number** - the full card number
+- **Cardholder name** - optional
+- **Expiration date** - month and year
+- **Initial transaction ID** - the identifier returned by the card network when the initial transaction was confirmed by the customer, also known as COF (Credential On File) ID
+
+### Encrypting file with MONEI PGP Key
+
+If you’re unfamiliar with PGP, see [GPG](http://gnupg.org/) and start by [importing a public key](http://www.gnupg.org/gph/en/manual.html#AEN84). Use the MONEI Public PGP key downloaded from [https://assets.monei.com/keys/pgp-public-key](https://assets.monei.com/keys/pgp-public-key) to encrypt sensitive data for PCI-compliant migration.
+
+```bash
+gpg --import pgp-public-key
+gpg --encrypt --recipient admin@monei.com SENSITIVE_DATA
+```
+This creates SENSITIVE_DATA.gpg with the following information:
+
+- **Key ID**: `D1EAC68D28C86E2A7DDD360AC6B156F9C06E825A`
+- **Key type**: `RSA`
+- **Key size**: `4096 bits`
+- **Fingerprint**: `D1EA C68D 28C8 6E2A 7DDD  360A C6B1 56F9 C06E 825A`
+- **User ID**: `MONEI DIGITAL PAYMENTS SL <admin@monei.com>`
+
+Send the encrypted file to [support@monei.com](mailto:support@monei.com).
+
+If you have any questions, please contact our [Support Team](https://support.monei.com/hc/requests/new).
