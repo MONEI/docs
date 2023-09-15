@@ -64,8 +64,8 @@ curl --request POST 'https://api.monei.com/v1/payments' \
 
 ```shell script title="POST https://graphql.monei.com"
 curl --request POST 'https://graphql.monei.com' \
---header 'Authorization: YOUR_API_KEY' \
+--header 'Authorization: <PARTNER_API_KEY>' \
 --header 'MONEI-Account-ID: <MONEI_ACCOUNT_ID>' \
 --header 'Content-Type: application/json' \
---data-raw '{"query":"account {name status}"}'
+--data-raw '{"query":"{account {name status}}"}'
 ```

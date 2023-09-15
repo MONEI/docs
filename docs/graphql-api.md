@@ -38,9 +38,9 @@ You can access GraphQL API endpoint using cURL or any other HTTP client.
 
 ```shell script
 curl --request POST 'https://graphql.monei.com' \
---header 'Authorization: YOUR_API_KEY' \
+--header 'Authorization: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
---data-raw '{"query":"account {name status}"}'
+--data-raw '{"query":"{account {name status}}"}'
 ```
 
 :::note
