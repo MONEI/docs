@@ -69,3 +69,60 @@ curl --request POST 'https://graphql.monei.com' \
 --header 'Content-Type: application/json' \
 --data-raw '{"query":"{account {name status}}"}'
 ```
+
+## Registration link
+
+The registration link is unique to your partner account and lets your users/merchants register their MONEI account. Every user that registers with this link will be bound to your partner account.
+
+The registration link is in the following format:
+
+```text
+https://dashboard.monei.com/?action=signUp&promo=<PARTNER_CODE>
+```
+
+Optionally you can pass an external ID to the registration link. This ID will be returned in the webhook notifications and can be used to identify the user/merchant in your system.
+
+```text
+https://dashboard.monei.com/?action=signUp&promo=<PARTNER_CODE>&mid=<EXTERNAL_ID>&h=<HASH>
+```
+
+- `mid` - External ID
+- `h` - Hash of the external ID. The hash is calculated as `HMAC-SHA256(<EXTERNAL_ID>, <PARTNER_API_KEY>)`
+
+:::note
+Your account can be configured to make external ID mandatory. In this case, the registration link must contain the external ID and the hash.
+:::
+
+## Webhook notifications
+
+MONEI will notify you when your users/merchants register for a MONEI account via your linked partner account by sending an HTTP POST request to the url provided during partner onboarding. The request body will contain the account information in JSON format.
+
+The request also contains a `MONEI-Signature` header. [Verify this signature](guides/verify-signature.mdx) to confirm that the received request is sent from MONEI. You need to use the same `PARTNER_API_KEY` to verify the signature that you use to authenticate your API requests.
+
+To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
+
+If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the request as failed and stops trying to send it to your endpoint.
+
+The account information sent in the webhook:
+
+- **id** `string` - Account ID
+- **name** `string` - Account name
+- **status** `enum` - Account status
+  - **PENDING_CONTRACT** - Account is created but the contract is not signed yet
+  - **PENDING_APPROVAL** - Account has signed the contract but is not approved yet
+  - **APPROVED** - Account is approved and ready to accept payments
+  - **REJECTED** - Account is rejected
+- **externalId** `string` - External ID
+- **business** `object`
+  - **country** `string` - Business country code
+  - **legalName** `string` - Business legal name
+  - **documentNumber** `string` - Business document number
+  - **email** `string` - Business email
+  - **website** `string` - Business website
+  - **address** `object`
+    - **line1** `string` - Address line 1
+    - **line2** `string` - Address line 2
+    - **city** `string` - City
+    - **state** `string` - State
+    - **zip** `string` - Postal code
+    - **country** `string` - Country
