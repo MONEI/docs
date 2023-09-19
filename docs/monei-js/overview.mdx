@@ -424,7 +424,8 @@ The Card Input Component lets you collect Credit Card information all within one
     name: 'App',
     components: {
       // Set Vue driver for Card Input Component
-      CardInput: CardInput.driver('vue', Vue)
+      // If you have Vue 2.x or lower use CardInput.driver('vue', Vue)
+      CardInput: CardInput.driver('vue3', Vue)
     },
     data() {
       return {
