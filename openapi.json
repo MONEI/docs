@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.4.0",
+    "version": "1.4.2",
     "title": "MONEI API v1",
     "description": "<p>The MONEI API is organized around\n<a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a>. Our\nAPI has predictable resource-oriented URLs, accepts JSON-encoded request\nbodies, returns JSON-encoded responses, and uses standard HTTP response\ncodes, authentication, and verbs.</p>\n<h4 id=\"base-url\">Base URL:</h4>\n<p><a href=\"https://api.monei.com/v1\">https://api.monei.com/v1</a></p>\n<h4 id=\"client-libraries\">Client libraries:</h4>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman</a></li>\n</ul>\n<h4 id=\"important\">Important:</h4>\n<p><strong>If you are not using our official SDKs, you need to provide a valid <code>User-Agent</code> header in each request, otherwise your requests will be rejected.</strong></p>\n"
   },
@@ -14,19 +14,23 @@
   "tags": [
     {
       "name": "Status codes",
-      "description": "<p>Our API returns a <code>statusCode</code> attribute along with every response. Some API calls return\na successful <code>E000</code> code, along with the message <code>Transaction approved</code>.</p>\n<p>Failed transactions return a specific <code>statusCode</code>, along with it&#39;s corresponding message.</p>\n<p>Here is a list of all the possible response/error codes our API can return:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E000</td>\n<td>Transaction approved</td>\n</tr>\n<tr>\n<td>E101</td>\n<td>Error with payment processor configuration. Check this in your dashboard or contact MONEI for support</td>\n</tr>\n<tr>\n<td>E102</td>\n<td>Invalid or inactive MID. Please contact the acquiring entity</td>\n</tr>\n<tr>\n<td>E103</td>\n<td>Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support</td>\n</tr>\n<tr>\n<td>E104</td>\n<td>Partial captures are not enabled in your account, please contact MONEI support</td>\n</tr>\n<tr>\n<td>E105</td>\n<td>MOTO Payment are not enabled in your account, please contact MONEI support</td>\n</tr>\n<tr>\n<td>E150</td>\n<td>Invalid or malformed request. Please check the message format</td>\n</tr>\n<tr>\n<td>E151</td>\n<td>Missing or malformed signature/auth</td>\n</tr>\n<tr>\n<td>E152</td>\n<td>Error while decrypting request</td>\n</tr>\n<tr>\n<td>E153</td>\n<td>Pre-authorization is expired and cannot be canceled or captured</td>\n</tr>\n<tr>\n<td>E154</td>\n<td>The payment date cannot be less than the cancellation or capture date</td>\n</tr>\n<tr>\n<td>E155</td>\n<td>The cancellation date exceeded the date allowed for pre-authorized operations</td>\n</tr>\n<tr>\n<td>E200</td>\n<td>Transaction failed during payment processing</td>\n</tr>\n<tr>\n<td>E201</td>\n<td>Transaction declined by the card-issuing bank</td>\n</tr>\n<tr>\n<td>E202</td>\n<td>Transaction declined by the issuing bank</td>\n</tr>\n<tr>\n<td>E203</td>\n<td>Payment method not allowed</td>\n</tr>\n<tr>\n<td>E204</td>\n<td>Wrong or not allowed currency</td>\n</tr>\n<tr>\n<td>E205</td>\n<td>Incorrect reference / transaction does not exist</td>\n</tr>\n<tr>\n<td>E206</td>\n<td>Invalid payment token</td>\n</tr>\n<tr>\n<td>E207</td>\n<td>Transaction failed: process time exceeded</td>\n</tr>\n<tr>\n<td>E208</td>\n<td>Transaction is currently being processed</td>\n</tr>\n<tr>\n<td>E209</td>\n<td>Duplicated operation</td>\n</tr>\n<tr>\n<td>E210</td>\n<td>Wrong or not allowed payment amount</td>\n</tr>\n<tr>\n<td>E211</td>\n<td>Refund declined by processor</td>\n</tr>\n<tr>\n<td>E212</td>\n<td>Transaction has already been captured</td>\n</tr>\n<tr>\n<td>E213</td>\n<td>Transaction has already been canceled</td>\n</tr>\n<tr>\n<td>E214</td>\n<td>The amount to be captured cannot exceed the pre-authorized amount</td>\n</tr>\n<tr>\n<td>E215</td>\n<td>The transaction to be captured has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E216</td>\n<td>The transaction to be canceled has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E217</td>\n<td>Transaction denied by processor to avoid duplicated operations</td>\n</tr>\n<tr>\n<td>E218</td>\n<td>Error during payment request validation</td>\n</tr>\n<tr>\n<td>E219</td>\n<td>Refund declined due to exceeded amount</td>\n</tr>\n<tr>\n<td>E220</td>\n<td>Transaction has already been fully refunded</td>\n</tr>\n<tr>\n<td>E221</td>\n<td>Transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E222</td>\n<td>The user has canceled the payment</td>\n</tr>\n<tr>\n<td>E223</td>\n<td>Waiting for the transaction to be completed</td>\n</tr>\n<tr>\n<td>E224</td>\n<td>No reason to decline</td>\n</tr>\n<tr>\n<td>E225</td>\n<td>Refund not allowed</td>\n</tr>\n<tr>\n<td>E226</td>\n<td>Transaction cannot be completed, violation of law</td>\n</tr>\n<tr>\n<td>E227</td>\n<td>Stop Payment Order</td>\n</tr>\n<tr>\n<td>E228</td>\n<td>Strong Customer Authentication required</td>\n</tr>\n<tr>\n<td>E300</td>\n<td>Transaction declined due to security restrictions</td>\n</tr>\n<tr>\n<td>E301</td>\n<td>3D Secure authentication failed</td>\n</tr>\n<tr>\n<td>E302</td>\n<td>Authentication process timed out. Please try again</td>\n</tr>\n<tr>\n<td>E303</td>\n<td>An error occurred during the 3D Secure process</td>\n</tr>\n<tr>\n<td>E304</td>\n<td>Invalid or malformed 3D Secure request</td>\n</tr>\n<tr>\n<td>E305</td>\n<td>Exemption not allowed</td>\n</tr>\n<tr>\n<td>E306</td>\n<td>Exemption error</td>\n</tr>\n<tr>\n<td>E307</td>\n<td>Fraud control error</td>\n</tr>\n<tr>\n<td>E308</td>\n<td>External MPI received wrong. Please check the data</td>\n</tr>\n<tr>\n<td>E309</td>\n<td>External MPI not enabled. Please contact support</td>\n</tr>\n<tr>\n<td>E500</td>\n<td>Transaction declined during card payment process</td>\n</tr>\n<tr>\n<td>E501</td>\n<td>Card rejected: invalid card number</td>\n</tr>\n<tr>\n<td>E502</td>\n<td>Card rejected: wrong expiration date</td>\n</tr>\n<tr>\n<td>E503</td>\n<td>Card rejected: wrong CVC/CVV2 number</td>\n</tr>\n<tr>\n<td>E504</td>\n<td>Card number not registered</td>\n</tr>\n<tr>\n<td>E505</td>\n<td>Card is expired</td>\n</tr>\n<tr>\n<td>E506</td>\n<td>Error during payment authorization. Please try again</td>\n</tr>\n<tr>\n<td>E507</td>\n<td>Cardholder has canceled the payment</td>\n</tr>\n<tr>\n<td>E508</td>\n<td>Transaction declined: AMEX cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E509</td>\n<td>Card blocked temporarily or under suspicion of fraud</td>\n</tr>\n<tr>\n<td>E510</td>\n<td>Card does not allow pre-authorization operations</td>\n</tr>\n<tr>\n<td>E511</td>\n<td>CVC/CVV2 number is required</td>\n</tr>\n<tr>\n<td>E512</td>\n<td>Transaction declined: card brand not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E513</td>\n<td>Transaction declined: DINERS cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E514</td>\n<td>Transaction type not allowed for this type of card</td>\n</tr>\n<tr>\n<td>E515</td>\n<td>Transaction declined by card issuer</td>\n</tr>\n<tr>\n<td>E516</td>\n<td>Transaction declined: DISCOVER cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E517</td>\n<td>Transaction not allowed for cardholder</td>\n</tr>\n<tr>\n<td>E518</td>\n<td>The amount exceeds the card limit</td>\n</tr>\n<tr>\n<td>E600</td>\n<td>Transaction declined during ApplePay/GooglePay payment process</td>\n</tr>\n<tr>\n<td>E601</td>\n<td>Incorrect ApplePay or GooglePay configuration</td>\n</tr>\n<tr>\n<td>E620</td>\n<td>Transaction declined during PayPal payment process</td>\n</tr>\n<tr>\n<td>E621</td>\n<td>Transaction declined during PayPal payment process: invalid currency</td>\n</tr>\n<tr>\n<td>E640</td>\n<td>Bizum transaction declined after three authentication attempts</td>\n</tr>\n<tr>\n<td>E641</td>\n<td>Bizum transaction declined due to failed authorization</td>\n</tr>\n<tr>\n<td>E642</td>\n<td>Bizum transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E643</td>\n<td>Bizum transaction canceled: the user does not want to continue</td>\n</tr>\n<tr>\n<td>E644</td>\n<td>Bizum transaction rejected by destination bank</td>\n</tr>\n<tr>\n<td>E645</td>\n<td>Bizum transaction rejected by origin bank</td>\n</tr>\n<tr>\n<td>E646</td>\n<td>Bizum transaction rejected by processor</td>\n</tr>\n<tr>\n<td>E647</td>\n<td>Bizum transaction failed while connecting with processor. Please try again</td>\n</tr>\n<tr>\n<td>E648</td>\n<td>Bizum transaction failed, payee is not found</td>\n</tr>\n<tr>\n<td>E649</td>\n<td>Bizum transaction failed, payer is not found</td>\n</tr>\n<tr>\n<td>E650</td>\n<td>Bizum REST not implemented</td>\n</tr>\n<tr>\n<td>E651</td>\n<td>Bizum transaction declined due to failed authentication</td>\n</tr>\n<tr>\n<td>E680</td>\n<td>Transaction declined during ClickToPay payment process</td>\n</tr>\n<tr>\n<td>E681</td>\n<td>Incorrect ClickToPay configuration</td>\n</tr>\n<tr>\n<td>E700</td>\n<td>Transaction declined during Cofidis payment process</td>\n</tr>\n<tr>\n<td>E999</td>\n<td>Service internal error. Please contact support</td>\n</tr>\n</tbody></table>\n"
+      "description": "<p>Our API returns a <code>statusCode</code> attribute along with every response. Some API calls return\na successful <code>E000</code> code, along with the message <code>Transaction approved</code>.</p>\n<p>Failed transactions return a specific <code>statusCode</code>, along with it&#39;s corresponding message.</p>\n<p>Here is a list of all the possible response/error codes our API can return:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E000</td>\n<td>Transaction approved</td>\n</tr>\n<tr>\n<td>E101</td>\n<td>Error with payment processor configuration. Check this in your dashboard or contact MONEI for support</td>\n</tr>\n<tr>\n<td>E102</td>\n<td>Invalid or inactive MID. Please contact the acquiring entity</td>\n</tr>\n<tr>\n<td>E103</td>\n<td>Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support</td>\n</tr>\n<tr>\n<td>E104</td>\n<td>Partial captures are not enabled in your account, please contact MONEI support</td>\n</tr>\n<tr>\n<td>E105</td>\n<td>MOTO Payment are not enabled in your account, please contact MONEI support</td>\n</tr>\n<tr>\n<td>E150</td>\n<td>Invalid or malformed request. Please check the message format</td>\n</tr>\n<tr>\n<td>E151</td>\n<td>Missing or malformed signature/auth</td>\n</tr>\n<tr>\n<td>E152</td>\n<td>Error while decrypting request</td>\n</tr>\n<tr>\n<td>E153</td>\n<td>Pre-authorization is expired and cannot be canceled or captured</td>\n</tr>\n<tr>\n<td>E154</td>\n<td>The payment date cannot be less than the cancellation or capture date</td>\n</tr>\n<tr>\n<td>E155</td>\n<td>The cancellation date exceeded the date allowed for pre-authorized operations</td>\n</tr>\n<tr>\n<td>E156</td>\n<td>Unauthorized token</td>\n</tr>\n<tr>\n<td>E200</td>\n<td>Transaction failed during payment processing</td>\n</tr>\n<tr>\n<td>E201</td>\n<td>Transaction declined by the card-issuing bank</td>\n</tr>\n<tr>\n<td>E202</td>\n<td>Transaction declined by the issuing bank</td>\n</tr>\n<tr>\n<td>E203</td>\n<td>Payment method not allowed</td>\n</tr>\n<tr>\n<td>E204</td>\n<td>Wrong or not allowed currency</td>\n</tr>\n<tr>\n<td>E205</td>\n<td>Incorrect reference / transaction does not exist</td>\n</tr>\n<tr>\n<td>E206</td>\n<td>Invalid payment method</td>\n</tr>\n<tr>\n<td>E207</td>\n<td>Transaction failed: process time exceeded</td>\n</tr>\n<tr>\n<td>E208</td>\n<td>Transaction is currently being processed</td>\n</tr>\n<tr>\n<td>E209</td>\n<td>Duplicated operation</td>\n</tr>\n<tr>\n<td>E210</td>\n<td>Wrong or not allowed payment amount</td>\n</tr>\n<tr>\n<td>E211</td>\n<td>Refund declined by processor</td>\n</tr>\n<tr>\n<td>E212</td>\n<td>Transaction has already been captured</td>\n</tr>\n<tr>\n<td>E213</td>\n<td>Transaction has already been canceled</td>\n</tr>\n<tr>\n<td>E214</td>\n<td>The amount to be captured cannot exceed the pre-authorized amount</td>\n</tr>\n<tr>\n<td>E215</td>\n<td>The transaction to be captured has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E216</td>\n<td>The transaction to be canceled has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E217</td>\n<td>Transaction denied by processor to avoid duplicated operations</td>\n</tr>\n<tr>\n<td>E218</td>\n<td>Error during payment request validation</td>\n</tr>\n<tr>\n<td>E219</td>\n<td>Refund declined due to exceeded amount</td>\n</tr>\n<tr>\n<td>E220</td>\n<td>Transaction has already been fully refunded</td>\n</tr>\n<tr>\n<td>E221</td>\n<td>Transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E222</td>\n<td>The user has canceled the payment</td>\n</tr>\n<tr>\n<td>E223</td>\n<td>Waiting for the transaction to be completed</td>\n</tr>\n<tr>\n<td>E224</td>\n<td>No reason to decline</td>\n</tr>\n<tr>\n<td>E225</td>\n<td>Refund not allowed</td>\n</tr>\n<tr>\n<td>E226</td>\n<td>Transaction cannot be completed, violation of law</td>\n</tr>\n<tr>\n<td>E227</td>\n<td>Stop Payment Order</td>\n</tr>\n<tr>\n<td>E228</td>\n<td>Strong Customer Authentication required</td>\n</tr>\n<tr>\n<td>E229</td>\n<td>Expired payment method</td>\n</tr>\n<tr>\n<td>E300</td>\n<td>Transaction declined due to security restrictions</td>\n</tr>\n<tr>\n<td>E301</td>\n<td>3D Secure authentication failed</td>\n</tr>\n<tr>\n<td>E302</td>\n<td>Authentication process timed out. Please try again</td>\n</tr>\n<tr>\n<td>E303</td>\n<td>An error occurred during the 3D Secure process</td>\n</tr>\n<tr>\n<td>E304</td>\n<td>Invalid or malformed 3D Secure request</td>\n</tr>\n<tr>\n<td>E305</td>\n<td>Exemption not allowed</td>\n</tr>\n<tr>\n<td>E306</td>\n<td>Exemption error</td>\n</tr>\n<tr>\n<td>E307</td>\n<td>Fraud control error</td>\n</tr>\n<tr>\n<td>E308</td>\n<td>External MPI received wrong. Please check the data</td>\n</tr>\n<tr>\n<td>E309</td>\n<td>External MPI not enabled. Please contact support</td>\n</tr>\n<tr>\n<td>E500</td>\n<td>Transaction declined during card payment process</td>\n</tr>\n<tr>\n<td>E501</td>\n<td>Card rejected: invalid card number</td>\n</tr>\n<tr>\n<td>E502</td>\n<td>Card rejected: wrong expiration date</td>\n</tr>\n<tr>\n<td>E503</td>\n<td>Card rejected: wrong CVC/CVV2 number</td>\n</tr>\n<tr>\n<td>E504</td>\n<td>Card number not registered</td>\n</tr>\n<tr>\n<td>E505</td>\n<td>Card is expired</td>\n</tr>\n<tr>\n<td>E506</td>\n<td>Error during payment authorization. Please try again</td>\n</tr>\n<tr>\n<td>E507</td>\n<td>Cardholder has canceled the payment</td>\n</tr>\n<tr>\n<td>E508</td>\n<td>Transaction declined: AMEX cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E509</td>\n<td>Card blocked temporarily or under suspicion of fraud</td>\n</tr>\n<tr>\n<td>E510</td>\n<td>Card does not allow pre-authorization operations</td>\n</tr>\n<tr>\n<td>E511</td>\n<td>CVC/CVV2 number is required</td>\n</tr>\n<tr>\n<td>E512</td>\n<td>Unsupported card type</td>\n</tr>\n<tr>\n<td>E513</td>\n<td>Transaction type not allowed for this type of card</td>\n</tr>\n<tr>\n<td>E514</td>\n<td>Transaction declined by card issuer</td>\n</tr>\n<tr>\n<td>E515</td>\n<td>Implausible card data</td>\n</tr>\n<tr>\n<td>E516</td>\n<td>Incorrect PIN</td>\n</tr>\n<tr>\n<td>E517</td>\n<td>Transaction not allowed for cardholder</td>\n</tr>\n<tr>\n<td>E518</td>\n<td>The amount exceeds the card limit</td>\n</tr>\n<tr>\n<td>E600</td>\n<td>Transaction declined during ApplePay/GooglePay payment process</td>\n</tr>\n<tr>\n<td>E601</td>\n<td>Incorrect ApplePay or GooglePay configuration</td>\n</tr>\n<tr>\n<td>E620</td>\n<td>Transaction declined during PayPal payment process</td>\n</tr>\n<tr>\n<td>E621</td>\n<td>Transaction declined during PayPal payment process: invalid currency</td>\n</tr>\n<tr>\n<td>E640</td>\n<td>Bizum transaction declined after three authentication attempts</td>\n</tr>\n<tr>\n<td>E641</td>\n<td>Bizum transaction declined due to failed authorization</td>\n</tr>\n<tr>\n<td>E642</td>\n<td>Bizum transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E643</td>\n<td>Bizum transaction canceled: the user does not want to continue</td>\n</tr>\n<tr>\n<td>E644</td>\n<td>Bizum transaction rejected by destination bank</td>\n</tr>\n<tr>\n<td>E645</td>\n<td>Bizum transaction rejected by origin bank</td>\n</tr>\n<tr>\n<td>E646</td>\n<td>Bizum transaction rejected by processor</td>\n</tr>\n<tr>\n<td>E647</td>\n<td>Bizum transaction failed while connecting with processor. Please try again</td>\n</tr>\n<tr>\n<td>E648</td>\n<td>Bizum transaction failed, payee is not found</td>\n</tr>\n<tr>\n<td>E649</td>\n<td>Bizum transaction failed, payer is not found</td>\n</tr>\n<tr>\n<td>E650</td>\n<td>Bizum REST not implemented</td>\n</tr>\n<tr>\n<td>E651</td>\n<td>Bizum transaction declined due to failed authentication</td>\n</tr>\n<tr>\n<td>E652</td>\n<td>The customer has disabled Bizum, please use another payment method</td>\n</tr>\n<tr>\n<td>E680</td>\n<td>Transaction declined during ClickToPay payment process</td>\n</tr>\n<tr>\n<td>E681</td>\n<td>Incorrect ClickToPay configuration</td>\n</tr>\n<tr>\n<td>E700</td>\n<td>Transaction declined during Cofidis payment process</td>\n</tr>\n<tr>\n<td>E999</td>\n<td>Service internal error. Please contact support</td>\n</tr>\n</tbody></table>\n"
     },
     {
       "name": "ApplePay Domain",
       "description": "Verify your custom domain with Apple to use Apple Pay on your website.\n"
     },
     {
+      "name": "Bizum",
+      "description": "Verify if the phone number is registered in Bizum.\n"
+    },
+    {
       "name": "Payments",
-      "description": "To charge a card, you create a Payment object.\nYou can capture, cancel, refund and confirm individual payments.\nPayments are identified by a unique, random ID.\n\nWe recommend that you create exactly one Payment for each\norder or customer session in your system.\n\n## Payment object\n\n<SchemaDefinition schemaRef=\"#/components/schemas/Payment\" />\n"
+      "description": "To charge a credit or a debit card, you create a Payment object.\nYou can capture, cancel, refund and confirm individual payments.\nPayments are identified by a unique, random ID.\n\nWe recommend that you create exactly one Payment for each\norder or customer session in your system.\n\n## Payment object\n\n<SchemaDefinition schemaRef=\"#/components/schemas/Payment\" />\n"
     },
     {
       "name": "Subscriptions",
-      "description": "<p>Use our subscriptions API to accept automatic recurring payments. You&#39;ll save time on billing and make the payment process easier for customers. Set parameters like subscription names, prices, and billing cycles, and let customers log in to their account to manage subscriptions.</p>\n<p><strong>MONEI Subscriptions are in open beta, and the API is subject to change.</strong></p>\n<h2 id=\"subscription-object\">Subscription object</h2>\n<SchemaDefinition schemaRef=\"#/components/schemas/Subscription\" />\n"
+      "description": "Use our subscriptions API to accept automatic recurring payments. You'll save time on billing and make the payment process easier for customers. Set parameters like subscription names, prices, and billing cycles, and let customers log in to their account to manage subscriptions.\n\n**MONEI Subscriptions are in closed beta, and the API is subject to change. Please contact [support@monei.com](mailto:support@monei.com) to get access**\n\n## Subscription object\n\n<SchemaDefinition schemaRef=\"#/components/schemas/Subscription\" />\n"
     }
   ],
   "components": {
@@ -103,6 +107,22 @@
               "type": "object",
               "properties": {
                 "success": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "ValidateBizumPhoneResponse": {
+        "description": "A successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isValid": {
                   "type": "boolean",
                   "example": true
                 }
@@ -302,6 +322,13 @@
         "example": false,
         "description": "Has the value `true` if the resource exists in live mode or the value `false` if the resource exists in test mode."
       },
+      "Metadata": {
+        "type": "object",
+        "example": {
+          "systemId": "12345"
+        },
+        "description": "A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format."
+      },
       "RegisterDomainRequest": {
         "type": "object",
         "properties": {
@@ -317,6 +344,26 @@
         "type": "string",
         "description": "The domain name to register for Apple Pay.",
         "example": "example.com"
+      },
+      "ValidateBizumPhoneRequest": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "$ref": "#/components/schemas/AccountId"
+          },
+          "paymentId": {
+            "$ref": "#/components/schemas/Payment-Id"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "+34500000000",
+            "description": "Phone number in E.164 format."
+          }
+        },
+        "required": [
+          "accountId",
+          "phoneNumber"
+        ]
       },
       "Payment": {
         "title": "Payment",
@@ -399,6 +446,9 @@
           },
           "pointOfSaleId": {
             "$ref": "#/components/schemas/Payment-PointOfSaleId"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
           },
           "nextAction": {
             "$ref": "#/components/schemas/Payment-NextAction"
@@ -493,6 +543,9 @@
           },
           "expireAt": {
             "$ref": "#/components/schemas/Payment-ExpireAt"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
           }
         }
       },
@@ -540,6 +593,9 @@
           },
           "shippingDetails": {
             "$ref": "#/components/schemas/Payment-ShippingDetails"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
           }
         }
       },
@@ -607,7 +663,7 @@
                 "$ref": "#/components/schemas/Payment-TransactionType"
               }
             ],
-            "default": "(same from initial payment)",
+            "default": "(same as initial payment)",
             "description": "Same as the `transactionType` parameter from\n[create payment](https://docs.monei.com/api/#operation/payments_create).\nIf not sent, it will default in the same transaction type used in the initial payment.\n"
           },
           "description": {
@@ -624,6 +680,9 @@
           },
           "callbackUrl": {
             "$ref": "#/components/schemas/Payment-CallbackUrl"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
           }
         }
       },
@@ -869,7 +928,16 @@
               "applePay",
               "clickToPay",
               "paypal",
-              "cofidis"
+              "cofidis",
+              "cofidisLoan",
+              "iDeal",
+              "mbway",
+              "multibanco",
+              "sofort",
+              "trustly",
+              "sepa",
+              "klarna",
+              "giropay"
             ],
             "description": "Payment method type."
           },
@@ -884,6 +952,21 @@
           },
           "cofidis": {
             "$ref": "#/components/schemas/Payment-PaymentMethodCofidis"
+          },
+          "cofidisLoan": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodCofidis"
+          },
+          "mbway": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodMbway"
+          },
+          "trustly": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodTrustly"
+          },
+          "sepa": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodSepa"
+          },
+          "klarna": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodKlarna"
           }
         }
       },
@@ -1001,6 +1084,111 @@
             "type": "string",
             "example": null,
             "description": "The Cofidis' order ID."
+          }
+        }
+      },
+      "Payment-PaymentMethodMbway": {
+        "type": "object",
+        "description": "Details from MBWay order used as payment method at the time of the transaction.\n",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "example": null,
+            "description": "The phone number used to pay with `mbway`."
+          }
+        }
+      },
+      "Payment-PaymentMethodSepa": {
+        "type": "object",
+        "description": "Details from SEPA order used as payment method at the time of the transaction.\n",
+        "properties": {
+          "accountholderAddress": {
+            "type": "string",
+            "example": null,
+            "description": "The address of the account holder."
+          },
+          "accountholderEmail": {
+            "type": "string",
+            "example": null,
+            "description": "The email of the account holder."
+          },
+          "accountholderName": {
+            "type": "string",
+            "example": null,
+            "description": "The name of the account holder."
+          },
+          "countryCode": {
+            "type": "string",
+            "example": null,
+            "description": "The country code of the account holder."
+          },
+          "bankAddress": {
+            "type": "string",
+            "example": null,
+            "description": "The address of the bank."
+          },
+          "bankCode": {
+            "type": "string",
+            "example": null,
+            "description": "The code of the bank."
+          },
+          "bankName": {
+            "type": "string",
+            "example": null,
+            "description": "The name of the bank."
+          },
+          "bic": {
+            "type": "string",
+            "example": null,
+            "description": "The BIC of the bank."
+          },
+          "last4": {
+            "type": "string",
+            "example": null,
+            "description": "The last 4 digits of the IBAN."
+          }
+        }
+      },
+      "Payment-PaymentMethodTrustly": {
+        "type": "object",
+        "description": "Details from Trustly order used as payment method at the time of the transaction.\n",
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "example": null,
+            "description": "The Trustly's customer ID."
+          }
+        }
+      },
+      "Payment-PaymentMethodKlarna": {
+        "type": "object",
+        "description": "Details from Klarna order used as payment method at the time of the transaction.\n",
+        "properties": {
+          "billingCategory": {
+            "type": "enum",
+            "example": "PAY_LATER",
+            "enum": [
+              "PAY_LATER",
+              "PAY_NOW",
+              "SLICE_IT",
+              "SLICE_IT_BY_CARD"
+            ]
+          },
+          "authPaymentMethod": {
+            "type": "enum",
+            "example": "card",
+            "enum": [
+              "invoice",
+              "fixed_amount",
+              "pix",
+              "base_account",
+              "deferred_interest",
+              "direct_debit",
+              "direct_bank_transfer",
+              "b2b_invoice",
+              "card",
+              "slice_it_by_card"
+            ]
           }
         }
       },
@@ -1155,6 +1343,11 @@
             "example": null,
             "description": "Billing company name."
           },
+          "taxId": {
+            "type": "string",
+            "example": null,
+            "description": "Company tax ID."
+          },
           "address": {
             "$ref": "#/components/schemas/Address"
           }
@@ -1183,6 +1376,11 @@
             "type": "string",
             "example": null,
             "description": "Name of the company where the shipment is going."
+          },
+          "taxId": {
+            "type": "string",
+            "example": null,
+            "description": "Company tax ID."
           },
           "address": {
             "$ref": "#/components/schemas/Address"
@@ -1475,6 +1673,9 @@
           "paymentCallbackUrl": {
             "$ref": "#/components/schemas/Subscription-PaymentCallbackUrl"
           },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
           "createdAt": {
             "$ref": "#/components/schemas/CreatedAt"
           },
@@ -1527,6 +1728,9 @@
           },
           "paymentCallbackUrl": {
             "$ref": "#/components/schemas/Subscription-PaymentCallbackUrl"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
           }
         }
       },
@@ -1575,6 +1779,9 @@
           },
           "pauseIntervalCount": {
             "$ref": "#/components/schemas/Subscription-PauseIntervalCount"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
           }
         }
       },
@@ -1612,6 +1819,9 @@
           },
           "cancelUrl": {
             "$ref": "#/components/schemas/Payment-CancelUrl"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
           }
         }
       },
@@ -1733,12 +1943,12 @@
       "Subscription-CallbackUrl": {
         "type": "string",
         "example": "https://example.com/subscriptions/callback",
-        "description": "The URL will be called each time subscription status changes.\n"
+        "description": "The URL will be called each time subscription status changes. You will receive a subscription object in the body of the request.\n"
       },
       "Subscription-PaymentCallbackUrl": {
         "type": "string",
         "example": "https://example.com/payments/callback",
-        "description": "The URL will be called each time subscription creates a new payments.\n"
+        "description": "The URL will be called each time subscription creates a new payments. You will receive the payment object in the body of the request.\n"
       },
       "Subscription-Interval": {
         "type": "string",
@@ -1994,6 +2204,31 @@
         ]
       }
     },
+    "/bizum/validate-phone": {
+      "post": {
+        "operationId": "bizum_validate_phone",
+        "summary": "Validate Phone",
+        "description": "<p>Verifies if the provided phone number is registered in Bizum. This method does not require\nauthentication. Either <code>accountId</code> or <code>paymentId</code> must be provided in the request body.</p>\n",
+        "tags": [
+          "Bizum"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateBizumPhoneRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ValidateBizumPhoneResponse"
+          }
+        }
+      }
+    },
     "/payments": {
       "post": {
         "operationId": "payments_create",
@@ -2034,7 +2269,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n    'amount' => 110, // 1.10 EUR\n    'orderId' => '14379133960355',\n    'currency' => 'EUR',\n    'payment_token' => '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n    'callback_url' => 'https://example.com/checkout/callback',\n    'complete_url' => 'https://example.com/checkout/complete'\n]);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n    'amount' => 110, // 1.10 EUR\n    'orderId' => '14379133960355',\n    'currency' => 'EUR',\n    'paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n    'callbackUrl' => 'https://example_com/checkout/callback',\n    'completeUrl' => 'https://example.com/checkout/complete'\n]);\n"
           },
           {
             "lang": "Python",
@@ -2126,7 +2361,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->confirm(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['payment_token' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->confirm(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
           },
           {
             "lang": "Python",
@@ -2232,7 +2467,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['cancellation_reason' => 'requested_by_customer']\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['cancellationReason' => 'requested_by_customer']\n);\n"
           },
           {
             "lang": "Python",
@@ -2285,7 +2520,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->refund(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refund_reason' => 'requested_by_customer']\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->refund(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refundReason' => 'requested_by_customer']\n);\n"
           },
           {
             "lang": "Python",
@@ -2338,7 +2573,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', [\n  'orderId' => '14379133960355',\n  'callback_url' => 'https://example.com/checkout/callback',\n]);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', [\n  'orderId' => '14379133960355',\n  'callbackUrl' => 'https://example.com/checkout/callback',\n]);\n"
           },
           {
             "lang": "Python",
@@ -2392,7 +2627,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendRequest(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'phone_number' => '+34500000000',\n    'language' => 'es'\n  ]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendRequest(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'phoneNumber' => '+34500000000',\n    'language' => 'es'\n  ]\n);\n"
           },
           {
             "lang": "Python",
@@ -2445,7 +2680,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendLink(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customer_email' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendLink(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customerEmail' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
           },
           {
             "lang": "Python",
@@ -2498,7 +2733,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendReceipt(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customer_email' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendReceipt(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customerEmail' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
           },
           {
             "lang": "Python",
@@ -2547,7 +2782,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->create([\n    'customer' => [\n        'name' => 'John Doe',\n        'email' => 'john.doe@monei.com'\n    ],\n    'amount' => 110,\n    'currency' => 'EUR',\n    'interval_count' => 'month',\n    'interval_count' => 1,\n    'description' => 'MoonMail Lite Monthly',\n    'callback_url' => 'https=>//example.com/subscription/callback',\n    'payment_callback_url' => 'https=>//example.com/payment/callback'\n]);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->create([\n    'customer' => [\n        'name' => 'John Doe',\n        'email' => 'john.doe@monei.com'\n    ],\n    'amount' => 110,\n    'currency' => 'EUR',\n    'intervalCount' => 'month',\n    'intervalCount' => 1,\n    'description' => 'MoonMail Lite Monthly',\n    'callbackUrl' => 'https=>//example.com/subscription/callback',\n    'paymentCallbackUrl' => 'https=>//example.com/payment/callback'\n]);\n"
           },
           {
             "lang": "Python",
@@ -2629,11 +2864,11 @@
         "x-codeSamples": [
           {
             "lang": "Node.js",
-            "source": "const {Monei, PaymentCancellationReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.cancel('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {amount: 990});\n"
+            "source": "const {Monei, PaymentCancellationReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.update('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {amount: 990});\n"
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->cancel(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['amount' => 990]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->update(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['amount' => 990]\n);\n"
           },
           {
             "lang": "Python",
@@ -2686,7 +2921,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->activate(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['payment_token' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->activate(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
           },
           {
             "lang": "Python",
@@ -2739,7 +2974,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->cancel(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['cancel_at_period_end' => true]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->cancel(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['cancelAtPeriodEnd' => true]\n);\n"
           },
           {
             "lang": "Python",
@@ -2792,7 +3027,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->pause(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['pause_at_period_end' => true]\n);\n"
+            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->pause(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['pauseAtPeriodEnd' => true]\n);\n"
           },
           {
             "lang": "Python",
