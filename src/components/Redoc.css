@@ -153,6 +153,8 @@
   color: var(--ifm-menu-color-active);
 }
 
-.api-reference #CookiebotWidget {
-  display: none;
+@media screen and (max-width: 50rem) {
+  .api-reference #CookiebotWidget {
+    display: none;
+  }
 }
