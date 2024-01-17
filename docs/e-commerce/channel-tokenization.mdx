@@ -15,24 +15,26 @@ Payment card tokenization is a secure process where credit card information is r
 The payment card tokenization process involves the following key steps:
 
 1. **Request Bookings:** Make a request to our endpoint, specifying the desired channel manager to retrieve bookings.
-
 2. **Receive Credit Card Information:** As a PCI-compliant company, the system receives credit card information securely.
-
 3. **Tokenization:** The received credit card information is tokenized, and a response containing the tokens is generated.
-
 4. **Return Tokens:** The generated tokens are returned to the requesting entity for secure payment processing.
 
 ## Integration
+
+:::important
+You will have to add your [MONEI API Key](http://localhost:3000/api/#section/Authentication) on your request header in order to authenticate the request.
+:::
+You can enable test mode and we will use Siteminder and Channex preprod URLs, you can enable it on your dashboard.
 
 ### Siteminder
 
 Siteminder is a widely used channel management system. We support payment card tokenization through the following API endpoint:
 
-**Endpoint:** `/v1/partner/tokens`
+**Endpoint:** `https://api.monei.com/v1/partner/tokens`
 
 **Method:** `POST`
 
-Request Body:
+#### Request:
 
 ```json
 {
@@ -56,9 +58,11 @@ Request Body:
 - **password** `string` - The password associated with the provided username, for authentication purposes. This is provided from Siteminder.
 - **echoToken** `string` - Globally unique identifier for the request, value will be returned as an EchoToken in the response.
 
+:::note
 When acting as a proxy for Siteminder, the same response is returned as if directly interacting with them, with the addition of the `<MoneiResponse>` field containing the token information.
+:::
 
-Response:
+#### Response:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -106,11 +110,11 @@ These elements collectively provide details about a tokenized payment method, al
 
 Channex is another channel management system that seamlessly integrates with the tokenization process. We expose the same endpoint, but changing the **channelManagerType** parameter to `CHANNEX`:
 
-**Endpoint:** `/v1/partner/tokens`
+**Endpoint:** `https://api.monei.com/v1/partner/tokens`
 
 **Method:** `POST`
 
-Request Body:
+#### Request:
 
 ```json
 {
