@@ -16,8 +16,7 @@ module.exports = {
         'e-commerce/woocommerce',
         'e-commerce/salesforce',
         'e-commerce/adobe-commerce',
-        'e-commerce/prestashop',
-        'e-commerce/channel-tokenization'
+        'e-commerce/prestashop'
       ],
       'Payment methods': [
         'payment-methods/card',
@@ -40,6 +39,7 @@ module.exports = {
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },
+    'channel-tokenization',
     {
       type: 'link',
       label: 'Payments API',
