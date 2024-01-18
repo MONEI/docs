@@ -129,3 +129,41 @@ Channex is another channel management system that seamlessly integrates with the
 - **sessionId** `string` - A universally unique identifier (UUID) representing the session.
 - **channelManagerType** `string` - Indicates the **name of channel manager**. It is a String with two possible values: `SITEMINDER` or `CHANNEX`. In this case we're going to use `CHANNEX`.
 - **channexId** `string` - [Channex API key](https://docs.channex.io/application-documentation/api-key-access).
+
+#### Response:
+
+```json
+[
+  {
+    "paymentToken": "b27b97a729ab9cefa8765eccf25d636b13f887cc",
+    "expireAt": 2678401,
+    "paymentMethod": {
+      "method": "card",
+      "card": {
+        "country": "US",
+        "last4": "8164",
+        "bank": "Wex Bank",
+        "bin": "53463306",
+        "cardholderName": "Joan Sanfeliu",
+        "expiration": 1767225600,
+        "type": "credit",
+        "brand": "mastercard"
+      }
+    },
+    "attributes": {
+      "id": "cbc57822-912c-4663-a9e5-3930b7539958",
+      "meta": {
+        "ruid": "Ykc2RlIyh9YUA66gHNu0pFCmOkmrTcr9qWngFe1gY4xjUlSmD+RVGXDjWrLMNL75u7DwI7i7eM9Vu047Nzj/TuNw+WkXmHOFc="
+      },
+      "status": "new",
+      "currency": "GBP",
+      "amount": "615.00",
+      All the rest of the channex response without card number exposed ...
+    }
+  }
+]
+```
+
+- `payment_token`: **MONEI's created token of booking card information**. This token is typically used in [subsequent transactions](http://localhost:3000/api/#operation/payments_create) instead of the actual card details for security reasons.
+- `expireAt`: Indicates the **expiration date** of the payment token.
+- `paymentMethod`: Indicates **more information** about the payment method that the user used on his booking.
