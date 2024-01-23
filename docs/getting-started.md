@@ -23,3 +23,8 @@ description: Find a guide to integrate MONEI into your system
 - **[Spreedly](https://docs.spreedly.com/payment-gateways/monei/)**
 - **[Adobe Commerce (Magento 2)](e-commerce/adobe-commerce.mdx)**
 - **[PrestaShop](e-commerce/prestashop.mdx)**
+
+#### Integrate with hotels channel managers
+
+- **[Siteminder](channel-tokenization)**
+- **[Channex](channel-tokenization)**
