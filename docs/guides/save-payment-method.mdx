@@ -77,8 +77,18 @@ $monei->payments->create([
 Check all available [request parameters](/api).
 
 :::note
-You can create a payment with **amount: 0** to retrieve the payment token for future use without charging your customer.
-If amount is 0 it is mandatory to pass **generatePaymentToken: true**.
+To retrieve the payment token for future use without charging your customer, create a payment with the following parameters:
+```json
+{
+  "amount": 0,
+  "currency": "EUR",
+  "orderId": "14379133960355",
+  "transactionType": "VERIF",
+  "generatePaymentToken": true,
+  "callbackUrl": "https://example.com/checkout/callback",
+  "completeUrl": "https://example.com/checkout/complete"
+}
+```
 :::
 
 ### When you confirm a payment `Server-side`
