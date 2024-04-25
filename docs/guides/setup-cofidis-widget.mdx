@@ -38,7 +38,7 @@ Place this code snippet at the end of your page, before closing `</body>` tag an
 ```html
 <script src="https://js.monei.com/v2/monei.js"></script>
 <script>
-  var cofidisWidget = monei.CofidisWidget({
+  const cofidisWidget = monei.CofidisWidget({
     accountId: '2975bcfa-7bbc-422d-af48-c66759d87b69', // Your MONEI Account ID
     amountInt: {{cart.total_price}}, // The amount you want to display in cents
     language: 'en', // Language, supported en, es
@@ -101,7 +101,7 @@ Place this code snippet at the end of your page, before closing `</body>` tag an
 ```html
 <script src="https://js.monei.com/v2/monei.js"></script>
 <script>
-  var cofidisPayWidget = monei.CofidisPayWidget({
+  const cofidisPayWidget = monei.CofidisPayWidget({
     accountId: '2975bcfa-7bbc-422d-af48-c66759d87b69', // Your MONEI Account ID
     amountInt: {{cart.total_price}}, // The amount you want to display in cents
     language: 'en', // Language, supported en, es

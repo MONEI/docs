@@ -127,11 +127,11 @@ The Card Input Component lets you collect card information all within one Compon
 <TabItem value="js">
 
 ```js
-var container = document.getElementById('card-input');
-var errorText = document.getElementById('card-error');
+const container = document.getElementById('card-input');
+const errorText = document.getElementById('card-error');
 
 // Custom styling can be passed to options when creating a Card Input Component.
-var style = {
+const style = {
   input: {
     color: '#8961a5',
     fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
@@ -150,7 +150,7 @@ var style = {
 };
 
 // Create an instance of the Card Input.
-var cardInput = monei.CardInput({
+const cardInput = monei.CardInput({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   style: style,
   onFocus: function () {
@@ -175,8 +175,8 @@ var cardInput = monei.CardInput({
 cardInput.render(container);
 
 // Handle form submission.
-var paymentForm = document.getElementById('payment-form');
-var paymentButton = document.getElementById('payment-button');
+const paymentForm = document.getElementById('payment-form');
+const paymentButton = document.getElementById('payment-button');
 paymentForm.addEventListener('submit', function (event) {
   event.preventDefault();
   paymentButton.disabled = true;
@@ -203,7 +203,7 @@ paymentForm.addEventListener('submit', function (event) {
 // Submit the form with the token ID.
 function moneiTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
-  var hiddenInput = document.createElement('input');
+  const hiddenInput = document.createElement('input');
   hiddenInput.setAttribute('type', 'hidden');
   hiddenInput.setAttribute('name', 'paymentToken');
   hiddenInput.setAttribute('value', token);

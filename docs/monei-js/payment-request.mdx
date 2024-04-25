@@ -161,7 +161,7 @@ Initialize Payment Request Component
 
 ```js title="client.js"
 // Create an instance of the Google Pay component.
-var paymentRequest = monei.PaymentRequest({
+const paymentRequest = monei.PaymentRequest({
   paymentId: '{{payment_id}}',
   onSubmit(result) {
     moneiTokenHandler(result.token);

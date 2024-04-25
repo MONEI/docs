@@ -36,7 +36,7 @@ CardInput is a customizable Component used to collect sensitive card information
 ### Create an instance of the CardInput Component.
 
 ```js
-var cardInput = monei.CardInput({
+const cardInput = monei.CardInput({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   ...otherOptions
 });
@@ -99,7 +99,7 @@ The following pseudo-classes and pseudo-elements can also be styled using a nest
 - `:-webkit-autofill`
 
 ```js
-var style = {
+const style = {
   base: {
     height: '44px',
     padding: '8px 12px'
@@ -124,7 +124,7 @@ var style = {
   }
 };
 
-var cardInput = monei.CardInput({
+const cardInput = monei.CardInput({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   style: style,
   ...otherOptions
@@ -178,7 +178,7 @@ PayPal is a customizable Component that renders a PayPal payment button.
 ### Create an instance of the PayPal Component.
 
 ```js
-var paypal = monei.PayPal({
+const paypal = monei.PayPal({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   onSubmit(result) {
     if (result.error) {
@@ -229,7 +229,7 @@ PaymentRequest is a customizable Component that renders a Google Pay or Apple Pa
 ### Create an instance of the PaymentRequest Component.
 
 ```js
-var paymentRequest = monei.PaymentRequest({
+const paymentRequest = monei.PaymentRequest({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   onSubmit(result) {
     if (result.error) {
@@ -278,7 +278,7 @@ Bizum is a customizable Component that renders a Bizum payment button.
 ### Create an instance of the Bizum Component.
 
 ```js
-var bizum = monei.Bizum({
+const bizum = monei.Bizum({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   onSubmit(result) {
     if (result.error) {
@@ -325,7 +325,7 @@ Cofidis is a customizable Component that renders a Cofidis payment button.
 ### Create an instance of the Cofidis Component.
 
 ```js
-var cofidis = monei.Cofidis({
+const cofidis = monei.Cofidis({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   onSubmit(result) {
     // Redirect the customer to the Cofidis payment page
@@ -360,7 +360,7 @@ Cofidis Widget is a customizable Component that renders a Cofidis commercial con
 ### Create an instance of the Cofidis Widget Component.
 
 ```js
-var cofidisWidget = monei.CofidisWidget({
+const cofidisWidget = monei.CofidisWidget({
   accountId: '2975bcfa-7bbc-422d-af48-c66759d87b69',
   amount: 100,
   onError(error) {
@@ -399,7 +399,7 @@ Cofidis Pay is a customizable Component that renders a Cofidis Pay payment butto
 ### Create an instance of the Cofidis Pay Component.
 
 ```js
-var cofidisPay = monei.CofidisPay({
+const cofidisPay = monei.CofidisPay({
   paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
   onSubmit(result) {
     // Redirect the customer to the Cofidis payment page
@@ -434,7 +434,7 @@ Cofidis Pay Widget is a customizable Component that renders a Cofidis Pay commer
 ### Create an instance of the Cofidis Pay Widget Component.
 
 ```js
-var cofidisPayWidget = monei.CofidisPayWidget({
+const cofidisPayWidget = monei.CofidisPayWidget({
   accountId: '2975bcfa-7bbc-422d-af48-c66759d87b69',
   amount: 100,
   onError(error) {
