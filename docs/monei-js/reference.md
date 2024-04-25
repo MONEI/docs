@@ -216,54 +216,7 @@ paypal.render('#paypal_container');
   - **layout** `string` - Determine the button layout when multiple buttons are available Possible values: `vertical`, `horizontal`
   - **label** `string`- Set button label. Possible values: `checkout`, `credit`, `pay`, `buynow`, `paypal`, `installment`
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when paypal is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
-- **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
-  - **result.token** `string` - Payment token
-  - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
-- **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
-
-## `GooglePay` Component
-
-GooglePay is a customizable Component that renders a Google Pay payment button.
-
-### Create an instance of the GooglePay Component.
-
-```js
-var gPay = monei.GooglePay({
-  paymentId: 'af6029f80f5fc73a8ad2753eea0b1be0',
-  onSubmit(result) {
-    if (result.error) {
-      // Inform the user if there was an error.
-    } else {
-      // Confirm payment using the token.
-      moneiTokenHandler(result.token);
-    }
-  },
-  onError(error) {
-    console.log(error);
-  },
-  ...otherOptions
-});
-
-// render Component on the page
-gPay.render('#gpay_container');
-```
-
-### GooglePay options
-
-- **paymentId** `string` - A payment ID provided by MONEI in [create payment](/api/#operation/payments_create) request. Generated payment token will be bound to this payment.
-- **accountId** `string` - Your MONEI account ID. Required if you're initializing the Component with account ID. Instead of passing **paymentId** you can initialize the Component with the **accountId** and **sessionId** (optional). Generate a payment token before you create the payment itself.
-- **sessionId** `string` - Unique session ID in your system. Provide a different **sessionId** for each customer. Use this parameter to ensure that the customer who generated the token is the same as the one making the payment. Only required if you pass a token to your server. If you provide a **sessionId** when initializing MONEI Component you will need to provide the same value when you [create a payment](/api/#section/Payment-object) on your server.
-- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD). Required if you initialize a Component with **accountId**. You'll need to pass the same value when creating the payment.
-- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency. Required if you initialize a Component with **accountId**. You'll need to pass the same value when creating the payment.
-- **language** `string` - The [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code represents the desired button language. Supported locales include `en`, `es`, `ca`, `pt`, `de`, `it`, `fr`, `nl`, `et`, `fi`, `lv`, `no`, `pl` and `ru`.
-- **style** `object` - Customize the appearance of Google Pay button.
-  - **height** `string` - By default, the button adapts to the size of its container element. To customize the button width, alter the width of the container element. To customize the button height, set the style.height option to a value from `25` to `55`.
-  - **type** `string` - Set button type. Possible values:
-    - **buy** - "Buy with Google Pay" button (default).
-    - **donate** - "Donate with Google Pay" button.
-    - **plain** - Google Pay button without additional text.
-  - **color** `string` - Set button color. Possible values: `default`, `black`, `white`
-- **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when paypal is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
+- **onBeforeOpen:() => boolean** `function` - Callback function that is called before the PayPal window is opened. If the function returns `false`, the PayPal window will not be opened.
 - **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.token** `string` - Payment token
   - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
@@ -312,6 +265,7 @@ paymentRequest.render('#payment_request');
     - **plain** - button without additional text (default).
   - **color** `string` - Set button color. Possible values: `default`, `black`, `white`
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when payment request is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
+- **onBeforeOpen:() => boolean** `function` - Callback function that is called before the payment window is opened. If the function returns `false`, the payment window will not be opened.
 - **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.token** `string` - Payment token
   - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
@@ -358,6 +312,7 @@ bizum.render('#bizum');
     - **pay** - "Pay with Bizum" button.
     - **plain** - button without additional text (default).
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when payment request is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
+- **onBeforeOpen:() => boolean** `function` - Callback function that is called before the Bizum window is opened. If the function returns `false`, the payment window will not be opened.
 - **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.token** `string` - Payment token
   - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
@@ -393,6 +348,7 @@ cofidis.render('#cofidis');
 - **style** `object` - Customize the appearance of Google Pay button.
   - **height** `string` - By default, the button adapts to the size of its container element. To customize the button width, alter the width of the container element. To customize the button height, set the style.height option to a value from `25` to `55`.
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when payment request is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
+- **onBeforeOpen:() => boolean** `function` - Callback function that is called before the Cofidis window is opened. If the function returns `false`, the payment window will not be opened.
 - **onSubmit:(result: {redirectUrl: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.redirectUrl** `string` - Cofidis payment page redirect url
 - **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
@@ -466,6 +422,7 @@ cofidisPay.render('#cofidis');
 - **style** `object` - Customize the appearance of Google Pay button.
   - **height** `string` - By default, the button adapts to the size of its container element. To customize the button width, alter the width of the container element. To customize the button height, set the style.height option to a value from `25` to `55`.
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when payment request is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
+- **onBeforeOpen:() => boolean** `function` - Callback function that is called before the Cofidis Pay window is opened. If the function returns `false`, the payment window will not be opened.
 - **onSubmit:(result: {redirectUrl: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.redirectUrl** `string` - Cofidis payment page redirect url
 - **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
