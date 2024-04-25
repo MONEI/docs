@@ -157,7 +157,7 @@ Initialize Bizum Component
 
 ```js title="client.js"
 // Create an instance of the Bizum component.
-var bizum = monei.Bizum({
+const bizum = monei.Bizum({
   paymentId: '{{payment_id}}',
   onSubmit(result) {
     moneiTokenHandler(result.token);

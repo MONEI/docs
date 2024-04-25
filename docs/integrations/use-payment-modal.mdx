@@ -123,8 +123,8 @@ You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-serv
 
 ```js title="client.js"
 // Handle form submission.
-var paymentForm = document.getElementById('payment-form');
-var paymentButton = document.getElementById('payment-button');
+const paymentForm = document.getElementById('payment-form');
+const paymentButton = document.getElementById('payment-button');
 paymentForm.addEventListener('submit', function (event) {
   event.preventDefault();
   paymentButton.disabled = true;

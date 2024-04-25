@@ -137,7 +137,7 @@ Initialize PayPal Component
 
 ```js title="client.js"
 // Create an instance of the PayPal component.
-var payPal = monei.PayPal({
+const payPal = monei.PayPal({
   paymentId: '{{payment_id}}',
   onSubmit(result) {
     moneiTokenHandler(result.token);
