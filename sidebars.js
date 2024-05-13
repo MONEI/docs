@@ -38,7 +38,8 @@ module.exports = {
         'guides/send-cardholder-name',
         'guides/payouts',
         'guides/setup-cofidis-widget',
-        'guides/migrate-tokens'
+        'guides/migrate-tokens',
+        'guides/ethoca-verify'
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },
