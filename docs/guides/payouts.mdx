@@ -3,17 +3,15 @@ id: payouts
 title: Payouts (beta)
 ---
 
-MONEI Payouts API allows you to send money to your clients via Bizum or card instead of charging them.
+The MONEI Payouts API allows you to send money to individuals via Bizum or Cards.
 
 :::warning
-Payouts API is currently in a closed beta. If you want to use it, please contact our [Support Team](https://support.monei.com/hc/requests/new)
+The Payouts API is currently in closed beta. If you want to use it, please contact our [Support Team](https://support.monei.com/hc/requests/new)
 :::
 
 ## Before you begin
 
-This page explains how to do payouts with Bizum or card. If you don't have Bizum payment method configured, please contact our [Support Team](https://support.monei.com/hc/requests/new).
-
-Before you start, you need to make sure that you have Bizum enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods).
+Before you start, you need to make sure that you have Bizum enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods). If you don't have Bizum configured, please contact our [Support Team](https://support.monei.com/hc/requests/new).
 
 To test your integration:
 
@@ -24,7 +22,7 @@ To test your integration:
 
 ## Payouts with Bizum
 
-Bizum payouts do not require client's confirmation. You only need to know the phone number.
+Bizum payouts do not require client's confirmation. You only need to know their phone number.
 
 :::caution
 Bizum payouts are not fully supported by all the banks yet. **If the client's bank doesn't support Bizum payouts, the request will fail**.
@@ -151,17 +149,15 @@ Bizum payouts are executed immediately. If the request is successful, you will r
 
 Check the full list of returned [response parameters](/api/#section/Payment-object).
 
-Optionally, you can redirect the client to the `nextAction.redirectUrl` to show the payment receipt.
+Optionally, you can redirect the client to the `nextAction.redirectUrl` to show the payout status or receipt.
 
-## Payouts with card
+## Payouts with Cards
 
-Payouts are supported by all our integrations. You can use a prebuilt payment page or build a custom checkout to let your client enter card details to receive the payout.
+Payouts are supported by all our integrations. You can use a prebuilt payment page or build a custom checkout to let your client enter their Card details to receive the payout.
 
 Pass the `transactionType` parameter with the value `PAYOUT` to create a payout in the first step of our guides.
 
 - [Use a prebuilt payment page](integrations/use-prebuilt-payment-page.mdx)
 - [Build a custom checkout](integrations/build-custom-checkout.mdx)
 
-Payouts are only supported for card and Bizum payments so, you need to pass `allowedPaymentMethods` parameter with the values of `card` and/or `bizum` (in case you have more payment methods enabled)
-
-
+Payouts are only supported for Cards and Bizum payments so, you need to pass the `allowedPaymentMethods` parameter with the values of `card` or `bizum` (in case you have more payment methods enabled)
