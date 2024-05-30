@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.4.2",
+    "version": "1.4.5",
     "title": "MONEI API v1",
     "description": "<p>The MONEI API is organized around\n<a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a>. Our\nAPI has predictable resource-oriented URLs, accepts JSON-encoded request\nbodies, returns JSON-encoded responses, and uses standard HTTP response\ncodes, authentication, and verbs.</p>\n<h4 id=\"base-url\">Base URL:</h4>\n<p><a href=\"https://api.monei.com/v1\">https://api.monei.com/v1</a></p>\n<h4 id=\"client-libraries\">Client libraries:</h4>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman</a></li>\n</ul>\n<h4 id=\"important\">Important:</h4>\n<p><strong>If you are not using our official SDKs, you need to provide a valid <code>User-Agent</code> header in each request, otherwise your requests will be rejected.</strong></p>\n"
   },
@@ -444,6 +444,9 @@
           "sequenceId": {
             "$ref": "#/components/schemas/Payment-SequenceId"
           },
+          "storeId": {
+            "$ref": "#/components/schemas/Payment-StoreId"
+          },
           "pointOfSaleId": {
             "$ref": "#/components/schemas/Payment-PointOfSaleId"
           },
@@ -516,6 +519,9 @@
           },
           "sequence": {
             "$ref": "#/components/schemas/Payment-Sequence"
+          },
+          "storeId": {
+            "$ref": "#/components/schemas/Payment-StoreId"
           },
           "pointOfSaleId": {
             "$ref": "#/components/schemas/Payment-PointOfSaleId"
@@ -922,22 +928,23 @@
             "type": "string",
             "example": "card",
             "enum": [
+              "alipay",
               "card",
               "bizum",
-              "googlePay",
-              "applePay",
-              "clickToPay",
               "paypal",
               "cofidis",
               "cofidisLoan",
-              "iDeal",
               "mbway",
               "multibanco",
+              "iDeal",
+              "bancontact",
               "sofort",
               "trustly",
               "sepa",
               "klarna",
-              "giropay"
+              "giropay",
+              "eps",
+              "blik"
             ],
             "description": "Payment method type."
           },
@@ -1249,11 +1256,13 @@
           "type": "string"
         },
         "enum": [
+          "alipay",
           "card",
           "bizum",
           "paypal",
           "cofidis",
           "cofidisLoan",
+          "mbway",
           "multibanco",
           "iDeal",
           "bancontact",
@@ -1261,14 +1270,16 @@
           "trustly",
           "sepa",
           "klarna",
-          "giropay"
+          "giropay",
+          "eps",
+          "blik"
         ],
         "example": [
           "card",
           "bizum",
           "paypal"
         ],
-        "description": "An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `card`\n  - `bizum`\n  - `paypal`\n  - `cofidis`\n  - `cofidisLoan`\n  - `multibanco`\n  - `iDeal`\n  - `bancontact`\n  - `sofort`\n  - `trustly`\n  - `sepa`\n  - `klarna`\n  - `giropay`\n"
+        "description": "An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `alipay`\n  - `card`\n  - `bizum`\n  - `paypal`\n  - `cofidis`\n  - `cofidisLoan`\n  - `mbway`\n  - `multibanco`\n  - `iDeal`\n  - `bancontact`\n  - `sofort`\n  - `trustly`\n  - `sepa`\n  - `klarna`\n  - `giropay`\n  - `eps`\n  - `blik`\n"
       },
       "Payment-TransactionType": {
         "type": "string",
@@ -1277,9 +1288,10 @@
         "enum": [
           "SALE",
           "AUTH",
-          "PAYOUT"
+          "PAYOUT",
+          "VERIF"
         ],
-        "description": "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don’t capture the funds until later.\n  - `PAYOUT` - Send funds to the customer\n"
+        "description": "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don’t capture the funds until later.\n  - `PAYOUT` - Send funds to the customer\n  - `VERIF` - Verify the card without placing a hold or capturing funds.\n"
       },
       "Payment-MessageChannel": {
         "type": "string",
@@ -1566,6 +1578,11 @@
           "requested_by_customer"
         ],
         "description": "The reason for refunding the Payment."
+      },
+      "Payment-StoreId": {
+        "type": "string",
+        "example": "e5f28150d9e8974c58ab5ec9c4a880f8734dcf05",
+        "description": "A unique identifier of the Store. If specified the payment is attached to this Store.\n"
       },
       "Payment-PointOfSaleId": {
         "type": "string",
@@ -2978,7 +2995,7 @@
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import CancelPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.cancel(\n    \"575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa\",\n    cancel_subscription_request=CancelPaymentRequest(cancel_at_period_end=True)\n)\n"
+            "source": "import Monei\nfrom Monei import CancelSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.cancel(\n    \"575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa\",\n    cancel_subscription_request=CancelSubscriptionRequest(cancel_at_period_end=True)\n)\n"
           }
         ]
       }

@@ -39,6 +39,15 @@ Configure payment methods that you want to accept in your store.
 
 Enter your API Key. You can find your API Key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api).
 
+:::important
+At present, our plugin does not support [WooCommerce Blocks](https://woocommerce.com/document/woocommerce-blocks/). To enable MONEI payment methods, please update the checkout page template (**Pages → Checkout**) with the following shortcode:
+```html
+[woocommerce_checkout]
+```
+:::
+
+![Configure Checkout Page](/img/configure-woo-3.png)
+
 ## Before you go live
 
 - Make sure that you are using [live (production) mode](testing.md) API Key.
