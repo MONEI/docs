@@ -18,6 +18,10 @@ Become an integrated payments partner to quickly and easily provide payment serv
 - First name
 - Last name
 - Email
+- Business name
+- Website
+- Tax Identification Number (CIF)
+- Services Description
 - Phone number
 
 
@@ -47,6 +51,7 @@ curl --request POST 'https://api.monei.com/v1/payments' \
 --header 'Authorization: <PARTNER_API_KEY>' \
 --header 'MONEI-Account-ID: <MONEI_ACCOUNT_ID>' \
 --header 'Content-Type: application/json' \
+--header 'User-Agent MONEI/<PARTNER_NAME>/0.1.0' \
 --data-raw '{
   "amount": 110,
   "currency": "EUR",
@@ -67,6 +72,7 @@ curl --request POST 'https://graphql.monei.com' \
 --header 'Authorization: <PARTNER_API_KEY>' \
 --header 'MONEI-Account-ID: <MONEI_ACCOUNT_ID>' \
 --header 'Content-Type: application/json' \
+--header 'User-Agent MONEI/<PARTNER_NAME>/0.1.0' \
 --data-raw '{"query":"{account {name status}}"}'
 ```
 
