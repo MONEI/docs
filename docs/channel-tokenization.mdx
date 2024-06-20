@@ -121,7 +121,8 @@ Channex is another channel management system that seamlessly integrates with the
   "accountId": "<monei_account_id>",
   "sessionId": "<uuid4>",
   "channelManagerType": "CHANNEX",
-  "channexId": "<your_channex_api_key>"
+  "channexId": "<your_channex_api_key>",
+  "propertyId": "<property_id>"
 }
 ```
 
@@ -129,6 +130,7 @@ Channex is another channel management system that seamlessly integrates with the
 - **sessionId** `string` - A universally unique identifier (UUID) representing the session.
 - **channelManagerType** `string` - Indicates the **name of channel manager**. It is a String with two possible values: `SITEMINDER` or `CHANNEX`. In this case we're going to use `CHANNEX`.
 - **channexId** `string` - [Channex API key](https://docs.channex.io/application-documentation/api-key-access).
+- **propertyId** `string` - **Optional**. The ID of the property you want to filter by, if not provided will return all the [Booking Revision Feed](https://docs.channex.io/api-v.1-documentation/bookings-collection#booking-revisions-feed).
 
 #### Response:
 
