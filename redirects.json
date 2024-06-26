@@ -88,5 +88,10 @@
     "source": "/docs/integrations/monei-connect/",
     "target": "/docs/monei-connect/",
     "status": "301"
+  },
+  {
+    "source": "/reference/parameters/",
+    "target": "/docs/monei-js/reference/",
+    "status": "301"
   }
 ]
