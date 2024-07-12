@@ -1,0 +1,58 @@
+---
+id: sepa-request-to-pay
+title: SEPA Request to Pay (SRTP)
+description: Create and accept payments using the SRTP scheme.
+---
+
+SEPA Request to Pay (SRTP) is an innovative payment scheme proposed by the European Payments Council (EPC) that is based on a real-time messaging ecosystem to facilitate financial transactions. This scheme, incorporated into MONEI's infrastructure, allows beneficiaries (businesses or individuals) to send payment requests to payers, who can approve and make the payment using SEPA payment channels. This payment method is designed to simplify transactions, reducing the need for bank data exchange and improving the security and traceability of payments. SRTP is both available and suits digital channels, ecommerce and retail or in-store physical transactions.
+
+The main features and advantages of the SRTP scheme are:
+
+- Customer can forget about manually entering bank details. With SRTP, the end customer will receive a payment request from the merchant that can accept with a single click, ensuring that his personal & financial data remains protected.
+
+- Companies can Create and Send “payments requests”  at any time of the day, without worrying about office hours or service availability. 
+
+- Customer can accept payments at his convenience. SRTP allows immediate or later approval of payment requests.
+
+- From MONEI's control panel, the merchant can access a history of all transactions and their status: pending, processed or rejected.
+
+- Consumers can select SRTP as a payment method on merchant’s checkout page. (most suited in ecommerce)
+
+- Consumers or individuals can easily “manage” their cash flow needs or plans and can approve Request to Pay transactions at their will.
+
+- SRTP is a “behind the scenes” SEPA Instant payment (SCT Inst) thus: no chargeback allowed.
+
+The integration with SRTP allows MONEI to offer its merchants and companies a more efficient and secure way to request and receive payments, enhancing the end-user experience and providing new opportunities for payment process automation in the European market. This initiative underscores MONEI's commitment to innovation and its effort to be at the forefront of digital payment solutions, reinforcing its position in the financial market as a key facilitator of secure and convenient transactions.
+
+## Messaging Flow
+
+The diagram below illustrates SRTP flows in a generic four-corner ecosystem, applied to basic use cases such as:
+
+- In physical or online retail.
+
+- Person-to-person (P2P) transactions.
+
+- Electronic Invoice Presentation and Payment (EIPP):
+  - Business to Customer (B2C).
+  - Business to Business (B2B).
+  - Business to Government (B2G).
+
+In this model, both the beneficiary and the payer use their own SRTP service provider. For the beneficiary, this would be MONEI. To simplify, payment flows are not presented in the diagram. In more complex scenarios, the beneficiary and/or payer PSPs could be different entities from the SRTP service providers.
+
+![SEPA Request to Pay](/img/srtp-scheme.jpg)
+
+1. The payer selects SRTP as the payment method on the merchant's payment page.
+2. The merchant notifies MONEI of a payment request with all necessary information.
+3. MONEI contacts and sends the RTP to the payer's payment service provider.
+4. The payer receives a notification on their smartphone or browser that they must accept or reject.
+5. All parties are notified if the RTP has been accepted or not.
+
+## Adherence
+
+The implementation of the SRTP scheme at MONEI has required the development of a specific API to facilitate communication between MONEI and banking systems, as well as between MONEI and its customers. This API has been designed to meet the different endpoints necessary in the SRTP scheme, allowing the creation, consultation, and management of payment requests efficiently and securely. The API ensures interoperability with banking systems and provides MONEI customers with a smooth and consistent user experience.
+
+The SRTP Integration Service we offer includes a streamlined REST API, facilitating the direct incorporation of SRTP into mobile and online banking platforms. This service eliminates the need for the bank to undergo formal SRTP certification, as it encompasses tools for effective integration testing, accommodating both automated and manual testing procedures. Consequently, the process of adhering to the SRTP scheme is significantly simplified, with MONEI assuming responsibility for the majority of technical components.
+
+If you are interested and are a Payer's RTP Service Provider, contact MONEI to receive all the necessary technical documentation for connection to the API.
+
+
