@@ -29,7 +29,8 @@ module.exports = {
         'payment-methods/bizum',
         'payment-methods/cofidis',
         'payment-methods/cofidis-pay',
-        'payment-methods/click-to-pay'
+        'payment-methods/click-to-pay',
+        'payment-methods/sepa-request-to-pay
       ],
       'Subscriptions (beta)': ['subscriptions/integration'],
       Guides: [
