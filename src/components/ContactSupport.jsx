@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 
-export const ContactSupport = ({children}) => {
+export const ContactSupport = ({ children }) => {
   const handleClick = (e) => {
     const zE = window.zE;
-    if (zE) {
-      e.preventDefault();
-      zE('webWidget', 'updateSettings', {
+    if (!zE) return;
+    e.preventDefault();
+    try {
+      zE("webWidget", "updateSettings", {
         webWidget: {
           chat: {
             suppress: true
@@ -31,8 +32,8 @@ export const ContactSupport = ({children}) => {
         }
       });
       zE.activate();
-      zE('webWidget:on', 'close', () => {
-        zE('webWidget', 'updateSettings', {
+      zE("webWidget:on", "close", () => {
+        zE("webWidget", "updateSettings", {
           webWidget: {
             chat: {
               suppress: false
@@ -58,6 +59,9 @@ export const ContactSupport = ({children}) => {
           }
         });
       });
+    } catch (error) {
+      console.error(error);
+      window.location.href = "https://support.monei.com/hc/requests/new";
     }
   };
 
