@@ -152,3 +152,7 @@ body {
 #CookiebotWidget {
   z-index: 9 !important;
 }
+
+#CookiebotWidgetUnderlay {
+  z-index: 8 !important;
+}
