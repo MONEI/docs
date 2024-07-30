@@ -148,3 +148,7 @@ body {
   scale: 0.75 !important;
   margin: 0;
 }
+
+#CookiebotWidget {
+  z-index: 9 !important;
+}
