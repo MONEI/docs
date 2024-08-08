@@ -18,7 +18,7 @@
     "@monei-js/components": "^1.7.3",
     "buffer": "^6.0.3",
     "clsx": "^1.1.1",
-    "core-js": "^3.20.3",
+    "core-js": "^3.37.1",
     "docusaurus-gtm-plugin": "^0.0.2",
     "https-browserify": "^1.0.0",
     "lodash.merge": "^4.6.2",
