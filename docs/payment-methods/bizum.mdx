@@ -4,21 +4,20 @@ title: Bizum
 description: Learn how to accept Bizum payments with MONEI.
 ---
 
-[Bizum](https://bizum.es/) is a Spanish instant mobile payment solution. Accept Bizum payments to let your customers make secure payments from the convenience of their smartphones.
+Accept [Bizum](https://bizum.es/) payments to provide your customers with a secure and convenient way to make instant payments from their smartphones, desktops, or tablets. Bizum, a trusted Spanish mobile payment solution, ensures seamless transactions across multiple devices.
 
-You can start accepting Bizum payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Bizum Component](monei-js/reference.md#bizu-component). No additional configuration is required to use Bizum in Hosted Payment Page.
+Easily start accepting Bizum payments on your website or mobile app with the [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Bizum Component](monei-js/reference.md#bizu-component). No extra configuration is needed to enable Bizum on the Hosted Payment Page.
 
-Our [Bizum Component](monei-js/reference.md#bizum-component) renders a Bizum button to your payment page.
-When a customer selects Bizum, the component presents a Bizum overlay, where a customer can enter his phone number registered in Bizum to complete the payment process.
+The [Bizum Component](monei-js/reference.md#bizum-component) adds a dedicated Bizum button to your payment page. When customers select Bizum, an overlay appears, allowing them to enter their registered phone number to complete the payment quickly and securely.
 
-Bizum transactions do not have a maximum limit. However, if a transaction fails, it could be due to the issuing bank having its own maximum limit or the consumer lacking sufficient funds.
+Bizum transactions do not have a maximum limit. However, if a transaction fails, it could be due to the issuing bank having its own maximum limit or the consumer lacking sufficient funds. Unlike Bizum's peer-to-peer (P2P) limits, there is no monthly cap on the number of online purchases a customer can make using Bizum.
 
-With Bizum, you can authorize and capture payments separately. After the payment is authorized, you have up to 30 days to capture it. Payment authorizations available only if RTP (Request to Pay) flow is supported by the customer's bank.
+With Bizum, you can perform pre-authentications and capture payments at a later time. During pre-authentication, the Bizum number is verified to confirm it belongs to the account holder via an online API, without holding or authorizing any funds as done in card pre-authorizations. Once the account holder is authenticated successfully, you have up to 30 days to capture the payment for the specified amount. If insufficient funds are available in the linked IBAN at the time of capture, the transaction will not proceed. No additional Strong Customer Authentication (SCA) or challenge is required from the Bizum holder during the capture. Note that Bizum payment authentications are available only if the customer's bank supports the RTP (Request to Pay) flow.
 
 Bizum transactions can be refunded within 365 days after the initial transaction has been processed.
 
 :::caution Bizum Payment Status Monitoring
-The status of a payment is a critical aspect of a transaction, as any discrepancy between the payment gateway and the processor can have serious consequences for both the merchant and the consumer. An error in this area can result in failed transactions, financial losses, or trust issues between the involved parties. For this reason, MONEI has developed an exclusive internal technology that ensures the security of the status of each transaction made through the Bizum payment method at all times. This advanced technology allows MONEI to monitor and verify each transaction with precision, ensuring that payments are processed efficiently and without errors, thus providing greater peace of mind for both merchants and consumers.
+The status of a payment is a critical aspect of a transaction, as any discrepancy between the payment gateway and the processor can have serious consequences for both the merchant and the consumer. An error in this area can result in failed transactions, financial losses, or trust issues between the involved parties. For this reason, MONEI has developed an exclusive internal technology that ensures the security of the status of each transaction made through the Bizum payment method at all times. This advanced technology allows MONEI to monitor and verify each transaction with precision, ensuring that payments are processed efficiently and without errors, thus providing greater peace of mind for both merchants and consumers.This functionality is exclusively available worldwide through the MONEI Bizum API, with no other tech companies having access to it.
 :::
 
 import {Bizum} from '../../src/components/Bizum';
@@ -30,7 +29,11 @@ import {Bizum} from '../../src/components/Bizum';
 </div>
 
 :::note
-You can [send payment request](/api/#operation/payments_send_request) directly to the customer's phone. If Bizum payment method is available and the phone number is registered in Bizum, the customer will get a push notification to confirm the payment directly in the banking app, otherwise, he will receive a link to pay via WhatsApp. This feature does not require UI Component.
+You can [send a payment request](/api/#operation/payments_send_request) directly to the customer’s phone. If the Bizum payment method is available and the phone number is registered with Bizum, the customer will receive a push notification to confirm the payment directly in their banking app. If not, they’ll receive a payment link via WhatsApp. This feature works independently of the UI Component.
+
+Example of a Bizum push notification:
+
+<img src="/img/bizum-push-notification.png" width={400} alt="Bizum Push Notification" />
 :::
 
 ## Before you begin
@@ -51,8 +54,8 @@ To test your integration:
 
 Create a [Payment](/api/#section/Payment-object) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 <Tabs
   defaultValue="curl"
@@ -191,7 +194,7 @@ You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-serv
 // Confirm the payment
 function moneiTokenHandler(token) {
   return monei
-    .confirmPayment({paymentId: "{{payment_id}}", paymentToken: token})
+    .confirmPayment({paymentId: '{{payment_id}}', paymentToken: token})
     .then(function (result) {
       // IMPORTANT: some banks do not support new RTP (Request to Pay) flow
       // and require a redirect to the hosted page to complete the payment
@@ -203,7 +206,6 @@ function moneiTokenHandler(token) {
       // But you should always rely on the result passed to the callback endpoint on your server
       // to update the order status
       console.log(result);
-
     })
     .catch(function (error) {
       console.log(error);
@@ -216,7 +218,7 @@ As an alternative process you can submit generated `paymentToken` to your sever 
 :::
 
 :::caution
-Bizum is migrating to the new payment request flow with the push notification to the banking app that will allow confirming the payment without the redirect. This is what's known as RTP (Request to Pay). This flow is not fully supported by all the banks yet. It is important to check the `mustRedirect` flag in the response to determine if the redirect is required.
+Bizum is transitioning to a new payment request flow, known as RTP (Request to Pay), which sends a push notification directly to the banking app, allowing payment confirmation without a redirect. Although not yet fully supported by all Spanish banks, this flow already covers nearly 98% of Bizum transactions. To confirm if a redirect is needed, it’s essential to check the `mustRedirect` flag in the response.
 :::
 
 ### 4. An asynchronous request is sent to your server.
