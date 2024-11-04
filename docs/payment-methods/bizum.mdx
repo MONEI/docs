@@ -10,9 +10,7 @@ Easily start accepting Bizum payments on your website or mobile app with the [Ho
 
 The [Bizum Component](monei-js/reference.md#bizum-component) adds a dedicated Bizum button to your payment page. When customers select Bizum, an overlay appears, allowing them to enter their registered phone number to complete the payment quickly and securely.
 
-By default, Bizum transactions are capped at 1.500 EUR, with any amount exceeding this limit automatically rejected. In certain cases, this limit can be increased to 15.000 EUR upon specific approval from the MONEI risk and compliance team.
-
-Unlike Bizum's peer-to-peer (P2P) limits, there is no monthly cap on the number of online purchases a customer can make using Bizum.
+Bizum transactions do not have a maximum limit. However, if a transaction fails, it could be due to the issuing bank having its own maximum limit or the consumer lacking sufficient funds. Unlike Bizum's peer-to-peer (P2P) limits, there is no monthly cap on the number of online purchases a customer can make using Bizum.
 
 With Bizum, you can perform pre-authentications and capture payments at a later time. During pre-authentication, the Bizum number is verified to confirm it belongs to the account holder via an online API, without holding or authorizing any funds as done in card pre-authorizations. Once the account holder is authenticated successfully, you have up to 30 days to capture the payment for the specified amount. If insufficient funds are available in the linked IBAN at the time of capture, the transaction will not proceed. No additional Strong Customer Authentication (SCA) or challenge is required from the Bizum holder during the capture. Note that Bizum payment authentications are available only if the customer's bank supports the RTP (Request to Pay) flow.
 
@@ -32,6 +30,10 @@ import {Bizum} from '../../src/components/Bizum';
 
 :::note
 You can [send a payment request](/api/#operation/payments_send_request) directly to the customer’s phone. If the Bizum payment method is available and the phone number is registered with Bizum, the customer will receive a push notification to confirm the payment directly in their banking app. If not, they’ll receive a payment link via WhatsApp. This feature works independently of the UI Component.
+
+Example of a Bizum push notification:
+
+<img src="/img/bizum-push-notification.png" width={400} alt="Bizum Push Notification" />
 :::
 
 ## Before you begin
@@ -52,8 +54,8 @@ To test your integration:
 
 Create a [Payment](/api/#section/Payment-object) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 <Tabs
   defaultValue="curl"
@@ -192,7 +194,7 @@ You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-serv
 // Confirm the payment
 function moneiTokenHandler(token) {
   return monei
-    .confirmPayment({paymentId: "{{payment_id}}", paymentToken: token})
+    .confirmPayment({paymentId: '{{payment_id}}', paymentToken: token})
     .then(function (result) {
       // IMPORTANT: some banks do not support new RTP (Request to Pay) flow
       // and require a redirect to the hosted page to complete the payment
@@ -204,7 +206,6 @@ function moneiTokenHandler(token) {
       // But you should always rely on the result passed to the callback endpoint on your server
       // to update the order status
       console.log(result);
-
     })
     .catch(function (error) {
       console.log(error);
