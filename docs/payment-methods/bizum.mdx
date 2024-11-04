@@ -11,7 +11,7 @@ You can start accepting Bizum payments on the Web using [Hosted Payment Page](in
 Our [Bizum Component](monei-js/reference.md#bizum-component) renders a Bizum button to your payment page.
 When a customer selects Bizum, the component presents a Bizum overlay, where a customer can enter his phone number registered in Bizum to complete the payment process.
 
-Bizum transactions can be as high as 1.500 EUR. Any transaction exceeding this amount is rejected.
+Bizum transactions do not have a maximum limit. However, if a transaction fails, it could be due to the issuing bank having its own maximum limit or the consumer lacking sufficient funds.
 
 With Bizum, you can authorize and capture payments separately. After the payment is authorized, you have up to 30 days to capture it. Payment authorizations available only if RTP (Request to Pay) flow is supported by the customer's bank.
 
