@@ -11,20 +11,18 @@ The Payouts API is currently in closed beta. To request access, please contact o
 
 ## Before you begin
 
-Before you start, you need to make sure that you have Bizum enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods). If you don't have Bizum configured, please contact our [Support Team](https://support.monei.com/hc/requests/new).
-
-To test your integration:
-
-The Payouts flow is not available in the MONEI testing environment. However, you can use the [MONEI API endpoint](https://docs.monei.com/api/#tag/Bizum) to verify if the phone number is registered with Bizum before sending the money to the end user.
-
+To enable MONEI payouts, it is essential to maintain a positive balance in the merchant account at all times. Additionally, a minimum initial top-up of €5,000 to the merchant account balance is required to fully activate the payout functionality.
 
 ## Payouts with Bizum
 
+Before you start, you need to make sure that you have Bizum enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods). If you don't have Bizum configured, please contact our [Support Team](https://support.monei.com/hc/requests/new).
+
+To test your Bizum payout integration:
+
+You can use the [MONEI API endpoint](https://docs.monei.com/api/#tag/Bizum) to verify if the phone number is registered with Bizum before sending the money to the end user.
+
 Bizum payouts do not require client's confirmation. You only need to know their phone number.
 
-:::caution
-Bizum payouts are not fully supported by all the banks yet. **If the client's bank doesn't support Bizum payouts, the request will fail**.
-:::
 
 ### 1. Create a new payment on your server.
 
