@@ -2,6 +2,7 @@ module.exports = {
   docs: [
     'getting-started',
     'monei-connect',
+    'eurm-stablecoin',
     {
       Integrations: [
         'integrations/use-prebuilt-payment-page',
