@@ -25,7 +25,7 @@ EURM is a stablecoin developed by MONEI, designed to facilitate digital payments
 **Here are several key programming-related aspects that detail how EURM functions on a technical level:**
 
 ### Smart Contract Architecture
--	**Language:** EURM’s smart contracts are primarily written in Solidity, the standard language for Ethereum and Polygon blockchain development. Solidity enables the creation of complex, immutable, and highly efficient contracts that can process transactions automatically.
+-	**Language:** EURM’s smart contracts are primarily written in Solidity, the standard language for Ethereum-compatible blockchain development. Solidity enables the creation of complex, immutable, and highly efficient contracts that can process transactions automatically.
 
 ### Key Contract Components
 -	**Minting/Burning Logic:** Functions handle minting new EURM tokens when euros are added to the reserve and burning them when euros are withdrawn. This logic ensures that EURM tokens remain fully collateralized by real euros.
@@ -34,17 +34,17 @@ EURM is a stablecoin developed by MONEI, designed to facilitate digital payments
 
 ### Gas Optimization
 
--	**Polygon for Lower Costs:** Polygon is chosen alongside Ethereum to minimize gas fees associated with token transfers and smart contract executions. This allows for high transaction volumes without prohibitive costs, which is essential for payments.
+-	**Polygon for Lower Costs:** EURM primarily operates on Polygon to minimize gas fees associated with token transfers and smart contract executions, while maintaining Ethereum compatibility. This allows for high transaction volumes with significantly lower costs compared to the Ethereum mainnet.
 -	**Efficient Contract Design:** Smart contracts are optimized to minimize storage usage and computational requirements, as these contribute to gas costs. For example, instead of writing multiple small transactions, contracts batch transactions where possible to reduce network calls.
 
 ### Token Standards and Interoperability
 
--	**ERC-20 Standard Compliance:** EURM adheres to the ERC-20 standard, the most widely accepted token standard on Ethereum. This standard provides interoperability with any Ethereum-compatible wallet or platform and ensures smooth integration with existing DeFi infrastructure.
+-	**ERC-20 Standard Compliance:** EURM implements the ERC-20 token standard, ensuring compatibility with Ethereum and Polygon ecosystems. This enables seamless integration with compatible wallets, exchanges, and DeFi platforms while maintaining the necessary regulatory compliance features.
 -	**Custom Extensions:** MONEI has likely added extensions to the ERC-20 contract, such as pausing or freezing tokens in compliance cases or enhancing security by restricting the functions that certain accounts can perform (e.g., non-compliant addresses can’t transfer tokens).
 
 ### API and SDK for Integration
 
-- **REST and GraphQL APIs:** MONEI offers API endpoints that allow developers to programmatically access EURM services, such as checking balances, executing transactions, and retrieving transaction history. REST APIs ensure broad compatibility, while GraphQL provides flexibility in querying.
+- **REST and GraphQL APIs:** MONEI provides a comprehensive REST API that enables developers to interact with EURM services, including balance checks, transaction execution, and history retrieval. The API is designed with security and ease of integration in mind.
 -	**SDKs for Popular Languages:** To simplify integration, MONEI provides Software Development Kits (SDKs) for popular languages like JavaScript, Python, and Java. These SDKs abstract the complex interactions with the Ethereum or Polygon blockchains, allowing developers to integrate EURM with minimal blockchain knowledge.
 
 ### Security and Auditing
@@ -65,7 +65,7 @@ EURM is a stablecoin developed by MONEI, designed to facilitate digital payments
 
 ### Scalability and Future-Proofing
 
--	**Layer-2 Compatibility:** Besides using Polygon, EURM contracts are built with a modular architecture that could integrate with other Layer-2 solutions, like Arbitrum or Optimism, if needed for further scalability.
+- **Layer-2 Integration:** EURM primarily utilizes Polygon as its Layer-2 solution, offering scalability and cost-efficiency while maintaining security. The modular architecture allows for potential integration with other scaling solutions if needed in the future.
 -	**Upgradeable Contracts:** Through an upgradable smart contract pattern (e.g., using the OpenZeppelin upgradeable proxy), EURM can adopt improvements or regulatory updates without having to redeploy entirely new contracts, making it adaptable over time.
 
 :::note
