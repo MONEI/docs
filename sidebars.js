@@ -35,13 +35,14 @@ module.exports = {
       ],
       'Subscriptions (beta)': ['subscriptions/integration'],
       Guides: [
-        'guides/save-payment-method',
-        'guides/verify-signature',
-        'guides/send-cardholder-name',
-        'guides/payouts',
-        'guides/setup-cofidis-widget',
+        'guides/ethoca-verify',
+        'guides/managing-stores',
         'guides/migrate-tokens',
-        'guides/ethoca-verify'
+        'guides/payouts',
+        'guides/save-payment-method',
+        'guides/send-cardholder-name',
+        'guides/setup-cofidis-widget',
+        'guides/verify-signature'
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },
