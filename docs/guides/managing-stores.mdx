@@ -21,7 +21,9 @@ To link a payment to a specific store, the storeId parameter must be included in
 
 Notably, the storeId only needs to be specified during the payment creation process; subsequent operations such as confirmation, capture, or refund inherit the store association by default. This approach minimizes redundancy and optimizes API interaction by simplifying follow-up transaction requests.
 
-:::note The ability to assign payments using the `storeId` parameter is not available for standard integrations with e-commerce platforms such as Shopify, Prestashop, Wix, and WooCommerce. This option is only applicable in custom implementations.:::
+:::note 
+The ability to assign payments using the `storeId` parameter is not available for standard integrations with e-commerce platforms such as Shopify, Prestashop, Wix, and WooCommerce. This option is only applicable in custom implementations.
+:::
 
 ### Create a payment with storeId on your server
 
