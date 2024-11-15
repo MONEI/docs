@@ -1,0 +1,98 @@
+---
+id: managing-stores
+title: Managing Multiple Stores
+---
+
+# Managing Multiple Stores
+
+With MONEI, you can manage multiple stores within a single account, providing centralized and simplified transaction management. This functionality is particularly valuable for businesses with several points of sale or business units that require detailed control over their operations.
+
+### Creating a Store from the Dashboard
+
+You can create new stores directly from the MONEI dashboard. To do this, you should go to [MONEI Dashboard → Settings → Stores](https://dashboard.monei.com/settings/stores). Here, you’ll be able to add important store details, such as the store name, email, phone number, website, and address information. This makes it easier for you to manage and keep track of all your stores from one place.
+
+Additionally, your dashboard allows you to search for specific stores, making it quick and efficient to find the data you need and manage store-related transactions. This is especially useful if you’re handling multiple points of sale and need to track each store’s activity individually.
+
+Once a store is created, the storeId—a unique identifier crucial for API operations—will be displayed on the store management screen. This identifier is necessary for linking payments to individual stores programmatically. Furthermore, you have the capability to update store details or remove stores as needed, ensuring complete flexibility and control over your store configurations.
+
+### Assigning Payments to Stores
+
+To link a payment to a specific store, the storeId parameter must be included in the API request when creating a payment. This unique identifier ensures that the transaction is explicitly associated with the designated store, enabling precise financial reporting and analytics. 
+
+Notably, the storeId only needs to be specified during the payment creation process; subsequent operations such as confirmation, capture, or refund inherit the store association by default. This approach minimizes redundancy and optimizes API interaction by simplifying follow-up transaction requests.
+
+:::note The ability to assign payments using the `storeId` parameter is not available for standard integrations with e-commerce platforms such as Shopify, Prestashop, Wix, and WooCommerce. This option is only applicable in custom implementations.
+
+### Create a payment with storeId on your server
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="POST https://api.monei.com/v1/payments"
+curl --request POST 'https://api.monei.com/v1/payments' \
+--header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "amount": 110,
+    "currency": "EUR",
+    "orderId": "14379133960355",
+    "description": "Test Store - #14379133960355",
+    "storeId": "e5f28150d9e8974c58ab5ec9c4a880f8734dcf05",
+}'
+```
+
+</TabItem>
+
+<TabItem value="node">
+
+```js title="server.js"
+const {Monei, TransactionTypes} = require('@monei-js/node-sdk');
+const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+monei.payments.create({
+  amount: 110,
+  currency: 'EUR',
+  orderId: '14379133960355',
+  description: 'Test Store - #14379133960355',
+  storeId: 'e5f28150d9e8974c58ab5ec9c4a880f8734dcf05',
+});
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php title="server.php"
+$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+$monei->payments->create([
+  'amount' => 110,
+  'currency' => 'EUR',
+  'orderId' => '14379133960355',
+  'description' => 'Test Store - #14379133960355',
+  'storeId' => 'e5f28150d9e8974c58ab5ec9c4a880f8734dcf05'
+]);
+```
+
+</TabItem>
+</Tabs>
+
+The following parameters are required:
+
+- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
+- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
+- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
+- **storeId** `string` - `A unique identifier of the Store. If specified the payment is attached to this Store.`
+
+Check all available [request parameters](/api/#operation/payments_create).
+
+### Configuring IBAN for Settlements
+
+MONEI offers the possibility of setting up a unique IBAN for each store, allowing payment settlements to be directed to the corresponding bank account. To enable this functionality, you need to contact MONEI's [Support Team](https://support.monei.com/hc/requests/new) for assistance in completing the IBAN configuration.
