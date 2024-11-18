@@ -196,12 +196,6 @@ function moneiTokenHandler(token) {
   return monei
     .confirmPayment({paymentId: '{{payment_id}}', paymentToken: token})
     .then(function (result) {
-      // IMPORTANT: some banks do not support new RTP (Request to Pay) flow
-      // and require a redirect to the hosted page to complete the payment
-      // You should check if mustRedirect is true and redirect the customer
-      if (result.nextAction && result.nextAction.mustRedirect) {
-        window.location.assign(result.nextAction.redirectUrl);
-      }
       // At this moment you can show a customer the payment result
       // But you should always rely on the result passed to the callback endpoint on your server
       // to update the order status
@@ -215,10 +209,6 @@ function moneiTokenHandler(token) {
 
 :::note
 As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/api/#operation/payments_confirm) on the server-side.
-:::
-
-:::caution
-Bizum is transitioning to a new payment request flow, known as RTP (Request to Pay), which sends a push notification directly to the banking app, allowing payment confirmation without a redirect. Although not yet fully supported by all Spanish banks, this flow already covers nearly 98% of Bizum transactions. To confirm if a redirect is needed, it’s essential to check the `mustRedirect` flag in the response.
 :::
 
 ### 4. An asynchronous request is sent to your server.
