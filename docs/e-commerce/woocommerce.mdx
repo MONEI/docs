@@ -29,24 +29,30 @@ To test your integration:
 
 ## Configure
 
-Go to **WooCommerce → Settings → Payments → MONEI**
+Go to **WooCommerce → Settings → MONEI Settings**
+
+Enter your Account ID and API Key. You can find your Account ID and API Key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api).
 
 ![Configure MONEI WooCommerce](/img/configure-woo-1.png)
+
+Go to **WooCommerce → Settings → Payments**
 
 Configure payment methods that you want to accept in your store.
 
 ![Configure Card Payments](/img/configure-woo-2.png)
 
-Enter your API Key. You can find your API Key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api).
 
-:::important
-At present, our plugin does not support [WooCommerce Blocks](https://woocommerce.com/document/woocommerce-blocks/). To enable MONEI payment methods, please update the checkout page template (**Pages → Checkout**) with the following shortcode:
-```html
-[woocommerce_checkout]
-```
-:::
+## Migration to WooCommerce Blocks
+
+Starting from **version 6.0**, our plugin supports [WooCommerce Blocks](https://woocommerce.com/document/woocommerce-blocks/). To enable new user experience, you need to update the checkout page and cart page templates.
+
+Go to **Pages**and find the **Checkout** page. Remove old shortcode and add **Checkout** block to the page.
 
 ![Configure Checkout Page](/img/configure-woo-3.png)
+
+Go to **Pages** and find the **Cart** page. Remove old shortcode and add **Cart** block to the page.
+
+![Configure Cart Page](/img/configure-woo-4.png)
 
 ## Before you go live
 
