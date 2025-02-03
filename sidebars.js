@@ -9,7 +9,7 @@ module.exports = {
         'integrations/use-payment-modal',
         'integrations/build-custom-checkout',
         'integrations/pay-by-link',
-        'integrations/use-qr-payments'
+        'integrations/use-qr-payments',
       ],
       'E-commerce platforms': [
         'e-commerce/shopify',
@@ -18,6 +18,9 @@ module.exports = {
         'e-commerce/salesforce',
         'e-commerce/adobe-commerce',
         'e-commerce/prestashop'
+      ],
+      'Accounting platforms': [
+        'accounting/odoo'
       ]
     },
     'channel-tokenization',
