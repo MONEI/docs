@@ -9,7 +9,8 @@ module.exports = {
         'integrations/use-payment-modal',
         'integrations/build-custom-checkout',
         'integrations/pay-by-link',
-        'integrations/use-qr-payments'
+        'integrations/use-qr-payments',
+        'integrations/odoo'
       ],
       'E-commerce platforms': [
         'e-commerce/shopify',

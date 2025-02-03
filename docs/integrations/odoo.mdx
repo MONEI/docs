@@ -1,0 +1,188 @@
+---
+id: odoo
+title: MONEI for Odoo
+description: Learn how to integrate MONEI with Odoo using our official free app to manage payments, orders, and transactions directly from your Odoo instance.
+---
+
+MONEI for Odoo is our official integration that allows you to process payments, manage transactions, and sync your Odoo orders with MONEI payments. The app provides a seamless experience for managing your payment operations directly from your Odoo interface.
+
+![MONEI Odoo App Dashboard](/img/odoo/dashboard.png)
+
+## Features
+
+- Process payments directly from Odoo
+- View and manage all your MONEI transactions
+- Filter and search payments
+- Perform payment actions (capture, cancel, refund)
+- Create new payments and payment links
+- Manual order synchronization
+- Detailed payment status tracking
+
+## Installation
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="odoo-sh"
+  groupId="installation"
+  values={[
+    {label: 'Odoo.sh Platform', value: 'odoo-sh'},
+    {label: 'Self-Hosted Odoo', value: 'self-hosted'}
+  ]}>
+<TabItem value="odoo-sh">
+
+1. Go to your project on [Odoo.sh](https://odoo.sh)
+2. Navigate to the "Repositories" tab
+3. Click "Add a Repository" and select "Add a Git Repository"
+4. Enter the repository URL: `https://github.com/MONEI/MONEI-Odoo`
+5. Select the branch you want to deploy
+6. Go to the "Branches" tab and activate the branch where you want MONEI installed
+7. Wait for the deployment to complete (you can check status in "Builds")
+8. Once deployed, go to Apps and search for "MONEI"
+9. Click Install on the MONEI module
+
+:::note
+If you don't see the module in Apps after deployment:
+- Enable developer mode (Settings → General Settings → Developer Tools → Activate the developer mode)
+- Go to Apps → Update Apps List (menu in the top bar)
+- Search for "MONEI" again
+:::
+
+</TabItem>
+<TabItem value="self-hosted">
+
+1. Download the module
+2. Place the `monei` folder in your Odoo addons directory:
+   - Linux: `/opt/odoo/addons/` or `/usr/lib/python3/dist-packages/odoo/addons/`
+   - Windows: `C:\Program Files\Odoo\server\odoo\addons\`
+3. Restart your Odoo server
+4. Update the apps list in Odoo:
+   - Enable developer mode
+   - Go to Apps > Update Apps List
+5. Search for "MONEI" and install the module
+
+</TabItem>
+</Tabs>
+
+![MONEI App Installation](/img/odoo/install.png)
+
+### 2. Configuration
+
+1. In Odoo, go to **Settings > MONEI Configuration**
+2. Enter your API Key. You can find your API Key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api).
+3. Save the configuration
+
+![Odoo MONEI Configuration](/img/odoo/configuration.png)
+
+:::note
+Make sure to use the correct API credentials based on your environment (test/live).
+:::
+
+## Usage
+
+### Managing Payments
+
+#### View Payments
+1. Navigate to **MONEI > Payments**
+2. View all your payments in a list with key information:
+   - Payment ID
+   - Amount
+   - Status
+   - Customer details
+   - Order reference
+3. Use filters to search by:
+   - Date range
+   - Payment status
+   - Amount
+   - Customer information
+
+![Payment List View](/img/odoo/payments-list.png)
+
+#### Create a New Payment
+1. Click on "Create" in the Payments view
+2. Fill in the payment details:
+   - Amount
+   - Currency
+   - Customer information
+   - Description
+   - Order reference (optional)
+3. Click "Create Payment"
+
+![Create Payment Form](/img/odoo/create.png)
+
+#### Payment Actions
+For each payment, you can:
+- Capture authorized payments
+- Cancel pending payments
+- Issue refunds
+- View detailed transaction information
+
+### Order Integration
+
+The integration allows you to manually synchronize your Odoo orders with MONEI payments:
+
+1. Go to **MONEI > Payments**
+2. Click the "Sync Payments" button to fetch the latest payments from MONEI
+3. The system will:
+   - Update existing payment statuses
+   - Import new payments
+   - Link payments to corresponding Odoo orders based on order reference
+
+:::tip
+Regular synchronization is recommended to keep your payment information up to date. Consider syncing at least once per day.
+:::
+
+### Payment Links
+
+To create a payment link:
+1. Go to **MONEI > Payment Links**
+2. Click "Create"
+3. Set the payment details:
+   - Amount
+   - Currency
+   - Description
+   - Expiration date (optional)
+   - Customer information (optional)
+4. Click "Generate Link"
+5. Share the generated link with your customer
+
+![Create Payment Link](/img/odoo/payment-link.png)
+
+### How Syncing Works
+
+1. **Initial Sync**
+   - After configuring your API key, use the Sync button to import payments
+   - Select a date range to import payments from that period
+   - The module will import all MONEI payments within the selected dates
+
+2. **Syncing Process**
+   - Go to MONEI > Payments
+   - Click the "Sync Payments" button
+   - Select start and end dates for the sync
+   - The module will:
+     - Import new payments from the selected period
+     - Update existing payment information
+     - Show a summary of changes when complete
+
+3. **Order Matching**
+   - Payments are automatically linked to sale orders using the order reference
+   - Each payment's order reference is matched to a sale order number
+   - View linked payments directly from the sale order form
+
+## Troubleshooting
+
+If you encounter any issues:
+1. Verify your API credentials are correct
+2. Check your Odoo system logs
+3. Ensure your Odoo instance can connect to MONEI's API
+4. Try re-syncing your payments manually
+5. Contact [MONEI support](https://support.monei.com) if issues persist
+
+Common issues:
+- **Sync button not working**: Verify your API credentials and internet connection
+- **Payments not linking to orders**: Ensure order references match between systems
+
+:::tip
+Keep your app updated to the latest version to ensure you have all the latest features and security updates.
+:::
