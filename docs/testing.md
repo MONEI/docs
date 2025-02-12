@@ -30,6 +30,9 @@ Genuine card information cannot be used in test mode. Instead, use any of the fo
 | 4444444444444422 | Visa                       | 3D Secure v2.1 Frictionless               |
 | 4444444444444430 | Visa                       | 3D Secure v2.1 Frictionless and Challenge |
 | 5555555555555524 | Mastercard                 | 3D Secure v2.1 Direct (no challenge)      |
+| 5555555555555532 | Mastercard                 | 3D Secure v2.1 Frictionless               |
+| 5555555555555565 | Mastercard                 | 3D Secure v2.1 Challenge                  |
+| 5555555555555573 | Mastercard                 | 3D Secure v2.1 Frictionless and Challenge |
 
 ## Test Bizum phone numbers
 
