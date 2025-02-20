@@ -36,7 +36,7 @@ module.exports = {
         'payment-methods/click-to-pay',
         'payment-methods/sepa-request-to-pay'
       ],
-      'Subscriptions (beta)': ['subscriptions/integration'],
+      'Subscriptions': ['subscriptions/integration'],
       Guides: [
         'guides/ethoca-verify',
         'guides/managing-stores',
@@ -56,7 +56,7 @@ module.exports = {
     },
     {
       type: 'link',
-      label: 'Subscriptions API (beta)',
+      label: 'Subscriptions API',
       href: '/api/#tag/Subscriptions'
     },
     'graphql-api',
