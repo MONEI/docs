@@ -20,11 +20,17 @@ Bizum transactions can be refunded within 365 days after the initial transaction
 The status of a payment is a critical aspect of a transaction, as any discrepancy between the payment gateway and the processor can have serious consequences for both the merchant and the consumer. An error in this area can result in failed transactions, financial losses, or trust issues between the involved parties. For this reason, MONEI has developed an exclusive internal technology that ensures the security of the status of each transaction made through the Bizum payment method at all times. This advanced technology allows MONEI to monitor and verify each transaction with precision, ensuring that payments are processed efficiently and without errors, thus providing greater peace of mind for both merchants and consumers.This functionality is exclusively available worldwide through the MONEI Bizum API, with no other tech companies having access to it.
 :::
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import {Bizum} from '../../src/components/Bizum';
 
 <div className="preview-frame" style={{marginBottom: 20}}>
   <div className="payment-button">
-    <Bizum />
+    <BrowserOnly>
+      {() => {
+        const Bizum = require('../../src/components/Bizum').default;
+        return <Bizum/>;
+      }}
+    </BrowserOnly>
   </div>
 </div>
 
