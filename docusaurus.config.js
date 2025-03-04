@@ -1,4 +1,5 @@
 const path = require('path');
+const {themes} = require('prism-react-renderer');
 
 module.exports = {
   title: 'MONEI Documentation',
@@ -21,13 +22,15 @@ module.exports = {
       respectPrefersColorScheme: false
     },
     prism: {
-      theme: require('prism-react-renderer/themes/nightOwl'),
+      theme: themes.nightOwl,
       additionalLanguages: ['php']
     },
     algolia: {
-      apiKey: '4b9b0bfa1a19b86cf70a5bf9c81e9c80',
+      appId: '8G87BCQYSU',
+      apiKey: '020dc2fc411d19f9f9dfe9d60c527139',
       indexName: 'monei',
-      algoliaOptions: {} // Optional, if provided by Algolia
+      contextualSearch: true,
+      searchParameters: {},
     },
     navbar: {
       title: 'MONEI',
@@ -83,18 +86,14 @@ module.exports = {
         sitemap: {
           changefreq: 'daily',
           priority: 0.7
-        }
-      }
+        },
+        googleTagManager: {
+          containerId: 'GTM-NHS56QJ',
+        },
+      },
     ]
   ],
   plugins: [
     path.resolve(__dirname, './inject-scripts.js'),
-    path.resolve(__dirname, './webpack-config.js'),
-    [
-      require.resolve('docusaurus-gtm-plugin'),
-      {
-        id: 'GTM-NHS56QJ'
-      }
-    ]
   ]
 };

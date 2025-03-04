@@ -42,6 +42,10 @@ body {
     rgb(255, 255, 255);
 }
 
+.button p {
+  margin: 0;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
   display: block;
