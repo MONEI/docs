@@ -3,7 +3,6 @@ frontend:
   phases:
     preBuild:
       commands:
-        - nvm install 22
         - corepack enable
         - yarn --immutable
         - aws s3 cp s3://$JS_BUCKET/api/v1/openapi.json ./openapi.json
