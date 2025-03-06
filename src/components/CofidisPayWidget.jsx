@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { CofidisPayWidget as MoneiCofidisPayWidget } from "@monei-js/components";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {CofidisPayWidget as MoneiCofidisPayWidget} from '@monei-js/components';
 
-const CofidisPayWidgetComponent = MoneiCofidisPayWidget.driver("react", {
+const CofidisPayWidgetComponent = MoneiCofidisPayWidget.driver('react', {
   React: React,
-  ReactDOM: ReactDOM,
+  ReactDOM: ReactDOM
 });
 
 export default function CofidisPayWidget() {

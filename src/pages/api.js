@@ -1,4 +1,4 @@
-import Head from "@docusaurus/Head";
+import Head from '@docusaurus/Head';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Redoc from '../components/Redoc';
@@ -8,9 +8,10 @@ function APIDocs() {
   return (
     <Layout
       title="API Reference"
-      description="Complete reference documentation for the MONEI API. Includes representative code snippets and examples for our PHP and Node.js client libraries.">
+      description="Complete reference documentation for the MONEI API. Includes representative code snippets and examples for our PHP and Node.js client libraries."
+    >
       <Head>
-        <html className="api-reference"/>
+        <html className="api-reference" />
       </Head>
       <Redoc spec={openapi} />
     </Layout>

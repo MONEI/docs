@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Bizum as MoneiBizum } from "@monei-js/components";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Bizum as MoneiBizum} from '@monei-js/components';
 
-const BizumComponent = MoneiBizum.driver("react", {
+const BizumComponent = MoneiBizum.driver('react', {
   React: React,
-  ReactDOM: ReactDOM,
+  ReactDOM: ReactDOM
 });
 
 export default function Bizum() {

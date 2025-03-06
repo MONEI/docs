@@ -8,6 +8,9 @@ module.exports = {
   trailingSlash: true,
   baseUrl: '/',
   favicon: 'https://assets.monei.com/images/icon.png',
+  future: {
+    experimental_faster: true
+  },
   themeConfig: {
     colorMode: {
       // "light" | "dark"
@@ -23,14 +26,14 @@ module.exports = {
     },
     prism: {
       theme: themes.nightOwl,
-      additionalLanguages: ['php']
+      additionalLanguages: ['php', 'bash']
     },
     algolia: {
       appId: '8G87BCQYSU',
       apiKey: '020dc2fc411d19f9f9dfe9d60c527139',
       indexName: 'monei',
       contextualSearch: true,
-      searchParameters: {},
+      searchParameters: {}
     },
     navbar: {
       title: 'MONEI',
@@ -88,12 +91,10 @@ module.exports = {
           priority: 0.7
         },
         googleTagManager: {
-          containerId: 'GTM-NHS56QJ',
-        },
-      },
+          containerId: 'GTM-NHS56QJ'
+        }
+      }
     ]
   ],
-  plugins: [
-    path.resolve(__dirname, './inject-scripts.js'),
-  ]
+  plugins: [path.resolve(__dirname, './inject-scripts.js')]
 };

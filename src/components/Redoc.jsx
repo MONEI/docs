@@ -27,7 +27,7 @@ let theme = {
   },
   rightPanel: {
     backgroundColor: '#303846'
-  },
+  }
 };
 
 const Redoc = (props) => {

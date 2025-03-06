@@ -27,7 +27,11 @@ Login into [pay.monei.com](https://pay.monei.com/) with your same credentials yo
 You can also download the **MONEI Pay** app to create QR codes on the go.
 
 <div style={{marginBottom: 20}}>
-  <a href="https://apps.apple.com/es/app/monei-pay/id1624647668" target="_blank" style={{marginRight: 20}}>
+  <a
+    href="https://apps.apple.com/es/app/monei-pay/id1624647668"
+    target="_blank"
+    style={{marginRight: 20}}
+  >
     <img height={50} width={145} src="/img/app-store-icon.svg" alt="App Store" />
   </a>
   <a href="https://play.google.com/store/apps/details?id=com.monei.moneibusiness" target="_blank">
@@ -35,10 +39,9 @@ You can also download the **MONEI Pay** app to create QR codes on the go.
   </a>
 </div>
 
-
 ## Demo
 
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import {ArrowRightIcon} from '@heroicons/react/24/outline';
 
 <div className="flex-container">
   <img src="/img/qr.png" alt="QR" width="300" height="300" />
@@ -120,7 +123,11 @@ Present to the user a unique QR code generated for this specific payment. To acc
 You can directly render it on to your webpage using this html code:
 
 ```html
-<img src="https://secure.monei.com/payments/{{payment_id}}/qr?format=svg&size=300" width="300" height="300" />
+<img
+  src="https://secure.monei.com/payments/{{payment_id}}/qr?format=svg&size=300"
+  width="300"
+  height="300"
+/>
 ```
 
 ![QR](https://secure.monei.com/payments/9407ed9d3b691dbf19f69c6b30a9a26c6821564d/qr?format=svg&size=300)
