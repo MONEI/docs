@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Cofidis as MoneiCofidis } from "@monei-js/components";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Cofidis as MoneiCofidis} from '@monei-js/components';
 
-const CofidisComponent = MoneiCofidis.driver("react", {
+const CofidisComponent = MoneiCofidis.driver('react', {
   React: React,
-  ReactDOM: ReactDOM,
+  ReactDOM: ReactDOM
 });
 
 export default function Cofidis() {
@@ -15,7 +15,7 @@ export default function Cofidis() {
       onSubmit={(result) => {
         console.log(result);
         alert(
-          "In the real integration at this point you will be redirected to Cofidis payment page."
+          'In the real integration at this point you will be redirected to Cofidis payment page.'
         );
       }}
       onError={(error) => {

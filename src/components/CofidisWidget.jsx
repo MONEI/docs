@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { CofidisWidget as MoneiCofidisWidget } from "@monei-js/components";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {CofidisWidget as MoneiCofidisWidget} from '@monei-js/components';
 
-const CofidisWidgetComponent = MoneiCofidisWidget.driver("react", {
+const CofidisWidgetComponent = MoneiCofidisWidget.driver('react', {
   React: React,
-  ReactDOM: ReactDOM,
+  ReactDOM: ReactDOM
 });
 
 export default function CofidisWidget() {

@@ -4,6 +4,7 @@ title: EURM Stablecoin
 ---
 
 EURM is a stablecoin developed by MONEI, designed to facilitate digital payments by maintaining a 1:1 parity with the euro. Technically, EURM operates on blockchain technology, specifically utilizing Ethereum and Polygon networks, to ensure secure and efficient transactions. ￼
+
 ## Key Technical Features
 
 - **Blockchain Integration:** EURM leverages the Ethereum and Polygon blockchains, enabling decentralized and transparent transactions. This integration ensures high security and scalability, accommodating a large volume of transactions with minimal latency. ￼
@@ -25,48 +26,50 @@ EURM is a stablecoin developed by MONEI, designed to facilitate digital payments
 **Here are several key programming-related aspects that detail how EURM functions on a technical level:**
 
 ### Smart Contract Architecture
--	**Language:** EURM’s smart contracts are primarily written in Solidity, the standard language for Ethereum-compatible blockchain development. Solidity enables the creation of complex, immutable, and highly efficient contracts that can process transactions automatically.
+
+- **Language:** EURM’s smart contracts are primarily written in Solidity, the standard language for Ethereum-compatible blockchain development. Solidity enables the creation of complex, immutable, and highly efficient contracts that can process transactions automatically.
 
 ### Key Contract Components
--	**Minting/Burning Logic:** Functions handle minting new EURM tokens when euros are added to the reserve and burning them when euros are withdrawn. This logic ensures that EURM tokens remain fully collateralized by real euros.
--	**Account Management:** Contracts include features for creating and managing wallet addresses linked to accounts at financial institutions. This allows EURM tokens to map transparently and securely to each user’s unique ID.
--	**Compliance and Permissions:** Additional contract modules may enforce KYC (Know Your Customer) compliance by restricting token transfers to authorized accounts or ensuring users are verified. This modular structure makes it easier to adapt to changing regulatory requirements.
+
+- **Minting/Burning Logic:** Functions handle minting new EURM tokens when euros are added to the reserve and burning them when euros are withdrawn. This logic ensures that EURM tokens remain fully collateralized by real euros.
+- **Account Management:** Contracts include features for creating and managing wallet addresses linked to accounts at financial institutions. This allows EURM tokens to map transparently and securely to each user’s unique ID.
+- **Compliance and Permissions:** Additional contract modules may enforce KYC (Know Your Customer) compliance by restricting token transfers to authorized accounts or ensuring users are verified. This modular structure makes it easier to adapt to changing regulatory requirements.
 
 ### Gas Optimization
 
--	**Polygon for Lower Costs:** EURM primarily operates on Polygon to minimize gas fees associated with token transfers and smart contract executions, while maintaining Ethereum compatibility. This allows for high transaction volumes with significantly lower costs compared to the Ethereum mainnet.
--	**Efficient Contract Design:** Smart contracts are optimized to minimize storage usage and computational requirements, as these contribute to gas costs. For example, instead of writing multiple small transactions, contracts batch transactions where possible to reduce network calls.
+- **Polygon for Lower Costs:** EURM primarily operates on Polygon to minimize gas fees associated with token transfers and smart contract executions, while maintaining Ethereum compatibility. This allows for high transaction volumes with significantly lower costs compared to the Ethereum mainnet.
+- **Efficient Contract Design:** Smart contracts are optimized to minimize storage usage and computational requirements, as these contribute to gas costs. For example, instead of writing multiple small transactions, contracts batch transactions where possible to reduce network calls.
 
 ### Token Standards and Interoperability
 
--	**ERC-20 Standard Compliance:** EURM implements the ERC-20 token standard, ensuring compatibility with Ethereum and Polygon ecosystems. This enables seamless integration with compatible wallets, exchanges, and DeFi platforms while maintaining the necessary regulatory compliance features.
--	**Custom Extensions:** MONEI has likely added extensions to the ERC-20 contract, such as pausing or freezing tokens in compliance cases or enhancing security by restricting the functions that certain accounts can perform (e.g., non-compliant addresses can’t transfer tokens).
+- **ERC-20 Standard Compliance:** EURM implements the ERC-20 token standard, ensuring compatibility with Ethereum and Polygon ecosystems. This enables seamless integration with compatible wallets, exchanges, and DeFi platforms while maintaining the necessary regulatory compliance features.
+- **Custom Extensions:** MONEI has likely added extensions to the ERC-20 contract, such as pausing or freezing tokens in compliance cases or enhancing security by restricting the functions that certain accounts can perform (e.g., non-compliant addresses can’t transfer tokens).
 
 ### API and SDK for Integration
 
 - **REST and GraphQL APIs:** MONEI provides a comprehensive REST API that enables developers to interact with EURM services, including balance checks, transaction execution, and history retrieval. The API is designed with security and ease of integration in mind.
--	**SDKs for Popular Languages:** To simplify integration, MONEI provides Software Development Kits (SDKs) for popular languages like JavaScript, Python, and Java. These SDKs abstract the complex interactions with the Ethereum or Polygon blockchains, allowing developers to integrate EURM with minimal blockchain knowledge.
+- **SDKs for Popular Languages:** To simplify integration, MONEI provides Software Development Kits (SDKs) for popular languages like JavaScript, Python, and Java. These SDKs abstract the complex interactions with the Ethereum or Polygon blockchains, allowing developers to integrate EURM with minimal blockchain knowledge.
 
 ### Security and Auditing
 
--	**Automated Auditing Tools:** EURM’s smart contracts undergo automated audits using tools like MythX and CertiK, which detect vulnerabilities in smart contract code. This helps prevent issues like reentrancy attacks or integer overflows.
+- **Automated Auditing Tools:** EURM’s smart contracts undergo automated audits using tools like MythX and CertiK, which detect vulnerabilities in smart contract code. This helps prevent issues like reentrancy attacks or integer overflows.
 - **Manual Code Audits:** Before any major release, EURM’s contracts are manually reviewed by blockchain security experts to ensure they meet the highest security standards.
--	**Multisig Wallets and Governance:** EURM employs multisignature wallets for handling reserves and approving major contract updates. This adds a layer of security by requiring multiple approvals from trusted individuals before significant actions are taken.
+- **Multisig Wallets and Governance:** EURM employs multisignature wallets for handling reserves and approving major contract updates. This adds a layer of security by requiring multiple approvals from trusted individuals before significant actions are taken.
 
 ### Data Privacy and Compliance
 
--	**Encrypted User Data:** While the blockchain records transactions publicly, EURM employs off-chain solutions for sensitive user data, which is encrypted and stored in secure databases compliant with GDPR and other privacy laws.
--	**Compliance via Oracles:** Compliance requirements, such as real-time checks of sanctioned addresses, are enforced through oracles that interact with off-chain compliance data. Oracles may prevent transactions from non-compliant addresses and provide automatic alerts for suspicious activities.
+- **Encrypted User Data:** While the blockchain records transactions publicly, EURM employs off-chain solutions for sensitive user data, which is encrypted and stored in secure databases compliant with GDPR and other privacy laws.
+- **Compliance via Oracles:** Compliance requirements, such as real-time checks of sanctioned addresses, are enforced through oracles that interact with off-chain compliance data. Oracles may prevent transactions from non-compliant addresses and provide automatic alerts for suspicious activities.
 
 ### On-Chain and Off-Chain Reconciliation
 
--	**Real-Time Euro Collateral Tracking:** Off-chain systems regularly update and reconcile the euros held in reserve to ensure that each EURM token remains fully backed. These updates are verified by third-party auditors and use secure APIs to record changes in reserve accounts.
--	**Blockchain-Linked Ledger:** MONEI maintains a distributed ledger that logs all EURM transactions, both on-chain and off-chain. This hybrid approach helps track regulatory data while leveraging blockchain for security and transparency.
+- **Real-Time Euro Collateral Tracking:** Off-chain systems regularly update and reconcile the euros held in reserve to ensure that each EURM token remains fully backed. These updates are verified by third-party auditors and use secure APIs to record changes in reserve accounts.
+- **Blockchain-Linked Ledger:** MONEI maintains a distributed ledger that logs all EURM transactions, both on-chain and off-chain. This hybrid approach helps track regulatory data while leveraging blockchain for security and transparency.
 
 ### Scalability and Future-Proofing
 
 - **Layer-2 Integration:** EURM primarily utilizes Polygon as its Layer-2 solution, offering scalability and cost-efficiency while maintaining security. The modular architecture allows for potential integration with other scaling solutions if needed in the future.
--	**Upgradeable Contracts:** Through an upgradable smart contract pattern (e.g., using the OpenZeppelin upgradeable proxy), EURM can adopt improvements or regulatory updates without having to redeploy entirely new contracts, making it adaptable over time.
+- **Upgradeable Contracts:** Through an upgradable smart contract pattern (e.g., using the OpenZeppelin upgradeable proxy), EURM can adopt improvements or regulatory updates without having to redeploy entirely new contracts, making it adaptable over time.
 
 :::note
 By implementing these programming principles, **EURM provides a robust, secure, and flexible foundation for digital euro transactions that can adapt to regulatory changes and scaling demands.** This technical infrastructure, combined with MONEI’s expertise, makes EURM a valuable tool for financial institutions looking to enter the digital currency space securely and efficiently.

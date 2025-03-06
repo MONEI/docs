@@ -9,7 +9,7 @@ module.exports = {
         'integrations/use-payment-modal',
         'integrations/build-custom-checkout',
         'integrations/pay-by-link',
-        'integrations/use-qr-payments',
+        'integrations/use-qr-payments'
       ],
       'E-commerce platforms': [
         'e-commerce/shopify',
@@ -19,9 +19,7 @@ module.exports = {
         'e-commerce/adobe-commerce',
         'e-commerce/prestashop'
       ],
-      'Accounting platforms': [
-        'accounting/odoo'
-      ]
+      'Accounting platforms': ['accounting/odoo']
     },
     'channel-tokenization',
     {
@@ -36,7 +34,7 @@ module.exports = {
         'payment-methods/click-to-pay',
         'payment-methods/sepa-request-to-pay'
       ],
-      'Subscriptions': ['subscriptions/integration'],
+      Subscriptions: ['subscriptions/integration'],
       Guides: [
         'guides/ethoca-verify',
         'guides/managing-stores',

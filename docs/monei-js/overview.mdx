@@ -72,7 +72,8 @@ The Card Input Component lets you collect card information all within one Compon
   src="/card-input-example.html"
   height="160px"
   width="100%"
-  className="preview-frame"></iframe>
+  className="preview-frame"
+></iframe>
 
 </TabItem>
 <TabItem value="html">
@@ -305,7 +306,8 @@ const App = () => {
       <div className="card-field">
         <div
           id="card-input"
-          className={cn({'is-focused': isFocused, 'is-invalid': error !== null})}>
+          className={cn({'is-focused': isFocused, 'is-invalid': error !== null})}
+        >
           <CardInputComponent
             ref={ref}
             accountId="fe6432a7-8a24-4288-a3a3-545c3205b549"

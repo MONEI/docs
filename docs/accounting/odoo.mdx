@@ -44,10 +44,11 @@ import TabItem from '@theme/TabItem';
 
 :::note
 If you don't see the module in Apps after deployment:
+
 - Enable developer mode (Settings → General Settings → Developer Tools → Activate the developer mode)
 - Go to Apps → Update Apps List (menu in the top bar)
 - Search for "MONEI" again
-:::
+  :::
 
 </TabItem>
 <TabItem value="self-hosted">
@@ -84,6 +85,7 @@ Make sure to use the correct API credentials based on your environment (test/liv
 ### Managing Payments
 
 #### View Payments
+
 1. Navigate to **MONEI > Payments**
 2. View all your payments in a list with key information:
    - Payment ID
@@ -100,6 +102,7 @@ Make sure to use the correct API credentials based on your environment (test/liv
 ![Payment List View](/img/odoo/payments-list.png)
 
 #### Create a New Payment
+
 1. Click on "Create" in the Payments view
 2. Fill in the payment details:
    - Amount
@@ -112,7 +115,9 @@ Make sure to use the correct API credentials based on your environment (test/liv
 ![Create Payment Form](/img/odoo/create.png)
 
 #### Payment Actions
+
 For each payment, you can:
+
 - Capture authorized payments
 - Cancel pending payments
 - Issue refunds
@@ -136,6 +141,7 @@ Regular synchronization is recommended to keep your payment information up to da
 ### Payment Links
 
 To create a payment link:
+
 1. Go to **MONEI > Payment Links**
 2. Click "Create"
 3. Set the payment details:
@@ -152,11 +158,13 @@ To create a payment link:
 ### How Syncing Works
 
 1. **Initial Sync**
+
    - After configuring your API key, use the Sync button to import payments
    - Select a date range to import payments from that period
    - The module will import all MONEI payments within the selected dates
 
 2. **Syncing Process**
+
    - Go to MONEI > Payments
    - Click the "Sync Payments" button
    - Select start and end dates for the sync
@@ -173,6 +181,7 @@ To create a payment link:
 ## Troubleshooting
 
 If you encounter any issues:
+
 1. Verify your API credentials are correct
 2. Check your Odoo system logs
 3. Ensure your Odoo instance can connect to MONEI's API
@@ -180,6 +189,7 @@ If you encounter any issues:
 5. Contact [MONEI support](https://support.monei.com) if issues persist
 
 Common issues:
+
 - **Sync button not working**: Verify your API credentials and internet connection
 - **Payments not linking to orders**: Ensure order references match between systems
 

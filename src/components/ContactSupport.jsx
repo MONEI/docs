@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-export const ContactSupport = ({ children }) => {
+export const ContactSupport = ({children}) => {
   const handleClick = (e) => {
     const zE = window.zE;
     if (!zE) return;
     e.preventDefault();
     try {
-      zE("messenger", "open");
+      zE('messenger', 'open');
     } catch (error) {
       console.error(error);
-      window.location.href = "https://support.monei.com/hc/requests/new";
+      window.location.href = 'https://support.monei.com/hc/requests/new';
     }
   };
 
