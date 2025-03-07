@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.5.1",
+    "version": "1.5.4",
     "title": "MONEI API v1",
     "description": "<p>The MONEI API is organized around <a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a> principles. Our API is designed to be intuitive and developer-friendly.</p>\n<h3>Base URL</h3>\n<p>All API requests should be made to:</p>\n<pre><code>https://api.monei.com/v1\n</code></pre>\n<h3>Environment</h3>\n<p>MONEI provides two environments:</p>\n<ul>\n<li><strong>Test Environment</strong>: For development and testing without processing real payments</li>\n<li><strong>Live Environment</strong>: For processing real transactions in production</li>\n</ul>\n<h3>Client Libraries</h3>\n<p>We provide official SDKs to simplify integration:</p>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>\n<p>Our SDKs handle authentication, error handling, and request formatting automatically.</p>\n<p>You can download the OpenAPI specification from the <a href=\"https://js.monei.com/api/v1/openapi.json\">https://js.monei.com/api/v1/openapi.json</a> and generate your own client library using the <a href=\"https://openapi-generator.tech/\">OpenAPI Generator</a>.</p>\n<h3>Important Requirements</h3>\n<ul>\n<li>All API requests must be made over HTTPS</li>\n<li>If you are not using our official SDKs, you <strong>must provide a valid <code>User-Agent</code> header</strong> with each request</li>\n<li>Requests without proper authentication will return a <code>401 Unauthorized</code> error</li>\n</ul>\n<h3>Error Handling</h3>\n<p>The API returns consistent error codes and messages to help you troubleshoot issues. Each response includes a <code>statusCode</code> attribute indicating the outcome of your request.</p>\n<h3>Rate Limits</h3>\n<p>The API implements rate limiting to ensure stability. If you exceed the limits, requests will return a <code>429 Too Many Requests</code> status code.</p>\n"
   },
@@ -342,26 +342,23 @@
         "description": "Browser accept header."
       },
       "BrowserColorDepth": {
-        "type": "integer",
-        "format": "string",
-        "example": 24,
+        "type": "string",
+        "example": "24",
         "description": "The color depth of the browser session (e.g., `24`)."
       },
       "BrowserScreenHeight": {
-        "type": "integer",
-        "format": "string",
-        "example": 1152,
+        "type": "string",
+        "example": "1152",
         "description": "The screen height of the browser session (e.g., `1152`)."
       },
       "BrowserScreenWidth": {
-        "type": "integer",
-        "format": "string",
-        "example": 2048,
+        "type": "string",
+        "example": "2048",
         "description": "The screen width of the browser session (e.g., `2048`)."
       },
       "BrowserTimezoneOffset": {
         "type": "string",
-        "example": "string",
+        "example": "-120",
         "description": "The timezone offset of the browser session (e.g., `-120`)."
       },
       "CreatedAt": {
@@ -2356,7 +2353,7 @@
           },
           "channel": {
             "type": "string",
-            "enum": ["email", "sms"],
+            "enum": ["EMAIL", "WHATSAPP", "SMS"],
             "description": "Channel to use for sending the subscription link"
           },
           "language": {
@@ -2380,7 +2377,7 @@
           },
           "channel": {
             "type": "string",
-            "enum": ["email", "sms"],
+            "enum": ["EMAIL", "WHATSAPP", "SMS"],
             "description": "Channel to use for sending the subscription status"
           },
           "language": {
@@ -2715,14 +2712,14 @@
       "SendSubscriptionLinkBasicRequest": {
         "value": {
           "customerEmail": "john.doe@monei.com",
-          "channel": "email",
+          "channel": "EMAIL",
           "language": "en"
         }
       },
       "SendSubscriptionStatusBasicRequest": {
         "value": {
           "customerEmail": "john.doe@monei.com",
-          "channel": "email",
+          "channel": "EMAIL",
           "language": "en"
         }
       }
@@ -2780,7 +2777,7 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\n// Initialize the MONEI client with your API key\n$monei = new \\Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for registering a domain with Apple Pay\n$request = new \\OpenAPI\\Client\\Model\\RegisterApplePayDomainRequest([\n    'domain_name' => 'example.com'\n]);\n\n// Register your domain with Apple to enable Apple Pay on your website\n$response = $monei->applePayDomain->register($request);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\nuse OpenAPI\\Client\\Model\\RegisterApplePayDomainRequest;\n\n// Initialize the MONEI client with your API key\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for registering a domain with Apple Pay\n$request = new RegisterApplePayDomainRequest([\n    'domain_name' => 'example.com'\n]);\n\n// Register your domain with Apple to enable Apple Pay on your website\n$response = $monei->applePayDomain->register($request);\n"
           },
           {
             "lang": "Python",
@@ -2840,11 +2837,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\n// Initialize the MONEI client with your API key\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Validate if a phone number is registered in Bizum\n$response = $monei->bizum->validatePhone([\n    'accountId' => '6dccce85-b290-40c2-bb9c-57bc7ecfaf04',\n    'phoneNumber' => '+34600000000'\n]);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n// Initialize the MONEI client with your API key\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Validate if a phone number is registered in Bizum\n$response = $monei->bizum->validatePhone([\n    'accountId' => '6dccce85-b290-40c2-bb9c-57bc7ecfaf04',\n    'phoneNumber' => '+34600000000'\n]);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\n# Validate if a phone number is registered in Bizum\nmonei.Bizum.validate_phone(\n    account_id=\"6dccce85-b290-40c2-bb9c-57bc7ecfaf04\", phone_number=\"+34600000000\"\n)\n"
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\n# Validate if a phone number is registered in Bizum\nmonei.bizum.validate_phone(\n    account_id=\"6dccce85-b290-40c2-bb9c-57bc7ecfaf04\", phone_number=\"+34600000000\"\n)\n"
           }
         ]
       }
@@ -2905,11 +2902,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\n// Initialize the MONEI client with your API key\n$monei = new \\Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for getting payment methods\n$request = new \\OpenAPI\\Client\\Model\\GetPaymentMethodsRequest([\n    'account_id' => '6dccce85-b290-40c2-bb9c-57bc7ecfaf04'\n]);\n\n// Get payment methods by accountId\n$paymentMethods = $monei->paymentMethods->get($request);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\nuse OpenAPI\\Client\\Model\\GetPaymentMethodsRequest;\n\n// Initialize the MONEI client with your API key\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for getting payment methods\n$request = new GetPaymentMethodsRequest([\n    'account_id' => '6dccce85-b290-40c2-bb9c-57bc7ecfaf04'\n]);\n\n// Get payment methods by accountId\n$paymentMethods = $monei->paymentMethods->get($request);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\n# Get payment methods by accountId\nmonei.PaymentMethods.get(accountId=\"6dccce85-b290-40c2-bb9c-57bc7ecfaf04\")\n"
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\n# Get payment methods by accountId\nmonei.payment_methods.get(accountId=\"6dccce85-b290-40c2-bb9c-57bc7ecfaf04\")\n"
           }
         ]
       }
@@ -2970,11 +2967,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n    'amount' => 110, // 1.10 EUR\n    'orderId' => '14379133960355',\n    'currency' => 'EUR',\n    'paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n    'callbackUrl' => 'https://example_com/checkout/callback',\n    'completeUrl' => 'https://example.com/checkout/complete'\n]);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->create([\n    'amount' => 110, // 1.10 EUR\n    'orderId' => '14379133960355',\n    'currency' => 'EUR',\n    'paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n    'callbackUrl' => 'https://example_com/checkout/callback',\n    'completeUrl' => 'https://example.com/checkout/complete'\n]);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import CreatePaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Payments.create(CreatePaymentRequest(\n    amount=110,\n    currency=\"EUR\",\n    order_id=\"14379133960355\",\n    payment_token=\"7cc38b08ff471ccd313ad62b23b9f362b107560b\",\n    callback_url=\"https://example.com/checkout/callback\",\n    complete_url=\"https://example.com/checkout/complete\"\n))\n"
+            "source": "import Monei\nfrom Monei import CreatePaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.create(CreatePaymentRequest(\n    amount=110,\n    currency=\"EUR\",\n    order_id=\"14379133960355\",\n    payment_token=\"7cc38b08ff471ccd313ad62b23b9f362b107560b\",\n    callback_url=\"https://example.com/checkout/callback\",\n    complete_url=\"https://example.com/checkout/complete\"\n))\n"
           }
         ]
       }
@@ -3025,11 +3022,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->get('832b77d1a4b372349a7ae0bb1b2af059');\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->get('832b77d1a4b372349a7ae0bb1b2af059');\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Payments.get(\"832b77d1a4b372349a7ae0bb1b2af059\")\n"
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.get(\"pay_7cc38b08ff471ccd313ad62b23b9f362\")\n"
           }
         ]
       }
@@ -3094,11 +3091,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->confirm(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->confirm(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import ConfirmPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Payments.confirm(\n    \"832b77d1a4b372349a7ae0bb1b2af059\",\n    ConfirmPaymentRequest(payment_token=\"7cc38b08ff471ccd313ad62b23b9f362b107560b\")\n)\n"
+            "source": "import Monei\nfrom Monei import ConfirmPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.confirm(\n    \"pay_7cc38b08ff471ccd313ad62b23b9f362\",\n    ConfirmPaymentRequest(payment_token=\"7cc38b08ff471ccd313ad62b23b9f362b107560b\"),\n)\n"
           }
         ]
       }
@@ -3163,11 +3160,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->capture(\n   '832b77d1a4b372349a7ae0bb1b2af059',\n   ['amount' => 100] // 1.00 EUR\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->capture(\n   '832b77d1a4b372349a7ae0bb1b2af059',\n   ['amount' => 100] // 1.00 EUR\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import CapturePaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Payments.capture(\n    \"832b77d1a4b372349a7ae0bb1b2af059\",\n    CapturePaymentRequest(amount=100) # 1.00 EUR\n)\n"
+            "source": "import Monei\nfrom Monei import CapturePaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.capture(\n    \"pay_7cc38b08ff471ccd313ad62b23b9f362\",\n    CapturePaymentRequest(amount=110)\n)\n"
           }
         ]
       }
@@ -3232,11 +3229,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['cancellationReason' => 'requested_by_customer']\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->cancel(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['cancellationReason' => 'requested_by_customer']\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import CancelPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Payments.cancel(\n    \"832b77d1a4b372349a7ae0bb1b2af059\",\n    CancelPaymentRequest(cancellation_reason=\"requested_by_customer\")\n)\n"
+            "source": "import Monei\nfrom Monei import CancelPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.cancel(\n    \"pay_7cc38b08ff471ccd313ad62b23b9f362\",\n    CancelPaymentRequest(reason=\"Customer requested cancellation\")\n)\n"
           }
         ]
       }
@@ -3301,11 +3298,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->refund(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refundReason' => 'requested_by_customer']\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->refund(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  ['refundReason' => 'requested_by_customer']\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import RefundPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.refund(\n    \"832b77d1a4b372349a7ae0bb1b2af059\",\n    RefundPaymentRequest(refund_reason=\"requested_by_customer\")\n)\n"
+            "source": "import Monei\nfrom Monei import RefundPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.refund(\n    \"pay_7cc38b08ff471ccd313ad62b23b9f362\",\n    RefundPaymentRequest(amount=110, reason=\"Customer requested refund\")\n)\n"
           }
         ]
       }
@@ -3370,11 +3367,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', [\n  'orderId' => '14379133960355',\n  'callbackUrl' => 'https://example.com/checkout/callback',\n]);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', [\n  'orderId' => '14379133960355',\n  'callbackUrl' => 'https://example.com/checkout/callback',\n]);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import RecurringPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Payments.recurring(\n    \"7cc38b08ff471ccd313ad62b23b9f362b107560b\",\n    RecurringPaymentRequest(\n        order_id=\"14379133960355\",\n        callback_url=\"https://example.com/checkout/callback\"\n    )\n)\n"
+            "source": "import Monei\nfrom Monei import RecurringPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.recurring(RecurringPaymentRequest(\n    amount=110,\n    currency=\"EUR\",\n    order_id=\"14379133960355\",\n    payment_method_id=\"pm_7cc38b08ff471ccd313ad62b23b9f362\",\n    customer_id=\"cus_7cc38b08ff471ccd313ad62b23b9f362\"\n))\n"
           }
         ]
       }
@@ -3440,11 +3437,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendRequest(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'phoneNumber' => '+34500000000',\n    'language' => 'es'\n  ]\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendRequest(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'phoneNumber' => '+34500000000',\n    'language' => 'es'\n  ]\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import SendPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.send_request(\n    \"832b77d1a4b372349a7ae0bb1b2af059\",\n    SendPaymentRequest(phone_number=\"+34500000000\", language=\"es\")\n)\n"
+            "source": "import Monei\nfrom Monei import SendPaymentRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.send_request(\n    \"pay_7cc38b08ff471ccd313ad62b23b9f362\",\n    SendPaymentRequest(phone_number=\"+34600000000\")\n)\n"
           }
         ]
       }
@@ -3509,11 +3506,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\n// Initialize the MONEI client with your API key\n$monei = new \\Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for sending a payment link\n$request = new \\OpenAPI\\Client\\Model\\SendPaymentLinkRequest([\n  'customer_email' => 'john.doe@example.com',\n  'language' => 'es'\n]);\n\n// Send payment link\n$monei->payments->sendLink('832b77d1a4b372349a7ae0bb1b2af059', $request);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\nuse OpenAPI\\Client\\Model\\SendPaymentLinkRequest;\n\n// Initialize the MONEI client with your API key\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for sending a payment link\n$request = new SendPaymentLinkRequest([\n  'customer_email' => 'john.doe@example.com',\n  'language' => 'es'\n]);\n\n// Send payment link\n$monei->payments->sendLink('832b77d1a4b372349a7ae0bb1b2af059', $request);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import SendPaymentLinkRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.send_link(\n    \"832b77d1a4b372349a7ae0bb1b2af059\",\n    SendPaymentLinkRequest(customer_email=\"john.doe@example.com\", language=\"es\")\n)\n"
+            "source": "import Monei\nfrom Monei import SendPaymentLinkRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.send_link(\n    \"pay_7cc38b08ff471ccd313ad62b23b9f362\",\n    SendPaymentLinkRequest(email=\"customer@example.com\")\n)\n"
           }
         ]
       }
@@ -3578,11 +3575,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendReceipt(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customerEmail' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->payments->sendReceipt(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  [\n    'customerEmail' => 'john.doe@example.com',\n    'language' => 'es'\n  ]\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import SendPaymentReceiptRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.send_receipt(\n    \"832b77d1a4b372349a7ae0bb1b2af059\",\n    SendPaymentReceiptRequest(customer_email=\"john.doe@example.com\", language=\"es\")\n)\n"
+            "source": "import Monei\nfrom Monei import SendPaymentReceiptRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.payments.send_receipt(\n    \"pay_7cc38b08ff471ccd313ad62b23b9f362\",\n    SendPaymentReceiptRequest(email=\"customer@example.com\")\n)\n"
           }
         ]
       }
@@ -3643,11 +3640,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\n// Initialize the MONEI client with your API key\n$monei = new \\Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for creating a subscription\n$request = new \\OpenAPI\\Client\\Model\\CreateSubscriptionRequest([\n    'customer' => [\n        'name' => 'John Doe',\n        'email' => 'john.doe@monei.com'\n    ],\n    'amount' => 110,\n    'currency' => 'EUR',\n    'interval' => 'month',\n    'interval_count' => 1,\n    'description' => 'MoonMail Lite Monthly',\n    'callback_url' => 'https://example.com/subscription/callback',\n    'payment_callback_url' => 'https://example.com/payment/callback'\n]);\n\n// Create a subscription\n$subscription = $monei->subscriptions->create($request);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\nuse OpenAPI\\Client\\Model\\CreateSubscriptionRequest;\n\n// Initialize the MONEI client with your API key\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for creating a subscription\n$request = new CreateSubscriptionRequest([\n    'customer' => [\n        'name' => 'John Doe',\n        'email' => 'john.doe@monei.com'\n    ],\n    'amount' => 110,\n    'currency' => 'EUR',\n    'interval' => 'month',\n    'interval_count' => 1,\n    'description' => 'MoonMail Lite Monthly',\n    'callback_url' => 'https://example.com/subscription/callback',\n    'payment_callback_url' => 'https://example.com/payment/callback'\n]);\n\n// Create a subscription\n$subscription = $monei->subscriptions->create($request);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import CreateSubscriptionRequest, PaymentCustomer\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Subscriptions.create(\n    CreateSubscriptionRequest(\n        customer=PaymentCustomer(name=\"John Doe\", email=\"john.doe@monei.com\"),\n        amount=100,\n        currency=\"EUR\",\n        interval_count=1,\n        interval=\"month\",\n        description=\"MoonMail Lite Monthly\",\n        callback_url=\"https://example.com/subscription/callback\",\n        payment_callback_url=\"https://example.com/payment/callback\"\n    )\n)\n"
+            "source": "import Monei\nfrom Monei import CreateSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.create(CreateSubscriptionRequest(\n    amount=1000,\n    currency=\"EUR\",\n    name=\"Premium Plan\",\n    interval=\"month\",\n    interval_count=1,\n    payment_method_id=\"pm_7cc38b08ff471ccd313ad62b23b9f362\",\n    customer_id=\"cus_7cc38b08ff471ccd313ad62b23b9f362\",\n    metadata={\n        \"plan\": \"premium\",\n        \"user_id\": \"user_123\"\n    }\n))\n"
           }
         ]
       }
@@ -3698,11 +3695,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n$monei->subscriptions->get('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->get('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Subscriptions.get(\"575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa\")\n"
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.get(\"sub_7cc38b08ff471ccd313ad62b23b9f362\")\n"
           }
         ]
       },
@@ -3761,11 +3758,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->update(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['amount' => 990]\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->update(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['amount' => 990]\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import UpdateSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Subscriptions.update(\n    \"575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa\",\n    UpdateSubscriptionRequest(amount=990)\n)\n"
+            "source": "import Monei\nfrom Monei import UpdateSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.update(\n    \"sub_7cc38b08ff471ccd313ad62b23b9f362\", UpdateSubscriptionRequest(amount=1500)\n)\n"
           }
         ]
       }
@@ -3830,11 +3827,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->activate(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->activate(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['paymentToken' => '7cc38b08ff471ccd313ad62b23b9f362b107560b']\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import ActivateSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Subscriptions.activate(\n    \"575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa\",\n    activate_subscription_request=ActivateSubscriptionRequest(payment_token=\"7cc38b08ff471ccd313ad62b23b9f362b107560b\")\n)\n"
+            "source": "import Monei\nfrom Monei import ActivateSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.activate(\n    \"sub_7cc38b08ff471ccd313ad62b23b9f362\",\n    ActivateSubscriptionRequest(\n        payment_method_id=\"pm_7cc38b08ff471ccd313ad62b23b9f362\"\n    ),\n)\n"
           }
         ]
       }
@@ -3899,11 +3896,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->cancel(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['cancelAtPeriodEnd' => true]\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->cancel(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['cancelAtPeriodEnd' => true]\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import CancelSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Subscriptions.cancel(\n    \"575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa\",\n    cancel_subscription_request=CancelSubscriptionRequest(cancel_at_period_end=True),\n)\n"
+            "source": "import Monei\nfrom Monei import CancelSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.cancel(\n    \"sub_7cc38b08ff471ccd313ad62b23b9f362\",\n    CancelSubscriptionRequest(reason=\"Customer requested cancellation\"),\n)\n"
           }
         ]
       }
@@ -3968,11 +3965,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->pause(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['pauseAtPeriodEnd' => true]\n);\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->pause(\n    '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',\n    ['pauseAtPeriodEnd' => true]\n);\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\nfrom Monei import PauseSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Subscriptions.pause(\n    \"575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa\",\n    pause_subscription_request=PauseSubscriptionRequest(pause_at_period_end=True)\n)\n"
+            "source": "import Monei\nfrom Monei import PauseSubscriptionRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.pause(\n    \"sub_7cc38b08ff471ccd313ad62b23b9f362\",\n    PauseSubscriptionRequest(resume_at=\"2023-12-01\"),\n)\n"
           }
         ]
       }
@@ -4023,11 +4020,11 @@
           },
           {
             "lang": "PHP",
-            "source": "<?php\n$monei = new Monei\\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->resume('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n$monei->subscriptions->resume('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
           },
           {
             "lang": "Python",
-            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.Subscriptions.resume(\"575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa\")\n"
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.resume(\"sub_7cc38b08ff471ccd313ad62b23b9f362\")\n"
           }
         ]
       }
@@ -4084,7 +4081,21 @@
           "503": {
             "$ref": "#/components/responses/ServiceUnavailable"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node.js",
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.sendLink('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\nuse OpenAPI\\Client\\Model\\SendSubscriptionLinkRequest;\n\n// Initialize the MONEI client with your API key\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for sending a subscription link\n$request = new SendSubscriptionLinkRequest([\n    'email' => 'customer@example.com',\n    'language' => 'en'\n]);\n\n// Send subscription link\n$subscription = $monei->subscriptions->sendLink('sub_7cc38b08ff471ccd313ad62b23b9f362', $request);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nfrom Monei import SendSubscriptionLinkRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.send_link(\n    \"sub_7cc38b08ff471ccd313ad62b23b9f362\",\n    SendSubscriptionLinkRequest(email=\"customer@example.com\", language=\"en\"),\n)\n"
+          }
+        ]
       }
     },
     "/subscriptions/{id}/status": {
@@ -4139,7 +4150,21 @@
           "503": {
             "$ref": "#/components/responses/ServiceUnavailable"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node.js",
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.sendStatus('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\nrequire_once(__DIR__ . '/vendor/autoload.php');\n\nuse Monei\\MoneiClient;\nuse OpenAPI\\Client\\Model\\SendSubscriptionStatusRequest;\n\n// Initialize the MONEI client with your API key\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Create a request object for sending a subscription status\n$request = new SendSubscriptionStatusRequest([\n    'email' => 'customer@example.com',\n    'language' => 'en'\n]);\n\n// Send subscription status\n$subscription = $monei->subscriptions->sendStatus('sub_7cc38b08ff471ccd313ad62b23b9f362', $request);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\nfrom Monei import SendSubscriptionStatusRequest\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\nmonei.subscriptions.send_status(\n    \"sub_7cc38b08ff471ccd313ad62b23b9f362\",\n    SendSubscriptionStatusRequest(email=\"customer@example.com\", language=\"en\"),\n)\n"
+          }
+        ]
       }
     }
   }
