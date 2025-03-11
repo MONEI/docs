@@ -217,7 +217,7 @@ paypal.render('#paypal_container');
   - **label** `string`- Set button label. Possible values: `checkout`, `credit`, `pay`, `buynow`, `paypal`, `installment`
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when paypal is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
 - **onBeforeOpen:() => boolean** `function` - Callback function that is called before the PayPal window is opened. If the function returns `false`, the PayPal window will not be opened.
-- **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
+- **onSubmit:(result: \{token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.token** `string` - Payment token
   - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
 - **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
@@ -266,7 +266,7 @@ paymentRequest.render('#payment_request');
   - **color** `string` - Set button color. Possible values: `default`, `black`, `white`
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when payment request is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
 - **onBeforeOpen:() => boolean** `function` - Callback function that is called before the payment window is opened. If the function returns `false`, the payment window will not be opened.
-- **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
+- **onSubmit:(result: \{token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.token** `string` - Payment token
   - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
 - **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
@@ -313,7 +313,7 @@ bizum.render('#bizum');
     - **plain** - button without additional text (default).
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when payment request is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
 - **onBeforeOpen:() => boolean** `function` - Callback function that is called before the Bizum window is opened. If the function returns `false`, the payment window will not be opened.
-- **onSubmit:(result: {token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
+- **onSubmit:(result: \{token?: string; error?: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.token** `string` - Payment token
   - **result.error** `string` - Payment error. Use this attribute to show an error to a user.
 - **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
@@ -349,7 +349,7 @@ cofidis.render('#cofidis');
   - **height** `string` - By default, the button adapts to the size of its container element. To customize the button width, alter the width of the container element. To customize the button height, set the style.height option to a value from `25` to `55`.
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when payment request is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
 - **onBeforeOpen:() => boolean** `function` - Callback function that is called before the Cofidis window is opened. If the function returns `false`, the payment window will not be opened.
-- **onSubmit:(result: {redirectUrl: string}) => void** `function` - Callback function that is called when customer approves the payment.
+- **onSubmit:(result: \{redirectUrl: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.redirectUrl** `string` - Cofidis payment page redirect url
 - **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
 
@@ -423,7 +423,7 @@ cofidisPay.render('#cofidis');
   - **height** `string` - By default, the button adapts to the size of its container element. To customize the button width, alter the width of the container element. To customize the button height, set the style.height option to a value from `25` to `55`.
 - **onLoad:(isSupported: boolean) => void** `function` - Callback function that is called when payment request is fully loaded. If this payment method is not supported, the Component will not show up, and `onLoad` callback will be triggered with `isSupported: false`
 - **onBeforeOpen:() => boolean** `function` - Callback function that is called before the Cofidis Pay window is opened. If the function returns `false`, the payment window will not be opened.
-- **onSubmit:(result: {redirectUrl: string}) => void** `function` - Callback function that is called when customer approves the payment.
+- **onSubmit:(result: \{redirectUrl: string}) => void** `function` - Callback function that is called when customer approves the payment.
   - **result.redirectUrl** `string` - Cofidis payment page redirect url
 - **onError: (error: Error) => void** `function` - Callback function that is called when there is an error.
 

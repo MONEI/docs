@@ -12,7 +12,8 @@ MONEI Hosted Payment Page is the simplest way to securely collect payments from 
   <a
     href="https://js.monei.com/v1/payment-page/#ewogICAic2hvcExvZ29VcmwiOiJodHRwczovL21vbmVpLXByb2Qtc2VydmljZS1idWNrZXQuczMuZXUtd2VzdC0xLmFtYXpvbmF3cy5jb20vcHJvdGVjdGVkL2V1LXdlc3QtMSUzQTUyOTNiZmQyLWE5YmItNGZkNS04MGI3LWJiZjc2NmI4ZTBiZS9yYy11cGxvYWQtMTYwNTg4OTY4ODAxNi0zLnN2ZyIsCiAgICJhY2NlbnRDb2xvciI6IiNEOTIyMkEiLAogICJhbW91bnQiOiAxNTAwMCwKICAgImJnQ29sb3IiOiIjZjBmNGY1IiwKICAgInRlc3QiOnRydWUsCiAgICJwYXltZW50TWV0aG9kcyI6WwogICAgICAiY2FyZCIsCiAgICAgICJwYXlwYWwiLAogICAgICAiYml6dW0iLAogICAgICAiYXBwbGVQYXkiLAogICAgICAiZ29vbGdlUGF5IiwKICAgICAgImNsaWNrVG9QYXkiLAogICAgICAiY29maWRpcyIKICAgXSwKICAgImFjY291bnRJZCI6IjI5NzViY2ZhLTdiYmMtNDIyZC1hZjQ4LWM2Njc1OWQ4N2I2OSIsCiAgICJwYXltZW50SWQiOiI0NDMyMzI5MmJkNzdlNDY1ZWVkMmZkM2E1ZTQ4NjQ5MzA1N2I1OGM2IiwKICAgInNob3BOYW1lIjoiTWVkaWFNYXJrdCIKfQ=="
     target="_blank"
-    className="button button--primary">
+    className="button button--primary"
+  >
     Live demo
   </a>
 </p>
@@ -156,7 +157,7 @@ Customer enters the Card information (or other payment information depending on 
 
 ### 4. Customer is redirected back to your server
 
-- if customer clicks **"Back to {{shop.name}}"** link (you can provide `shop.name` parameter when you create a payment or in the [public business details settings](https://dashboard.monei.com/settings)), s/he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
+- if customer clicks **"Back to \{\{shop.name}}"** link (you can provide `shop.name` parameter when you create a payment or in the [public business details settings](https://dashboard.monei.com/settings)), s/he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
 - in any other case the customer is redirected to the `completeUrl` with **payment_id** query parameter. Use [get payment](/api/#operation/payments_get) endpoint to get the payment status.
 
 ### 5. An asynchronous request is sent to your server

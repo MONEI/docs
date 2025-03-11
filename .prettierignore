@@ -1,0 +1,17 @@
+# Build output
+build/
+
+# Node modules
+node_modules/
+
+# Yarn files
+.yarn/
+.pnp.*
+
+# Docusaurus generated files
+.docusaurus/
+.cache-loader/
+
+# Other common files to ignore
+dist/
+coverage/ 

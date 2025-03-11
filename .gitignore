@@ -21,3 +21,13 @@ yarn-error.log*
 
 .idea
 .env
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

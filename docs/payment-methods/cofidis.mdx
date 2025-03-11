@@ -9,12 +9,16 @@ You can start accepting [Cofidis](https://www.cofidis.es/) installment payments 
 Our [Cofidis Component](monei-js/reference.md#cofidis-component) renders Cofidis button to your payment page.
 When a customer selects "Pay with Cofidis", the component presents a Cofidis overlay, where the customer could see commercial conditions, legal information and continue to the Cofidis payment page .
 
-import {Cofidis} from '../../src/components/Cofidis';
-import {CofidisWidget} from '../../src/components/CofidisWidget';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 <div className="preview-frame">
   <div className="payment-button" style={{height: 115}}>
-    <Cofidis />
+    <BrowserOnly>
+      {() => {
+        const Cofidis = require('../../src/components/Cofidis').default;
+        return <Cofidis />;
+      }}
+    </BrowserOnly>
   </div>
 </div>
 <br />
@@ -24,7 +28,12 @@ We also provide a [Cofidis Widget](monei-js/reference.md#cofidiswidget-component
 <div className="preview-frame">
   <div className="payment-button">
     <div style={{maxWidth: 500}}>
-      <CofidisWidget />
+      <BrowserOnly>
+        {() => {
+          const CofidisWidget = require('../../src/components/CofidisWidget').default;
+          return <CofidisWidget />;
+        }}
+      </BrowserOnly>
     </div>
   </div>
 </div>

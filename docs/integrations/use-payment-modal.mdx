@@ -103,7 +103,7 @@ Included in the returned Payment object is a payment `id`, which is used on the 
 
 ### 2. Confirm the payment `Client-side`
 
-To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function
+To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#confirmpayment-function) function
 
 Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
 
@@ -119,7 +119,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </body>
 ```
 
-You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)). You can also provide additional parameters like `customer.email`. Check all available [parameters](/monei-js/reference.md/#confirmpayment-function).
+You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)). You can also provide additional parameters like `customer.email`. Check all available [parameters](/monei-js/reference.md#confirmpayment-function).
 
 ```js title="client.js"
 // Handle form submission.
