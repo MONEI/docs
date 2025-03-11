@@ -3,8 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
-        - nvm install 16
-        - yarn install
+        - corepack enable
+        - yarn --immutable
         - aws s3 cp s3://$JS_BUCKET/api/v1/openapi.json ./openapi.json
     build:
       commands:
@@ -18,4 +18,4 @@ frontend:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
+      - ~/.yarn/berry/cache/**/*

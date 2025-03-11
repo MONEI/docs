@@ -18,13 +18,15 @@ Businesses can issue refunds directly through the [MONEI dashboard](https://dash
     style={{marginRight: '1em'}}
     href="https://payments-demo.monei.com"
     target="_blank"
-    className="button button--primary">
+    className="button button--primary"
+  >
     Live demo
   </a>
   <a
     href="https://github.com/MONEI/monei-payments-demo"
     target="_blank"
-    className="button button--secondary">
+    className="button button--secondary"
+  >
     Source code
   </a>
 </p>
@@ -190,7 +192,7 @@ Check the [MONEI JS Reference](monei-js/reference.md#cardinput-component) for mo
 
 ### 3. Confirm the payment `Client-side`
 
-To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function
+To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#confirmpayment-function) function
 
 You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Card Input Component. You can also provide additional parameters like `customer.email`. Check all available [parameters](/api/#operation/payments_confirm).
 

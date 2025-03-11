@@ -13,13 +13,15 @@ Build your custom checkout using [MONEI Components](monei-js/overview.mdx) to se
     style={{marginRight: '1em'}}
     href="https://payments-demo.monei.com"
     target="_blank"
-    className="button button--primary">
+    className="button button--primary"
+  >
     Live demo
   </a>
   <a
     href="https://github.com/MONEI/monei-payments-demo"
     target="_blank"
-    className="button button--secondary">
+    className="button button--secondary"
+  >
     Source code
   </a>
 </p>
@@ -173,7 +175,7 @@ Check the [Payment Methods](/payment-methods/card.mdx) section for more details 
 
 ### 3. Confirm the payment `Client-side`
 
-To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#moneiconfirmpayment-function) function
+To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#confirmpayment-function) function
 
 You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Component. Check the [Payment Methods](/payment-methods/card.mdx) section for more details about how to generate `paymentToken` for each payment method.
 

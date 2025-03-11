@@ -191,7 +191,7 @@ Customer enters the Card information and goes through the 3D secure verification
 
 ### 5. Customer is redirected back to your server
 
-- if customer clicks **"Back to {{shop.name}}"** link (you can provide `shop.name` in the [public business details settings](https://dashboard.monei.com/settings)), s/he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
+- if customer clicks **"Back to \{\{shop.name}}"** link (you can provide `shop.name` in the [public business details settings](https://dashboard.monei.com/settings)), s/he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
 - in any other case the customer is redirected to the `completeUrl` with **payment_id** and **subscription_id** query parameters. Use [get subscription](/api/#operation/subscriptions_get) endpoint to get the subscription status.
 
 ### 6. An asynchronous request is sent to your server

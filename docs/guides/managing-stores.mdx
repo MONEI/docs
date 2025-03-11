@@ -19,11 +19,11 @@ Once a store is created, the storeId (a unique identifier crucial for API operat
 
 ### Assigning Payments to Stores
 
-To link a payment to a specific store, the storeId parameter must be included in the API request when creating a payment. This unique identifier ensures that the transaction is explicitly associated with the designated store, enabling precise financial reporting and analytics. 
+To link a payment to a specific store, the storeId parameter must be included in the API request when creating a payment. This unique identifier ensures that the transaction is explicitly associated with the designated store, enabling precise financial reporting and analytics.
 
 Notably, the storeId only needs to be specified during the payment creation process; subsequent operations such as confirmation, capture, or refund inherit the store association by default. This approach minimizes redundancy and optimizes API interaction by simplifying follow-up transaction requests.
 
-:::note 
+:::note
 The ability to assign payments using the `storeId` parameter is not available for standard integrations with e-commerce platforms such as Shopify, Prestashop, Wix, and WooCommerce. This option is only applicable in custom implementations.
 :::
 
@@ -67,7 +67,7 @@ monei.payments.create({
   currency: 'EUR',
   orderId: '14379133960355',
   description: 'Test Store - #14379133960355',
-  storeId: 'e5f28150d9e8974c58ab5ec9c4a880f8734dcf05',
+  storeId: 'e5f28150d9e8974c58ab5ec9c4a880f8734dcf05'
 });
 ```
 

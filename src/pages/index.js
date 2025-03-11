@@ -28,7 +28,8 @@ const features = [
   },
   {
     title: 'Connect with business platforms and marketplaces',
-    description: 'Help your users/merchants accept more payment methods while saving time and money integrating payments into your business platform or marketplace.',
+    description:
+      'Help your users/merchants accept more payment methods while saving time and money integrating payments into your business platform or marketplace.',
     url: '/docs/monei-connect'
   }
 ];
@@ -81,7 +82,8 @@ function Home() {
           <div className={styles.buttons}>
             <Link
               className={clsx('button button--primary button--lg', styles.getStarted)}
-              to={useBaseUrl('docs/')}>
+              to={useBaseUrl('docs/')}
+            >
               Get Started
             </Link>
           </div>
