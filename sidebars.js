@@ -14,10 +14,10 @@ module.exports = {
       'E-commerce platforms': [
         {
           Shopify: [
-            'e-commerce/shopify/shopify-payments',
-            'e-commerce/shopify/shopify-bizum',
-            'e-commerce/shopify/shopify-multibanco',
-            'e-commerce/shopify/shopify-mbway'
+            'e-commerce/shopify/shopify-monei-payments',
+            'e-commerce/shopify/shopify-monei-bizum',
+            'e-commerce/shopify/shopify-monei-multibanco',
+            'e-commerce/shopify/shopify-monei-mbway'
           ]
         },
         'e-commerce/wix',
