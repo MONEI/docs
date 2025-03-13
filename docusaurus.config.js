@@ -79,9 +79,8 @@ module.exports = {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
           sidebarPath: require.resolve('./sidebars.js'),
-          //includeCurrentVersion: true,
-          //disableVersioning: true,
-          sidebarCollapsible: true
+          sidebarCollapsible: true,
+          editUrl: 'https://github.com/MONEI/docs/edit/master/'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')
