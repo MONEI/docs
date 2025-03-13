@@ -12,7 +12,14 @@ module.exports = {
         'integrations/use-qr-payments'
       ],
       'E-commerce platforms': [
-        'e-commerce/shopify',
+        {
+          Shopify: [
+            'e-commerce/shopify/shopify-payments',
+            'e-commerce/shopify/shopify-bizum',
+            'e-commerce/shopify/shopify-multibanco',
+            'e-commerce/shopify/shopify-mbway'
+          ]
+        },
         'e-commerce/wix',
         'e-commerce/woocommerce',
         'e-commerce/salesforce',
