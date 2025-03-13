@@ -1,0 +1,111 @@
+---
+id: shopify-bizum
+title: Shopify Bizum
+description: Accept Bizum payments through MONEI in your Shopify store by installing and configuring the MONEI Pay · Bizum Shopify App.
+---
+
+To accept Bizum payments through MONEI in your Shopify store you simply need to install and configure MONEI Pay · Bizum Shopify App.
+
+<p>
+  <a href="https://monei-demo.myshopify.com/" target="_blank" className="button button--primary">
+    Live demo
+  </a>
+</p>
+
+Password: `demo`
+
+## Before you begin
+
+To test your integration:
+
+- Use your [test mode](testing.md) API Key. You can find them in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api)
+- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+
+## Install
+
+<p>
+  <a
+    href="https://apps.shopify.com/monei-bizum"
+    target="_blank"
+    className="button button--primary"
+  >
+    Install from Shopify App Store
+  </a>
+</p>
+
+## Configure
+
+### First time install
+
+When you install the app for the first time:
+
+1. You will be automatically redirected to the configuration page
+2. Enter your API Key. You can find your API Key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api)
+
+   ![Configure MONEI App](/img/shopify/bizum/configuration.png)
+
+3. After saving your API Key, you will be redirected to the Payments Settings
+4. Click on **Activate** to enable the payment method
+
+   ![Configure MONEI Payments](/img/shopify/bizum/activate.png)
+
+### Modify configuration
+
+To modify payment method settings or switch between test/live mode:
+
+1. Go to **Shopify Admin → Settings**
+
+   ![Shopify Settings](/img/shopify/settings-button.png)
+
+2. Navigate to **Payments → MONEI Pay · Bizum**
+
+   ![Shopify Payments](/img/shopify/bizum/payments-section.png)
+
+3. Modify your configuration as needed
+4. Click on **Activate** to apply your changes
+
+   ![Configure MONEI Payments](/img/shopify/bizum/activate.png)
+
+### Modify API Key
+
+To change your API Key:
+
+1. Go to **Shopify Admin → Settings**
+
+   ![Shopify Settings](/img/shopify/settings-button.png)
+
+2. Navigate to **Payments → MONEI Pay · Bizum**
+
+   ![Shopify Payments](/img/shopify/bizum/payments-section.png)
+
+3. Click on the **More actions** dropdown menu in the top right corner and select **Manage**
+
+   ![Shopify Manage App](/img/shopify/bizum/manage-app-button.png)
+
+4. Enter your new API Key
+
+   ![Configure MONEI App](/img/shopify/bizum/configuration.png)
+
+5. After saving, you will be redirected to the Payments Settings
+6. Click on **Activate** to apply your changes
+
+## Before you go live
+
+- Make sure that you are using [live (production) mode](testing.md) API Key.
+- Make sure that you have Bizum activated as a [payment method](https://dashboard.monei.com/settings/payment-methods)
+
+## How to find the Shopify Order
+
+To find the order in Shopify Admin use the Order ID from MONEI Dashboard
+
+![Find MONEI Payment](/img/shopify/find-order-id.png)
+
+Enter the following query in Shopify Admin -> Orders
+
+`receipt.payment_id:{{ MONEI_ORDER_ID }}`
+
+![Find MONEI Payment in Shopify](/img/shopify/search-order.png)
+
+You can find the MONEI Order ID in the **Information from the gateway** section in the Shopify order.
+
+![Find Payment in MONEI](/img/shopify/order-details.png) 
