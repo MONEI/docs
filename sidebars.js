@@ -15,6 +15,7 @@ module.exports = {
         {
           Shopify: [
             'e-commerce/shopify/shopify-monei-payments',
+            'e-commerce/shopify/shopify-monei-onsite',
             'e-commerce/shopify/shopify-monei-bizum',
             'e-commerce/shopify/shopify-monei-multibanco',
             'e-commerce/shopify/shopify-monei-mbway'
