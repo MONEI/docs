@@ -16,7 +16,7 @@ description: Find a guide to integrate MONEI into your system
 
 #### Integrate with your platform
 
-- **[Shopify](e-commerce/shopify/payments.mdx)**
+- **[Shopify](e-commerce/shopify/monei-payments)**
 - **[WooCommerce](e-commerce/woocommerce.mdx)**
 - **[Wix](e-commerce/wix.mdx)**
 - **[Salesforce Commerce Cloud](e-commerce/salesforce.mdx)**
