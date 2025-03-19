@@ -23,6 +23,14 @@ yarn start
 
 This command starts a local development server and opens a browser window. Most changes are reflected live without having to restart the server.
 
+### genapi
+
+```bash
+yarn genapi:rest
+```
+
+This command generates REST API documentation from the `openapi.json` file into MDX files within the `docs/api/rest` folder.
+
 ### Build
 
 ```bash

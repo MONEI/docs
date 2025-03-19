@@ -8,6 +8,7 @@ frontend:
         - aws s3 cp s3://$JS_BUCKET/api/v1/openapi.json ./openapi.json
     build:
       commands:
+        - yarn run genapi:rest
         - yarn run build
     postBuild:
       commands:

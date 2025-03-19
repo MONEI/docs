@@ -1305,7 +1305,7 @@
               }
             ],
             "default": "(same as initial payment)",
-            "description": "Same as the `transactionType` parameter from\n[create payment](https://docs.monei.com/api/#operation/payments_create).\nIf not sent, it will default in the same transaction type used in the initial payment.\n"
+            "description": "Same as the `transactionType` parameter from\n[create payment](https://docs.monei.com/docs/apis/rest/payments-create/).\nIf not sent, it will default in the same transaction type used in the initial payment.\n"
           },
           "description": {
             "$ref": "#/components/schemas/Payment-Description"
