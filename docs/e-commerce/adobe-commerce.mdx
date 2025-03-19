@@ -4,7 +4,7 @@ title: Adobe Commerce (Magento 2)
 description: To accept payments through MONEI in your Adobe Commerce (Magento 2) store you simply need to install and configure MONEI Adobe Commerce Extension.
 ---
 
-To accept payments through MONEI in your Adobe Commerce (Magento 2) store you simply need to install and configure MONEI Adobe Commerce Extension.
+MONEI Payments for Adobe Commerce (Magento 2) allows you to seamlessly integrate MONEI's payment processing capabilities into your Magento store. This official module provides a secure, reliable, and user-friendly payment experience for your customers.
 
 <a href="https://magento2-demo.monei.com/" target="_blank" className="button button--primary">
   Live demo
@@ -19,8 +19,8 @@ To test your integration:
 
 ## Install
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 <Tabs
   defaultValue="composer"
@@ -32,36 +32,59 @@ import TabItem from '@theme/TabItem';
 
 You can install MONEI Adobe Commerce Extension using composer by adding it to your composer file using following command:
 
-```shell
+Go to your Adobe Commerce (Magento 2) root directory and run the following commands:
+
+1. Add the package to your Magento installation:
+
+```bash
 composer require monei/module-monei-payment
 ```
 
-Enable module
+2. Enable the module:
 
-```shell
-php magento/bin/magento module:enable Monei_MoneiPayment
+```bash
+bin/magento module:enable Monei_MoneiPayment
 ```
 
-Finally, run setup upgrade to enable new modules:
+3. Run the following commands to upgrade and compile the module:
 
-```shell
-php magento/bin/magento setup:upgrade
+```bash
+bin/magento setup:upgrade
+bin/magento setup:di:compile
+bin/magento setup:static-content:deploy
+bin/magento cache:clean
 ```
 
   </TabItem>
   <TabItem value="archive">
 
-You can install MONEI Adobe Commerce Extension from the raw package by downloading the [latest version](https://github.com/MONEI/MONEI-AdobeCommerce-Magento2/archive/refs/heads/main.zip).
+Go to your Adobe Commerce (Magento 2) root directory.
 
-Create a directory called `app/code/Monei/MoneiPayment`, inside your magento2 project, and you unzip the downloaded archive there.
+1. Download the latest release from the [GitHub repository](https://github.com/MONEI/MONEI-AdobeCommerce-Magento2/releases)
+2. Extract the contents to your `app/code/Monei/MoneiPayment` directory
+3. Install the MONEI PHP SDK:
 
-Go to Adobe Commerce (Magento 2) root directory and run:
+```bash
+composer require monei/monei-php-sdk:^2.4.3
+```
 
-```shell
-  php bin/magento module:enable Monei_MoneiPayment
-  php bin/magento setup:upgrade
-  php bin/magento setup:static-content:deploy
-  php bin/magento cache:clean
+4. Go to your Adobe Commerce (Magento 2) root directory and run:
+
+```bash
+bin/magento module:enable Monei_MoneiPayment
+bin/magento setup:upgrade
+bin/magento setup:di:compile
+bin/magento setup:static-content:deploy
+bin/magento cache:clean
+```
+
+Alternatively, you can use this one-line command to download and extract the latest release:
+
+```bash
+curl -L https://github.com/MONEI/MONEI-AdobeCommerce-Magento2/releases/latest/download/monei-module-monei-payment.zip -o monei.zip && \
+mkdir -p app/code/Monei/MoneiPayment && \
+unzip monei.zip -d app/code/Monei/MoneiPayment && \
+rm monei.zip
 ```
 
   </TabItem>
@@ -72,9 +95,11 @@ Go to Adobe Commerce (Magento 2) root directory and run:
 To configure the extension you have to go to **Stores → Configuration→ Payment Methods (under Sales section) →
 MONEI**
 
-![Configure MONEI Adobe Commerce](/img/configure-magento-0.jpg)
+![Configure MONEI Adobe Commerce](/img/configure-magento-0.png)
 
 Enter your API Key. You can find your API Key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api).
+
+For more information on how to configure the extension, please refer to the [MONEI Adobe Commerce Extension documentation](https://github.com/MONEI/MONEI-AdobeCommerce-Magento2/blob/main/README.md).
 
 ## Before you go live
 
