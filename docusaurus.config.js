@@ -45,15 +45,15 @@ module.exports = {
       items: [
         {
           to: 'docs/',
-          activeBasePath: 'docs',
           label: 'Documentation',
-          position: 'right'
+          position: 'right',
+          activeBaseRegex: '^/docs/(?!apis/)'
         },
         {
-          to: 'api/',
-          activeBasePath: 'api',
+          to: 'docs/apis/rest/',
           label: 'API',
-          position: 'right'
+          position: 'right',
+          activeBaseRegex: '^/docs/apis/'
         },
         {
           to: 'https://support.monei.com',
@@ -77,9 +77,11 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          // It is recommended to set document id as docs home page (`docs/` path).
+          id: 'docs',
+          path: 'docs',
+          routeBasePath: 'docs',
+          docItemComponent: '@theme/ApiItem',
           sidebarPath: require.resolve('./sidebars.js'),
-          sidebarCollapsible: true,
           editUrl: 'https://github.com/MONEI/docs/edit/master/'
         },
         theme: {
@@ -95,5 +97,24 @@ module.exports = {
       }
     ]
   ],
-  plugins: [path.resolve(__dirname, './inject-scripts.js')]
+  plugins: [
+    path.resolve(__dirname, './inject-scripts.js'),
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: 'rest',
+        docsPluginId: 'rest',
+        config: {
+          api: {
+            specPath: 'openapi.json',
+            outputDir: 'docs/apis/rest',
+            sidebarOptions: {
+              groupPathsBy: 'tag'
+            }
+          }
+        }
+      }
+    ]
+  ],
+  themes: ['docusaurus-theme-openapi-docs']
 };
