@@ -71,17 +71,20 @@ module.exports = {
       {
         highlight: 'javascript',
         language: 'javascript',
-        logoClass: 'javascript'
+        logoClass: 'javascript',
+        variants: ['node']
       },
       {
         highlight: 'python',
         language: 'python',
-        logoClass: 'python'
+        logoClass: 'python',
+        variants: ['python']
       },
       {
         highlight: 'php',
         language: 'php',
-        logoClass: 'php'
+        logoClass: 'php',
+        variants: ['php']
       }
     ],
     footer: {
@@ -126,7 +129,8 @@ module.exports = {
             specPath: 'openapi.json',
             outputDir: 'docs/apis/rest',
             sidebarOptions: {
-              groupPathsBy: 'tag'
+              groupPathsBy: 'tag',
+              categoryLinkSource: 'tag'
             },
             showSchemas: true
           }

@@ -1,0 +1,45 @@
+---
+id: payments
+title: 'Payments'
+description: 'Payments'
+custom_edit_url: null
+---
+
+<p>
+  The Payments API provides a comprehensive platform for processing transactions and managing the
+  complete payment lifecycle.
+</p>
+<h3>Core Payment Operations</h3>
+<ul>
+  <li>Create and process payments with multiple payment methods</li>
+  <li>Authorize payments and capture funds later</li>
+  <li>Cancel authorized payments to release reserved funds</li>
+  <li>Refund payments partially or in full</li>
+  <li>Generate detailed receipts for completed payments</li>
+</ul>
+<h3>Customer Experience Features</h3>
+<ul>
+  <li>Send payment requests via WhatsApp, SMS, or Bizum</li>
+  <li>Create and distribute payment links through various channels</li>
+  <li>Generate permanent payment tokens for one-click checkout experiences</li>
+  <li>Support recurring billing and subscription payments</li>
+</ul>
+<h3>Implementation Best Practices</h3>
+<ul>
+  <li>Create one payment per order or customer session for clear transaction records</li>
+  <li>Use the unique payment ID for all subsequent operations on a payment</li>
+  <li>
+    Generate permanent payment tokens (with <code>generatePaymentToken: true</code>) for returning
+    customers
+  </li>
+  <li>Implement webhook notifications to receive real-time payment status updates</li>
+</ul>
+<h2>Payment Object</h2>
+See [Payment](/docs/apis/rest/schemas/payment/) for more information.
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
+```

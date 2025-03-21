@@ -9,6 +9,10 @@ const sidebar: SidebarsConfig = {
     {
       type: 'category',
       label: 'Apple Pay Domain',
+      link: {
+        type: 'doc',
+        id: 'apis/rest/apple-pay-domain'
+      },
       items: [
         {
           type: 'doc',
@@ -21,6 +25,10 @@ const sidebar: SidebarsConfig = {
     {
       type: 'category',
       label: 'Bizum',
+      link: {
+        type: 'doc',
+        id: 'apis/rest/bizum'
+      },
       items: [
         {
           type: 'doc',
@@ -33,6 +41,10 @@ const sidebar: SidebarsConfig = {
     {
       type: 'category',
       label: 'Payment Methods',
+      link: {
+        type: 'doc',
+        id: 'apis/rest/payment-methods'
+      },
       items: [
         {
           type: 'doc',
@@ -45,6 +57,10 @@ const sidebar: SidebarsConfig = {
     {
       type: 'category',
       label: 'Payments',
+      link: {
+        type: 'doc',
+        id: 'apis/rest/payments'
+      },
       items: [
         {
           type: 'doc',
@@ -111,6 +127,10 @@ const sidebar: SidebarsConfig = {
     {
       type: 'category',
       label: 'Subscriptions',
+      link: {
+        type: 'doc',
+        id: 'apis/rest/subscriptions'
+      },
       items: [
         {
           type: 'doc',
