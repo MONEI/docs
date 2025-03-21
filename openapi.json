@@ -2871,7 +2871,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Register your domain with Apple to enable Apple Pay on your website\nmonei.applePayDomain.register({\n  domainName: 'example.com'\n});\n"
           },
           {
@@ -2931,7 +2932,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Validate if a phone number is registered in Bizum\nmonei.bizum.validatePhone({\n  accountId: '6dccce85-b290-40c2-bb9c-57bc7ecfaf04',\n  phoneNumber: '+34600000000'\n});\n"
           },
           {
@@ -2996,7 +2998,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Get payment methods by accountId\nmonei.paymentMethods.get({accountId: '6dccce85-b290-40c2-bb9c-57bc7ecfaf04'});\n"
           },
           {
@@ -3061,7 +3064,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '14379133960355',\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  callbackUrl: 'https://example.com/checkout/callback',\n  completeUrl: 'https://example.com/checkout/complete',\n  customer: {\n    name: 'John Doe',\n    email: 'example@example.com',\n    phone: '+49123456789'\n  }\n});\n"
           },
           {
@@ -3116,7 +3120,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.get('832b77d1a4b372349a7ae0bb1b2af059');\n"
           },
           {
@@ -3185,7 +3190,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.confirm('832b77d1a4b372349a7ae0bb1b2af059', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n"
           },
           {
@@ -3254,7 +3260,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.capture(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  {amount: 100} // 1.00 EUR\n);\n"
           },
           {
@@ -3323,7 +3330,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "const {Monei, PaymentCancellationReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.cancel('832b77d1a4b372349a7ae0bb1b2af059', {\n  cancellationReason: PaymentCancellationReason.RequestedByCustomer\n});\n"
           },
           {
@@ -3392,7 +3400,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "const {Monei, PaymentRefundReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.refund('832b77d1a4b372349a7ae0bb1b2af059', {\n  refundReason: PaymentRefundReason.RequestedByCustomer\n});\n"
           },
           {
@@ -3461,7 +3470,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', {\n  orderId: '14379133960355',\n  callbackUrl: 'https://example.com/checkout/callback'\n});\n"
           },
           {
@@ -3531,7 +3541,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.sendRequest('832b77d1a4b372349a7ae0bb1b2af059', {\n  phoneNumber: '+34500000000',\n  language: 'es'\n});\n"
           },
           {
@@ -3600,7 +3611,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.sendLink('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: 'es'\n});\n"
           },
           {
@@ -3669,7 +3681,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.sendReceipt('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: 'es'\n});\n"
           },
           {
@@ -3734,7 +3747,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.create({\n  customer: {\n    name: 'John Doe',\n    email: 'john.doe@monei.com'\n  },\n  amount: 110,\n  currency: 'EUR',\n  interval: 'month',\n  intervalCount: 1,\n  description: 'MoonMail Lite Monthly',\n  callbackUrl: 'https://example.com/subscription/callback',\n  paymentCallbackUrl: 'https://example.com/payment/callback'\n});\n"
           },
           {
@@ -3789,7 +3803,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.get('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
           },
           {
@@ -3852,7 +3867,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.update('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {amount: 990});\n"
           },
           {
@@ -3921,7 +3937,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.activate('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n"
           },
           {
@@ -3990,7 +4007,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.cancel('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {cancelAtPeriodEnd: true});\n"
           },
           {
@@ -4059,7 +4077,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei, PaymentCancellationReason} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.pause('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {pauseAtPeriodEnd: true});\n"
           },
           {
@@ -4114,7 +4133,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.resume('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
           },
           {
@@ -4183,7 +4203,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.sendLink('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n"
           },
           {
@@ -4252,7 +4273,8 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Node.js",
+            "lang": "JavaScript",
+            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.sendStatus('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n"
           },
           {

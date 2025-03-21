@@ -1,0 +1,33 @@
+---
+id: cancelsubscriptionrequest
+title: 'CancelSubscriptionRequest'
+description: ''
+sidebar_label: 'CancelSubscriptionRequest'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'cancelAtPeriodEnd': false}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'CancelSubscriptionRequest'}></Heading>
+
+<Schema
+  schema={{
+    title: 'CancelSubscriptionRequest',
+    type: 'object',
+    properties: {
+      cancelAtPeriodEnd: {
+        type: 'boolean',
+        example: false,
+        description:
+          'If true, the subscription will be canceled at the end of the current period.\n',
+        title: 'Subscription-CancelAtPeriodEnd'
+      }
+    }
+  }}
+  schemaType={'response'}
+></Schema>

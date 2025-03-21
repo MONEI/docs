@@ -1,0 +1,29 @@
+---
+id: subscription-intervalcount
+title: 'Subscription-IntervalCount'
+description: 'Number of intervals between subscription payments.'
+sidebar_label: 'Subscription-IntervalCount'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 1
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Subscription-IntervalCount'}></Heading>
+
+Number of intervals between subscription payments.
+
+<Schema
+  schema={{
+    type: 'integer',
+    format: 'int32',
+    example: 1,
+    description: 'Number of intervals between subscription payments.',
+    title: 'Subscription-IntervalCount'
+  }}
+  schemaType={'response'}
+></Schema>

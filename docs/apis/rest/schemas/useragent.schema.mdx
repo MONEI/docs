@@ -1,0 +1,28 @@
+---
+id: useragent
+title: 'UserAgent'
+description: 'Full user agent string of the browser session.'
+sidebar_label: 'UserAgent'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'UserAgent'}></Heading>
+
+Full user agent string of the browser session.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...',
+    description: 'Full user agent string of the browser session.',
+    title: 'UserAgent'
+  }}
+  schemaType={'response'}
+></Schema>

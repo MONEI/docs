@@ -1,0 +1,380 @@
+---
+id: paymentmethods-metadata
+title: 'PaymentMethods-Metadata'
+description: 'Additional configuration details for each payment method.'
+sidebar_label: 'PaymentMethods-Metadata'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'alipay': {'countries': ['CN']},
+    'bancontact': {'countries': ['BE']},
+    'bizum': {'countries': ['ES']},
+    'blik': {'countries': ['PL']},
+    'card': {'brands': ['visa', 'mastercard']},
+    'eps': {'countries': ['AT']},
+    'iDeal': {'countries': ['NL']},
+    'mbway': {'countries': ['PT']},
+    'multibanco': {'countries': ['PT']},
+    'sofort': {'countries': ['AT', 'BE', 'DE', 'ES', 'IT', 'NL', 'CH', 'PL']},
+    'trustly':
+      {'countries': ['DE', 'DK', 'EE', 'ES', 'FI', 'GB', 'LT', 'LV', 'NL', 'NO', 'PL', 'SE', 'SK']},
+    'sepa':
+      {
+        'countries':
+          [
+            'AT',
+            'BE',
+            'BG',
+            'HR',
+            'CY',
+            'CZ',
+            'DK',
+            'EE',
+            'FI',
+            'FR',
+            'DE',
+            'GR',
+            'HU',
+            'IE',
+            'IT',
+            'LV',
+            'LT',
+            'LU',
+            'MT',
+            'NL',
+            'PL',
+            'PT',
+            'RO',
+            'SK',
+            'SI',
+            'ES',
+            'SE',
+            'IS',
+            'LI',
+            'NO',
+            'AD',
+            'SM',
+            'MC',
+            'VA',
+            'PF',
+            'TF',
+            'GI',
+            'GG',
+            'IM',
+            'JE',
+            'BL',
+            'PM',
+            'CH',
+            'GB',
+            'WF'
+          ]
+      },
+    'klarna':
+      {'countries': ['AT', 'BE', 'CH', 'DE', 'DK', 'ES', 'FI', 'FR', 'GB', 'IT', 'NL', 'NO', 'SE']},
+    'giropay': {'countries': ['DE']},
+    'googlePay': {'merchantId': '12345678901234567890', 'cvcRequired': false},
+    'applePay': {'merchantId': 'merchant.com.monei'},
+    'clickToPay':
+      {
+        'tokenSupport': true,
+        'preselected': false,
+        'visa':
+          {
+            'srciDpaId': 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+            'srcInitiatorId': '550e8400-e29b-41d4-a716-446655440000'
+          },
+        'mastercard':
+          {
+            'srciDpaId': '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+            'srcInitiatorId': 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'
+          },
+        'discover':
+          {
+            'srciDpaId': '71f0c4d5-9947-4d1c-9cb3-d6a3f7c4e701',
+            'srcInitiatorId': 'c2d06c25-9ddb-4a5e-9d5a-3ff1c8d98467'
+          }
+      }
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'PaymentMethods-Metadata'}></Heading>
+
+Additional configuration details for each payment method.
+
+<Schema
+  schema={{
+    type: 'object',
+    description: 'Additional configuration details for each payment method.\n',
+    properties: {
+      alipay: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['CN'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      bancontact: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['BE'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      bizum: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['ES'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      blik: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['PL'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      card: {
+        type: 'object',
+        properties: {
+          brands: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['visa', 'mastercard'],
+            description: 'List of card brands supported'
+          }
+        }
+      },
+      eps: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['AT'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      iDeal: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['NL'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      mbway: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['PT'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      multibanco: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['PT'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      sofort: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['AT', 'BE', 'DE', 'ES', 'IT', 'NL', 'CH', 'PL'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      trustly: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['DE', 'DK', 'EE', 'ES', 'FI', 'GB', 'LT', 'LV', 'NL', 'NO', 'PL', 'SE', 'SK'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      sepa: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: [
+              'AT',
+              'BE',
+              'BG',
+              'HR',
+              'CY',
+              'CZ',
+              'DK',
+              'EE',
+              'FI',
+              'FR',
+              'DE',
+              'GR',
+              'HU',
+              'IE',
+              'IT',
+              'LV',
+              'LT',
+              'LU',
+              'MT',
+              'NL',
+              'PL',
+              'PT',
+              'RO',
+              'SK',
+              'SI',
+              'ES',
+              'SE',
+              'IS',
+              'LI',
+              'NO',
+              'AD',
+              'SM',
+              'MC',
+              'VA',
+              'PF',
+              'TF',
+              'GI',
+              'GG',
+              'IM',
+              'JE',
+              'BL',
+              'PM',
+              'CH',
+              'GB',
+              'WF'
+            ],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      klarna: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['AT', 'BE', 'CH', 'DE', 'DK', 'ES', 'FI', 'FR', 'GB', 'IT', 'NL', 'NO', 'SE'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      giropay: {
+        type: 'object',
+        properties: {
+          countries: {
+            type: 'array',
+            items: {type: 'string'},
+            example: ['DE'],
+            description: 'List of countries where the payment method is available'
+          }
+        }
+      },
+      googlePay: {
+        type: 'object',
+        properties: {
+          merchantId: {
+            type: 'string',
+            example: '12345678901234567890',
+            description: 'Google Pay merchant ID'
+          },
+          cvcRequired: {
+            type: 'boolean',
+            example: false,
+            description: 'Whether CVC is required for Google Pay transactions'
+          }
+        }
+      },
+      applePay: {
+        type: 'object',
+        properties: {
+          merchantId: {
+            type: 'string',
+            example: 'merchant.com.monei',
+            description: 'Apple Pay merchant ID'
+          }
+        }
+      },
+      clickToPay: {
+        type: 'object',
+        properties: {
+          tokenSupport: {
+            type: 'boolean',
+            example: true,
+            description: 'Whether token support is enabled'
+          },
+          preselected: {
+            type: 'boolean',
+            example: false,
+            description: 'Whether the method is preselected'
+          },
+          visa: {
+            type: 'object',
+            properties: {
+              srciDpaId: {type: 'string', example: 'f47ac10b-58cc-4372-a567-0e02b2c3d479'},
+              srcInitiatorId: {type: 'string', example: '550e8400-e29b-41d4-a716-446655440000'}
+            }
+          },
+          mastercard: {
+            type: 'object',
+            properties: {
+              srciDpaId: {type: 'string', example: '6ba7b810-9dad-11d1-80b4-00c04fd430c8'},
+              srcInitiatorId: {type: 'string', example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'}
+            }
+          },
+          discover: {
+            type: 'object',
+            properties: {
+              srciDpaId: {type: 'string', example: '71f0c4d5-9947-4d1c-9cb3-d6a3f7c4e701'},
+              srcInitiatorId: {type: 'string', example: 'c2d06c25-9ddb-4a5e-9d5a-3ff1c8d98467'}
+            }
+          }
+        }
+      }
+    },
+    title: 'PaymentMethods-Metadata'
+  }}
+  schemaType={'response'}
+></Schema>

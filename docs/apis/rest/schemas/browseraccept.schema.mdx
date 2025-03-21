@@ -1,0 +1,28 @@
+---
+id: browseraccept
+title: 'BrowserAccept'
+description: 'Browser accept header.'
+sidebar_label: 'BrowserAccept'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'text/html,application/xhtml+xml,application/json'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'BrowserAccept'}></Heading>
+
+Browser accept header.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'text/html,application/xhtml+xml,application/json',
+    description: 'Browser accept header.',
+    title: 'BrowserAccept'
+  }}
+  schemaType={'response'}
+></Schema>

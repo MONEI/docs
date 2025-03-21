@@ -1,0 +1,33 @@
+---
+id: cancelpaymentrequest
+title: 'CancelPaymentRequest'
+description: ''
+sidebar_label: 'CancelPaymentRequest'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'cancellationReason': null}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'CancelPaymentRequest'}></Heading>
+
+<Schema
+  schema={{
+    title: 'CancelPaymentRequest',
+    type: 'object',
+    properties: {
+      cancellationReason: {
+        type: 'string',
+        example: null,
+        enum: ['duplicated', 'fraudulent', 'requested_by_customer'],
+        description: 'The reason for canceling the Payment.',
+        title: 'Payment-CancellationReason'
+      }
+    }
+  }}
+  schemaType={'response'}
+></Schema>

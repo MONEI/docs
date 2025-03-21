@@ -1,0 +1,39 @@
+---
+id: payment-shop
+title: 'Payment-Shop'
+description: 'The information about the shop (used in'
+sidebar_label: 'Payment-Shop'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'name': 'Test Shop', 'country': 'ES'}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-Shop'}></Heading>
+
+The information about the shop (used in
+[hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)).
+
+<Schema
+  schema={{
+    type: 'object',
+    description:
+      'The information about the shop (used in\n[hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)).\n',
+    properties: {
+      name: {type: 'string', example: 'Test Shop', description: 'The shop name.'},
+      country: {
+        type: 'string',
+        example: 'ES',
+        description:
+          'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+        title: 'Country'
+      }
+    },
+    title: 'Payment-Shop'
+  }}
+  schemaType={'response'}
+></Schema>

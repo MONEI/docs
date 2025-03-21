@@ -1,0 +1,30 @@
+---
+id: payment-description
+title: 'Payment-Description'
+description: 'An arbitrary string attached to the payment. Often useful for'
+sidebar_label: 'Payment-Description'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'Test Shop - #84370745531439'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-Description'}></Heading>
+
+An arbitrary string attached to the payment. Often useful for
+displaying to users.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'Test Shop - #84370745531439',
+    description:
+      'An arbitrary string attached to the payment. Often useful for\ndisplaying to users.\n',
+    title: 'Payment-Description'
+  }}
+  schemaType={'response'}
+></Schema>

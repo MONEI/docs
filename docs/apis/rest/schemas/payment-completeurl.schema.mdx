@@ -1,0 +1,30 @@
+---
+id: payment-completeurl
+title: 'Payment-CompleteUrl'
+description: 'The URL the customer will be directed to after transaction'
+sidebar_label: 'Payment-CompleteUrl'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'https://example.com/checkout/complete'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-CompleteUrl'}></Heading>
+
+The URL the customer will be directed to after transaction
+completed (successful or failed - except if `failUrl` is provided).
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'https://example.com/checkout/complete',
+    description:
+      'The URL the customer will be directed to after transaction\ncompleted (successful or failed - except if `failUrl` is provided).\n',
+    title: 'Payment-CompleteUrl'
+  }}
+  schemaType={'response'}
+></Schema>

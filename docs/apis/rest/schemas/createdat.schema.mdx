@@ -1,0 +1,30 @@
+---
+id: createdat
+title: 'CreatedAt'
+description: 'Time at which the resource was created. Measured in seconds since the Unix epoch.'
+sidebar_label: 'CreatedAt'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 1636366897
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'CreatedAt'}></Heading>
+
+Time at which the resource was created. Measured in seconds since the Unix epoch.
+
+<Schema
+  schema={{
+    type: 'integer',
+    format: 'int64',
+    example: 1636366897,
+    description:
+      'Time at which the resource was created. Measured in seconds since the Unix epoch.',
+    title: 'CreatedAt'
+  }}
+  schemaType={'response'}
+></Schema>

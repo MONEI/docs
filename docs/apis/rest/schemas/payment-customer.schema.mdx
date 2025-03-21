@@ -1,0 +1,41 @@
+---
+id: payment-customer
+title: 'Payment-Customer'
+description: ''
+sidebar_label: 'Payment-Customer'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'email': 'john.doe@example.com', 'name': 'John Doe', 'phone': null}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-Customer'}></Heading>
+
+<Schema
+  schema={{
+    type: 'object',
+    properties: {
+      email: {
+        type: 'string',
+        example: 'john.doe@example.com',
+        description: "The customer's email address."
+      },
+      name: {
+        type: 'string',
+        example: 'John Doe',
+        description: "The customer's full name or business name."
+      },
+      phone: {
+        type: 'string',
+        example: null,
+        description: "The customer's phone number in E.164 format."
+      }
+    },
+    title: 'Payment-Customer'
+  }}
+  schemaType={'response'}
+></Schema>

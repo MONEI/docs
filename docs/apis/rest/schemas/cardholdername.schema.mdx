@@ -1,0 +1,28 @@
+---
+id: cardholdername
+title: 'CardholderName'
+description: "The cardholder's name, as stated in the credit card."
+sidebar_label: 'CardholderName'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'John Doe'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'CardholderName'}></Heading>
+
+The cardholder's name, as stated in the credit card.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'John Doe',
+    description: "The cardholder's name, as stated in the credit card.",
+    title: 'CardholderName'
+  }}
+  schemaType={'response'}
+></Schema>

@@ -1,0 +1,35 @@
+---
+id: payment-generatepaymenttoken
+title: 'Payment-GeneratePaymentToken'
+description: 'If set to true a permanent token that represents a payment'
+sidebar_label: 'Payment-GeneratePaymentToken'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: false
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Payment-GeneratePaymentToken'}
+></Heading>
+
+If set to true a permanent token that represents a payment
+method used in the payment will be generated.
+
+<Schema
+  schema={{
+    type: 'boolean',
+    example: false,
+    default: false,
+    description:
+      'If set to true a permanent token that represents a payment\nmethod used in the payment will be generated.\n',
+    title: 'Payment-GeneratePaymentToken'
+  }}
+  schemaType={'response'}
+></Schema>

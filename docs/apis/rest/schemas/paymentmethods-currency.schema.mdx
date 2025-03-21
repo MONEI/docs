@@ -1,0 +1,30 @@
+---
+id: paymentmethods-currency
+title: 'PaymentMethods-Currency'
+description: 'Three-letter ISO currency code, in uppercase.'
+sidebar_label: 'PaymentMethods-Currency'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'EUR'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'PaymentMethods-Currency'}></Heading>
+
+Three-letter ISO currency code, in uppercase.
+Only present when querying by paymentId.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'EUR',
+    description:
+      'Three-letter ISO currency code, in uppercase.\nOnly present when querying by paymentId.\n',
+    title: 'PaymentMethods-Currency'
+  }}
+  schemaType={'response'}
+></Schema>

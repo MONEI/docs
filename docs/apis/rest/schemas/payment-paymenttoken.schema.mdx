@@ -1,0 +1,34 @@
+---
+id: payment-paymenttoken
+title: 'Payment-PaymentToken'
+description: 'A permanent token represents a payment method used in the'
+sidebar_label: 'Payment-PaymentToken'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: '7cc38b08ff471ccd313ad62b23b9f362b107560b'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-PaymentToken'}></Heading>
+
+A permanent token represents a payment method used in the
+payment. Pass `generatePaymentToken: true` when you creating
+a payment to generate it. You can pass it as `paymentToken`
+parameter to create other payments with the same payment
+method. This token does not expire, and should only be
+used server-side.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+    description:
+      'A permanent token represents a payment method used in the\npayment. Pass `generatePaymentToken: true` when you creating\na payment to generate it. You can pass it as `paymentToken`\nparameter to create other payments with the same payment\nmethod. This token does not expire, and should only be\nused server-side.\n',
+    title: 'Payment-PaymentToken'
+  }}
+  schemaType={'response'}
+></Schema>
