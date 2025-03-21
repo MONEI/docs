@@ -1,0 +1,38 @@
+---
+id: payment-transactiontype
+title: 'Payment-TransactionType'
+description: 'Controls when the funds will be captured.'
+sidebar_label: 'Payment-TransactionType'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'SALE'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-TransactionType'}></Heading>
+
+Controls when the funds will be captured.
+
+- `SALE` - **Default**. MONEI automatically captures funds
+  when the customer authorizes the payment.
+- `AUTH` - Place a hold on the funds when the customer authorizes
+  the payment, but don't capture the funds until later.
+- `PAYOUT` - Send funds to the customer
+- `VERIF` - Verify the card without placing a hold or capturing funds.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'SALE',
+    default: 'SALE',
+    enum: ['SALE', 'AUTH', 'PAYOUT', 'VERIF'],
+    description:
+      "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don't capture the funds until later.\n  - `PAYOUT` - Send funds to the customer\n  - `VERIF` - Verify the card without placing a hold or capturing funds.\n",
+    title: 'Payment-TransactionType'
+  }}
+  schemaType={'response'}
+></Schema>

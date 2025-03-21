@@ -1,0 +1,29 @@
+---
+id: payment-messagechannel
+title: 'Payment-MessageChannel'
+description: 'The channel used to send the payment message.'
+sidebar_label: 'Payment-MessageChannel'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'EMAIL'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-MessageChannel'}></Heading>
+
+The channel used to send the payment message.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'EMAIL',
+    enum: ['EMAIL', 'WHATSAPP', 'SMS'],
+    description: 'The channel used to send the payment message.\n',
+    title: 'Payment-MessageChannel'
+  }}
+  schemaType={'response'}
+></Schema>

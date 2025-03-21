@@ -1,0 +1,30 @@
+---
+id: payment-orderid
+title: 'Payment-OrderId'
+description: 'An order ID from your system. A unique identifier that can be used'
+sidebar_label: 'Payment-OrderId'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: '14379133960355'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-OrderId'}></Heading>
+
+An order ID from your system. A unique identifier that can be used
+to reconcile the payment with your internal system.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: '14379133960355',
+    description:
+      'An order ID from your system. A unique identifier that can be used\nto reconcile the payment with your internal system.\n',
+    title: 'Payment-OrderId'
+  }}
+  schemaType={'response'}
+></Schema>

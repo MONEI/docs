@@ -1,0 +1,29 @@
+---
+id: subscription-status
+title: 'Subscription-Status'
+description: 'The status of the subscription.'
+sidebar_label: 'Subscription-Status'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'PENDING'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Subscription-Status'}></Heading>
+
+The status of the subscription.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'PENDING',
+    enum: ['PENDING', 'EXPIRED', 'TRIALING', 'ACTIVE', 'PAST_DUE', 'PAUSED', 'CANCELED'],
+    description: 'The status of the subscription.',
+    title: 'Subscription-Status'
+  }}
+  schemaType={'response'}
+></Schema>

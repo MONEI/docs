@@ -1,0 +1,28 @@
+---
+id: ip
+title: 'IP'
+description: 'The IP address where the operation originated.'
+sidebar_label: 'IP'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: '100.100.200.100'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'IP'}></Heading>
+
+The IP address where the operation originated.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: '100.100.200.100',
+    description: 'The IP address where the operation originated.',
+    title: 'IP'
+  }}
+  schemaType={'response'}
+></Schema>

@@ -1,0 +1,68 @@
+---
+id: payment-paymentmethodcardinput
+title: 'Payment-PaymentMethodCardInput'
+description: 'Details about the card used as payment method.'
+sidebar_label: 'Payment-PaymentMethodCardInput'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'number': 'string',
+    'cvc': 'string',
+    'expMonth': 'string',
+    'expYear': 'string',
+    'cardholderName': 'John Doe',
+    'cardholderEmail': 'john.doe@monei.com'
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Payment-PaymentMethodCardInput'}
+></Heading>
+
+Details about the card used as payment method.
+If provided, MONEI will try to confirm the payment directly.
+
+<Schema
+  schema={{
+    type: 'object',
+    description:
+      'Details about the card used as payment method.\nIf provided, MONEI will try to confirm the payment directly.\n',
+    properties: {
+      number: {
+        type: 'string',
+        description: 'The card number, as a string without any separators.'
+      },
+      cvc: {type: 'string', description: 'Card security code.'},
+      expMonth: {
+        type: 'string',
+        description: "Two-digit number representing the card's expiration month."
+      },
+      expYear: {
+        type: 'string',
+        description: "Two-digit number representing the card's expiration year."
+      },
+      cardholderName: {
+        type: 'string',
+        example: 'John Doe',
+        description: "The cardholder's name, as stated in the credit card.",
+        title: 'CardholderName'
+      },
+      cardholderEmail: {
+        type: 'string',
+        example: 'john.doe@monei.com',
+        description: "The cardholder's email address.",
+        title: 'CardholderEmail'
+      }
+    },
+    title: 'Payment-PaymentMethodCardInput'
+  }}
+  schemaType={'response'}
+></Schema>

@@ -1,0 +1,28 @@
+---
+id: domainname
+title: 'DomainName'
+description: 'The domain name to register for Apple Pay.'
+sidebar_label: 'DomainName'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'example.com'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'DomainName'}></Heading>
+
+The domain name to register for Apple Pay.
+
+<Schema
+  schema={{
+    type: 'string',
+    description: 'The domain name to register for Apple Pay.',
+    example: 'example.com',
+    title: 'DomainName'
+  }}
+  schemaType={'response'}
+></Schema>

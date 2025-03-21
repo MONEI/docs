@@ -1,0 +1,38 @@
+---
+id: payment-status
+title: 'Payment-Status'
+description: 'The status of the payment.'
+sidebar_label: 'Payment-Status'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'PENDING'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-Status'}></Heading>
+
+The status of the payment.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'PENDING',
+    enum: [
+      'SUCCEEDED',
+      'PENDING',
+      'FAILED',
+      'CANCELED',
+      'REFUNDED',
+      'PARTIALLY_REFUNDED',
+      'AUTHORIZED',
+      'EXPIRED'
+    ],
+    description: 'The status of the payment.',
+    title: 'Payment-Status'
+  }}
+  schemaType={'response'}
+></Schema>

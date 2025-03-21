@@ -1,0 +1,29 @@
+---
+id: subscription-callbackurl
+title: 'Subscription-CallbackUrl'
+description: 'The URL will be called each time subscription status changes. You will receive a subscription object in the body of the request.'
+sidebar_label: 'Subscription-CallbackUrl'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'https://example.com/subscriptions/callback'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Subscription-CallbackUrl'}></Heading>
+
+The URL will be called each time subscription status changes. You will receive a subscription object in the body of the request.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'https://example.com/subscriptions/callback',
+    description:
+      'The URL will be called each time subscription status changes. You will receive a subscription object in the body of the request.\n',
+    title: 'Subscription-CallbackUrl'
+  }}
+  schemaType={'response'}
+></Schema>

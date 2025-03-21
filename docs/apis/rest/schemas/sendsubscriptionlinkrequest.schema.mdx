@@ -1,0 +1,54 @@
+---
+id: sendsubscriptionlinkrequest
+title: 'SendSubscriptionLinkRequest'
+description: ''
+sidebar_label: 'SendSubscriptionLinkRequest'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'customerEmail': 'user@example.com',
+    'customerPhone': 'string',
+    'channel': 'EMAIL',
+    'language': 'string'
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'SendSubscriptionLinkRequest'}
+></Heading>
+
+<Schema
+  schema={{
+    title: 'SendSubscriptionLinkRequest',
+    type: 'object',
+    properties: {
+      customerEmail: {
+        type: 'string',
+        format: 'email',
+        description: 'Customer email to send the subscription link to'
+      },
+      customerPhone: {
+        type: 'string',
+        description: 'Customer phone number to send the subscription link to'
+      },
+      channel: {
+        type: 'string',
+        enum: ['EMAIL', 'WHATSAPP', 'SMS'],
+        description: 'Channel to use for sending the subscription link'
+      },
+      language: {
+        type: 'string',
+        description: 'Language to use for the subscription link message'
+      }
+    }
+  }}
+  schemaType={'response'}
+></Schema>

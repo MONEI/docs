@@ -1,0 +1,29 @@
+---
+id: subscription-interval
+title: 'Subscription-Interval'
+description: 'Subscription interval.'
+sidebar_label: 'Subscription-Interval'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'month'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Subscription-Interval'}></Heading>
+
+Subscription interval.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'month',
+    enum: ['day', 'week', 'month', 'year'],
+    description: 'Subscription interval.',
+    title: 'Subscription-Interval'
+  }}
+  schemaType={'response'}
+></Schema>

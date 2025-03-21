@@ -1,0 +1,285 @@
+---
+id: payment-paymentmethod
+title: 'Payment-PaymentMethod'
+description: 'Details about the payment method at the time of the transaction.'
+sidebar_label: 'Payment-PaymentMethod'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'method': 'card',
+    'card':
+      {
+        'country': 'ES',
+        'brand': 'visa',
+        'type': 'credit',
+        'threeDSecure': false,
+        'threeDSecureVersion': '2.1.0',
+        'threeDSecureFlow': 'CHALLENGE',
+        'expiration': 2048544000,
+        'last4': '0004',
+        'tokenizationMethod': 'applePay',
+        'cardholderName': 'John Doe',
+        'cardholderEmail': 'email@example.com'
+      },
+    'bizum': {'phoneNumber': null},
+    'paypal': {'orderId': null},
+    'cofidis': {'orderId': null},
+    'cofidisLoan': {'orderId': null},
+    'mbway': {'phoneNumber': null},
+    'trustly': {'customerId': null},
+    'sepa':
+      {
+        'accountholderAddress': null,
+        'accountholderEmail': null,
+        'accountholderName': null,
+        'countryCode': null,
+        'bankAddress': null,
+        'bankCode': null,
+        'bankName': null,
+        'bic': null,
+        'last4': null
+      },
+    'klarna': {'billingCategory': 'PAY_LATER', 'authPaymentMethod': 'card'}
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-PaymentMethod'}></Heading>
+
+Details about the payment method at the time of the transaction.
+
+<Schema
+  schema={{
+    type: 'object',
+    description: 'Details about the payment method at the time of the transaction.\n',
+    properties: {
+      method: {
+        type: 'string',
+        example: 'card',
+        enum: [
+          'alipay',
+          'card',
+          'bizum',
+          'paypal',
+          'cofidis',
+          'cofidisLoan',
+          'mbway',
+          'multibanco',
+          'iDeal',
+          'bancontact',
+          'sofort',
+          'trustly',
+          'sepa',
+          'klarna',
+          'giropay',
+          'eps',
+          'blik'
+        ],
+        description: 'Payment method type.'
+      },
+      card: {
+        type: 'object',
+        description:
+          'Details about the card used as payment method at the time of the transaction.\n',
+        properties: {
+          country: {
+            type: 'string',
+            example: 'ES',
+            description:
+              'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+            title: 'Country'
+          },
+          brand: {
+            type: 'string',
+            example: 'visa',
+            enum: ['visa', 'mastercard', 'diners', 'amex', 'jcb', 'unionpay', 'unknown'],
+            description: 'Card brand.'
+          },
+          type: {
+            type: 'string',
+            example: 'credit',
+            enum: ['debit', 'credit'],
+            description: 'Card type `debit` or `credit`.'
+          },
+          threeDSecure: {
+            type: 'boolean',
+            example: false,
+            description: 'Whether this transaction used 3D Secure authentication.'
+          },
+          threeDSecureVersion: {
+            type: 'string',
+            example: '2.1.0',
+            description: 'The protocol version of the 3DS challenge.'
+          },
+          threeDSecureFlow: {
+            type: 'string',
+            example: 'CHALLENGE',
+            enum: ['CHALLENGE', 'FRICTIONLESS', 'FRICTIONLESS_CHALLENGE', 'DIRECT'],
+            description:
+              "The flow used for 3DS authentication.\n- `CHALLENGE` - In a challenge flow, the issuer requires additional shopper interaction, either through biometrics, two-factor authentication, or similar methods based on [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) factors.\n- `FRICTIONLESS` - In a frictionless flow, the acquirer, issuer, and card scheme exchange all necessary\n    information in the background through passive authentication using the shopper's device\n    fingerprint. The transaction is completed without further shopper interaction.\n- `FRICTIONLESS_CHALLENGE` - This flow is the complete 3DS flow. It is similar to the 3DS frictionless flow but\n    includes an additional authentication step (challenge) that will be invoked if the\n    information provided in the data collection step does not suffice to determine the\n    risk-level of the transaction.\n- `DIRECT` - This transaction did not require [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) due to the low risk\n"
+          },
+          expiration: {
+            type: 'integer',
+            format: 'int64',
+            example: 2048544000,
+            description:
+              'Time at which the card will expire.\nMeasured in seconds since the Unix epoch.\n'
+          },
+          last4: {
+            type: 'string',
+            example: '0004',
+            description: 'The last four digits of the card.'
+          },
+          tokenizationMethod: {
+            type: 'string',
+            example: 'applePay',
+            enum: ['applePay', 'googlePay', 'clickToPay'],
+            description: 'The digital wallet used to tokenize the card.'
+          },
+          cardholderName: {
+            type: 'string',
+            example: 'John Doe',
+            description: 'The name of the cardholder.'
+          },
+          cardholderEmail: {
+            type: 'string',
+            example: 'email@example.com',
+            description: 'The email of the cardholder.'
+          }
+        },
+        title: 'Payment-PaymentMethodCard'
+      },
+      bizum: {
+        type: 'object',
+        description:
+          'Details about the Bizum account used as payment method at the time of the transaction.\n',
+        properties: {
+          phoneNumber: {
+            type: 'string',
+            example: null,
+            description: 'Phone number in E.164 format used to pay with `bizum`.'
+          }
+        },
+        title: 'Payment-PaymentMethodBizum'
+      },
+      paypal: {
+        type: 'object',
+        description:
+          'Details from Paypal order used as payment method at the time of the transaction.\n',
+        properties: {
+          orderId: {type: 'string', example: null, description: "The Paypal's order ID."}
+        },
+        title: 'Payment-PaymentMethodPaypal'
+      },
+      cofidis: {
+        type: 'object',
+        description:
+          'Details from Cofidis order used as payment method at the time of the transaction.\n',
+        properties: {
+          orderId: {type: 'string', example: null, description: "The Cofidis' order ID."}
+        },
+        title: 'Payment-PaymentMethodCofidis'
+      },
+      cofidisLoan: {
+        type: 'object',
+        description:
+          'Details from Cofidis order used as payment method at the time of the transaction.\n',
+        properties: {
+          orderId: {type: 'string', example: null, description: "The Cofidis' order ID."}
+        },
+        title: 'Payment-PaymentMethodCofidis'
+      },
+      mbway: {
+        type: 'object',
+        description:
+          'Details from MBWay order used as payment method at the time of the transaction.\n',
+        properties: {
+          phoneNumber: {
+            type: 'string',
+            example: null,
+            description: 'Phone number in E.164 format used to pay with `mbway`.'
+          }
+        },
+        title: 'Payment-PaymentMethodMbway'
+      },
+      trustly: {
+        type: 'object',
+        description:
+          'Details from Trustly order used as payment method at the time of the transaction.\n',
+        properties: {
+          customerId: {type: 'string', example: null, description: "The Trustly's customer ID."}
+        },
+        title: 'Payment-PaymentMethodTrustly'
+      },
+      sepa: {
+        type: 'object',
+        description:
+          'Details from SEPA order used as payment method at the time of the transaction.\n',
+        properties: {
+          accountholderAddress: {
+            type: 'string',
+            example: null,
+            description: 'The address of the account holder.'
+          },
+          accountholderEmail: {
+            type: 'string',
+            example: null,
+            description: 'The email of the account holder.'
+          },
+          accountholderName: {
+            type: 'string',
+            example: null,
+            description: 'The name of the account holder.'
+          },
+          countryCode: {
+            type: 'string',
+            example: null,
+            description: 'The country code of the account holder.'
+          },
+          bankAddress: {type: 'string', example: null, description: 'The address of the bank.'},
+          bankCode: {type: 'string', example: null, description: 'The code of the bank.'},
+          bankName: {type: 'string', example: null, description: 'The name of the bank.'},
+          bic: {type: 'string', example: null, description: 'The BIC of the bank.'},
+          last4: {type: 'string', example: null, description: 'The last 4 digits of the IBAN.'}
+        },
+        title: 'Payment-PaymentMethodSepa'
+      },
+      klarna: {
+        type: 'object',
+        description:
+          'Details from Klarna order used as payment method at the time of the transaction.\n',
+        properties: {
+          billingCategory: {
+            type: 'string',
+            example: 'PAY_LATER',
+            enum: ['PAY_LATER', 'PAY_NOW', 'SLICE_IT', 'SLICE_IT_BY_CARD']
+          },
+          authPaymentMethod: {
+            type: 'string',
+            example: 'card',
+            enum: [
+              'invoice',
+              'fixed_amount',
+              'pix',
+              'base_account',
+              'deferred_interest',
+              'direct_debit',
+              'direct_bank_transfer',
+              'b2b_invoice',
+              'card',
+              'slice_it_by_card'
+            ]
+          }
+        },
+        title: 'Payment-PaymentMethodKlarna'
+      }
+    },
+    title: 'Payment-PaymentMethod'
+  }}
+  schemaType={'response'}
+></Schema>
