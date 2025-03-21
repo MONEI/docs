@@ -1,0 +1,31 @@
+---
+id: payment-failurl
+title: 'Payment-FailUrl'
+description: 'The URL the customer will be directed to after transaction has failed,'
+sidebar_label: 'Payment-FailUrl'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'https://example.com/checkout/fail'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-FailUrl'}></Heading>
+
+The URL the customer will be directed to after transaction has failed,
+instead of `completeUrl` (used in hosted payment page). This allows
+to provide two different URLs for successful and failed payments.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'https://example.com/checkout/fail',
+    description:
+      'The URL the customer will be directed to after transaction has failed,\ninstead of `completeUrl` (used in hosted payment page). This allows\nto provide two different URLs for successful and failed payments.\n',
+    title: 'Payment-FailUrl'
+  }}
+  schemaType={'response'}
+></Schema>

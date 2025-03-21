@@ -1,0 +1,29 @@
+---
+id: metadata
+title: 'Metadata'
+description: 'A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.'
+sidebar_label: 'Metadata'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'systemId': '12345'}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Metadata'}></Heading>
+
+A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.
+
+<Schema
+  schema={{
+    type: 'object',
+    example: {systemId: '12345'},
+    description:
+      'A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.',
+    title: 'Metadata'
+  }}
+  schemaType={'response'}
+></Schema>

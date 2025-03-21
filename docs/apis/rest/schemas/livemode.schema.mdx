@@ -1,0 +1,29 @@
+---
+id: livemode
+title: 'Livemode'
+description: 'Has the value `true` if the resource exists in live mode or the value `false` if the resource exists in test mode.'
+sidebar_label: 'Livemode'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: false
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Livemode'}></Heading>
+
+Has the value `true` if the resource exists in live mode or the value `false` if the resource exists in test mode.
+
+<Schema
+  schema={{
+    type: 'boolean',
+    example: false,
+    description:
+      'Has the value `true` if the resource exists in live mode or the value `false` if the resource exists in test mode.',
+    title: 'Livemode'
+  }}
+  schemaType={'response'}
+></Schema>

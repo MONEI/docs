@@ -1,0 +1,29 @@
+---
+id: payment-autorecover
+title: 'Payment-AutoRecover'
+description: "If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create 'Pay By Link' payments)."
+sidebar_label: 'Payment-AutoRecover'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: false
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-AutoRecover'}></Heading>
+
+If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create "Pay By Link" payments).
+
+<Schema
+  schema={{
+    type: 'boolean',
+    example: false,
+    description:
+      'If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create "Pay By Link" payments).',
+    title: 'Payment-AutoRecover'
+  }}
+  schemaType={'response'}
+></Schema>

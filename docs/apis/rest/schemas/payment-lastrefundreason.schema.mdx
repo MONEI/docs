@@ -1,0 +1,29 @@
+---
+id: payment-lastrefundreason
+title: 'Payment-LastRefundReason'
+description: 'The reason of the last refund transaction.'
+sidebar_label: 'Payment-LastRefundReason'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: null
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-LastRefundReason'}></Heading>
+
+The reason of the last refund transaction.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: null,
+    enum: ['duplicated', 'fraudulent', 'requested_by_customer'],
+    description: 'The reason of the last refund transaction.',
+    title: 'Payment-LastRefundReason'
+  }}
+  schemaType={'response'}
+></Schema>

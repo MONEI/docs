@@ -1,0 +1,66 @@
+---
+id: subscription-lastpayment
+title: 'Subscription-LastPayment'
+description: ''
+sidebar_label: 'Subscription-LastPayment'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'id': 'af6029f80f5fc73a8ad2753eea0b1be0',
+    'status': 'PENDING',
+    'statusCode': null,
+    'statusMessage': null
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Subscription-LastPayment'}></Heading>
+
+<Schema
+  schema={{
+    type: 'object',
+    properties: {
+      id: {
+        type: 'string',
+        example: 'af6029f80f5fc73a8ad2753eea0b1be0',
+        description: 'Unique identifier for the payment.',
+        title: 'Payment-Id'
+      },
+      status: {
+        type: 'string',
+        example: 'PENDING',
+        enum: [
+          'SUCCEEDED',
+          'PENDING',
+          'FAILED',
+          'CANCELED',
+          'REFUNDED',
+          'PARTIALLY_REFUNDED',
+          'AUTHORIZED',
+          'EXPIRED'
+        ],
+        description: 'The status of the payment.',
+        title: 'Payment-Status'
+      },
+      statusCode: {
+        type: 'string',
+        example: null,
+        description: 'Payment status code.\n',
+        title: 'Payment-StatusCode'
+      },
+      statusMessage: {
+        type: 'string',
+        example: null,
+        description: 'Human readable status message, can be displayed to a user.\n',
+        title: 'Payment-StatusMessage'
+      }
+    },
+    title: 'Subscription-LastPayment'
+  }}
+  schemaType={'response'}
+></Schema>

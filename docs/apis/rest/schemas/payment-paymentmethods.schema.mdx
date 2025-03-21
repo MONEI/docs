@@ -1,0 +1,68 @@
+---
+id: payment-paymentmethods
+title: 'Payment-PaymentMethods'
+description: 'An array of allowed payment methods (used in hosted payment'
+sidebar_label: 'Payment-PaymentMethods'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: ['card', 'bizum', 'paypal']
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-PaymentMethods'}></Heading>
+
+An array of allowed payment methods (used in hosted payment
+page). Must be enabled payment methods. Possible values:
+
+- `alipay`
+- `card`
+- `bizum`
+- `paypal`
+- `cofidis`
+- `cofidisLoan`
+- `mbway`
+- `multibanco`
+- `iDeal`
+- `bancontact`
+- `sofort`
+- `trustly`
+- `sepa`
+- `klarna`
+- `giropay`
+- `eps`
+- `blik`
+
+<Schema
+  schema={{
+    type: 'array',
+    items: {type: 'string'},
+    enum: [
+      'alipay',
+      'card',
+      'bizum',
+      'paypal',
+      'cofidis',
+      'cofidisLoan',
+      'mbway',
+      'multibanco',
+      'iDeal',
+      'bancontact',
+      'sofort',
+      'trustly',
+      'sepa',
+      'klarna',
+      'giropay',
+      'eps',
+      'blik'
+    ],
+    example: ['card', 'bizum', 'paypal'],
+    description:
+      'An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `alipay`\n  - `card`\n  - `bizum`\n  - `paypal`\n  - `cofidis`\n  - `cofidisLoan`\n  - `mbway`\n  - `multibanco`\n  - `iDeal`\n  - `bancontact`\n  - `sofort`\n  - `trustly`\n  - `sepa`\n  - `klarna`\n  - `giropay`\n  - `eps`\n  - `blik`\n',
+    title: 'Payment-PaymentMethods'
+  }}
+  schemaType={'response'}
+></Schema>

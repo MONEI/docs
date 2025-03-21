@@ -1,0 +1,35 @@
+---
+id: payment-paymentmethodcofidis
+title: 'Payment-PaymentMethodCofidis'
+description: 'Details from Cofidis order used as payment method at the time of the transaction.'
+sidebar_label: 'Payment-PaymentMethodCofidis'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'orderId': null}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Payment-PaymentMethodCofidis'}
+></Heading>
+
+Details from Cofidis order used as payment method at the time of the transaction.
+
+<Schema
+  schema={{
+    type: 'object',
+    description:
+      'Details from Cofidis order used as payment method at the time of the transaction.\n',
+    properties: {
+      orderId: {type: 'string', example: null, description: "The Cofidis' order ID."}
+    },
+    title: 'Payment-PaymentMethodCofidis'
+  }}
+  schemaType={'response'}
+></Schema>

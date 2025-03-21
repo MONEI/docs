@@ -1,0 +1,45 @@
+---
+id: payment-sequencerecurring
+title: 'Payment-SequenceRecurring'
+description: 'Specific configurations for recurring payments.'
+sidebar_label: 'Payment-SequenceRecurring'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'expiry': '20210630', 'frequency': 30}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-SequenceRecurring'}></Heading>
+
+Specific configurations for recurring payments.
+Will only be used when `sequence`.`type` is `recurring`.
+
+<Schema
+  schema={{
+    type: 'object',
+    description:
+      'Specific configurations for recurring payments.\nWill only be used when `sequence`.`type` is `recurring`.\n',
+    properties: {
+      expiry: {
+        type: 'string',
+        example: '20210630',
+        default: '*(The payment method or card expiration)*',
+        description:
+          'Date after which no further recurring payments will be performed.\nMust be formatted as `YYYYMMDD`.\n'
+      },
+      frequency: {
+        type: 'integer',
+        format: 'int32',
+        example: 30,
+        default: 25,
+        description: 'The minimum number of **days** between the different recurring payments.\n'
+      }
+    },
+    title: 'Payment-SequenceRecurring'
+  }}
+  schemaType={'response'}
+></Schema>

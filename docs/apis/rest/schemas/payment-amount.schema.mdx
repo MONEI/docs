@@ -1,0 +1,32 @@
+---
+id: payment-amount
+title: 'Payment-Amount'
+description: 'Amount intended to be collected by this payment. A positive integer'
+sidebar_label: 'Payment-Amount'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 110
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-Amount'}></Heading>
+
+Amount intended to be collected by this payment. A positive integer
+representing how much to charge in the smallest currency unit (e.g.,
+100 cents to charge 1.00 USD).
+
+<Schema
+  schema={{
+    type: 'integer',
+    format: 'int32',
+    example: 110,
+    description:
+      'Amount intended to be collected by this payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n',
+    title: 'Payment-Amount'
+  }}
+  schemaType={'response'}
+></Schema>

@@ -93,5 +93,10 @@
     "source": "/reference/parameters/",
     "target": "/docs/monei-js/reference/",
     "status": "301"
+  },
+  {
+    "source": "/api/",
+    "target": "/docs/apis/rest/",
+    "status": "301"
   }
 ]
