@@ -6,7 +6,7 @@ sidebar_label: 'CapturePaymentRequest'
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {'amount': 110}
+sample: { 'amount': 110 }
 custom_edit_url: null
 ---
 
@@ -28,13 +28,13 @@ import Heading from '@theme/Heading';
             example: 110,
             description:
               'Amount intended to be collected by this payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n',
-            title: 'Payment-Amount'
-          }
+            title: 'Payment-Amount',
+          },
         ],
         description:
-          'The amount to capture, which must be less than or equal to the\noriginal amount. Any additional amount will be automatically refunded.\n'
-      }
-    }
+          'The amount to capture, which must be less than or equal to the\noriginal amount. Any additional amount will be automatically refunded.\n',
+      },
+    },
   }}
   schemaType={'response'}
 ></Schema>

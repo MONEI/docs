@@ -18,7 +18,7 @@ sample:
     'last4': '0004',
     'tokenizationMethod': 'applePay',
     'cardholderName': 'John Doe',
-    'cardholderEmail': 'email@example.com'
+    'cardholderEmail': 'email@example.com',
   }
 custom_edit_url: null
 ---
@@ -40,63 +40,63 @@ Details about the card used as payment method at the time of the transaction.
         example: 'ES',
         description:
           'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
-        title: 'Country'
+        title: 'Country',
       },
       brand: {
         type: 'string',
         example: 'visa',
         enum: ['visa', 'mastercard', 'diners', 'amex', 'jcb', 'unionpay', 'unknown'],
-        description: 'Card brand.'
+        description: 'Card brand.',
       },
       type: {
         type: 'string',
         example: 'credit',
         enum: ['debit', 'credit'],
-        description: 'Card type `debit` or `credit`.'
+        description: 'Card type `debit` or `credit`.',
       },
       threeDSecure: {
         type: 'boolean',
         example: false,
-        description: 'Whether this transaction used 3D Secure authentication.'
+        description: 'Whether this transaction used 3D Secure authentication.',
       },
       threeDSecureVersion: {
         type: 'string',
         example: '2.1.0',
-        description: 'The protocol version of the 3DS challenge.'
+        description: 'The protocol version of the 3DS challenge.',
       },
       threeDSecureFlow: {
         type: 'string',
         example: 'CHALLENGE',
         enum: ['CHALLENGE', 'FRICTIONLESS', 'FRICTIONLESS_CHALLENGE', 'DIRECT'],
         description:
-          "The flow used for 3DS authentication.\n- `CHALLENGE` - In a challenge flow, the issuer requires additional shopper interaction, either through biometrics, two-factor authentication, or similar methods based on [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) factors.\n- `FRICTIONLESS` - In a frictionless flow, the acquirer, issuer, and card scheme exchange all necessary\n    information in the background through passive authentication using the shopper's device\n    fingerprint. The transaction is completed without further shopper interaction.\n- `FRICTIONLESS_CHALLENGE` - This flow is the complete 3DS flow. It is similar to the 3DS frictionless flow but\n    includes an additional authentication step (challenge) that will be invoked if the\n    information provided in the data collection step does not suffice to determine the\n    risk-level of the transaction.\n- `DIRECT` - This transaction did not require [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) due to the low risk\n"
+          "The flow used for 3DS authentication.\n- `CHALLENGE` - In a challenge flow, the issuer requires additional shopper interaction, either through biometrics, two-factor authentication, or similar methods based on [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) factors.\n- `FRICTIONLESS` - In a frictionless flow, the acquirer, issuer, and card scheme exchange all necessary\n    information in the background through passive authentication using the shopper's device\n    fingerprint. The transaction is completed without further shopper interaction.\n- `FRICTIONLESS_CHALLENGE` - This flow is the complete 3DS flow. It is similar to the 3DS frictionless flow but\n    includes an additional authentication step (challenge) that will be invoked if the\n    information provided in the data collection step does not suffice to determine the\n    risk-level of the transaction.\n- `DIRECT` - This transaction did not require [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) due to the low risk\n",
       },
       expiration: {
         type: 'integer',
         format: 'int64',
         example: 2048544000,
         description:
-          'Time at which the card will expire.\nMeasured in seconds since the Unix epoch.\n'
+          'Time at which the card will expire.\nMeasured in seconds since the Unix epoch.\n',
       },
-      last4: {type: 'string', example: '0004', description: 'The last four digits of the card.'},
+      last4: { type: 'string', example: '0004', description: 'The last four digits of the card.' },
       tokenizationMethod: {
         type: 'string',
         example: 'applePay',
         enum: ['applePay', 'googlePay', 'clickToPay'],
-        description: 'The digital wallet used to tokenize the card.'
+        description: 'The digital wallet used to tokenize the card.',
       },
       cardholderName: {
         type: 'string',
         example: 'John Doe',
-        description: 'The name of the cardholder.'
+        description: 'The name of the cardholder.',
       },
       cardholderEmail: {
         type: 'string',
         example: 'email@example.com',
-        description: 'The email of the cardholder.'
-      }
+        description: 'The email of the cardholder.',
+      },
     },
-    title: 'Payment-PaymentMethodCard'
+    title: 'Payment-PaymentMethodCard',
   }}
   schemaType={'response'}
 ></Schema>

@@ -12,7 +12,7 @@ sample:
     'statusCode': 0,
     'message': 'string',
     'requestId': 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
-    'requestTime': '2025-03-05T10:25:52Z'
+    'requestTime': '2025-03-05T10:25:52Z',
   }
 custom_edit_url: null
 ---
@@ -27,22 +27,22 @@ import Heading from '@theme/Heading';
     type: 'object',
     required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
     properties: {
-      status: {type: 'string', description: 'Error type identifier'},
-      statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-      message: {type: 'string', description: 'Human-readable error message'},
+      status: { type: 'string', description: 'Error type identifier' },
+      statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+      message: { type: 'string', description: 'Human-readable error message' },
       requestId: {
         type: 'string',
         description: 'Unique identifier for the request',
-        example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+        example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
       },
       requestTime: {
         type: 'string',
         format: 'date-time',
         description: 'Timestamp when the request was processed',
-        example: '2025-03-05T10:25:52Z'
-      }
+        example: '2025-03-05T10:25:52Z',
+      },
     },
-    title: 'ErrorBase'
+    title: 'ErrorBase',
   }}
   schemaType={'response'}
 ></Schema>

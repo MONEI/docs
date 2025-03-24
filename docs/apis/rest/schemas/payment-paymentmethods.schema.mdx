@@ -39,7 +39,7 @@ page). Must be enabled payment methods. Possible values:
 <Schema
   schema={{
     type: 'array',
-    items: {type: 'string'},
+    items: { type: 'string' },
     enum: [
       'alipay',
       'card',
@@ -57,12 +57,12 @@ page). Must be enabled payment methods. Possible values:
       'klarna',
       'giropay',
       'eps',
-      'blik'
+      'blik',
     ],
     example: ['card', 'bizum', 'paypal'],
     description:
       'An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `alipay`\n  - `card`\n  - `bizum`\n  - `paypal`\n  - `cofidis`\n  - `cofidisLoan`\n  - `mbway`\n  - `multibanco`\n  - `iDeal`\n  - `bancontact`\n  - `sofort`\n  - `trustly`\n  - `sepa`\n  - `klarna`\n  - `giropay`\n  - `eps`\n  - `blik`\n',
-    title: 'Payment-PaymentMethods'
+    title: 'Payment-PaymentMethods',
   }}
   schemaType={'response'}
 ></Schema>

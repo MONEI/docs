@@ -10,7 +10,7 @@ sample:
   {
     'type': 'CONFIRM',
     'mustRedirect': false,
-    'redirectUrl': 'https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0'
+    'redirectUrl': 'https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0',
   }
 custom_edit_url: null
 ---
@@ -35,21 +35,21 @@ using the provided source.
         example: 'CONFIRM',
         enum: ['CONFIRM', 'CHALLENGE', 'FRICTIONLESS_CHALLENGE', 'BIZUM_CHALLENGE', 'COMPLETE'],
         description:
-          '- `CONFIRM` - Your customer needs to be redirected to a\n  [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)\n  or confirm payment using\n  [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).\n  The **redirectUrl** will point to the hosted payment page.\n- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless\n   3d secure challenge page provided by the bank. The **redirectUrl**\n   will point to the frictionless 3d secure challenge page provided by the bank.\n- `CHALLENGE` - Your customer needs to be redirected to the\n  3d secure challenge page provided by the bank. The **redirectUrl**\n  will point to the 3d secure challenge page provided by the bank.\n- `COMPLETE` - The payment is completed. The **redirectUrl** will be\n  the **completeUrl** if it was provided when the payment was created.\n- `BIZUM_CHALLENGE` - Your customer will be redirected to the Bizum hosted payment page.\n'
+          '- `CONFIRM` - Your customer needs to be redirected to a\n  [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)\n  or confirm payment using\n  [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).\n  The **redirectUrl** will point to the hosted payment page.\n- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless\n   3d secure challenge page provided by the bank. The **redirectUrl**\n   will point to the frictionless 3d secure challenge page provided by the bank.\n- `CHALLENGE` - Your customer needs to be redirected to the\n  3d secure challenge page provided by the bank. The **redirectUrl**\n  will point to the 3d secure challenge page provided by the bank.\n- `COMPLETE` - The payment is completed. The **redirectUrl** will be\n  the **completeUrl** if it was provided when the payment was created.\n- `BIZUM_CHALLENGE` - Your customer will be redirected to the Bizum hosted payment page.\n',
       },
       mustRedirect: {
         type: 'boolean',
         example: false,
         description:
-          'If `true` you have to redirect your customer to the **redirectUrl**\nto continue payment process.\n'
+          'If `true` you have to redirect your customer to the **redirectUrl**\nto continue payment process.\n',
       },
       redirectUrl: {
         type: 'string',
         example: 'https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0',
-        description: 'Redirect your customer to this url to continue payment process.\n'
-      }
+        description: 'Redirect your customer to this url to continue payment process.\n',
+      },
     },
-    title: 'Payment-NextAction'
+    title: 'Payment-NextAction',
   }}
   schemaType={'response'}
 ></Schema>

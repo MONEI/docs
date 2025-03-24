@@ -10,7 +10,7 @@ sample:
   {
     'accountId': 'aa9333ba-82de-400c-9ae7-087b9f8d2242',
     'paymentId': 'af6029f80f5fc73a8ad2753eea0b1be0',
-    'phoneNumber': '+34500000000'
+    'phoneNumber': '+34500000000',
   }
 custom_edit_url: null
 ---
@@ -28,22 +28,22 @@ import Heading from '@theme/Heading';
         type: 'string',
         example: 'aa9333ba-82de-400c-9ae7-087b9f8d2242',
         description: 'MONEI Account identifier.',
-        title: 'AccountId'
+        title: 'AccountId',
       },
       paymentId: {
         type: 'string',
         example: 'af6029f80f5fc73a8ad2753eea0b1be0',
         description: 'Unique identifier for the payment.',
-        title: 'Payment-Id'
+        title: 'Payment-Id',
       },
       phoneNumber: {
         type: 'string',
         example: '+34500000000',
-        description: 'Phone number in E.164 format.'
-      }
+        description: 'Phone number in E.164 format.',
+      },
     },
     required: ['accountId', 'phoneNumber'],
-    title: 'ValidateBizumPhoneRequest'
+    title: 'ValidateBizumPhoneRequest',
   }}
   schemaType={'response'}
 ></Schema>

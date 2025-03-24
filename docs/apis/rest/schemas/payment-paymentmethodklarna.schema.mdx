@@ -6,7 +6,7 @@ sidebar_label: 'Payment-PaymentMethodKlarna'
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {'billingCategory': 'PAY_LATER', 'authPaymentMethod': 'card'}
+sample: { 'billingCategory': 'PAY_LATER', 'authPaymentMethod': 'card' }
 custom_edit_url: null
 ---
 
@@ -30,7 +30,7 @@ Details from Klarna order used as payment method at the time of the transaction.
       billingCategory: {
         type: 'string',
         example: 'PAY_LATER',
-        enum: ['PAY_LATER', 'PAY_NOW', 'SLICE_IT', 'SLICE_IT_BY_CARD']
+        enum: ['PAY_LATER', 'PAY_NOW', 'SLICE_IT', 'SLICE_IT_BY_CARD'],
       },
       authPaymentMethod: {
         type: 'string',
@@ -45,11 +45,11 @@ Details from Klarna order used as payment method at the time of the transaction.
           'direct_bank_transfer',
           'b2b_invoice',
           'card',
-          'slice_it_by_card'
-        ]
-      }
+          'slice_it_by_card',
+        ],
+      },
     },
-    title: 'Payment-PaymentMethodKlarna'
+    title: 'Payment-PaymentMethodKlarna',
   }}
   schemaType={'response'}
 ></Schema>

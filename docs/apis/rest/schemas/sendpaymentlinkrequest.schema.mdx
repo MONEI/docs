@@ -11,7 +11,7 @@ sample:
     'customerEmail': 'john.doe@example.com',
     'customerPhone': '+34500000000',
     'channel': 'EMAIL',
-    'language': 'en'
+    'language': 'en',
   }
 custom_edit_url: null
 ---
@@ -29,20 +29,20 @@ import Heading from '@theme/Heading';
       customerEmail: {
         type: 'string',
         example: 'john.doe@example.com',
-        description: 'The customer will receive payment link on this email address.'
+        description: 'The customer will receive payment link on this email address.',
       },
       customerPhone: {
         type: 'string',
         example: '+34500000000',
         description:
-          'Phone number in E.164 format. The customer will receive payment link on this phone number.'
+          'Phone number in E.164 format. The customer will receive payment link on this phone number.',
       },
       channel: {
         type: 'string',
         example: 'EMAIL',
         enum: ['EMAIL', 'WHATSAPP', 'SMS'],
         description: 'The channel used to send the payment message.\n',
-        title: 'Payment-MessageChannel'
+        title: 'Payment-MessageChannel',
       },
       language: {
         type: 'string',
@@ -50,9 +50,9 @@ import Heading from '@theme/Heading';
         enum: ['en', 'es', 'ca', 'pt', 'de', 'it', 'fr'],
         description:
           'The language of message sent to the customer. If not provided the default customer language is used if available.',
-        title: 'Payment-MessageLanguage'
-      }
-    }
+        title: 'Payment-MessageLanguage',
+      },
+    },
   }}
   schemaType={'response'}
 ></Schema>

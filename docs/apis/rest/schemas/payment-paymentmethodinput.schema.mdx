@@ -15,9 +15,9 @@ sample:
         'expMonth': 'string',
         'expYear': 'string',
         'cardholderName': 'John Doe',
-        'cardholderEmail': 'john.doe@monei.com'
+        'cardholderEmail': 'john.doe@monei.com',
       },
-    'bizum': {'phoneNumber': null}
+    'bizum': { 'phoneNumber': null },
   }
 custom_edit_url: null
 ---
@@ -46,31 +46,31 @@ card information on your server requires
         properties: {
           number: {
             type: 'string',
-            description: 'The card number, as a string without any separators.'
+            description: 'The card number, as a string without any separators.',
           },
-          cvc: {type: 'string', description: 'Card security code.'},
+          cvc: { type: 'string', description: 'Card security code.' },
           expMonth: {
             type: 'string',
-            description: "Two-digit number representing the card's expiration month."
+            description: "Two-digit number representing the card's expiration month.",
           },
           expYear: {
             type: 'string',
-            description: "Two-digit number representing the card's expiration year."
+            description: "Two-digit number representing the card's expiration year.",
           },
           cardholderName: {
             type: 'string',
             example: 'John Doe',
             description: "The cardholder's name, as stated in the credit card.",
-            title: 'CardholderName'
+            title: 'CardholderName',
           },
           cardholderEmail: {
             type: 'string',
             example: 'john.doe@monei.com',
             description: "The cardholder's email address.",
-            title: 'CardholderEmail'
-          }
+            title: 'CardholderEmail',
+          },
         },
-        title: 'Payment-PaymentMethodCardInput'
+        title: 'Payment-PaymentMethodCardInput',
       },
       bizum: {
         type: 'object',
@@ -80,13 +80,13 @@ card information on your server requires
           phoneNumber: {
             type: 'string',
             example: null,
-            description: 'Phone number in E.164 format used to pay with `bizum`.'
-          }
+            description: 'Phone number in E.164 format used to pay with `bizum`.',
+          },
         },
-        title: 'Payment-PaymentMethodBizumInput'
-      }
+        title: 'Payment-PaymentMethodBizumInput',
+      },
     },
-    title: 'Payment-PaymentMethodInput'
+    title: 'Payment-PaymentMethodInput',
   }}
   schemaType={'response'}
 ></Schema>

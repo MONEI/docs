@@ -6,7 +6,7 @@ sidebar_label: 'PauseSubscriptionRequest'
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {'pauseAtPeriodEnd': false, 'pauseIntervalCount': 1}
+sample: { 'pauseAtPeriodEnd': false, 'pauseIntervalCount': 1 }
 custom_edit_url: null
 ---
 
@@ -24,7 +24,7 @@ import Heading from '@theme/Heading';
         type: 'boolean',
         example: false,
         description: 'If true, the subscription will be paused at the end of the current period.\n',
-        title: 'Subscription-PauseAtPeriodEnd'
+        title: 'Subscription-PauseAtPeriodEnd',
       },
       pauseIntervalCount: {
         type: 'integer',
@@ -32,9 +32,9 @@ import Heading from '@theme/Heading';
         example: 1,
         description:
           'Number of intervals when subscription will be paused before it activates again.',
-        title: 'Subscription-PauseIntervalCount'
-      }
-    }
+        title: 'Subscription-PauseIntervalCount',
+      },
+    },
   }}
   schemaType={'response'}
 ></Schema>

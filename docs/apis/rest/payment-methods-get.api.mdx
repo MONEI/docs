@@ -52,15 +52,15 @@ import Heading from '@theme/Heading';
       in: 'query',
       description: 'The ID of the account to get payment methods for',
       required: false,
-      schema: {type: 'string'}
+      schema: { type: 'string' },
     },
     {
       name: 'paymentId',
       in: 'query',
       description: 'The ID of the payment to get payment methods for',
       required: false,
-      schema: {type: 'string'}
-    }
+      schema: { type: 'string' },
+    },
   ]}
 ></ParamsDetails>
 
@@ -83,7 +83,7 @@ import Heading from '@theme/Heading';
                 example: false,
                 description:
                   'Has the value `true` if the resource exists in live mode or the value `false` if the resource exists in test mode.',
-                title: 'Livemode'
+                title: 'Livemode',
               },
               paymentMethods: {
                 type: 'array',
@@ -110,8 +110,8 @@ import Heading from '@theme/Heading';
                     'paypal',
                     'sepa',
                     'sofort',
-                    'trustly'
-                  ]
+                    'trustly',
+                  ],
                 },
                 example: [
                   'bizum',
@@ -131,11 +131,11 @@ import Heading from '@theme/Heading';
                   'sepa',
                   'klarna',
                   'giropay',
-                  'card'
+                  'card',
                 ],
                 description:
                   'An array of available payment methods for the account or payment.\nPossible values include:\n  - `alipay` - Alipay\n  - `applePay` - Apple Pay\n  - `bancontact` - Bancontact\n  - `bizum` - Bizum\n  - `blik` - BLIK\n  - `card` - Credit or debit card\n  - `cardPresent` - Card present (physical POS)\n  - `clickToPay` - Click to Pay\n  - `cofidis` - Cofidis\n  - `cofidisLoan` - Cofidis Loan\n  - `eps` - EPS\n  - `giropay` - Giropay\n  - `googlePay` - Google Pay\n  - `iDeal` - iDEAL\n  - `klarna` - Klarna\n  - `mbway` - MB WAY\n  - `multibanco` - Multibanco\n  - `paypal` - PayPal\n  - `sepa` - SEPA Direct Debit\n  - `sofort` - Sofort\n  - `trustly` - Trustly\n',
-                title: 'PaymentMethods-Methods'
+                title: 'PaymentMethods-Methods',
               },
               metadata: {
                 type: 'object',
@@ -146,117 +146,117 @@ import Heading from '@theme/Heading';
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['CN'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   bancontact: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['BE'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   bizum: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['ES'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   blik: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['PL'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   card: {
                     type: 'object',
                     properties: {
                       brands: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['visa', 'mastercard'],
-                        description: 'List of card brands supported'
-                      }
-                    }
+                        description: 'List of card brands supported',
+                      },
+                    },
                   },
                   eps: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['AT'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   iDeal: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['NL'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   mbway: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['PT'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   multibanco: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['PT'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   sofort: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['AT', 'BE', 'DE', 'ES', 'IT', 'NL', 'CH', 'PL'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   trustly: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: [
                           'DE',
                           'DK',
@@ -270,18 +270,18 @@ import Heading from '@theme/Heading';
                           'NO',
                           'PL',
                           'SE',
-                          'SK'
+                          'SK',
                         ],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   sepa: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: [
                           'AT',
                           'BE',
@@ -327,18 +327,18 @@ import Heading from '@theme/Heading';
                           'PM',
                           'CH',
                           'GB',
-                          'WF'
+                          'WF',
                         ],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   klarna: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: [
                           'AT',
                           'BE',
@@ -352,22 +352,22 @@ import Heading from '@theme/Heading';
                           'IT',
                           'NL',
                           'NO',
-                          'SE'
+                          'SE',
                         ],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   giropay: {
                     type: 'object',
                     properties: {
                       countries: {
                         type: 'array',
-                        items: {type: 'string'},
+                        items: { type: 'string' },
                         example: ['DE'],
-                        description: 'List of countries where the payment method is available'
-                      }
-                    }
+                        description: 'List of countries where the payment method is available',
+                      },
+                    },
                   },
                   googlePay: {
                     type: 'object',
@@ -375,14 +375,14 @@ import Heading from '@theme/Heading';
                       merchantId: {
                         type: 'string',
                         example: '12345678901234567890',
-                        description: 'Google Pay merchant ID'
+                        description: 'Google Pay merchant ID',
                       },
                       cvcRequired: {
                         type: 'boolean',
                         example: false,
-                        description: 'Whether CVC is required for Google Pay transactions'
-                      }
-                    }
+                        description: 'Whether CVC is required for Google Pay transactions',
+                      },
+                    },
                   },
                   applePay: {
                     type: 'object',
@@ -390,9 +390,9 @@ import Heading from '@theme/Heading';
                       merchantId: {
                         type: 'string',
                         example: 'merchant.com.monei',
-                        description: 'Apple Pay merchant ID'
-                      }
-                    }
+                        description: 'Apple Pay merchant ID',
+                      },
+                    },
                   },
                   clickToPay: {
                     type: 'object',
@@ -400,100 +400,100 @@ import Heading from '@theme/Heading';
                       tokenSupport: {
                         type: 'boolean',
                         example: true,
-                        description: 'Whether token support is enabled'
+                        description: 'Whether token support is enabled',
                       },
                       preselected: {
                         type: 'boolean',
                         example: false,
-                        description: 'Whether the method is preselected'
+                        description: 'Whether the method is preselected',
                       },
                       visa: {
                         type: 'object',
                         properties: {
                           srciDpaId: {
                             type: 'string',
-                            example: 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+                            example: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
                           },
                           srcInitiatorId: {
                             type: 'string',
-                            example: '550e8400-e29b-41d4-a716-446655440000'
-                          }
-                        }
+                            example: '550e8400-e29b-41d4-a716-446655440000',
+                          },
+                        },
                       },
                       mastercard: {
                         type: 'object',
                         properties: {
                           srciDpaId: {
                             type: 'string',
-                            example: '6ba7b810-9dad-11d1-80b4-00c04fd430c8'
+                            example: '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
                           },
                           srcInitiatorId: {
                             type: 'string',
-                            example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'
-                          }
-                        }
+                            example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
+                          },
+                        },
                       },
                       discover: {
                         type: 'object',
                         properties: {
                           srciDpaId: {
                             type: 'string',
-                            example: '71f0c4d5-9947-4d1c-9cb3-d6a3f7c4e701'
+                            example: '71f0c4d5-9947-4d1c-9cb3-d6a3f7c4e701',
                           },
                           srcInitiatorId: {
                             type: 'string',
-                            example: 'c2d06c25-9ddb-4a5e-9d5a-3ff1c8d98467'
-                          }
-                        }
-                      }
-                    }
-                  }
+                            example: 'c2d06c25-9ddb-4a5e-9d5a-3ff1c8d98467',
+                          },
+                        },
+                      },
+                    },
+                  },
                 },
-                title: 'PaymentMethods-Metadata'
+                title: 'PaymentMethods-Metadata',
               },
               merchantName: {
                 type: 'string',
                 example: 'MONEI',
                 description: 'The name of the merchant',
-                title: 'PaymentMethods-MerchantName'
+                title: 'PaymentMethods-MerchantName',
               },
               merchantUrl: {
                 type: 'string',
                 example: 'https://monei.com/',
                 description: "The URL of the merchant's website",
-                title: 'PaymentMethods-MerchantUrl'
+                title: 'PaymentMethods-MerchantUrl',
               },
               countryCode: {
                 type: 'string',
                 example: 'ES',
                 description:
                   'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
-                title: 'Country'
+                title: 'Country',
               },
               accountId: {
                 type: 'string',
                 example: 'aa9333ba-82de-400c-9ae7-087b9f8d2242',
                 description: 'MONEI Account identifier.',
-                title: 'AccountId'
+                title: 'AccountId',
               },
               amount: {
                 type: 'integer',
                 example: 10,
                 description:
                   'The amount of the payment in the smallest currency unit.\nFor example, 10 EUR = 1000 cents.\nOnly present when querying by paymentId.\n',
-                title: 'PaymentMethods-Amount'
+                title: 'PaymentMethods-Amount',
               },
               currency: {
                 type: 'string',
                 example: 'EUR',
                 description:
                   'Three-letter ISO currency code, in uppercase.\nOnly present when querying by paymentId.\n',
-                title: 'PaymentMethods-Currency'
-              }
-            }
-          }
-        }
-      }
+                title: 'PaymentMethods-Currency',
+              },
+            },
+          },
+        },
+      },
     },
     '400': {
       description: 'The request is incorrect or could not be processed',
@@ -505,22 +505,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -528,26 +528,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'BadRequestError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 400,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Bad request',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'BadRequestError'
-          }
-        }
-      }
+            title: 'BadRequestError',
+          },
+        },
+      },
     },
     '401': {
       description: 'Unauthorized error. Please check your auth credentials',
@@ -559,22 +559,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -582,26 +582,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'UnauthorizedError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 401,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Unauthorized access',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'UnauthorizedError'
-          }
-        }
-      }
+            title: 'UnauthorizedError',
+          },
+        },
+      },
     },
     '404': {
       description: 'The specified resource was not found',
@@ -613,22 +613,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -636,26 +636,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'NotFoundError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 404,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Resource not found',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'NotFoundError'
-          }
-        }
-      }
+            title: 'NotFoundError',
+          },
+        },
+      },
     },
     '422': {
       description: 'The request was well-formed but could not be processed due to semantic errors',
@@ -667,22 +667,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -690,26 +690,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'UnprocessableEntityError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 422,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Unprocessable entity',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'UnprocessableEntityError'
-          }
-        }
-      }
+            title: 'UnprocessableEntityError',
+          },
+        },
+      },
     },
     '500': {
       description: 'Unexpected server error',
@@ -721,22 +721,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -744,26 +744,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'InternalServerError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 500,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'An unexpected error occurred',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'InternalServerError'
-          }
-        }
-      }
+            title: 'InternalServerError',
+          },
+        },
+      },
     },
     '503': {
       description: 'The service is temporarily unavailable',
@@ -775,22 +775,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -798,26 +798,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'ServiceUnavailableError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 503,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Upstream service is unavailable',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'ServiceUnavailableError'
-          }
-        }
-      }
-    }
+            title: 'ServiceUnavailableError',
+          },
+        },
+      },
+    },
   }}
 ></StatusCodes>

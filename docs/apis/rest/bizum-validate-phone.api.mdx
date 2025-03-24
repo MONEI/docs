@@ -57,25 +57,25 @@ import Heading from '@theme/Heading';
               type: 'string',
               example: 'aa9333ba-82de-400c-9ae7-087b9f8d2242',
               description: 'MONEI Account identifier.',
-              title: 'AccountId'
+              title: 'AccountId',
             },
             paymentId: {
               type: 'string',
               example: 'af6029f80f5fc73a8ad2753eea0b1be0',
               description: 'Unique identifier for the payment.',
-              title: 'Payment-Id'
+              title: 'Payment-Id',
             },
             phoneNumber: {
               type: 'string',
               example: '+34500000000',
-              description: 'Phone number in E.164 format.'
-            }
+              description: 'Phone number in E.164 format.',
+            },
           },
           required: ['accountId', 'phoneNumber'],
-          title: 'ValidateBizumPhoneRequest'
-        }
-      }
-    }
+          title: 'ValidateBizumPhoneRequest',
+        },
+      },
+    },
   }}
 ></RequestSchema>
 
@@ -87,9 +87,9 @@ import Heading from '@theme/Heading';
       description: 'A successful response',
       content: {
         'application/json': {
-          schema: {type: 'object', properties: {isValid: {type: 'boolean', example: true}}}
-        }
-      }
+          schema: { type: 'object', properties: { isValid: { type: 'boolean', example: true } } },
+        },
+      },
     },
     '400': {
       description: 'The request is incorrect or could not be processed',
@@ -101,22 +101,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -124,26 +124,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'BadRequestError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 400,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Bad request',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'BadRequestError'
-          }
-        }
-      }
+            title: 'BadRequestError',
+          },
+        },
+      },
     },
     '401': {
       description: 'Unauthorized error. Please check your auth credentials',
@@ -155,22 +155,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -178,26 +178,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'UnauthorizedError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 401,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Unauthorized access',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'UnauthorizedError'
-          }
-        }
-      }
+            title: 'UnauthorizedError',
+          },
+        },
+      },
     },
     '404': {
       description: 'The specified resource was not found',
@@ -209,22 +209,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -232,26 +232,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'NotFoundError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 404,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Resource not found',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'NotFoundError'
-          }
-        }
-      }
+            title: 'NotFoundError',
+          },
+        },
+      },
     },
     '422': {
       description: 'The request was well-formed but could not be processed due to semantic errors',
@@ -263,22 +263,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -286,26 +286,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'UnprocessableEntityError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 422,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Unprocessable entity',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'UnprocessableEntityError'
-          }
-        }
-      }
+            title: 'UnprocessableEntityError',
+          },
+        },
+      },
     },
     '500': {
       description: 'Unexpected server error',
@@ -317,22 +317,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -340,26 +340,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'InternalServerError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 500,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'An unexpected error occurred',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'InternalServerError'
-          }
-        }
-      }
+            title: 'InternalServerError',
+          },
+        },
+      },
     },
     '503': {
       description: 'The service is temporarily unavailable',
@@ -371,22 +371,22 @@ import Heading from '@theme/Heading';
                 type: 'object',
                 required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
                 properties: {
-                  status: {type: 'string', description: 'Error type identifier'},
-                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
-                  message: {type: 'string', description: 'Human-readable error message'},
+                  status: { type: 'string', description: 'Error type identifier' },
+                  statusCode: { type: 'integer', format: 'int32', description: 'HTTP status code' },
+                  message: { type: 'string', description: 'Human-readable error message' },
                   requestId: {
                     type: 'string',
                     description: 'Unique identifier for the request',
-                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
                   },
                   requestTime: {
                     type: 'string',
                     format: 'date-time',
                     description: 'Timestamp when the request was processed',
-                    example: '2025-03-05T10:25:52Z'
-                  }
+                    example: '2025-03-05T10:25:52Z',
+                  },
                 },
-                title: 'ErrorBase'
+                title: 'ErrorBase',
               },
               {
                 type: 'object',
@@ -394,26 +394,26 @@ import Heading from '@theme/Heading';
                   status: {
                     type: 'string',
                     example: 'ServiceUnavailableError',
-                    description: 'Error type identifier'
+                    description: 'Error type identifier',
                   },
                   statusCode: {
                     type: 'integer',
                     format: 'int32',
                     example: 503,
-                    description: 'HTTP status code'
+                    description: 'HTTP status code',
                   },
                   message: {
                     type: 'string',
                     example: 'Upstream service is unavailable',
-                    description: 'Human-readable error message'
-                  }
-                }
-              }
+                    description: 'Human-readable error message',
+                  },
+                },
+              },
             ],
-            title: 'ServiceUnavailableError'
-          }
-        }
-      }
-    }
+            title: 'ServiceUnavailableError',
+          },
+        },
+      },
+    },
   }}
 ></StatusCodes>

@@ -32,7 +32,7 @@ Controls when the funds will be captured.
     enum: ['SALE', 'AUTH', 'PAYOUT', 'VERIF'],
     description:
       "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don't capture the funds until later.\n  - `PAYOUT` - Send funds to the customer\n  - `VERIF` - Verify the card without placing a hold or capturing funds.\n",
-    title: 'Payment-TransactionType'
+    title: 'Payment-TransactionType',
   }}
   schemaType={'response'}
 ></Schema>

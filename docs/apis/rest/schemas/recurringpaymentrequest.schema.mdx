@@ -12,7 +12,7 @@ sample:
     'amount': 110,
     'transactionType': 'SALE',
     'description': 'Test Shop - #84370745531439',
-    'customer': {'email': 'john.doe@example.com', 'name': 'John Doe', 'phone': null},
+    'customer': { 'email': 'john.doe@example.com', 'name': 'John Doe', 'phone': null },
     'billingDetails':
       {
         'name': 'John Doe',
@@ -27,8 +27,8 @@ sample:
             'line1': 'Fake Street 123',
             'line2': null,
             'zip': '1234',
-            'state': 'Málaga'
-          }
+            'state': 'Málaga',
+          },
       },
     'shippingDetails':
       {
@@ -44,11 +44,11 @@ sample:
             'line1': 'Fake Street 123',
             'line2': null,
             'zip': '1234',
-            'state': 'Málaga'
-          }
+            'state': 'Málaga',
+          },
       },
     'callbackUrl': 'https://example.com/checkout/callback',
-    'metadata': {'systemId': '12345'}
+    'metadata': { 'systemId': '12345' },
   }
 custom_edit_url: null
 ---
@@ -69,7 +69,7 @@ import Heading from '@theme/Heading';
         example: '14379133960355',
         description:
           'An order ID from your system. A unique identifier that can be used\nto reconcile the payment with your internal system.\n',
-        title: 'Payment-OrderId'
+        title: 'Payment-OrderId',
       },
       amount: {
         allOf: [
@@ -79,11 +79,11 @@ import Heading from '@theme/Heading';
             example: 110,
             description:
               'Amount intended to be collected by this payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n',
-            title: 'Payment-Amount'
-          }
+            title: 'Payment-Amount',
+          },
         ],
         description:
-          'The amount to collected by this subsequent payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n'
+          'The amount to collected by this subsequent payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n',
       },
       transactionType: {
         allOf: [
@@ -94,19 +94,19 @@ import Heading from '@theme/Heading';
             enum: ['SALE', 'AUTH', 'PAYOUT', 'VERIF'],
             description:
               "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don't capture the funds until later.\n  - `PAYOUT` - Send funds to the customer\n  - `VERIF` - Verify the card without placing a hold or capturing funds.\n",
-            title: 'Payment-TransactionType'
-          }
+            title: 'Payment-TransactionType',
+          },
         ],
         default: '(same as initial payment)',
         description:
-          'Same as the `transactionType` parameter from\n[create payment](https://docs.monei.com/docs/apis/rest/payments-create/).\nIf not sent, it will default in the same transaction type used in the initial payment.\n'
+          'Same as the `transactionType` parameter from\n[create payment](https://docs.monei.com/docs/apis/rest/payments-create/).\nIf not sent, it will default in the same transaction type used in the initial payment.\n',
       },
       description: {
         type: 'string',
         example: 'Test Shop - #84370745531439',
         description:
           'An arbitrary string attached to the payment. Often useful for\ndisplaying to users.\n',
-        title: 'Payment-Description'
+        title: 'Payment-Description',
       },
       customer: {
         type: 'object',
@@ -114,20 +114,20 @@ import Heading from '@theme/Heading';
           email: {
             type: 'string',
             example: 'john.doe@example.com',
-            description: "The customer's email address."
+            description: "The customer's email address.",
           },
           name: {
             type: 'string',
             example: 'John Doe',
-            description: "The customer's full name or business name."
+            description: "The customer's full name or business name.",
           },
           phone: {
             type: 'string',
             example: null,
-            description: "The customer's phone number in E.164 format."
-          }
+            description: "The customer's phone number in E.164 format.",
+          },
         },
-        title: 'Payment-Customer'
+        title: 'Payment-Customer',
       },
       billingDetails: {
         type: 'object',
@@ -137,20 +137,20 @@ import Heading from '@theme/Heading';
           name: {
             type: 'string',
             example: 'John Doe',
-            description: "The customer's billing full name."
+            description: "The customer's billing full name.",
           },
           email: {
             type: 'string',
             example: 'john.doe@example.com',
-            description: "The customer's billing email address."
+            description: "The customer's billing email address.",
           },
           phone: {
             type: 'string',
             example: null,
-            description: "The customer's billing phone number in E.164 format."
+            description: "The customer's billing phone number in E.164 format.",
           },
-          company: {type: 'string', example: null, description: 'Billing company name.'},
-          taxId: {type: 'string', example: null, description: 'Company tax ID.'},
+          company: { type: 'string', example: null, description: 'Billing company name.' },
+          taxId: { type: 'string', example: null, description: 'Company tax ID.' },
           address: {
             title: 'Address',
             type: 'object',
@@ -160,33 +160,33 @@ import Heading from '@theme/Heading';
                 example: 'ES',
                 description:
                   'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
-                title: 'Country'
+                title: 'Country',
               },
               city: {
                 type: 'string',
                 example: 'Málaga',
-                description: 'City, district, suburb, town, or village.'
+                description: 'City, district, suburb, town, or village.',
               },
               line1: {
                 type: 'string',
                 example: 'Fake Street 123',
-                description: 'Address line 1 (e.g., street, PO Box, or company name).'
+                description: 'Address line 1 (e.g., street, PO Box, or company name).',
               },
               line2: {
                 type: 'string',
                 example: null,
-                description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
+                description: 'Address line 2 (e.g., apartment, suite, unit, or building).',
               },
-              zip: {type: 'string', example: '1234', description: 'ZIP or postal code.'},
+              zip: { type: 'string', example: '1234', description: 'ZIP or postal code.' },
               state: {
                 type: 'string',
                 example: 'Málaga',
-                description: 'State, county, province, or region.'
-              }
-            }
-          }
+                description: 'State, county, province, or region.',
+              },
+            },
+          },
         },
-        title: 'Payment-BillingDetails'
+        title: 'Payment-BillingDetails',
       },
       shippingDetails: {
         type: 'object',
@@ -195,24 +195,24 @@ import Heading from '@theme/Heading';
           name: {
             type: 'string',
             example: 'John Doe',
-            description: "The shipping customer's full name."
+            description: "The shipping customer's full name.",
           },
           email: {
             type: 'string',
             example: 'john.doe@example.com',
-            description: "The shipping customer's email address."
+            description: "The shipping customer's email address.",
           },
           phone: {
             type: 'string',
             example: null,
-            description: "The shipping customer's phone number in E.164 format."
+            description: "The shipping customer's phone number in E.164 format.",
           },
           company: {
             type: 'string',
             example: null,
-            description: 'Name of the company where the shipment is going.'
+            description: 'Name of the company where the shipment is going.',
           },
-          taxId: {type: 'string', example: null, description: 'Company tax ID.'},
+          taxId: { type: 'string', example: null, description: 'Company tax ID.' },
           address: {
             title: 'Address',
             type: 'object',
@@ -222,48 +222,48 @@ import Heading from '@theme/Heading';
                 example: 'ES',
                 description:
                   'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
-                title: 'Country'
+                title: 'Country',
               },
               city: {
                 type: 'string',
                 example: 'Málaga',
-                description: 'City, district, suburb, town, or village.'
+                description: 'City, district, suburb, town, or village.',
               },
               line1: {
                 type: 'string',
                 example: 'Fake Street 123',
-                description: 'Address line 1 (e.g., street, PO Box, or company name).'
+                description: 'Address line 1 (e.g., street, PO Box, or company name).',
               },
               line2: {
                 type: 'string',
                 example: null,
-                description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
+                description: 'Address line 2 (e.g., apartment, suite, unit, or building).',
               },
-              zip: {type: 'string', example: '1234', description: 'ZIP or postal code.'},
+              zip: { type: 'string', example: '1234', description: 'ZIP or postal code.' },
               state: {
                 type: 'string',
                 example: 'Málaga',
-                description: 'State, county, province, or region.'
-              }
-            }
-          }
+                description: 'State, county, province, or region.',
+              },
+            },
+          },
         },
-        title: 'Payment-ShippingDetails'
+        title: 'Payment-ShippingDetails',
       },
       callbackUrl: {
         type: 'string',
         example: 'https://example.com/checkout/callback',
         description: 'The URL to which a payment result should be sent asynchronously.\n',
-        title: 'Payment-CallbackUrl'
+        title: 'Payment-CallbackUrl',
       },
       metadata: {
         type: 'object',
-        example: {systemId: '12345'},
+        example: { systemId: '12345' },
         description:
           'A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.',
-        title: 'Metadata'
-      }
-    }
+        title: 'Metadata',
+      },
+    },
   }}
   schemaType={'response'}
 ></Schema>
