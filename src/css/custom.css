@@ -167,3 +167,23 @@ body {
 .tabs-container.openapi-tabs__code-container.openapi-tabs__code-container-inner:nth-child(2) {
   display: none;
 }
+
+/* docusaurus-plugin-openapi-docs: Fix rendering of auth details in endpoint pages.
+   Reference: https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/issues/1036
+*/
+.openapi-security__details pre p,
+.openapi-security__details pre ul,
+.openapi-security__details pre h2,
+.openapi-security__details pre h3 {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.openapi-security__details pre code {
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+}
+
+.openapi-security__details pre pre {
+  border-top: 0;
+}

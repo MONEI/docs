@@ -118,7 +118,7 @@ module.exports = {
     ]
   ],
   plugins: [
-    path.resolve(__dirname, './inject-scripts.js'),
+    path.resolve(__dirname, './plugins/inject-scripts.js'),
     [
       'docusaurus-plugin-openapi-docs',
       {
@@ -136,7 +136,8 @@ module.exports = {
           }
         }
       }
-    ]
+    ],
+    path.resolve(__dirname, './plugins/fix-auth-openapi.js')
   ],
   themes: ['docusaurus-theme-openapi-docs']
 };
