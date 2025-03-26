@@ -531,3 +531,26 @@ The Card Input Component lets you collect Credit Card information all within one
 Card Input Component is completely customizable. You can style it to match the look and feel of your site, providing a seamless checkout experience for your customers. It’s also possible to style various input states, for example when the input has focus.
 
 To see all available MONEI Components check the [API docummentation](monei-js/reference.md) or our integration guides for individual payment methods.
+
+## React 19 Compatibility
+
+:::note Temporary Fix for React 19
+If you're using React 19 and experiencing issues with MONEI Components, you can use the following temporary fix:
+
+```jsx
+// Import findDOMNode from external library
+import { findDOMNode } from "find-dom-node-polyfill";
+
+// Set Find DOM Node before driver
+ReactDOM.findDOMNode = findDOMNode;
+
+const CardInputComponent: React.FC<CardInputProps> = CardInput.driver("react", {
+  React: React,
+  ReactDOM: ReactDOM,
+});
+```
+
+This workaround addresses the removal of `ReactDOM.findDOMNode` in React 19 by using the external library. We're working on a permanent solution that will be available in the next major version of MONEI Components.
+:::
+
+[![Edit monei-card-input-react-19](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/monei-card-input-react-forked-8cm7qm?file=/src/index.tsx:10,1-16,4)
