@@ -4,53 +4,990 @@ title: SEPA Request to Pay (SRTP)
 description: Create and accept payments using the SRTP scheme.
 ---
 
-SEPA Request to Pay (SRTP) is an innovative payment scheme proposed by the European Payments Council (EPC) that is based on a real-time messaging ecosystem to facilitate financial transactions. This scheme, incorporated into MONEI's infrastructure, allows beneficiaries (businesses or individuals) to send payment requests to payers, who can approve and make the payment using SEPA payment channels. This payment method is designed to simplify transactions, reducing the need for bank data exchange and improving the security and traceability of payments. SRTP is both available and suits digital channels, ecommerce and retail or in-store physical transactions.
+# SEPA Request to Pay (SRTP)
 
-The main features and advantages of the SRTP scheme are:
+SEPA Request to Pay (SRTP) is an innovative payment scheme proposed by the European Payments Council (EPC) that uses a real-time messaging framework to simplify financial transactions. It allows a beneficiary (merchant or business) to send a payment request to a payer, who can then approve and execute the payment through SEPA channels. This method streamlines the process by reducing the need to exchange bank details and improving the security and traceability of payments. SRTP is well-suited for digital channels (e-commerce, mobile apps) as well as in-store transactions.
 
-- Customer can forget about manually entering bank details. With SRTP, the end customer will receive a payment request from the merchant that can accept with a single click, ensuring that his personal & financial data remains protected.
+MONEI has incorporated the SRTP scheme into its infrastructure to offer merchants a more efficient and secure way to request and receive payments. By using SRTP, the end-user experience is enhanced (customers can pay with a simple approval) and opportunities for automation in payment processes are increased. This initiative underscores MONEI’s commitment to innovation and positions it at the forefront of digital payment solutions, acting as a key facilitator of secure and convenient transactions in the European market.
 
-- Companies can Create and Send “payments requests” at any time of the day, without worrying about office hours or service availability.
+## Features and Benefits
 
-- Customer can accept payments at his convenience. SRTP allows immediate or later approval of payment requests.
-
-- From MONEI's control panel, the merchant can access a history of all transactions and their status: pending, processed or rejected.
-
-- Consumers can select SRTP as a payment method on merchant’s checkout page. (most suited in ecommerce)
-
-- Consumers or individuals can easily “manage” their cash flow needs or plans and can approve Request to Pay transactions at their will.
-
-- SRTP is a “behind the scenes” SEPA Instant payment (SCT Inst) thus: no chargeback allowed.
-
-The integration with SRTP allows MONEI to offer its merchants and companies a more efficient and secure way to request and receive payments, enhancing the end-user experience and providing new opportunities for payment process automation in the European market. This initiative underscores MONEI's commitment to innovation and its effort to be at the forefront of digital payment solutions, reinforcing its position in the financial market as a key facilitator of secure and convenient transactions.
+- **One-click payment approval:** Customers do not need to manually enter IBAN or other bank details. They receive a payment request from the merchant and can accept it with a single click, keeping their personal and financial data protected.  
+- **24/7 payment request initiation:** Merchants can create and send payment requests at any time, without being limited by banking hours. SRTP messages can be generated and sent around the clock.  
+- **Flexible payment timing for customers:** Customers have the option to approve the request immediately or at a later time before expiration, giving them control and flexibility in managing their payments.  
+- **Real-time transaction status tracking:** From MONEI’s dashboard, merchants can see a history of all SRTP transactions and their statuses (e.g. pending, accepted/processed, or rejected) in real time.  
+- **Seamless checkout integration:** Customers can choose SRTP as a payment method on the merchant’s checkout page (ideal for e-commerce), which provides a seamless and quick payment experience.  
+- **Improved cash flow management:** Individuals and businesses can better manage cash flow by deciding when to approve incoming payment requests, aligning with their financial planning.  
+- **No chargebacks:** SRTP leverages SEPA Instant Credit Transfer behind the scenes, so once a payment is approved and executed, it is irrevocable (no chargebacks), reducing fraud and chargeback-related issues for merchants.  
 
 ## Messaging Flow
 
-The diagram below illustrates SRTP flows in a generic four-corner ecosystem, applied to basic use cases such as:
-
-- In physical or online retail.
-
-- Person-to-person (P2P) transactions.
-
-- Electronic Invoice Presentation and Payment (EIPP):
-  - Business to Customer (B2C).
-  - Business to Business (B2B).
-  - Business to Government (B2G).
-
-In this model, both the beneficiary and the payer use their own SRTP service provider. For the beneficiary, this would be MONEI. To simplify, payment flows are not presented in the diagram. In more complex scenarios, the beneficiary and/or payer PSPs could be different entities from the SRTP service providers.
+The diagram below shows the SRTP message flow in a four-corner model (payer and payee each with their own SRTP service provider), followed by a step-by-step explanation:
 
 ![SEPA Request to Pay](/img/SEPA-Request-to-Pay-SRTP.jpg)
 
-1. The payer selects SRTP as the payment method on the merchant's payment page.
-2. The merchant notifies MONEI of a payment request with all necessary information.
-3. MONEI contacts and sends the RTP to the payer's payment service provider.
-4. The payer receives a notification on their smartphone or browser that they must accept or reject.
-5. All parties are notified if the RTP has been accepted or not.
+1. **Payment method selection:** The payer selects **SEPA Request to Pay (SRTP)** as the payment method on the merchant’s payment page (checkout).  
+2. **Request initiation:** The payee (merchant) notifies MONEI (the payee’s SRTP service provider) of a new payment request, providing all necessary payment details. MONEI then creates an SRTP message for this request.  
+3. **Delivery to payer’s provider:** MONEI, acting on behalf of the payee, sends the SRTP message to the payer’s SRTP service provider (typically the payer’s bank or payment service).  
+4. **Payer notification:** The payer’s service provider notifies the payer (e.g. via mobile app or online banking) that a payment request is awaiting their approval. The payer can review the request details and choose to **accept** or **reject** the request.  
+5. **Status reporting:** Once the payer accepts or rejects the request, the outcome (approval or rejection status) is reported back to all parties. MONEI and the merchant receive a status update confirming whether the SRTP was accepted (and the payment initiated) or declined by the payer. This status update can occur in real-time or via a callback mechanism.
 
-## Adherence
+## API Endpoints
 
-The implementation of the SRTP scheme at MONEI has required the development of a specific API to facilitate communication between MONEI and banking systems, as well as between MONEI and its customers. This API has been designed to meet the different endpoints necessary in the SRTP scheme, allowing the creation, consultation, and management of payment requests efficiently and securely. The API ensures interoperability with banking systems and provides MONEI customers with a smooth and consistent user experience.
+MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowing creation and management of Request to Pay messages. Below are the main endpoints in the SRTP flow, with their details:
 
-The SRTP Integration Service we offer includes a streamlined REST API, facilitating the direct incorporation of SRTP into mobile and online banking platforms. This service eliminates the need for the bank to undergo formal SRTP certification, as it encompasses tools for effective integration testing, accommodating both automated and manual testing procedures. Consequently, the process of adhering to the SRTP scheme is significantly simplified, with MONEI assuming responsibility for the majority of technical components.
+### Create a new SRTP
 
-If you are interested and are a Payer's RTP Service Provider, contact MONEI to receive all the necessary technical documentation for connection to the API.
+**Description:** This endpoint allows the payee’s SRTP service provider (e.g., MONEI on behalf of the merchant) to post a new SEPA Request-to-Pay to the payer’s SRTP service provider. In practice, it creates a payment request that will be delivered to the payer for approval.
+
+**Endpoint:** `https://service.microapps-staging.com/v1/sepa-request-to-pay-requests`
+
+**Instructions:**
+
+- All parameters in the request must comply with the SRTP rulebook and the official *SRTP Implementation Guidelines*.  
+- The fields **ReqdExctnDt** (requested execution date/time) and **XpryDt** (expiration date/time) must be provided and must be in the future (not past dates), otherwise the request will be rejected.  
+- For each new SRTP creation call, use a unique **resourceId**. This ID acts as an idempotency key for the request; sending a duplicate **resourceId** will be treated as the same request.  
+
+**Example JSON Request:**
+
+```json
+{
+    "callbackUrl": "https://testing-srtp.galitt.com/005/callback",
+    "Document": {
+        "CdtrPmtActvtnReq": {
+            "GrpHdr": {
+                "MsgId": "Id20***3731",
+                "CreDtTm": "2024-04-30T15:59:30.000Z",
+                "NbOfTxs": "1",
+                "InitgPty": {
+                    "Nm": "SRTPTestEPCXX                 ",
+                    "Id": {
+                        "OrgId": {
+                            "AnyBIC": "AAAAZZ12"
+                        }
+                    }
+                }
+            },
+            "PmtInf": [
+                {
+                    "PmtInfId": "Id20***3317",
+                    "PmtMtd": "TRF",
+                    "ReqdAdvcTp": {
+                        "CdtAdvc": {
+                            "Cd": "ADND"
+                        },
+                        "DbtAdvc": {
+                            "Cd": "ADND"
+                        }
+                    },
+                    "ReqdExctnDt": {
+                        "DtTm": "2024-06-26T15:59:14.000Z"
+                    },
+                    "XpryDt": {
+                        "DtTm": "2024-06-29T18:00:00.000Z"
+                    },
+                    "Dbtr": {
+                        "Nm": "Max140Text_EPC259-22_V3.0_DS02",
+                        "PstlAdr": {
+                            "Ctry": "FR",
+                            "AdrLine": [
+                                "01 Rue de Paris"
+                            ]
+                        },
+                        "Id": {
+                            "OrgId": {
+                                "AnyBIC": "AAAAZZ12"
+                            }
+                        }
+                    },
+                    "DbtrAcct": {
+                        "Id": {
+                            "IBAN": "ES9131906664658225183334"
+                        },
+                        "Nm": "Nm"
+                    },
+                    "DbtrAgt": {
+                        "FinInstnId": {
+                            "BICFI": "MMMMES69"
+                        }
+                    },
+                    "CdtTrfTx": [
+                        {
+                            "PmtId": {
+                                "InstrId": "InstrId                 ",
+                                "EndToEndId": "Id20***5809"
+                            },
+                            "PmtTpInf": {
+                                "SvcLvl": {
+                                    "Cd": "SRTP"
+                                },
+                                "LclInstrm": {
+                                    "Cd": "CTP"
+                                },
+                                "CtgyPurp": {
+                                    "Cd": " "
+                                }
+                            },
+                            "PmtCond": {
+                                "AmtModAllwd": false,
+                                "EarlyPmtAllwd": true,
+                                "GrntedPmtReqd": false
+                            },
+                            "Amt": {
+                                "InstdAmt": 2001
+                            },
+                            "ChrgBr": "SLEV",
+                            "CdtrAgt": {
+                                "FinInstnId": {
+                                    "BICFI": "AAAAZZ11234"
+                                }
+                            },
+                            "Cdtr": {
+                                "Nm": "Max140Text_EPC259-22_V3.0_DS02",
+                                "PstlAdr": {
+                                    "Ctry": "FR",
+                                    "AdrLine": [
+                                        "01 Rue de Paris"
+                                    ]
+                                },
+                                "Id": {
+                                    "OrgId": {
+                                        "AnyBIC": "AAAAZZ12"
+                                    }
+                                }
+                            },
+                            "CdtrAcct": {
+                                "Id": {
+                                    "IBAN": "ES9131906664658225183334"
+                                }
+                            },
+                            "InstrForCdtrAgt": [
+                                {
+                                    "InstrInf": "ATS007 Positive functional confirmation requested"
+                                }
+                            ],
+                            "Purp": {
+                                "Cd": "ADCS"
+                            },
+                            "RltdRmtInf": {
+                                "RmtId": "RmtId",
+                                "RmtLctnDtls": [
+                                    {
+                                        "Mtd": "URID",
+                                        "ElctrncAdr": "david.molina@monei.com"
+                                    }
+                                ]
+                            },
+                            "RmtInf": {
+                                "Ustrd": [
+                                    "Ustrd"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "resourceId": "8410-8600-1312-3709"
+}
+```
+
+**Example JSON Response:**
+
+```json
+{
+    "resourceId": "8410-8600-1312-3709",
+    "Document": {
+        "CdtrPmtActvtnReqStsRpt": {
+            "GrpHdr": {
+                "MsgId": "2f5424439ad4a3590203e9afbdc185762fe",
+                "CreDtTm": "2024-06-25T09:36:45.764Z",
+                "InitgPty": {
+                    "Id": {
+                        "OrgId": {
+                            "AnyBIC": "MMMMES69"
+                        }
+                    }
+                }
+            },
+            "OrgnlGrpInfAndSts": {
+                "OrgnlMsgId": "Id20***3731",
+                "OrgnlMsgNmId": "pain.013.001.10",
+                "OrgnlCreDtTm": "2024-04-30T15:59:30.000Z"
+            },
+            "OrgnlPmtInfAndSts": [
+                {
+                    "OrgnlPmtInfId": "Id20***3317",
+                    "TxInfAndSts": {
+                        "StsId": "a6128f3fc0692ae3b3834c397555893baf1",
+                        "OrgnlInstrId": "InstrId                 ",
+                        "OrgnlEndToEndId": "Id20***5809",
+                        "TxSts": "ACTC",
+                        "StsRsnInf": {
+                            "Orgtr": {
+                                "Id": {
+                                    "OrgId": {
+                                        "AnyBIC": "MMMMES69"
+                                    }
+                                }
+                            },
+                            "Rsn": {
+                                "Cd": "EDTR"
+                            }
+                        },
+                        "OrgnlTxRef": {
+                            "Amt": {
+                                "InstdAmt": 2001
+                            },
+                            "ReqdExctnDt": {
+                                "DtTm": "2024-06-26T15:59:14.000Z"
+                            },
+                            "XpryDt": {
+                                "DtTm": "2024-06-29T18:00:00.000Z"
+                            },
+                            "PmtTpInf": {
+                                "SvcLvl": {
+                                    "Cd": "SRTP"
+                                },
+                                "LclInstrm": {
+                                    "Cd": "CTP"
+                                }
+                            },
+                            "DbtrAgt": {
+                                "FinInstnId": {
+                                    "BICFI": "MMMMES69"
+                                }
+                            },
+                            "CdtrAgt": {
+                                "FinInstnId": {
+                                    "BICFI": "AAAAZZ11234"
+                                }
+                            },
+                            "Cdtr": {
+                                "Nm": "Max140Text_EPC259-22_V3.0_DS02",
+                                "Id": {
+                                    "OrgId": {
+                                        "AnyBIC": "AAAAZZ12"
+                                    }
+                                }
+                            },
+                            "CdtrAcct": {
+                                "Id": {
+                                    "IBAN": "ES9131906664658225183334"
+                                }
+                            },
+                            "RmtInf": {
+                                "Ustrd": "Ustrd"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+```
+
+### Status-update
+
+**Description:** This endpoint is used by the payee’s SRTP service provider to query the status of a previously created Request to Pay. It asks the payer’s SRTP service provider for an update on whether the payer has accepted, rejected, or not yet acted on the payment request.
+
+**Endpoint:** `https://service.microapps-staging.com/v1/sepa-request-to-pay-requests/{{resourceId}}/status-update`
+
+**Instructions:**
+
+- All parameters must follow the SRTP rulebook and Implementation Guidelines.  
+- The `{resourceId}` path parameter in the endpoint URL should be the same **resourceId** that was returned when the SRTP was created. (In other words, you are requesting the status of that specific payment request.) For example, if the original resourceId is `8410-8600-1312-3709`, the status endpoint would be:  
+  `.../sepa-request-to-pay-requests/8410-8600-1312-3709/status-update`  
+- If the status information is available, the API server will respond immediately with the current status. Otherwise (e.g. if the payer has not responded yet), the server will return a pending acknowledgment and later send the status update asynchronously to the provided callback URL.  
+- This call does not create any new resource, so using the same resourceId for multiple status queries will simply retrieve the same status (it’s idempotent in that sense).  
+
+**Example JSON Request:**
+
+```json
+{
+    "resourceId": "5427-9966-1810-4084",
+    "callbackUrl": "https://testing-srtp.galitt.com/005/callback",
+    "Document": {
+        "FIToFIPmtStsReq": {
+            "GrpHdr": {
+                "MsgId": "Id20***6359",
+                "CreDtTm": "2024-04-19T15:40:14.000Z",
+                "InstgAgt": {
+                    "FinInstnId": {
+                        "BICFI": "AAAAZZ11",
+                        "LEI": "00000032411889200037",
+                        "Nm": "SRTPTestEPCXX                 ",
+                        "Othr": {
+                            "Id": "Id20***6848",
+                            "SchmeNm": {
+                                "Cd": "aaaa",
+                                "Prtry": "Max35Text"
+                            },
+                            "Issr": " Issr"
+                        }
+                    }
+                }
+            },
+            "TxInf": [
+                {
+                    "StsReqId": "StsReqId                ",
+                    "OrgnlGrpInf": {
+                        "OrgnlMsgId": "Id20***8079",
+                        "OrgnlMsgNmId": "pain.013.001.10",
+                        "OrgnlCreDtTm": "2024-04-13T15:02:05.000Z"
+                    },
+                    "OrgnlInstrId": "InstrId                 ",
+                    "OrgnlEndToEndId": "Id2024041915393549256381",
+                    "OrgnlTxId": "OrgnlTxId",
+                    "OrgnlTxRef": {
+                        "Amt": {
+                            "InstdAmt": 2013
+                        },
+                        "ReqdExctnDt": {
+                            "DtTm": "2024-05-02T15:02:04.000Z"
+                        },
+                        "PmtTpInf": {
+                            "SvcLvl": {
+                                "Cd": "SRTP"
+                            },
+                            "LclInstrm": {
+                                "Cd": "CTP"
+                            }
+                        },
+                        "RmtInf": {
+                            "Ustrd": [
+                                "Ustrd"
+                            ]
+                        },
+                        "DbtrAgt": {
+                            "FinInstnId": {
+                                "BICFI": "MMMMES69"
+                            }
+                        },
+                        "CdtrAgt": {
+                            "FinInstnId": {
+                                "BICFI": "AAAAZZ11234"
+                            }
+                        },
+                        "Cdtr": {
+                            "Pty": {
+                                "Nm": "Max140Text_EPC259-22_V3.0_DS02",
+                                "Id": {
+                                    "OrgId": {
+                                        "AnyBIC": "AAAAZZ12"
+                                    }
+                                }
+                            }
+                        },
+                        "CdtrAcct": {
+                            "Id": {
+                                "IBAN": "FR7630003035710005023922834"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+```
+
+**Example JSON Response:**
+
+```json
+{
+    "resourceId": "5427-9966-1810-4084",
+    "Document": {
+        "CdtrPmtActvtnReqStsRpt": {
+            "GrpHdr": {
+                "MsgId": "a5f786c715aba67ab04e34ad62286c72fa1",
+                "CreDtTm": "2024-06-25T09:39:17.015Z",
+                "InitgPty": {
+                    "Id": {
+                        "OrgId": {
+                            "AnyBIC": "MMMMES69"
+                        }
+                    }
+                }
+            },
+            "OrgnlGrpInfAndSts": {
+                "OrgnlMsgId": "Id20***6359",
+                "OrgnlMsgNmId": "pacs.028.001.03",
+                "OrgnlCreDtTm": "2024-04-30T15:59:30.000Z"
+            },
+            "OrgnlPmtInfAndSts": [
+                {
+                    "OrgnlPmtInfId": "Id20***3317",
+                    "TxInfAndSts": [
+                        {
+                            "StsId": "5f79f32400bf21b7053a91def757f7fc418",
+                            "OrgnlInstrId": "InstrId                 ",
+                            "OrgnlEndToEndId": "Id2024041915393549256381",
+                            "StsRsnInf": {
+                                "Orgtr": {
+                                    "Id": {
+                                        "OrgId": {
+                                            "AnyBIC": "MMMMES69"
+                                        }
+                                    }
+                                },
+                                "Rsn": {
+                                    "Cd": "AEXR"
+                                }
+                            },
+                            "OrgnlTxRef": {
+                                "Amt": {
+                                    "InstdAmt": 2013
+                                },
+                                "ReqdExctnDt": {
+                                    "DtTm": "2024-05-02T15:02:04.000Z"
+                                },
+                                "XpryDt": {
+                                    "DtTm": "2024-06-29T18:00:00.000Z"
+                                },
+                                "PmtTpInf": {
+                                    "SvcLvl": {
+                                        "Cd": "SRTP"
+                                    },
+                                    "LclInstrm": {
+                                        "Cd": "CTP"
+                                    }
+                                },
+                                "DbtrAgt": {
+                                    "FinInstnId": {
+                                        "BICFI": "MMMMES69"
+                                    }
+                                },
+                                "CdtrAgt": {
+                                    "FinInstnId": {
+                                        "BICFI": "AAAAZZ11234"
+                                    }
+                                },
+                                "Cdtr": {
+                                    "Nm": "Max140Text_EPC259-22_V3.0_DS02",
+                                    "Id": {
+                                        "OrgId": {
+                                            "AnyBIC": "AAAAZZ12"
+                                        }
+                                    }
+                                },
+                                "CdtrAcct": {
+                                    "Id": {
+                                        "IBAN": "FR7630003035710005023922834"
+                                    }
+                                },
+                                "RmtInf": {
+                                    "Ustrd": "Ustrd"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+```
+
+### Cancellation-request
+
+**Description:** This endpoint is used by the payee’s SRTP service provider to request cancellation of a previously sent Request to Pay. Essentially, it sends a cancellation message to the payer’s SRTP service provider indicating that the payee (merchant) wishes to cancel the payment request.
+
+**Endpoint:** `https://service.microapps-staging.com/v1/sepa-request-to-pay-requests/{{resourceId}}/cancellation-requests`
+
+**Instructions:**
+
+- All parameters must follow the SRTP rulebook and Implementation Guidelines for cancellation messages.  
+- The `{resourceId}` in the endpoint URL is the original SRTP’s resourceId (the same ID used when creating the Request to Pay). This identifies which payment request is being cancelled. For example:  
+  `.../sepa-request-to-pay-requests/8410-8600-1312-3709/cancellation-requests`  
+- In the request body, provide a new unique **resourceId**. This will serve as the identifier for the cancellation request itself (often referred to as the **cancellationResourceId**). This ID must be different from the original payment’s resourceId, as it will be used in the cancellation status endpoint.  
+- When possible, the payer’s API may respond immediately with a cancellation result. If an immediate result is not available, the API will acknowledge the request and later send the cancellation outcome via the callback URL.  
+
+**Example JSON Request:**
+
+```json
+{
+    "callbackUrl": "https://testing-srtp.galitt.com/005/callback",
+    "Document": {
+        "CstmrPmtCxlReq": {
+            "Assgnmt": {
+                "Id": "Id20***7140",
+                "Assgnr": {
+                    "Pty": {
+                        "Id": {
+                            "OrgId": {
+                                "AnyBIC": "AAAAZZ12"
+                            }
+                        }
+                    }
+                },
+                "Assgne": {
+                    "Pty": {
+                        "Id": {
+                            "OrgId": {
+                                "AnyBIC": "MMMMES69"
+                            }
+                        }
+                    }
+                },
+                "CreDtTm": "2024-04-23T15:58:37.000Z"
+            },
+            "Undrlyg": {
+                "OrgnlPmtInfAndCxl": [
+                    {
+                        "PmtCxlId": "Id20***5990",
+                        "OrgnlPmtInfId": "Id20***9456",
+                        "OrgnlGrpInf": {
+                            "OrgnlMsgId": "Id20***8505",
+                            "OrgnlMsgNmId": "pain.013.001.10",
+                            "OrgnlCreDtTm": "2024-04-24T15:46:07.000Z"
+                        },
+                        "TxInf": [
+                            {
+                                "CxlId": "Id20***2849",
+                                "OrgnlInstrId": "InstrId                 ",
+                                "OrgnlEndToEndId": "Id20***4837",
+                                "CxlRsnInf": {
+                                    "Orgtr": {
+                                        "Nm": "SRTPTestEPCXX                 ",
+                                        "Id": {
+                                            "OrgId": {
+                                                "AnyBIC": "AAAAZZ12"
+                                            }
+                                        }
+                                    },
+                                    "Rsn": {
+                                        "Cd": "TECH"
+                                    },
+                                    "AddtlInf": [
+                                        "ATS005/2024-05-08T15:46:06.000Z"
+                                    ]
+                                },
+                                "OrgnlTxRef": {
+                                    "Amt": {
+                                        "InstdAmt": 2018
+                                    },
+                                    "ReqdExctnDt": {
+                                        "DtTm": "2024-05-13T15:46:06.000Z"
+                                    },
+                                    "PmtTpInf": {
+                                        "SvcLvl": {
+                                            "Cd": "SRTP"
+                                        },
+                                        "LclInstrm": {
+                                            "Cd": "CTP"
+                                        }
+                                    },
+                                    "RmtInf": {
+                                        "Ustrd": "Ustrd"
+                                    },
+                                    "DbtrAgt": {
+                                        "FinInstnId": {
+                                            "BICFI": "MMMMES69"
+                                        }
+                                    },
+                                    "CdtrAgt": {
+                                        "FinInstnId": {
+                                            "BICFI": "AAAAZZ11234"
+                                        }
+                                    },
+                                    "Cdtr": {
+                                        "Pty": {
+                                            "Nm": "Max140Text_EPC259-22_V3.0_DS02",
+                                            "Id": {
+                                                "OrgId": {
+                                                    "AnyBIC": "AAAAZZ12"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "CdtrAcct": {
+                                        "Id": {
+                                            "IBAN": "FR7630003035710005023922834"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "resourceId": "8410-8600-1312-3592"
+}
+```
+
+**Example JSON Response:**
+
+```json
+{
+    "resourceId": "8410-8600-1312-3593",
+    "SepaRequestToPayCancellationResponse": {
+        "Document": {
+            "RsltnOfInvstgtn": {
+                "Assgnmt": {
+                    "Id": "Id20***7140",
+                    "Assgnr": {
+                        "Pty": {
+                            "Id": {
+                                "OrgId": {
+                                    "AnyBIC": "MMMMES69"
+                                }
+                            }
+                        }
+                    },
+                    "Assgne": {
+                        "Pty": {
+                            "Id": {
+                                "OrgId": {
+                                    "AnyBIC": "AAAAZZ12"
+                                }
+                            }
+                        }
+                    },
+                    "CreDtTm": "2024-04-23T15:58:37.000Z"
+                },
+                "Sts": {
+                    "Conf": "CNCL"
+                },
+                "CxlDtls": {
+                    "OrgnlPmtInfAndSts": [
+                        {
+                            "OrgnlPmtInfId": "Id20***9456",
+                            "TxInfAndSts": [
+                                {
+                                    "OrgnlInstrId": "InstrId                 ",
+                                    "OrgnlEndToEndId": "Id20***4837"
+                                }
+                            ]
+                        }
+                    ],
+                    "TxInfAndSts": [
+                        {
+                            "CxlStsId": "f4c9c8dba13b1aa99f9aa9c6ebd9fe61b73",
+                            "OrgnlGrpInf": {
+                                "OrgnlMsgId": "Id20***8505",
+                                "OrgnlMsgNmId": "pain.013.001.10",
+                                "OrgnlCreDtTm": "2024-04-24T15:46:07.000Z"
+                            },
+                            "OrgnlInstrId": "InstrId                 ",
+                            "OrgnlEndToEndId": "Id20***4837",
+                            "TxCxlSts": "ACCR",
+                            "CxlStsRsnInf": {
+                                "Orgtr": {
+                                    "Id": {
+                                        "OrgId": {
+                                            "LEI": "95980008YL8WG2MZQQ40"
+                                        }
+                                    }
+                                },
+                                "AddtlInf": [
+                                    "ATS005/2024-05-13T15:46:06.000Z"
+                                ]
+                            },
+                            "OrgnlTxRef": {
+                                "Amt": {
+                                    "InstdAmt": 2018
+                                },
+                                "ReqdExctnDt": {
+                                    "DtTm": "2024-05-13T15:46:06.000Z"
+                                },
+                                "PmtTpInf": {
+                                    "SvcLvl": {
+                                        "Cd": "SRTP"
+                                    },
+                                    "LclInstrm": {
+                                        "Cd": "CTP"
+                                    }
+                                },
+                                "DbtrAgt": {
+                                    "FinInstnId": {
+                                        "BICFI": "MMMMES69"
+                                    }
+                                },
+                                "CdtrAgt": {
+                                    "FinInstnId": {
+                                        "BICFI": "AAAAZZ11234"
+                                    }
+                                },
+                                "Cdtr": {
+                                    "Pty": {
+                                        "Nm": "Max140Text_EPC259-22_V3.0_DS02",
+                                        "Id": {
+                                            "OrgId": {
+                                                "AnyBIC": "AAAAZZ12"
+                                            }
+                                        }
+                                    }
+                                },
+                                "CdtrAcct": {
+                                    "Id": {
+                                        "IBAN": "FR7630003035710005023922834"
+                                    }
+                                },
+                                "RmtInf": {
+                                    "Ustrd": "Ustrd"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
+```
+
+### Cancellation status-update
+
+**Description:** This endpoint allows the payee’s SRTP service provider to request a status update for a cancellation request that was previously made. In other words, after initiating a cancellation of an SRTP, the payee’s provider can use this endpoint to check whether that cancellation has been processed/acknowledged by the payer’s side.
+
+**Endpoint:** `https://service.microapps-staging.com/v1/sepa-request-to-pay-requests/{{resourceId}}/cancellation-requests/{{cancellationResourceId}}/status-update`
+
+**Instructions:**
+
+- All parameters must follow the SRTP rulebook and Implementation Guidelines.  
+- The `{resourceId}` in the URL refers to the original payment’s SRTP resourceId (same as used in creation and cancellation-request). The `{cancellationResourceId}` corresponds to the unique resourceId that was used in the cancellation request. For example, if `resourceId = 8410-8600-1312-3709` and the cancellation’s resourceId was `8410-8600-1312-3593`, then:  
+  `.../requests/8410-8600-1312-3709/cancellation-requests/8410-8600-1312-3593/status-update`  
+- This status query is idempotent – requesting the status of the same cancellation more than once will return the same result (once the cancellation outcome is known, it won’t change on subsequent queries).  
+- If the cancellation outcome is already available, the API will return it immediately. Otherwise, an acknowledgement is returned and the final status will be delivered later via the callback URL (as provided during the cancellation request).  
+
+**Example JSON Request:**
+
+```json
+{
+    "resourceId": "9813-7776-2938-9347",
+    "Document": {
+        "CstmrPmtCxlReq": {
+            "Assgnmt": {
+                "Id": "123456U",
+                "Assgnr": {
+                    "Pty": {
+                        "Id": {
+                            "OrgId": {
+                                "AnyBIC": "AAAAZZ12"
+                            }
+                        }
+                    }
+                },
+                "Assgne": {
+                    "Pty": {
+                        "Id": {
+                            "OrgId": {
+                                "AnyBIC": "ZZZZAA12"
+                            }
+                        }
+                    }
+                },
+                "CreDtTm": "2024-01-16T13:33:53.000Z"
+            },
+            "Undrlyg": {
+                "OrgnlPmtInfAndCxl": [
+                    {
+                        "PmtCxlId": "0***07",
+                        "OrgnlPmtInfId": "0***06",
+                        "OrgnlGrpInf": {
+                            "OrgnlMsgId": "202***1",
+                            "OrgnlMsgNmId": "SRTPTestEPC                   ",
+                            "OrgnlCreDtTm": "2024-01-16T13:33:53.000Z"
+                        },
+                        "TxInf": [
+                            {
+                                "CxlId": "123456789A",
+                                "OrgnlInstrId": "InstrId",
+                                "OrgnlEndToEndId": "EndtoEnd  ",
+                                "CxlRsnInf": {
+                                    "Orgtr": {
+                                        "Id": {
+                                            "OrgId": {
+                                                "AnyBIC": "MMMMES69"
+                                            }
+                                        }
+                                    },
+                                    "Rsn": {
+                                        "Cd": "AC02"
+                                    }
+                                },
+                                "OrgnlTxRef": {
+                                    "Amt": {
+                                        "InstdAmt": 2108
+                                    },
+                                    "ReqdExctnDt": {
+                                        "DtTm": "2024-02-04T13:33:52.000Z"
+                                    },
+                                    "PmtTpInf": {
+                                        "SvcLvl": {
+                                            "Cd": "SRTP"
+                                        },
+                                        "LclInstrm": {
+                                            "Cd": "CTP"
+                                        }
+                                    },
+                                    "DbtrAgt": {
+                                        "FinInstnId": {
+                                            "BICFI": "PECOFIHH"
+                                        }
+                                    },
+                                    "CdtrAgt": {
+                                        "FinInstnId": {
+                                            "BICFI": "AAAAZZ11"
+                                        }
+                                    },
+                                    "Cdtr": {
+                                        "Pty": {
+                                            "Nm": "Max140Text_EPC259-22_V3.0_DS02",
+                                            "Id": {
+                                                "OrgId": {
+                                                    "AnyBIC": "AAAAZZ12"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "CdtrAcct": {
+                                        "Id": {
+                                            "IBAN": "ES9131906664658225183334"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "callbackUrl": "https://testing-srtp.galitt.com/005/callback"
+}
+```
+
+**Example JSON Response:**
+
+```json
+{
+    "resourceId": "9813-7776-2938-9347",
+    "Document": {
+        "RsltnOfInvstgtn": {
+            "Assgnmt": {
+                "Id": "6bd60078b1f08bef6f486a324225de4344b",
+                "Assgnr": {
+                    "Pty": {
+                        "Id": {
+                            "OrgId": {
+                                "AnyBIC": "ZZZZAA12"
+                            }
+                        }
+                    }
+                },
+                "Assgne": {
+                    "Pty": {
+                        "Id": {
+                            "OrgId": {
+                                "AnyBIC": "AAAAZZ12"
+                            }
+                        }
+                    }
+                },
+                "CreDtTm": "2024-04-23T15:58:37.000Z"
+            },
+            "Sts": {
+                "AssgnmtCxlConf": true
+            },
+            "CxlDtls": {
+                "OrgnlPmtInfAndSts": [
+                    {
+                        "OrgnlPmtInfId": "Id20***9456",
+                        "TxInfAndSts": [
+                            {
+                                "OrgnlEndToEndId": "Id20***4837",
+                                "OrgnlInstrId": "InstrId                 "
+                            }
+                        ]
+                    }
+                ],
+                "TxInfAndSts": [
+                    {
+                        "CxlStsId": "a578f447abced8d534f42d29ee06fc7dd3e",
+                        "OrgnlGrpInf": {
+                            "OrgnlMsgId": "Id20***8505",
+                            "OrgnlMsgNmId": "camt.055.001.08",
+                            "OrgnlCreDtTm": "2024-04-23T15:58:37.000Z"
+                        },
+                        "OrgnlInstrId": "InstrId                 ",
+                        "OrgnlEndToEndId": "Id20***4837",
+                        "CxlStsRsnInf": {
+                            "Orgtr": {
+                                "Id": {
+                                    "OrgId": {
+                                        "LEI": "95980008YL8WG2MZQQ40"
+                                    }
+                                }
+                            },
+                            "AddtlInf": [
+                                "ATS005/2024-05-13T15:46:06.000Z"
+                            ],
+                            "Rsn": {
+                                "Cd": "AEXR"
+                            }
+                        },
+                        "OrgnlTxRef": {
+                            "Cdtr": {
+                                "Pty": {
+                                    "Nm": "Max140Text_EPC259-22_V3.0_DS02",
+                                    "Id": {
+                                        "OrgId": {
+                                            "AnyBIC": "AAAAZZ12"
+                                        }
+                                    }
+                                }
+                            },
+                            "CdtrAgt": {
+                                "FinInstnId": {
+                                    "BICFI": "AAAAZZ11234"
+                                }
+                            },
+                            "PmtTpInf": {
+                                "SvcLvl": {
+                                    "Cd": "SRTP"
+                                },
+                                "LclInstrm": {
+                                    "Cd": "CTP"
+                                }
+                            },
+                            "ReqdExctnDt": {
+                                "DtTm": "2024-05-13T15:46:06.000Z"
+                            },
+                            "CdtrAcct": {
+                                "Id": {
+                                    "IBAN": "FR7630003035710005023922834"
+                                }
+                            },
+                            "DbtrAgt": {
+                                "FinInstnId": {
+                                    "BICFI": "MMMMES69"
+                                }
+                            },
+                            "Amt": {
+                                "InstdAmt": 2018
+                            },
+                            "RmtInf": {
+                                "Ustrd": "Ustrd"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+## Adherence and Integration
+
+MONEI’s implementation of the SRTP scheme is provided through a secure REST API that handles the necessary messaging with banking systems. The endpoints described above enable the creation, status inquiry, and cancellation of Request to Pay messages in full compliance with the SRTP rulebook. This API ensures interoperability with banks and provides MONEI’s partners a smooth integration, abstracting much of the SRTP protocol complexity behind a simple web API.
+
+Notably, MONEI offers an **SRTP Integration Service** that streamlines the adoption of the SRTP scheme for payment service providers. This service includes testing tools and a controlled sandbox environment, allowing both automated and manual tests of SRTP message flows. Because MONEI manages the SRTP messaging and compliance, a bank or payer’s service provider using this integration does not need to undergo the full formal SRTP certification on its own. MONEI takes on the responsibility for conforming to technical specifications, significantly simplifying the process of adhering to the SRTP scheme.
+
+If you are a Payer’s SRTP Service Provider interested in SRTP integration, you can contact **MONEI** for detailed technical documentation and access credentials. MONEI will provide all the necessary information and support to connect to the SRTP API and begin testing the integration. With MONEI’s guidance, service providers can quickly incorporate SRTP into their offerings and start leveraging this new payment request scheme.
