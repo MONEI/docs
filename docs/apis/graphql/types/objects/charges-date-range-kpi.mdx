@@ -1,0 +1,81 @@
+---
+id: charges-date-range-kpi
+title: ChargesDateRangeKPI
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type ChargesDateRangeKPI {
+  currency: Currencies!
+  total: ChargesDateRangeKPITotal!
+  data: [ChargesDateRangeKPIRow!]!
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPI.<b>currency</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Currencies!</b></code>](/docs/apis/graphql/types/enums/currencies.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPI.<b>total</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ChargesDateRangeKPITotal!</b></code>](/docs/apis/graphql/types/objects/charges-date-range-kpitotal.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPI.<b>data</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[ChargesDateRangeKPIRow!]!</b></code>](/docs/apis/graphql/types/objects/charges-date-range-kpirow.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="object"/>
+
+### Returned By
+
+[`chargesDateRangeKPI`](/docs/apis/graphql/operations/queries/charges-date-range-kpi.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/>

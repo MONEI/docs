@@ -1,0 +1,112 @@
+---
+id: provider
+title: Provider
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type Provider {
+  id: ID!
+  processor: Processor
+  enabled: Boolean
+  paymentMethod: PaymentMethods
+  acquirer: Acquirer
+  configurable: Boolean
+  metadata: [MetadataItem!]
+  rules: ProviderRules
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>Provider.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Provider ID
+
+#### [<code style={{ fontWeight: 'normal' }}>Provider.<b>processor</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Processor</b></code>](/docs/apis/graphql/types/enums/processor.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+The integrated processor
+
+#### [<code style={{ fontWeight: 'normal' }}>Provider.<b>enabled</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Whether the provider is enabled or not
+
+#### [<code style={{ fontWeight: 'normal' }}>Provider.<b>paymentMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethods</b></code>](/docs/apis/graphql/types/enums/payment-methods.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+The specific payment method
+
+#### [<code style={{ fontWeight: 'normal' }}>Provider.<b>acquirer</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Acquirer</b></code>](/docs/apis/graphql/types/enums/acquirer.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+The acquirer behind the provider
+
+#### [<code style={{ fontWeight: 'normal' }}>Provider.<b>configurable</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Whether the provider is open to be configured or not
+
+#### [<code style={{ fontWeight: 'normal' }}>Provider.<b>metadata</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[MetadataItem!]</b></code>](/docs/apis/graphql/types/objects/metadata-item.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="object"/>
+
+Metadata
+
+#### [<code style={{ fontWeight: 'normal' }}>Provider.<b>rules</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ProviderRules</b></code>](/docs/apis/graphql/types/objects/provider-rules.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Provider rules
+
+### Returned By
+
+[`createProvider`](/docs/apis/graphql/operations/mutations/create-provider.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`deleteProvider`](/docs/apis/graphql/operations/mutations/delete-provider.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`enableProvider`](/docs/apis/graphql/operations/mutations/enable-provider.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`provider`](/docs/apis/graphql/operations/queries/provider.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`providers`](/docs/apis/graphql/operations/queries/providers.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`setDefaultCardProvider`](/docs/apis/graphql/operations/mutations/set-default-card-provider.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`updateProvider`](/docs/apis/graphql/operations/mutations/update-provider.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

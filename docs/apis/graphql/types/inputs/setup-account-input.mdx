@@ -1,0 +1,102 @@
+---
+id: setup-account-input
+title: SetupAccountInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Setup account input
+
+```graphql
+input SetupAccountInput {
+  language: String
+  business: BusinessDataInput
+  representatives: [RepresentativeInput!]
+  iban: String
+  billingPlan: BillingPlans
+  userNote: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>SetupAccountInput.<b>language</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The preferred account language
+
+#### [<code style={{ fontWeight: 'normal' }}>SetupAccountInput.<b>business</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>BusinessDataInput</b></code>](/docs/apis/graphql/types/inputs/business-data-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+Business data
+
+#### [<code style={{ fontWeight: 'normal' }}>SetupAccountInput.<b>representatives</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[RepresentativeInput!]</b></code>](/docs/apis/graphql/types/inputs/representative-input.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="input"/>
+
+Legal representatives
+
+#### [<code style={{ fontWeight: 'normal' }}>SetupAccountInput.<b>iban</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+IBAN number to receive payments
+
+#### [<code style={{ fontWeight: 'normal' }}>SetupAccountInput.<b>billingPlan</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>BillingPlans</b></code>](/docs/apis/graphql/types/enums/billing-plans.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Billing plan
+
+#### [<code style={{ fontWeight: 'normal' }}>SetupAccountInput.<b>userNote</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+User provided note
+
+### Member Of
+
+[`setupAccount`](/docs/apis/graphql/operations/mutations/setup-account.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`verifyBusinessDetails`](/docs/apis/graphql/operations/mutations/verify-business-details.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

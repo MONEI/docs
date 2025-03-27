@@ -1,0 +1,106 @@
+---
+id: account-invoice-line-item
+title: AccountInvoiceLineItem
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Account invoice line item
+
+- If the `unitType` is `money`, `unitAmount` is the amount in the currency of the invoice in cents
+  and the line item amount is calculated as `quantity * unitAmount`
+- If the `unitType` is `percent`, `unitAmount` is the percentage value, quantity is an amount in the currency of the invoice in cents and the line item amount is calculated as `quantity * unitAmount / 100`
+
+```graphql
+type AccountInvoiceLineItem {
+  name: String!
+  quantity: Int!
+  unitAmount: Float!
+  unitType: UnitType!
+  currency: Currencies!
+  amount: Int!
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoiceLineItem.<b>name</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Line item name
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoiceLineItem.<b>quantity</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Line item quantity
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoiceLineItem.<b>unitAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Float!</b></code>](/docs/apis/graphql/types/scalars/float.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Line item unit amount
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoiceLineItem.<b>unitType</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>UnitType!</b></code>](/docs/apis/graphql/types/enums/unit-type.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Line item unit type
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoiceLineItem.<b>currency</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Currencies!</b></code>](/docs/apis/graphql/types/enums/currencies.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Line item currency
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoiceLineItem.<b>amount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Line item total amount in cents
+
+### Member Of
+
+[`AccountInvoice`](/docs/apis/graphql/types/objects/account-invoice.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

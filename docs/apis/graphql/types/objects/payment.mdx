@@ -1,0 +1,171 @@
+---
+id: payment
+title: Payment
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type Payment {
+  id: ID!
+  amount: Int
+  currency: String!
+  orderId: ID
+  storeId: ID
+  pointOfSaleId: ID
+  description: String
+  descriptor: String
+  accountId: ID!
+  authorizationCode: String
+  livemode: Boolean
+  status: PaymentStatus!
+  statusCode: String
+  statusMessage: String
+  customer: Customer
+  sequenceId: ID
+  subscriptionId: ID
+  paymentToken: String
+  paymentMethod: PaymentMethod
+  shop: Shop
+  billingDetails: ContactDetails
+  shippingDetails: ContactDetails
+  refundedAmount: Int
+  lastRefundAmount: Int
+  lastRefundReason: RefundReason
+  cancellationReason: CancellationReason
+  sessionDetails: SessionDetails
+  traceDetails: TraceDetails
+  nextAction: NextAction
+  createdAt: AWSTimestamp
+  updatedAt: AWSTimestamp
+  pageOpenedAt: AWSTimestamp
+  metadata: [KeyValueItem!]
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>amount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>currency</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>orderId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>storeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>pointOfSaleId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>description</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>descriptor</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>accountId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>authorizationCode</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>livemode</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>status</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentStatus!</b></code>](/docs/apis/graphql/types/enums/payment-status.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>statusCode</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>statusMessage</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>customer</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Customer</b></code>](/docs/apis/graphql/types/objects/customer.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>sequenceId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>subscriptionId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>paymentToken</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>paymentMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethod</b></code>](/docs/apis/graphql/types/objects/payment-method.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>shop</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Shop</b></code>](/docs/apis/graphql/types/objects/shop.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>billingDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ContactDetails</b></code>](/docs/apis/graphql/types/objects/contact-details.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>shippingDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ContactDetails</b></code>](/docs/apis/graphql/types/objects/contact-details.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>refundedAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>lastRefundAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>lastRefundReason</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>RefundReason</b></code>](/docs/apis/graphql/types/enums/refund-reason.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>cancellationReason</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>CancellationReason</b></code>](/docs/apis/graphql/types/enums/cancellation-reason.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>sessionDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SessionDetails</b></code>](/docs/apis/graphql/types/objects/session-details.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>traceDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>TraceDetails</b></code>](/docs/apis/graphql/types/objects/trace-details.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>nextAction</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>NextAction</b></code>](/docs/apis/graphql/types/objects/next-action.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>updatedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>pageOpenedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Payment.<b>metadata</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[KeyValueItem!]</b></code>](/docs/apis/graphql/types/objects/key-value-item.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="object"/>
+
+### Returned By
+
+[`activateSubscription`](/docs/apis/graphql/operations/mutations/activate-subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`cancelPayment`](/docs/apis/graphql/operations/mutations/cancel-payment.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`capturePayment`](/docs/apis/graphql/operations/mutations/capture-payment.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`createPayment`](/docs/apis/graphql/operations/mutations/create-payment.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`refundPayment`](/docs/apis/graphql/operations/mutations/refund-payment.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`sendPaymentLink`](/docs/apis/graphql/operations/mutations/send-payment-link.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`sendPaymentReceipt`](/docs/apis/graphql/operations/mutations/send-payment-receipt.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`sendPaymentRequest`](/docs/apis/graphql/operations/mutations/send-payment-request.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

@@ -1,0 +1,87 @@
+---
+id: update-authorized-user-input
+title: UpdateAuthorizedUserInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input UpdateAuthorizedUserInput {
+  userEmail: String!
+  accessLevel: AuthorizedUserAccessLevel
+  storeId: ID
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateAuthorizedUserInput.<b>userEmail</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Email address of the authorized user to be updated
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateAuthorizedUserInput.<b>accessLevel</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AuthorizedUserAccessLevel</b></code>](/docs/apis/graphql/types/enums/authorized-user-access-level.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Access level for the authorized user granted by the authorizer
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateAuthorizedUserInput.<b>storeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Limit access to a specific store
+
+### Member Of
+
+[`updateAuthorizedUser`](/docs/apis/graphql/operations/mutations/update-authorized-user.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

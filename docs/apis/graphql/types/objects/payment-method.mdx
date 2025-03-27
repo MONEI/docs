@@ -1,0 +1,105 @@
+---
+id: payment-method
+title: PaymentMethod
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Payment method details
+
+```graphql
+type PaymentMethod {
+  method: PaymentMethods
+  card: PaymentMethodCard
+  cardPresent: PaymentMethodCardPresent
+  bizum: PaymentMethodBizum
+  paypal: PaymentMethodPaypal
+  cofidis: PaymentMethodCofidis
+  cofidisLoan: PaymentMethodCofidisLoan
+  trustly: PaymentMethodTrustly
+  sepa: PaymentMethodSepa
+  klarna: PaymentMethodKlarna
+  mbway: PaymentMethodMBWay
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>method</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethods</b></code>](/docs/apis/graphql/types/enums/payment-methods.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>card</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodCard</b></code>](/docs/apis/graphql/types/objects/payment-method-card.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>cardPresent</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodCardPresent</b></code>](/docs/apis/graphql/types/objects/payment-method-card-present.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>bizum</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodBizum</b></code>](/docs/apis/graphql/types/objects/payment-method-bizum.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>paypal</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodPaypal</b></code>](/docs/apis/graphql/types/objects/payment-method-paypal.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>cofidis</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodCofidis</b></code>](/docs/apis/graphql/types/objects/payment-method-cofidis.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>cofidisLoan</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodCofidisLoan</b></code>](/docs/apis/graphql/types/objects/payment-method-cofidis-loan.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>trustly</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodTrustly</b></code>](/docs/apis/graphql/types/objects/payment-method-trustly.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>sepa</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodSepa</b></code>](/docs/apis/graphql/types/objects/payment-method-sepa.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>klarna</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodKlarna</b></code>](/docs/apis/graphql/types/objects/payment-method-klarna.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethod.<b>mbway</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodMBWay</b></code>](/docs/apis/graphql/types/objects/payment-method-mbway.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+### Member Of
+
+[`Charge`](/docs/apis/graphql/types/objects/charge.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ChargeEventObject`](/docs/apis/graphql/types/objects/charge-event-object.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Payment`](/docs/apis/graphql/types/objects/payment.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Subscription`](/docs/apis/graphql/types/objects/subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`SubscriptionEventObject`](/docs/apis/graphql/types/objects/subscription-event-object.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

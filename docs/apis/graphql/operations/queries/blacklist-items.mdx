@@ -1,0 +1,81 @@
+---
+id: blacklist-items
+title: blacklistItems
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+List of the blacklist items
+
+```graphql
+blacklistItems(
+  token: String
+  pageSize: Int
+  type: BlacklistItemType
+): BlacklistItemsConnection!
+```
+
+### Arguments
+
+#### [<code style={{ fontWeight: 'normal' }}>blacklistItems.<b>token</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>blacklistItems.<b>pageSize</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>blacklistItems.<b>type</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>BlacklistItemType</b></code>](/docs/apis/graphql/types/enums/blacklist-item-type.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+### Type
+
+#### [<code style={{ fontWeight: 'normal' }}><b>BlacklistItemsConnection</b></code>](/docs/apis/graphql/types/objects/blacklist-items-connection.mdx) <Badge class="badge badge--secondary " text="object"/>

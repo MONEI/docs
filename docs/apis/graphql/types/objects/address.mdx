@@ -1,0 +1,102 @@
+---
+id: address
+title: Address
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Full address details
+
+```graphql
+type Address {
+  city: String
+  country: String
+  line1: String
+  line2: String
+  zip: String
+  state: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>Address.<b>city</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Address city
+
+#### [<code style={{ fontWeight: 'normal' }}>Address.<b>country</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Address country as ISO 3166-1 alpha-2 code
+
+#### [<code style={{ fontWeight: 'normal' }}>Address.<b>line1</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Address line 1
+
+#### [<code style={{ fontWeight: 'normal' }}>Address.<b>line2</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Address line 2
+
+#### [<code style={{ fontWeight: 'normal' }}>Address.<b>zip</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Address ZIP code
+
+#### [<code style={{ fontWeight: 'normal' }}>Address.<b>state</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Address state
+
+### Member Of
+
+[`AccountPublicBusinessDetails`](/docs/apis/graphql/types/objects/account-public-business-details.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`BusinessData`](/docs/apis/graphql/types/objects/business-data.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ContactDetails`](/docs/apis/graphql/types/objects/contact-details.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`PaymentMethodSepa`](/docs/apis/graphql/types/objects/payment-method-sepa.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Representative`](/docs/apis/graphql/types/objects/representative.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Store`](/docs/apis/graphql/types/objects/store.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

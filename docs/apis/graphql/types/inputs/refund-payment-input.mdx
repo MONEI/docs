@@ -1,0 +1,87 @@
+---
+id: refund-payment-input
+title: RefundPaymentInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input RefundPaymentInput {
+  paymentId: ID!
+  amount: Int!
+  refundReason: RefundReason
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>RefundPaymentInput.<b>paymentId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+The ID of the payment to be refunded
+
+#### [<code style={{ fontWeight: 'normal' }}>RefundPaymentInput.<b>amount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+The amount to be refunded (for example 1075 for 10.75€)
+
+#### [<code style={{ fontWeight: 'normal' }}>RefundPaymentInput.<b>refundReason</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>RefundReason</b></code>](/docs/apis/graphql/types/enums/refund-reason.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+The reason why the payment is being refunded
+
+### Member Of
+
+[`refundPayment`](/docs/apis/graphql/operations/mutations/refund-payment.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

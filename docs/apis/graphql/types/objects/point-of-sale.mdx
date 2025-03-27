@@ -1,0 +1,141 @@
+---
+id: point-of-sale
+title: PointOfSale
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type PointOfSale {
+  id: ID!
+  storeId: ID!
+  number: Int!
+  name: String
+  manualAmount: Boolean
+  requireEmail: Boolean
+  requireTaxId: Boolean
+  fixedAmount: Int
+  includeQrCode: Boolean
+  fixedCurrency: Currencies
+  qrCodeText: String
+  paymentCallbackUrl: String
+  currentPaymentId: ID
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+The ID of the point of sale
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>storeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+The store's ID where this point of sale belongs
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>number</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Point of sale unique number inside the store
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>name</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The name that represents the point of sale
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>manualAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Whether the user can manually enter the amount or not
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>requireEmail</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Whether the user must provide an email address or not
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>requireTaxId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Whether the user must provide a tax ID or not
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>fixedAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Fixed amount to be charged
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>includeQrCode</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Whether the user must provide a fixed amount or not
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>fixedCurrency</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Currencies</b></code>](/docs/apis/graphql/types/enums/currencies.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Fixed currency to be charged
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>qrCodeText</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+QR code text
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>paymentCallbackUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The URL where to notify a success payment (server-to-server HTTP POST request)
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>currentPaymentId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The ID of the current payment
+
+### Returned By
+
+[`createPointOfSale`](/docs/apis/graphql/operations/mutations/create-point-of-sale.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`pointOfSale`](/docs/apis/graphql/operations/queries/point-of-sale.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`updatePointOfSale`](/docs/apis/graphql/operations/mutations/update-point-of-sale.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>
+
+### Member Of
+
+[`PointsOfSaleConnection`](/docs/apis/graphql/types/objects/points-of-sale-connection.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

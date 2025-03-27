@@ -1,0 +1,102 @@
+---
+id: contact-details
+title: ContactDetails
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Contact details
+
+```graphql
+type ContactDetails {
+  email: String
+  name: String
+  company: String
+  phone: String
+  address: Address
+  taxId: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>ContactDetails.<b>email</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Contact email
+
+#### [<code style={{ fontWeight: 'normal' }}>ContactDetails.<b>name</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Contact name
+
+#### [<code style={{ fontWeight: 'normal' }}>ContactDetails.<b>company</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Contact company
+
+#### [<code style={{ fontWeight: 'normal' }}>ContactDetails.<b>phone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Contact phone in E.164 format, e.g. +34666777888
+
+#### [<code style={{ fontWeight: 'normal' }}>ContactDetails.<b>address</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Address</b></code>](/docs/apis/graphql/types/objects/address.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Contact address
+
+#### [<code style={{ fontWeight: 'normal' }}>ContactDetails.<b>taxId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Contact tax ID
+
+### Member Of
+
+[`Charge`](/docs/apis/graphql/types/objects/charge.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ChargeEventObject`](/docs/apis/graphql/types/objects/charge-event-object.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Payment`](/docs/apis/graphql/types/objects/payment.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Subscription`](/docs/apis/graphql/types/objects/subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`SubscriptionEventObject`](/docs/apis/graphql/types/objects/subscription-event-object.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

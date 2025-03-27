@@ -1,0 +1,87 @@
+---
+id: send-subscription-message-input
+title: SendSubscriptionMessageInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input SendSubscriptionMessageInput {
+  channel: MessageChannel
+  customerEmail: AWSEmail
+  customerPhone: AWSPhone
+  language: String
+  subscriptionId: ID!
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>SendSubscriptionMessageInput.<b>channel</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>MessageChannel</b></code>](/docs/apis/graphql/types/enums/message-channel.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SendSubscriptionMessageInput.<b>customerEmail</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSEmail</b></code>](/docs/apis/graphql/types/scalars/awsemail.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SendSubscriptionMessageInput.<b>customerPhone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSPhone</b></code>](/docs/apis/graphql/types/scalars/awsphone.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SendSubscriptionMessageInput.<b>language</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SendSubscriptionMessageInput.<b>subscriptionId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+### Member Of
+
+[`sendSubscriptionLink`](/docs/apis/graphql/operations/mutations/send-subscription-link.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`sendSubscriptionStatus`](/docs/apis/graphql/operations/mutations/send-subscription-status.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

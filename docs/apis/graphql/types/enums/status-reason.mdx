@@ -1,0 +1,143 @@
+---
+id: status-reason
+title: StatusReason
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+The reason why the account status was changed
+
+- REAL_HOLDERS_DOCS: Real holders documents are required
+- NON_COMMERCIAL_COMPANY_DOCS: Non-commercial company documents are required
+- NON_COMPLIANT_WEBSITE: Website is not compliant
+- OTHER_COMPANY_WEBSITE: Other company website is required
+- HIGH_RISK_GOODS: High risk goods
+- JOINT_OWNERSHIP: Joint ownership, additional documents are required
+- REPEAT_ONBOARDING: Repeat onboarding
+- CBD_PRODUCTS: CBD products
+- INCOMPLETE_DOCS: Incomplete documents
+- NOT_COMPLIANT_BUSINESS: Business is not compliant
+- RESTRICTED_CATEGORY: Restricted category
+- UPDATE_BILLING_INFO: Update billing information
+- SUSPICIOUS_ACTIVITY: Suspicious activity
+- CUSTOMER_COMPLAINTS: Customer complaints
+- CHARGEBACKS: Chargebacks
+- OTHER: Other
+
+```graphql
+enum StatusReason {
+  BANK_OWNERSHIP_CERT_REQUIRED
+  REAL_HOLDERS_DOCS
+  NON_COMMERCIAL_COMPANY_DOCS
+  NON_COMPLIANT_WEBSITE
+  OTHER_COMPANY_WEBSITE
+  HIGH_RISK_GOODS
+  JOINT_OWNERSHIP
+  REPEAT_ONBOARDING
+  CBD_PRODUCTS
+  ID_VERIFICATION_REQUIRED
+  INCOMPLETE_DOCS
+  NOT_COMPLIANT_BUSINESS
+  RESTRICTED_CATEGORY
+  UPDATE_BILLING_INFO
+  SUSPICIOUS_ACTIVITY
+  CUSTOMER_COMPLAINTS
+  CHARGEBACKS
+  OTHER
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>BANK_OWNERSHIP_CERT_REQUIRED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>REAL_HOLDERS_DOCS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>NON_COMMERCIAL_COMPANY_DOCS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>NON_COMPLIANT_WEBSITE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>OTHER_COMPANY_WEBSITE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>HIGH_RISK_GOODS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>JOINT_OWNERSHIP</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>REPEAT_ONBOARDING</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>CBD_PRODUCTS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>ID_VERIFICATION_REQUIRED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>INCOMPLETE_DOCS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>NOT_COMPLIANT_BUSINESS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>RESTRICTED_CATEGORY</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>UPDATE_BILLING_INFO</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>SUSPICIOUS_ACTIVITY</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>CUSTOMER_COMPLAINTS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>CHARGEBACKS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>StatusReason.<b>OTHER</b></code>](#)
+
+### Member Of
+
+[`Account`](/docs/apis/graphql/types/objects/account.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>
