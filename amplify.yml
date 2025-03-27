@@ -9,6 +9,7 @@ frontend:
     build:
       commands:
         - yarn run genapi:rest
+        - yarn run genapi:graphql
         - yarn run build
     postBuild:
       commands:

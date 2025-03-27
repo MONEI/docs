@@ -1,0 +1,91 @@
+# Sample schema for testing the extension. We'll replace it with Monei's schema.
+
+# Represents a message in the system
+type Message {
+    id: ID!
+    # The message text. No more than 140 characters!
+    body: String
+    # When the message was published
+    date: Date
+    # Who published the message
+    author: User
+    # Views, likes, and other engagement metrics
+    stats: Stat
+}
+
+# Represents a user in the system
+type User {
+    id: ID!
+    # The username of the user
+    username: String
+    # The user's first name
+    first_name: String
+    # The user's last name
+    last_name: String
+    # The user's full name
+    full_name: String
+    # Deprecated field, use full_name instead
+    name: String @deprecated
+    # URL of the user's avatar image
+    avatar_url: Url
+}
+
+# Represents engagement statistics for a message
+type Stat {
+    # Number of views
+    views: Int
+    # Number of likes
+    likes: Int
+    # Number of times the message was shared
+    shares: Int
+    # Number of responses to the message
+    responses: Int
+}
+
+# Represents a notification in the system
+type Notification {
+    id: ID
+    # When the notification was created
+    date: Date
+    # Type of notification (e.g., "mention", "like")
+    type: String
+}
+
+# Metadata information
+type Meta {
+    # Total count of items
+    count: Int
+}
+
+# Scalar type for URL values
+scalar Url
+# Scalar type for Date values
+scalar Date
+
+# Queries for retrieving data
+type Query {
+    # Fetch a message by its ID
+    Message(id: ID!): Message
+    # Fetch a list of messages with optional filters
+    Messages(limit: Int, skip: Int, sort_field: String, sort_order: String): [Message]
+    # Fetch metadata about messages
+    MessagesMeta: Meta
+    # Fetch a user by their ID
+    User(id: ID!): User
+    # Fetch notifications with an optional limit
+    Notifications(limit: Int): [Notification]
+    # Fetch metadata about notifications
+    NotificationsMeta: Meta
+}
+
+# Mutations for modifying data
+type Mutation {
+    # Create a new message
+    createMessage (
+        body: String
+    ): Message
+    # Delete a message by its ID
+    deleteMessage(id: ID!): Message
+    # Mark a message as read
+    markMessageRead(id: ID!): Boolean
+}

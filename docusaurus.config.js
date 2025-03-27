@@ -41,10 +41,20 @@ module.exports = {
           activeBaseRegex: '^/docs/(?!apis/)'
         },
         {
-          to: 'docs/apis/rest/',
-          label: 'API',
+          type: 'dropdown',
+          label: 'APIs',
           position: 'right',
-          activeBaseRegex: '^/docs/apis/'
+          activeBaseRegex: '^/docs/apis/rest/',
+          items: [
+            {
+              label: 'REST API',
+              to: 'docs/apis/rest/'
+            },
+            {
+              label: 'GraphQL API',
+              to: 'docs/apis/graphql/'
+            }
+          ]
         },
         {
           to: 'https://support.monei.com',
@@ -128,6 +138,19 @@ module.exports = {
             },
             showSchemas: true
           }
+        }
+      }
+    ],
+    [
+      '@graphql-markdown/docusaurus',
+      {
+        schema: './schema.graphql',
+        rootPath: './docs/apis',
+        baseURL: 'graphql',
+        linkRoot: '/docs/apis/',
+        homepage: './docs/apis/graphql/index.md',
+        loaders: {
+          GraphQLFileLoader: '@graphql-tools/graphql-file-loader'
         }
       }
     ]
