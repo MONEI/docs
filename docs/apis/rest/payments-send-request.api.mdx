@@ -1,0 +1,1336 @@
+---
+id: payments-send-request
+title: 'Send Payment Request'
+description: 'Sends a direct payment request to the customer&#39;s phone with smart channel selection.'
+sidebar_label: 'Send Payment Request'
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: 'post api-method'
+info_path: docs/apis/rest/monei-api-v-1
+custom_edit_url: null
+---
+
+import MethodEndpoint from '@theme/ApiExplorer/MethodEndpoint';
+import ParamsDetails from '@theme/ParamsDetails';
+import RequestSchema from '@theme/RequestSchema';
+import StatusCodes from '@theme/StatusCodes';
+import OperationTabs from '@theme/OperationTabs';
+import TabItem from '@theme/TabItem';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Send Payment Request'}></Heading>
+
+<MethodEndpoint method={'post'} path={'/payments/{id}/rtp'} context={'endpoint'}></MethodEndpoint>
+
+<p>Sends a direct payment request to the customer&#39;s phone with smart channel selection.</p>
+<p>
+  <strong>Smart delivery logic based on customer phone capabilities:</strong>
+</p>
+<ul>
+  <li>
+    If the phone number is registered with Bizum and that payment method is available: The customer
+    receives a push notification in their banking app to instantly approve the payment
+  </li>
+  <li>
+    If Bizum is not available or the phone is not registered with Bizum: The customer receives a
+    payment link via WhatsApp to complete the payment
+  </li>
+</ul>
+<p>
+  This endpoint provides a streamlined payment experience, especially for Spanish customers with
+  Bizum integration, enabling quick and convenient mobile payments.
+</p>
+
+<Heading
+  id={'request'}
+  as={'h2'}
+  className={'openapi-tabs__heading'}
+  children={'Request'}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: 'id',
+      in: 'path',
+      required: true,
+      description: 'The payment ID',
+      schema: {
+        type: 'string',
+        example: 'af6029f80f5fc73a8ad2753eea0b1be0',
+        description: 'Unique identifier for the payment.',
+        title: 'Payment-Id'
+      }
+    }
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={'Body'}
+  body={{
+    required: true,
+    content: {
+      'application/json': {
+        schema: {
+          title: 'SendPaymentRequestRequest',
+          type: 'object',
+          required: ['phoneNumber'],
+          properties: {
+            phoneNumber: {
+              type: 'string',
+              example: '+34500000000',
+              description:
+                'Phone number in E.164 format. The customer will receive payment link on this phone number.'
+            },
+            language: {
+              type: 'string',
+              example: 'en',
+              enum: ['en', 'es', 'ca', 'pt', 'de', 'it', 'fr'],
+              description:
+                'The language of message sent to the customer. If not provided the default customer language is used if available.',
+              title: 'Payment-MessageLanguage'
+            }
+          }
+        },
+        examples: {full: {value: {phoneNumber: '+34500000000', language: 'es'}}}
+      }
+    }
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    '200': {
+      description: 'A payment object',
+      content: {
+        'application/json': {
+          schema: {
+            title: 'Payment',
+            type: 'object',
+            properties: {
+              id: {
+                type: 'string',
+                example: 'af6029f80f5fc73a8ad2753eea0b1be0',
+                description: 'Unique identifier for the payment.',
+                title: 'Payment-Id'
+              },
+              amount: {
+                type: 'integer',
+                format: 'int32',
+                example: 110,
+                description:
+                  'Amount intended to be collected by this payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n',
+                title: 'Payment-Amount'
+              },
+              currency: {
+                type: 'string',
+                example: 'EUR',
+                description:
+                  'Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217),\nin uppercase. Must be a supported currency.\n',
+                title: 'Payment-Currency'
+              },
+              orderId: {
+                type: 'string',
+                example: '14379133960355',
+                description:
+                  'An order ID from your system. A unique identifier that can be used\nto reconcile the payment with your internal system.\n',
+                title: 'Payment-OrderId'
+              },
+              description: {
+                type: 'string',
+                example: 'Test Shop - #84370745531439',
+                description:
+                  'An arbitrary string attached to the payment. Often useful for\ndisplaying to users.\n',
+                title: 'Payment-Description'
+              },
+              accountId: {
+                type: 'string',
+                example: 'aa9333ba-82de-400c-9ae7-087b9f8d2242',
+                description: 'MONEI Account identifier.',
+                title: 'AccountId'
+              },
+              authorizationCode: {
+                type: 'string',
+                example: '475816',
+                description: 'Unique identifier provided by the bank performing transaction.\n',
+                title: 'Payment-AuthorizationCode'
+              },
+              livemode: {
+                type: 'boolean',
+                example: false,
+                description:
+                  'Has the value `true` if the resource exists in live mode or the value `false` if the resource exists in test mode.',
+                title: 'Livemode'
+              },
+              status: {
+                type: 'string',
+                example: 'PENDING',
+                enum: [
+                  'SUCCEEDED',
+                  'PENDING',
+                  'FAILED',
+                  'CANCELED',
+                  'REFUNDED',
+                  'PARTIALLY_REFUNDED',
+                  'AUTHORIZED',
+                  'EXPIRED'
+                ],
+                description: 'The status of the payment.',
+                title: 'Payment-Status'
+              },
+              statusCode: {
+                allOf: [{type: 'string', example: null}],
+                description:
+                  '<p>The MONEI API returns a <code>statusCode</code> attribute in the <a href="https://docs.monei.com/docs/apis/rest/payments/">Payment Object</a> to indicate the outcome of your request. This helps you understand whether an operation was successful or why it failed.</p>\n<h3>Success Code</h3>\n<p>Successful transactions return the following code:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E000</td>\n<td>Transaction approved</td>\n</tr>\n<tr>\n<td>E001</td>\n<td>Transaction pending processing</td>\n</tr>\n<tr>\n<td>E002</td>\n<td>Transaction pending authentication</td>\n</tr>\n<tr>\n<td>E003</td>\n<td>Transaction pending authorization</td>\n</tr>\n</tbody></table>\n<h3>Error Codes</h3>\n<p>Error codes are grouped by category to help you quickly identify the type of issue:</p>\n<h4>Configuration Errors (E1xx)</h4>\n<p>These errors relate to account configuration issues:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E101</td>\n<td>Error with payment processor configuration. Check this in your dashboard or contact MONEI for support</td>\n</tr>\n<tr>\n<td>E102</td>\n<td>Invalid or inactive MID. Please contact the acquiring entity</td>\n</tr>\n<tr>\n<td>E103</td>\n<td>Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support</td>\n</tr>\n<tr>\n<td>E104</td>\n<td>Partial captures are not enabled in your account, please contact MONEI support</td>\n</tr>\n<tr>\n<td>E105</td>\n<td>MOTO Payment are not enabled in your account, please contact MONEI support</td>\n</tr>\n</tbody></table>\n<h4>Authentication and Request Errors (E15x)</h4>\n<p>These errors indicate issues with your API request format or authentication:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E150</td>\n<td>Invalid or malformed request. Please check the message format</td>\n</tr>\n<tr>\n<td>E151</td>\n<td>Missing or malformed signature/auth</td>\n</tr>\n<tr>\n<td>E152</td>\n<td>Error while decrypting request</td>\n</tr>\n<tr>\n<td>E153</td>\n<td>Pre-authorization is expired and cannot be canceled or captured</td>\n</tr>\n<tr>\n<td>E154</td>\n<td>The payment date cannot be less than the cancellation or capture date</td>\n</tr>\n<tr>\n<td>E155</td>\n<td>The cancellation date exceeded the date allowed for pre-authorized operations</td>\n</tr>\n<tr>\n<td>E156</td>\n<td>Unauthorized token</td>\n</tr>\n</tbody></table>\n<h4>Transaction Processing Errors (E2xx)</h4>\n<p>These errors occur during payment processing:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E200</td>\n<td>Transaction failed during payment processing</td>\n</tr>\n<tr>\n<td>E201</td>\n<td>Transaction declined by the card-issuing bank</td>\n</tr>\n<tr>\n<td>E202</td>\n<td>Transaction declined by the issuing bank</td>\n</tr>\n<tr>\n<td>E203</td>\n<td>Payment method not allowed</td>\n</tr>\n<tr>\n<td>E204</td>\n<td>Wrong or not allowed currency</td>\n</tr>\n<tr>\n<td>E205</td>\n<td>Incorrect reference / transaction does not exist</td>\n</tr>\n<tr>\n<td>E206</td>\n<td>Invalid payment method</td>\n</tr>\n<tr>\n<td>E207</td>\n<td>Transaction failed: process time exceeded</td>\n</tr>\n<tr>\n<td>E208</td>\n<td>Transaction is currently being processed</td>\n</tr>\n<tr>\n<td>E209</td>\n<td>Duplicated operation</td>\n</tr>\n<tr>\n<td>E210</td>\n<td>Wrong or not allowed payment amount</td>\n</tr>\n<tr>\n<td>E211</td>\n<td>Refund declined by processor</td>\n</tr>\n<tr>\n<td>E212</td>\n<td>Transaction has already been captured</td>\n</tr>\n<tr>\n<td>E213</td>\n<td>Transaction has already been canceled</td>\n</tr>\n<tr>\n<td>E214</td>\n<td>The amount to be captured cannot exceed the pre-authorized amount</td>\n</tr>\n<tr>\n<td>E215</td>\n<td>The transaction to be captured has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E216</td>\n<td>The transaction to be canceled has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E217</td>\n<td>Transaction denied by processor to avoid duplicated operations</td>\n</tr>\n<tr>\n<td>E218</td>\n<td>Error during payment request validation</td>\n</tr>\n<tr>\n<td>E219</td>\n<td>Refund declined due to exceeded amount</td>\n</tr>\n<tr>\n<td>E220</td>\n<td>Transaction has already been fully refunded</td>\n</tr>\n<tr>\n<td>E221</td>\n<td>Transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E222</td>\n<td>The user has canceled the payment</td>\n</tr>\n<tr>\n<td>E223</td>\n<td>Waiting for the transaction to be completed</td>\n</tr>\n<tr>\n<td>E224</td>\n<td>No reason to decline</td>\n</tr>\n<tr>\n<td>E225</td>\n<td>Refund not allowed</td>\n</tr>\n<tr>\n<td>E226</td>\n<td>Transaction cannot be completed, violation of law</td>\n</tr>\n<tr>\n<td>E227</td>\n<td>Stop Payment Order</td>\n</tr>\n<tr>\n<td>E228</td>\n<td>Strong Customer Authentication required</td>\n</tr>\n<tr>\n<td>E229</td>\n<td>Expired payment method</td>\n</tr>\n</tbody></table>\n<h4>3D Secure Related Errors (E3xx)</h4>\n<p>These errors are related to 3D Secure authentication:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E300</td>\n<td>Transaction declined due to security restrictions</td>\n</tr>\n<tr>\n<td>E301</td>\n<td>3D Secure authentication failed</td>\n</tr>\n<tr>\n<td>E302</td>\n<td>Authentication process timed out. Please try again</td>\n</tr>\n<tr>\n<td>E303</td>\n<td>An error occurred during the 3D Secure process</td>\n</tr>\n<tr>\n<td>E304</td>\n<td>Invalid or malformed 3D Secure request</td>\n</tr>\n<tr>\n<td>E305</td>\n<td>Exemption not allowed</td>\n</tr>\n<tr>\n<td>E306</td>\n<td>Exemption error</td>\n</tr>\n<tr>\n<td>E307</td>\n<td>Fraud control error</td>\n</tr>\n<tr>\n<td>E308</td>\n<td>External MPI received wrong. Please check the data</td>\n</tr>\n<tr>\n<td>E309</td>\n<td>External MPI not enabled. Please contact support</td>\n</tr>\n<tr>\n<td>E310</td>\n<td>Transaction confirmation rejected by the merchant</td>\n</tr>\n</tbody></table>\n<h4>Card Related Errors (E5xx)</h4>\n<p>These errors are specific to card payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E500</td>\n<td>Transaction declined during card payment process</td>\n</tr>\n<tr>\n<td>E501</td>\n<td>Card rejected: invalid card number</td>\n</tr>\n<tr>\n<td>E502</td>\n<td>Card rejected: wrong expiration date</td>\n</tr>\n<tr>\n<td>E503</td>\n<td>Card rejected: wrong CVC/CVV2 number</td>\n</tr>\n<tr>\n<td>E504</td>\n<td>Card number not registered</td>\n</tr>\n<tr>\n<td>E505</td>\n<td>Card is expired</td>\n</tr>\n<tr>\n<td>E506</td>\n<td>Error during payment authorization. Please try again</td>\n</tr>\n<tr>\n<td>E507</td>\n<td>Cardholder has canceled the payment</td>\n</tr>\n<tr>\n<td>E508</td>\n<td>Transaction declined: AMEX cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E509</td>\n<td>Card blocked temporarily or under suspicion of fraud</td>\n</tr>\n<tr>\n<td>E510</td>\n<td>Card does not allow pre-authorization operations</td>\n</tr>\n<tr>\n<td>E511</td>\n<td>CVC/CVV2 number is required</td>\n</tr>\n<tr>\n<td>E512</td>\n<td>Unsupported card type</td>\n</tr>\n<tr>\n<td>E513</td>\n<td>Transaction type not allowed for this type of card</td>\n</tr>\n<tr>\n<td>E514</td>\n<td>Transaction declined by card issuer</td>\n</tr>\n<tr>\n<td>E515</td>\n<td>Implausible card data</td>\n</tr>\n<tr>\n<td>E516</td>\n<td>Incorrect PIN</td>\n</tr>\n<tr>\n<td>E517</td>\n<td>Transaction not allowed for cardholder</td>\n</tr>\n<tr>\n<td>E518</td>\n<td>The amount exceeds the card limit</td>\n</tr>\n</tbody></table>\n<h4>Digital Wallet Errors (E6xx)</h4>\n<p>These errors are related to digital wallet payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E600</td>\n<td>Transaction declined during ApplePay/GooglePay payment process</td>\n</tr>\n<tr>\n<td>E601</td>\n<td>Incorrect ApplePay or GooglePay configuration</td>\n</tr>\n</tbody></table>\n<h4>PayPal Related Errors (E62x)</h4>\n<p>These errors are specific to PayPal payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E620</td>\n<td>Transaction declined during PayPal payment process</td>\n</tr>\n<tr>\n<td>E621</td>\n<td>Transaction declined during PayPal payment process: invalid currency</td>\n</tr>\n</tbody></table>\n<h4>Bizum Related Errors (E64x-E65x)</h4>\n<p>These errors are specific to Bizum payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E640</td>\n<td>Bizum transaction declined after three authentication attempts</td>\n</tr>\n<tr>\n<td>E641</td>\n<td>Bizum transaction declined due to failed authorization</td>\n</tr>\n<tr>\n<td>E642</td>\n<td>Bizum transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E643</td>\n<td>Bizum transaction canceled: the user does not want to continue</td>\n</tr>\n<tr>\n<td>E644</td>\n<td>Bizum transaction rejected by destination bank</td>\n</tr>\n<tr>\n<td>E645</td>\n<td>Bizum transaction rejected by origin bank</td>\n</tr>\n<tr>\n<td>E646</td>\n<td>Bizum transaction rejected by processor</td>\n</tr>\n<tr>\n<td>E647</td>\n<td>Bizum transaction failed while connecting with processor. Please try again</td>\n</tr>\n<tr>\n<td>E648</td>\n<td>Bizum transaction failed, payee is not found</td>\n</tr>\n<tr>\n<td>E649</td>\n<td>Bizum transaction failed, payer is not found</td>\n</tr>\n<tr>\n<td>E650</td>\n<td>Bizum REST not implemented</td>\n</tr>\n<tr>\n<td>E651</td>\n<td>Bizum transaction declined due to failed authentication</td>\n</tr>\n<tr>\n<td>E652</td>\n<td>The customer has disabled Bizum, please use another payment method</td>\n</tr>\n</tbody></table>\n<h4>ClickToPay Related Errors (E68x)</h4>\n<p>These errors are specific to ClickToPay payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E680</td>\n<td>Transaction declined during ClickToPay payment process</td>\n</tr>\n<tr>\n<td>E681</td>\n<td>Incorrect ClickToPay configuration</td>\n</tr>\n</tbody></table>\n<h4>Cofidis Related Errors (E7xx)</h4>\n<p>These errors are specific to Cofidis payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E700</td>\n<td>Transaction declined during Cofidis payment process</td>\n</tr>\n</tbody></table>\n<h4>System Errors (E9xx)</h4>\n<p>These errors indicate system-level issues:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E999</td>\n<td>Service internal error. Please contact support</td>\n</tr>\n</tbody></table>\n',
+                title: 'Payment-StatusCode'
+              },
+              statusMessage: {
+                type: 'string',
+                example: null,
+                description: 'Human readable status message, can be displayed to a user.\n',
+                title: 'Payment-StatusMessage'
+              },
+              customer: {
+                type: 'object',
+                properties: {
+                  email: {
+                    type: 'string',
+                    example: 'john.doe@example.com',
+                    description: "The customer's email address."
+                  },
+                  name: {
+                    type: 'string',
+                    example: 'John Doe',
+                    description: "The customer's full name or business name."
+                  },
+                  phone: {
+                    type: 'string',
+                    example: null,
+                    description: "The customer's phone number in E.164 format."
+                  }
+                },
+                title: 'Payment-Customer'
+              },
+              shop: {
+                type: 'object',
+                description:
+                  'The information about the shop (used in\n[hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)).\n',
+                properties: {
+                  name: {type: 'string', example: 'Test Shop', description: 'The shop name.'},
+                  country: {
+                    type: 'string',
+                    example: 'ES',
+                    description:
+                      'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+                    title: 'Country'
+                  }
+                },
+                title: 'Payment-Shop'
+              },
+              billingDetails: {
+                type: 'object',
+                description:
+                  'Billing information associated with the payment method\nat the time of the transaction.\n',
+                properties: {
+                  name: {
+                    type: 'string',
+                    example: 'John Doe',
+                    description: "The customer's billing full name."
+                  },
+                  email: {
+                    type: 'string',
+                    example: 'john.doe@example.com',
+                    description: "The customer's billing email address."
+                  },
+                  phone: {
+                    type: 'string',
+                    example: null,
+                    description: "The customer's billing phone number in E.164 format."
+                  },
+                  company: {type: 'string', example: null, description: 'Billing company name.'},
+                  taxId: {type: 'string', example: null, description: 'Company tax ID.'},
+                  address: {
+                    title: 'Address',
+                    type: 'object',
+                    properties: {
+                      country: {
+                        type: 'string',
+                        example: 'ES',
+                        description:
+                          'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+                        title: 'Country'
+                      },
+                      city: {
+                        type: 'string',
+                        example: 'Málaga',
+                        description: 'City, district, suburb, town, or village.'
+                      },
+                      line1: {
+                        type: 'string',
+                        example: 'Fake Street 123',
+                        description: 'Address line 1 (e.g., street, PO Box, or company name).'
+                      },
+                      line2: {
+                        type: 'string',
+                        example: null,
+                        description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
+                      },
+                      zip: {type: 'string', example: '1234', description: 'ZIP or postal code.'},
+                      state: {
+                        type: 'string',
+                        example: 'Málaga',
+                        description: 'State, county, province, or region.'
+                      }
+                    }
+                  }
+                },
+                title: 'Payment-BillingDetails'
+              },
+              shippingDetails: {
+                type: 'object',
+                description: 'Shipping information associated with the payment.',
+                properties: {
+                  name: {
+                    type: 'string',
+                    example: 'John Doe',
+                    description: "The shipping customer's full name."
+                  },
+                  email: {
+                    type: 'string',
+                    example: 'john.doe@example.com',
+                    description: "The shipping customer's email address."
+                  },
+                  phone: {
+                    type: 'string',
+                    example: null,
+                    description: "The shipping customer's phone number in E.164 format."
+                  },
+                  company: {
+                    type: 'string',
+                    example: null,
+                    description: 'Name of the company where the shipment is going.'
+                  },
+                  taxId: {type: 'string', example: null, description: 'Company tax ID.'},
+                  address: {
+                    title: 'Address',
+                    type: 'object',
+                    properties: {
+                      country: {
+                        type: 'string',
+                        example: 'ES',
+                        description:
+                          'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+                        title: 'Country'
+                      },
+                      city: {
+                        type: 'string',
+                        example: 'Málaga',
+                        description: 'City, district, suburb, town, or village.'
+                      },
+                      line1: {
+                        type: 'string',
+                        example: 'Fake Street 123',
+                        description: 'Address line 1 (e.g., street, PO Box, or company name).'
+                      },
+                      line2: {
+                        type: 'string',
+                        example: null,
+                        description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
+                      },
+                      zip: {type: 'string', example: '1234', description: 'ZIP or postal code.'},
+                      state: {
+                        type: 'string',
+                        example: 'Málaga',
+                        description: 'State, county, province, or region.'
+                      }
+                    }
+                  }
+                },
+                title: 'Payment-ShippingDetails'
+              },
+              refundedAmount: {
+                type: 'integer',
+                format: 'int32',
+                example: null,
+                description:
+                  'Amount in cents refunded (can be less than the amount\nattribute on the payment if a partial refund was issued).\n',
+                title: 'Payment-RefundedAmount'
+              },
+              lastRefundAmount: {
+                type: 'integer',
+                format: 'int32',
+                example: null,
+                description: 'Amount in cents refunded in the last transaction.',
+                title: 'Payment-LastRefundAmount'
+              },
+              lastRefundReason: {
+                type: 'string',
+                example: null,
+                enum: ['duplicated', 'fraudulent', 'requested_by_customer'],
+                description: 'The reason of the last refund transaction.',
+                title: 'Payment-LastRefundReason'
+              },
+              cancellationReason: {
+                type: 'string',
+                example: null,
+                enum: ['duplicated', 'fraudulent', 'requested_by_customer'],
+                description: 'The reason for canceling the Payment.',
+                title: 'Payment-CancellationReason'
+              },
+              sessionDetails: {
+                description:
+                  'Information related to the browsing session of the user\nwho initiated the payment.\n',
+                properties: {
+                  ip: {
+                    type: 'string',
+                    example: '100.100.200.100',
+                    description: 'The IP address where the operation originated.',
+                    title: 'IP'
+                  },
+                  countryCode: {
+                    type: 'string',
+                    example: 'ES',
+                    description:
+                      'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+                    title: 'Country'
+                  },
+                  lang: {
+                    type: 'string',
+                    example: 'es',
+                    description:
+                      'Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)).',
+                    title: 'Lang'
+                  },
+                  deviceType: {
+                    type: 'string',
+                    example: 'desktop',
+                    description: 'Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`.',
+                    title: 'DeviceType'
+                  },
+                  deviceModel: {
+                    type: 'string',
+                    example: null,
+                    description:
+                      'Information about the device used for the browser session (e.g., `iPhone`).',
+                    title: 'DeviceModel'
+                  },
+                  browser: {
+                    type: 'string',
+                    example: 'Chrome',
+                    description:
+                      'The browser used in this browser session (e.g., `Mobile Safari`).',
+                    title: 'Browser'
+                  },
+                  browserVersion: {
+                    type: 'string',
+                    example: '83.0.4103.116',
+                    description: 'The version for the browser session (e.g., `13.1.1`).',
+                    title: 'BrowserVersion'
+                  },
+                  os: {
+                    type: 'string',
+                    example: 'Mac OS',
+                    description: 'Operation system (e.g., `iOS`).',
+                    title: 'Os'
+                  },
+                  osVersion: {
+                    type: 'string',
+                    example: '10.15.4',
+                    description: 'Operation system version (e.g., `13.5.1`).',
+                    title: 'OsVersion'
+                  },
+                  source: {
+                    type: 'string',
+                    example: 'MONEI/PHP',
+                    description:
+                      "The source component from where the operation was generated (mostly for our SDK's).",
+                    title: 'Source'
+                  },
+                  sourceVersion: {
+                    type: 'string',
+                    example: '0.1.2',
+                    description:
+                      "The source component version from where the operation was generated (mostly for our SDK's).",
+                    title: 'SourceVersion'
+                  },
+                  userAgent: {
+                    type: 'string',
+                    example: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...',
+                    description: 'Full user agent string of the browser session.',
+                    title: 'UserAgent'
+                  },
+                  browserAccept: {
+                    type: 'string',
+                    example: 'text/html,application/xhtml+xml,application/json',
+                    description: 'Browser accept header.',
+                    title: 'BrowserAccept'
+                  },
+                  browserColorDepth: {
+                    type: 'string',
+                    example: '24',
+                    description: 'The color depth of the browser session (e.g., `24`).',
+                    title: 'BrowserColorDepth'
+                  },
+                  browserScreenHeight: {
+                    type: 'string',
+                    example: '1152',
+                    description: 'The screen height of the browser session (e.g., `1152`).',
+                    title: 'BrowserScreenHeight'
+                  },
+                  browserScreenWidth: {
+                    type: 'string',
+                    example: '2048',
+                    description: 'The screen width of the browser session (e.g., `2048`).',
+                    title: 'BrowserScreenWidth'
+                  },
+                  browserTimezoneOffset: {
+                    type: 'string',
+                    example: '-120',
+                    description: 'The timezone offset of the browser session (e.g., `-120`).',
+                    title: 'BrowserTimezoneOffset'
+                  }
+                },
+                title: 'Payment-SessionDetails'
+              },
+              traceDetails: {
+                description:
+                  'Information related to the browsing session of the user\nwho initiated the payment.\n',
+                properties: {
+                  ip: {
+                    type: 'string',
+                    example: '100.100.200.100',
+                    description: 'The IP address where the operation originated.',
+                    title: 'IP'
+                  },
+                  countryCode: {
+                    type: 'string',
+                    example: 'ES',
+                    description:
+                      'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+                    title: 'Country'
+                  },
+                  lang: {
+                    type: 'string',
+                    example: 'es',
+                    description:
+                      'Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)).',
+                    title: 'Lang'
+                  },
+                  deviceType: {
+                    type: 'string',
+                    example: 'desktop',
+                    description: 'Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`.',
+                    title: 'DeviceType'
+                  },
+                  deviceModel: {
+                    type: 'string',
+                    example: null,
+                    description:
+                      'Information about the device used for the browser session (e.g., `iPhone`).',
+                    title: 'DeviceModel'
+                  },
+                  browser: {
+                    type: 'string',
+                    example: 'Chrome',
+                    description:
+                      'The browser used in this browser session (e.g., `Mobile Safari`).',
+                    title: 'Browser'
+                  },
+                  browserVersion: {
+                    type: 'string',
+                    example: '83.0.4103.116',
+                    description: 'The version for the browser session (e.g., `13.1.1`).',
+                    title: 'BrowserVersion'
+                  },
+                  os: {
+                    type: 'string',
+                    example: 'Mac OS',
+                    description: 'Operation system (e.g., `iOS`).',
+                    title: 'Os'
+                  },
+                  osVersion: {
+                    type: 'string',
+                    example: '10.15.4',
+                    description: 'Operation system version (e.g., `13.5.1`).',
+                    title: 'OsVersion'
+                  },
+                  source: {
+                    type: 'string',
+                    example: 'MONEI/PHP',
+                    description:
+                      "The source component from where the operation was generated (mostly for our SDK's).",
+                    title: 'Source'
+                  },
+                  sourceVersion: {
+                    type: 'string',
+                    example: '0.1.2',
+                    description:
+                      "The source component version from where the operation was generated (mostly for our SDK's).",
+                    title: 'SourceVersion'
+                  },
+                  userAgent: {
+                    type: 'string',
+                    example: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...',
+                    description: 'Full user agent string of the browser session.',
+                    title: 'UserAgent'
+                  },
+                  browserAccept: {
+                    type: 'string',
+                    example: 'text/html,application/xhtml+xml,application/json',
+                    description: 'Browser accept header.',
+                    title: 'BrowserAccept'
+                  },
+                  browserColorDepth: {
+                    type: 'string',
+                    example: '24',
+                    description: 'The color depth of the browser session (e.g., `24`).',
+                    title: 'BrowserColorDepth'
+                  },
+                  browserScreenHeight: {
+                    type: 'string',
+                    example: '1152',
+                    description: 'The screen height of the browser session (e.g., `1152`).',
+                    title: 'BrowserScreenHeight'
+                  },
+                  browserScreenWidth: {
+                    type: 'string',
+                    example: '2048',
+                    description: 'The screen width of the browser session (e.g., `2048`).',
+                    title: 'BrowserScreenWidth'
+                  },
+                  browserTimezoneOffset: {
+                    type: 'string',
+                    example: '-120',
+                    description: 'The timezone offset of the browser session (e.g., `-120`).',
+                    title: 'BrowserTimezoneOffset'
+                  },
+                  userId: {
+                    type: 'string',
+                    example: null,
+                    description: 'The ID of the user that started the operation.'
+                  },
+                  userEmail: {
+                    type: 'string',
+                    example: 'user@example.com',
+                    description: 'The email of the user that started the operation.'
+                  }
+                },
+                title: 'Payment-TraceDetails'
+              },
+              paymentToken: {
+                type: 'string',
+                example: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
+                description:
+                  'A permanent token represents a payment method used in the\npayment. Pass `generatePaymentToken: true` when you creating\na payment to generate it. You can pass it as `paymentToken`\nparameter to create other payments with the same payment\nmethod. This token does not expire, and should only be\nused server-side.\n',
+                title: 'Payment-PaymentToken'
+              },
+              paymentMethod: {
+                type: 'object',
+                description: 'Details about the payment method at the time of the transaction.\n',
+                properties: {
+                  method: {
+                    type: 'string',
+                    example: 'card',
+                    enum: [
+                      'alipay',
+                      'card',
+                      'bizum',
+                      'paypal',
+                      'cofidis',
+                      'cofidisLoan',
+                      'mbway',
+                      'multibanco',
+                      'iDeal',
+                      'bancontact',
+                      'sofort',
+                      'trustly',
+                      'sepa',
+                      'klarna',
+                      'giropay',
+                      'eps',
+                      'blik'
+                    ],
+                    description: 'Payment method type.'
+                  },
+                  card: {
+                    type: 'object',
+                    description:
+                      'Details about the card used as payment method at the time of the transaction.\n',
+                    properties: {
+                      country: {
+                        type: 'string',
+                        example: 'ES',
+                        description:
+                          'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+                        title: 'Country'
+                      },
+                      brand: {
+                        type: 'string',
+                        example: 'visa',
+                        enum: [
+                          'visa',
+                          'mastercard',
+                          'diners',
+                          'amex',
+                          'jcb',
+                          'unionpay',
+                          'unknown'
+                        ],
+                        description: 'Card brand.'
+                      },
+                      type: {
+                        type: 'string',
+                        example: 'credit',
+                        enum: ['debit', 'credit'],
+                        description: 'Card type `debit` or `credit`.'
+                      },
+                      threeDSecure: {
+                        type: 'boolean',
+                        example: false,
+                        description: 'Whether this transaction used 3D Secure authentication.'
+                      },
+                      threeDSecureVersion: {
+                        type: 'string',
+                        example: '2.1.0',
+                        description: 'The protocol version of the 3DS challenge.'
+                      },
+                      threeDSecureFlow: {
+                        type: 'string',
+                        example: 'CHALLENGE',
+                        enum: ['CHALLENGE', 'FRICTIONLESS', 'FRICTIONLESS_CHALLENGE', 'DIRECT'],
+                        description:
+                          "The flow used for 3DS authentication.\n- `CHALLENGE` - In a challenge flow, the issuer requires additional shopper interaction, either through biometrics, two-factor authentication, or similar methods based on [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) factors.\n- `FRICTIONLESS` - In a frictionless flow, the acquirer, issuer, and card scheme exchange all necessary\n    information in the background through passive authentication using the shopper's device\n    fingerprint. The transaction is completed without further shopper interaction.\n- `FRICTIONLESS_CHALLENGE` - This flow is the complete 3DS flow. It is similar to the 3DS frictionless flow but\n    includes an additional authentication step (challenge) that will be invoked if the\n    information provided in the data collection step does not suffice to determine the\n    risk-level of the transaction.\n- `DIRECT` - This transaction did not require [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) due to the low risk\n"
+                      },
+                      expiration: {
+                        type: 'integer',
+                        format: 'int64',
+                        example: 2048544000,
+                        description:
+                          'Time at which the card will expire.\nMeasured in seconds since the Unix epoch.\n'
+                      },
+                      last4: {
+                        type: 'string',
+                        example: '0004',
+                        description: 'The last four digits of the card.'
+                      },
+                      tokenizationMethod: {
+                        type: 'string',
+                        example: 'applePay',
+                        enum: ['applePay', 'googlePay', 'clickToPay'],
+                        description: 'The digital wallet used to tokenize the card.'
+                      },
+                      cardholderName: {
+                        type: 'string',
+                        example: 'John Doe',
+                        description: 'The name of the cardholder.'
+                      },
+                      cardholderEmail: {
+                        type: 'string',
+                        example: 'email@example.com',
+                        description: 'The email of the cardholder.'
+                      }
+                    },
+                    title: 'Payment-PaymentMethodCard'
+                  },
+                  bizum: {
+                    type: 'object',
+                    description:
+                      'Details about the Bizum account used as payment method at the time of the transaction.\n',
+                    properties: {
+                      phoneNumber: {
+                        type: 'string',
+                        example: null,
+                        description: 'Phone number in E.164 format used to pay with `bizum`.'
+                      }
+                    },
+                    title: 'Payment-PaymentMethodBizum'
+                  },
+                  paypal: {
+                    type: 'object',
+                    description:
+                      'Details from Paypal order used as payment method at the time of the transaction.\n',
+                    properties: {
+                      orderId: {
+                        type: 'string',
+                        example: null,
+                        description: "The Paypal's order ID."
+                      }
+                    },
+                    title: 'Payment-PaymentMethodPaypal'
+                  },
+                  cofidis: {
+                    type: 'object',
+                    description:
+                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
+                    properties: {
+                      orderId: {
+                        type: 'string',
+                        example: null,
+                        description: "The Cofidis' order ID."
+                      }
+                    },
+                    title: 'Payment-PaymentMethodCofidis'
+                  },
+                  cofidisLoan: {
+                    type: 'object',
+                    description:
+                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
+                    properties: {
+                      orderId: {
+                        type: 'string',
+                        example: null,
+                        description: "The Cofidis' order ID."
+                      }
+                    },
+                    title: 'Payment-PaymentMethodCofidis'
+                  },
+                  mbway: {
+                    type: 'object',
+                    description:
+                      'Details from MBWay order used as payment method at the time of the transaction.\n',
+                    properties: {
+                      phoneNumber: {
+                        type: 'string',
+                        example: null,
+                        description: 'Phone number in E.164 format used to pay with `mbway`.'
+                      }
+                    },
+                    title: 'Payment-PaymentMethodMbway'
+                  },
+                  trustly: {
+                    type: 'object',
+                    description:
+                      'Details from Trustly order used as payment method at the time of the transaction.\n',
+                    properties: {
+                      customerId: {
+                        type: 'string',
+                        example: null,
+                        description: "The Trustly's customer ID."
+                      }
+                    },
+                    title: 'Payment-PaymentMethodTrustly'
+                  },
+                  sepa: {
+                    type: 'object',
+                    description:
+                      'Details from SEPA order used as payment method at the time of the transaction.\n',
+                    properties: {
+                      accountholderAddress: {
+                        type: 'string',
+                        example: null,
+                        description: 'The address of the account holder.'
+                      },
+                      accountholderEmail: {
+                        type: 'string',
+                        example: null,
+                        description: 'The email of the account holder.'
+                      },
+                      accountholderName: {
+                        type: 'string',
+                        example: null,
+                        description: 'The name of the account holder.'
+                      },
+                      countryCode: {
+                        type: 'string',
+                        example: null,
+                        description: 'The country code of the account holder.'
+                      },
+                      bankAddress: {
+                        type: 'string',
+                        example: null,
+                        description: 'The address of the bank.'
+                      },
+                      bankCode: {
+                        type: 'string',
+                        example: null,
+                        description: 'The code of the bank.'
+                      },
+                      bankName: {
+                        type: 'string',
+                        example: null,
+                        description: 'The name of the bank.'
+                      },
+                      bic: {type: 'string', example: null, description: 'The BIC of the bank.'},
+                      last4: {
+                        type: 'string',
+                        example: null,
+                        description: 'The last 4 digits of the IBAN.'
+                      }
+                    },
+                    title: 'Payment-PaymentMethodSepa'
+                  },
+                  klarna: {
+                    type: 'object',
+                    description:
+                      'Details from Klarna order used as payment method at the time of the transaction.\n',
+                    properties: {
+                      billingCategory: {
+                        type: 'string',
+                        example: 'PAY_LATER',
+                        enum: ['PAY_LATER', 'PAY_NOW', 'SLICE_IT', 'SLICE_IT_BY_CARD']
+                      },
+                      authPaymentMethod: {
+                        type: 'string',
+                        example: 'card',
+                        enum: [
+                          'invoice',
+                          'fixed_amount',
+                          'pix',
+                          'base_account',
+                          'deferred_interest',
+                          'direct_debit',
+                          'direct_bank_transfer',
+                          'b2b_invoice',
+                          'card',
+                          'slice_it_by_card'
+                        ]
+                      }
+                    },
+                    title: 'Payment-PaymentMethodKlarna'
+                  }
+                },
+                title: 'Payment-PaymentMethod'
+              },
+              sequence: {
+                type: 'object',
+                description:
+                  'This field needs to be sent in order to mark the beginning of a sequence of payments\n(recurring/subscriptions, installments, and so). Specific configurations can be set\nin the inside properties (`recurring`).\n',
+                required: ['type'],
+                properties: {
+                  type: {type: 'string', example: 'recurring', enum: ['recurring']},
+                  recurring: {
+                    type: 'object',
+                    description:
+                      'Specific configurations for recurring payments.\nWill only be used when `sequence`.`type` is `recurring`.\n',
+                    properties: {
+                      expiry: {
+                        type: 'string',
+                        example: '20210630',
+                        default: '*(The payment method or card expiration)*',
+                        description:
+                          'Date after which no further recurring payments will be performed.\nMust be formatted as `YYYYMMDD`.\n'
+                      },
+                      frequency: {
+                        type: 'integer',
+                        format: 'int32',
+                        example: 30,
+                        default: 25,
+                        description:
+                          'The minimum number of **days** between the different recurring payments.\n'
+                      }
+                    },
+                    title: 'Payment-SequenceRecurring'
+                  }
+                },
+                title: 'Payment-Sequence'
+              },
+              sequenceId: {
+                type: 'string',
+                example: '62b23b9f3627cc38b08ff471ccd313ad',
+                description:
+                  'A permanent identifier that refers to the initial payment of\na sequence of payments. This value needs to be sent in the path\nfor `RECURRING` payments.\n',
+                title: 'Payment-SequenceId'
+              },
+              storeId: {
+                type: 'string',
+                example: 'e5f28150d9e8974c58ab5ec9c4a880f8734dcf05',
+                description:
+                  'A unique identifier of the Store. If specified the payment is attached to this Store.\n',
+                title: 'Payment-StoreId'
+              },
+              pointOfSaleId: {
+                type: 'string',
+                example: 'fb269cccfa0cc021f5d0b8eb1421646c696213e1',
+                description:
+                  'A unique identifier of the Point of Sale. If specified the payment is attached to this Point of Sale. If there is a QR code attached to the same Point of Sale, this payment will be available by scanning the QR code.\n',
+                title: 'Payment-PointOfSaleId'
+              },
+              metadata: {
+                type: 'object',
+                example: {systemId: '12345'},
+                description:
+                  'A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.',
+                title: 'Metadata'
+              },
+              nextAction: {
+                type: 'object',
+                description:
+                  'If present, this property tells you what actions you need\nto take in order for your customer to fulfill a payment\nusing the provided source.\n',
+                properties: {
+                  type: {
+                    type: 'string',
+                    example: 'CONFIRM',
+                    enum: [
+                      'CONFIRM',
+                      'CHALLENGE',
+                      'FRICTIONLESS_CHALLENGE',
+                      'BIZUM_CHALLENGE',
+                      'COMPLETE'
+                    ],
+                    description:
+                      '- `CONFIRM` - Your customer needs to be redirected to a\n  [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)\n  or confirm payment using\n  [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).\n  The **redirectUrl** will point to the hosted payment page.\n- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless\n   3d secure challenge page provided by the bank. The **redirectUrl**\n   will point to the frictionless 3d secure challenge page provided by the bank.\n- `CHALLENGE` - Your customer needs to be redirected to the\n  3d secure challenge page provided by the bank. The **redirectUrl**\n  will point to the 3d secure challenge page provided by the bank.\n- `COMPLETE` - The payment is completed. The **redirectUrl** will be\n  the **completeUrl** if it was provided when the payment was created.\n- `BIZUM_CHALLENGE` - Your customer will be redirected to the Bizum hosted payment page.\n'
+                  },
+                  mustRedirect: {
+                    type: 'boolean',
+                    example: false,
+                    description:
+                      'If `true` you have to redirect your customer to the **redirectUrl**\nto continue payment process.\n'
+                  },
+                  redirectUrl: {
+                    type: 'string',
+                    example: 'https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0',
+                    description: 'Redirect your customer to this url to continue payment process.\n'
+                  }
+                },
+                title: 'Payment-NextAction'
+              },
+              createdAt: {
+                type: 'integer',
+                format: 'int64',
+                example: 1636366897,
+                description:
+                  'Time at which the resource was created. Measured in seconds since the Unix epoch.',
+                title: 'CreatedAt'
+              },
+              updatedAt: {
+                type: 'integer',
+                format: 'int64',
+                example: 1636366897,
+                description:
+                  'Time at which the resource updated last time. Measured in seconds since the Unix epoch.',
+                title: 'UpdatedAt'
+              }
+            }
+          }
+        }
+      }
+    },
+    '400': {
+      description: 'The request is incorrect or could not be processed',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ErrorBase'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'BadRequestError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 400,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Bad request',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'BadRequestError'
+          }
+        }
+      }
+    },
+    '401': {
+      description: 'Unauthorized error. Please check your auth credentials',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ErrorBase'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'UnauthorizedError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 401,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Unauthorized access',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'UnauthorizedError'
+          }
+        }
+      }
+    },
+    '404': {
+      description: 'The specified resource was not found',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ErrorBase'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'NotFoundError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 404,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Resource not found',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'NotFoundError'
+          }
+        }
+      }
+    },
+    '422': {
+      description: 'The request was well-formed but could not be processed due to semantic errors',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ErrorBase'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'UnprocessableEntityError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 422,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Unprocessable entity',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'UnprocessableEntityError'
+          }
+        }
+      }
+    },
+    '500': {
+      description: 'Unexpected server error',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ErrorBase'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'InternalServerError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 500,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'An unexpected error occurred',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'InternalServerError'
+          }
+        }
+      }
+    },
+    '503': {
+      description: 'The service is temporarily unavailable',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ErrorBase'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'ServiceUnavailableError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 503,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Upstream service is unavailable',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'ServiceUnavailableError'
+          }
+        }
+      }
+    }
+  }}
+></StatusCodes>

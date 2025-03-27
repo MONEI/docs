@@ -107,7 +107,7 @@ The following parameters are required:
 - **transactionType** `string` - `PAYOUT`
 - **paymentMethod** `object` - Payment method object. It must contain `bizum` object with `phoneNumber` property.
 
-Check all available [request parameters](/api/#operation/payments_create).
+Check all available [request parameters](/docs/apis/rest/payments-create/).
 
 ### 2. Handle the response
 
@@ -142,7 +142,7 @@ Bizum payouts are executed immediately. If the request is successful, you will r
 }
 ```
 
-Check the full list of returned [response parameters](/api/#section/Payment-object).
+Check the full list of returned [response parameters](/docs/apis/rest/schemas/payment/).
 
 Optionally, you can redirect the client to the `nextAction.redirectUrl` to show the payout status or receipt.
 
