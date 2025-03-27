@@ -6,7 +6,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "genapi:rest": "docusaurus clean-api-docs all && docusaurus gen-api-docs all && node scripts/fix-rest-api-docs.js",
-    "genapi:graphql": "docusaurus graphql-to-doc",
+    "genapi:graphql": "node scripts/clean-graphql.js && docusaurus graphql-to-doc",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
