@@ -246,8 +246,7 @@ body {
   margin: 0;
 }
 
-/* docusaurus-plugin-openapi-docs: Increase code snippets max height.
-*/
+/* docusaurus-plugin-openapi-docs: Increase code snippets max height. */
 .openapi-right-panel__container .openapi-explorer__code-block code,
 .openapi-right-panel__container .openapi-explorer__playground-container {
   max-height: 800px;
