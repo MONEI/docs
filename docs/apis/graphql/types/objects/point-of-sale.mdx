@@ -74,6 +74,7 @@ type PointOfSale {
   fixedCurrency: Currencies
   qrCodeText: String
   paymentCallbackUrl: String
+  currentPaymentId: ID
 }
 ```
 
@@ -126,6 +127,10 @@ QR code text
 #### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>paymentCallbackUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
 
 The URL where to notify a success payment (server-to-server HTTP POST request)
+
+#### [<code style={{ fontWeight: 'normal' }}>PointOfSale.<b>currentPaymentId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The ID of the current payment
 
 ### Returned By
 
