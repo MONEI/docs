@@ -446,12 +446,6 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: 'doc',
-          id: 'apis/rest/schemas/paymentstatuscodes',
-          label: 'PaymentStatusCodes',
-          className: 'schema'
-        },
-        {
-          type: 'doc',
           id: 'apis/rest/schemas/payment',
           label: 'Payment',
           className: 'schema'
