@@ -40,7 +40,7 @@ MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowin
 
 **Description:** This endpoint allows the payee’s SRTP service provider (e.g., MONEI on behalf of the merchant) to post a new SEPA Request-to-Pay to the payer’s SRTP service provider. In practice, it creates a payment request that will be delivered to the payer for approval.
 
-**Endpoint:** `https://service.microapps-staging.com/v1/sepa-request-to-pay-requests`
+**Endpoint:** `https://api.monei.com/v1/sepa-request-to-pay-requests`
 
 **Instructions:**
 
@@ -52,7 +52,7 @@ MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowin
 
 ```json
 {
-    "callbackUrl": "https://testing-srtp.galitt.com/005/callback",
+    "callbackUrl": "https://testing-srtp.com/005/callback",
     "Document": {
         "CdtrPmtActvtnReq": {
             "GrpHdr": {
@@ -174,7 +174,7 @@ MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowin
                                 "RmtLctnDtls": [
                                     {
                                         "Mtd": "URID",
-                                        "ElctrncAdr": "david.molina@monei.com"
+                                        "ElctrncAdr": "test@monei.com"
                                     }
                                 ]
                             },
@@ -293,7 +293,7 @@ MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowin
 
 **Description:** This endpoint is used by the payee’s SRTP service provider to query the status of a previously created Request to Pay. It asks the payer’s SRTP service provider for an update on whether the payer has accepted, rejected, or not yet acted on the payment request.
 
-**Endpoint:** `https://service.microapps-staging.com/v1/sepa-request-to-pay-requests/{{resourceId}}/status-update`
+**Endpoint:** `https://api.monei.com/v1/sepa-request-to-pay-requests/{{resourceId}}/status-update`
 
 **Instructions:**
 
@@ -308,7 +308,7 @@ MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowin
 ```json
 {
     "resourceId": "5427-9966-1810-4084",
-    "callbackUrl": "https://testing-srtp.galitt.com/005/callback",
+    "callbackUrl": "https://testing-srtp.com/005/callback",
     "Document": {
         "FIToFIPmtStsReq": {
             "GrpHdr": {
@@ -495,7 +495,7 @@ MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowin
 
 **Description:** This endpoint is used by the payee’s SRTP service provider to request cancellation of a previously sent Request to Pay. Essentially, it sends a cancellation message to the payer’s SRTP service provider indicating that the payee (merchant) wishes to cancel the payment request.
 
-**Endpoint:** `https://service.microapps-staging.com/v1/sepa-request-to-pay-requests/{{resourceId}}/cancellation-requests`
+**Endpoint:** `https://api.monei.com/v1/sepa-request-to-pay-requests/{{resourceId}}/cancellation-requests`
 
 **Instructions:**
 
@@ -509,7 +509,7 @@ MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowin
 
 ```json
 {
-    "callbackUrl": "https://testing-srtp.galitt.com/005/callback",
+    "callbackUrl": "https://testing-srtp.com/005/callback",
     "Document": {
         "CstmrPmtCxlReq": {
             "Assgnmt": {
@@ -745,7 +745,7 @@ MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowin
 
 **Description:** This endpoint allows the payee’s SRTP service provider to request a status update for a cancellation request that was previously made. In other words, after initiating a cancellation of an SRTP, the payee’s provider can use this endpoint to check whether that cancellation has been processed/acknowledged by the payer’s side.
 
-**Endpoint:** `https://service.microapps-staging.com/v1/sepa-request-to-pay-requests/{{resourceId}}/cancellation-requests/{{cancellationResourceId}}/status-update`
+**Endpoint:** `https://api.monei.com/v1/sepa-request-to-pay-requests/{{resourceId}}/cancellation-requests/{{cancellationResourceId}}/status-update`
 
 **Instructions:**
 
@@ -859,7 +859,7 @@ MONEI provides a set of REST API endpoints to integrate the SRTP scheme, allowin
             }
         }
     },
-    "callbackUrl": "https://testing-srtp.galitt.com/005/callback"
+    "callbackUrl": "https://testing-srtp.com/005/callback"
 }
 ```
 
