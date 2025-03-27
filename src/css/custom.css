@@ -241,3 +241,14 @@ body {
 .openapi-security__details pre pre {
   border-top: 0;
 }
+
+.openapi-security__details .openapi-security__summary-header {
+  margin: 0;
+}
+
+/* docusaurus-plugin-openapi-docs: Increase code snippets max height.
+*/
+.openapi-right-panel__container .openapi-explorer__code-block code,
+.openapi-right-panel__container .openapi-explorer__playground-container {
+  max-height: 800px;
+}
