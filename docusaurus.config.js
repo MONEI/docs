@@ -45,15 +45,25 @@ module.exports = {
       items: [
         {
           to: 'docs/',
-          activeBasePath: 'docs',
           label: 'Documentation',
-          position: 'right'
+          position: 'right',
+          activeBaseRegex: '^/docs/(?!apis/)'
         },
         {
-          to: 'api/',
-          activeBasePath: 'api',
-          label: 'API',
-          position: 'right'
+          type: 'dropdown',
+          label: 'APIs',
+          position: 'right',
+          activeBaseRegex: '^/docs/apis/',
+          items: [
+            {
+              label: 'REST API',
+              to: 'api/'
+            },
+            {
+              label: 'GraphQL API',
+              to: 'docs/apis/graphql/'
+            }
+          ]
         },
         {
           to: 'https://support.monei.com',
@@ -95,5 +105,21 @@ module.exports = {
       }
     ]
   ],
-  plugins: [path.resolve(__dirname, './inject-scripts.js')]
+  plugins: [
+    path.resolve(__dirname, './inject-scripts.js'),
+    [
+      '@graphql-markdown/docusaurus',
+      {
+        schema: './schema.graphql',
+        rootPath: './docs/apis',
+        baseURL: 'graphql',
+        linkRoot: '/docs/apis/',
+        homepage: './docs/apis/graphql/index.md',
+        loaders: {
+          GraphQLFileLoader: '@graphql-tools/graphql-file-loader'
+          // TODO: Replace with the Monei schema using the URLLoader.
+        }
+      }
+    ]
+  ]
 };
