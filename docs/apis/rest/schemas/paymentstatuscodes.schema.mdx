@@ -1,0 +1,573 @@
+---
+id: paymentstatuscodes
+title: 'PaymentStatusCodes'
+description: 'The MONEI API returns a <code>statusCode</code> attribute in the Payment Object to indicate the outcome of your request. This helps you understand whether an operation was successful or why it failed.'
+sidebar_label: 'PaymentStatusCodes'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'E000'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'PaymentStatusCodes'}></Heading>
+
+<p>
+  The MONEI API returns a <code>statusCode</code> attribute in the{' '}
+  <a href="https://docs.monei.com/docs/apis/rest/payments/">Payment Object</a> to indicate the
+  outcome of your request. This helps you understand whether an operation was successful or why it
+  failed.
+</p>
+<h3>Success Code</h3>
+<p>Successful transactions return the following code:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E000</td>
+      <td>Transaction approved</td>
+    </tr>
+    <tr>
+      <td>E001</td>
+      <td>Transaction pending processing</td>
+    </tr>
+    <tr>
+      <td>E002</td>
+      <td>Transaction pending authentication</td>
+    </tr>
+    <tr>
+      <td>E003</td>
+      <td>Transaction pending authorization</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Error Codes</h3>
+<p>Error codes are grouped by category to help you quickly identify the type of issue:</p>
+<h4>Configuration Errors (E1xx)</h4>
+<p>These errors relate to account configuration issues:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E101</td>
+      <td>
+        Error with payment processor configuration. Check this in your dashboard or contact MONEI
+        for support
+      </td>
+    </tr>
+    <tr>
+      <td>E102</td>
+      <td>Invalid or inactive MID. Please contact the acquiring entity</td>
+    </tr>
+    <tr>
+      <td>E103</td>
+      <td>
+        Operation not allowed/configured for this merchant. Please contact the acquiring entity or
+        MONEI for support
+      </td>
+    </tr>
+    <tr>
+      <td>E104</td>
+      <td>Partial captures are not enabled in your account, please contact MONEI support</td>
+    </tr>
+    <tr>
+      <td>E105</td>
+      <td>MOTO Payment are not enabled in your account, please contact MONEI support</td>
+    </tr>
+  </tbody>
+</table>
+<h4>Authentication and Request Errors (E15x)</h4>
+<p>These errors indicate issues with your API request format or authentication:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E150</td>
+      <td>Invalid or malformed request. Please check the message format</td>
+    </tr>
+    <tr>
+      <td>E151</td>
+      <td>Missing or malformed signature/auth</td>
+    </tr>
+    <tr>
+      <td>E152</td>
+      <td>Error while decrypting request</td>
+    </tr>
+    <tr>
+      <td>E153</td>
+      <td>Pre-authorization is expired and cannot be canceled or captured</td>
+    </tr>
+    <tr>
+      <td>E154</td>
+      <td>The payment date cannot be less than the cancellation or capture date</td>
+    </tr>
+    <tr>
+      <td>E155</td>
+      <td>The cancellation date exceeded the date allowed for pre-authorized operations</td>
+    </tr>
+    <tr>
+      <td>E156</td>
+      <td>Unauthorized token</td>
+    </tr>
+  </tbody>
+</table>
+<h4>Transaction Processing Errors (E2xx)</h4>
+<p>These errors occur during payment processing:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E200</td>
+      <td>Transaction failed during payment processing</td>
+    </tr>
+    <tr>
+      <td>E201</td>
+      <td>Transaction declined by the card-issuing bank</td>
+    </tr>
+    <tr>
+      <td>E202</td>
+      <td>Transaction declined by the issuing bank</td>
+    </tr>
+    <tr>
+      <td>E203</td>
+      <td>Payment method not allowed</td>
+    </tr>
+    <tr>
+      <td>E204</td>
+      <td>Wrong or not allowed currency</td>
+    </tr>
+    <tr>
+      <td>E205</td>
+      <td>Incorrect reference / transaction does not exist</td>
+    </tr>
+    <tr>
+      <td>E206</td>
+      <td>Invalid payment method</td>
+    </tr>
+    <tr>
+      <td>E207</td>
+      <td>Transaction failed: process time exceeded</td>
+    </tr>
+    <tr>
+      <td>E208</td>
+      <td>Transaction is currently being processed</td>
+    </tr>
+    <tr>
+      <td>E209</td>
+      <td>Duplicated operation</td>
+    </tr>
+    <tr>
+      <td>E210</td>
+      <td>Wrong or not allowed payment amount</td>
+    </tr>
+    <tr>
+      <td>E211</td>
+      <td>Refund declined by processor</td>
+    </tr>
+    <tr>
+      <td>E212</td>
+      <td>Transaction has already been captured</td>
+    </tr>
+    <tr>
+      <td>E213</td>
+      <td>Transaction has already been canceled</td>
+    </tr>
+    <tr>
+      <td>E214</td>
+      <td>The amount to be captured cannot exceed the pre-authorized amount</td>
+    </tr>
+    <tr>
+      <td>E215</td>
+      <td>The transaction to be captured has not been pre-authorized yet</td>
+    </tr>
+    <tr>
+      <td>E216</td>
+      <td>The transaction to be canceled has not been pre-authorized yet</td>
+    </tr>
+    <tr>
+      <td>E217</td>
+      <td>Transaction denied by processor to avoid duplicated operations</td>
+    </tr>
+    <tr>
+      <td>E218</td>
+      <td>Error during payment request validation</td>
+    </tr>
+    <tr>
+      <td>E219</td>
+      <td>Refund declined due to exceeded amount</td>
+    </tr>
+    <tr>
+      <td>E220</td>
+      <td>Transaction has already been fully refunded</td>
+    </tr>
+    <tr>
+      <td>E221</td>
+      <td>Transaction declined due to insufficient funds</td>
+    </tr>
+    <tr>
+      <td>E222</td>
+      <td>The user has canceled the payment</td>
+    </tr>
+    <tr>
+      <td>E223</td>
+      <td>Waiting for the transaction to be completed</td>
+    </tr>
+    <tr>
+      <td>E224</td>
+      <td>No reason to decline</td>
+    </tr>
+    <tr>
+      <td>E225</td>
+      <td>Refund not allowed</td>
+    </tr>
+    <tr>
+      <td>E226</td>
+      <td>Transaction cannot be completed, violation of law</td>
+    </tr>
+    <tr>
+      <td>E227</td>
+      <td>Stop Payment Order</td>
+    </tr>
+    <tr>
+      <td>E228</td>
+      <td>Strong Customer Authentication required</td>
+    </tr>
+    <tr>
+      <td>E229</td>
+      <td>Expired payment method</td>
+    </tr>
+  </tbody>
+</table>
+<h4>3D Secure Related Errors (E3xx)</h4>
+<p>These errors are related to 3D Secure authentication:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E300</td>
+      <td>Transaction declined due to security restrictions</td>
+    </tr>
+    <tr>
+      <td>E301</td>
+      <td>3D Secure authentication failed</td>
+    </tr>
+    <tr>
+      <td>E302</td>
+      <td>Authentication process timed out. Please try again</td>
+    </tr>
+    <tr>
+      <td>E303</td>
+      <td>An error occurred during the 3D Secure process</td>
+    </tr>
+    <tr>
+      <td>E304</td>
+      <td>Invalid or malformed 3D Secure request</td>
+    </tr>
+    <tr>
+      <td>E305</td>
+      <td>Exemption not allowed</td>
+    </tr>
+    <tr>
+      <td>E306</td>
+      <td>Exemption error</td>
+    </tr>
+    <tr>
+      <td>E307</td>
+      <td>Fraud control error</td>
+    </tr>
+    <tr>
+      <td>E308</td>
+      <td>External MPI received wrong. Please check the data</td>
+    </tr>
+    <tr>
+      <td>E309</td>
+      <td>External MPI not enabled. Please contact support</td>
+    </tr>
+    <tr>
+      <td>E310</td>
+      <td>Transaction confirmation rejected by the merchant</td>
+    </tr>
+  </tbody>
+</table>
+<h4>Card Related Errors (E5xx)</h4>
+<p>These errors are specific to card payments:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E500</td>
+      <td>Transaction declined during card payment process</td>
+    </tr>
+    <tr>
+      <td>E501</td>
+      <td>Card rejected: invalid card number</td>
+    </tr>
+    <tr>
+      <td>E502</td>
+      <td>Card rejected: wrong expiration date</td>
+    </tr>
+    <tr>
+      <td>E503</td>
+      <td>Card rejected: wrong CVC/CVV2 number</td>
+    </tr>
+    <tr>
+      <td>E504</td>
+      <td>Card number not registered</td>
+    </tr>
+    <tr>
+      <td>E505</td>
+      <td>Card is expired</td>
+    </tr>
+    <tr>
+      <td>E506</td>
+      <td>Error during payment authorization. Please try again</td>
+    </tr>
+    <tr>
+      <td>E507</td>
+      <td>Cardholder has canceled the payment</td>
+    </tr>
+    <tr>
+      <td>E508</td>
+      <td>Transaction declined: AMEX cards not accepted by payment processor</td>
+    </tr>
+    <tr>
+      <td>E509</td>
+      <td>Card blocked temporarily or under suspicion of fraud</td>
+    </tr>
+    <tr>
+      <td>E510</td>
+      <td>Card does not allow pre-authorization operations</td>
+    </tr>
+    <tr>
+      <td>E511</td>
+      <td>CVC/CVV2 number is required</td>
+    </tr>
+    <tr>
+      <td>E512</td>
+      <td>Unsupported card type</td>
+    </tr>
+    <tr>
+      <td>E513</td>
+      <td>Transaction type not allowed for this type of card</td>
+    </tr>
+    <tr>
+      <td>E514</td>
+      <td>Transaction declined by card issuer</td>
+    </tr>
+    <tr>
+      <td>E515</td>
+      <td>Implausible card data</td>
+    </tr>
+    <tr>
+      <td>E516</td>
+      <td>Incorrect PIN</td>
+    </tr>
+    <tr>
+      <td>E517</td>
+      <td>Transaction not allowed for cardholder</td>
+    </tr>
+    <tr>
+      <td>E518</td>
+      <td>The amount exceeds the card limit</td>
+    </tr>
+  </tbody>
+</table>
+<h4>Digital Wallet Errors (E6xx)</h4>
+<p>These errors are related to digital wallet payments:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E600</td>
+      <td>Transaction declined during ApplePay/GooglePay payment process</td>
+    </tr>
+    <tr>
+      <td>E601</td>
+      <td>Incorrect ApplePay or GooglePay configuration</td>
+    </tr>
+  </tbody>
+</table>
+<h4>PayPal Related Errors (E62x)</h4>
+<p>These errors are specific to PayPal payments:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E620</td>
+      <td>Transaction declined during PayPal payment process</td>
+    </tr>
+    <tr>
+      <td>E621</td>
+      <td>Transaction declined during PayPal payment process: invalid currency</td>
+    </tr>
+  </tbody>
+</table>
+<h4>Bizum Related Errors (E64x-E65x)</h4>
+<p>These errors are specific to Bizum payments:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E640</td>
+      <td>Bizum transaction declined after three authentication attempts</td>
+    </tr>
+    <tr>
+      <td>E641</td>
+      <td>Bizum transaction declined due to failed authorization</td>
+    </tr>
+    <tr>
+      <td>E642</td>
+      <td>Bizum transaction declined due to insufficient funds</td>
+    </tr>
+    <tr>
+      <td>E643</td>
+      <td>Bizum transaction canceled: the user does not want to continue</td>
+    </tr>
+    <tr>
+      <td>E644</td>
+      <td>Bizum transaction rejected by destination bank</td>
+    </tr>
+    <tr>
+      <td>E645</td>
+      <td>Bizum transaction rejected by origin bank</td>
+    </tr>
+    <tr>
+      <td>E646</td>
+      <td>Bizum transaction rejected by processor</td>
+    </tr>
+    <tr>
+      <td>E647</td>
+      <td>Bizum transaction failed while connecting with processor. Please try again</td>
+    </tr>
+    <tr>
+      <td>E648</td>
+      <td>Bizum transaction failed, payee is not found</td>
+    </tr>
+    <tr>
+      <td>E649</td>
+      <td>Bizum transaction failed, payer is not found</td>
+    </tr>
+    <tr>
+      <td>E650</td>
+      <td>Bizum REST not implemented</td>
+    </tr>
+    <tr>
+      <td>E651</td>
+      <td>Bizum transaction declined due to failed authentication</td>
+    </tr>
+    <tr>
+      <td>E652</td>
+      <td>The customer has disabled Bizum, please use another payment method</td>
+    </tr>
+  </tbody>
+</table>
+<h4>ClickToPay Related Errors (E68x)</h4>
+<p>These errors are specific to ClickToPay payments:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E680</td>
+      <td>Transaction declined during ClickToPay payment process</td>
+    </tr>
+    <tr>
+      <td>E681</td>
+      <td>Incorrect ClickToPay configuration</td>
+    </tr>
+  </tbody>
+</table>
+<h4>Cofidis Related Errors (E7xx)</h4>
+<p>These errors are specific to Cofidis payments:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E700</td>
+      <td>Transaction declined during Cofidis payment process</td>
+    </tr>
+  </tbody>
+</table>
+<h4>System Errors (E9xx)</h4>
+<p>These errors indicate system-level issues:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>E999</td>
+      <td>Service internal error. Please contact support</td>
+    </tr>
+  </tbody>
+</table>
+
+<Schema
+  schema={{
+    description:
+      '<p>The MONEI API returns a <code>statusCode</code> attribute in the <a href="https://docs.monei.com/docs/apis/rest/payments/">Payment Object</a> to indicate the outcome of your request. This helps you understand whether an operation was successful or why it failed.</p>\n<h3>Success Code</h3>\n<p>Successful transactions return the following code:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E000</td>\n<td>Transaction approved</td>\n</tr>\n<tr>\n<td>E001</td>\n<td>Transaction pending processing</td>\n</tr>\n<tr>\n<td>E002</td>\n<td>Transaction pending authentication</td>\n</tr>\n<tr>\n<td>E003</td>\n<td>Transaction pending authorization</td>\n</tr>\n</tbody></table>\n<h3>Error Codes</h3>\n<p>Error codes are grouped by category to help you quickly identify the type of issue:</p>\n<h4>Configuration Errors (E1xx)</h4>\n<p>These errors relate to account configuration issues:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E101</td>\n<td>Error with payment processor configuration. Check this in your dashboard or contact MONEI for support</td>\n</tr>\n<tr>\n<td>E102</td>\n<td>Invalid or inactive MID. Please contact the acquiring entity</td>\n</tr>\n<tr>\n<td>E103</td>\n<td>Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support</td>\n</tr>\n<tr>\n<td>E104</td>\n<td>Partial captures are not enabled in your account, please contact MONEI support</td>\n</tr>\n<tr>\n<td>E105</td>\n<td>MOTO Payment are not enabled in your account, please contact MONEI support</td>\n</tr>\n</tbody></table>\n<h4>Authentication and Request Errors (E15x)</h4>\n<p>These errors indicate issues with your API request format or authentication:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E150</td>\n<td>Invalid or malformed request. Please check the message format</td>\n</tr>\n<tr>\n<td>E151</td>\n<td>Missing or malformed signature/auth</td>\n</tr>\n<tr>\n<td>E152</td>\n<td>Error while decrypting request</td>\n</tr>\n<tr>\n<td>E153</td>\n<td>Pre-authorization is expired and cannot be canceled or captured</td>\n</tr>\n<tr>\n<td>E154</td>\n<td>The payment date cannot be less than the cancellation or capture date</td>\n</tr>\n<tr>\n<td>E155</td>\n<td>The cancellation date exceeded the date allowed for pre-authorized operations</td>\n</tr>\n<tr>\n<td>E156</td>\n<td>Unauthorized token</td>\n</tr>\n</tbody></table>\n<h4>Transaction Processing Errors (E2xx)</h4>\n<p>These errors occur during payment processing:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E200</td>\n<td>Transaction failed during payment processing</td>\n</tr>\n<tr>\n<td>E201</td>\n<td>Transaction declined by the card-issuing bank</td>\n</tr>\n<tr>\n<td>E202</td>\n<td>Transaction declined by the issuing bank</td>\n</tr>\n<tr>\n<td>E203</td>\n<td>Payment method not allowed</td>\n</tr>\n<tr>\n<td>E204</td>\n<td>Wrong or not allowed currency</td>\n</tr>\n<tr>\n<td>E205</td>\n<td>Incorrect reference / transaction does not exist</td>\n</tr>\n<tr>\n<td>E206</td>\n<td>Invalid payment method</td>\n</tr>\n<tr>\n<td>E207</td>\n<td>Transaction failed: process time exceeded</td>\n</tr>\n<tr>\n<td>E208</td>\n<td>Transaction is currently being processed</td>\n</tr>\n<tr>\n<td>E209</td>\n<td>Duplicated operation</td>\n</tr>\n<tr>\n<td>E210</td>\n<td>Wrong or not allowed payment amount</td>\n</tr>\n<tr>\n<td>E211</td>\n<td>Refund declined by processor</td>\n</tr>\n<tr>\n<td>E212</td>\n<td>Transaction has already been captured</td>\n</tr>\n<tr>\n<td>E213</td>\n<td>Transaction has already been canceled</td>\n</tr>\n<tr>\n<td>E214</td>\n<td>The amount to be captured cannot exceed the pre-authorized amount</td>\n</tr>\n<tr>\n<td>E215</td>\n<td>The transaction to be captured has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E216</td>\n<td>The transaction to be canceled has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E217</td>\n<td>Transaction denied by processor to avoid duplicated operations</td>\n</tr>\n<tr>\n<td>E218</td>\n<td>Error during payment request validation</td>\n</tr>\n<tr>\n<td>E219</td>\n<td>Refund declined due to exceeded amount</td>\n</tr>\n<tr>\n<td>E220</td>\n<td>Transaction has already been fully refunded</td>\n</tr>\n<tr>\n<td>E221</td>\n<td>Transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E222</td>\n<td>The user has canceled the payment</td>\n</tr>\n<tr>\n<td>E223</td>\n<td>Waiting for the transaction to be completed</td>\n</tr>\n<tr>\n<td>E224</td>\n<td>No reason to decline</td>\n</tr>\n<tr>\n<td>E225</td>\n<td>Refund not allowed</td>\n</tr>\n<tr>\n<td>E226</td>\n<td>Transaction cannot be completed, violation of law</td>\n</tr>\n<tr>\n<td>E227</td>\n<td>Stop Payment Order</td>\n</tr>\n<tr>\n<td>E228</td>\n<td>Strong Customer Authentication required</td>\n</tr>\n<tr>\n<td>E229</td>\n<td>Expired payment method</td>\n</tr>\n</tbody></table>\n<h4>3D Secure Related Errors (E3xx)</h4>\n<p>These errors are related to 3D Secure authentication:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E300</td>\n<td>Transaction declined due to security restrictions</td>\n</tr>\n<tr>\n<td>E301</td>\n<td>3D Secure authentication failed</td>\n</tr>\n<tr>\n<td>E302</td>\n<td>Authentication process timed out. Please try again</td>\n</tr>\n<tr>\n<td>E303</td>\n<td>An error occurred during the 3D Secure process</td>\n</tr>\n<tr>\n<td>E304</td>\n<td>Invalid or malformed 3D Secure request</td>\n</tr>\n<tr>\n<td>E305</td>\n<td>Exemption not allowed</td>\n</tr>\n<tr>\n<td>E306</td>\n<td>Exemption error</td>\n</tr>\n<tr>\n<td>E307</td>\n<td>Fraud control error</td>\n</tr>\n<tr>\n<td>E308</td>\n<td>External MPI received wrong. Please check the data</td>\n</tr>\n<tr>\n<td>E309</td>\n<td>External MPI not enabled. Please contact support</td>\n</tr>\n<tr>\n<td>E310</td>\n<td>Transaction confirmation rejected by the merchant</td>\n</tr>\n</tbody></table>\n<h4>Card Related Errors (E5xx)</h4>\n<p>These errors are specific to card payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E500</td>\n<td>Transaction declined during card payment process</td>\n</tr>\n<tr>\n<td>E501</td>\n<td>Card rejected: invalid card number</td>\n</tr>\n<tr>\n<td>E502</td>\n<td>Card rejected: wrong expiration date</td>\n</tr>\n<tr>\n<td>E503</td>\n<td>Card rejected: wrong CVC/CVV2 number</td>\n</tr>\n<tr>\n<td>E504</td>\n<td>Card number not registered</td>\n</tr>\n<tr>\n<td>E505</td>\n<td>Card is expired</td>\n</tr>\n<tr>\n<td>E506</td>\n<td>Error during payment authorization. Please try again</td>\n</tr>\n<tr>\n<td>E507</td>\n<td>Cardholder has canceled the payment</td>\n</tr>\n<tr>\n<td>E508</td>\n<td>Transaction declined: AMEX cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E509</td>\n<td>Card blocked temporarily or under suspicion of fraud</td>\n</tr>\n<tr>\n<td>E510</td>\n<td>Card does not allow pre-authorization operations</td>\n</tr>\n<tr>\n<td>E511</td>\n<td>CVC/CVV2 number is required</td>\n</tr>\n<tr>\n<td>E512</td>\n<td>Unsupported card type</td>\n</tr>\n<tr>\n<td>E513</td>\n<td>Transaction type not allowed for this type of card</td>\n</tr>\n<tr>\n<td>E514</td>\n<td>Transaction declined by card issuer</td>\n</tr>\n<tr>\n<td>E515</td>\n<td>Implausible card data</td>\n</tr>\n<tr>\n<td>E516</td>\n<td>Incorrect PIN</td>\n</tr>\n<tr>\n<td>E517</td>\n<td>Transaction not allowed for cardholder</td>\n</tr>\n<tr>\n<td>E518</td>\n<td>The amount exceeds the card limit</td>\n</tr>\n</tbody></table>\n<h4>Digital Wallet Errors (E6xx)</h4>\n<p>These errors are related to digital wallet payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E600</td>\n<td>Transaction declined during ApplePay/GooglePay payment process</td>\n</tr>\n<tr>\n<td>E601</td>\n<td>Incorrect ApplePay or GooglePay configuration</td>\n</tr>\n</tbody></table>\n<h4>PayPal Related Errors (E62x)</h4>\n<p>These errors are specific to PayPal payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E620</td>\n<td>Transaction declined during PayPal payment process</td>\n</tr>\n<tr>\n<td>E621</td>\n<td>Transaction declined during PayPal payment process: invalid currency</td>\n</tr>\n</tbody></table>\n<h4>Bizum Related Errors (E64x-E65x)</h4>\n<p>These errors are specific to Bizum payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E640</td>\n<td>Bizum transaction declined after three authentication attempts</td>\n</tr>\n<tr>\n<td>E641</td>\n<td>Bizum transaction declined due to failed authorization</td>\n</tr>\n<tr>\n<td>E642</td>\n<td>Bizum transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E643</td>\n<td>Bizum transaction canceled: the user does not want to continue</td>\n</tr>\n<tr>\n<td>E644</td>\n<td>Bizum transaction rejected by destination bank</td>\n</tr>\n<tr>\n<td>E645</td>\n<td>Bizum transaction rejected by origin bank</td>\n</tr>\n<tr>\n<td>E646</td>\n<td>Bizum transaction rejected by processor</td>\n</tr>\n<tr>\n<td>E647</td>\n<td>Bizum transaction failed while connecting with processor. Please try again</td>\n</tr>\n<tr>\n<td>E648</td>\n<td>Bizum transaction failed, payee is not found</td>\n</tr>\n<tr>\n<td>E649</td>\n<td>Bizum transaction failed, payer is not found</td>\n</tr>\n<tr>\n<td>E650</td>\n<td>Bizum REST not implemented</td>\n</tr>\n<tr>\n<td>E651</td>\n<td>Bizum transaction declined due to failed authentication</td>\n</tr>\n<tr>\n<td>E652</td>\n<td>The customer has disabled Bizum, please use another payment method</td>\n</tr>\n</tbody></table>\n<h4>ClickToPay Related Errors (E68x)</h4>\n<p>These errors are specific to ClickToPay payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E680</td>\n<td>Transaction declined during ClickToPay payment process</td>\n</tr>\n<tr>\n<td>E681</td>\n<td>Incorrect ClickToPay configuration</td>\n</tr>\n</tbody></table>\n<h4>Cofidis Related Errors (E7xx)</h4>\n<p>These errors are specific to Cofidis payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E700</td>\n<td>Transaction declined during Cofidis payment process</td>\n</tr>\n</tbody></table>\n<h4>System Errors (E9xx)</h4>\n<p>These errors indicate system-level issues:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E999</td>\n<td>Service internal error. Please contact support</td>\n</tr>\n</tbody></table>\n',
+    allOf: [{type: 'string', example: 'E000'}],
+    title: 'PaymentStatusCodes'
+  }}
+  schemaType={'response'}
+></Schema>
