@@ -73,10 +73,10 @@ module.exports = {
   rest: [
     {
       type: 'category',
-      label: 'REST API',
+      label: 'MONEI REST API',
       link: {
         type: 'generated-index',
-        title: 'REST API Reference',
+        title: 'MONEI REST API',
         description:
           'Complete reference documentation for the MONEI API. Includes representative code snippets and examples for our PHP and Node.js client libraries.',
         slug: 'apis/rest'
