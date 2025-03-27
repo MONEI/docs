@@ -107,6 +107,7 @@ module.exports = {
   ],
   plugins: [
     path.resolve(__dirname, './inject-scripts.js'),
+    require.resolve('./plugins/fix-docusaurus-navbar'),
     [
       '@graphql-markdown/docusaurus',
       {
