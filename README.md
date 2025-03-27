@@ -23,7 +23,7 @@ yarn start
 
 This command starts a local development server and opens a browser window. Most changes are reflected live without having to restart the server.
 
-### genapi
+### Generate API references
 
 #### REST
 
@@ -37,6 +37,20 @@ During [production builds](.amplify.yml), the latest version of the OpenAPI file
 
 ```bash
 aws s3 cp s3://$JS_BUCKET/api/v1/openapi.json ./openapi.json
+```
+
+#### GraphQL
+
+```bash
+yarn genapi:graphql
+```
+
+This command generates GraphQL API documentation from the `schema.graphql` file and outputs it as MDX files in the `docs/apis/graphql` folder.
+
+During [production builds](.amplify.yml), the latest version of the GraphQL schema is downloaded with the following command:
+
+```bash
+yarn rover graph introspect https://graphql.monei.com/ --output schema.graphql
 ```
 
 ### Build

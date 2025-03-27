@@ -1,6 +1,6 @@
 ---
 id: graphql-api
-title: GraphQL API
+title: MONEI GraphQL API
 description: With MONEI GraphQL API you have full access to all MONEI features.
 sidebar_position: 1
 ---
