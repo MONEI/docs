@@ -1,0 +1,121 @@
+---
+id: store
+title: Store
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type Store {
+  id: ID!
+  name: String
+  address: Address
+  phone: String
+  email: String
+  iban: String
+  website: String
+  metadata: [KeyValueItem!]
+  blocked: Boolean
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>Store.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+The Store's ID
+
+#### [<code style={{ fontWeight: 'normal' }}>Store.<b>name</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+A name that represents the store
+
+#### [<code style={{ fontWeight: 'normal' }}>Store.<b>address</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Address</b></code>](/docs/apis/graphql/types/objects/address.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+The store's address
+
+#### [<code style={{ fontWeight: 'normal' }}>Store.<b>phone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The store's phone number
+
+#### [<code style={{ fontWeight: 'normal' }}>Store.<b>email</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The store's email address
+
+#### [<code style={{ fontWeight: 'normal' }}>Store.<b>iban</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The store's IBAN
+
+#### [<code style={{ fontWeight: 'normal' }}>Store.<b>website</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The store's website
+
+#### [<code style={{ fontWeight: 'normal' }}>Store.<b>metadata</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[KeyValueItem!]</b></code>](/docs/apis/graphql/types/objects/key-value-item.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="object"/>
+
+Metadata
+
+#### [<code style={{ fontWeight: 'normal' }}>Store.<b>blocked</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Whether the store is blocked or not
+
+### Returned By
+
+[`createStore`](/docs/apis/graphql/operations/mutations/create-store.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`store`](/docs/apis/graphql/operations/queries/store.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`updateStore`](/docs/apis/graphql/operations/mutations/update-store.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`userStore`](/docs/apis/graphql/operations/queries/user-store.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/>
+
+### Member Of
+
+[`StoresConnection`](/docs/apis/graphql/types/objects/stores-connection.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

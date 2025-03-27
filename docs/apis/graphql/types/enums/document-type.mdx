@@ -1,0 +1,123 @@
+---
+id: document-type
+title: DocumentType
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+enum DocumentType {
+  CENSUS_CERT
+  GIPUZKOA_CENSUS_CERT
+  NAVARRA_CENSUS_CERT
+  BIZKAIA_CENSUS_CERT
+  ALAVA_CENSUS_CERT
+  BANK_OWNERSHIP_CERT
+  CONTRACT
+  PASSPORT
+  ID_CARD
+  COMPANY_TAX_ID
+  RESIDENCE_PERMIT
+  DRIVERS_LICENSE
+  DEED_OF_INCORPORATION
+  BENEFICIAL_OWNERSHIP_REPORT
+  DEED_OF_COMPANY_REPRESENTATIVE
+  POWER_OF_ATTORNEY
+  OTHER
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>CENSUS_CERT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>GIPUZKOA_CENSUS_CERT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>NAVARRA_CENSUS_CERT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>BIZKAIA_CENSUS_CERT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>ALAVA_CENSUS_CERT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>BANK_OWNERSHIP_CERT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>CONTRACT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>PASSPORT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>ID_CARD</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>COMPANY_TAX_ID</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>RESIDENCE_PERMIT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>DRIVERS_LICENSE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>DEED_OF_INCORPORATION</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>BENEFICIAL_OWNERSHIP_REPORT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>DEED_OF_COMPANY_REPRESENTATIVE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>POWER_OF_ATTORNEY</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>DocumentType.<b>OTHER</b></code>](#)
+
+### Member Of
+
+[`CreateDocumentInput`](/docs/apis/graphql/types/inputs/create-document-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`Document`](/docs/apis/graphql/types/objects/document.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

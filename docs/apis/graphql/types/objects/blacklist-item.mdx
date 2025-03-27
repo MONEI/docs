@@ -1,0 +1,102 @@
+---
+id: blacklist-item
+title: BlacklistItem
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Blacklist item, e.g. email, phone, ip, card, bin, fingerprint.
+All payments with this value will be blocked.
+
+```graphql
+type BlacklistItem {
+  value: String!
+  type: BlacklistItemType!
+  accountId: ID
+  createdAt: String!
+  updatedAt: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>BlacklistItem.<b>value</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+The value of the blacklist item, e.g. email, phone, ip, card, bin, fingerprint
+
+#### [<code style={{ fontWeight: 'normal' }}>BlacklistItem.<b>type</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>BlacklistItemType!</b></code>](/docs/apis/graphql/types/enums/blacklist-item-type.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+The type of the blacklist item
+
+#### [<code style={{ fontWeight: 'normal' }}>BlacklistItem.<b>accountId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The account ID that created the blacklist item
+
+#### [<code style={{ fontWeight: 'normal' }}>BlacklistItem.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Creation date in ISO 8601 format
+
+#### [<code style={{ fontWeight: 'normal' }}>BlacklistItem.<b>updatedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Last update date in ISO 8601 format
+
+### Returned By
+
+[`addBlacklistItem`](/docs/apis/graphql/operations/mutations/add-blacklist-item.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`blacklistItem`](/docs/apis/graphql/operations/queries/blacklist-item.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/>
+
+### Member Of
+
+[`BlacklistItemsConnection`](/docs/apis/graphql/types/objects/blacklist-items-connection.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

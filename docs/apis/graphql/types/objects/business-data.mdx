@@ -1,0 +1,157 @@
+---
+id: business-data
+title: BusinessData
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Business details
+
+```graphql
+type BusinessData {
+  country: String
+  legalForm: LegalForm
+  legalName: String
+  companyName: String
+  address: Address
+  documentNumber: String
+  email: String
+  phone: String
+  website: String
+  monthlyVolume: Long
+  confirmWebsite: Boolean
+  industry: Industries
+  mcc: String
+  allowedMcc: [String!]
+  servicesDescription: String
+  confirmServicesDescription: Boolean
+  status: BusinessStatus
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>country</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Country code, ISO 3166-1 alpha-2 code
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>legalForm</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>LegalForm</b></code>](/docs/apis/graphql/types/enums/legal-form.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Legal form
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>legalName</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Legal name
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>companyName</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Company name, could be different from legal name
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>address</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Address</b></code>](/docs/apis/graphql/types/objects/address.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Full address
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>documentNumber</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Company tax ID (CIF/NIF)
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>email</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Company email
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>phone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Phone number in E.164 format, e.g. +34666777888
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>website</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Website
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>monthlyVolume</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Expected monthly volume in EUR
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>confirmWebsite</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Confirms that website complies with requirements
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>industry</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Industries</b></code>](/docs/apis/graphql/types/enums/industries.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Company Industry
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>mcc</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Merchant Category Codes (MCC) in ISO 18245:2003 format
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>allowedMcc</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[String!]</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+A list of allowed MCCs
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>servicesDescription</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+A description of the products or services it provides
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>confirmServicesDescription</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Confirms that service complies with requirements
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessData.<b>status</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>BusinessStatus</b></code>](/docs/apis/graphql/types/enums/business-status.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Business status
+
+### Member Of
+
+[`Account`](/docs/apis/graphql/types/objects/account.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>
