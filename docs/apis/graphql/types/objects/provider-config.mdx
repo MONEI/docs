@@ -1,0 +1,92 @@
+---
+id: provider-config
+title: ProviderConfig
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type ProviderConfig {
+  paymentMethod: PaymentMethods
+  processor: Processor
+  acquirers: [Acquirer!]
+  metadataConfig: [MetadataConfigItem!]
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>ProviderConfig.<b>paymentMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethods</b></code>](/docs/apis/graphql/types/enums/payment-methods.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+The requested payment method
+
+#### [<code style={{ fontWeight: 'normal' }}>ProviderConfig.<b>processor</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Processor</b></code>](/docs/apis/graphql/types/enums/processor.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+The requested processor
+
+#### [<code style={{ fontWeight: 'normal' }}>ProviderConfig.<b>acquirers</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[Acquirer!]</b></code>](/docs/apis/graphql/types/enums/acquirer.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Which acquirers could be behind the provider
+
+#### [<code style={{ fontWeight: 'normal' }}>ProviderConfig.<b>metadataConfig</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[MetadataConfigItem!]</b></code>](/docs/apis/graphql/types/objects/metadata-config-item.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="object"/>
+
+Metadata config
+
+### Returned By
+
+[`providerConfig`](/docs/apis/graphql/operations/queries/provider-config.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/>

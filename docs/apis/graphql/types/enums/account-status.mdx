@@ -1,0 +1,108 @@
+---
+id: account-status
+title: AccountStatus
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Account status
+
+- ACTIVE: Account is active and payments are being processed
+- PENDING_CONTRACT: Account is pending contract signature
+- PENDING_APPROVAL: Account is pending approval
+- APPROVED: Account is approved
+- NOT_CONFIGURED: Account needs additional information or documents to be configured, see `statusReason` for more details
+- SUSPENDED: Account is suspended
+- REJECTED: Account is rejected
+- DELETED: Account is deleted
+
+```graphql
+enum AccountStatus {
+  ACTIVE
+  PENDING_CONTRACT
+  PENDING_APPROVAL
+  APPROVED
+  NOT_CONFIGURED
+  SUSPENDED
+  REJECTED
+  DELETED
+  PENDING_REVIEW
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountStatus.<b>ACTIVE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountStatus.<b>PENDING_CONTRACT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountStatus.<b>PENDING_APPROVAL</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountStatus.<b>APPROVED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountStatus.<b>NOT_CONFIGURED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountStatus.<b>SUSPENDED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountStatus.<b>REJECTED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountStatus.<b>DELETED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountStatus.<b>PENDING_REVIEW</b></code>](#)
+
+### Member Of
+
+[`Account`](/docs/apis/graphql/types/objects/account.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

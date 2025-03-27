@@ -1,0 +1,156 @@
+---
+id: webhook-event-type
+title: WebhookEventType
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+enum WebhookEventType {
+  CHARGE_PENDING
+  CHARGE_PENDING_PROCESSING
+  CHARGE_UPDATED
+  CHARGE_AUTHORIZED
+  CHARGE_REFUNDED
+  CHARGE_PARTIALLY_REFUNDED
+  CHARGE_CAPTURED
+  CHARGE_CANCELED
+  CHARGE_SUCCEEDED
+  CHARGE_FAILED
+  CHARGE_EXPIRED
+  CHARGE_CHARGEBACK
+  CHARGE_PAID_OUT
+  SETTLEMENT_COMPLETED
+  SETTLEMENT_PENDING
+  SETTLEMENT_SUSPENDED
+  SUBSCRIPTION_PENDING
+  SUBSCRIPTION_EXPIRED
+  SUBSCRIPTION_TRIALING
+  SUBSCRIPTION_ACTIVATED
+  SUBSCRIPTION_CANCELED
+  SUBSCRIPTION_PAUSED
+  SUBSCRIPTION_PAST_DUE
+  SUBSCRIPTION_UPDATED
+  ACCOUNT_INVOICE_PAID
+  ACCOUNT_INVOICE_UNPAID
+  ACCOUNT_INVOICE_PENDING
+  ACCOUNT_INVOICE_PAST_DUE
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_PENDING</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_PENDING_PROCESSING</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_UPDATED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_AUTHORIZED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_REFUNDED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_PARTIALLY_REFUNDED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_CAPTURED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_CANCELED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_SUCCEEDED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_FAILED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_EXPIRED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_CHARGEBACK</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>CHARGE_PAID_OUT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SETTLEMENT_COMPLETED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SETTLEMENT_PENDING</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SETTLEMENT_SUSPENDED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SUBSCRIPTION_PENDING</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SUBSCRIPTION_EXPIRED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SUBSCRIPTION_TRIALING</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SUBSCRIPTION_ACTIVATED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SUBSCRIPTION_CANCELED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SUBSCRIPTION_PAUSED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SUBSCRIPTION_PAST_DUE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>SUBSCRIPTION_UPDATED</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>ACCOUNT_INVOICE_PAID</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>ACCOUNT_INVOICE_UNPAID</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>ACCOUNT_INVOICE_PENDING</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>WebhookEventType.<b>ACCOUNT_INVOICE_PAST_DUE</b></code>](#)
+
+### Member Of
+
+[`CreateWebhookInput`](/docs/apis/graphql/types/inputs/create-webhook-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`UpdateWebhookInput`](/docs/apis/graphql/types/inputs/update-webhook-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`Webhook`](/docs/apis/graphql/types/objects/webhook.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

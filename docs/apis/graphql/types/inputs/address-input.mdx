@@ -1,0 +1,90 @@
+---
+id: address-input
+title: AddressInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input AddressInput {
+  city: String
+  country: String
+  line1: String
+  line2: String
+  zip: String
+  state: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>AddressInput.<b>city</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>AddressInput.<b>country</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>AddressInput.<b>line1</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>AddressInput.<b>line2</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>AddressInput.<b>zip</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>AddressInput.<b>state</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+### Member Of
+
+[`AccountPublicBusinessDetailsInput`](/docs/apis/graphql/types/inputs/account-public-business-details-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`BusinessDataInput`](/docs/apis/graphql/types/inputs/business-data-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`ContactDetailsInput`](/docs/apis/graphql/types/inputs/contact-details-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`CreateStoreInput`](/docs/apis/graphql/types/inputs/create-store-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`PaymentMethodSepaInput`](/docs/apis/graphql/types/inputs/payment-method-sepa-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`RepresentativeInput`](/docs/apis/graphql/types/inputs/representative-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`UpdateStoreInput`](/docs/apis/graphql/types/inputs/update-store-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/>

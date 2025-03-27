@@ -1,0 +1,167 @@
+---
+id: create-payment-input
+title: CreatePaymentInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input CreatePaymentInput {
+  id: ID
+  amount: Int!
+  orderId: ID
+  storeId: ID
+  pointOfSaleId: ID
+  description: String
+  descriptor: String
+  customer: CustomerInput
+  billingDetails: ContactDetailsInput
+  shippingDetails: ContactDetailsInput
+  currency: Currencies
+  allowedPaymentMethods: [PaymentMethods]
+  transactionType: TransactionTypes
+  completeUrl: String
+  callbackUrl: String
+  cancelUrl: String
+  failUrl: String
+  expireAt: AWSTimestamp
+  metadata: [KeyValueInput!]
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The ID of the payment to be created
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>amount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+The amount to be charged (for example 1075 for 10.75€)
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>orderId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The order ID in your platform (eg: the invoice number). If not present, MONEI will generate a unique one
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>storeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The ID of the store
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>pointOfSaleId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The ID of the Point of Sale this payment will be associated to
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>description</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The payment description
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>descriptor</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The payment descriptor
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>customer</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>CustomerInput</b></code>](/docs/apis/graphql/types/inputs/customer-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+Basic information about the customer
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>billingDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ContactDetailsInput</b></code>](/docs/apis/graphql/types/inputs/contact-details-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+Billing information
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>shippingDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ContactDetailsInput</b></code>](/docs/apis/graphql/types/inputs/contact-details-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+Shipping details
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>currency</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Currencies</b></code>](/docs/apis/graphql/types/enums/currencies.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+The currency of the payment
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>allowedPaymentMethods</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[PaymentMethods]</b></code>](/docs/apis/graphql/types/enums/payment-methods.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Which payment methods are allowed
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>transactionType</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>TransactionTypes</b></code>](/docs/apis/graphql/types/enums/transaction-types.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Transaction type
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>completeUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The URL where to send the user when the payment has finished
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>callbackUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The URL where to notify a success payment (server-to-server HTTP POST request)
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>cancelUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The URL where to send the user when he/she requests to cancel the payment
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>failUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The URL where to send the user when the payment has failed
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>expireAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Time at which the payment will expire. Measured in seconds since the Unix epoch.
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePaymentInput.<b>metadata</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[KeyValueInput!]</b></code>](/docs/apis/graphql/types/inputs/key-value-input.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="input"/>
+
+The payment metadata
+
+### Member Of
+
+[`createPayment`](/docs/apis/graphql/operations/mutations/create-payment.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

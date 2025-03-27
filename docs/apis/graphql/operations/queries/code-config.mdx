@@ -1,0 +1,75 @@
+---
+id: code-config
+title: codeConfig
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Lists the available configurations for a code type
+
+```graphql
+codeConfig(
+  codeType: CodeTypes!
+): CodeConfig
+```
+
+### Arguments
+
+#### [<code style={{ fontWeight: 'normal' }}>codeConfig.<b>codeType</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>CodeTypes!</b></code>](/docs/apis/graphql/types/enums/code-types.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+### Type
+
+#### [<code style={{ fontWeight: 'normal' }}><b>CodeConfig</b></code>](/docs/apis/graphql/types/objects/code-config.mdx) <Badge class="badge badge--secondary " text="object"/>

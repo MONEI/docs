@@ -1,0 +1,87 @@
+---
+id: customer
+title: Customer
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Customer details
+
+```graphql
+type Customer {
+  email: String
+  name: String
+  phone: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>Customer.<b>email</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Customer email
+
+#### [<code style={{ fontWeight: 'normal' }}>Customer.<b>name</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Customer name
+
+#### [<code style={{ fontWeight: 'normal' }}>Customer.<b>phone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Customer phone in E.164 format, e.g. +34666777888
+
+### Member Of
+
+[`Charge`](/docs/apis/graphql/types/objects/charge.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ChargeEventObject`](/docs/apis/graphql/types/objects/charge-event-object.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Payment`](/docs/apis/graphql/types/objects/payment.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Subscription`](/docs/apis/graphql/types/objects/subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`SubscriptionEventObject`](/docs/apis/graphql/types/objects/subscription-event-object.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

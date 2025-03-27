@@ -1,0 +1,78 @@
+---
+id: item-level-update
+title: ItemLevelUpdate
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type ItemLevelUpdate {
+  accountId: ID
+  id: ID
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>ItemLevelUpdate.<b>accountId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ItemLevelUpdate.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+### Returned By
+
+[`onUpdateChargeEvents`](/docs/apis/graphql/operations/subscriptions/on-update-charge-events.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateChargeEventsV2`](/docs/apis/graphql/operations/subscriptions/on-update-charge-events-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateChargeV2`](/docs/apis/graphql/operations/subscriptions/on-update-charge-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateSubscription`](/docs/apis/graphql/operations/subscriptions/on-update-subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateSubscriptionEvents`](/docs/apis/graphql/operations/subscriptions/on-update-subscription-events.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateSubscriptionEventsV2`](/docs/apis/graphql/operations/subscriptions/on-update-subscription-events-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`publishUpdateChargeEvents`](/docs/apis/graphql/operations/mutations/publish-update-charge-events.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateChargeEventsV2`](/docs/apis/graphql/operations/mutations/publish-update-charge-events-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateChargeV2`](/docs/apis/graphql/operations/mutations/publish-update-charge-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateSubscription`](/docs/apis/graphql/operations/mutations/publish-update-subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateSubscriptionEvents`](/docs/apis/graphql/operations/mutations/publish-update-subscription-events.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateSubscriptionEventsV2`](/docs/apis/graphql/operations/mutations/publish-update-subscription-events-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>
