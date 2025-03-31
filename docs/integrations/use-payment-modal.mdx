@@ -10,8 +10,8 @@ Collecting payments on your website consists of creating a payment object, and c
 
 ![MONEI Payment Modal preview](/img/payment-modal.png)
 
-:::note
-Apple Pay and Bizum are not available when using MONEI Payment Modal integration.
+:::important
+Apple Pay is not available when using MONEI Payment Modal integration.
 :::
 
 ## Integration
@@ -20,8 +20,8 @@ Apple Pay and Bizum are not available when using MONEI Payment Modal integration
 
 Create a [Payment](/api/#section/Payment-object) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 <Tabs
   defaultValue="curl"
