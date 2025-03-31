@@ -1,3 +1,5 @@
+import SidebarsConfig from './docs/apis/rest/sidebar';
+
 module.exports = {
   docs: [
     'getting-started',
@@ -55,17 +57,21 @@ module.exports = {
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },
-    {
-      type: 'link',
-      label: 'Payments API',
-      href: '/api/#tag/Payments'
-    },
-    {
-      type: 'link',
-      label: 'Subscriptions API',
-      href: '/api/#tag/Subscriptions'
-    },
     'graphql-api',
     'testing'
+  ],
+  rest: [
+    {
+      type: 'category',
+      label: 'MONEI REST API',
+      link: {
+        type: 'generated-index',
+        title: 'MONEI REST API',
+        description:
+          'Complete reference documentation for the MONEI API. Includes representative code snippets and examples for our PHP and Node.js client libraries.',
+        slug: 'apis/rest'
+      },
+      items: SidebarsConfig
+    }
   ]
 };

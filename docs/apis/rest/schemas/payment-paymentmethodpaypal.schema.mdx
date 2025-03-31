@@ -1,0 +1,52 @@
+---
+id: payment-paymentmethodpaypal
+title: 'Payment-PaymentMethodPaypal'
+description: 'Details from Paypal order used as payment method at the time of the transaction.'
+sidebar_label: 'Payment-PaymentMethodPaypal'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'orderId': '7XP21983KL5672104',
+    'payerId': 'QWRTNBFHZXLPD',
+    'email': 'john.doe@example.com',
+    'name': 'John Doe'
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Payment-PaymentMethodPaypal'}
+></Heading>
+
+Details from Paypal order used as payment method at the time of the transaction.
+
+<Schema
+  schema={{
+    type: 'object',
+    description:
+      'Details from Paypal order used as payment method at the time of the transaction.\n',
+    properties: {
+      orderId: {
+        type: 'string',
+        example: '7XP21983KL5672104',
+        description: "The Paypal's order ID."
+      },
+      payerId: {type: 'string', example: 'QWRTNBFHZXLPD', description: "The Paypal's payer ID."},
+      email: {
+        type: 'string',
+        example: 'john.doe@example.com',
+        description: "The Paypal's payer email."
+      },
+      name: {type: 'string', example: 'John Doe', description: "The Paypal's payer name."}
+    },
+    title: 'Payment-PaymentMethodPaypal'
+  }}
+  schemaType={'response'}
+></Schema>

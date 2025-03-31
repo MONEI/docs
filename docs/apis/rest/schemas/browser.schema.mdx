@@ -1,0 +1,28 @@
+---
+id: browser
+title: 'Browser'
+description: 'The browser used in this browser session (e.g., `Mobile Safari`).'
+sidebar_label: 'Browser'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'Chrome'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Browser'}></Heading>
+
+The browser used in this browser session (e.g., `Mobile Safari`).
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'Chrome',
+    description: 'The browser used in this browser session (e.g., `Mobile Safari`).',
+    title: 'Browser'
+  }}
+  schemaType={'response'}
+></Schema>

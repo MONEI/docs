@@ -1,0 +1,41 @@
+---
+id: subscription-status
+title: 'Subscription-Status'
+description: 'The status of the subscription.'
+sidebar_label: 'Subscription-Status'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'PENDING'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Subscription-Status'}></Heading>
+
+The status of the subscription.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'PENDING',
+    enum: ['PENDING', 'EXPIRED', 'TRIALING', 'ACTIVE', 'PAST_DUE', 'PAUSED', 'CANCELED'],
+    'x-enumDescriptions': {
+      PENDING: 'The subscription has been created but is waiting for initial payment or activation',
+      EXPIRED:
+        'The subscription has reached its end date or maximum number of attempts without successful payment',
+      TRIALING: 'The subscription is in trial period before the first payment is required',
+      ACTIVE: 'The subscription is currently active and payments are being processed normally',
+      PAST_DUE:
+        'The most recent payment attempt failed but the subscription will retry according to schedule',
+      PAUSED: 'The subscription is temporarily suspended and will resume based on pause settings',
+      CANCELED:
+        'The subscription has been permanently terminated and will not process further payments'
+    },
+    description: 'The status of the subscription.',
+    title: 'Subscription-Status'
+  }}
+  schemaType={'response'}
+></Schema>

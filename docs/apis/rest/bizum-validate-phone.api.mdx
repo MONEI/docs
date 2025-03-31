@@ -1,0 +1,421 @@
+---
+id: bizum-validate-phone
+title: 'Validate Phone'
+description: 'Validates if a phone number is registered with Bizum.'
+sidebar_label: 'Validate Phone'
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: 'post api-method'
+info_path: docs/apis/rest/monei-api-v-1
+custom_edit_url: null
+hide_send_button: true
+show_extensions: true
+---
+
+import MethodEndpoint from '@theme/ApiExplorer/MethodEndpoint';
+import ParamsDetails from '@theme/ParamsDetails';
+import RequestSchema from '@theme/RequestSchema';
+import StatusCodes from '@theme/StatusCodes';
+import OperationTabs from '@theme/OperationTabs';
+import TabItem from '@theme/TabItem';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Validate Phone'}></Heading>
+
+<MethodEndpoint
+  method={'post'}
+  path={'/bizum/validate-phone'}
+  context={'endpoint'}
+></MethodEndpoint>
+
+Validates if a phone number is registered with Bizum.
+
+Use this endpoint to check if a customer's phone number can be used for Bizum payments
+before attempting to process a payment. This helps provide a better user experience by
+preventing failed payment attempts for non-registered numbers.
+
+The response will indicate whether the phone number is valid for Bizum payments.
+
+<Heading
+  id={'request'}
+  as={'h2'}
+  className={'openapi-tabs__heading'}
+  children={'Request'}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={'Body'}
+  body={{
+    required: true,
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {
+            accountId: {
+              type: 'string',
+              example: 'aa9333ba-82de-400c-9ae7-087b9f8d2242',
+              description: 'MONEI Account identifier.',
+              title: 'AccountId'
+            },
+            paymentId: {
+              type: 'string',
+              example: 'af6029f80f5fc73a8ad2753eea0b1be0',
+              description: 'Unique identifier for the payment.',
+              title: 'Payment-Id'
+            },
+            phoneNumber: {
+              type: 'string',
+              example: '+34500000000',
+              description: 'Phone number in E.164 format.'
+            }
+          },
+          required: ['accountId', 'phoneNumber'],
+          title: 'ValidateBizumPhoneRequest'
+        }
+      }
+    }
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    '200': {
+      description: 'A successful response',
+      content: {
+        'application/json': {
+          schema: {type: 'object', properties: {isValid: {type: 'boolean', example: true}}}
+        }
+      }
+    },
+    '400': {
+      description: 'The request is incorrect or could not be processed',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'BadRequestError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 400,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Bad request',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'BadRequestError'
+          }
+        }
+      }
+    },
+    '401': {
+      description: 'Unauthorized error. Please check your auth credentials',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'UnauthorizedError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 401,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Unauthorized access',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'UnauthorizedError'
+          }
+        }
+      }
+    },
+    '404': {
+      description: 'The specified resource was not found',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'NotFoundError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 404,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Resource not found',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'NotFoundError'
+          }
+        }
+      }
+    },
+    '422': {
+      description: 'The request was well-formed but could not be processed due to semantic errors',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'UnprocessableEntityError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 422,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Unprocessable entity',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'UnprocessableEntityError'
+          }
+        }
+      }
+    },
+    '500': {
+      description: 'Unexpected server error',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'InternalServerError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 500,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'An unexpected error occurred',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'InternalServerError'
+          }
+        }
+      }
+    },
+    '503': {
+      description: 'The service is temporarily unavailable',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'ServiceUnavailableError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 503,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Upstream service is unavailable',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'ServiceUnavailableError'
+          }
+        }
+      }
+    }
+  }}
+></StatusCodes>

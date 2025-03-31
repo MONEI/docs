@@ -13,16 +13,7 @@ module.exports = {
   },
   themeConfig: {
     colorMode: {
-      // "light" | "dark"
-      defaultMode: 'light',
-
-      // Hides the switch in the navbar
-      // Useful if you want to support a single color mode
-      disableSwitch: true,
-
-      // Should we use the prefers-color-scheme media-query,
-      // using user system preferences, instead of the hardcoded defaultMode
-      respectPrefersColorScheme: false
+      defaultMode: 'light'
     },
     prism: {
       theme: themes.nightOwl,
@@ -45,15 +36,15 @@ module.exports = {
       items: [
         {
           to: 'docs/',
-          activeBasePath: 'docs',
           label: 'Documentation',
-          position: 'right'
+          position: 'right',
+          activeBaseRegex: '^/docs/(?!apis/)'
         },
         {
-          to: 'api/',
-          activeBasePath: 'api',
+          to: 'docs/apis/rest/',
           label: 'API',
-          position: 'right'
+          position: 'right',
+          activeBaseRegex: '^/docs/apis/'
         },
         {
           to: 'https://support.monei.com',
@@ -67,6 +58,26 @@ module.exports = {
         }
       ]
     },
+    languageTabs: [
+      {
+        highlight: 'javascript',
+        language: 'javascript',
+        logoClass: 'javascript',
+        variants: ['node']
+      },
+      {
+        highlight: 'python',
+        language: 'python',
+        logoClass: 'python',
+        variants: ['python']
+      },
+      {
+        highlight: 'php',
+        language: 'php',
+        logoClass: 'php',
+        variants: ['php']
+      }
+    ],
     footer: {
       style: 'dark',
       copyright: `<p>Copyright © ${new Date().getFullYear()} MONEI — <a href="https://aws.amazon.com/es/blogs/startups/serverless-architecture-powers-moneis-fast-secure-and-scalable-digital-payment-solutions/" target="_blank" rel="noreferrer noopener">Winner of the AWS Startup Architecture Challenge 🏆</a></p><div class="footer-legal">MONEI DIGITAL PAYMENTS SL - ESB02660926 Palestina, 1, Entreplanta, 29007, Málaga, Spain BORME Registry Details: Registro Mercantil de MÁLAGA T 5998, L 4905, F 54, S 8,H MA158775, I/A 1 (14.01.21).  MONEI is a Payments Institution regulated by Banco de España with license number: 6911, and a Swift member with BIC number: MDIPES22. MONEI is member of the European Payments Council under the SRTP group.</div>`
@@ -77,9 +88,11 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          // It is recommended to set document id as docs home page (`docs/` path).
+          id: 'docs',
+          path: 'docs',
+          routeBasePath: 'docs',
+          docItemComponent: '@theme/ApiItem',
           sidebarPath: require.resolve('./sidebars.js'),
-          sidebarCollapsible: true,
           editUrl: 'https://github.com/MONEI/docs/edit/master/'
         },
         theme: {
@@ -95,5 +108,29 @@ module.exports = {
       }
     ]
   ],
-  plugins: [path.resolve(__dirname, './inject-scripts.js')]
+  plugins: [
+    path.resolve(__dirname, './plugins/inject-scripts.js'),
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: 'rest',
+        docsPluginId: 'rest',
+        config: {
+          api: {
+            specPath: 'openapi.json',
+            outputDir: 'docs/apis/rest',
+            downloadUrl: 'https://js.monei.com/api/v1/openapi.json',
+            hideSendButton: true,
+            showExtensions: true,
+            sidebarOptions: {
+              groupPathsBy: 'tag',
+              categoryLinkSource: 'tag'
+            },
+            showSchemas: true
+          }
+        }
+      }
+    ]
+  ],
+  themes: ['docusaurus-theme-openapi-docs']
 };

@@ -1,0 +1,30 @@
+---
+id: subscription-description
+title: 'Subscription-Description'
+description: 'An arbitrary string attached to the subscription. Often useful for'
+sidebar_label: 'Subscription-Description'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'MoonMail Monthly Lite'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Subscription-Description'}></Heading>
+
+An arbitrary string attached to the subscription. Often useful for
+displaying to users.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'MoonMail Monthly Lite',
+    description:
+      'An arbitrary string attached to the subscription. Often useful for\ndisplaying to users.\n',
+    title: 'Subscription-Description'
+  }}
+  schemaType={'response'}
+></Schema>

@@ -1,0 +1,33 @@
+---
+id: subscription-paymentcallbackurl
+title: 'Subscription-PaymentCallbackUrl'
+description: 'The URL will be called each time subscription creates a new payments. You will receive the payment object in the body of the request.'
+sidebar_label: 'Subscription-PaymentCallbackUrl'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'https://example.com/payments/callback'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Subscription-PaymentCallbackUrl'}
+></Heading>
+
+The URL will be called each time subscription creates a new payments. You will receive the payment object in the body of the request.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'https://example.com/payments/callback',
+    description:
+      'The URL will be called each time subscription creates a new payments. You will receive the payment object in the body of the request.\n',
+    title: 'Subscription-PaymentCallbackUrl'
+  }}
+  schemaType={'response'}
+></Schema>

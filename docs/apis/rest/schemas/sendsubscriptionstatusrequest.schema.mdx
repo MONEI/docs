@@ -1,0 +1,56 @@
+---
+id: sendsubscriptionstatusrequest
+title: 'SendSubscriptionStatusRequest'
+description: ''
+sidebar_label: 'SendSubscriptionStatusRequest'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'customerEmail': 'user@example.com',
+    'customerPhone': 'string',
+    'channel': 'EMAIL',
+    'language': 'string'
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'SendSubscriptionStatusRequest'}
+></Heading>
+
+<Schema
+  schema={{
+    title: 'SendSubscriptionStatusRequest',
+    type: 'object',
+    properties: {
+      customerEmail: {
+        type: 'string',
+        format: 'email',
+        description: 'Customer email to send the subscription status to'
+      },
+      customerPhone: {
+        type: 'string',
+        description: 'Customer phone number to send the subscription status to'
+      },
+      channel: {
+        type: 'string',
+        enum: ['EMAIL', 'WHATSAPP', 'SMS'],
+        'x-enumDescriptions': {
+          EMAIL: 'Send message via email',
+          WHATSAPP: 'Send message via WhatsApp',
+          SMS: 'Send message via SMS text message'
+        },
+        description: 'Channel to use for sending the subscription status'
+      },
+      language: {type: 'string', description: 'Language to use for the subscription status message'}
+    }
+  }}
+  schemaType={'response'}
+></Schema>

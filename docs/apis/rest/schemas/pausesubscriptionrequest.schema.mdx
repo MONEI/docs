@@ -1,0 +1,40 @@
+---
+id: pausesubscriptionrequest
+title: 'PauseSubscriptionRequest'
+description: ''
+sidebar_label: 'PauseSubscriptionRequest'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'pauseAtPeriodEnd': false, 'pauseIntervalCount': 1}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'PauseSubscriptionRequest'}></Heading>
+
+<Schema
+  schema={{
+    title: 'PauseSubscriptionRequest',
+    type: 'object',
+    properties: {
+      pauseAtPeriodEnd: {
+        type: 'boolean',
+        example: false,
+        description: 'If true, the subscription will be paused at the end of the current period.\n',
+        title: 'Subscription-PauseAtPeriodEnd'
+      },
+      pauseIntervalCount: {
+        type: 'integer',
+        format: 'int32',
+        example: 1,
+        description:
+          'Number of intervals when subscription will be paused before it activates again.',
+        title: 'Subscription-PauseIntervalCount'
+      }
+    }
+  }}
+  schemaType={'response'}
+></Schema>

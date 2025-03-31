@@ -1,0 +1,117 @@
+---
+id: paymentmethods-methods
+title: 'PaymentMethods-Methods'
+description: 'An array of available payment methods for the account or payment.'
+sidebar_label: 'PaymentMethods-Methods'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  [
+    'bizum',
+    'applePay',
+    'googlePay',
+    'alipay',
+    'bancontact',
+    'blik',
+    'cofidis',
+    'cofidisLoan',
+    'eps',
+    'iDeal',
+    'mbway',
+    'multibanco',
+    'sofort',
+    'trustly',
+    'sepa',
+    'klarna',
+    'giropay',
+    'card'
+  ]
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'PaymentMethods-Methods'}></Heading>
+
+An array of available payment methods for the account or payment.
+Possible values include:
+
+- `alipay` - Alipay
+- `applePay` - Apple Pay
+- `bancontact` - Bancontact
+- `bizum` - Bizum
+- `blik` - BLIK
+- `card` - Credit or debit card
+- `cardPresent` - Card present (physical POS)
+- `clickToPay` - Click to Pay
+- `cofidis` - Cofidis
+- `cofidisLoan` - Cofidis Loan
+- `eps` - EPS
+- `giropay` - Giropay
+- `googlePay` - Google Pay
+- `iDeal` - iDEAL
+- `klarna` - Klarna
+- `mbway` - MB WAY
+- `multibanco` - Multibanco
+- `paypal` - PayPal
+- `sepa` - SEPA Direct Debit
+- `sofort` - Sofort
+- `trustly` - Trustly
+
+<Schema
+  schema={{
+    type: 'array',
+    items: {
+      type: 'string',
+      enum: [
+        'alipay',
+        'applePay',
+        'bancontact',
+        'bizum',
+        'blik',
+        'card',
+        'cardPresent',
+        'clickToPay',
+        'cofidis',
+        'cofidisLoan',
+        'eps',
+        'giropay',
+        'googlePay',
+        'iDeal',
+        'klarna',
+        'mbway',
+        'multibanco',
+        'paypal',
+        'sepa',
+        'sofort',
+        'trustly'
+      ]
+    },
+    example: [
+      'bizum',
+      'applePay',
+      'googlePay',
+      'alipay',
+      'bancontact',
+      'blik',
+      'cofidis',
+      'cofidisLoan',
+      'eps',
+      'iDeal',
+      'mbway',
+      'multibanco',
+      'sofort',
+      'trustly',
+      'sepa',
+      'klarna',
+      'giropay',
+      'card'
+    ],
+    description:
+      'An array of available payment methods for the account or payment.\nPossible values include:\n  - `alipay` - Alipay\n  - `applePay` - Apple Pay\n  - `bancontact` - Bancontact\n  - `bizum` - Bizum\n  - `blik` - BLIK\n  - `card` - Credit or debit card\n  - `cardPresent` - Card present (physical POS)\n  - `clickToPay` - Click to Pay\n  - `cofidis` - Cofidis\n  - `cofidisLoan` - Cofidis Loan\n  - `eps` - EPS\n  - `giropay` - Giropay\n  - `googlePay` - Google Pay\n  - `iDeal` - iDEAL\n  - `klarna` - Klarna\n  - `mbway` - MB WAY\n  - `multibanco` - Multibanco\n  - `paypal` - PayPal\n  - `sepa` - SEPA Direct Debit\n  - `sofort` - Sofort\n  - `trustly` - Trustly\n',
+    title: 'PaymentMethods-Methods'
+  }}
+  schemaType={'response'}
+></Schema>

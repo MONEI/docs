@@ -1,0 +1,46 @@
+---
+id: subscriptions
+title: 'Subscriptions'
+description: 'Subscriptions'
+custom_edit_url: null
+---
+
+The Subscriptions API provides a powerful solution for managing recurring billing and subscription-based business models.
+
+## Key Features
+
+### Flexible Billing Options
+
+- **Multiple billing intervals**: Daily, weekly, monthly, or yearly billing cycles
+- **Custom intervals**: Configure non-standard periods using intervalCount (e.g., every 3 months)
+- **Trial periods**: Offer free trials before the first billing cycle begins
+- **Variable amounts**: Update subscription amounts for pricing changes or upgrades
+
+### Complete Lifecycle Management
+
+- **Create subscriptions**: Set up recurring billing plans with customizable parameters
+- **Activate subscriptions**: Begin billing cycles with customer payment information
+- **Pause/Resume**: Temporarily halt billing without cancellation
+- **Update subscriptions**: Modify pricing, billing details, or subscription parameters
+- **Cancel subscriptions**: End recurring billing permanently or at period end
+
+### Customer-Friendly Features
+
+- **Automated recurring payments**: No manual action required for subsequent billing
+- **Consistent billing dates**: Predictable billing on the same day of each period
+- **Payment retry mechanism**: Automatic retries for failed payments
+- **Customer control**: Enable customers to manage their own subscriptions
+
+### Integration Benefits
+
+- **Webhook notifications**: Get real-time updates on subscription status changes
+- **Detailed reporting**: Track subscription metrics and performance
+- **Simplified compliance**: Handle recurring billing requirements automatically
+- **Reduced churn**: Automatic billing helps prevent missed payments
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
+```
