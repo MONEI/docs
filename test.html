@@ -1,0 +1,39 @@
+<head>
+  <title>Checkout</title>
+  <script src="https://js.monei.com/v2/monei.js"></script>
+</head>
+<body>
+  <form
+    id="payment-form"
+    action="https://secure.monei.com/payments/3c591eec63a839ef4f21356b1c38c50832f9d1c2"
+    method="GET"
+  >
+    <button id="payment-button" type="submit">Pay</button>
+  </form>
+  <script>
+    const paymentForm = document.getElementById('payment-form');
+    const paymentButton = document.getElementById('payment-button');
+    paymentForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      paymentButton.disabled = true;
+      monei
+        .confirmPayment({paymentId: '3c591eec63a839ef4f21356b1c38c50832f9d1c2'})
+        .then(function (result) {
+          paymentButton.disabled = false;
+          // At this moment you can show a customer the payment result
+          // But you should always rely on the result passed to the callback endpoint on your server
+          // to update the order status
+          console.log(result);
+          if (result.status === 'SUCCEEDED') {
+            handleResult(result);
+          } else {
+            handleError(result);
+          }
+        })
+        .catch(function (error) {
+          paymentButton.disabled = false;
+          console.log(error);
+        });
+    });
+  </script>
+</body>
