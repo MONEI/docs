@@ -6,7 +6,7 @@ sidebar_label: 'Payment-Sequence'
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: { 'type': 'recurring', 'recurring': { 'expiry': '20210630', 'frequency': 30 } }
+sample: {'type': 'recurring', 'recurring': {'expiry': '20210630', 'frequency': 30}}
 custom_edit_url: null
 ---
 
@@ -26,7 +26,7 @@ in the inside properties (`recurring`).
       'This field needs to be sent in order to mark the beginning of a sequence of payments\n(recurring/subscriptions, installments, and so). Specific configurations can be set\nin the inside properties (`recurring`).\n',
     required: ['type'],
     properties: {
-      type: { type: 'string', example: 'recurring', enum: ['recurring'] },
+      type: {type: 'string', example: 'recurring', enum: ['recurring']},
       recurring: {
         type: 'object',
         description:
@@ -37,7 +37,7 @@ in the inside properties (`recurring`).
             example: '20210630',
             default: '*(The payment method or card expiration)*',
             description:
-              'Date after which no further recurring payments will be performed.\nMust be formatted as `YYYYMMDD`.\n',
+              'Date after which no further recurring payments will be performed.\nMust be formatted as `YYYYMMDD`.\n'
           },
           frequency: {
             type: 'integer',
@@ -45,13 +45,13 @@ in the inside properties (`recurring`).
             example: 30,
             default: 25,
             description:
-              'The minimum number of **days** between the different recurring payments.\n',
-          },
+              'The minimum number of **days** between the different recurring payments.\n'
+          }
         },
-        title: 'Payment-SequenceRecurring',
-      },
+        title: 'Payment-SequenceRecurring'
+      }
     },
-    title: 'Payment-Sequence',
+    title: 'Payment-Sequence'
   }}
   schemaType={'response'}
 ></Schema>

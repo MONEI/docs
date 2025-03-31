@@ -29,10 +29,20 @@ The status of the payment.
       'REFUNDED',
       'PARTIALLY_REFUNDED',
       'AUTHORIZED',
-      'EXPIRED',
+      'EXPIRED'
     ],
+    'x-enumDescriptions': {
+      SUCCEEDED: 'The payment has been successfully processed and funds have been captured',
+      PENDING: 'The payment is being processed and awaiting completion',
+      FAILED: 'The payment attempt was unsuccessful',
+      CANCELED: 'The payment was canceled before completion',
+      REFUNDED: 'The full payment amount has been refunded',
+      PARTIALLY_REFUNDED: 'Only a portion of the payment amount has been refunded',
+      AUTHORIZED: 'The payment has been authorized but funds have not been captured yet',
+      EXPIRED: 'The payment has expired without being completed'
+    },
     description: 'The status of the payment.',
-    title: 'Payment-Status',
+    title: 'Payment-Status'
   }}
   schemaType={'response'}
 ></Schema>

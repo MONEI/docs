@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.5.7",
+    "version": "1.6.0",
     "title": "MONEI API v1",
-    "description": "<p>The MONEI API is organized around <a href=\"https://en.wikipedia.org/wiki/Representational_State_Transfer\">REST</a> principles. Our API is designed to be intuitive and developer-friendly.</p>\n<h3>Base URL</h3>\n<p>All API requests should be made to:</p>\n<pre><code>https://api.monei.com/v1\n</code></pre>\n<h3>Environment</h3>\n<p>MONEI provides two environments:</p>\n<ul>\n<li><strong>Test Environment</strong>: For development and testing without processing real payments</li>\n<li><strong>Live Environment</strong>: For processing real transactions in production</li>\n</ul>\n<h3>Client Libraries</h3>\n<p>We provide official SDKs to simplify integration:</p>\n<ul>\n<li><a href=\"https://github.com/MONEI/monei-php-sdk\">PHP SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-python-sdk\">Python SDK</a></li>\n<li><a href=\"https://github.com/MONEI/monei-node-sdk\">Node.js SDK</a></li>\n<li><a href=\"https://postman.monei.com/\">Postman Collection</a></li>\n</ul>\n<p>Our SDKs handle authentication, error handling, and request formatting automatically.</p>\n<p>You can download the OpenAPI specification from the <a href=\"https://js.monei.com/api/v1/openapi.json\">https://js.monei.com/api/v1/openapi.json</a> and generate your own client library using the <a href=\"https://openapi-generator.tech/\">OpenAPI Generator</a>.</p>\n<h3>Important Requirements</h3>\n<ul>\n<li>All API requests must be made over HTTPS</li>\n<li>If you are not using our official SDKs, you <strong>must provide a valid <code>User-Agent</code> header</strong> with each request</li>\n<li>Requests without proper authentication will return a <code>401 Unauthorized</code> error</li>\n</ul>\n<h3>Error Handling</h3>\n<p>The API returns consistent error codes and messages to help you troubleshoot issues. Each response includes a <code>statusCode</code> attribute indicating the outcome of your request.</p>\n<h3>Rate Limits</h3>\n<p>The API implements rate limiting to ensure stability. If you exceed the limits, requests will return a <code>429 Too Many Requests</code> status code.</p>\n\n<!-- ReDoc-Inject: <security-definitions> -->"
+    "description": "The MONEI API is organized around REST principles. Our API is designed to be intuitive and developer-friendly.\n\n### Base URL\n\nAll API requests should be made to:\n\n```\nhttps://api.monei.com/v1\n```\n\n### Environment\n\nMONEI provides two environments:\n\n- **Test Environment**: For development and testing without processing real payments\n- **Live Environment**: For processing real transactions in production\n\n### Client Libraries\n\nWe provide official SDKs to simplify integration:\n\n- [PHP SDK](https://github.com/MONEI/monei-php-sdk)\n- [Python SDK](https://github.com/MONEI/monei-python-sdk)\n- [Node.js SDK](https://github.com/MONEI/monei-node-sdk)\n- [Postman Collection](https://postman.monei.com/)\n\nOur SDKs handle authentication, error handling, and request formatting automatically.\n\nYou can download the OpenAPI specification from the https://js.monei.com/api/v1/openapi.json and generate your own client library using the [OpenAPI Generator](https://openapi-generator.tech/).\n\n### Important Requirements\n\n- All API requests must be made over HTTPS\n- If you are not using our official SDKs, you **must provide a valid `User-Agent` header** with each request\n- Requests without proper authentication will return a `401 Unauthorized` error\n\n### Error Handling\n\nThe API returns consistent error codes and messages to help you troubleshoot issues. Each response includes a `statusCode` attribute indicating the outcome of your request.\n\n### Rate Limits\n\nThe API implements rate limiting to ensure stability. If you exceed the limits, requests will return a `429 Too Many Requests` status code.\n"
   },
   "servers": [
     {
@@ -11,26 +11,9 @@
       "description": "MONEI API v1"
     }
   ],
-  "tags": [
+  "security": [
     {
-      "name": "Apple Pay Domain",
-      "description": "<p>The Apple Pay Domain API allows you to register and manage domains for Apple Pay integration.</p>\n<p>With the Apple Pay Domain API, you can:</p>\n<ul>\n<li>Register domains to use with Apple Pay</li>\n<li>View currently registered domains</li>\n<li>Ensure your website is properly configured for Apple Pay payments</li>\n</ul>\n<p>Apple requires domain verification before you can accept Apple Pay payments on your website.\nThis API simplifies the process of registering your domains with Apple Pay and maintaining\nyour domain verification status.</p>\n<h2>Domain registration process</h2>\n<p>To accept Apple Pay on your website, you must register your domain with Apple. This process:</p>\n<ol>\n<li>Verifies that you control the domain</li>\n<li>Allows Apple Pay buttons to be displayed on your website</li>\n<li>Enables secure payment processing through Apple Pay</li>\n</ol>\n<p>Once registered, your domain will be authorized to display Apple Pay payment options to customers.</p>\n"
-    },
-    {
-      "name": "Bizum",
-      "description": "<p>The Bizum API allows you to integrate with Spain&#39;s popular mobile payment system.</p>\n<p>With the Bizum API, you can:</p>\n<ul>\n<li>Validate customer phone numbers for Bizum compatibility</li>\n<li>Process payments using Bizum as a payment method</li>\n<li>Offer a seamless mobile payment experience for Spanish customers</li>\n</ul>\n<p>Bizum is a widely used payment method in Spain that allows customers to make payments\nusing their mobile phone number linked to their bank account. This API provides the\nnecessary tools to incorporate Bizum into your payment options.</p>\n<h2>Bizum validation</h2>\n<p>Before processing a Bizum payment, you can validate if a customer&#39;s phone number is\nregistered with Bizum using the validate-phone endpoint.</p>\n"
-    },
-    {
-      "name": "Payment Methods",
-      "description": "<p>The Payment Methods API allows you to retrieve available payment methods for an account or a specific payment.\nThis information can be used to display appropriate payment options to your customers.</p>\n<p>Payment methods vary by country, currency, and merchant configuration. This API helps you dynamically\ndetermine which payment methods are available for a specific transaction or account.</p>\n<p>You can use this API to:</p>\n<ul>\n<li>Get all payment methods available for an account</li>\n<li>Get payment methods available for a specific payment</li>\n<li>Display payment options to your customers based on their location and purchase details</li>\n</ul>\n<h2>Payment Methods object</h2>\n<SchemaDefinition schemaRef=\"#/components/schemas/PaymentMethods\" />\n"
-    },
-    {
-      "name": "Payments",
-      "description": "<p>The Payments API provides a comprehensive platform for processing transactions and managing the complete payment lifecycle.</p>\n<h3>Core Payment Operations</h3>\n<ul>\n<li>Create and process payments with multiple payment methods</li>\n<li>Authorize payments and capture funds later</li>\n<li>Cancel authorized payments to release reserved funds</li>\n<li>Refund payments partially or in full</li>\n<li>Generate detailed receipts for completed payments</li>\n</ul>\n<h3>Customer Experience Features</h3>\n<ul>\n<li>Send payment requests via WhatsApp, SMS, or Bizum</li>\n<li>Create and distribute payment links through various channels</li>\n<li>Generate permanent payment tokens for one-click checkout experiences</li>\n<li>Support recurring billing and subscription payments</li>\n</ul>\n<h3>Implementation Best Practices</h3>\n<ul>\n<li>Create one payment per order or customer session for clear transaction records</li>\n<li>Use the unique payment ID for all subsequent operations on a payment</li>\n<li>Generate permanent payment tokens (with <code>generatePaymentToken: true</code>) for returning customers</li>\n<li>Implement webhook notifications to receive real-time payment status updates</li>\n</ul>\n<h2>Payment Object</h2>\n<SchemaDefinition schemaRef=\"#/components/schemas/Payment\" />\n"
-    },
-    {
-      "name": "Subscriptions",
-      "description": "<p>The Subscriptions API provides a powerful solution for managing recurring billing and subscription-based business models.</p>\n<h2>Key Features</h2>\n<h3>Flexible Billing Options</h3>\n<ul>\n<li><strong>Multiple billing intervals</strong>: Daily, weekly, monthly, or yearly billing cycles</li>\n<li><strong>Custom intervals</strong>: Configure non-standard periods using intervalCount (e.g., every 3 months)</li>\n<li><strong>Trial periods</strong>: Offer free trials before the first billing cycle begins</li>\n<li><strong>Variable amounts</strong>: Update subscription amounts for pricing changes or upgrades</li>\n</ul>\n<h3>Complete Lifecycle Management</h3>\n<ul>\n<li><strong>Create subscriptions</strong>: Set up recurring billing plans with customizable parameters</li>\n<li><strong>Activate subscriptions</strong>: Begin billing cycles with customer payment information</li>\n<li><strong>Pause/Resume</strong>: Temporarily halt billing without cancellation</li>\n<li><strong>Update subscriptions</strong>: Modify pricing, billing details, or subscription parameters</li>\n<li><strong>Cancel subscriptions</strong>: End recurring billing permanently or at period end</li>\n</ul>\n<h3>Customer-Friendly Features</h3>\n<ul>\n<li><strong>Automated recurring payments</strong>: No manual action required for subsequent billing</li>\n<li><strong>Consistent billing dates</strong>: Predictable billing on the same day of each period</li>\n<li><strong>Payment retry mechanism</strong>: Automatic retries for failed payments</li>\n<li><strong>Customer control</strong>: Enable customers to manage their own subscriptions</li>\n</ul>\n<h3>Integration Benefits</h3>\n<ul>\n<li><strong>Webhook notifications</strong>: Get real-time updates on subscription status changes</li>\n<li><strong>Detailed reporting</strong>: Track subscription metrics and performance</li>\n<li><strong>Simplified compliance</strong>: Handle recurring billing requirements automatically</li>\n<li><strong>Reduced churn</strong>: Automatic billing helps prevent missed payments</li>\n</ul>\n<h2>Subscription Object</h2>\n<SchemaDefinition schemaRef=\"#/components/schemas/Subscription\" />\n"
+      "APIKey": []
     }
   ],
   "components": {
@@ -39,13 +22,13 @@
         "type": "apiKey",
         "in": "header",
         "name": "Authorization",
-        "description": "<p>The MONEI API uses API keys to authenticate requests. Each request must include your API key in the <code>Authorization</code> header.</p>\n<p>You can view and manage your API keys in the <a href=\"https://dashboard.monei.com/settings/api\">MONEI Dashboard</a>.</p>\n<p>MONEI provides two types of API keys:</p>\n<ul>\n<li><strong>Test mode keys</strong>: Prefixed with <code>pk_test_</code></li>\n<li><strong>Live mode keys</strong>: Prefixed with <code>pk_live_</code></li>\n</ul>\n<h3>Implementation</h3>\n<p>Include your API key in the <code>Authorization</code> header for all API requests:</p>\n<pre><code>Authorization: pk_test_your_api_key\n</code></pre>\n<h3>Security Best Practices</h3>\n<p>Your API key carries significant privileges, so it&#39;s crucial to keep it secure:</p>\n<ul>\n<li><strong>Never share your API key</strong> in publicly accessible areas such as GitHub, client-side code, or public repositories</li>\n<li><strong>Store your API key securely</strong> in environment variables or secure configuration systems</li>\n<li><strong>Rotate your API keys periodically</strong> for enhanced security</li>\n<li><strong>Use test mode keys</strong> for development and testing</li>\n<li><strong>Restrict API key access</strong> to only the necessary services and personnel</li>\n</ul>\n"
+        "description": "The MONEI API uses API keys to authenticate requests. Each request must include your API key in the `Authorization` header.\n\nYou can view and manage your API keys in the [MONEI Dashboard](https://dashboard.monei.com/settings/api).\n\nMONEI provides two types of API keys:\n\n- **Test mode keys**: Prefixed with `pk_test_`\n- **Live mode keys**: Prefixed with `pk_live_`\n\n### Security Best Practices\n\nYour API key carries significant privileges, so it's crucial to keep it secure:\n\n- **Never share your API key** in publicly accessible areas such as GitHub, client-side code, or public repositories\n- **Store your API key securely** in environment variables or secure configuration systems\n- **Rotate your API keys periodically** for enhanced security\n- **Use test mode keys** for development and testing\n- **Restrict API key access** to only the necessary services and personnel\n"
       },
       "AccountId": {
         "type": "apiKey",
         "in": "header",
         "name": "MONEI-Account-ID",
-        "description": "<p>If you&#39;re integrating with MONEI as a partner or platform, you&#39;ll need to use both your Master Account API Key and the Account ID of the merchant you&#39;re acting on behalf of.</p>\n<h3>How It Works</h3>\n<ol>\n<li><strong>Authentication</strong>: Include your Master Account API Key in the <code>Authorization</code> header</li>\n<li><strong>Account Selection</strong>: Include the merchant&#39;s Account ID in the <code>MONEI-Account-ID</code> header</li>\n</ol>\n<p>This combination allows you to perform operations on behalf of your connected merchants while using your own authentication credentials.</p>\n<h3>Implementation</h3>\n<p>For all API requests as a partner, include both headers:</p>\n<pre><code>Authorization: pk_test_your_master_api_key\nMONEI-Account-ID: acc_merchant_account_id\n</code></pre>\n<h3>Use Cases</h3>\n<p>The Account ID header is essential for:</p>\n<ul>\n<li>Processing payments on behalf of connected merchants</li>\n<li>Managing subscriptions for merchants on your platform</li>\n<li>Retrieving payment methods available to specific merchants</li>\n</ul>\n<h3>Finding Account IDs</h3>\n<p>You can find the Account ID for each connected merchant in your MONEI Partner Dashboard.</p>\n"
+        "description": "If you're integrating with MONEI as a partner or platform, you'll need to use both your Master Account API Key and the Account ID of the merchant you're acting on behalf of.\n\n### How It Works\n\n1. **Authentication**: Include your Master Account API Key in the `Authorization` header\n2. **Account Selection**: Include the merchant's Account ID in the `MONEI-Account-ID` header\n\nThis combination allows you to perform operations on behalf of your connected merchants while using your own authentication credentials.\n\n### Use Cases\n\nThe Account ID header is essential for:\n\n- Processing payments on behalf of connected merchants\n- Managing subscriptions for merchants on your platform\n- Retrieving payment methods available to specific merchants\n\n### Finding Account IDs\n\nYou can find the Account ID for each connected merchant in your [MONEI Partner Dashboard](https://admin.monei.com).\n"
       }
     },
     "responses": {
@@ -173,7 +156,7 @@
       }
     },
     "schemas": {
-      "ErrorBase": {
+      "ApiException": {
         "type": "object",
         "required": ["status", "statusCode", "message", "requestId", "requestTime"],
         "properties": {
@@ -206,7 +189,7 @@
       "BadRequestError": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/ErrorBase"
+            "$ref": "#/components/schemas/ApiException"
           },
           {
             "type": "object",
@@ -234,7 +217,7 @@
       "UnauthorizedError": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/ErrorBase"
+            "$ref": "#/components/schemas/ApiException"
           },
           {
             "type": "object",
@@ -262,7 +245,7 @@
       "NotFoundError": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/ErrorBase"
+            "$ref": "#/components/schemas/ApiException"
           },
           {
             "type": "object",
@@ -290,7 +273,7 @@
       "InternalServerError": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/ErrorBase"
+            "$ref": "#/components/schemas/ApiException"
           },
           {
             "type": "object",
@@ -318,7 +301,7 @@
       "ServiceUnavailableError": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/ErrorBase"
+            "$ref": "#/components/schemas/ApiException"
           },
           {
             "type": "object",
@@ -346,7 +329,7 @@
       "UnprocessableEntityError": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/ErrorBase"
+            "$ref": "#/components/schemas/ApiException"
           },
           {
             "type": "object",
@@ -1301,7 +1284,7 @@
               }
             ],
             "default": "(same as initial payment)",
-            "description": "Same as the `transactionType` parameter from\n[create payment](https://docs.monei.com/docs/apis/rest/payments-create/).\nIf not sent, it will default in the same transaction type used in the initial payment.\n"
+            "description": "Same as the `transactionType` parameter from\n[create payment](https://docs.monei.com/api/payments-create).\nIf not sent, it will default in the same transaction type used in the initial payment.\n"
           },
           "description": {
             "$ref": "#/components/schemas/Payment-Description"
@@ -1426,20 +1409,26 @@
           "AUTHORIZED",
           "EXPIRED"
         ],
+        "x-enumDescriptions": {
+          "SUCCEEDED": "The payment has been successfully processed and funds have been captured",
+          "PENDING": "The payment is being processed and awaiting completion",
+          "FAILED": "The payment attempt was unsuccessful",
+          "CANCELED": "The payment was canceled before completion",
+          "REFUNDED": "The full payment amount has been refunded",
+          "PARTIALLY_REFUNDED": "Only a portion of the payment amount has been refunded",
+          "AUTHORIZED": "The payment has been authorized but funds have not been captured yet",
+          "EXPIRED": "The payment has expired without being completed"
+        },
         "description": "The status of the payment."
       },
       "Payment-StatusCode": {
-        "allOf": [
-          {
-            "type": "string",
-            "example": null
-          }
-        ],
-        "description": "<p>The MONEI API returns a <code>statusCode</code> attribute in the <a href=\"https://docs.monei.com/docs/apis/rest/payments/\">Payment Object</a> to indicate the outcome of your request. This helps you understand whether an operation was successful or why it failed.</p>\n<h3>Success Code</h3>\n<p>Successful transactions return the following code:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E000</td>\n<td>Transaction approved</td>\n</tr>\n<tr>\n<td>E001</td>\n<td>Transaction pending processing</td>\n</tr>\n<tr>\n<td>E002</td>\n<td>Transaction pending authentication</td>\n</tr>\n<tr>\n<td>E003</td>\n<td>Transaction pending authorization</td>\n</tr>\n</tbody></table>\n<h3>Error Codes</h3>\n<p>Error codes are grouped by category to help you quickly identify the type of issue:</p>\n<h4>Configuration Errors (E1xx)</h4>\n<p>These errors relate to account configuration issues:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E101</td>\n<td>Error with payment processor configuration. Check this in your dashboard or contact MONEI for support</td>\n</tr>\n<tr>\n<td>E102</td>\n<td>Invalid or inactive MID. Please contact the acquiring entity</td>\n</tr>\n<tr>\n<td>E103</td>\n<td>Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support</td>\n</tr>\n<tr>\n<td>E104</td>\n<td>Partial captures are not enabled in your account, please contact MONEI support</td>\n</tr>\n<tr>\n<td>E105</td>\n<td>MOTO Payment are not enabled in your account, please contact MONEI support</td>\n</tr>\n</tbody></table>\n<h4>Authentication and Request Errors (E15x)</h4>\n<p>These errors indicate issues with your API request format or authentication:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E150</td>\n<td>Invalid or malformed request. Please check the message format</td>\n</tr>\n<tr>\n<td>E151</td>\n<td>Missing or malformed signature/auth</td>\n</tr>\n<tr>\n<td>E152</td>\n<td>Error while decrypting request</td>\n</tr>\n<tr>\n<td>E153</td>\n<td>Pre-authorization is expired and cannot be canceled or captured</td>\n</tr>\n<tr>\n<td>E154</td>\n<td>The payment date cannot be less than the cancellation or capture date</td>\n</tr>\n<tr>\n<td>E155</td>\n<td>The cancellation date exceeded the date allowed for pre-authorized operations</td>\n</tr>\n<tr>\n<td>E156</td>\n<td>Unauthorized token</td>\n</tr>\n</tbody></table>\n<h4>Transaction Processing Errors (E2xx)</h4>\n<p>These errors occur during payment processing:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E200</td>\n<td>Transaction failed during payment processing</td>\n</tr>\n<tr>\n<td>E201</td>\n<td>Transaction declined by the card-issuing bank</td>\n</tr>\n<tr>\n<td>E202</td>\n<td>Transaction declined by the issuing bank</td>\n</tr>\n<tr>\n<td>E203</td>\n<td>Payment method not allowed</td>\n</tr>\n<tr>\n<td>E204</td>\n<td>Wrong or not allowed currency</td>\n</tr>\n<tr>\n<td>E205</td>\n<td>Incorrect reference / transaction does not exist</td>\n</tr>\n<tr>\n<td>E206</td>\n<td>Invalid payment method</td>\n</tr>\n<tr>\n<td>E207</td>\n<td>Transaction failed: process time exceeded</td>\n</tr>\n<tr>\n<td>E208</td>\n<td>Transaction is currently being processed</td>\n</tr>\n<tr>\n<td>E209</td>\n<td>Duplicated operation</td>\n</tr>\n<tr>\n<td>E210</td>\n<td>Wrong or not allowed payment amount</td>\n</tr>\n<tr>\n<td>E211</td>\n<td>Refund declined by processor</td>\n</tr>\n<tr>\n<td>E212</td>\n<td>Transaction has already been captured</td>\n</tr>\n<tr>\n<td>E213</td>\n<td>Transaction has already been canceled</td>\n</tr>\n<tr>\n<td>E214</td>\n<td>The amount to be captured cannot exceed the pre-authorized amount</td>\n</tr>\n<tr>\n<td>E215</td>\n<td>The transaction to be captured has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E216</td>\n<td>The transaction to be canceled has not been pre-authorized yet</td>\n</tr>\n<tr>\n<td>E217</td>\n<td>Transaction denied by processor to avoid duplicated operations</td>\n</tr>\n<tr>\n<td>E218</td>\n<td>Error during payment request validation</td>\n</tr>\n<tr>\n<td>E219</td>\n<td>Refund declined due to exceeded amount</td>\n</tr>\n<tr>\n<td>E220</td>\n<td>Transaction has already been fully refunded</td>\n</tr>\n<tr>\n<td>E221</td>\n<td>Transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E222</td>\n<td>The user has canceled the payment</td>\n</tr>\n<tr>\n<td>E223</td>\n<td>Waiting for the transaction to be completed</td>\n</tr>\n<tr>\n<td>E224</td>\n<td>No reason to decline</td>\n</tr>\n<tr>\n<td>E225</td>\n<td>Refund not allowed</td>\n</tr>\n<tr>\n<td>E226</td>\n<td>Transaction cannot be completed, violation of law</td>\n</tr>\n<tr>\n<td>E227</td>\n<td>Stop Payment Order</td>\n</tr>\n<tr>\n<td>E228</td>\n<td>Strong Customer Authentication required</td>\n</tr>\n<tr>\n<td>E229</td>\n<td>Expired payment method</td>\n</tr>\n</tbody></table>\n<h4>3D Secure Related Errors (E3xx)</h4>\n<p>These errors are related to 3D Secure authentication:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E300</td>\n<td>Transaction declined due to security restrictions</td>\n</tr>\n<tr>\n<td>E301</td>\n<td>3D Secure authentication failed</td>\n</tr>\n<tr>\n<td>E302</td>\n<td>Authentication process timed out. Please try again</td>\n</tr>\n<tr>\n<td>E303</td>\n<td>An error occurred during the 3D Secure process</td>\n</tr>\n<tr>\n<td>E304</td>\n<td>Invalid or malformed 3D Secure request</td>\n</tr>\n<tr>\n<td>E305</td>\n<td>Exemption not allowed</td>\n</tr>\n<tr>\n<td>E306</td>\n<td>Exemption error</td>\n</tr>\n<tr>\n<td>E307</td>\n<td>Fraud control error</td>\n</tr>\n<tr>\n<td>E308</td>\n<td>External MPI received wrong. Please check the data</td>\n</tr>\n<tr>\n<td>E309</td>\n<td>External MPI not enabled. Please contact support</td>\n</tr>\n<tr>\n<td>E310</td>\n<td>Transaction confirmation rejected by the merchant</td>\n</tr>\n</tbody></table>\n<h4>Card Related Errors (E5xx)</h4>\n<p>These errors are specific to card payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E500</td>\n<td>Transaction declined during card payment process</td>\n</tr>\n<tr>\n<td>E501</td>\n<td>Card rejected: invalid card number</td>\n</tr>\n<tr>\n<td>E502</td>\n<td>Card rejected: wrong expiration date</td>\n</tr>\n<tr>\n<td>E503</td>\n<td>Card rejected: wrong CVC/CVV2 number</td>\n</tr>\n<tr>\n<td>E504</td>\n<td>Card number not registered</td>\n</tr>\n<tr>\n<td>E505</td>\n<td>Card is expired</td>\n</tr>\n<tr>\n<td>E506</td>\n<td>Error during payment authorization. Please try again</td>\n</tr>\n<tr>\n<td>E507</td>\n<td>Cardholder has canceled the payment</td>\n</tr>\n<tr>\n<td>E508</td>\n<td>Transaction declined: AMEX cards not accepted by payment processor</td>\n</tr>\n<tr>\n<td>E509</td>\n<td>Card blocked temporarily or under suspicion of fraud</td>\n</tr>\n<tr>\n<td>E510</td>\n<td>Card does not allow pre-authorization operations</td>\n</tr>\n<tr>\n<td>E511</td>\n<td>CVC/CVV2 number is required</td>\n</tr>\n<tr>\n<td>E512</td>\n<td>Unsupported card type</td>\n</tr>\n<tr>\n<td>E513</td>\n<td>Transaction type not allowed for this type of card</td>\n</tr>\n<tr>\n<td>E514</td>\n<td>Transaction declined by card issuer</td>\n</tr>\n<tr>\n<td>E515</td>\n<td>Implausible card data</td>\n</tr>\n<tr>\n<td>E516</td>\n<td>Incorrect PIN</td>\n</tr>\n<tr>\n<td>E517</td>\n<td>Transaction not allowed for cardholder</td>\n</tr>\n<tr>\n<td>E518</td>\n<td>The amount exceeds the card limit</td>\n</tr>\n</tbody></table>\n<h4>Digital Wallet Errors (E6xx)</h4>\n<p>These errors are related to digital wallet payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E600</td>\n<td>Transaction declined during ApplePay/GooglePay payment process</td>\n</tr>\n<tr>\n<td>E601</td>\n<td>Incorrect ApplePay or GooglePay configuration</td>\n</tr>\n</tbody></table>\n<h4>PayPal Related Errors (E62x)</h4>\n<p>These errors are specific to PayPal payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E620</td>\n<td>Transaction declined during PayPal payment process</td>\n</tr>\n<tr>\n<td>E621</td>\n<td>Transaction declined during PayPal payment process: invalid currency</td>\n</tr>\n</tbody></table>\n<h4>Bizum Related Errors (E64x-E65x)</h4>\n<p>These errors are specific to Bizum payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E640</td>\n<td>Bizum transaction declined after three authentication attempts</td>\n</tr>\n<tr>\n<td>E641</td>\n<td>Bizum transaction declined due to failed authorization</td>\n</tr>\n<tr>\n<td>E642</td>\n<td>Bizum transaction declined due to insufficient funds</td>\n</tr>\n<tr>\n<td>E643</td>\n<td>Bizum transaction canceled: the user does not want to continue</td>\n</tr>\n<tr>\n<td>E644</td>\n<td>Bizum transaction rejected by destination bank</td>\n</tr>\n<tr>\n<td>E645</td>\n<td>Bizum transaction rejected by origin bank</td>\n</tr>\n<tr>\n<td>E646</td>\n<td>Bizum transaction rejected by processor</td>\n</tr>\n<tr>\n<td>E647</td>\n<td>Bizum transaction failed while connecting with processor. Please try again</td>\n</tr>\n<tr>\n<td>E648</td>\n<td>Bizum transaction failed, payee is not found</td>\n</tr>\n<tr>\n<td>E649</td>\n<td>Bizum transaction failed, payer is not found</td>\n</tr>\n<tr>\n<td>E650</td>\n<td>Bizum REST not implemented</td>\n</tr>\n<tr>\n<td>E651</td>\n<td>Bizum transaction declined due to failed authentication</td>\n</tr>\n<tr>\n<td>E652</td>\n<td>The customer has disabled Bizum, please use another payment method</td>\n</tr>\n</tbody></table>\n<h4>ClickToPay Related Errors (E68x)</h4>\n<p>These errors are specific to ClickToPay payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E680</td>\n<td>Transaction declined during ClickToPay payment process</td>\n</tr>\n<tr>\n<td>E681</td>\n<td>Incorrect ClickToPay configuration</td>\n</tr>\n</tbody></table>\n<h4>Cofidis Related Errors (E7xx)</h4>\n<p>These errors are specific to Cofidis payments:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E700</td>\n<td>Transaction declined during Cofidis payment process</td>\n</tr>\n</tbody></table>\n<h4>System Errors (E9xx)</h4>\n<p>These errors indicate system-level issues:</p>\n<table>\n<thead>\n<tr>\n<th>Code</th>\n<th>Message</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>E999</td>\n<td>Service internal error. Please contact support</td>\n</tr>\n</tbody></table>\n"
+        "type": "string",
+        "example": "E000",
+        "description": "Payment status code.\n"
       },
       "Payment-StatusMessage": {
         "type": "string",
-        "example": null,
+        "example": "Transaction approved",
         "description": "Human readable status message, can be displayed to a user.\n"
       },
       "Payment-RefundedAmount": {
@@ -1567,6 +1556,25 @@
               "eps",
               "blik"
             ],
+            "x-enumDescriptions": {
+              "alipay": "Alipay",
+              "card": "Card",
+              "bizum": "Bizum",
+              "paypal": "PayPal",
+              "cofidis": "Cofidis",
+              "cofidisLoan": "Cofidis Loan",
+              "mbway": "MB WAY",
+              "multibanco": "Multibanco",
+              "iDeal": "iDEAL",
+              "bancontact": "Bancontact",
+              "sofort": "SOFORT",
+              "trustly": "Trustly",
+              "sepa": "SEPA",
+              "klarna": "Klarna",
+              "giropay": "Giropay",
+              "eps": "EPS",
+              "blik": "BLIK"
+            },
             "description": "Payment method type."
           },
           "card": {
@@ -1609,6 +1617,15 @@
             "type": "string",
             "example": "visa",
             "enum": ["visa", "mastercard", "diners", "amex", "jcb", "unionpay", "unknown"],
+            "x-enumDescriptions": {
+              "visa": "Visa credit or debit card",
+              "mastercard": "Mastercard credit or debit card",
+              "diners": "Diners Club credit card",
+              "amex": "American Express credit card",
+              "jcb": "Japan Credit Bureau card",
+              "unionpay": "UnionPay card from China",
+              "unknown": "Card brand could not be determined"
+            },
             "description": "Card brand."
           },
           "type": {
@@ -1631,7 +1648,13 @@
             "type": "string",
             "example": "CHALLENGE",
             "enum": ["CHALLENGE", "FRICTIONLESS", "FRICTIONLESS_CHALLENGE", "DIRECT"],
-            "description": "The flow used for 3DS authentication.\n- `CHALLENGE` - In a challenge flow, the issuer requires additional shopper interaction, either through biometrics, two-factor authentication, or similar methods based on [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) factors.\n- `FRICTIONLESS` - In a frictionless flow, the acquirer, issuer, and card scheme exchange all necessary\n    information in the background through passive authentication using the shopper's device\n    fingerprint. The transaction is completed without further shopper interaction.\n- `FRICTIONLESS_CHALLENGE` - This flow is the complete 3DS flow. It is similar to the 3DS frictionless flow but\n    includes an additional authentication step (challenge) that will be invoked if the\n    information provided in the data collection step does not suffice to determine the\n    risk-level of the transaction.\n- `DIRECT` - This transaction did not require [Strong Customer Authentication (SCA)](https://en.wikipedia.org/wiki/Strong_customer_authentication) due to the low risk\n"
+            "x-enumDescriptions": {
+              "CHALLENGE": "Authentication requiring additional shopper interaction through biometrics, 2FA, or other SCA methods",
+              "FRICTIONLESS": "Background authentication using device fingerprint without additional shopper interaction",
+              "FRICTIONLESS_CHALLENGE": "Complete 3DS flow with additional authentication if initial data collection is insufficient",
+              "DIRECT": "Transaction exempt from SCA due to low risk assessment"
+            },
+            "description": "The flow used for 3DS authentication.\n"
           },
           "expiration": {
             "type": "integer",
@@ -1679,8 +1702,23 @@
         "properties": {
           "orderId": {
             "type": "string",
-            "example": null,
+            "example": "7XP21983KL5672104",
             "description": "The Paypal's order ID."
+          },
+          "payerId": {
+            "type": "string",
+            "example": "QWRTNBFHZXLPD",
+            "description": "The Paypal's payer ID."
+          },
+          "email": {
+            "type": "string",
+            "example": "john.doe@example.com",
+            "description": "The Paypal's payer email."
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe",
+            "description": "The Paypal's payer name."
           }
         }
       },
@@ -1775,7 +1813,13 @@
           "billingCategory": {
             "type": "string",
             "example": "PAY_LATER",
-            "enum": ["PAY_LATER", "PAY_NOW", "SLICE_IT", "SLICE_IT_BY_CARD"]
+            "enum": ["PAY_LATER", "PAY_NOW", "SLICE_IT", "SLICE_IT_BY_CARD"],
+            "x-enumDescriptions": {
+              "PAY_LATER": "Pay after delivery within a specified timeframe",
+              "PAY_NOW": "Immediate payment at time of purchase",
+              "SLICE_IT": "Split payment into installments",
+              "SLICE_IT_BY_CARD": "Split payment into installments using a card"
+            }
           },
           "authPaymentMethod": {
             "type": "string",
@@ -1791,7 +1835,19 @@
               "b2b_invoice",
               "card",
               "slice_it_by_card"
-            ]
+            ],
+            "x-enumDescriptions": {
+              "invoice": "Traditional invoice payment",
+              "fixed_amount": "Payment with a predetermined fixed amount",
+              "pix": "Brazilian instant payment system",
+              "base_account": "Payment from a basic account",
+              "deferred_interest": "Payment with delayed interest charges",
+              "direct_debit": "Direct bank account debit",
+              "direct_bank_transfer": "Immediate bank transfer",
+              "b2b_invoice": "Business-to-business invoice payment",
+              "card": "Credit or debit card payment",
+              "slice_it_by_card": "Installment payment using a card"
+            }
           }
         }
       },
@@ -1870,26 +1926,65 @@
           "eps",
           "blik"
         ],
+        "x-enumDescriptions": {
+          "alipay": "Alipay",
+          "card": "Card",
+          "bizum": "Bizum",
+          "paypal": "PayPal",
+          "cofidis": "Cofidis",
+          "cofidisLoan": "Cofidis Loan",
+          "mbway": "MB WAY",
+          "multibanco": "Multibanco",
+          "iDeal": "iDEAL",
+          "bancontact": "Bancontact",
+          "sofort": "SOFORT",
+          "trustly": "Trustly",
+          "sepa": "SEPA",
+          "klarna": "Klarna",
+          "giropay": "Giropay",
+          "eps": "EPS",
+          "blik": "BLIK"
+        },
         "example": ["card", "bizum", "paypal"],
-        "description": "An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `alipay`\n  - `card`\n  - `bizum`\n  - `paypal`\n  - `cofidis`\n  - `cofidisLoan`\n  - `mbway`\n  - `multibanco`\n  - `iDeal`\n  - `bancontact`\n  - `sofort`\n  - `trustly`\n  - `sepa`\n  - `klarna`\n  - `giropay`\n  - `eps`\n  - `blik`\n"
+        "description": "An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods.\n"
       },
       "Payment-TransactionType": {
         "type": "string",
         "example": "SALE",
         "default": "SALE",
         "enum": ["SALE", "AUTH", "PAYOUT", "VERIF"],
-        "description": "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don't capture the funds until later.\n  - `PAYOUT` - Send funds to the customer\n  - `VERIF` - Verify the card without placing a hold or capturing funds.\n"
+        "x-enumDescriptions": {
+          "SALE": "Automatically captures funds when the customer authorizes the payment",
+          "AUTH": "Places a hold on funds without immediate capture, allowing for later capture",
+          "PAYOUT": "Sends funds to the customer",
+          "VERIF": "Verifies the payment method without placing a hold or capturing funds"
+        },
+        "description": "Controls when the funds will be captured.\n"
       },
       "Payment-MessageChannel": {
         "type": "string",
         "example": "EMAIL",
         "enum": ["EMAIL", "WHATSAPP", "SMS"],
+        "x-enumDescriptions": {
+          "EMAIL": "Send message via email",
+          "WHATSAPP": "Send message via WhatsApp",
+          "SMS": "Send message via SMS text message"
+        },
         "description": "The channel used to send the payment message.\n"
       },
       "Payment-MessageLanguage": {
         "type": "string",
         "example": "en",
         "enum": ["en", "es", "ca", "pt", "de", "it", "fr"],
+        "x-enumDescriptions": {
+          "en": "English",
+          "es": "Spanish",
+          "ca": "Catalan",
+          "pt": "Portuguese",
+          "de": "German",
+          "it": "Italian",
+          "fr": "French"
+        },
         "description": "The language of message sent to the customer. If not provided the default customer language is used if available."
       },
       "Payment-Shop": {
@@ -2453,6 +2548,11 @@
           "channel": {
             "type": "string",
             "enum": ["EMAIL", "WHATSAPP", "SMS"],
+            "x-enumDescriptions": {
+              "EMAIL": "Send message via email",
+              "WHATSAPP": "Send message via WhatsApp",
+              "SMS": "Send message via SMS text message"
+            },
             "description": "Channel to use for sending the subscription link"
           },
           "language": {
@@ -2477,6 +2577,11 @@
           "channel": {
             "type": "string",
             "enum": ["EMAIL", "WHATSAPP", "SMS"],
+            "x-enumDescriptions": {
+              "EMAIL": "Send message via email",
+              "WHATSAPP": "Send message via WhatsApp",
+              "SMS": "Send message via SMS text message"
+            },
             "description": "Channel to use for sending the subscription status"
           },
           "language": {
@@ -2499,6 +2604,15 @@
         "type": "string",
         "example": "PENDING",
         "enum": ["PENDING", "EXPIRED", "TRIALING", "ACTIVE", "PAST_DUE", "PAUSED", "CANCELED"],
+        "x-enumDescriptions": {
+          "PENDING": "Pending",
+          "EXPIRED": "Expired",
+          "TRIALING": "Trial Period",
+          "ACTIVE": "Active",
+          "PAST_DUE": "Past Due",
+          "PAUSED": "Paused",
+          "CANCELED": "Canceled"
+        },
         "description": "The status of the subscription."
       },
       "Subscription-PaymentMethod": {
@@ -2509,6 +2623,9 @@
             "type": "string",
             "example": "card",
             "enum": ["card"],
+            "x-enumDescriptions": {
+              "card": "Card"
+            },
             "description": "Subscription method type."
           },
           "card": {
@@ -2527,12 +2644,25 @@
             "type": "string",
             "example": "visa",
             "enum": ["visa", "mastercard", "diners", "amex", "jcb", "unionpay", "unknown"],
+            "x-enumDescriptions": {
+              "visa": "Visa",
+              "mastercard": "Mastercard",
+              "diners": "Diners Club",
+              "amex": "American Express",
+              "jcb": "JCB",
+              "unionpay": "UnionPay",
+              "unknown": "Unknown"
+            },
             "description": "Card brand."
           },
           "type": {
             "type": "string",
             "example": "credit",
             "enum": ["debit", "credit"],
+            "x-enumDescriptions": {
+              "debit": "Debit",
+              "credit": "Credit"
+            },
             "description": "Card type `debit` or `credit`."
           },
           "threeDSecure": {
@@ -2572,6 +2702,12 @@
         "type": "string",
         "example": "month",
         "enum": ["day", "week", "month", "year"],
+        "x-enumDescriptions": {
+          "day": "Daily",
+          "week": "Weekly",
+          "month": "Monthly",
+          "year": "Yearly"
+        },
         "description": "Subscription interval."
       },
       "Subscription-IntervalCount": {
@@ -2657,6 +2793,12 @@
             "interval": {
               "type": "string",
               "enum": ["day", "week", "month", "year"],
+              "x-enumDescriptions": {
+                "day": "Daily",
+                "week": "Weekly",
+                "month": "Monthly",
+                "year": "Yearly"
+              },
               "example": "day",
               "description": "The unit of time to wait before the retry attempt."
             },
@@ -2824,12 +2966,34 @@
       }
     }
   },
+  "tags": [
+    {
+      "name": "Apple Pay Domain",
+      "description": "The Apple Pay Domain API allows you to register and manage domains for Apple Pay integration.\n\nWith the Apple Pay Domain API, you can:\n\n- Register domains to use with Apple Pay\n- View currently registered domains\n- Ensure your website is properly configured for Apple Pay payments\n\nApple requires domain verification before you can accept Apple Pay payments on your website.\nThis API simplifies the process of registering your domains with Apple Pay and maintaining\nyour domain verification status.\n\n## Domain registration process\n\nTo accept Apple Pay on your website, you must register your domain with Apple. This process:\n\n1. Verifies that you control the domain\n2. Allows Apple Pay buttons to be displayed on your website\n3. Enables secure payment processing through Apple Pay\n\nOnce registered, your domain will be authorized to display Apple Pay payment options to customers.\n"
+    },
+    {
+      "name": "Bizum",
+      "description": "The Bizum API allows you to integrate with Spain's popular mobile payment system.\n\nWith the Bizum API, you can:\n\n- Validate customer phone numbers for Bizum compatibility\n- Process payments using Bizum as a payment method\n- Offer a seamless mobile payment experience for Spanish customers\n\nBizum is a widely used payment method in Spain that allows customers to make payments\nusing their mobile phone number linked to their bank account. This API provides the\nnecessary tools to incorporate Bizum into your payment options.\n\n## Bizum validation\n\nBefore processing a Bizum payment, you can validate if a customer's phone number is\nregistered with Bizum using the validate-phone endpoint.\n"
+    },
+    {
+      "name": "Payment Methods",
+      "description": "The Payment Methods API allows you to retrieve available payment methods for an account or a specific payment.\nThis information can be used to display appropriate payment options to your customers.\n\nPayment methods vary by country, currency, and merchant configuration. This API helps you dynamically\ndetermine which payment methods are available for a specific transaction or account.\n\nYou can use this API to:\n\n- Get all payment methods available for an account\n- Get payment methods available for a specific payment\n- Display payment options to your customers based on their location and purchase details\n\n## Payment Methods object\n\nSee [PaymentMethods](https://docs.monei.com/docs/apis/rest/schemas/paymentmethods/) for more\ninformation.\n"
+    },
+    {
+      "name": "Payments",
+      "description": "The Payments API provides a comprehensive platform for processing transactions and managing the complete payment lifecycle.\n\n### Core Payment Operations\n\n- Create and process payments with multiple payment methods\n- Authorize payments and capture funds later\n- Cancel authorized payments to release reserved funds\n- Refund payments partially or in full\n- Generate detailed receipts for completed payments\n\n### Customer Experience Features\n\n- Send payment requests via WhatsApp, SMS, or Bizum\n- Create and distribute payment links through various channels\n- Generate permanent payment tokens for one-click checkout experiences\n- Support recurring billing and subscription payments\n\n### Implementation Best Practices\n\n- Create one payment per order or customer session for clear transaction records\n- Use the unique payment ID for all subsequent operations on a payment\n- Generate permanent payment tokens (with `generatePaymentToken: true`) for returning customers\n- Implement webhook notifications to receive real-time payment status updates\n\n## Payment Status Codes\n\nThe MONEI API returns a `statusCode` attribute in the Payment response to indicate the outcome of your request. This helps you understand whether an operation was successful or why it failed.\n\n### Success Codes\n\nSuccessful transactions return the following codes:\n\n| Code | Message                            |\n| ---- | ---------------------------------- |\n| E000 | Transaction approved               |\n| E001 | Transaction pending processing     |\n| E002 | Transaction pending authentication |\n| E003 | Transaction pending authorization  |\n\n### Error Codes\n\nError codes are grouped by category to help you quickly identify the type of issue:\n\n#### Configuration Errors (E1xx)\n\nThese errors relate to account configuration issues:\n\n| Code | Message                                                                                                      |\n| ---- | ------------------------------------------------------------------------------------------------------------ |\n| E101 | Error with payment processor configuration. Check this in your dashboard or contact MONEI for support        |\n| E102 | Invalid or inactive MID. Please contact the acquiring entity                                                 |\n| E103 | Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support |\n| E104 | Partial captures are not enabled in your account, please contact MONEI support                               |\n| E105 | MOTO Payment are not enabled in your account, please contact MONEI support                                   |\n\n#### Authentication and Request Errors (E15x)\n\nThese errors indicate issues with your API request format or authentication:\n\n| Code | Message                                                                       |\n| ---- | ----------------------------------------------------------------------------- |\n| E150 | Invalid or malformed request. Please check the message format                 |\n| E151 | Missing or malformed signature/auth                                           |\n| E152 | Error while decrypting request                                                |\n| E153 | Pre-authorization is expired and cannot be canceled or captured               |\n| E154 | The payment date cannot be less than the cancellation or capture date         |\n| E155 | The cancellation date exceeded the date allowed for pre-authorized operations |\n| E156 | Unauthorized token                                                            |\n\n#### Transaction Processing Errors (E2xx)\n\nThese errors occur during payment processing:\n\n| Code | Message                                                           |\n| ---- | ----------------------------------------------------------------- |\n| E200 | Transaction failed during payment processing                      |\n| E201 | Transaction declined by the card-issuing bank                     |\n| E202 | Transaction declined by the issuing bank                          |\n| E203 | Payment method not allowed                                        |\n| E204 | Wrong or not allowed currency                                     |\n| E205 | Incorrect reference / transaction does not exist                  |\n| E206 | Invalid payment method                                            |\n| E207 | Transaction failed: process time exceeded                         |\n| E208 | Transaction is currently being processed                          |\n| E209 | Duplicated operation                                              |\n| E210 | Wrong or not allowed payment amount                               |\n| E211 | Refund declined by processor                                      |\n| E212 | Transaction has already been captured                             |\n| E213 | Transaction has already been canceled                             |\n| E214 | The amount to be captured cannot exceed the pre-authorized amount |\n| E215 | The transaction to be captured has not been pre-authorized yet    |\n| E216 | The transaction to be canceled has not been pre-authorized yet    |\n| E217 | Transaction denied by processor to avoid duplicated operations    |\n| E218 | Error during payment request validation                           |\n| E219 | Refund declined due to exceeded amount                            |\n| E220 | Transaction has already been fully refunded                       |\n| E221 | Transaction declined due to insufficient funds                    |\n| E222 | The user has canceled the payment                                 |\n| E223 | Waiting for the transaction to be completed                       |\n| E224 | No reason to decline                                              |\n| E225 | Refund not allowed                                                |\n| E226 | Transaction cannot be completed, violation of law                 |\n| E227 | Stop Payment Order                                                |\n| E228 | Strong Customer Authentication required                           |\n| E229 | Expired payment method                                            |\n\n#### 3D Secure Related Errors (E3xx)\n\nThese errors are related to 3D Secure authentication:\n\n| Code | Message                                            |\n| ---- | -------------------------------------------------- |\n| E300 | Transaction declined due to security restrictions  |\n| E301 | 3D Secure authentication failed                    |\n| E302 | Authentication process timed out. Please try again |\n| E303 | An error occurred during the 3D Secure process     |\n| E304 | Invalid or malformed 3D Secure request             |\n| E305 | Exemption not allowed                              |\n| E306 | Exemption error                                    |\n| E307 | Fraud control error                                |\n| E308 | External MPI received wrong. Please check the data |\n| E309 | External MPI not enabled. Please contact support   |\n| E310 | Transaction confirmation rejected by the merchant  |\n\n#### Card Related Errors (E5xx)\n\nThese errors are specific to card payments:\n\n| Code | Message                                                            |\n| ---- | ------------------------------------------------------------------ |\n| E500 | Transaction declined during card payment process                   |\n| E501 | Card rejected: invalid card number                                 |\n| E502 | Card rejected: wrong expiration date                               |\n| E503 | Card rejected: wrong CVC/CVV2 number                               |\n| E504 | Card number not registered                                         |\n| E505 | Card is expired                                                    |\n| E506 | Error during payment authorization. Please try again               |\n| E507 | Cardholder has canceled the payment                                |\n| E508 | Transaction declined: AMEX cards not accepted by payment processor |\n| E509 | Card blocked temporarily or under suspicion of fraud               |\n| E510 | Card does not allow pre-authorization operations                   |\n| E511 | CVC/CVV2 number is required                                        |\n| E512 | Unsupported card type                                              |\n| E513 | Transaction type not allowed for this type of card                 |\n| E514 | Transaction declined by card issuer                                |\n| E515 | Implausible card data                                              |\n| E516 | Incorrect PIN                                                      |\n| E517 | Transaction not allowed for cardholder                             |\n| E518 | The amount exceeds the card limit                                  |\n\n#### Digital Wallet Errors (E6xx)\n\nThese errors are related to digital wallet payments:\n\n| Code | Message                                                        |\n| ---- | -------------------------------------------------------------- |\n| E600 | Transaction declined during ApplePay/GooglePay payment process |\n| E601 | Incorrect ApplePay or GooglePay configuration                  |\n\n#### PayPal Related Errors (E62x)\n\nThese errors are specific to PayPal payments:\n\n| Code | Message                                                              |\n| ---- | -------------------------------------------------------------------- |\n| E620 | Transaction declined during PayPal payment process                   |\n| E621 | Transaction declined during PayPal payment process: invalid currency |\n\n#### Bizum Related Errors (E64x-E65x)\n\nThese errors are specific to Bizum payments:\n\n| Code | Message                                                                    |\n| ---- | -------------------------------------------------------------------------- |\n| E640 | Bizum transaction declined after three authentication attempts             |\n| E641 | Bizum transaction declined due to failed authorization                     |\n| E642 | Bizum transaction declined due to insufficient funds                       |\n| E643 | Bizum transaction canceled: the user does not want to continue             |\n| E644 | Bizum transaction rejected by destination bank                             |\n| E645 | Bizum transaction rejected by origin bank                                  |\n| E646 | Bizum transaction rejected by processor                                    |\n| E647 | Bizum transaction failed while connecting with processor. Please try again |\n| E648 | Bizum transaction failed, payee is not found                               |\n| E649 | Bizum transaction failed, payer is not found                               |\n| E650 | Bizum REST not implemented                                                 |\n| E651 | Bizum transaction declined due to failed authentication                    |\n| E652 | The customer has disabled Bizum, please use another payment method         |\n\n#### Click To Pay Related Errors (E68x)\n\nThese errors are specific to ClickToPay payments:\n\n| Code | Message                                                |\n| ---- | ------------------------------------------------------ |\n| E680 | Transaction declined during ClickToPay payment process |\n| E681 | Incorrect ClickToPay configuration                     |\n\n#### Cofidis Related Errors (E7xx)\n\nThese errors are specific to Cofidis payments:\n\n| Code | Message                                             |\n| ---- | --------------------------------------------------- |\n| E700 | Transaction declined during Cofidis payment process |\n\n#### System Errors (E9xx)\n\nThese errors indicate system-level issues:\n\n| Code | Message                                        |\n| ---- | ---------------------------------------------- |\n| E999 | Service internal error. Please contact support |\n"
+    },
+    {
+      "name": "Subscriptions",
+      "description": "The Subscriptions API provides a powerful solution for managing recurring billing and subscription-based business models.\n\n## Key Features\n\n### Flexible Billing Options\n\n- **Multiple billing intervals**: Daily, weekly, monthly, or yearly billing cycles\n- **Custom intervals**: Configure non-standard periods using intervalCount (e.g., every 3 months)\n- **Trial periods**: Offer free trials before the first billing cycle begins\n- **Variable amounts**: Update subscription amounts for pricing changes or upgrades\n\n### Complete Lifecycle Management\n\n- **Create subscriptions**: Set up recurring billing plans with customizable parameters\n- **Activate subscriptions**: Begin billing cycles with customer payment information\n- **Pause/Resume**: Temporarily halt billing without cancellation\n- **Update subscriptions**: Modify pricing, billing details, or subscription parameters\n- **Cancel subscriptions**: End recurring billing permanently or at period end\n\n### Customer-Friendly Features\n\n- **Automated recurring payments**: No manual action required for subsequent billing\n- **Consistent billing dates**: Predictable billing on the same day of each period\n- **Payment retry mechanism**: Automatic retries for failed payments\n- **Customer control**: Enable customers to manage their own subscriptions\n\n### Integration Benefits\n\n- **Webhook notifications**: Get real-time updates on subscription status changes\n- **Detailed reporting**: Track subscription metrics and performance\n- **Simplified compliance**: Handle recurring billing requirements automatically\n- **Reduced churn**: Automatic billing helps prevent missed payments\n"
+    }
+  ],
   "paths": {
     "/apple-pay/domains": {
       "post": {
         "operationId": "applePayDomain_register",
         "summary": "Register Domain",
-        "description": "<p>Registers a domain with Apple Pay.</p>\n<p>This endpoint allows you to register your website domain with Apple Pay, which is required\nbefore you can accept Apple Pay payments on your website. The domain must be accessible\nvia HTTPS and have a valid SSL certificate.</p>\n<p>Before registering, you must download\nthis <a href=\"https://assets.monei.com/apple-pay/apple-developer-merchantid-domain-association/\">domain association file</a>\nand host it at <code>/.well-known/apple-developer-merchantid-domain-association</code> on your site.</p>\n<p>For example, if you&#39;re registering <code>example.com</code>, make that file available\nat <code>https://example.com/.well-known/apple-developer-merchantid-domain-association</code>.</p>\n<p>After registration, Apple will verify your domain. Once verified, you can display\nApple Pay buttons and process Apple Pay payments on your website.</p>\n",
+        "description": "Registers a domain with Apple Pay.\n\nThis endpoint allows you to register your website domain with Apple Pay, which is required\nbefore you can accept Apple Pay payments on your website. The domain must be accessible\nvia HTTPS and have a valid SSL certificate.\n\nBefore registering, you must download\nthis [domain association file](https://assets.monei.com/apple-pay/apple-developer-merchantid-domain-association/)\nand host it at `/.well-known/apple-developer-merchantid-domain-association` on your site.\n\nFor example, if you're registering `example.com`, make that file available\nat `https://example.com/.well-known/apple-developer-merchantid-domain-association`.\n\nAfter registration, Apple will verify your domain. Once verified, you can display\nApple Pay buttons and process Apple Pay payments on your website.\n",
         "security": [
           {
             "APIKey": []
@@ -2872,7 +3036,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Register your domain with Apple to enable Apple Pay on your website\nmonei.applePayDomain.register({\n  domainName: 'example.com'\n});\n"
           },
           {
@@ -2890,7 +3053,7 @@
       "post": {
         "operationId": "bizum_validatePhone",
         "summary": "Validate Phone",
-        "description": "<p>Validates if a phone number is registered with Bizum.</p>\n<p>Use this endpoint to check if a customer&#39;s phone number can be used for Bizum payments\nbefore attempting to process a payment. This helps provide a better user experience by\npreventing failed payment attempts for non-registered numbers.</p>\n<p>The response will indicate whether the phone number is valid for Bizum payments.</p>\n",
+        "description": "Validates if a phone number is registered with Bizum.\n\nUse this endpoint to check if a customer's phone number can be used for Bizum payments\nbefore attempting to process a payment. This helps provide a better user experience by\npreventing failed payment attempts for non-registered numbers.\n\nThe response will indicate whether the phone number is valid for Bizum payments.\n",
         "security": [
           {
             "APIKey": []
@@ -2933,7 +3096,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Validate if a phone number is registered in Bizum\nmonei.bizum.validatePhone({\n  accountId: '6dccce85-b290-40c2-bb9c-57bc7ecfaf04',\n  phoneNumber: '+34600000000'\n});\n"
           },
           {
@@ -2951,7 +3113,7 @@
       "get": {
         "operationId": "paymentMethods_get",
         "summary": "Get Payment Methods",
-        "description": "<p>Retrieve available payment methods for an account or a specific payment.</p>\n<p>You can provide either an <code>accountId</code> or a <code>paymentId</code> as a query parameter to get the available payment methods.</p>\n<p>When providing a <code>paymentId</code>, the response will include additional payment-specific information such as amount and currency.\nThis is useful when you want to show payment options that are specifically available for a particular transaction.</p>\n<p>When providing an <code>accountId</code>, the response will include all payment methods available for that account based on\nthe merchant&#39;s configuration and supported payment methods.</p>\n",
+        "description": "Retrieve available payment methods for an account or a specific payment.\n\nYou can provide either an `accountId` or a `paymentId` as a query parameter to get the available payment methods.\n\nWhen providing a `paymentId`, the response will include additional payment-specific information such as amount and currency.\nThis is useful when you want to show payment options that are specifically available for a particular transaction.\n\nWhen providing an `accountId`, the response will include all payment methods available for that account based on\nthe merchant's configuration and supported payment methods.\n",
         "tags": ["Payment Methods"],
         "parameters": [
           {
@@ -2999,7 +3161,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Get payment methods by accountId\nmonei.paymentMethods.get({accountId: '6dccce85-b290-40c2-bb9c-57bc7ecfaf04'});\n"
           },
           {
@@ -3017,7 +3178,7 @@
       "post": {
         "operationId": "payments_create",
         "summary": "Create Payment",
-        "description": "<p>Creates a new payment with the specified parameters.</p>\n<p>You can create a payment in two ways:</p>\n<ol>\n<li><strong>Immediate processing</strong>: Provide a <code>paymentToken</code> or <code>paymentMethod</code> - The payment will be processed instantly</li>\n<li><strong>Deferred processing</strong>: Create without payment details - The payment remains in <code>PENDING</code> status until you\nconfirm it later using the <a href=\"#operation/payments_confirm\">confirm endpoint</a></li>\n</ol>\n<p>When creating a payment without payment details, you can redirect customers to the hosted payment page\nwhere they can select their preferred payment method and complete the transaction.</p>\n<p>For immediate processing, use one of these token options:</p>\n<ul>\n<li>A temporary <code>paymentToken</code> generated on the frontend using <a href=\"https://docs.monei.com/docs/monei-js-overview\">monei.js Components</a></li>\n<li>A permanent <code>paymentToken</code> from a previous successful payment (when <code>generatePaymentToken: true</code> was included)</li>\n</ul>\n<p>Permanent tokens enable one-click checkout experiences for returning customers by allowing you to\nsecurely store and reuse payment details without requiring customers to re-enter their information.</p>\n",
+        "description": "Creates a new payment with the specified parameters.\n\nYou can create a payment in two ways:\n\n1. **Immediate processing**: Provide a `paymentToken` or `paymentMethod` - The payment will be processed instantly\n2. **Deferred processing**: Create without payment details - The payment remains in `PENDING` status until you\n   confirm it later using the [confirm endpoint](#operation/payments_confirm)\n\nWhen creating a payment without payment details, you can redirect customers to the hosted payment page\nwhere they can select their preferred payment method and complete the transaction.\n\nFor immediate processing, use one of these token options:\n\n- A temporary `paymentToken` generated on the frontend using [monei.js Components](https://docs.monei.com/docs/monei-js-overview)\n- A permanent `paymentToken` from a previous successful payment (when `generatePaymentToken: true` was included)\n\nPermanent tokens enable one-click checkout experiences for returning customers by allowing you to\nsecurely store and reuse payment details without requiring customers to re-enter their information.\n",
         "security": [
           {
             "APIKey": []
@@ -3065,7 +3226,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '14379133960355',\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b',\n  callbackUrl: 'https://example.com/checkout/callback',\n  completeUrl: 'https://example.com/checkout/complete',\n  customer: {\n    name: 'John Doe',\n    email: 'example@example.com',\n    phone: '+49123456789'\n  }\n});\n"
           },
           {
@@ -3088,7 +3248,7 @@
       "get": {
         "operationId": "payments_get",
         "summary": "Get Payment",
-        "description": "<p>Retrieves the complete details of an existing payment by its unique ID.</p>\n<p>This endpoint returns all available information about the payment, including its current status,\namount, customer details, timestamps, and transaction history. Use this to check the status of\na payment, verify payment details, or retrieve information for your records.</p>\n<p>Supply the unique payment ID that was returned from your previous request.</p>\n",
+        "description": "Retrieves the complete details of an existing payment by its unique ID.\n\nThis endpoint returns all available information about the payment, including its current status,\namount, customer details, timestamps, and transaction history. Use this to check the status of\na payment, verify payment details, or retrieve information for your records.\n\nSupply the unique payment ID that was returned from your previous request.\n",
         "security": [
           {
             "APIKey": []
@@ -3121,7 +3281,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.get('832b77d1a4b372349a7ae0bb1b2af059');\n"
           },
           {
@@ -3144,7 +3303,7 @@
       "post": {
         "operationId": "payments_confirm",
         "summary": "Confirm Payment",
-        "description": "<p>Confirms a payment that was created without payment details. This endpoint can only be used with\npayments in <code>PENDING</code> status.</p>\n<p>The two-step payment flow:</p>\n<ol>\n<li><strong>Create</strong>: First, create a payment without payment details (status: <code>PENDING</code>)</li>\n<li><strong>Confirm</strong>: Then provide payment details to complete the transaction</li>\n</ol>\n<p>When confirming a payment, you can use:</p>\n<ul>\n<li>A newly generated <code>paymentToken</code> from <a href=\"https://docs.monei.com/docs/monei-js-overview\">monei.js Components</a></li>\n<li>A permanent <code>paymentToken</code> from a previous payment (generated with <code>generatePaymentToken: true</code>)</li>\n</ul>\n<p>Using permanent payment tokens enables one-click checkout experiences for returning customers\nwithout requiring them to re-enter their payment information.</p>\n<p>You can provide additional customer information during confirmation, which will override\nany corresponding information originally passed in the payment creation request.</p>\n",
+        "description": "Confirms a payment that was created without payment details. This endpoint can only be used with\npayments in `PENDING` status.\n\nThe two-step payment flow:\n\n1. **Create**: First, create a payment without payment details (status: `PENDING`)\n2. **Confirm**: Then provide payment details to complete the transaction\n\nWhen confirming a payment, you can use:\n\n- A newly generated `paymentToken` from [monei.js Components](https://docs.monei.com/docs/monei-js-overview)\n- A permanent `paymentToken` from a previous payment (generated with `generatePaymentToken: true`)\n\nUsing permanent payment tokens enables one-click checkout experiences for returning customers\nwithout requiring them to re-enter their payment information.\n\nYou can provide additional customer information during confirmation, which will override\nany corresponding information originally passed in the payment creation request.\n",
         "security": [
           {
             "APIKey": []
@@ -3191,7 +3350,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.confirm('832b77d1a4b372349a7ae0bb1b2af059', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n"
           },
           {
@@ -3214,7 +3372,7 @@
       "post": {
         "operationId": "payments_capture",
         "summary": "Capture Payment",
-        "description": "<p>Captures funds from a previously authorized payment. This endpoint can only\nbe used with payments in <code>AUTHORIZED</code> status.</p>\n<p>This operation completes the two-step authorization flow:</p>\n<ol>\n<li><strong>Authorize</strong>: Create a payment with <code>transactionType: AUTH</code> to reserve funds</li>\n<li><strong>Capture</strong>: Transfer the reserved funds to your account when ready to fulfill the order</li>\n</ol>\n<p><strong>Important</strong>: Authorized payments expire after exactly seven days. After expiration,\nthey will be marked as <code>EXPIRED</code> and can no longer be captured. Be sure to capture\nfunds within this timeframe or communicate with your customer about a new payment.</p>\n",
+        "description": "Captures funds from a previously authorized payment. This endpoint can only\nbe used with payments in `AUTHORIZED` status.\n\nThis operation completes the two-step authorization flow:\n\n1. **Authorize**: Create a payment with `transactionType: AUTH` to reserve funds\n2. **Capture**: Transfer the reserved funds to your account when ready to fulfill the order\n\n**Important**: Authorized payments expire after exactly seven days. After expiration,\nthey will be marked as `EXPIRED` and can no longer be captured. Be sure to capture\nfunds within this timeframe or communicate with your customer about a new payment.\n",
         "security": [
           {
             "APIKey": []
@@ -3261,7 +3419,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.capture(\n  '832b77d1a4b372349a7ae0bb1b2af059',\n  {amount: 100} // 1.00 EUR\n);\n"
           },
           {
@@ -3284,7 +3441,7 @@
       "post": {
         "operationId": "payments_cancel",
         "summary": "Cancel Payment",
-        "description": "<p>Releases reserved funds from a previously authorized payment. This endpoint can only\nbe used with payments in <code>AUTHORIZED</code> status.</p>\n<p>This operation is part of the two-step authorization flow:</p>\n<ol>\n<li><strong>Authorize</strong>: Create a payment with <code>transactionType: AUTH</code> to reserve funds</li>\n<li><strong>Cancel</strong>: Release the reserved funds if you decide not to capture the payment</li>\n</ol>\n<p>Cancellation makes the reserved funds available to the customer again and prevents you from\nbeing able to capture those funds in the future. Once cancelled, an authorization cannot be reactivated.</p>\n",
+        "description": "Releases reserved funds from a previously authorized payment. This endpoint can only\nbe used with payments in `AUTHORIZED` status.\n\nThis operation is part of the two-step authorization flow:\n\n1. **Authorize**: Create a payment with `transactionType: AUTH` to reserve funds\n2. **Cancel**: Release the reserved funds if you decide not to capture the payment\n\nCancellation makes the reserved funds available to the customer again and prevents you from\nbeing able to capture those funds in the future. Once cancelled, an authorization cannot be reactivated.\n",
         "security": [
           {
             "APIKey": []
@@ -3331,7 +3488,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "const {Monei, PaymentCancellationReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.cancel('832b77d1a4b372349a7ae0bb1b2af059', {\n  cancellationReason: PaymentCancellationReason.RequestedByCustomer\n});\n"
           },
           {
@@ -3354,7 +3510,7 @@
       "post": {
         "operationId": "payments_refund",
         "summary": "Refund Payment",
-        "description": "<p>Returns funds from a completed payment back to the customer&#39;s original payment method.</p>\n<p><strong>Refund options:</strong></p>\n<ul>\n<li><strong>Full refund</strong>: Return the entire payment amount</li>\n<li><strong>Partial refund</strong>: Specify an amount less than the original payment</li>\n<li><strong>Multiple partial refunds</strong>: Issue several partial refunds until the total payment amount is reached</li>\n</ul>\n<p><strong>Limitations:</strong></p>\n<ul>\n<li>You can only refund payments that have been successfully processed</li>\n<li>A payment can only be refunded up to its original amount</li>\n<li>Once fully refunded, a payment cannot be refunded again</li>\n<li>Attempting to refund more than the remaining available amount will result in an error</li>\n</ul>\n",
+        "description": "Returns funds from a completed payment back to the customer's original payment method.\n\n**Refund options:**\n\n- **Full refund**: Return the entire payment amount\n- **Partial refund**: Specify an amount less than the original payment\n- **Multiple partial refunds**: Issue several partial refunds until the total payment amount is reached\n\n**Limitations:**\n\n- You can only refund payments that have been successfully processed\n- A payment can only be refunded up to its original amount\n- Once fully refunded, a payment cannot be refunded again\n- Attempting to refund more than the remaining available amount will result in an error\n",
         "security": [
           {
             "APIKey": []
@@ -3401,7 +3557,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "const {Monei, PaymentRefundReason} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.refund('832b77d1a4b372349a7ae0bb1b2af059', {\n  refundReason: PaymentRefundReason.RequestedByCustomer\n});\n"
           },
           {
@@ -3424,7 +3579,7 @@
       "post": {
         "operationId": "payments_recurring",
         "summary": "Recurring Payment",
-        "description": "<p>Creates a subsequent charge using the payment details from a previous transaction.</p>\n<p>This endpoint enables recurring billing and subscription payments by:</p>\n<ul>\n<li>Using the same payment method as the original payment</li>\n<li>Charging the customer without requiring them to re-enter payment details</li>\n<li>Supporting variable or fixed amounts (defaults to the original payment amount if not specified)</li>\n</ul>\n<p><strong>Prerequisites:</strong></p>\n<ol>\n<li>The initial payment must be created with the <code>sequence</code> parameter</li>\n<li>The initial payment will return a <code>sequenceId</code> in the response</li>\n<li>This <code>sequenceId</code> must be provided in the URL path when making subsequent recurring charges</li>\n</ol>\n<p>Ideal for subscription services, membership renewals, and installment payments.</p>\n<p><strong>Need more advanced subscription management?</strong>\nFor comprehensive subscription management with features like billing cycles, trial periods,\nand automatic recurring billing, consider using the <a href=\"https://docs.monei.com/docs/apis/rest/subscriptions/\">Subscriptions API</a>\ninstead. It provides a complete solution for creating and managing subscription-based services.</p>\n",
+        "description": "Creates a subsequent charge using the payment details from a previous transaction.\n\nThis endpoint enables recurring billing and subscription payments by:\n\n- Using the same payment method as the original payment\n- Charging the customer without requiring them to re-enter payment details\n- Supporting variable or fixed amounts (defaults to the original payment amount if not specified)\n\n**Prerequisites:**\n\n1. The initial payment must be created with the `sequence` parameter\n2. The initial payment will return a `sequenceId` in the response\n3. This `sequenceId` must be provided in the URL path when making subsequent recurring charges\n\nIdeal for subscription services, membership renewals, and installment payments.\n\n**Need more advanced subscription management?**\nFor comprehensive subscription management with features like billing cycles, trial periods,\nand automatic recurring billing, consider using the [Subscriptions API](https://docs.monei.com/docs/apis/rest/subscriptions/)\ninstead. It provides a complete solution for creating and managing subscription-based services.\n",
         "security": [
           {
             "APIKey": []
@@ -3471,7 +3626,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', {\n  orderId: '14379133960355',\n  callbackUrl: 'https://example.com/checkout/callback'\n});\n"
           },
           {
@@ -3494,7 +3648,7 @@
       "post": {
         "operationId": "payments_sendRequest",
         "summary": "Send Payment Request",
-        "description": "<p>Sends a direct payment request to the customer&#39;s phone with smart channel selection.</p>\n<p><strong>Smart delivery logic based on customer phone capabilities:</strong></p>\n<ul>\n<li>If the phone number is registered with Bizum and that payment method is available:\nThe customer receives a push notification in their banking app to instantly approve the payment</li>\n<li>If Bizum is not available or the phone is not registered with Bizum:\nThe customer receives a payment link via WhatsApp to complete the payment</li>\n</ul>\n<p>This endpoint provides a streamlined payment experience, especially for Spanish customers\nwith Bizum integration, enabling quick and convenient mobile payments.</p>\n",
+        "description": "Sends a direct payment request to the customer's phone with smart channel selection.\n\n**Smart delivery logic based on customer phone capabilities:**\n\n- If the phone number is registered with Bizum and that payment method is available:\n  The customer receives a push notification in their banking app to instantly approve the payment\n- If Bizum is not available or the phone is not registered with Bizum:\n  The customer receives a payment link via WhatsApp to complete the payment\n\nThis endpoint provides a streamlined payment experience, especially for Spanish customers\nwith Bizum integration, enabling quick and convenient mobile payments.\n",
         "security": [
           {
             "APIKey": []
@@ -3542,7 +3696,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.sendRequest('832b77d1a4b372349a7ae0bb1b2af059', {\n  phoneNumber: '+34500000000',\n  language: 'es'\n});\n"
           },
           {
@@ -3565,7 +3718,7 @@
       "post": {
         "operationId": "payments_sendLink",
         "summary": "Send Payment Link",
-        "description": "<p>Sends a payment link to the customer through their preferred communication channel.</p>\n<p><strong>This API can only be used for payments with the following status:</strong></p>\n<ul>\n<li>Pending</li>\n</ul>\n<p><strong>Delivery channels are automatically selected based on available customer information:</strong></p>\n<ul>\n<li>If customer email is available: Link is sent via email</li>\n<li>If customer phone is available: Link is sent via WhatsApp</li>\n<li>If WhatsApp delivery fails: Link is sent via SMS as a fallback</li>\n</ul>\n<p>The payment link allows customers to complete the payment at their convenience using\ntheir preferred payment method on the secure MONEI payment page. If no customer contact information is provided, the system will use the details stored in the payment record.</p>\n",
+        "description": "Sends a payment link to the customer through their preferred communication channel.\n\n**This API can only be used for payments with the following status:**\n\n- Pending\n\n**Delivery channels are automatically selected based on available customer information:**\n\n- If customer email is available: Link is sent via email\n- If customer phone is available: Link is sent via WhatsApp\n- If WhatsApp delivery fails: Link is sent via SMS as a fallback\n\nThe payment link allows customers to complete the payment at their convenience using\ntheir preferred payment method on the secure MONEI payment page. If no customer contact information is provided, the system will use the details stored in the payment record.\n",
         "security": [
           {
             "APIKey": []
@@ -3612,7 +3765,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.sendLink('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: 'es'\n});\n"
           },
           {
@@ -3635,7 +3787,7 @@
       "post": {
         "operationId": "payments_sendReceipt",
         "summary": "Send Payment Receipt",
-        "description": "<p>Sends a payment receipt to the customer through their preferred communication channel.</p>\n<p><strong>This API can only be used for payments with the following status:</strong></p>\n<ul>\n<li>Succeeded</li>\n</ul>\n<p><strong>Delivery channels are automatically selected based on available customer information:</strong></p>\n<ul>\n<li>If customer email is available: Receipt is sent via email</li>\n<li>If customer phone is available: Receipt is sent via WhatsApp</li>\n<li>If WhatsApp delivery fails: Receipt is sent via SMS as a fallback</li>\n</ul>\n<p>The receipt includes payment details such as amount, date, transaction ID, and merchant\ninformation, providing customers with a record of their successful transaction. If no customer contact information is provided, the system will use the details stored in the payment record.</p>\n",
+        "description": "Sends a payment receipt to the customer through their preferred communication channel.\n\n**This API can only be used for payments with the following status:**\n\n- Succeeded\n\n**Delivery channels are automatically selected based on available customer information:**\n\n- If customer email is available: Receipt is sent via email\n- If customer phone is available: Receipt is sent via WhatsApp\n- If WhatsApp delivery fails: Receipt is sent via SMS as a fallback\n\nThe receipt includes payment details such as amount, date, transaction ID, and merchant\ninformation, providing customers with a record of their successful transaction. If no customer contact information is provided, the system will use the details stored in the payment record.\n",
         "security": [
           {
             "APIKey": []
@@ -3682,7 +3834,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "const {Monei} = require('@monei-js/node-sdk');\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.payments.sendReceipt('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: 'es'\n});\n"
           },
           {
@@ -3700,7 +3851,7 @@
       "post": {
         "operationId": "subscriptions_create",
         "summary": "Create Subscription",
-        "description": "<p>Creates a new subscription with the specified parameters.</p>\n<p><strong>Subscription Lifecycle</strong>:</p>\n<ol>\n<li>When first created, the subscription has a <code>PENDING</code> status</li>\n<li>To initiate billing, you must call the <a href=\"#operation/subscriptions_activate\">activate endpoint</a> with payment details</li>\n<li>Once activated, the subscription will automatically bill according to the configured interval</li>\n</ol>\n<p><strong>Key Configuration Parameters</strong>:</p>\n<ul>\n<li><strong>Billing settings</strong>: Amount, currency, interval (daily, weekly, monthly, yearly)</li>\n<li><strong>Schedule customization</strong>: Interval count, trial period duration</li>\n<li><strong>Customer information</strong>: Contact details, billing and shipping addresses</li>\n<li><strong>Communication</strong>: Callback URLs for webhook notifications about subscription events</li>\n</ul>\n<p><strong>Best Practices</strong>:</p>\n<ul>\n<li>Set clear, descriptive names for subscriptions to help with identification</li>\n<li>Configure appropriate webhook notifications to monitor subscription status changes</li>\n<li>Consider offering trial periods to increase customer conversion rates</li>\n<li>Use metadata to store additional information relevant to your business logic</li>\n</ul>\n",
+        "description": "Creates a new subscription with the specified parameters.\n\n**Subscription Lifecycle**:\n\n1. When first created, the subscription has a `PENDING` status\n2. To initiate billing, you must call the [activate endpoint](#operation/subscriptions_activate) with payment details\n3. Once activated, the subscription will automatically bill according to the configured interval\n\n**Key Configuration Parameters**:\n\n- **Billing settings**: Amount, currency, interval (daily, weekly, monthly, yearly)\n- **Schedule customization**: Interval count, trial period duration\n- **Customer information**: Contact details, billing and shipping addresses\n- **Communication**: Callback URLs for webhook notifications about subscription events\n\n**Best Practices**:\n\n- Set clear, descriptive names for subscriptions to help with identification\n- Configure appropriate webhook notifications to monitor subscription status changes\n- Consider offering trial periods to increase customer conversion rates\n- Use metadata to store additional information relevant to your business logic\n",
         "security": [
           {
             "APIKey": []
@@ -3748,7 +3899,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.create({\n  customer: {\n    name: 'John Doe',\n    email: 'john.doe@monei.com'\n  },\n  amount: 110,\n  currency: 'EUR',\n  interval: 'month',\n  intervalCount: 1,\n  description: 'MoonMail Lite Monthly',\n  callbackUrl: 'https://example.com/subscription/callback',\n  paymentCallbackUrl: 'https://example.com/payment/callback'\n});\n"
           },
           {
@@ -3771,7 +3921,7 @@
       "get": {
         "operationId": "subscriptions_get",
         "summary": "Get Subscription",
-        "description": "<p>Retrieves the complete details of an existing subscription by its unique ID.</p>\n<p>This endpoint returns comprehensive information about the subscription, including:</p>\n<ul>\n<li>Current status and lifecycle details (active, paused, canceled)</li>\n<li>Billing configuration (amount, currency, interval)</li>\n<li>Schedule information (current period, next payment date)</li>\n<li>Customer and payment method details</li>\n<li>Payment history (including last payment status)</li>\n<li>Trial period information (if applicable)</li>\n</ul>\n<p>Use this endpoint to check subscription status, verify billing details, or retrieve\ninformation needed for customer support inquiries.</p>\n",
+        "description": "Retrieves the complete details of an existing subscription by its unique ID.\n\nThis endpoint returns comprehensive information about the subscription, including:\n\n- Current status and lifecycle details (active, paused, canceled)\n- Billing configuration (amount, currency, interval)\n- Schedule information (current period, next payment date)\n- Customer and payment method details\n- Payment history (including last payment status)\n- Trial period information (if applicable)\n\nUse this endpoint to check subscription status, verify billing details, or retrieve\ninformation needed for customer support inquiries.\n",
         "security": [
           {
             "APIKey": []
@@ -3804,7 +3954,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.get('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
           },
           {
@@ -3820,7 +3969,7 @@
       "put": {
         "operationId": "subscriptions_update",
         "summary": "Update Subscription",
-        "description": "<p>Updates the configuration of an existing subscription.</p>\n<p><strong>Modifiable Parameters</strong>:</p>\n<ul>\n<li>Billing information (amount, description)</li>\n<li>Customer details (contact information, billing/shipping addresses)</li>\n<li>Subscription settings (cancelAtPeriodEnd, pauseAtPeriodEnd)</li>\n<li>Metadata (for your internal tracking)</li>\n</ul>\n<p><strong>Update Effects</strong>:</p>\n<ul>\n<li>Amount changes apply to the next billing cycle</li>\n<li>Customer information updates take effect immediately</li>\n<li>Setting <code>cancelAtPeriodEnd</code> to true will end the subscription after the current period</li>\n<li>Setting <code>pauseAtPeriodEnd</code> to true will pause billing after the current period</li>\n</ul>\n<p><strong>Note</strong>: Some fundamental properties cannot be changed once a subscription is created,\nincluding currency and billing interval. To modify these, you would need to cancel the\nexisting subscription and create a new one.</p>\n",
+        "description": "Updates the configuration of an existing subscription.\n\n**Modifiable Parameters**:\n\n- Billing information (amount, description)\n- Customer details (contact information, billing/shipping addresses)\n- Subscription settings (cancelAtPeriodEnd, pauseAtPeriodEnd)\n- Metadata (for your internal tracking)\n\n**Update Effects**:\n\n- Amount changes apply to the next billing cycle\n- Customer information updates take effect immediately\n- Setting `cancelAtPeriodEnd` to true will end the subscription after the current period\n- Setting `pauseAtPeriodEnd` to true will pause billing after the current period\n\n**Note**: Some fundamental properties cannot be changed once a subscription is created,\nincluding currency and billing interval. To modify these, you would need to cancel the\nexisting subscription and create a new one.\n",
         "security": [
           {
             "APIKey": []
@@ -3868,7 +4017,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.update('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {amount: 990});\n"
           },
           {
@@ -3891,7 +4039,7 @@
       "post": {
         "operationId": "subscriptions_activate",
         "summary": "Activate Subscription",
-        "description": "<p>Activates a subscription by attaching a payment method and initiating the billing cycle.</p>\n<p><strong>Activation Process</strong>:</p>\n<ol>\n<li>This endpoint transitions a <code>PENDING</code> subscription to <code>ACTIVE</code> status</li>\n<li>An initial payment is created to validate the payment method:<ul>\n<li>For regular subscriptions: First billing cycle payment is processed immediately</li>\n<li>For trial subscriptions: A zero-amount payment is created to verify the payment method</li>\n</ul>\n</li>\n</ol>\n<p><strong>Payment Method Updates</strong>:\nIf the subscription is already active, this endpoint can be used to update the payment method.\nThe update process creates a zero-amount payment to verify the new payment method works correctly.</p>\n<p><strong>Important Notes</strong>:</p>\n<ul>\n<li>Subscription billing begins immediately upon successful activation (unless in trial period)</li>\n<li>The payment method provided will be used for all future recurring charges</li>\n<li>Activation failures (due to invalid payment method) will keep the subscription in <code>PENDING</code> status</li>\n</ul>\n",
+        "description": "Activates a subscription by attaching a payment method and initiating the billing cycle.\n\n**Activation Process**:\n\n1. This endpoint transitions a `PENDING` subscription to `ACTIVE` status\n2. An initial payment is created to validate the payment method:\n   - For regular subscriptions: First billing cycle payment is processed immediately\n   - For trial subscriptions: A zero-amount payment is created to verify the payment method\n\n**Payment Method Updates**:\nIf the subscription is already active, this endpoint can be used to update the payment method.\nThe update process creates a zero-amount payment to verify the new payment method works correctly.\n\n**Important Notes**:\n\n- Subscription billing begins immediately upon successful activation (unless in trial period)\n- The payment method provided will be used for all future recurring charges\n- Activation failures (due to invalid payment method) will keep the subscription in `PENDING` status\n",
         "security": [
           {
             "APIKey": []
@@ -3938,7 +4086,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.activate('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n"
           },
           {
@@ -3961,7 +4108,7 @@
       "post": {
         "operationId": "subscriptions_cancel",
         "summary": "Cancel Subscription",
-        "description": "<p>Cancels an active subscription, permanently stopping the billing cycle.</p>\n<p><strong>Cancellation Effects</strong>:</p>\n<ul>\n<li>The subscription status changes to <code>CANCELED</code></li>\n<li>No further charges will be processed</li>\n<li>Access to subscription services typically ends immediately or at period end (depending on your business rules)</li>\n</ul>\n<p><strong>Important Notes</strong>:</p>\n<ul>\n<li>Cancellation is permanent and cannot be undone</li>\n<li>To restart service, a new subscription must be created</li>\n<li>Consider using <code>pauseAtPeriodEnd</code> or <code>cancelAtPeriodEnd</code> for softer transitions</li>\n</ul>\n<p>Use this endpoint when a customer wishes to completely terminate their subscription.</p>\n",
+        "description": "Cancels an active subscription, permanently stopping the billing cycle.\n\n**Cancellation Effects**:\n\n- The subscription status changes to `CANCELED`\n- No further charges will be processed\n- Access to subscription services typically ends immediately or at period end (depending on your business rules)\n\n**Important Notes**:\n\n- Cancellation is permanent and cannot be undone\n- To restart service, a new subscription must be created\n- Consider using `pauseAtPeriodEnd` or `cancelAtPeriodEnd` for softer transitions\n\nUse this endpoint when a customer wishes to completely terminate their subscription.\n",
         "security": [
           {
             "APIKey": []
@@ -4008,7 +4155,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.cancel('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {cancelAtPeriodEnd: true});\n"
           },
           {
@@ -4031,7 +4177,7 @@
       "post": {
         "operationId": "subscriptions_pause",
         "summary": "Pause Subscription",
-        "description": "<p>Pauses an active subscription, temporarily halting the billing cycle.</p>\n<p><strong>Pause Effects</strong>:</p>\n<ul>\n<li>Billing is immediately suspended</li>\n<li>The subscription status changes to <code>PAUSED</code></li>\n<li>No charges will be processed while the subscription remains paused</li>\n<li>The current billing period end date remains unchanged</li>\n</ul>\n<p><strong>Use Cases</strong>:</p>\n<ul>\n<li>Temporary service interruptions</li>\n<li>Customer vacation or absence periods</li>\n<li>Account maintenance or dispute resolution</li>\n</ul>\n<p>To resume billing, use the <a href=\"#operation/subscriptions_resume\">resume endpoint</a>.</p>\n",
+        "description": "Pauses an active subscription, temporarily halting the billing cycle.\n\n**Pause Effects**:\n\n- Billing is immediately suspended\n- The subscription status changes to `PAUSED`\n- No charges will be processed while the subscription remains paused\n- The current billing period end date remains unchanged\n\n**Use Cases**:\n\n- Temporary service interruptions\n- Customer vacation or absence periods\n- Account maintenance or dispute resolution\n\nTo resume billing, use the [resume endpoint](#operation/subscriptions_resume).\n",
         "security": [
           {
             "APIKey": []
@@ -4078,7 +4224,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei, PaymentCancellationReason} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.pause('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {pauseAtPeriodEnd: true});\n"
           },
           {
@@ -4101,7 +4246,7 @@
       "post": {
         "operationId": "subscriptions_resume",
         "summary": "Resume Subscription",
-        "description": "<p>Resumes a previously paused subscription, reactivating the billing cycle.</p>\n<p><strong>Resume Effects</strong>:</p>\n<ul>\n<li>Billing is immediately reactivated</li>\n<li>The subscription status changes from <code>PAUSED</code> to <code>ACTIVE</code></li>\n<li>The next billing date is recalculated based on the current date</li>\n<li>Regular charging schedule resumes according to the subscription interval</li>\n</ul>\n<p><strong>Important Notes</strong>:</p>\n<ul>\n<li>No immediate charge is created when resuming (billing continues on next scheduled date)</li>\n<li>Any pause duration is added to the current billing period, maintaining the expected number of billing cycles</li>\n<li>If a significant time has passed, verify that the payment method is still valid</li>\n</ul>\n",
+        "description": "Resumes a previously paused subscription, reactivating the billing cycle.\n\n**Resume Effects**:\n\n- Billing is immediately reactivated\n- The subscription status changes from `PAUSED` to `ACTIVE`\n- The next billing date is recalculated based on the current date\n- Regular charging schedule resumes according to the subscription interval\n\n**Important Notes**:\n\n- No immediate charge is created when resuming (billing continues on next scheduled date)\n- Any pause duration is added to the current billing period, maintaining the expected number of billing cycles\n- If a significant time has passed, verify that the payment method is still valid\n",
         "security": [
           {
             "APIKey": []
@@ -4134,7 +4279,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.resume('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
           },
           {
@@ -4157,7 +4301,7 @@
       "post": {
         "operationId": "subscriptions_sendLink",
         "summary": "Send Subscription Link",
-        "description": "<p>Sends a subscription activation link to the customer through their preferred communication channel.</p>\n<p><strong>This API can only be used for subscriptions with the following status:</strong></p>\n<ul>\n<li>Pending</li>\n</ul>\n<p><strong>Delivery channels are automatically selected based on available customer information:</strong></p>\n<ul>\n<li>If customer email is available: Link is sent via email</li>\n<li>If customer phone is available: Link is sent via WhatsApp</li>\n<li>If WhatsApp delivery fails: Link is sent via SMS as a fallback</li>\n</ul>\n<p>The subscription activation link allows customers to complete their subscription setup by providing payment details on the secure MONEI payment page. If no customer contact information is provided, the system will use the details stored in the subscription record.</p>\n",
+        "description": "Sends a subscription activation link to the customer through their preferred communication channel.\n\n**This API can only be used for subscriptions with the following status:**\n\n- Pending\n\n**Delivery channels are automatically selected based on available customer information:**\n\n- If customer email is available: Link is sent via email\n- If customer phone is available: Link is sent via WhatsApp\n- If WhatsApp delivery fails: Link is sent via SMS as a fallback\n\nThe subscription activation link allows customers to complete their subscription setup by providing payment details on the secure MONEI payment page. If no customer contact information is provided, the system will use the details stored in the subscription record.\n",
         "security": [
           {
             "APIKey": []
@@ -4204,7 +4348,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.sendLink('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n"
           },
           {
@@ -4227,7 +4370,7 @@
       "post": {
         "operationId": "subscriptions_sendStatus",
         "summary": "Send Subscription Status",
-        "description": "<p>Sends subscription status information to the customer through their preferred communication channel.</p>\n<p><strong>This API can only be used for subscriptions with the following statuses:</strong></p>\n<ul>\n<li>Active</li>\n<li>Trialing</li>\n<li>Past due</li>\n</ul>\n<p><strong>Delivery channels are automatically selected based on available customer information:</strong></p>\n<ul>\n<li>If customer email is available: Status is sent via email</li>\n<li>If customer phone is available: Status is sent via WhatsApp</li>\n<li>If WhatsApp delivery fails: Status is sent via SMS as a fallback</li>\n</ul>\n<p>The status notification includes subscription details such as current status, upcoming payments, and recent changes. If no customer contact information is provided, the system will use the details stored in the subscription record.</p>\n<p><strong>Email notifications include contextual action links based on subscription status:</strong></p>\n<ul>\n<li>For past due subscriptions: A link to reactivate the subscription</li>\n<li>For active and trialing subscriptions: A link to update the payment method</li>\n</ul>\n<p>You can specify the customer&#39;s email or phone number, the preferred communication channel (email or SMS), and the language for the message.</p>\n",
+        "description": "Sends subscription status information to the customer through their preferred communication channel.\n\n**This API can only be used for subscriptions with the following statuses:**\n\n- Active\n- Trialing\n- Past due\n\n**Delivery channels are automatically selected based on available customer information:**\n\n- If customer email is available: Status is sent via email\n- If customer phone is available: Status is sent via WhatsApp\n- If WhatsApp delivery fails: Status is sent via SMS as a fallback\n\nThe status notification includes subscription details such as current status, upcoming payments, and recent changes. If no customer contact information is provided, the system will use the details stored in the subscription record.\n\n**Email notifications include contextual action links based on subscription status:**\n\n- For past due subscriptions: A link to reactivate the subscription\n- For active and trialing subscriptions: A link to update the payment method\n\nYou can specify the customer's email or phone number, the preferred communication channel (email or SMS), and the language for the message.\n",
         "security": [
           {
             "APIKey": []
@@ -4274,7 +4417,6 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "label": "Node",
             "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\nmonei.subscriptions.sendStatus('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n"
           },
           {

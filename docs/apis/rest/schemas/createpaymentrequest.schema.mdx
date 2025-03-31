@@ -27,19 +27,19 @@ sample:
             'expMonth': 'string',
             'expYear': 'string',
             'cardholderName': 'John Doe',
-            'cardholderEmail': 'john.doe@monei.com',
+            'cardholderEmail': 'john.doe@monei.com'
           },
-        'bizum': { 'phoneNumber': null },
+        'bizum': {'phoneNumber': null}
       },
     'allowedPaymentMethods': ['card', 'bizum', 'paypal'],
     'transactionType': 'SALE',
-    'sequence': { 'type': 'recurring', 'recurring': { 'expiry': '20210630', 'frequency': 30 } },
+    'sequence': {'type': 'recurring', 'recurring': {'expiry': '20210630', 'frequency': 30}},
     'storeId': 'e5f28150d9e8974c58ab5ec9c4a880f8734dcf05',
     'pointOfSaleId': 'fb269cccfa0cc021f5d0b8eb1421646c696213e1',
     'subscriptionId': '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',
     'autoRecover': false,
     'description': 'Test Shop - #84370745531439',
-    'customer': { 'email': 'john.doe@example.com', 'name': 'John Doe', 'phone': null },
+    'customer': {'email': 'john.doe@example.com', 'name': 'John Doe', 'phone': null},
     'billingDetails':
       {
         'name': 'John Doe',
@@ -54,8 +54,8 @@ sample:
             'line1': 'Fake Street 123',
             'line2': null,
             'zip': '1234',
-            'state': 'Málaga',
-          },
+            'state': 'Málaga'
+          }
       },
     'shippingDetails':
       {
@@ -71,8 +71,8 @@ sample:
             'line1': 'Fake Street 123',
             'line2': null,
             'zip': '1234',
-            'state': 'Málaga',
-          },
+            'state': 'Málaga'
+          }
       },
     'sessionDetails':
       {
@@ -92,10 +92,10 @@ sample:
         'browserColorDepth': '24',
         'browserScreenHeight': '1152',
         'browserScreenWidth': '2048',
-        'browserTimezoneOffset': '-120',
+        'browserTimezoneOffset': '-120'
       },
     'expireAt': 1663581391,
-    'metadata': { 'systemId': '12345' },
+    'metadata': {'systemId': '12345'}
   }
 custom_edit_url: null
 ---
@@ -117,48 +117,48 @@ import Heading from '@theme/Heading';
         example: 110,
         description:
           'Amount intended to be collected by this payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n',
-        title: 'Payment-Amount',
+        title: 'Payment-Amount'
       },
       currency: {
         type: 'string',
         example: 'EUR',
         description:
           'Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217),\nin uppercase. Must be a supported currency.\n',
-        title: 'Payment-Currency',
+        title: 'Payment-Currency'
       },
       orderId: {
         type: 'string',
         example: '14379133960355',
         description:
           'An order ID from your system. A unique identifier that can be used\nto reconcile the payment with your internal system.\n',
-        title: 'Payment-OrderId',
+        title: 'Payment-OrderId'
       },
       callbackUrl: {
         type: 'string',
         example: 'https://example.com/checkout/callback',
         description: 'The URL to which a payment result should be sent asynchronously.\n',
-        title: 'Payment-CallbackUrl',
+        title: 'Payment-CallbackUrl'
       },
       completeUrl: {
         type: 'string',
         example: 'https://example.com/checkout/complete',
         description:
           'The URL the customer will be directed to after transaction\ncompleted (successful or failed - except if `failUrl` is provided).\n',
-        title: 'Payment-CompleteUrl',
+        title: 'Payment-CompleteUrl'
       },
       failUrl: {
         type: 'string',
         example: 'https://example.com/checkout/fail',
         description:
           'The URL the customer will be directed to after transaction has failed,\ninstead of `completeUrl` (used in hosted payment page). This allows\nto provide two different URLs for successful and failed payments.\n',
-        title: 'Payment-FailUrl',
+        title: 'Payment-FailUrl'
       },
       cancelUrl: {
         type: 'string',
         example: 'https://example.com/checkout/cancel',
         description:
           'The URL the customer will be directed to if they decide to cancel\npayment and return to your website (used in hosted payment page).\n',
-        title: 'Payment-CancelUrl',
+        title: 'Payment-CancelUrl'
       },
       paymentToken: {
         allOf: [
@@ -167,18 +167,18 @@ import Heading from '@theme/Heading';
             example: '7cc38b08ff471ccd313ad62b23b9f362b107560b',
             description:
               'A permanent token represents a payment method used in the\npayment. Pass `generatePaymentToken: true` when you creating\na payment to generate it. You can pass it as `paymentToken`\nparameter to create other payments with the same payment\nmethod. This token does not expire, and should only be\nused server-side.\n',
-            title: 'Payment-PaymentToken',
-          },
+            title: 'Payment-PaymentToken'
+          }
         ],
         description:
-          'A payment token generated by monei.js\n[Components](https://docs.monei.com/docs/monei-js-overview) or a paymentToken\n[saved after a previous successful payment](https://docs.monei.com/docs/save-payment-method).\nIn case of the first one, you will also need to send the `sessionId`\nused to generate the token in the first place.\n',
+          'A payment token generated by monei.js\n[Components](https://docs.monei.com/docs/monei-js-overview) or a paymentToken\n[saved after a previous successful payment](https://docs.monei.com/docs/save-payment-method).\nIn case of the first one, you will also need to send the `sessionId`\nused to generate the token in the first place.\n'
       },
       sessionId: {
         type: 'string',
         example: '39603551437913',
         description:
           'A unique identifier within your system that adds security to the\npayment process. You need to pass the same session ID as the one\nused on the frontend to initialize MONEI Component (if you needed to).\nThis is required if a payment token (not permanent) was already\ngenerated in the frontend.\n',
-        title: 'Payment-SessionId',
+        title: 'Payment-SessionId'
       },
       generatePaymentToken: {
         type: 'boolean',
@@ -186,7 +186,7 @@ import Heading from '@theme/Heading';
         default: false,
         description:
           'If set to true a permanent token that represents a payment\nmethod used in the payment will be generated.\n',
-        title: 'Payment-GeneratePaymentToken',
+        title: 'Payment-GeneratePaymentToken'
       },
       paymentMethod: {
         type: 'object',
@@ -200,31 +200,31 @@ import Heading from '@theme/Heading';
             properties: {
               number: {
                 type: 'string',
-                description: 'The card number, as a string without any separators.',
+                description: 'The card number, as a string without any separators.'
               },
-              cvc: { type: 'string', description: 'Card security code.' },
+              cvc: {type: 'string', description: 'Card security code.'},
               expMonth: {
                 type: 'string',
-                description: "Two-digit number representing the card's expiration month.",
+                description: "Two-digit number representing the card's expiration month."
               },
               expYear: {
                 type: 'string',
-                description: "Two-digit number representing the card's expiration year.",
+                description: "Two-digit number representing the card's expiration year."
               },
               cardholderName: {
                 type: 'string',
                 example: 'John Doe',
                 description: "The cardholder's name, as stated in the credit card.",
-                title: 'CardholderName',
+                title: 'CardholderName'
               },
               cardholderEmail: {
                 type: 'string',
                 example: 'john.doe@monei.com',
                 description: "The cardholder's email address.",
-                title: 'CardholderEmail',
-              },
+                title: 'CardholderEmail'
+              }
             },
-            title: 'Payment-PaymentMethodCardInput',
+            title: 'Payment-PaymentMethodCardInput'
           },
           bizum: {
             type: 'object',
@@ -234,17 +234,17 @@ import Heading from '@theme/Heading';
               phoneNumber: {
                 type: 'string',
                 example: null,
-                description: 'Phone number in E.164 format used to pay with `bizum`.',
-              },
+                description: 'Phone number in E.164 format used to pay with `bizum`.'
+              }
             },
-            title: 'Payment-PaymentMethodBizumInput',
-          },
+            title: 'Payment-PaymentMethodBizumInput'
+          }
         },
-        title: 'Payment-PaymentMethodInput',
+        title: 'Payment-PaymentMethodInput'
       },
       allowedPaymentMethods: {
         type: 'array',
-        items: { type: 'string' },
+        items: {type: 'string'},
         enum: [
           'alipay',
           'card',
@@ -262,21 +262,45 @@ import Heading from '@theme/Heading';
           'klarna',
           'giropay',
           'eps',
-          'blik',
+          'blik'
         ],
+        'x-enumDescriptions': {
+          alipay: 'Alipay',
+          card: 'Card',
+          bizum: 'Bizum',
+          paypal: 'PayPal',
+          cofidis: 'Cofidis',
+          cofidisLoan: 'Cofidis Loan',
+          mbway: 'MB WAY',
+          multibanco: 'Multibanco',
+          iDeal: 'iDEAL',
+          bancontact: 'Bancontact',
+          sofort: 'SOFORT',
+          trustly: 'Trustly',
+          sepa: 'SEPA',
+          klarna: 'Klarna',
+          giropay: 'Giropay',
+          eps: 'EPS',
+          blik: 'BLIK'
+        },
         example: ['card', 'bizum', 'paypal'],
         description:
-          'An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods. Possible values:\n  - `alipay`\n  - `card`\n  - `bizum`\n  - `paypal`\n  - `cofidis`\n  - `cofidisLoan`\n  - `mbway`\n  - `multibanco`\n  - `iDeal`\n  - `bancontact`\n  - `sofort`\n  - `trustly`\n  - `sepa`\n  - `klarna`\n  - `giropay`\n  - `eps`\n  - `blik`\n',
-        title: 'Payment-PaymentMethods',
+          'An array of allowed payment methods (used in hosted payment\npage). Must be enabled payment methods.\n',
+        title: 'Payment-PaymentMethods'
       },
       transactionType: {
         type: 'string',
         example: 'SALE',
         default: 'SALE',
         enum: ['SALE', 'AUTH', 'PAYOUT', 'VERIF'],
-        description:
-          "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don't capture the funds until later.\n  - `PAYOUT` - Send funds to the customer\n  - `VERIF` - Verify the card without placing a hold or capturing funds.\n",
-        title: 'Payment-TransactionType',
+        'x-enumDescriptions': {
+          SALE: 'Automatically captures funds when the customer authorizes the payment',
+          AUTH: 'Places a hold on funds without immediate capture, allowing for later capture',
+          PAYOUT: 'Sends funds to the customer',
+          VERIF: 'Verifies the payment method without placing a hold or capturing funds'
+        },
+        description: 'Controls when the funds will be captured.\n',
+        title: 'Payment-TransactionType'
       },
       sequence: {
         type: 'object',
@@ -284,7 +308,7 @@ import Heading from '@theme/Heading';
           'This field needs to be sent in order to mark the beginning of a sequence of payments\n(recurring/subscriptions, installments, and so). Specific configurations can be set\nin the inside properties (`recurring`).\n',
         required: ['type'],
         properties: {
-          type: { type: 'string', example: 'recurring', enum: ['recurring'] },
+          type: {type: 'string', example: 'recurring', enum: ['recurring']},
           recurring: {
             type: 'object',
             description:
@@ -295,7 +319,7 @@ import Heading from '@theme/Heading';
                 example: '20210630',
                 default: '*(The payment method or card expiration)*',
                 description:
-                  'Date after which no further recurring payments will be performed.\nMust be formatted as `YYYYMMDD`.\n',
+                  'Date after which no further recurring payments will be performed.\nMust be formatted as `YYYYMMDD`.\n'
               },
               frequency: {
                 type: 'integer',
@@ -303,48 +327,48 @@ import Heading from '@theme/Heading';
                 example: 30,
                 default: 25,
                 description:
-                  'The minimum number of **days** between the different recurring payments.\n',
-              },
+                  'The minimum number of **days** between the different recurring payments.\n'
+              }
             },
-            title: 'Payment-SequenceRecurring',
-          },
+            title: 'Payment-SequenceRecurring'
+          }
         },
-        title: 'Payment-Sequence',
+        title: 'Payment-Sequence'
       },
       storeId: {
         type: 'string',
         example: 'e5f28150d9e8974c58ab5ec9c4a880f8734dcf05',
         description:
           'A unique identifier of the Store. If specified the payment is attached to this Store.\n',
-        title: 'Payment-StoreId',
+        title: 'Payment-StoreId'
       },
       pointOfSaleId: {
         type: 'string',
         example: 'fb269cccfa0cc021f5d0b8eb1421646c696213e1',
         description:
           'A unique identifier of the Point of Sale. If specified the payment is attached to this Point of Sale. If there is a QR code attached to the same Point of Sale, this payment will be available by scanning the QR code.\n',
-        title: 'Payment-PointOfSaleId',
+        title: 'Payment-PointOfSaleId'
       },
       subscriptionId: {
         type: 'string',
         example: '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',
         description:
           'A unique identifier of the Subscription. If specified the payment is attached to this Subscription.\n',
-        title: 'Payment-SubscriptionId',
+        title: 'Payment-SubscriptionId'
       },
       autoRecover: {
         type: 'boolean',
         example: false,
         description:
           'If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create "Pay By Link" payments).',
-        title: 'Payment-AutoRecover',
+        title: 'Payment-AutoRecover'
       },
       description: {
         type: 'string',
         example: 'Test Shop - #84370745531439',
         description:
           'An arbitrary string attached to the payment. Often useful for\ndisplaying to users.\n',
-        title: 'Payment-Description',
+        title: 'Payment-Description'
       },
       customer: {
         type: 'object',
@@ -352,20 +376,20 @@ import Heading from '@theme/Heading';
           email: {
             type: 'string',
             example: 'john.doe@example.com',
-            description: "The customer's email address.",
+            description: "The customer's email address."
           },
           name: {
             type: 'string',
             example: 'John Doe',
-            description: "The customer's full name or business name.",
+            description: "The customer's full name or business name."
           },
           phone: {
             type: 'string',
             example: null,
-            description: "The customer's phone number in E.164 format.",
-          },
+            description: "The customer's phone number in E.164 format."
+          }
         },
-        title: 'Payment-Customer',
+        title: 'Payment-Customer'
       },
       billingDetails: {
         type: 'object',
@@ -375,20 +399,20 @@ import Heading from '@theme/Heading';
           name: {
             type: 'string',
             example: 'John Doe',
-            description: "The customer's billing full name.",
+            description: "The customer's billing full name."
           },
           email: {
             type: 'string',
             example: 'john.doe@example.com',
-            description: "The customer's billing email address.",
+            description: "The customer's billing email address."
           },
           phone: {
             type: 'string',
             example: null,
-            description: "The customer's billing phone number in E.164 format.",
+            description: "The customer's billing phone number in E.164 format."
           },
-          company: { type: 'string', example: null, description: 'Billing company name.' },
-          taxId: { type: 'string', example: null, description: 'Company tax ID.' },
+          company: {type: 'string', example: null, description: 'Billing company name.'},
+          taxId: {type: 'string', example: null, description: 'Company tax ID.'},
           address: {
             title: 'Address',
             type: 'object',
@@ -398,33 +422,33 @@ import Heading from '@theme/Heading';
                 example: 'ES',
                 description:
                   'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
-                title: 'Country',
+                title: 'Country'
               },
               city: {
                 type: 'string',
                 example: 'Málaga',
-                description: 'City, district, suburb, town, or village.',
+                description: 'City, district, suburb, town, or village.'
               },
               line1: {
                 type: 'string',
                 example: 'Fake Street 123',
-                description: 'Address line 1 (e.g., street, PO Box, or company name).',
+                description: 'Address line 1 (e.g., street, PO Box, or company name).'
               },
               line2: {
                 type: 'string',
                 example: null,
-                description: 'Address line 2 (e.g., apartment, suite, unit, or building).',
+                description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
               },
-              zip: { type: 'string', example: '1234', description: 'ZIP or postal code.' },
+              zip: {type: 'string', example: '1234', description: 'ZIP or postal code.'},
               state: {
                 type: 'string',
                 example: 'Málaga',
-                description: 'State, county, province, or region.',
-              },
-            },
-          },
+                description: 'State, county, province, or region.'
+              }
+            }
+          }
         },
-        title: 'Payment-BillingDetails',
+        title: 'Payment-BillingDetails'
       },
       shippingDetails: {
         type: 'object',
@@ -433,24 +457,24 @@ import Heading from '@theme/Heading';
           name: {
             type: 'string',
             example: 'John Doe',
-            description: "The shipping customer's full name.",
+            description: "The shipping customer's full name."
           },
           email: {
             type: 'string',
             example: 'john.doe@example.com',
-            description: "The shipping customer's email address.",
+            description: "The shipping customer's email address."
           },
           phone: {
             type: 'string',
             example: null,
-            description: "The shipping customer's phone number in E.164 format.",
+            description: "The shipping customer's phone number in E.164 format."
           },
           company: {
             type: 'string',
             example: null,
-            description: 'Name of the company where the shipment is going.',
+            description: 'Name of the company where the shipment is going.'
           },
-          taxId: { type: 'string', example: null, description: 'Company tax ID.' },
+          taxId: {type: 'string', example: null, description: 'Company tax ID.'},
           address: {
             title: 'Address',
             type: 'object',
@@ -460,33 +484,33 @@ import Heading from '@theme/Heading';
                 example: 'ES',
                 description:
                   'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
-                title: 'Country',
+                title: 'Country'
               },
               city: {
                 type: 'string',
                 example: 'Málaga',
-                description: 'City, district, suburb, town, or village.',
+                description: 'City, district, suburb, town, or village.'
               },
               line1: {
                 type: 'string',
                 example: 'Fake Street 123',
-                description: 'Address line 1 (e.g., street, PO Box, or company name).',
+                description: 'Address line 1 (e.g., street, PO Box, or company name).'
               },
               line2: {
                 type: 'string',
                 example: null,
-                description: 'Address line 2 (e.g., apartment, suite, unit, or building).',
+                description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
               },
-              zip: { type: 'string', example: '1234', description: 'ZIP or postal code.' },
+              zip: {type: 'string', example: '1234', description: 'ZIP or postal code.'},
               state: {
                 type: 'string',
                 example: 'Málaga',
-                description: 'State, county, province, or region.',
-              },
-            },
-          },
+                description: 'State, county, province, or region.'
+              }
+            }
+          }
         },
-        title: 'Payment-ShippingDetails',
+        title: 'Payment-ShippingDetails'
       },
       sessionDetails: {
         description:
@@ -496,127 +520,127 @@ import Heading from '@theme/Heading';
             type: 'string',
             example: '100.100.200.100',
             description: 'The IP address where the operation originated.',
-            title: 'IP',
+            title: 'IP'
           },
           countryCode: {
             type: 'string',
             example: 'ES',
             description:
               'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
-            title: 'Country',
+            title: 'Country'
           },
           lang: {
             type: 'string',
             example: 'es',
             description:
               'Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)).',
-            title: 'Lang',
+            title: 'Lang'
           },
           deviceType: {
             type: 'string',
             example: 'desktop',
             description: 'Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`.',
-            title: 'DeviceType',
+            title: 'DeviceType'
           },
           deviceModel: {
             type: 'string',
             example: null,
             description:
               'Information about the device used for the browser session (e.g., `iPhone`).',
-            title: 'DeviceModel',
+            title: 'DeviceModel'
           },
           browser: {
             type: 'string',
             example: 'Chrome',
             description: 'The browser used in this browser session (e.g., `Mobile Safari`).',
-            title: 'Browser',
+            title: 'Browser'
           },
           browserVersion: {
             type: 'string',
             example: '83.0.4103.116',
             description: 'The version for the browser session (e.g., `13.1.1`).',
-            title: 'BrowserVersion',
+            title: 'BrowserVersion'
           },
           os: {
             type: 'string',
             example: 'Mac OS',
             description: 'Operation system (e.g., `iOS`).',
-            title: 'Os',
+            title: 'Os'
           },
           osVersion: {
             type: 'string',
             example: '10.15.4',
             description: 'Operation system version (e.g., `13.5.1`).',
-            title: 'OsVersion',
+            title: 'OsVersion'
           },
           source: {
             type: 'string',
             example: 'MONEI/PHP',
             description:
               "The source component from where the operation was generated (mostly for our SDK's).",
-            title: 'Source',
+            title: 'Source'
           },
           sourceVersion: {
             type: 'string',
             example: '0.1.2',
             description:
               "The source component version from where the operation was generated (mostly for our SDK's).",
-            title: 'SourceVersion',
+            title: 'SourceVersion'
           },
           userAgent: {
             type: 'string',
             example: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...',
             description: 'Full user agent string of the browser session.',
-            title: 'UserAgent',
+            title: 'UserAgent'
           },
           browserAccept: {
             type: 'string',
             example: 'text/html,application/xhtml+xml,application/json',
             description: 'Browser accept header.',
-            title: 'BrowserAccept',
+            title: 'BrowserAccept'
           },
           browserColorDepth: {
             type: 'string',
             example: '24',
             description: 'The color depth of the browser session (e.g., `24`).',
-            title: 'BrowserColorDepth',
+            title: 'BrowserColorDepth'
           },
           browserScreenHeight: {
             type: 'string',
             example: '1152',
             description: 'The screen height of the browser session (e.g., `1152`).',
-            title: 'BrowserScreenHeight',
+            title: 'BrowserScreenHeight'
           },
           browserScreenWidth: {
             type: 'string',
             example: '2048',
             description: 'The screen width of the browser session (e.g., `2048`).',
-            title: 'BrowserScreenWidth',
+            title: 'BrowserScreenWidth'
           },
           browserTimezoneOffset: {
             type: 'string',
             example: '-120',
             description: 'The timezone offset of the browser session (e.g., `-120`).',
-            title: 'BrowserTimezoneOffset',
-          },
+            title: 'BrowserTimezoneOffset'
+          }
         },
-        title: 'Payment-SessionDetails',
+        title: 'Payment-SessionDetails'
       },
       expireAt: {
         type: 'number',
         format: 'int64',
         example: 1663581391,
         description: 'Payment expiration time.',
-        title: 'Payment-ExpireAt',
+        title: 'Payment-ExpireAt'
       },
       metadata: {
         type: 'object',
-        example: { systemId: '12345' },
+        example: {systemId: '12345'},
         description:
           'A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.',
-        title: 'Metadata',
-      },
-    },
+        title: 'Metadata'
+      }
+    }
   }}
   schemaType={'response'}
 ></Schema>

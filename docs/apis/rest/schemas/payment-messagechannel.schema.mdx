@@ -22,8 +22,13 @@ The channel used to send the payment message.
     type: 'string',
     example: 'EMAIL',
     enum: ['EMAIL', 'WHATSAPP', 'SMS'],
+    'x-enumDescriptions': {
+      EMAIL: 'Send message via email',
+      WHATSAPP: 'Send message via WhatsApp',
+      SMS: 'Send message via SMS text message'
+    },
     description: 'The channel used to send the payment message.\n',
-    title: 'Payment-MessageChannel',
+    title: 'Payment-MessageChannel'
   }}
   schemaType={'response'}
 ></Schema>

@@ -22,9 +22,18 @@ The language of message sent to the customer. If not provided the default custom
     type: 'string',
     example: 'en',
     enum: ['en', 'es', 'ca', 'pt', 'de', 'it', 'fr'],
+    'x-enumDescriptions': {
+      en: 'English',
+      es: 'Spanish',
+      ca: 'Catalan',
+      pt: 'Portuguese',
+      de: 'German',
+      it: 'Italian',
+      fr: 'French'
+    },
     description:
       'The language of message sent to the customer. If not provided the default customer language is used if available.',
-    title: 'Payment-MessageLanguage',
+    title: 'Payment-MessageLanguage'
   }}
   schemaType={'response'}
 ></Schema>

@@ -5,33 +5,22 @@ description: 'Payment Methods'
 custom_edit_url: null
 ---
 
-<p>
-  The Payment Methods API allows you to retrieve available payment methods for an account or a
-  specific payment. This information can be used to display appropriate payment options to your
-  customers.
-</p>
-<p>
-  Payment methods vary by country, currency, and merchant configuration. This API helps you
-  dynamically determine which payment methods are available for a specific transaction or account.
-</p>
-<p>You can use this API to:</p>
-<ul>
-  <li>Get all payment methods available for an account</li>
-  <li>Get payment methods available for a specific payment</li>
-  <li>Display payment options to your customers based on their location and purchase details</li>
-</ul>
-<h2>Payment Methods object</h2>
+The Payment Methods API allows you to retrieve available payment methods for an account or a specific payment.
+This information can be used to display appropriate payment options to your customers.
 
-<details open className="embedded-schema">
-<summary><strong>PaymentMethods Schema</strong> - <a href="../schemas/paymentmethods">View full schema</a></summary>
+Payment methods vary by country, currency, and merchant configuration. This API helps you dynamically
+determine which payment methods are available for a specific transaction or account.
 
-import PaymentMethodsSchema from './schemas/paymentmethods.schema.mdx';
+You can use this API to:
 
-{/* Hide the title when embedded */}
+- Get all payment methods available for an account
+- Get payment methods available for a specific payment
+- Display payment options to your customers based on their location and purchase details
 
-<PaymentMethodsSchema hideTitle={true} />
+## Payment Methods object
 
-</details>
+See [PaymentMethods](https://docs.monei.com/docs/apis/rest/schemas/paymentmethods/) for more
+information.
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

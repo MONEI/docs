@@ -17,22 +17,20 @@ import Heading from '@theme/Heading';
 
 Controls when the funds will be captured.
 
-- `SALE` - **Default**. MONEI automatically captures funds
-  when the customer authorizes the payment.
-- `AUTH` - Place a hold on the funds when the customer authorizes
-  the payment, but don't capture the funds until later.
-- `PAYOUT` - Send funds to the customer
-- `VERIF` - Verify the card without placing a hold or capturing funds.
-
 <Schema
   schema={{
     type: 'string',
     example: 'SALE',
     default: 'SALE',
     enum: ['SALE', 'AUTH', 'PAYOUT', 'VERIF'],
-    description:
-      "Controls when the funds will be captured.\n  - `SALE` - **Default**. MONEI automatically captures funds\n    when the customer authorizes the payment.\n  - `AUTH` - Place a hold on the funds when the customer authorizes\n    the payment, but don't capture the funds until later.\n  - `PAYOUT` - Send funds to the customer\n  - `VERIF` - Verify the card without placing a hold or capturing funds.\n",
-    title: 'Payment-TransactionType',
+    'x-enumDescriptions': {
+      SALE: 'Automatically captures funds when the customer authorizes the payment',
+      AUTH: 'Places a hold on funds without immediate capture, allowing for later capture',
+      PAYOUT: 'Sends funds to the customer',
+      VERIF: 'Verifies the payment method without placing a hold or capturing funds'
+    },
+    description: 'Controls when the funds will be captured.\n',
+    title: 'Payment-TransactionType'
   }}
   schemaType={'response'}
 ></Schema>

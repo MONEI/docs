@@ -194,8 +194,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: 'doc',
-          id: 'apis/rest/schemas/errorbase',
-          label: 'ErrorBase',
+          id: 'apis/rest/schemas/apiexception',
+          label: 'ApiException',
           className: 'schema'
         },
         {

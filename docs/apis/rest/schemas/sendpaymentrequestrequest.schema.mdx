@@ -6,7 +6,7 @@ sidebar_label: 'SendPaymentRequestRequest'
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: { 'phoneNumber': '+34500000000', 'language': 'en' }
+sample: {'phoneNumber': '+34500000000', 'language': 'en'}
 custom_edit_url: null
 ---
 
@@ -25,17 +25,26 @@ import Heading from '@theme/Heading';
         type: 'string',
         example: '+34500000000',
         description:
-          'Phone number in E.164 format. The customer will receive payment link on this phone number.',
+          'Phone number in E.164 format. The customer will receive payment link on this phone number.'
       },
       language: {
         type: 'string',
         example: 'en',
         enum: ['en', 'es', 'ca', 'pt', 'de', 'it', 'fr'],
+        'x-enumDescriptions': {
+          en: 'English',
+          es: 'Spanish',
+          ca: 'Catalan',
+          pt: 'Portuguese',
+          de: 'German',
+          it: 'Italian',
+          fr: 'French'
+        },
         description:
           'The language of message sent to the customer. If not provided the default customer language is used if available.',
-        title: 'Payment-MessageLanguage',
-      },
-    },
+        title: 'Payment-MessageLanguage'
+      }
+    }
   }}
   schemaType={'response'}
 ></Schema>

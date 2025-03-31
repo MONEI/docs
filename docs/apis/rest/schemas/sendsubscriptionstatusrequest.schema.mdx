@@ -11,7 +11,7 @@ sample:
     'customerEmail': 'user@example.com',
     'customerPhone': 'string',
     'channel': 'EMAIL',
-    'language': 'string',
+    'language': 'string'
   }
 custom_edit_url: null
 ---
@@ -33,22 +33,24 @@ import Heading from '@theme/Heading';
       customerEmail: {
         type: 'string',
         format: 'email',
-        description: 'Customer email to send the subscription status to',
+        description: 'Customer email to send the subscription status to'
       },
       customerPhone: {
         type: 'string',
-        description: 'Customer phone number to send the subscription status to',
+        description: 'Customer phone number to send the subscription status to'
       },
       channel: {
         type: 'string',
         enum: ['EMAIL', 'WHATSAPP', 'SMS'],
-        description: 'Channel to use for sending the subscription status',
+        'x-enumDescriptions': {
+          EMAIL: 'Send message via email',
+          WHATSAPP: 'Send message via WhatsApp',
+          SMS: 'Send message via SMS text message'
+        },
+        description: 'Channel to use for sending the subscription status'
       },
-      language: {
-        type: 'string',
-        description: 'Language to use for the subscription status message',
-      },
-    },
+      language: {type: 'string', description: 'Language to use for the subscription status message'}
+    }
   }}
   schemaType={'response'}
 ></Schema>

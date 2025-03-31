@@ -14,7 +14,7 @@ sample:
     'threeDSecure': false,
     'threeDSecureVersion': '2.1.0',
     'expiration': 2048544000,
-    'last4': '0004',
+    'last4': '0004'
   }
 custom_edit_url: null
 ---
@@ -40,40 +40,50 @@ Details about the card used as payment method at the time of the transaction.
         example: 'ES',
         description:
           'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
-        title: 'Country',
+        title: 'Country'
       },
       brand: {
         type: 'string',
         example: 'visa',
         enum: ['visa', 'mastercard', 'diners', 'amex', 'jcb', 'unionpay', 'unknown'],
-        description: 'Card brand.',
+        'x-enumDescriptions': {
+          visa: 'Visa',
+          mastercard: 'Mastercard',
+          diners: 'Diners Club',
+          amex: 'American Express',
+          jcb: 'JCB',
+          unionpay: 'UnionPay',
+          unknown: 'Unknown'
+        },
+        description: 'Card brand.'
       },
       type: {
         type: 'string',
         example: 'credit',
         enum: ['debit', 'credit'],
-        description: 'Card type `debit` or `credit`.',
+        'x-enumDescriptions': {debit: 'Debit', credit: 'Credit'},
+        description: 'Card type `debit` or `credit`.'
       },
       threeDSecure: {
         type: 'boolean',
         example: false,
-        description: 'Wether this transaction used 3D Secure authentication.',
+        description: 'Wether this transaction used 3D Secure authentication.'
       },
       threeDSecureVersion: {
         type: 'string',
         example: '2.1.0',
-        description: 'The protocol version of the 3DS challenge.',
+        description: 'The protocol version of the 3DS challenge.'
       },
       expiration: {
         type: 'integer',
         format: 'int64',
         example: 2048544000,
         description:
-          'Time at which the card will expire.\nMeasured in seconds since the Unix epoch.\n',
+          'Time at which the card will expire.\nMeasured in seconds since the Unix epoch.\n'
       },
-      last4: { type: 'string', example: '0004', description: 'The last four digits of the card.' },
+      last4: {type: 'string', example: '0004', description: 'The last four digits of the card.'}
     },
-    title: 'Subscription-PaymentMethodCard',
+    title: 'Subscription-PaymentMethodCard'
   }}
   schemaType={'response'}
 ></Schema>

@@ -13,16 +13,7 @@ module.exports = {
   },
   themeConfig: {
     colorMode: {
-      // "light" | "dark"
-      defaultMode: 'light',
-
-      // Hides the switch in the navbar
-      // Useful if you want to support a single color mode
-      disableSwitch: true,
-
-      // Should we use the prefers-color-scheme media-query,
-      // using user system preferences, instead of the hardcoded defaultMode
-      respectPrefersColorScheme: false
+      defaultMode: 'light'
     },
     prism: {
       theme: themes.nightOwl,
@@ -128,6 +119,9 @@ module.exports = {
           api: {
             specPath: 'openapi.json',
             outputDir: 'docs/apis/rest',
+            downloadUrl: 'https://js.monei.com/api/v1/openapi.json',
+            hideSendButton: true,
+            showExtensions: true,
             sidebarOptions: {
               groupPathsBy: 'tag',
               categoryLinkSource: 'tag'
@@ -136,8 +130,7 @@ module.exports = {
           }
         }
       }
-    ],
-    path.resolve(__dirname, './plugins/fix-auth-openapi.js')
+    ]
   ],
   themes: ['docusaurus-theme-openapi-docs']
 };

@@ -6,7 +6,7 @@ sidebar_label: 'RefundPaymentRequest'
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: { 'amount': 110, 'refundReason': null }
+sample: {'amount': 110, 'refundReason': null}
 custom_edit_url: null
 ---
 
@@ -28,20 +28,20 @@ import Heading from '@theme/Heading';
             example: 110,
             description:
               'Amount intended to be collected by this payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n',
-            title: 'Payment-Amount',
-          },
+            title: 'Payment-Amount'
+          }
         ],
         description:
-          'The amount to refund, which must be less than or\nequal to the original amount.\n',
+          'The amount to refund, which must be less than or\nequal to the original amount.\n'
       },
       refundReason: {
         type: 'string',
         example: null,
         enum: ['duplicated', 'fraudulent', 'requested_by_customer'],
         description: 'The reason for refunding the Payment.',
-        title: 'Payment-RefundReason',
-      },
-    },
+        title: 'Payment-RefundReason'
+      }
+    }
   }}
   schemaType={'response'}
 ></Schema>

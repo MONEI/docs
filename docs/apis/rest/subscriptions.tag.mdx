@@ -5,89 +5,38 @@ description: 'Subscriptions'
 custom_edit_url: null
 ---
 
-<p>
-  The Subscriptions API provides a powerful solution for managing recurring billing and
-  subscription-based business models.
-</p>
-<h2>Key Features</h2>
-<h3>Flexible Billing Options</h3>
-<ul>
-  <li>
-    <strong>Multiple billing intervals</strong>: Daily, weekly, monthly, or yearly billing cycles
-  </li>
-  <li>
-    <strong>Custom intervals</strong>: Configure non-standard periods using intervalCount (e.g.,
-    every 3 months)
-  </li>
-  <li>
-    <strong>Trial periods</strong>: Offer free trials before the first billing cycle begins
-  </li>
-  <li>
-    <strong>Variable amounts</strong>: Update subscription amounts for pricing changes or upgrades
-  </li>
-</ul>
-<h3>Complete Lifecycle Management</h3>
-<ul>
-  <li>
-    <strong>Create subscriptions</strong>: Set up recurring billing plans with customizable
-    parameters
-  </li>
-  <li>
-    <strong>Activate subscriptions</strong>: Begin billing cycles with customer payment information
-  </li>
-  <li>
-    <strong>Pause/Resume</strong>: Temporarily halt billing without cancellation
-  </li>
-  <li>
-    <strong>Update subscriptions</strong>: Modify pricing, billing details, or subscription
-    parameters
-  </li>
-  <li>
-    <strong>Cancel subscriptions</strong>: End recurring billing permanently or at period end
-  </li>
-</ul>
-<h3>Customer-Friendly Features</h3>
-<ul>
-  <li>
-    <strong>Automated recurring payments</strong>: No manual action required for subsequent billing
-  </li>
-  <li>
-    <strong>Consistent billing dates</strong>: Predictable billing on the same day of each period
-  </li>
-  <li>
-    <strong>Payment retry mechanism</strong>: Automatic retries for failed payments
-  </li>
-  <li>
-    <strong>Customer control</strong>: Enable customers to manage their own subscriptions
-  </li>
-</ul>
-<h3>Integration Benefits</h3>
-<ul>
-  <li>
-    <strong>Webhook notifications</strong>: Get real-time updates on subscription status changes
-  </li>
-  <li>
-    <strong>Detailed reporting</strong>: Track subscription metrics and performance
-  </li>
-  <li>
-    <strong>Simplified compliance</strong>: Handle recurring billing requirements automatically
-  </li>
-  <li>
-    <strong>Reduced churn</strong>: Automatic billing helps prevent missed payments
-  </li>
-</ul>
-<h2>Subscription Object</h2>
+The Subscriptions API provides a powerful solution for managing recurring billing and subscription-based business models.
 
-<details open className="embedded-schema">
-<summary><strong>Subscription Schema</strong> - <a href="../schemas/subscription">View full schema</a></summary>
+## Key Features
 
-import SubscriptionSchema from './schemas/subscription.schema.mdx';
+### Flexible Billing Options
 
-{/* Hide the title when embedded */}
+- **Multiple billing intervals**: Daily, weekly, monthly, or yearly billing cycles
+- **Custom intervals**: Configure non-standard periods using intervalCount (e.g., every 3 months)
+- **Trial periods**: Offer free trials before the first billing cycle begins
+- **Variable amounts**: Update subscription amounts for pricing changes or upgrades
 
-<SubscriptionSchema hideTitle={true} />
+### Complete Lifecycle Management
 
-</details>
+- **Create subscriptions**: Set up recurring billing plans with customizable parameters
+- **Activate subscriptions**: Begin billing cycles with customer payment information
+- **Pause/Resume**: Temporarily halt billing without cancellation
+- **Update subscriptions**: Modify pricing, billing details, or subscription parameters
+- **Cancel subscriptions**: End recurring billing permanently or at period end
+
+### Customer-Friendly Features
+
+- **Automated recurring payments**: No manual action required for subsequent billing
+- **Consistent billing dates**: Predictable billing on the same day of each period
+- **Payment retry mechanism**: Automatic retries for failed payments
+- **Customer control**: Enable customers to manage their own subscriptions
+
+### Integration Benefits
+
+- **Webhook notifications**: Get real-time updates on subscription status changes
+- **Detailed reporting**: Track subscription metrics and performance
+- **Simplified compliance**: Handle recurring billing requirements automatically
+- **Reduced churn**: Automatic billing helps prevent missed payments
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

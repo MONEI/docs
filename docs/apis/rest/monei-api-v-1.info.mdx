@@ -16,82 +16,58 @@ import Export from '@theme/ApiExplorer/Export';
 
 <span
   className={'theme-doc-version-badge badge badge--secondary'}
-  children={'Version: 1.5.7'}
+  children={'Version: 1.6.0'}
 ></span>
+
+<Export url={'https://js.monei.com/api/v1/openapi.json'} proxy={undefined}></Export>
 
 <Heading as={'h1'} className={'openapi__heading'} children={'MONEI API v1'}></Heading>
 
-<p>
-  The MONEI API is organized around{' '}
-  <a href="https://en.wikipedia.org/wiki/Representational_State_Transfer">REST</a> principles. Our
-  API is designed to be intuitive and developer-friendly.
-</p>
-<h3>Base URL</h3>
-<p>All API requests should be made to:</p>
-<pre>
-  <code>https://api.monei.com/v1</code>
-</pre>
-<h3>Environment</h3>
-<p>MONEI provides two environments:</p>
-<ul>
-  <li>
-    <strong>Test Environment</strong>: For development and testing without processing real payments
-  </li>
-  <li>
-    <strong>Live Environment</strong>: For processing real transactions in production
-  </li>
-</ul>
-<h3>Client Libraries</h3>
-<p>We provide official SDKs to simplify integration:</p>
-<ul>
-  <li>
-    <a href="https://github.com/MONEI/monei-php-sdk">PHP SDK</a>
-  </li>
-  <li>
-    <a href="https://github.com/MONEI/monei-python-sdk">Python SDK</a>
-  </li>
-  <li>
-    <a href="https://github.com/MONEI/monei-node-sdk">Node.js SDK</a>
-  </li>
-  <li>
-    <a href="https://postman.monei.com/">Postman Collection</a>
-  </li>
-</ul>
-<p>Our SDKs handle authentication, error handling, and request formatting automatically.</p>
-<p>
-  You can download the OpenAPI specification from the{' '}
-  <a href="https://js.monei.com/api/v1/openapi.json">https://js.monei.com/api/v1/openapi.json</a>{' '}
-  and generate your own client library using the{' '}
-  <a href="https://openapi-generator.tech/">OpenAPI Generator</a>.
-</p>
-<h3>Important Requirements</h3>
-<ul>
-  <li>All API requests must be made over HTTPS</li>
-  <li>
-    If you are not using our official SDKs, you{' '}
-    <strong>
-      must provide a valid <code>User-Agent</code> header
-    </strong>{' '}
-    with each request
-  </li>
-  <li>
-    Requests without proper authentication will return a <code>401 Unauthorized</code> error
-  </li>
-</ul>
-<h3>Error Handling</h3>
-<p>
-  The API returns consistent error codes and messages to help you troubleshoot issues. Each response
-  includes a <code>statusCode</code> attribute indicating the outcome of your request.
-</p>
-<h3>Rate Limits</h3>
-<p>
-  The API implements rate limiting to ensure stability. If you exceed the limits, requests will
-  return a <code>429 Too Many Requests</code> status code.
-</p>
+The MONEI API is organized around REST principles. Our API is designed to be intuitive and developer-friendly.
 
-<!-- ReDoc-Inject: <security-definitions> -->
+### Base URL
 
-<div style={{ marginBottom: '2rem' }}>
+All API requests should be made to:
+
+```
+https://api.monei.com/v1
+```
+
+### Environment
+
+MONEI provides two environments:
+
+- **Test Environment**: For development and testing without processing real payments
+- **Live Environment**: For processing real transactions in production
+
+### Client Libraries
+
+We provide official SDKs to simplify integration:
+
+- [PHP SDK](https://github.com/MONEI/monei-php-sdk)
+- [Python SDK](https://github.com/MONEI/monei-python-sdk)
+- [Node.js SDK](https://github.com/MONEI/monei-node-sdk)
+- [Postman Collection](https://postman.monei.com/)
+
+Our SDKs handle authentication, error handling, and request formatting automatically.
+
+You can download the OpenAPI specification from the https://js.monei.com/api/v1/openapi.json and generate your own client library using the [OpenAPI Generator](https://openapi-generator.tech/).
+
+### Important Requirements
+
+- All API requests must be made over HTTPS
+- If you are not using our official SDKs, you **must provide a valid `User-Agent` header** with each request
+- Requests without proper authentication will return a `401 Unauthorized` error
+
+### Error Handling
+
+The API returns consistent error codes and messages to help you troubleshoot issues. Each response includes a `statusCode` attribute indicating the outcome of your request.
+
+### Rate Limits
+
+The API implements rate limiting to ensure stability. If you exceed the limits, requests will return a `429 Too Many Requests` status code.
+
+<div style={{marginBottom: '2rem'}}>
   <Heading
     id={'authentication'}
     as={'h2'}
@@ -100,52 +76,16 @@ import Export from '@theme/ApiExplorer/Export';
   ></Heading>
   <SchemaTabs className={'openapi-tabs__security-schemes'}>
     <TabItem label={'API Key: APIKey'} value={'APIKey'}>
-      <p>
-        The MONEI API uses API keys to authenticate requests. Each request must include your API key
-        in the <code>Authorization</code> header.
-      </p>
-      <p>
-        You can view and manage your API keys in the{' '}
-        <a href="https://dashboard.monei.com/settings/api">MONEI Dashboard</a>.
-      </p>
-      <p>MONEI provides two types of API keys:</p>
-      <ul>
-        <li>
-          <strong>Test mode keys</strong>: Prefixed with <code>pk_test_</code>
-        </li>
-        <li>
-          <strong>Live mode keys</strong>: Prefixed with <code>pk_live_</code>
-        </li>
-      </ul>
-      <h3>Implementation</h3>
-      <p>
-        Include your API key in the <code>Authorization</code> header for all API requests:
-      </p>
-      <pre>
-        <code>Authorization: pk_test_your_api_key</code>
-      </pre>
-      <h3>Security Best Practices</h3>
-      <p>Your API key carries significant privileges, so it&#39;s crucial to keep it secure:</p>
-      <ul>
-        <li>
-          <strong>Never share your API key</strong> in publicly accessible areas such as GitHub,
-          client-side code, or public repositories
-        </li>
-        <li>
-          <strong>Store your API key securely</strong> in environment variables or secure
-          configuration systems
-        </li>
-        <li>
-          <strong>Rotate your API keys periodically</strong> for enhanced security
-        </li>
-        <li>
-          <strong>Use test mode keys</strong> for development and testing
-        </li>
-        <li>
-          <strong>Restrict API key access</strong> to only the necessary services and personnel
-        </li>
-      </ul>
-
+      The MONEI API uses API keys to authenticate requests. Each request must include your API key
+      in the `Authorization` header. You can view and manage your API keys in the [MONEI
+      Dashboard](https://dashboard.monei.com/settings/api). MONEI provides two types of API keys: -
+      **Test mode keys**: Prefixed with `pk_test_` - **Live mode keys**: Prefixed with `pk_live_`
+      ### Security Best Practices Your API key carries significant privileges, so it's crucial to
+      keep it secure: - **Never share your API key** in publicly accessible areas such as GitHub,
+      client-side code, or public repositories - **Store your API key securely** in environment
+      variables or secure configuration systems - **Rotate your API keys periodically** for enhanced
+      security - **Use test mode keys** for development and testing - **Restrict API key access** to
+      only the necessary services and personnel
       <div>
         <table>
           <tbody>
@@ -162,45 +102,16 @@ import Export from '@theme/ApiExplorer/Export';
       </div>
     </TabItem>
     <TabItem label={'API Key: AccountId'} value={'AccountId'}>
-      <p>
-        If you&#39;re integrating with MONEI as a partner or platform, you&#39;ll need to use both
-        your Master Account API Key and the Account ID of the merchant you&#39;re acting on behalf
-        of.
-      </p>
-      <h3>How It Works</h3>
-      <ol>
-        <li>
-          <strong>Authentication</strong>: Include your Master Account API Key in the{' '}
-          <code>Authorization</code> header
-        </li>
-        <li>
-          <strong>Account Selection</strong>: Include the merchant&#39;s Account ID in the{' '}
-          <code>MONEI-Account-ID</code> header
-        </li>
-      </ol>
-      <p>
-        This combination allows you to perform operations on behalf of your connected merchants
-        while using your own authentication credentials.
-      </p>
-      <h3>Implementation</h3>
-      <p>For all API requests as a partner, include both headers:</p>
-      <pre>
-        <code>
-          Authorization: pk_test_your_master_api_key MONEI-Account-ID: acc_merchant_account_id
-        </code>
-      </pre>
-      <h3>Use Cases</h3>
-      <p>The Account ID header is essential for:</p>
-      <ul>
-        <li>Processing payments on behalf of connected merchants</li>
-        <li>Managing subscriptions for merchants on your platform</li>
-        <li>Retrieving payment methods available to specific merchants</li>
-      </ul>
-      <h3>Finding Account IDs</h3>
-      <p>
-        You can find the Account ID for each connected merchant in your MONEI Partner Dashboard.
-      </p>
-
+      If you're integrating with MONEI as a partner or platform, you'll need to use both your Master
+      Account API Key and the Account ID of the merchant you're acting on behalf of. ### How It
+      Works 1. **Authentication**: Include your Master Account API Key in the `Authorization` header
+      2. **Account Selection**: Include the merchant's Account ID in the `MONEI-Account-ID` header
+      This combination allows you to perform operations on behalf of your connected merchants while
+      using your own authentication credentials. ### Use Cases The Account ID header is essential
+      for: - Processing payments on behalf of connected merchants - Managing subscriptions for
+      merchants on your platform - Retrieving payment methods available to specific merchants ###
+      Finding Account IDs You can find the Account ID for each connected merchant in your [MONEI
+      Partner Dashboard](https://admin.monei.com).
       <div>
         <table>
           <tbody>
@@ -216,6 +127,5 @@ import Export from '@theme/ApiExplorer/Export';
         </table>
       </div>
     </TabItem>
-
   </SchemaTabs>
 </div>

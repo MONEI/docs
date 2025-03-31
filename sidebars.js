@@ -57,16 +57,6 @@ module.exports = {
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },
-    {
-      type: 'link',
-      label: 'Payments API',
-      href: '/docs/apis/rest/payments-create'
-    },
-    {
-      type: 'link',
-      label: 'Subscriptions API',
-      href: '/docs/apis/rest/subscriptions-create'
-    },
     'graphql-api',
     'testing'
   ],
