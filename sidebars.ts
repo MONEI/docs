@@ -1,6 +1,6 @@
 import SidebarsConfig from './docs/apis/rest/sidebar';
 
-module.exports = {
+export default {
   docs: [
     'getting-started',
     'monei-connect',

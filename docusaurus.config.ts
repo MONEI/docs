@@ -1,7 +1,8 @@
-const path = require('path');
-const {themes} = require('prism-react-renderer');
+import type {Config} from '@docusaurus/types';
+import * as path from 'path';
+import {themes} from 'prism-react-renderer';
 
-module.exports = {
+const config: Config = {
   title: 'MONEI Documentation',
   url: 'https://docs.monei.com',
   tagline: 'Explore our guides and examples to integrate MONEI',
@@ -158,3 +159,5 @@ module.exports = {
   ],
   themes: ['docusaurus-theme-openapi-docs']
 };
+
+export default config;

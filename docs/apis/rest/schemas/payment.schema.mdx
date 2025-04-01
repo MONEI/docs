@@ -865,7 +865,11 @@ import Heading from '@theme/Heading';
                 example: 'john.doe@example.com',
                 description: "The Paypal's payer email."
               },
-              name: {type: 'string', example: 'John Doe', description: "The Paypal's payer name."}
+              name: {
+                type: 'string',
+                example: 'John Doe',
+                description: "The Paypal's payer name."
+              }
             },
             title: 'Payment-PaymentMethodPaypal'
           },
@@ -905,7 +909,11 @@ import Heading from '@theme/Heading';
             description:
               'Details from Trustly order used as payment method at the time of the transaction.\n',
             properties: {
-              customerId: {type: 'string', example: null, description: "The Trustly's customer ID."}
+              customerId: {
+                type: 'string',
+                example: null,
+                description: "The Trustly's customer ID."
+              }
             },
             title: 'Payment-PaymentMethodTrustly'
           },
@@ -934,11 +942,19 @@ import Heading from '@theme/Heading';
                 example: null,
                 description: 'The country code of the account holder.'
               },
-              bankAddress: {type: 'string', example: null, description: 'The address of the bank.'},
+              bankAddress: {
+                type: 'string',
+                example: null,
+                description: 'The address of the bank.'
+              },
               bankCode: {type: 'string', example: null, description: 'The code of the bank.'},
               bankName: {type: 'string', example: null, description: 'The name of the bank.'},
               bic: {type: 'string', example: null, description: 'The BIC of the bank.'},
-              last4: {type: 'string', example: null, description: 'The last 4 digits of the IBAN.'}
+              last4: {
+                type: 'string',
+                example: null,
+                description: 'The last 4 digits of the IBAN.'
+              }
             },
             title: 'Payment-PaymentMethodSepa'
           },

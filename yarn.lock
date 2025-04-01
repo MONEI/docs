@@ -3246,7 +3246,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/mdx@npm:^3.0.0":
+"@mdx-js/mdx@npm:^3.0.0, @mdx-js/mdx@npm:^3.1.0":
   version: 3.1.0
   resolution: "@mdx-js/mdx@npm:3.1.0"
   dependencies:
@@ -10126,6 +10126,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"marked@npm:^15.0.7":
+  version: 15.0.7
+  resolution: "marked@npm:15.0.7"
+  bin:
+    marked: bin/marked.js
+  checksum: 10c0/0b9d07bace37bbf0548bae356c4184765afa4d2296ed0be4418aa4bb0ce703f323dc1a475125d536581f9fe264797e6265dd0b57499d97c0fe0f29bc6d016343
+  languageName: node
+  linkType: hard
+
 "marked@npm:^4.3.0":
   version: 4.3.0
   resolution: "marked@npm:4.3.0"
@@ -11712,6 +11721,7 @@ __metadata:
     "@docusaurus/types": "npm:3.7.0"
     "@graphql-markdown/docusaurus": "npm:^1.29.0"
     "@heroicons/react": "npm:2.2.0"
+    "@mdx-js/mdx": "npm:^3.1.0"
     "@mdx-js/react": "npm:^3.1.0"
     "@monei-js/components": "npm:^1.7.7"
     clsx: "npm:^2.1.1"
@@ -11720,6 +11730,7 @@ __metadata:
     graphql: "npm:^16.10.0"
     husky: "npm:^9.1.7"
     lint-staged: "npm:^15.5.0"
+    marked: "npm:^15.0.7"
     prettier: "npm:^3.5.3"
     prism-react-renderer: "npm:^2.4.1"
     react: "npm:^18.3.1"

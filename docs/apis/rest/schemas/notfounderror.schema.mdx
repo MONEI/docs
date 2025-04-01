@@ -49,7 +49,11 @@ import Heading from '@theme/Heading';
       {
         type: 'object',
         properties: {
-          status: {type: 'string', example: 'NotFoundError', description: 'Error type identifier'},
+          status: {
+            type: 'string',
+            example: 'NotFoundError',
+            description: 'Error type identifier'
+          },
           statusCode: {
             type: 'integer',
             format: 'int32',

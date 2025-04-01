@@ -25,11 +25,19 @@ type Query {
   " A single account invoice"
   accountInvoice(id: ID!): AccountInvoice
   " List of the account invoices"
-  accountInvoices(filter: SearchableAccountInvoiceFilterInput, size: Int, from: Int): AccountInvoicesConnection!
+  accountInvoices(
+    filter: SearchableAccountInvoiceFilterInput
+    size: Int
+    from: Int
+  ): AccountInvoicesConnection!
   " A single account settlement"
   accountSettlement(id: ID!): AccountSettlement
   " List of the account settlements"
-  accountSettlements(filter: SearchableAccountSettlementFilterInput, size: Int, from: Int): AccountSettlementsConnection!
+  accountSettlements(
+    filter: SearchableAccountSettlementFilterInput
+    size: Int
+    from: Int
+  ): AccountSettlementsConnection!
   " Get Custom Apple Pay certificate by ID"
   applePayCert(id: ID!): ApplePayCertificate
   " List of Custom Apple Pay certificates"
@@ -55,7 +63,14 @@ type Query {
   " List of the charges"
   charges(filter: SearchableChargeFilterInput, size: Int, from: Int): ChargesConnection!
   " Get charges KPI for a date range"
-  chargesDateRangeKPI(start: Int, end: Int, interval: Interval, timezone: String, storeId: ID, currency: Currencies): ChargesDateRangeKPI!
+  chargesDateRangeKPI(
+    start: Int
+    end: Int
+    interval: Interval
+    timezone: String
+    storeId: ID
+    currency: Currencies
+  ): ChargesDateRangeKPI!
   chargesExport(id: ID!): ChargesExport
   chargesExports(token: String, pageSize: Int): ChargesExportsConnection!
   " A single code"
@@ -74,7 +89,8 @@ type Query {
   liveAccount: Account!
   " Link to account notifications preferences"
   notificationsPortalUrl: Redirect
-  paymentEmailPreview(paymentId: ID!, emailType: PaymentEmailType, language: String): String @deprecated(reason: "Use previewPaymentEmail instead")
+  paymentEmailPreview(paymentId: ID!, emailType: PaymentEmailType, language: String): String
+    @deprecated(reason: "Use previewPaymentEmail instead")
   " A single point of sale"
   pointOfSale(id: ID!): PointOfSale
   " Lists all the points of sale of the account or store"
@@ -83,7 +99,11 @@ type Query {
   " Preview payment email"
   previewPaymentEmail(paymentId: ID!, emailType: PaymentEmailType, language: String): String
   " Preview subscription email"
-  previewSubscriptionEmail(subscriptionId: ID!, emailType: SubscriptionEmailType, language: String): String
+  previewSubscriptionEmail(
+    subscriptionId: ID!
+    emailType: SubscriptionEmailType
+    language: String
+  ): String
   " A single provider"
   provider(id: ID!): Provider
   " Returns the configuration options for the provider"
@@ -98,11 +118,19 @@ type Query {
   stores(token: String, pageSize: Int): StoresConnection!
   " A single subscription"
   subscription(id: ID!): Subscription
-  subscriptionEmailPreview(subscriptionId: ID!, emailType: SubscriptionEmailType, language: String): String @deprecated(reason: "Use previewSubscriptionEmail instead")
+  subscriptionEmailPreview(
+    subscriptionId: ID!
+    emailType: SubscriptionEmailType
+    language: String
+  ): String @deprecated(reason: "Use previewSubscriptionEmail instead")
   " List of the subscriptions events"
   subscriptionEvents(subscriptionId: ID!, size: Int, from: Int): SubscriptionEventsConnection!
   " List of the subscriptions"
-  subscriptions(filter: SearchableSubscriptionFilterInput, size: Int, from: Int): SubscriptionsConnection!
+  subscriptions(
+    filter: SearchableSubscriptionFilterInput
+    size: Int
+    from: Int
+  ): SubscriptionsConnection!
   " List of user accounts"
   userAccounts(token: String, pageSize: Int): UserAccountsConnection!
   " Store attached to the logged in user"
@@ -1439,7 +1467,11 @@ type Mutation {
   " Enable the selected tokenization method for the account"
   enableTokenizationMethod(method: TokenizationMethods!): Account!
   " Export a list of charges"
-  exportCharges(filter: SearchableChargeFilterInput, columns: [String!], timezone: String): ExportCharges!
+  exportCharges(
+    filter: SearchableChargeFilterInput
+    columns: [String!]
+    timezone: String
+  ): ExportCharges!
   " Pause a subscription"
   pauseSubscription(input: PauseSubscriptionInput!): Subscription!
   " Private. For onUpdateAccount subscription."
@@ -1447,9 +1479,11 @@ type Mutation {
   " Private. For onUpdateAnalytics subscription."
   publishUpdateAnalytics(accountId: ID!): AccountLevelUpdate
   " Private. For onUpdateCharge subscription."
-  publishUpdateCharge(accountId: ID!, data: UpdateChargeInput!): Charge @deprecated(reason: "Use publishUpdateChargeV2 instead")
+  publishUpdateCharge(accountId: ID!, data: UpdateChargeInput!): Charge
+    @deprecated(reason: "Use publishUpdateChargeV2 instead")
   " Private. For onUpdateChargeEvents subscription."
-  publishUpdateChargeEvents(accountId: ID!, data: ChargeEventsChangeInput!): ItemLevelUpdate @deprecated(reason: "Use publishUpdateChargeEventsV2 instead")
+  publishUpdateChargeEvents(accountId: ID!, data: ChargeEventsChangeInput!): ItemLevelUpdate
+    @deprecated(reason: "Use publishUpdateChargeEventsV2 instead")
   " Private. For onUpdateChargeEventsV2 subscription."
   publishUpdateChargeEventsV2(accountId: ID!, id: ID!): ItemLevelUpdate
   " Private. For onUpdateChargeV2 subscription."
@@ -1463,7 +1497,10 @@ type Mutation {
   " Private. For onUpdateSubscriptionV2 subscription."
   publishUpdateSubscription(accountId: ID!, id: ID!): ItemLevelUpdate
   " Private. For onUpdateSubscriptionEvents subscription."
-  publishUpdateSubscriptionEvents(accountId: ID!, data: SubscriptionEventsChangeInput!): ItemLevelUpdate @deprecated(reason: "Use publishUpdateSubscriptionEventsV2 instead")
+  publishUpdateSubscriptionEvents(
+    accountId: ID!
+    data: SubscriptionEventsChangeInput!
+  ): ItemLevelUpdate @deprecated(reason: "Use publishUpdateSubscriptionEventsV2 instead")
   " Private. For onUpdateSubscriptionEventsV2 subscription."
   publishUpdateSubscriptionEventsV2(accountId: ID!, id: ID!): ItemLevelUpdate
   " Private. For onUpdateSubscriptions subscription."
@@ -1499,7 +1536,11 @@ type Mutation {
   " Lookup company in the registry"
   startCompanyLookup(documentNumber: String!): Account!
   " Start the export of a list of charges"
-  startExportCharges(filter: SearchableChargeFilterInput, columns: [String!], timezone: String): ChargesExport!
+  startExportCharges(
+    filter: SearchableChargeFilterInput
+    columns: [String!]
+    timezone: String
+  ): ChargesExport!
   " Updates the account information"
   updateAccount(input: UpdateAccountInput!): Account!
   " Update Custom Apple Pay certificate"
@@ -1619,31 +1660,38 @@ type UploadFile {
 }
 type Subscriptions {
   " Notifies new Analytics"
-  onUpdateAnalytics(accountId: ID!): AccountLevelUpdate @deprecated(reason: "Use onUpdateAnalyticsV2 instead")
+  onUpdateAnalytics(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateAnalyticsV2 instead")
   " Notifies new Analytics"
   onUpdateAnalyticsV2: AccountLevelUpdate
   " Notifies new Events"
-  onUpdateEvents(accountId: ID!): AccountLevelUpdate @deprecated(reason: "Use onUpdateEventsV2 instead")
+  onUpdateEvents(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateEventsV2 instead")
   " Notifies new Events"
   onUpdateEventsV2: AccountLevelUpdate
   " Notifies creations and updates of Charges"
-  onUpdateCharges(accountId: ID!): AccountLevelUpdate @deprecated(reason: "Use onUpdateChargesV2 instead")
+  onUpdateCharges(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateChargesV2 instead")
   " Notifies creations and updates of Charges"
   onUpdateChargesV2: AccountLevelUpdate
   " Notifies updates for one Charge"
-  onUpdateCharge(accountId: ID!, id: ID!): Charge @deprecated(reason: "Use onUpdateChargeV2 instead")
+  onUpdateCharge(accountId: ID!, id: ID!): Charge
+    @deprecated(reason: "Use onUpdateChargeV2 instead")
   " Notifies updates for one Charge"
   onUpdateChargeV2(id: ID!): ItemLevelUpdate
   " Notifies new Events for one Charge"
-  onUpdateChargeEvents(accountId: ID!, id: ID!): ItemLevelUpdate @deprecated(reason: "Use onUpdateChargeEventsV2 instead")
+  onUpdateChargeEvents(accountId: ID!, id: ID!): ItemLevelUpdate
+    @deprecated(reason: "Use onUpdateChargeEventsV2 instead")
   " Notifies new Events for one Charge"
   onUpdateChargeEventsV2(id: ID!): ItemLevelUpdate
   " Notifies about Account updates"
-  onUpdateAccount(accountId: ID!): AccountLevelUpdate @deprecated(reason: "Use onUpdateAccountV2 instead")
+  onUpdateAccount(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateAccountV2 instead")
   " Notifies about Account updates"
   onUpdateAccountV2: AccountLevelUpdate
   " Notifies about Documents updates"
-  onUpdateDocuments(accountId: ID!): AccountLevelUpdate @deprecated(reason: "Use onUpdateDocumentsV2 instead")
+  onUpdateDocuments(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateDocumentsV2 instead")
   " Notifies about Documents updates"
   onUpdateDocumentsV2: AccountLevelUpdate
   " Notifies about Subscriptions updates"
@@ -1651,7 +1699,8 @@ type Subscriptions {
   " Notifies updates for one Subscription"
   onUpdateSubscription(id: ID!): ItemLevelUpdate
   " Notifies new Events for one Subscription"
-  onUpdateSubscriptionEvents(accountId: ID!, id: ID!): ItemLevelUpdate @deprecated(reason: "Use onUpdateSubscriptionEventsV2 instead")
+  onUpdateSubscriptionEvents(accountId: ID!, id: ID!): ItemLevelUpdate
+    @deprecated(reason: "Use onUpdateSubscriptionEventsV2 instead")
   " Notifies new Events for one Subscription"
   onUpdateSubscriptionEventsV2(id: ID!): ItemLevelUpdate
   " Notifies creations and updates of Website Report"
@@ -3033,9 +3082,9 @@ directive @defer on FIELD
 directive @aws_lambda on OBJECT | FIELD_DEFINITION
 "Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead."
 directive @aws_publish(
-    "List of subscriptions which will be published to when this mutation is called."
-    subscriptions: [String]
-  ) on FIELD_DEFINITION
+  "List of subscriptions which will be published to when this mutation is called."
+  subscriptions: [String]
+) on FIELD_DEFINITION
 "Tells the service this field/object has access authorized by sigv4 signing."
 directive @aws_iam on OBJECT | FIELD_DEFINITION
 "Tells the service this field/object has access authorized by an OIDC token."
@@ -3044,16 +3093,16 @@ directive @aws_oidc on OBJECT | FIELD_DEFINITION
 directive @aws_api_key on OBJECT | FIELD_DEFINITION
 "Tells the service which mutation triggers this subscription."
 directive @aws_subscribe(
-    "List of mutations which will trigger this subscription when they are called."
-    mutations: [String]
-  ) on FIELD_DEFINITION
+  "List of mutations which will trigger this subscription when they are called."
+  mutations: [String]
+) on FIELD_DEFINITION
 "Tells the service this field/object has access authorized by a Cognito User Pools token."
 directive @aws_cognito_user_pools(
-    "List of cognito user pool groups which have access on this field"
-    cognito_groups: [String]
-  ) on OBJECT | FIELD_DEFINITION
+  "List of cognito user pool groups which have access on this field"
+  cognito_groups: [String]
+) on OBJECT | FIELD_DEFINITION
 "Directs the schema to enforce authorization on a field"
 directive @aws_auth(
-    "List of cognito user pool groups which have access on this field"
-    cognito_groups: [String]
-  ) on FIELD_DEFINITION
+  "List of cognito user pool groups which have access on this field"
+  cognito_groups: [String]
+) on FIELD_DEFINITION

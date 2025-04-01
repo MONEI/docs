@@ -539,14 +539,14 @@ If you're using React 19 and experiencing issues with MONEI Components, you can 
 
 ```jsx
 // Import findDOMNode from external library
-import { findDOMNode } from "find-dom-node-polyfill";
+import {findDOMNode} from 'find-dom-node-polyfill';
 
 // Set Find DOM Node before driver
 ReactDOM.findDOMNode = findDOMNode;
 
-const CardInputComponent: React.FC<CardInputProps> = CardInput.driver("react", {
+const CardInputComponent: React.FC<CardInputProps> = CardInput.driver('react', {
   React: React,
-  ReactDOM: ReactDOM,
+  ReactDOM: ReactDOM
 });
 ```
 
