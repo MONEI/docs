@@ -57,22 +57,7 @@ module.exports = {
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },
-    {
-      type: 'link',
-      label: 'Payments API',
-      href: '/api/#tag/Payments'
-    },
-    {
-      type: 'link',
-      label: 'Subscriptions API',
-      href: '/api/#tag/Subscriptions'
-    },
-    {
-      type: 'link',
-      label: 'GraphQL API',
-      href: '/docs/apis/graphql'
-    },
-    'testing',
+    'testing'
   ],
   rest: [
     {
@@ -86,8 +71,7 @@ module.exports = {
         slug: 'apis/rest'
       },
       items: SidebarsConfig
-  
-    },
+    }
   ],
   graphql: [
     {
@@ -96,5 +80,3 @@ module.exports = {
     }
   ]
 };
-
-
