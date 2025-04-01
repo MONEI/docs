@@ -1,0 +1,141 @@
+---
+id: acquirer
+title: Acquirer
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+enum Acquirer {
+  CUSTOM
+  ADYEN
+  STRIPE
+  MONEI_X
+  COFIDIS
+  PAYPAL
+  PAYCOMET
+  ABANCA
+  BANCAMARCH
+  BANKIA
+  BANKINTER
+  BBVA
+  CAJALABORAL
+  CAJAMAR
+  CAJARURAL
+  CAJASUR
+  COMERCIAGLOBALPAY
+  CREDITANDORRA
+  KUTXABANK
+  SABADELL
+  SANTANDER
+  UNICAJA
+  DEUTSCHE_BANK
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>CUSTOM</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>ADYEN</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>STRIPE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>MONEI_X</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>COFIDIS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>PAYPAL</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>PAYCOMET</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>ABANCA</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>BANCAMARCH</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>BANKIA</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>BANKINTER</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>BBVA</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>CAJALABORAL</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>CAJAMAR</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>CAJARURAL</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>CAJASUR</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>COMERCIAGLOBALPAY</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>CREDITANDORRA</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>KUTXABANK</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>SABADELL</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>SANTANDER</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>UNICAJA</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Acquirer.<b>DEUTSCHE_BANK</b></code>](#)
+
+### Member Of
+
+[`CreateProviderInput`](/docs/apis/graphql/types/inputs/create-provider-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`Provider`](/docs/apis/graphql/types/objects/provider.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ProviderConfig`](/docs/apis/graphql/types/objects/provider-config.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`UpdateProviderInput`](/docs/apis/graphql/types/inputs/update-provider-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/>

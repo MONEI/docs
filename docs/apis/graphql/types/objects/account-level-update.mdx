@@ -1,0 +1,75 @@
+---
+id: account-level-update
+title: AccountLevelUpdate
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type AccountLevelUpdate {
+  accountId: ID
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountLevelUpdate.<b>accountId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+### Returned By
+
+[`onUpdateAccount`](/docs/apis/graphql/operations/subscriptions/on-update-account.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateAccountV2`](/docs/apis/graphql/operations/subscriptions/on-update-account-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateAnalytics`](/docs/apis/graphql/operations/subscriptions/on-update-analytics.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateAnalyticsV2`](/docs/apis/graphql/operations/subscriptions/on-update-analytics-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateCharges`](/docs/apis/graphql/operations/subscriptions/on-update-charges.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateChargesV2`](/docs/apis/graphql/operations/subscriptions/on-update-charges-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateDocuments`](/docs/apis/graphql/operations/subscriptions/on-update-documents.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateDocumentsV2`](/docs/apis/graphql/operations/subscriptions/on-update-documents-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateEvents`](/docs/apis/graphql/operations/subscriptions/on-update-events.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateEventsV2`](/docs/apis/graphql/operations/subscriptions/on-update-events-v2.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateSubscriptions`](/docs/apis/graphql/operations/subscriptions/on-update-subscriptions.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`onUpdateWebReport`](/docs/apis/graphql/operations/subscriptions/on-update-web-report.mdx) <Badge class="badge badge--secondary badge--relation" text="subscription"/><Bullet />[`publishUpdateAccount`](/docs/apis/graphql/operations/mutations/publish-update-account.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateAnalytics`](/docs/apis/graphql/operations/mutations/publish-update-analytics.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateCharges`](/docs/apis/graphql/operations/mutations/publish-update-charges.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateDocuments`](/docs/apis/graphql/operations/mutations/publish-update-documents.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateEvents`](/docs/apis/graphql/operations/mutations/publish-update-events.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateSubscriptions`](/docs/apis/graphql/operations/mutations/publish-update-subscriptions.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`publishUpdateWebReport`](/docs/apis/graphql/operations/mutations/publish-update-web-report.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

@@ -1,0 +1,132 @@
+---
+id: payment-method-card
+title: PaymentMethodCard
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Card payment method details
+
+```graphql
+type PaymentMethodCard {
+  brand: CardBrand
+  country: String
+  type: CardType
+  threeDSecure: Boolean
+  threeDSecureVersion: String
+  threeDSecureFlow: ThreeDSecureFlow
+  last4: String
+  cardholderName: String
+  cardholderEmail: String
+  expiration: AWSTimestamp
+  bank: String
+  tokenizationMethod: TokenizationMethods
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>brand</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>CardBrand</b></code>](/docs/apis/graphql/types/enums/card-brand.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Card brand
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>country</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Card country as ISO 3166-1 alpha-2 code
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>type</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>CardType</b></code>](/docs/apis/graphql/types/enums/card-type.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Card type
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>threeDSecure</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Indicates if transaction was 3D Secure
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>threeDSecureVersion</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+3D Secure version
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>threeDSecureFlow</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ThreeDSecureFlow</b></code>](/docs/apis/graphql/types/enums/three-dsecure-flow.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+3D Secure flow
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>last4</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Card last 4 digits
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>cardholderName</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Cardholder name
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>cardholderEmail</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Cardholder email
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>expiration</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Expiration date as unix timestamp
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>bank</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Card issuing bank
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodCard.<b>tokenizationMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>TokenizationMethods</b></code>](/docs/apis/graphql/types/enums/tokenization-methods.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Card tokenization method
+
+### Member Of
+
+[`PaymentMethod`](/docs/apis/graphql/types/objects/payment-method.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

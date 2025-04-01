@@ -1,0 +1,107 @@
+---
+id: account-public-business-details-input
+title: AccountPublicBusinessDetailsInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Account public business details input
+
+```graphql
+input AccountPublicBusinessDetailsInput {
+  companyName: String
+  website: String
+  phone: String
+  address: AddressInput
+  supportWebsite: String
+  supportEmail: String
+  supportPhone: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountPublicBusinessDetailsInput.<b>companyName</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Company name
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountPublicBusinessDetailsInput.<b>website</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Website
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountPublicBusinessDetailsInput.<b>phone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Phone number, E.164 format, e.g. +34666777888
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountPublicBusinessDetailsInput.<b>address</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AddressInput</b></code>](/docs/apis/graphql/types/inputs/address-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+Full address
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountPublicBusinessDetailsInput.<b>supportWebsite</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Support website
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountPublicBusinessDetailsInput.<b>supportEmail</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Support email
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountPublicBusinessDetailsInput.<b>supportPhone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Support phone, E.164 format, e.g. +34666777888
+
+### Member Of
+
+[`UpdateAccountInput`](/docs/apis/graphql/types/inputs/update-account-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/>

@@ -1,0 +1,102 @@
+---
+id: create-provider-input
+title: CreateProviderInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input CreateProviderInput {
+  processor: Processor!
+  enabled: Boolean
+  acquirer: Acquirer!
+  paymentMethod: PaymentMethods!
+  metadata: [MetadataItemInput!]
+  rules: ProviderRulesInput
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>CreateProviderInput.<b>processor</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Processor!</b></code>](/docs/apis/graphql/types/enums/processor.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+The integrated processor
+
+#### [<code style={{ fontWeight: 'normal' }}>CreateProviderInput.<b>enabled</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Whether the provider is enabled since creation or not
+
+#### [<code style={{ fontWeight: 'normal' }}>CreateProviderInput.<b>acquirer</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Acquirer!</b></code>](/docs/apis/graphql/types/enums/acquirer.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+The acquirer
+
+#### [<code style={{ fontWeight: 'normal' }}>CreateProviderInput.<b>paymentMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethods!</b></code>](/docs/apis/graphql/types/enums/payment-methods.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+The payment method for the provider
+
+#### [<code style={{ fontWeight: 'normal' }}>CreateProviderInput.<b>metadata</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[MetadataItemInput!]</b></code>](/docs/apis/graphql/types/inputs/metadata-item-input.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="input"/>
+
+Metadata
+
+#### [<code style={{ fontWeight: 'normal' }}>CreateProviderInput.<b>rules</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ProviderRulesInput</b></code>](/docs/apis/graphql/types/inputs/provider-rules-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+Rules for the provider
+
+### Member Of
+
+[`createProvider`](/docs/apis/graphql/operations/mutations/create-provider.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

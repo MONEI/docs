@@ -1,0 +1,105 @@
+---
+id: payment-method-input
+title: PaymentMethodInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input PaymentMethodInput {
+  method: PaymentMethods
+  bizum: PaymentMethodBizumInput
+  card: PaymentMethodCardInput
+  cardPresent: PaymentMethodCardPresentInput
+  cofidis: PaymentMethodCofidisInput
+  cofidisLoan: PaymentMethodCofidisLoanInput
+  paypal: PaymentMethodPaypalInput
+  sepa: PaymentMethodSepaInput
+  trustly: PaymentMethodTrustlyInput
+  klarna: PaymentMethodKlarnaInput
+  mbway: PaymentMethodMBWayInput
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>method</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethods</b></code>](/docs/apis/graphql/types/enums/payment-methods.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>bizum</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodBizumInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-bizum-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>card</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodCardInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-card-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>cardPresent</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodCardPresentInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-card-present-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>cofidis</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodCofidisInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-cofidis-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>cofidisLoan</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodCofidisLoanInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-cofidis-loan-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>paypal</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodPaypalInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-paypal-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>sepa</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodSepaInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-sepa-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>trustly</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodTrustlyInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-trustly-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>klarna</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodKlarnaInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-klarna-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethodInput.<b>mbway</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethodMBWayInput</b></code>](/docs/apis/graphql/types/inputs/payment-method-mbway-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+### Member Of
+
+[`UpdateChargeInput`](/docs/apis/graphql/types/inputs/update-charge-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/>

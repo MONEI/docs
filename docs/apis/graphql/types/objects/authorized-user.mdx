@@ -1,0 +1,117 @@
+---
+id: authorized-user
+title: AuthorizedUser
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+An authorized user that can access the MONEI dashboard.
+One user can have access to multiple accounts with different access levels.
+
+```graphql
+type AuthorizedUser {
+  userEmail: String!
+  id: ID!
+  accessLevel: AuthorizedUserAccessLevel!
+  storeId: ID
+  status: AuthorizedUserStatus!
+  lastLoginAt: String
+  createdAt: String!
+  updatedAt: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUser.<b>userEmail</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Email address of the authorized user
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUser.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+ID of the authorized user
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUser.<b>accessLevel</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AuthorizedUserAccessLevel!</b></code>](/docs/apis/graphql/types/enums/authorized-user-access-level.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Access level for the authorized user
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUser.<b>storeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Limit access to a specific store
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUser.<b>status</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AuthorizedUserStatus!</b></code>](/docs/apis/graphql/types/enums/authorized-user-status.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Status of the authorized user
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUser.<b>lastLoginAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Last login date
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUser.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Creation date, in ISO 8601 format
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUser.<b>updatedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Updated date, in ISO 8601 format
+
+### Returned By
+
+[`createAuthorizedUser`](/docs/apis/graphql/operations/mutations/create-authorized-user.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`updateAuthorizedUser`](/docs/apis/graphql/operations/mutations/update-authorized-user.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>
+
+### Member Of
+
+[`AuthorizedUsersConnection`](/docs/apis/graphql/types/objects/authorized-users-connection.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

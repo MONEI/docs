@@ -36,7 +36,10 @@ If provided, MONEI will try to confirm the payment directly.
     description:
       'Details about the card used as payment method.\nIf provided, MONEI will try to confirm the payment directly.\n',
     properties: {
-      number: {type: 'string', description: 'The card number, as a string without any separators.'},
+      number: {
+        type: 'string',
+        description: 'The card number, as a string without any separators.'
+      },
       cvc: {type: 'string', description: 'Card security code.'},
       expMonth: {
         type: 'string',

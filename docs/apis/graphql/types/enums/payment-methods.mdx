@@ -1,0 +1,138 @@
+---
+id: payment-methods
+title: PaymentMethods
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Possible payment methods
+
+```graphql
+enum PaymentMethods {
+  alipay
+  card
+  cardPresent
+  bizum
+  paypal
+  cofidis
+  cofidisLoan
+  googlePay
+  applePay
+  clickToPay
+  mbway
+  multibanco
+  iDeal
+  bancontact
+  sofort
+  trustly
+  sepa
+  klarna
+  giropay
+  srtp
+  eps
+  blik
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>alipay</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>card</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>cardPresent</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>bizum</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>paypal</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>cofidis</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>cofidisLoan</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>googlePay</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>applePay</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>clickToPay</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>mbway</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>multibanco</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>iDeal</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>bancontact</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>sofort</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>trustly</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>sepa</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>klarna</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>giropay</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>srtp</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>eps</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>PaymentMethods.<b>blik</b></code>](#)
+
+### Member Of
+
+[`AvailablePaymentMethod`](/docs/apis/graphql/types/objects/available-payment-method.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`AvailableProcessor`](/docs/apis/graphql/types/objects/available-processor.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`availableProcessors`](/docs/apis/graphql/operations/queries/available-processors.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`CreatePaymentInput`](/docs/apis/graphql/types/inputs/create-payment-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`CreateProviderInput`](/docs/apis/graphql/types/inputs/create-provider-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`PaymentMethod`](/docs/apis/graphql/types/objects/payment-method.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`PaymentMethodInput`](/docs/apis/graphql/types/inputs/payment-method-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`Provider`](/docs/apis/graphql/types/objects/provider.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`providerConfig`](/docs/apis/graphql/operations/queries/provider-config.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`ProviderConfig`](/docs/apis/graphql/types/objects/provider-config.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

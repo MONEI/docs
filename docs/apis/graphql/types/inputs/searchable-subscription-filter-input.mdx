@@ -1,0 +1,165 @@
+---
+id: searchable-subscription-filter-input
+title: SearchableSubscriptionFilterInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input SearchableSubscriptionFilterInput {
+  id: SearchableIDFilterInput
+  createdAt: SearchableIntFilterInput
+  updatedAt: SearchableIntFilterInput
+  amount: SearchableIntFilterInput
+  currency: SearchableStringFilterInput
+  description: SearchableStringFilterInput
+  descriptor: SearchableStringFilterInput
+  lastOrderId: SearchableStringFilterInput
+  sequenceId: SearchableStringFilterInput
+  status: SearchableStringFilterInput
+  interval: SearchableStringFilterInput
+  intervalCount: SearchableIntFilterInput
+  lastPaymentId: SearchableIDFilterInput
+  lastPaymentStatus: SearchableStringFilterInput
+  lastPaymentStatusCode: SearchableStringFilterInput
+  customerEmail: SearchableStringFilterInput
+  customerName: SearchableStringFilterInput
+  customerPhone: SearchableStringFilterInput
+  paymentMethodMethod: SearchableStringFilterInput
+  paymentMethodCardBrand: SearchableStringFilterInput
+  paymentMethodCardLast4: SearchableStringFilterInput
+  paymentMethodCardType: SearchableStringFilterInput
+  paymentMethodCardThreeDSecure: SearchableBooleanFilterInput
+  paymentMethodCardThreeDSecureVersion: SearchableStringFilterInput
+  paymentMethodCardThreeDSecureFlow: SearchableStringFilterInput
+  paymentMethodCardTokenizationMethod: SearchableStringFilterInput
+  traceDetailsSource: SearchableStringFilterInput
+  storeId: SearchableStringFilterInput
+  and: [SearchableSubscriptionFilterInput]
+  or: [SearchableSubscriptionFilterInput]
+  not: SearchableSubscriptionFilterInput
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableIDFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-idfilter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableIntFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-int-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>updatedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableIntFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-int-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>amount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableIntFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-int-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>currency</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>description</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>descriptor</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>lastOrderId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>sequenceId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>status</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>interval</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>intervalCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableIntFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-int-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>lastPaymentId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableIDFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-idfilter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>lastPaymentStatus</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>lastPaymentStatusCode</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>customerEmail</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>customerName</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>customerPhone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>paymentMethodMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>paymentMethodCardBrand</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>paymentMethodCardLast4</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>paymentMethodCardType</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>paymentMethodCardThreeDSecure</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableBooleanFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-boolean-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>paymentMethodCardThreeDSecureVersion</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>paymentMethodCardThreeDSecureFlow</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>paymentMethodCardTokenizationMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>traceDetailsSource</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>storeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>and</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[SearchableSubscriptionFilterInput]</b></code>](/docs/apis/graphql/types/inputs/searchable-subscription-filter-input.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>or</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[SearchableSubscriptionFilterInput]</b></code>](/docs/apis/graphql/types/inputs/searchable-subscription-filter-input.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableSubscriptionFilterInput.<b>not</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableSubscriptionFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-subscription-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+### Member Of
+
+[`SearchableSubscriptionFilterInput`](/docs/apis/graphql/types/inputs/searchable-subscription-filter-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`subscriptions`](/docs/apis/graphql/operations/queries/subscriptions.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/>
