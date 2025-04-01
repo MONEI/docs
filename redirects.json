@@ -100,7 +100,7 @@
     "status": "301"
   },
   {
-    "source": "/docs/graphql-api/",
+    "source": "/graphql-api/",
     "target": "/docs/apis/graphql/",
     "status": "301"
   }
