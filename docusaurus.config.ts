@@ -36,24 +36,24 @@ const config: Config = {
       },
       items: [
         {
-          to: 'docs/',
+          to: 'getting-started/',
           label: 'Documentation',
           position: 'right',
-          activeBaseRegex: '^/docs/(?!apis/)'
+          activeBaseRegex: '^/(?!apis/)'
         },
         {
           type: 'dropdown',
           label: 'APIs',
           position: 'right',
-          activeBaseRegex: '^/docs/apis/rest/',
+          activeBaseRegex: '^/apis/rest/',
           items: [
             {
               label: 'REST API',
-              to: 'docs/apis/rest/'
+              to: 'apis/rest/'
             },
             {
               label: 'GraphQL API',
-              to: 'docs/apis/graphql/'
+              to: 'apis/graphql/'
             }
           ]
         },
@@ -101,7 +101,7 @@ const config: Config = {
         docs: {
           id: 'docs',
           path: 'docs',
-          routeBasePath: 'docs',
+          routeBasePath: '/',
           docItemComponent: '@theme/ApiItem',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/MONEI/docs/edit/master/'
