@@ -232,6 +232,7 @@ body {
   font-size: inherit;
 }
 
+
 .openapi-security__details pre code {
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
 }
@@ -240,8 +241,13 @@ body {
   border-top: 0;
 }
 
+.openapi-security__details pre p {
+  margin-bottom: 5px;
+  white-space: normal;
+}
+
 .openapi-security__details .openapi-security__summary-header {
-  margin: 0;
+  margin: 0 !important;
 }
 
 /* docusaurus-plugin-openapi-docs: Increase code snippets max height */
@@ -254,7 +260,12 @@ body {
   --ifm-code-font-size: 100%;
 }
 
+/* docusaurus-plugin-openapi-docs: Customize embedded schema */
 .embedded-schema {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.embedded-schema .openapi__heading {
+  display: none;
 }
