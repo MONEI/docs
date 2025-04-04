@@ -5,7 +5,7 @@ title: Payment Request Component
 description: Learn how to use PaymentRequest Component to accept Apple Pay and Google Pay payments with MONEI.
 ---
 
-MONEI [Payment Request Component](monei-js/reference.md#moneigooglepay-component) gives you a single integration for Apple Pay and Google Pay. Customers see a Google Pay or an Apple Pay button, depending on what their device and browser combination supports.
+MONEI [Payment Request Component](reference.md#paymentrequest-component) gives you a single integration for Apple Pay and Google Pay. Customers see a Google Pay or an Apple Pay button, depending on what their device and browser combination supports.
 
 <p>
   <iframe
@@ -149,7 +149,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [Payment Request Component](monei-js/reference.md#paymentrequest-ui-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
+Add MONEI [Payment Request Component](reference.md#paymentrequest-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
 
 ```html title="checkout.html"
 <div id="payment_request_container">
@@ -175,7 +175,7 @@ const paymentRequest = monei.PaymentRequest({
 paymentRequest.render('#payment_request_container');
 ```
 
-Check the [MONEI JS Reference](monei-js/reference.md#paymentrequest-ui-component) for more options.
+Check the [MONEI JS Reference](reference.md#paymentrequest-component) for more options.
 
 ### 3. Confirm the payment `Client-side`
 

@@ -389,8 +389,8 @@ cofidisWidget.render('#cofidis_widget');
 
 ### CofidisWidget instance methods
 
-- **redner: (container: string | DOMElement) => void** - renders the widget to the container DOM element
-- **updateProps: (options: CofidisWidgetProps) => void ** - updates the widget with new options (use this method to update amount)
+- **render: (container: string | DOMElement) => void** - renders the widget to the container DOM element
+- **updateProps: (options: CofidisWidgetProps) => void** - updates the widget with new options (use this method to update amount)
 
 ## `CofidisPay` Component
 
@@ -463,8 +463,8 @@ cofidisPayWidget.render('#cofidis_widget');
 
 ### CofidisPayWidget instance methods
 
-- **redner: (container: string | DOMElement) => void** - renders the widget to the container DOM element
-- **updateProps: (options: CofidisPayWidgetProps) => void ** - updates the widget with new options (use this method to update amount)
+- **render: (container: string | DOMElement) => void** - renders the widget to the container DOM element
+- **updateProps: (options: CofidisPayWidgetProps) => void** - updates the widget with new options (use this method to update amount)
 
 ## `confirmPayment` function
 

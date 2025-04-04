@@ -4,9 +4,9 @@ title: Cofidis 6x12x24x
 description: With Cofidis 6x12x24x, the customer can finance their purchase in up to 50 monthly installments through direct debit.
 ---
 
-You can start accepting [Cofidis](https://www.cofidis.es/) installment payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Cofidis Pay Component](monei-js/reference.md#cofidispay-component). No additional configuration is required to use Cofidis Pay in Hosted Payment Page.
+You can start accepting [Cofidis](https://www.cofidis.es/) installment payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Cofidis Pay Component](../monei-js/reference.md#cofidispay-component). No additional configuration is required to use Cofidis Pay in Hosted Payment Page.
 
-Our [Cofidis Pay Component](monei-js/reference.md#cofidispay-component) renders Cofidis button to your payment page.
+Our [Cofidis Pay Component](../monei-js/reference.md#cofidispay-component) renders Cofidis button to your payment page.
 When a customer selects "Pay with Cofidis", the component presents a Cofidis overlay, where the customer could see commercial conditions, legal information and continue to the Cofidis payment page .
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
@@ -159,7 +159,7 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
 </head>
 ```
 
-Add MONEI [Cofidis Pay Component](monei-js/reference.md#cofidispay-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
+Add MONEI [Cofidis Pay Component](../monei-js/reference.md#cofidispay-component) to your payment page. Create empty DOM node (container) with unique ID in your payment form.
 
 ```html title="checkout.html"
 <div id="cofidis_container">
@@ -190,7 +190,7 @@ cofidis.render('#cofidis_container');
 Cofidis Component is also available as a React and Vue component. [Check out our examples](monei-js/overview.mdx#card-input-component).
 :::
 
-Check the [MONEI JS Reference](monei-js/reference.md#CofidisPay-component) for more options.
+Check the [MONEI JS Reference](../monei-js/reference.md#cofidisPay-component) for more options.
 
 ### 3. Check the payment status `Server-side`
 
