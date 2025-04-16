@@ -1,10 +1,10 @@
-import React from 'react';
-import clsx from 'clsx';
-import Layout from '@theme/Layout';
+import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import Head from '@docusaurus/Head';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@theme/Layout';
+import clsx from 'clsx';
+import React from 'react';
 import styles from './styles.module.css';
 
 const features = [
@@ -24,7 +24,7 @@ const features = [
     title: 'Integrate with multiple platforms',
     description:
       'Easily integrate MONEI with Shopify, Magento Commerce - Adobe, Wix, Salesforce Commerce Cloud, WooCommerce, PrestaShop, commercetools, Spreedly, saleor and other popular platforms.',
-    url: '/getting-started#integrate-with-your-platform'
+    url: '/getting-started'
   },
   {
     title: 'Connect with business platforms and marketplaces',
