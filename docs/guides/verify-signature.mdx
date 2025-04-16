@@ -166,14 +166,10 @@ try {
 import os
 import Monei
 from Monei.errors import SignatureVerificationError
-from Monei.model.payment_status import PaymentStatus # New import
 from flask import Flask, request, abort, jsonify
 
-# Set your api key. Remember to switch to your live api key in production!
-# See your api key here: https://dashboard.monei.com/settings/api
-# It's recommended to load the API key from environment variables
-monei_api_key = os.environ.get("MONEI_API_KEY", "YOUR_API_KEY")
-monei_client = Monei.MoneiClient(api_key=monei_api_key)
+# Replace YOUR_API_KEY with your actual MONEI API key
+monei_client = Monei.MoneiClient(api_key="YOUR_API_KEY")
 
 app = Flask(__name__)
 
@@ -197,22 +193,22 @@ def callback():
         print(f"Webhook received for Payment ID: {payment_id}, Status: {payment_status}")
 
         # Update your order status based on the payment status
-        if payment_status == PaymentStatus.SUCCEEDED:
+        if payment_status == 'SUCCEEDED':
             # Payment successful - fulfill the order
             print(f"Payment {payment_id} succeeded. Fulfilling order...")
             # Update your database, send confirmation email, etc.
             pass # Placeholder from user snippet
-        elif payment_status == PaymentStatus.FAILED:
+        elif payment_status == 'FAILED':
             # Payment failed - notify the customer
             print(f"Payment {payment_id} failed. Notifying customer...")
             # Log the failure, update your database, etc.
             pass # Placeholder from user snippet
-        elif payment_status == PaymentStatus.AUTHORIZED:
+        elif payment_status == 'AUTHORIZED':
             # Payment is authorized but not yet captured
             print(f"Payment {payment_id} authorized. Capture if needed.")
             # You can capture it later
             pass # Placeholder from user snippet
-        elif payment_status == PaymentStatus.CANCELED:
+        elif payment_status == 'CANCELED':
             # Payment was canceled
             print(f"Payment {payment_id} was canceled.")
             pass # Placeholder from user snippet
