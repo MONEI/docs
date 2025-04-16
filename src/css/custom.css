@@ -255,8 +255,12 @@ body {
   max-height: 800px;
 }
 
-.openapi-explorer__playground-editor {
-  --ifm-code-font-size: 100%;
+.openapi-explorer__code-block code {
+  font-size: inherit !important;
+}
+
+.prism-code {
+  font-size: 0.9rem !important;
 }
 
 /* docusaurus-plugin-openapi-docs: Customize embedded schema */
