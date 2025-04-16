@@ -1,0 +1,33 @@
+---
+id: subscription-pauseintervalcount
+title: 'Subscription-PauseIntervalCount'
+description: 'Number of intervals when subscription will be paused before it activates again.'
+sidebar_label: 'Subscription-PauseIntervalCount'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 1
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Subscription-PauseIntervalCount'}
+></Heading>
+
+Number of intervals when subscription will be paused before it activates again.
+
+<Schema
+  schema={{
+    type: 'integer',
+    format: 'int32',
+    example: 1,
+    description: 'Number of intervals when subscription will be paused before it activates again.',
+    title: 'Subscription-PauseIntervalCount'
+  }}
+  schemaType={'response'}
+></Schema>

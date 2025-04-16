@@ -1,0 +1,60 @@
+---
+id: subscription-retryschedule
+title: 'Subscription-RetrySchedule'
+description: 'Defines a custom schedule for retrying failed subscription payments. Each entry in the array specifies how long to wait before attempting the next payment retry.'
+sidebar_label: 'Subscription-RetrySchedule'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  [
+    {'interval': 'day', 'intervalCount': 1},
+    {'interval': 'day', 'intervalCount': 3},
+    {'interval': 'week', 'intervalCount': 1}
+  ]
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Subscription-RetrySchedule'}></Heading>
+
+Defines a custom schedule for retrying failed subscription payments. Each entry in the array specifies how long to wait before attempting the next payment retry.
+If not specified, the system's default retry schedule will be used.
+
+<Schema
+  schema={{
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: {
+        interval: {
+          type: 'string',
+          enum: ['day', 'week', 'month', 'year'],
+          'x-enumDescriptions': {day: 'Daily', week: 'Weekly', month: 'Monthly', year: 'Yearly'},
+          example: 'day',
+          description: 'The unit of time to wait before the retry attempt.'
+        },
+        intervalCount: {
+          type: 'integer',
+          format: 'int32',
+          minimum: 1,
+          maximum: 31,
+          example: 3,
+          description: 'The number of intervals to wait before the retry attempt.'
+        }
+      },
+      required: ['interval', 'intervalCount']
+    },
+    example: [
+      {interval: 'day', intervalCount: 1},
+      {interval: 'day', intervalCount: 3},
+      {interval: 'week', intervalCount: 1}
+    ],
+    description:
+      "Defines a custom schedule for retrying failed subscription payments. Each entry in the array specifies how long to wait before attempting the next payment retry.\nIf not specified, the system's default retry schedule will be used.\n",
+    title: 'Subscription-RetrySchedule'
+  }}
+  schemaType={'response'}
+></Schema>

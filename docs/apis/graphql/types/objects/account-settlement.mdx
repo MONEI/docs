@@ -1,0 +1,156 @@
+---
+id: account-settlement
+title: AccountSettlement
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type AccountSettlement {
+  accountId: ID!
+  acquirerFees: Int!
+  grossVolume: Int!
+  iban: String
+  id: ID!
+  legalName: String
+  netVolume: Int!
+  payMethod: SettlementPayMethods
+  periodEndAt: AWSTimestamp!
+  periodStartAt: AWSTimestamp!
+  releasedAmount: Int
+  reservedAmount: Int
+  scheduledAt: AWSTimestamp!
+  status: SettlementStatus!
+  settleGross: Boolean
+  storeId: ID
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>accountId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Account ID
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>acquirerFees</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Fees for the settlement period
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>grossVolume</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Gross volume for the settlement period
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>iban</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+IBAN for the settlement bank transfer
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Settlement ID
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>legalName</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Legal name of the store
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>netVolume</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Net volume for the settlement period
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>payMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SettlementPayMethods</b></code>](/docs/apis/graphql/types/enums/settlement-pay-methods.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Payment method for the all the transactions in the settlement
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>periodEndAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp!</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Settlement end period
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>periodStartAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp!</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Settlement start period
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>releasedAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Released amount hold in the previous settlement
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>reservedAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Reserve amount hold from the previous settlement
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>scheduledAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp!</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Settlement completion projected date
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>status</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SettlementStatus!</b></code>](/docs/apis/graphql/types/enums/settlement-status.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Settlement status
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>settleGross</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Payout type
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountSettlement.<b>storeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Settlement associated to a specific store in the account
+
+### Returned By
+
+[`accountSettlement`](/docs/apis/graphql/operations/queries/account-settlement.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/>
+
+### Member Of
+
+[`AccountSettlementsConnection`](/docs/apis/graphql/types/objects/account-settlements-connection.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

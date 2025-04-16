@@ -1,0 +1,39 @@
+---
+id: payment-messagelanguage
+title: 'Payment-MessageLanguage'
+description: 'The language of message sent to the customer. If not provided the default customer language is used if available.'
+sidebar_label: 'Payment-MessageLanguage'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'en'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-MessageLanguage'}></Heading>
+
+The language of message sent to the customer. If not provided the default customer language is used if available.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'en',
+    enum: ['en', 'es', 'ca', 'pt', 'de', 'it', 'fr'],
+    'x-enumDescriptions': {
+      en: 'English',
+      es: 'Spanish',
+      ca: 'Catalan',
+      pt: 'Portuguese',
+      de: 'German',
+      it: 'Italian',
+      fr: 'French'
+    },
+    description:
+      'The language of message sent to the customer. If not provided the default customer language is used if available.',
+    title: 'Payment-MessageLanguage'
+  }}
+  schemaType={'response'}
+></Schema>

@@ -1,0 +1,92 @@
+---
+id: payment-paymentmethodinput
+title: 'Payment-PaymentMethodInput'
+description: 'An information about a payment method used for this payment.'
+sidebar_label: 'Payment-PaymentMethodInput'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'card':
+      {
+        'number': 'string',
+        'cvc': 'string',
+        'expMonth': 'string',
+        'expYear': 'string',
+        'cardholderName': 'John Doe',
+        'cardholderEmail': 'john.doe@monei.com'
+      },
+    'bizum': {'phoneNumber': null}
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-PaymentMethodInput'}></Heading>
+
+An information about a payment method used for this payment.
+We recommend using `paymentToken` instead, as it is more secure
+way to pass sensitive payment information. Processing credit
+card information on your server requires
+[PCI DSS compliance](https://www.investopedia.com/terms/p/pci-compliance.asp).
+
+<Schema
+  schema={{
+    type: 'object',
+    description:
+      'An information about a payment method used for this payment.\nWe recommend using `paymentToken` instead, as it is more secure\nway to pass sensitive payment information. Processing credit\ncard information on your server requires\n[PCI DSS compliance](https://www.investopedia.com/terms/p/pci-compliance.asp).\n',
+    properties: {
+      card: {
+        type: 'object',
+        description:
+          'Details about the card used as payment method.\nIf provided, MONEI will try to confirm the payment directly.\n',
+        properties: {
+          number: {
+            type: 'string',
+            description: 'The card number, as a string without any separators.'
+          },
+          cvc: {type: 'string', description: 'Card security code.'},
+          expMonth: {
+            type: 'string',
+            description: "Two-digit number representing the card's expiration month."
+          },
+          expYear: {
+            type: 'string',
+            description: "Two-digit number representing the card's expiration year."
+          },
+          cardholderName: {
+            type: 'string',
+            example: 'John Doe',
+            description: "The cardholder's name, as stated in the credit card.",
+            title: 'CardholderName'
+          },
+          cardholderEmail: {
+            type: 'string',
+            example: 'john.doe@monei.com',
+            description: "The cardholder's email address.",
+            title: 'CardholderEmail'
+          }
+        },
+        title: 'Payment-PaymentMethodCardInput'
+      },
+      bizum: {
+        type: 'object',
+        description:
+          'Details about the Bizum account used for this payment.\nIf provided phone number is valid and registered in Bizum,\nMONEI will try to confirm the payment directly.\n',
+        properties: {
+          phoneNumber: {
+            type: 'string',
+            example: null,
+            description: 'Phone number in E.164 format used to pay with `bizum`.'
+          }
+        },
+        title: 'Payment-PaymentMethodBizumInput'
+      }
+    },
+    title: 'Payment-PaymentMethodInput'
+  }}
+  schemaType={'response'}
+></Schema>

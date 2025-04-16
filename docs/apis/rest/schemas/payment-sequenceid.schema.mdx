@@ -1,0 +1,31 @@
+---
+id: payment-sequenceid
+title: 'Payment-SequenceId'
+description: 'A permanent identifier that refers to the initial payment of'
+sidebar_label: 'Payment-SequenceId'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: '62b23b9f3627cc38b08ff471ccd313ad'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-SequenceId'}></Heading>
+
+A permanent identifier that refers to the initial payment of
+a sequence of payments. This value needs to be sent in the path
+for `RECURRING` payments.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: '62b23b9f3627cc38b08ff471ccd313ad',
+    description:
+      'A permanent identifier that refers to the initial payment of\na sequence of payments. This value needs to be sent in the path\nfor `RECURRING` payments.\n',
+    title: 'Payment-SequenceId'
+  }}
+  schemaType={'response'}
+></Schema>

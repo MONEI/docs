@@ -1,0 +1,119 @@
+---
+id: monei-api-v-1
+title: 'MONEI API v1'
+description: 'The MONEI API is organized around REST principles. Our API is designed to be intuitive and developer-friendly.'
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from '@theme/ApiLogo';
+import Heading from '@theme/Heading';
+import SchemaTabs from '@theme/SchemaTabs';
+import TabItem from '@theme/TabItem';
+import Export from '@theme/ApiExplorer/Export';
+
+<span
+  className={'theme-doc-version-badge badge badge--secondary'}
+  children={'Version: 1.6.0'}
+></span>
+
+<Export url={'https://js.monei.com/api/v1/openapi.json'} proxy={undefined}></Export>
+
+<Heading as={'h1'} className={'openapi__heading'} children={'MONEI API v1'}></Heading>
+
+The MONEI API is organized around REST principles. Our API is designed to be intuitive and developer-friendly.
+
+### Base URL
+
+All API requests should be made to:
+
+```
+https://api.monei.com/v1
+```
+
+### Environment
+
+MONEI provides two environments:
+
+- **Test Environment**: For development and testing without processing real payments
+- **Live Environment**: For processing real transactions in production
+
+### Client Libraries
+
+We provide official SDKs to simplify integration:
+
+- [PHP SDK](https://github.com/MONEI/monei-php-sdk)
+- [Python SDK](https://github.com/MONEI/monei-python-sdk)
+- [Node.js SDK](https://github.com/MONEI/monei-node-sdk)
+- [Postman Collection](https://postman.monei.com/)
+
+Our SDKs handle authentication, error handling, and request formatting automatically.
+
+You can download the OpenAPI specification from the https://js.monei.com/api/v1/openapi.json and generate your own client library using the [OpenAPI Generator](https://openapi-generator.tech/).
+
+### Important Requirements
+
+- All API requests must be made over HTTPS
+- If you are not using our official SDKs, you **must provide a valid `User-Agent` header** with each request
+- Requests without proper authentication will return a `401 Unauthorized` error
+
+### Error Handling
+
+The API returns consistent error codes and messages to help you troubleshoot issues. Each response includes a `statusCode` attribute indicating the outcome of your request.
+
+### Rate Limits
+
+The API implements rate limiting to ensure stability. If you exceed the limits, requests will return a `429 Too Many Requests` status code.
+
+<div style={{marginBottom: '2rem'}}>
+  <Heading
+    id={'authentication'}
+    as={'h2'}
+    className={'openapi-tabs__heading'}
+    children={'Authentication'}
+  ></Heading>
+  <SchemaTabs className={'openapi-tabs__security-schemes'}>
+    <TabItem label={'API Key: APIKey'} value={'APIKey'}>
+      The MONEI API uses API keys to authenticate requests. Each request must include your API key
+      in the `Authorization` header. You can view and manage your API keys in the [MONEI
+      Dashboard](https://dashboard.monei.com/settings/api). MONEI provides two types of API keys:
+      test mode keys (prefixed with `pk_test_`) and live mode keys (prefixed with `pk_live_`).
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>Security Scheme Type:</th>
+              <td>apiKey</td>
+            </tr>
+            <tr>
+              <th>Header parameter name:</th>
+              <td>Authorization</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem>
+    <TabItem label={'API Key: AccountId'} value={'AccountId'}>
+      If you're integrating with MONEI as a partner or platform, you'll need to use both your Master
+      Account API Key and the Account ID of the merchant you're acting on behalf of. You can find
+      the Account ID for each connected merchant in your [MONEI Partner
+      Dashboard](https://admin.monei.com).
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>Security Scheme Type:</th>
+              <td>apiKey</td>
+            </tr>
+            <tr>
+              <th>Header parameter name:</th>
+              <td>MONEI-Account-ID</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem>
+  </SchemaTabs>
+</div>

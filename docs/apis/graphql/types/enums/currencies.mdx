@@ -1,0 +1,93 @@
+---
+id: currencies
+title: Currencies
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Possible currencies
+
+```graphql
+enum Currencies {
+  EUR
+  USD
+  GBP
+  JPY
+  CHF
+  SEK
+  DKK
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>Currencies.<b>EUR</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Currencies.<b>USD</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Currencies.<b>GBP</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Currencies.<b>JPY</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Currencies.<b>CHF</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Currencies.<b>SEK</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>Currencies.<b>DKK</b></code>](#)
+
+### Member Of
+
+[`Account`](/docs/apis/graphql/types/objects/account.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`AccountInvoice`](/docs/apis/graphql/types/objects/account-invoice.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`AccountInvoiceLineItem`](/docs/apis/graphql/types/objects/account-invoice-line-item.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`chargesDateRangeKPI`](/docs/apis/graphql/operations/queries/charges-date-range-kpi.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`ChargesDateRangeKPI`](/docs/apis/graphql/types/objects/charges-date-range-kpi.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`CreatePaymentInput`](/docs/apis/graphql/types/inputs/create-payment-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`CreatePointOfSaleInput`](/docs/apis/graphql/types/inputs/create-point-of-sale-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`CreateSubscriptionInput`](/docs/apis/graphql/types/inputs/create-subscription-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`PointOfSale`](/docs/apis/graphql/types/objects/point-of-sale.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Subscription`](/docs/apis/graphql/types/objects/subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`UpdatePointOfSaleInput`](/docs/apis/graphql/types/inputs/update-point-of-sale-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/>

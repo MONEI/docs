@@ -1,0 +1,73 @@
+---
+id: payment-paymentmethodklarna
+title: 'Payment-PaymentMethodKlarna'
+description: 'Details from Klarna order used as payment method at the time of the transaction.'
+sidebar_label: 'Payment-PaymentMethodKlarna'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'billingCategory': 'PAY_LATER', 'authPaymentMethod': 'card'}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Payment-PaymentMethodKlarna'}
+></Heading>
+
+Details from Klarna order used as payment method at the time of the transaction.
+
+<Schema
+  schema={{
+    type: 'object',
+    description:
+      'Details from Klarna order used as payment method at the time of the transaction.\n',
+    properties: {
+      billingCategory: {
+        type: 'string',
+        example: 'PAY_LATER',
+        enum: ['PAY_LATER', 'PAY_NOW', 'SLICE_IT', 'SLICE_IT_BY_CARD'],
+        'x-enumDescriptions': {
+          PAY_LATER: 'Pay after delivery within a specified timeframe',
+          PAY_NOW: 'Immediate payment at time of purchase',
+          SLICE_IT: 'Split payment into installments',
+          SLICE_IT_BY_CARD: 'Split payment into installments using a card'
+        }
+      },
+      authPaymentMethod: {
+        type: 'string',
+        example: 'card',
+        enum: [
+          'invoice',
+          'fixed_amount',
+          'pix',
+          'base_account',
+          'deferred_interest',
+          'direct_debit',
+          'direct_bank_transfer',
+          'b2b_invoice',
+          'card',
+          'slice_it_by_card'
+        ],
+        'x-enumDescriptions': {
+          invoice: 'Traditional invoice payment',
+          fixed_amount: 'Payment with a predetermined fixed amount',
+          pix: 'Brazilian instant payment system',
+          base_account: 'Payment from a basic account',
+          deferred_interest: 'Payment with delayed interest charges',
+          direct_debit: 'Direct bank account debit',
+          direct_bank_transfer: 'Immediate bank transfer',
+          b2b_invoice: 'Business-to-business invoice payment',
+          card: 'Credit or debit card payment',
+          slice_it_by_card: 'Installment payment using a card'
+        }
+      }
+    },
+    title: 'Payment-PaymentMethodKlarna'
+  }}
+  schemaType={'response'}
+></Schema>

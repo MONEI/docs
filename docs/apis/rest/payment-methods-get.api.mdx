@@ -1,0 +1,820 @@
+---
+id: payment-methods-get
+title: 'Get Payment Methods'
+description: 'Retrieve available payment methods for an account or a specific payment.'
+sidebar_label: 'Get Payment Methods'
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: 'get api-method'
+info_path: docs/apis/rest/monei-api-v-1
+custom_edit_url: null
+hide_send_button: true
+show_extensions: true
+---
+
+import MethodEndpoint from '@theme/ApiExplorer/MethodEndpoint';
+import ParamsDetails from '@theme/ParamsDetails';
+import RequestSchema from '@theme/RequestSchema';
+import StatusCodes from '@theme/StatusCodes';
+import OperationTabs from '@theme/OperationTabs';
+import TabItem from '@theme/TabItem';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Get Payment Methods'}></Heading>
+
+<MethodEndpoint method={'get'} path={'/payment-methods'} context={'endpoint'}></MethodEndpoint>
+
+Retrieve available payment methods for an account or a specific payment.
+
+You can provide either an `accountId` or a `paymentId` as a query parameter to get the available payment methods.
+
+When providing a `paymentId`, the response will include additional payment-specific information such as amount and currency.
+This is useful when you want to show payment options that are specifically available for a particular transaction.
+
+When providing an `accountId`, the response will include all payment methods available for that account based on
+the merchant's configuration and supported payment methods.
+
+<Heading
+  id={'request'}
+  as={'h2'}
+  className={'openapi-tabs__heading'}
+  children={'Request'}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: 'accountId',
+      in: 'query',
+      description: 'The ID of the account to get payment methods for',
+      required: false,
+      schema: {type: 'string'}
+    },
+    {
+      name: 'paymentId',
+      in: 'query',
+      description: 'The ID of the payment to get payment methods for',
+      required: false,
+      schema: {type: 'string'}
+    }
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={'Body'} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    '200': {
+      description: 'Available payment methods',
+      content: {
+        'application/json': {
+          schema: {
+            title: 'PaymentMethods',
+            type: 'object',
+            properties: {
+              livemode: {
+                type: 'boolean',
+                example: false,
+                description:
+                  'Has the value `true` if the resource exists in live mode or the value `false` if the resource exists in test mode.',
+                title: 'Livemode'
+              },
+              paymentMethods: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                  enum: [
+                    'alipay',
+                    'applePay',
+                    'bancontact',
+                    'bizum',
+                    'blik',
+                    'card',
+                    'cardPresent',
+                    'clickToPay',
+                    'cofidis',
+                    'cofidisLoan',
+                    'eps',
+                    'giropay',
+                    'googlePay',
+                    'iDeal',
+                    'klarna',
+                    'mbway',
+                    'multibanco',
+                    'paypal',
+                    'sepa',
+                    'sofort',
+                    'trustly'
+                  ]
+                },
+                example: [
+                  'bizum',
+                  'applePay',
+                  'googlePay',
+                  'alipay',
+                  'bancontact',
+                  'blik',
+                  'cofidis',
+                  'cofidisLoan',
+                  'eps',
+                  'iDeal',
+                  'mbway',
+                  'multibanco',
+                  'sofort',
+                  'trustly',
+                  'sepa',
+                  'klarna',
+                  'giropay',
+                  'card'
+                ],
+                description:
+                  'An array of available payment methods for the account or payment.\nPossible values include:\n  - `alipay` - Alipay\n  - `applePay` - Apple Pay\n  - `bancontact` - Bancontact\n  - `bizum` - Bizum\n  - `blik` - BLIK\n  - `card` - Credit or debit card\n  - `cardPresent` - Card present (physical POS)\n  - `clickToPay` - Click to Pay\n  - `cofidis` - Cofidis\n  - `cofidisLoan` - Cofidis Loan\n  - `eps` - EPS\n  - `giropay` - Giropay\n  - `googlePay` - Google Pay\n  - `iDeal` - iDEAL\n  - `klarna` - Klarna\n  - `mbway` - MB WAY\n  - `multibanco` - Multibanco\n  - `paypal` - PayPal\n  - `sepa` - SEPA Direct Debit\n  - `sofort` - Sofort\n  - `trustly` - Trustly\n',
+                title: 'PaymentMethods-Methods'
+              },
+              metadata: {
+                type: 'object',
+                description: 'Additional configuration details for each payment method.\n',
+                properties: {
+                  alipay: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['CN'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  bancontact: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['BE'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  bizum: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['ES'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  blik: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['PL'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  card: {
+                    type: 'object',
+                    properties: {
+                      brands: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['visa', 'mastercard'],
+                        description: 'List of card brands supported'
+                      }
+                    }
+                  },
+                  eps: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['AT'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  iDeal: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['NL'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  mbway: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['PT'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  multibanco: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['PT'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  sofort: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['AT', 'BE', 'DE', 'ES', 'IT', 'NL', 'CH', 'PL'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  trustly: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: [
+                          'DE',
+                          'DK',
+                          'EE',
+                          'ES',
+                          'FI',
+                          'GB',
+                          'LT',
+                          'LV',
+                          'NL',
+                          'NO',
+                          'PL',
+                          'SE',
+                          'SK'
+                        ],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  sepa: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: [
+                          'AT',
+                          'BE',
+                          'BG',
+                          'HR',
+                          'CY',
+                          'CZ',
+                          'DK',
+                          'EE',
+                          'FI',
+                          'FR',
+                          'DE',
+                          'GR',
+                          'HU',
+                          'IE',
+                          'IT',
+                          'LV',
+                          'LT',
+                          'LU',
+                          'MT',
+                          'NL',
+                          'PL',
+                          'PT',
+                          'RO',
+                          'SK',
+                          'SI',
+                          'ES',
+                          'SE',
+                          'IS',
+                          'LI',
+                          'NO',
+                          'AD',
+                          'SM',
+                          'MC',
+                          'VA',
+                          'PF',
+                          'TF',
+                          'GI',
+                          'GG',
+                          'IM',
+                          'JE',
+                          'BL',
+                          'PM',
+                          'CH',
+                          'GB',
+                          'WF'
+                        ],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  klarna: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: [
+                          'AT',
+                          'BE',
+                          'CH',
+                          'DE',
+                          'DK',
+                          'ES',
+                          'FI',
+                          'FR',
+                          'GB',
+                          'IT',
+                          'NL',
+                          'NO',
+                          'SE'
+                        ],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  giropay: {
+                    type: 'object',
+                    properties: {
+                      countries: {
+                        type: 'array',
+                        items: {type: 'string'},
+                        example: ['DE'],
+                        description: 'List of countries where the payment method is available'
+                      }
+                    }
+                  },
+                  googlePay: {
+                    type: 'object',
+                    properties: {
+                      merchantId: {
+                        type: 'string',
+                        example: '12345678901234567890',
+                        description: 'Google Pay merchant ID'
+                      },
+                      cvcRequired: {
+                        type: 'boolean',
+                        example: false,
+                        description: 'Whether CVC is required for Google Pay transactions'
+                      }
+                    }
+                  },
+                  applePay: {
+                    type: 'object',
+                    properties: {
+                      merchantId: {
+                        type: 'string',
+                        example: 'merchant.com.monei',
+                        description: 'Apple Pay merchant ID'
+                      }
+                    }
+                  },
+                  clickToPay: {
+                    type: 'object',
+                    properties: {
+                      tokenSupport: {
+                        type: 'boolean',
+                        example: true,
+                        description: 'Whether token support is enabled'
+                      },
+                      preselected: {
+                        type: 'boolean',
+                        example: false,
+                        description: 'Whether the method is preselected'
+                      },
+                      visa: {
+                        type: 'object',
+                        properties: {
+                          srciDpaId: {
+                            type: 'string',
+                            example: 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+                          },
+                          srcInitiatorId: {
+                            type: 'string',
+                            example: '550e8400-e29b-41d4-a716-446655440000'
+                          }
+                        }
+                      },
+                      mastercard: {
+                        type: 'object',
+                        properties: {
+                          srciDpaId: {
+                            type: 'string',
+                            example: '6ba7b810-9dad-11d1-80b4-00c04fd430c8'
+                          },
+                          srcInitiatorId: {
+                            type: 'string',
+                            example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'
+                          }
+                        }
+                      },
+                      discover: {
+                        type: 'object',
+                        properties: {
+                          srciDpaId: {
+                            type: 'string',
+                            example: '71f0c4d5-9947-4d1c-9cb3-d6a3f7c4e701'
+                          },
+                          srcInitiatorId: {
+                            type: 'string',
+                            example: 'c2d06c25-9ddb-4a5e-9d5a-3ff1c8d98467'
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                title: 'PaymentMethods-Metadata'
+              },
+              merchantName: {
+                type: 'string',
+                example: 'MONEI',
+                description: 'The name of the merchant',
+                title: 'PaymentMethods-MerchantName'
+              },
+              merchantUrl: {
+                type: 'string',
+                example: 'https://monei.com/',
+                description: "The URL of the merchant's website",
+                title: 'PaymentMethods-MerchantUrl'
+              },
+              countryCode: {
+                type: 'string',
+                example: 'ES',
+                description:
+                  'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+                title: 'Country'
+              },
+              accountId: {
+                type: 'string',
+                example: 'aa9333ba-82de-400c-9ae7-087b9f8d2242',
+                description: 'MONEI Account identifier.',
+                title: 'AccountId'
+              },
+              amount: {
+                type: 'integer',
+                example: 10,
+                description:
+                  'The amount of the payment in the smallest currency unit.\nFor example, 10 EUR = 1000 cents.\nOnly present when querying by paymentId.\n',
+                title: 'PaymentMethods-Amount'
+              },
+              currency: {
+                type: 'string',
+                example: 'EUR',
+                description:
+                  'Three-letter ISO currency code, in uppercase.\nOnly present when querying by paymentId.\n',
+                title: 'PaymentMethods-Currency'
+              }
+            }
+          }
+        }
+      }
+    },
+    '400': {
+      description: 'The request is incorrect or could not be processed',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'BadRequestError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 400,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Bad request',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'BadRequestError'
+          }
+        }
+      }
+    },
+    '401': {
+      description: 'Unauthorized error. Please check your auth credentials',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'UnauthorizedError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 401,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Unauthorized access',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'UnauthorizedError'
+          }
+        }
+      }
+    },
+    '404': {
+      description: 'The specified resource was not found',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'NotFoundError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 404,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Resource not found',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'NotFoundError'
+          }
+        }
+      }
+    },
+    '422': {
+      description: 'The request was well-formed but could not be processed due to semantic errors',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'UnprocessableEntityError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 422,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Unprocessable entity',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'UnprocessableEntityError'
+          }
+        }
+      }
+    },
+    '500': {
+      description: 'Unexpected server error',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'InternalServerError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 500,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'An unexpected error occurred',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'InternalServerError'
+          }
+        }
+      }
+    },
+    '503': {
+      description: 'The service is temporarily unavailable',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'ServiceUnavailableError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 503,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Upstream service is unavailable',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'ServiceUnavailableError'
+          }
+        }
+      }
+    }
+  }}
+></StatusCodes>

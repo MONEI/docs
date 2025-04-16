@@ -1,0 +1,29 @@
+---
+id: payment-expireat
+title: 'Payment-ExpireAt'
+description: 'Payment expiration time.'
+sidebar_label: 'Payment-ExpireAt'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 1663581391
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-ExpireAt'}></Heading>
+
+Payment expiration time.
+
+<Schema
+  schema={{
+    type: 'number',
+    format: 'int64',
+    example: 1663581391,
+    description: 'Payment expiration time.',
+    title: 'Payment-ExpireAt'
+  }}
+  schemaType={'response'}
+></Schema>

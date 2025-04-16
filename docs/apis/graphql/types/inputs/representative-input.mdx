@@ -1,0 +1,122 @@
+---
+id: representative-input
+title: RepresentativeInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Legal Representative input
+
+```graphql
+input RepresentativeInput {
+  firstName: String
+  lastName: String
+  address: AddressInput
+  email: String
+  phone: String
+  documentNumber: String
+  stocksPercentage: Float
+  hasNoPublicActivity: Boolean
+  nationality: String
+  citizenship: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>firstName</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+First name
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>lastName</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Last name
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>address</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AddressInput</b></code>](/docs/apis/graphql/types/inputs/address-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+Address
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>email</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Email
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>phone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Phone number in E.164 format, e.g. +34666777888
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>documentNumber</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Document number (DNI/NIE)
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>stocksPercentage</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Float</b></code>](/docs/apis/graphql/types/scalars/float.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Stock percentage (100% if it's an individual or freelancer)
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>hasNoPublicActivity</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Confirms that the representative is not a PEP (Politically Exposed Person)
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>nationality</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Nationality, ISO 3166-1 alpha-2 code
+
+#### [<code style={{ fontWeight: 'normal' }}>RepresentativeInput.<b>citizenship</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Citizenship, ISO 3166-1 alpha-2 code
+
+### Member Of
+
+[`SetupAccountInput`](/docs/apis/graphql/types/inputs/setup-account-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/>

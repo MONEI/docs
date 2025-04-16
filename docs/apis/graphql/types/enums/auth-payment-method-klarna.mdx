@@ -1,0 +1,102 @@
+---
+id: auth-payment-method-klarna
+title: AuthPaymentMethodKlarna
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+enum AuthPaymentMethodKlarna {
+  invoice
+  fixed_amount
+  pix
+  base_account
+  deferred_interest
+  direct_debit
+  direct_bank_transfer
+  b2b_invoice
+  card
+  slice_it_by_card
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>invoice</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>fixed_amount</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>pix</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>base_account</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>deferred_interest</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>direct_debit</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>direct_bank_transfer</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>b2b_invoice</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>card</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthPaymentMethodKlarna.<b>slice_it_by_card</b></code>](#)
+
+### Member Of
+
+[`PaymentMethodKlarna`](/docs/apis/graphql/types/objects/payment-method-klarna.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

@@ -1,0 +1,72 @@
+---
+id: sendpaymentreceiptrequest
+title: 'SendPaymentReceiptRequest'
+description: ''
+sidebar_label: 'SendPaymentReceiptRequest'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'customerEmail': 'john.doe@example.com',
+    'customerPhone': '+34500000000',
+    'channel': 'EMAIL',
+    'language': 'en'
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'SendPaymentReceiptRequest'}></Heading>
+
+<Schema
+  schema={{
+    title: 'SendPaymentReceiptRequest',
+    type: 'object',
+    properties: {
+      customerEmail: {
+        type: 'string',
+        example: 'john.doe@example.com',
+        description: 'The customer will receive payment receipt on this email address.'
+      },
+      customerPhone: {
+        type: 'string',
+        example: '+34500000000',
+        description:
+          'Phone number in E.164 format. The customer will receive payment receipt link on this phone number.'
+      },
+      channel: {
+        type: 'string',
+        example: 'EMAIL',
+        enum: ['EMAIL', 'WHATSAPP', 'SMS'],
+        'x-enumDescriptions': {
+          EMAIL: 'Send message via email',
+          WHATSAPP: 'Send message via WhatsApp',
+          SMS: 'Send message via SMS text message'
+        },
+        description: 'The channel used to send the payment message.\n',
+        title: 'Payment-MessageChannel'
+      },
+      language: {
+        type: 'string',
+        example: 'en',
+        enum: ['en', 'es', 'ca', 'pt', 'de', 'it', 'fr'],
+        'x-enumDescriptions': {
+          en: 'English',
+          es: 'Spanish',
+          ca: 'Catalan',
+          pt: 'Portuguese',
+          de: 'German',
+          it: 'Italian',
+          fr: 'French'
+        },
+        description:
+          'The language of message sent to the customer. If not provided the default customer language is used if available.',
+        title: 'Payment-MessageLanguage'
+      }
+    }
+  }}
+  schemaType={'response'}
+></Schema>

@@ -1,0 +1,129 @@
+---
+id: charges-date-range-kpirow
+title: ChargesDateRangeKPIRow
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type ChargesDateRangeKPIRow {
+  timestamp: AWSTimestamp!
+  succeededAmount: Long!
+  succeededCount: Long!
+  capturedAmount: Long!
+  capturedCount: Long!
+  directAmount: Long!
+  directCount: Long!
+  canceledAmount: Long!
+  canceledCount: Long!
+  refundedAmount: Long!
+  refundedCount: Long!
+  failedAmount: Long!
+  failedCount: Long!
+  cuSucceededAmount: Long!
+  cuSucceededCount: Long!
+  cuCapturedAmount: Long!
+  cuCapturedCount: Long!
+  cuDirectAmount: Long!
+  cuDirectCount: Long!
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>timestamp</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp!</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>succeededAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>succeededCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>capturedAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>capturedCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>directAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>directCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>canceledAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>canceledCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>refundedAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>refundedCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>failedAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>failedCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>cuSucceededAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>cuSucceededCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>cuCapturedAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>cuCapturedCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>cuDirectAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>ChargesDateRangeKPIRow.<b>cuDirectCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Long!</b></code>](/docs/apis/graphql/types/scalars/long.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+### Member Of
+
+[`ChargesDateRangeKPI`](/docs/apis/graphql/types/objects/charges-date-range-kpi.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

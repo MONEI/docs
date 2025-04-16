@@ -1,0 +1,28 @@
+---
+id: cardholderemail
+title: 'CardholderEmail'
+description: "The cardholder's email address."
+sidebar_label: 'CardholderEmail'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'john.doe@monei.com'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'CardholderEmail'}></Heading>
+
+The cardholder's email address.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'john.doe@monei.com',
+    description: "The cardholder's email address.",
+    title: 'CardholderEmail'
+  }}
+  schemaType={'response'}
+></Schema>

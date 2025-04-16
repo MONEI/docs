@@ -1,0 +1,331 @@
+---
+id: createsubscriptionrequest
+title: 'CreateSubscriptionRequest'
+description: ''
+sidebar_label: 'CreateSubscriptionRequest'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'amount': 110,
+    'currency': 'EUR',
+    'interval': 'month',
+    'intervalCount': 1,
+    'description': 'MoonMail Monthly Lite',
+    'customer': {'email': 'john.doe@example.com', 'name': 'John Doe', 'phone': null},
+    'billingDetails':
+      {
+        'name': 'John Doe',
+        'email': 'john.doe@example.com',
+        'phone': null,
+        'company': null,
+        'taxId': null,
+        'address':
+          {
+            'country': 'ES',
+            'city': 'Málaga',
+            'line1': 'Fake Street 123',
+            'line2': null,
+            'zip': '1234',
+            'state': 'Málaga'
+          }
+      },
+    'shippingDetails':
+      {
+        'name': 'John Doe',
+        'email': 'john.doe@example.com',
+        'phone': null,
+        'company': null,
+        'taxId': null,
+        'address':
+          {
+            'country': 'ES',
+            'city': 'Málaga',
+            'line1': 'Fake Street 123',
+            'line2': null,
+            'zip': '1234',
+            'state': 'Málaga'
+          }
+      },
+    'trialPeriodEnd': 1636366897,
+    'trialPeriodDays': 7,
+    'retrySchedule':
+      [
+        {'interval': 'day', 'intervalCount': 1},
+        {'interval': 'day', 'intervalCount': 3},
+        {'interval': 'week', 'intervalCount': 1}
+      ],
+    'callbackUrl': 'https://example.com/subscriptions/callback',
+    'paymentCallbackUrl': 'https://example.com/payments/callback',
+    'metadata': {'systemId': '12345'}
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'CreateSubscriptionRequest'}></Heading>
+
+<Schema
+  schema={{
+    title: 'CreateSubscriptionRequest',
+    type: 'object',
+    required: ['amount', 'currency', 'interval'],
+    properties: {
+      amount: {
+        type: 'integer',
+        format: 'int32',
+        example: 110,
+        description:
+          'Amount intended to be collected by this payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n',
+        title: 'Payment-Amount'
+      },
+      currency: {
+        type: 'string',
+        example: 'EUR',
+        description:
+          'Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217),\nin uppercase. Must be a supported currency.\n',
+        title: 'Payment-Currency'
+      },
+      interval: {
+        type: 'string',
+        example: 'month',
+        enum: ['day', 'week', 'month', 'year'],
+        'x-enumDescriptions': {day: 'Daily', week: 'Weekly', month: 'Monthly', year: 'Yearly'},
+        description: 'Subscription interval.',
+        title: 'Subscription-Interval'
+      },
+      intervalCount: {
+        type: 'integer',
+        format: 'int32',
+        example: 1,
+        description: 'Number of intervals between subscription payments.',
+        title: 'Subscription-IntervalCount'
+      },
+      description: {
+        type: 'string',
+        example: 'MoonMail Monthly Lite',
+        description:
+          'An arbitrary string attached to the subscription. Often useful for\ndisplaying to users.\n',
+        title: 'Subscription-Description'
+      },
+      customer: {
+        type: 'object',
+        properties: {
+          email: {
+            type: 'string',
+            example: 'john.doe@example.com',
+            description: "The customer's email address."
+          },
+          name: {
+            type: 'string',
+            example: 'John Doe',
+            description: "The customer's full name or business name."
+          },
+          phone: {
+            type: 'string',
+            example: null,
+            description: "The customer's phone number in E.164 format."
+          }
+        },
+        title: 'Payment-Customer'
+      },
+      billingDetails: {
+        type: 'object',
+        description:
+          'Billing information associated with the payment method\nat the time of the transaction.\n',
+        properties: {
+          name: {
+            type: 'string',
+            example: 'John Doe',
+            description: "The customer's billing full name."
+          },
+          email: {
+            type: 'string',
+            example: 'john.doe@example.com',
+            description: "The customer's billing email address."
+          },
+          phone: {
+            type: 'string',
+            example: null,
+            description: "The customer's billing phone number in E.164 format."
+          },
+          company: {type: 'string', example: null, description: 'Billing company name.'},
+          taxId: {type: 'string', example: null, description: 'Company tax ID.'},
+          address: {
+            title: 'Address',
+            type: 'object',
+            properties: {
+              country: {
+                type: 'string',
+                example: 'ES',
+                description:
+                  'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+                title: 'Country'
+              },
+              city: {
+                type: 'string',
+                example: 'Málaga',
+                description: 'City, district, suburb, town, or village.'
+              },
+              line1: {
+                type: 'string',
+                example: 'Fake Street 123',
+                description: 'Address line 1 (e.g., street, PO Box, or company name).'
+              },
+              line2: {
+                type: 'string',
+                example: null,
+                description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
+              },
+              zip: {type: 'string', example: '1234', description: 'ZIP or postal code.'},
+              state: {
+                type: 'string',
+                example: 'Málaga',
+                description: 'State, county, province, or region.'
+              }
+            }
+          }
+        },
+        title: 'Payment-BillingDetails'
+      },
+      shippingDetails: {
+        type: 'object',
+        description: 'Shipping information associated with the payment.',
+        properties: {
+          name: {
+            type: 'string',
+            example: 'John Doe',
+            description: "The shipping customer's full name."
+          },
+          email: {
+            type: 'string',
+            example: 'john.doe@example.com',
+            description: "The shipping customer's email address."
+          },
+          phone: {
+            type: 'string',
+            example: null,
+            description: "The shipping customer's phone number in E.164 format."
+          },
+          company: {
+            type: 'string',
+            example: null,
+            description: 'Name of the company where the shipment is going.'
+          },
+          taxId: {type: 'string', example: null, description: 'Company tax ID.'},
+          address: {
+            title: 'Address',
+            type: 'object',
+            properties: {
+              country: {
+                type: 'string',
+                example: 'ES',
+                description:
+                  'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+                title: 'Country'
+              },
+              city: {
+                type: 'string',
+                example: 'Málaga',
+                description: 'City, district, suburb, town, or village.'
+              },
+              line1: {
+                type: 'string',
+                example: 'Fake Street 123',
+                description: 'Address line 1 (e.g., street, PO Box, or company name).'
+              },
+              line2: {
+                type: 'string',
+                example: null,
+                description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
+              },
+              zip: {type: 'string', example: '1234', description: 'ZIP or postal code.'},
+              state: {
+                type: 'string',
+                example: 'Málaga',
+                description: 'State, county, province, or region.'
+              }
+            }
+          }
+        },
+        title: 'Payment-ShippingDetails'
+      },
+      trialPeriodEnd: {
+        type: 'number',
+        format: 'int64',
+        example: 1636366897,
+        description: 'The end date of the trial period. Measured in seconds since the Unix epoch.',
+        title: 'Subscription-TrialPeriodEnd'
+      },
+      trialPeriodDays: {
+        type: 'integer',
+        format: 'int32',
+        example: 7,
+        description: 'Number of days the trial period lasts.',
+        title: 'Subscription-TrialPeriodDays'
+      },
+      retrySchedule: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            interval: {
+              type: 'string',
+              enum: ['day', 'week', 'month', 'year'],
+              'x-enumDescriptions': {
+                day: 'Daily',
+                week: 'Weekly',
+                month: 'Monthly',
+                year: 'Yearly'
+              },
+              example: 'day',
+              description: 'The unit of time to wait before the retry attempt.'
+            },
+            intervalCount: {
+              type: 'integer',
+              format: 'int32',
+              minimum: 1,
+              maximum: 31,
+              example: 3,
+              description: 'The number of intervals to wait before the retry attempt.'
+            }
+          },
+          required: ['interval', 'intervalCount']
+        },
+        example: [
+          {interval: 'day', intervalCount: 1},
+          {interval: 'day', intervalCount: 3},
+          {interval: 'week', intervalCount: 1}
+        ],
+        description:
+          "Defines a custom schedule for retrying failed subscription payments. Each entry in the array specifies how long to wait before attempting the next payment retry.\nIf not specified, the system's default retry schedule will be used.\n",
+        title: 'Subscription-RetrySchedule'
+      },
+      callbackUrl: {
+        type: 'string',
+        example: 'https://example.com/subscriptions/callback',
+        description:
+          'The URL will be called each time subscription status changes. You will receive a subscription object in the body of the request.\n',
+        title: 'Subscription-CallbackUrl'
+      },
+      paymentCallbackUrl: {
+        type: 'string',
+        example: 'https://example.com/payments/callback',
+        description:
+          'The URL will be called each time subscription creates a new payments. You will receive the payment object in the body of the request.\n',
+        title: 'Subscription-PaymentCallbackUrl'
+      },
+      metadata: {
+        type: 'object',
+        example: {systemId: '12345'},
+        description:
+          'A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.',
+        title: 'Metadata'
+      }
+    }
+  }}
+  schemaType={'response'}
+></Schema>

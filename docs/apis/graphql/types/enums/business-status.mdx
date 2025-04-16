@@ -1,0 +1,109 @@
+---
+id: business-status
+title: BusinessStatus
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Account business status
+
+- active: Business is verified to be active
+- under_review: Business requires manual review
+- inactive: Business is inactive
+- dissolved: Business is dissolved
+- renamed: Business is renamed
+- transformed: Business is transformed
+- processing: Business is in the process of verification
+- not_found: Business is not found
+- resubmission_requested: Business details require resubmission
+
+```graphql
+enum BusinessStatus {
+  active
+  under_review
+  inactive
+  dissolved
+  renamed
+  transformed
+  processing
+  not_found
+  resubmission_requested
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessStatus.<b>active</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessStatus.<b>under_review</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessStatus.<b>inactive</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessStatus.<b>dissolved</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessStatus.<b>renamed</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessStatus.<b>transformed</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessStatus.<b>processing</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessStatus.<b>not_found</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BusinessStatus.<b>resubmission_requested</b></code>](#)
+
+### Member Of
+
+[`BusinessData`](/docs/apis/graphql/types/objects/business-data.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

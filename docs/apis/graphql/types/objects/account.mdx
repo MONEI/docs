@@ -1,0 +1,305 @@
+---
+id: account
+title: Account
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Account information
+
+```graphql
+type Account {
+  id: ID!
+  externalId: String
+  masterAccountId: ID
+  name: String
+  paymentMethods: AccountPaymentMethods @deprecated
+  publicBusinessDetails: AccountPublicBusinessDetails
+  branding: AccountBranding
+  defaultCurrency: Currencies @deprecated
+  test: Boolean
+  blocked: Boolean
+  status: AccountStatus!
+  reason: String @deprecated
+  timezone: String
+  adminEmail: String
+  apiKey: String
+  customDomain: String
+  customDomainConfig: CustomDomainConfig
+  payoutTerms: AccountPayoutTerms
+  business: BusinessData
+  representatives: [Representative!]
+  iban: String
+  bankAccount: BankAccount
+  language: String
+  tokenizationMethods: AccountTokenizationMethods
+  notifications: AccountNotifications
+  billingPlan: BillingPlans
+  contract: AccountContract
+  referralCode: String
+  promoCode: String
+  allowCreateApiKey: Boolean
+  previewFeatures: [String!]
+  notConfiguredReason: NotConfiguredReason @deprecated
+  notConfiguredNote: String @deprecated
+  userNote: String
+  createdAt: String!
+  approvedAt: String
+  updatedAt: String
+  rejectedReason: RejectedReason @deprecated
+  rejectedNote: String @deprecated
+  statusReason: StatusReason
+  statusNote: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Account ID
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>externalId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Account external ID, provided by the partner (master account)
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>masterAccountId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Master account ID, if the account is a sub-account of a partner (master account)
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>name</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Account name
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>paymentMethods</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountPaymentMethods</b></code>](/docs/apis/graphql/types/objects/account-payment-methods.mdx) <Badge class="badge badge--secondary badge--deprecated" text="deprecated"/> <Badge class="badge badge--secondary " text="object"/>
+
+:::warning[DEPRECATED]
+
+not used anymore
+
+:::
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>publicBusinessDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountPublicBusinessDetails</b></code>](/docs/apis/graphql/types/objects/account-public-business-details.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Public business information
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>branding</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountBranding</b></code>](/docs/apis/graphql/types/objects/account-branding.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Account branding
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>defaultCurrency</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Currencies</b></code>](/docs/apis/graphql/types/enums/currencies.mdx) <Badge class="badge badge--secondary badge--deprecated" text="deprecated"/> <Badge class="badge badge--secondary " text="enum"/>
+
+:::warning[DEPRECATED]
+
+not used anymore
+
+:::
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>test</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+If the account is a test account
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>blocked</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+If the account is blocked
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>status</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountStatus!</b></code>](/docs/apis/graphql/types/enums/account-status.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Account status
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>reason</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--deprecated" text="deprecated"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+:::warning[DEPRECATED]
+
+Use statusReason instead
+
+:::
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>timezone</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The account default timezone, e.g. Europe/Madrid
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>adminEmail</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Account admin email
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>apiKey</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Account API key, used to authenticate requests to REST and GraphQL APIs
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>customDomain</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Account custom domain, this domain will be used for the hosted payment page
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>customDomainConfig</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>CustomDomainConfig</b></code>](/docs/apis/graphql/types/objects/custom-domain-config.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Account custom domain configuration
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>payoutTerms</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountPayoutTerms</b></code>](/docs/apis/graphql/types/objects/account-payout-terms.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Account payout terms
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>business</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>BusinessData</b></code>](/docs/apis/graphql/types/objects/business-data.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Business basic data
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>representatives</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[Representative!]</b></code>](/docs/apis/graphql/types/objects/representative.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="object"/>
+
+Legal representatives
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>iban</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+IBAN number to receive settlements
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>bankAccount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>BankAccount</b></code>](/docs/apis/graphql/types/objects/bank-account.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Bank account information
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>language</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Preferred language
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>tokenizationMethods</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountTokenizationMethods</b></code>](/docs/apis/graphql/types/objects/account-tokenization-methods.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Tokenization methods
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>notifications</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountNotifications</b></code>](/docs/apis/graphql/types/objects/account-notifications.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Account notifications
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>billingPlan</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>BillingPlans</b></code>](/docs/apis/graphql/types/enums/billing-plans.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Billing Plan
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>contract</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountContract</b></code>](/docs/apis/graphql/types/objects/account-contract.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Account contract
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>referralCode</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Account referral code
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>promoCode</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Account promo code
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>allowCreateApiKey</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Allow creating API keys, if false, the account will not be able to create new API keys
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>previewFeatures</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[String!]</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Access to preview features
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>notConfiguredReason</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>NotConfiguredReason</b></code>](/docs/apis/graphql/types/enums/not-configured-reason.mdx) <Badge class="badge badge--secondary badge--deprecated" text="deprecated"/> <Badge class="badge badge--secondary " text="enum"/>
+
+:::warning[DEPRECATED]
+
+Use statusReason instead
+
+:::
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>notConfiguredNote</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--deprecated" text="deprecated"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+:::warning[DEPRECATED]
+
+Use statusNote instead
+
+:::
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>userNote</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+User provided note
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+The date when the account was created in ISO 8601 format
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>approvedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The date when the account was approved in ISO 8601 format
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>updatedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The date when the account was updated in ISO 8601 format
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>rejectedReason</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>RejectedReason</b></code>](/docs/apis/graphql/types/enums/rejected-reason.mdx) <Badge class="badge badge--secondary badge--deprecated" text="deprecated"/> <Badge class="badge badge--secondary " text="enum"/>
+
+:::warning[DEPRECATED]
+
+Use statusReason instead
+
+:::
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>rejectedNote</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--deprecated" text="deprecated"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+:::warning[DEPRECATED]
+
+Use statusNote instead
+
+:::
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>statusReason</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>StatusReason</b></code>](/docs/apis/graphql/types/enums/status-reason.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+The reason why the account status was changed
+
+#### [<code style={{ fontWeight: 'normal' }}>Account.<b>statusNote</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The note about the account status
+
+### Returned By
+
+[`account`](/docs/apis/graphql/operations/queries/account.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`connectMasterAccount`](/docs/apis/graphql/operations/mutations/connect-master-account.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`disableCustomDomain`](/docs/apis/graphql/operations/mutations/disable-custom-domain.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`disableTokenizationMethod`](/docs/apis/graphql/operations/mutations/disable-tokenization-method.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`disconnectMasterAccount`](/docs/apis/graphql/operations/mutations/disconnect-master-account.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`enableCustomDomain`](/docs/apis/graphql/operations/mutations/enable-custom-domain.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`enableTokenizationMethod`](/docs/apis/graphql/operations/mutations/enable-tokenization-method.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`liveAccount`](/docs/apis/graphql/operations/queries/live-account.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`requestAccountReview`](/docs/apis/graphql/operations/mutations/request-account-review.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`setupAccount`](/docs/apis/graphql/operations/mutations/setup-account.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`startCompanyLookup`](/docs/apis/graphql/operations/mutations/start-company-lookup.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`updateAccount`](/docs/apis/graphql/operations/mutations/update-account.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`verifyBusinessDetails`](/docs/apis/graphql/operations/mutations/verify-business-details.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`verifyCustomDomain`](/docs/apis/graphql/operations/mutations/verify-custom-domain.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

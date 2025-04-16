@@ -1,0 +1,31 @@
+---
+id: paymentmethods-amount
+title: 'PaymentMethods-Amount'
+description: 'The amount of the payment in the smallest currency unit.'
+sidebar_label: 'PaymentMethods-Amount'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 10
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'PaymentMethods-Amount'}></Heading>
+
+The amount of the payment in the smallest currency unit.
+For example, 10 EUR = 1000 cents.
+Only present when querying by paymentId.
+
+<Schema
+  schema={{
+    type: 'integer',
+    example: 10,
+    description:
+      'The amount of the payment in the smallest currency unit.\nFor example, 10 EUR = 1000 cents.\nOnly present when querying by paymentId.\n',
+    title: 'PaymentMethods-Amount'
+  }}
+  schemaType={'response'}
+></Schema>

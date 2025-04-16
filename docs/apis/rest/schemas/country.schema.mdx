@@ -1,0 +1,29 @@
+---
+id: country
+title: 'Country'
+description: 'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).'
+sidebar_label: 'Country'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'ES'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Country'}></Heading>
+
+Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'ES',
+    description:
+      'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+    title: 'Country'
+  }}
+  schemaType={'response'}
+></Schema>

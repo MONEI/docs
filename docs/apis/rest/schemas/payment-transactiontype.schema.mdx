@@ -1,0 +1,36 @@
+---
+id: payment-transactiontype
+title: 'Payment-TransactionType'
+description: 'Controls when the funds will be captured.'
+sidebar_label: 'Payment-TransactionType'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'SALE'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-TransactionType'}></Heading>
+
+Controls when the funds will be captured.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'SALE',
+    default: 'SALE',
+    enum: ['SALE', 'AUTH', 'PAYOUT', 'VERIF'],
+    'x-enumDescriptions': {
+      SALE: 'Automatically captures funds when the customer authorizes the payment',
+      AUTH: 'Places a hold on funds without immediate capture, allowing for later capture',
+      PAYOUT: 'Sends funds to the customer',
+      VERIF: 'Verifies the payment method without placing a hold or capturing funds'
+    },
+    description: 'Controls when the funds will be captured.\n',
+    title: 'Payment-TransactionType'
+  }}
+  schemaType={'response'}
+></Schema>
