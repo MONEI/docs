@@ -20,8 +20,8 @@ Apple Pay and Bizum are not available when using MONEI Payment Modal integration
 
 Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 <Tabs
   defaultValue="curl"
@@ -43,7 +43,7 @@ curl --request POST 'https://api.monei.com/v1/payments' \
   "orderId": "14379133960355",
   "description": "Test Shop - #14379133960355",
   "customer": {
-    "email": "john.doe@microapps.com"
+    "email": "email@example.com"
    },
   "callbackUrl": "https://example.com/checkout/callback"
 }'
@@ -55,18 +55,24 @@ curl --request POST 'https://api.monei.com/v1/payments' \
 <TabItem value="node">
 
 ```js title="server.js"
-const {Monei} = require('@monei-js/node-sdk');
-const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-monei.payments.create({
+import {Monei} from '@monei-js/node-sdk';
+
+// Replace YOUR_API_KEY with your actual MONEI API key
+const monei = new Monei('YOUR_API_KEY');
+
+const payment = await monei.payments.create({
   amount: 110,
   currency: 'EUR',
   orderId: '14379133960355',
   description: 'Test Shop - #14379133960355',
   customer: {
-    email: 'john.doe@microapps.com'
+    email: 'email@example.com'
   },
   callbackUrl: 'https://example.com/checkout/callback'
 });
+
+// You will need the paymentId from the response in the next step
+const paymentId = payment.id;
 ```
 
 </TabItem>
@@ -74,17 +80,32 @@ monei.payments.create({
 <TabItem value="php">
 
 ```php title="server.php"
-$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-$monei->payments->create([
-  'amount' => 110,
-  'currency' => 'EUR',
-  'orderId' => '14379133960355',
-  'description' => 'Test Shop - #14379133960355',
-  'customer' => [
-    'email' => 'john.doe@microapps.com'
-  ],
-  'callbackUrl' => 'https://example.com/checkout/callback'
-]);
+<?php
+require_once 'vendor/autoload.php';
+
+use Monei\Model\CreatePaymentRequest;
+use Monei\Model\PaymentCustomer;
+use Monei\MoneiClient;
+
+// Replace YOUR_API_KEY with your actual MONEI API key
+$monei = new MoneiClient('YOUR_API_KEY');
+
+$payment = $monei->payments->create(
+  new CreatePaymentRequest([
+    'amount' => 110,
+    'currency' => 'EUR',
+    'order_id' => '14379133960355',
+    'description' => 'Test Shop - #14379133960355',
+    'customer' => new PaymentCustomer([
+      'email' => 'email@example.com'
+    ]),
+    'callback_url' => 'https://example.com/checkout/callback'
+  ])
+);
+
+// You will need the paymentId from the response in the next step
+$paymentId = $payment->getId();
+?>
 ```
 
   </TabItem>

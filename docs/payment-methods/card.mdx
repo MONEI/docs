@@ -50,8 +50,8 @@ To test your integration:
 
 Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client. This prevents malicious customers from being able to choose their own prices.
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 <Tabs
   defaultValue="curl"
@@ -73,7 +73,7 @@ curl --request POST 'https://api.monei.com/v1/payments' \
   "orderId": "14379133960355",
   "description": "Test Shop - #14379133960355",
   "customer": {
-    "email": "john.doe@microapps.com"
+    "email": "email@example.com"
    },
   "callbackUrl": "https://example.com/checkout/callback"
 }'
@@ -93,7 +93,7 @@ monei.payments.create({
   orderId: '14379133960355',
   description: 'Test Shop - #14379133960355',
   customer: {
-    email: 'john.doe@microapps.com'
+    email: 'email@example.com'
   },
   callbackUrl: 'https://example.com/checkout/callback'
 });
@@ -111,7 +111,7 @@ $monei->payments->create([
   'orderId' => '14379133960355',
   'description' => 'Test Shop - #14379133960355',
   'customer' => [
-    'email' => 'john.doe@microapps.com'
+    'email' => 'email@example.com'
   ],
   'callbackUrl' => 'https://example.com/checkout/callback'
 ]);

@@ -4,16 +4,26 @@ title: Getting started
 description: Find a guide to integrate MONEI into your system
 ---
 
-#### Find a guide to integrate MONEI into your system
+### Ways to Integrate
 
-- **[Use a prebuilt payment page](/integrations/use-prebuilt-payment-page.mdx)**  
-  MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Cards, PayPal, Bizum, GooglePay, Apple Pay, Click to Pay, multiple BNPL, MB Way, SEPA Direct Debit and more.
-- **[Build a custom checkout](/integrations/build-custom-checkout.mdx)**  
-  Use MONEI Components to build your custom checkout and securely accept Cards, PayPal, Bizum, GooglePay, Apple Pay, Click to Pay, multiple BNPL, MB Way, SEPA Direct Debit and other payment methods.
-- **[Payments API](/apis/rest/payments/)**  
-  Securely perform a server to server payment.
+Choose the integration method that best suits your needs:
 
-#### Integrate with your platform
+- **[Use a prebuilt payment page](/integrations/use-prebuilt-payment-page.mdx)**
+  The simplest way to securely collect payments with multiple payment methods.
+- **[Build a custom checkout](/integrations/build-custom-checkout.mdx)**
+  Use MONEI Components to build your custom checkout experience.
+- **[Payments API](/apis/rest/payments/)**
+  Securely perform server-to-server payments.
+
+### Become a Partner (MONEI Connect)
+
+Enable payment processing for users on your platform or marketplace.
+
+- **[Learn about MONEI Connect](/monei-connect.mdx)**: Integrate payments directly into your platform for your merchants.
+
+### E-commerce Platforms
+
+Integrate MONEI with your e-commerce platform:
 
 - **[Shopify](/e-commerce/shopify/monei-payments)**
 - **[WooCommerce](/e-commerce/woocommerce.mdx)**
@@ -23,7 +33,9 @@ description: Find a guide to integrate MONEI into your system
 - **[Adobe Commerce (Magento 2)](/e-commerce/adobe-commerce.mdx)**
 - **[PrestaShop](/e-commerce/prestashop.mdx)**
 
-#### Integrate with hotels channel managers
+### Hotel Channel Managers
+
+Connect with hotel booking systems:
 
 - **[Siteminder](/channel-tokenization)**
 - **[Channex](/channel-tokenization)**

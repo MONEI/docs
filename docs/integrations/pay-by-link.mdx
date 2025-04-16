@@ -24,8 +24,8 @@ To test your integration:
 
 Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount and currency.
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 <Tabs
   defaultValue="curl"
@@ -47,7 +47,7 @@ curl --request POST 'https://api.monei.com/v1/payments' \
   "orderId": "14379133960355",
   "description": "Test Shop - #14379133960355",
   "customer": {
-    "email": "john.doe@microapps.com"
+    "email": "email@example.com"
    }
 }'
 
@@ -66,7 +66,7 @@ monei.payments.create({
   orderId: '14379133960355',
   description: 'Test Shop - #14379133960355',
   customer: {
-    email: 'john.doe@microapps.com'
+    email: 'email@example.com'
   }
 });
 ```
@@ -83,7 +83,7 @@ $monei->payments->create([
   'orderId' => '14379133960355',
   'description' => 'Test Shop - #14379133960355',
   'customer' => [
-    'email' => 'john.doe@microapps.com'
+    'email' => 'email@example.com'
   ]
 ]);
 ```
