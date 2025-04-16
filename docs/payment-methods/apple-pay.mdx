@@ -30,7 +30,7 @@ Before you start, you need to:
 - Add a card to your Wallet for Safari.
 - Serve your application over HTTPS. This is a requirement both in development and in production. One way to get up and running is to use a service like [ngrok](https://ngrok.com/).
 - [Register your domain with Apple Pay](monei-js/payment-request.mdx#register-your-domain-with-apple-pay), both in development and production.
-- Follow [Apples’s instructions](https://developer.apple.com/documentation/apple_pay_on_the_web).
+- Follow [Apples's instructions](https://developer.apple.com/documentation/apple_pay_on_the_web).
 
 Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
 
@@ -85,6 +85,26 @@ session.onpaymentauthorized = async (event) => {
   }
 };
 session.begin();
+```
+
+## 3. Confirm the payment client-side
+
+After you have obtained the MONEI Payment Token, you can confirm the payment using the token.
+
+```javascript
+function moneiTokenHandler(token) {
+  return monei
+    .confirmPayment({paymentId: '{{payment_id}}', paymentToken: token})
+    .then(function (result) {
+      // At this moment you can show a customer the payment result
+      // But you should always rely on the result passed to the callback endpoint on your server
+      // to update the order status
+      console.log(result);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 ```
 
 ## Before you go live

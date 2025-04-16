@@ -43,7 +43,7 @@ By integrating Google Pay™, you adhere to the Google Pay APIs [Acceptable Use 
 
 ## Google Pay direct API integration
 
-If you prefer to integrate directly against the Google Pay API, follow [Google’s instructions](https://developers.google.com/pay/api/web/guides/setup).
+If you prefer to integrate directly against the Google Pay API, follow [Google's instructions](https://developers.google.com/pay/api/web/guides/setup).
 
 Specify following tokenization specification
 
@@ -83,6 +83,26 @@ function processPayment(paymentData) {
     })
     .then(function (result) {
       return moneiTokenHandler(result.token);
+    });
+}
+```
+
+## 3. Confirm the payment client-side
+
+After you have obtained the MONEI Payment Token, you can confirm the payment using the token.
+
+```javascript
+function moneiTokenHandler(token) {
+  return monei
+    .confirmPayment({paymentId: '{{payment_id}}', paymentToken: token})
+    .then(function (result) {
+      // At this moment you can show a customer the payment result
+      // But you should always rely on the result passed to the callback endpoint on your server
+      // to update the order status
+      console.log(result);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
 }
 ```
