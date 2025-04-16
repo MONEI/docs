@@ -15,74 +15,221 @@ MONEI generates signatures using a hash-based message authentication code ([HMAC
 
 Use one of our official libraries to verify signatures. You perform the verification by providing the request payload and the `MONEI-Signature` header. If verification fails, MONEI returns an error.
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 <Tabs
   defaultValue="node"
   groupId="code"
   values={[
     {label: 'Node.js', value: 'node'},
-    {label: 'PHP', value: 'php'}
+    {label: 'PHP', value: 'php'},
+    {label: 'Python', value: 'python'}
   ]}>
 
   <TabItem value="node">
 
 ```js title="server.js"
-const {Monei} = require('@monei-js/node-sdk');
+import express from 'express';
+import {Monei, PaymentStatus} from '@monei-js/node-sdk';
+
 // Set your api key. Remember to switch to your live api key in production!
 // See your api key here: https://dashboard.monei.com/settings/api
-
-const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+const monei = new Monei('YOUR_API_KEY');
 
 // This example uses Express to receive webhooks
-const app = require('express')();
+const app = express();
 
-// Use body-parser to retrieve the raw body as a buffer
-const bodyParser = require('body-parser');
-
-// Match the raw body to content type application/json
-app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
-  const signature = request.headers['MONEI-Signature'];
-
-  let payload;
+// Endpoint to handle MONEI webhooks
+app.post('/checkout/callback', express.raw({type: 'application/json'}), (req, res) => {
+  const signature = req.headers['MONEI-Signature'];
 
   try {
-    payload = monei.verifySignature(request.body, signature);
-  } catch (err) {
-    response.status(400).send(`Webhook Error: ${err.message}`);
+    // Verify the signature using the raw request body and the header
+    const payment = monei.verifySignature(req.body.toString(), signature);
+
+    // Optional: Log the received payment status
+    console.log(`Webhook received for Payment ID: ${payment.id}, Status: ${payment.status}`);
+
+    // Update your order status based on the payment status
+    if (payment.status === PaymentStatus.SUCCEEDED) {
+      // Payment successful - fulfill the order
+      console.log(`Payment ${payment.id} succeeded. Fulfilling order...`);
+      // Update your database, send confirmation email, etc.
+    } else if (payment.status === PaymentStatus.FAILED) {
+      // Payment failed - notify the customer
+      console.log(`Payment ${payment.id} failed. Notifying customer...`);
+      // Log the failure, update your database, etc.
+    } else if (payment.status === PaymentStatus.AUTHORIZED) {
+      // Payment is authorized but not yet captured
+      console.log(`Payment ${payment.id} authorized. Capture if needed.`);
+      // You might want to capture it later using monei.payments.capture()
+    } else if (payment.status === PaymentStatus.CANCELED) {
+      // Payment was canceled by the user or system
+      console.log(`Payment ${payment.id} was canceled.`);
+      // Update your database accordingly
+    } else {
+      // Handle other potential statuses if necessary
+      console.log(`Unhandled payment status: ${payment.status} for Payment ${payment.id}`);
+    }
+
+    // Acknowledge receipt of the webhook with a 200 OK status
+    res.status(200).json({received: true});
+  } catch (error) {
+    // Handle signature verification failure
+    console.error('Invalid webhook signature:', error.message);
+    // Respond with 401 Unauthorized if the signature is invalid
+    res.status(401).json({error: 'Invalid signature'});
   }
-
-  console.log('Payload', payload);
-
-  // Return a response to acknowledge receipt of the event
-  response.sendStatus(200);
 });
 
-app.listen(3000, () => console.log('Running on port 3000'));
+// Start the server
+app.listen(3000, () => {
+  console.log(`Server listening on port 3000`);
+});
 ```
 
   </TabItem>
   <TabItem value="php">
 
 ```php title="server.php"
-$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
 
-$request_body = @file_get_contents('php://input');
-$sig_header = $_SERVER['HTTP_MONEI_SIGNATURE'];
-$payload = null;
+use Monei\\Model\\PaymentStatus;
+use Monei\\ApiException;
+
+// Replace YOUR_API_KEY with your actual MONEI API key
+$monei = new Monei\\MoneiClient('YOUR_API_KEY');
+
+// Parse raw body for signature verification
+$rawBody = file_get_contents('php://input');
+$signature = $_SERVER['HTTP_MONEI_SIGNATURE'] ?? '';
 
 try {
-  $payload = $monei->verifySignature($request_body, $sig_header);
-} catch(Exception $e) {
-  // Invalid signature
-  http_response_code(400);
-  exit();
+    // Verify the signature
+    // verifySignature returns the validated Payment object or throws ApiException
+    $payment = $monei->verifySignature($rawBody, $signature);
+
+    // Optional: Log the received payment status
+    error_log('Webhook received for Payment ID: ' . $payment->getId() . ', Status: ' . $payment->getStatus());
+
+    // Update your order status based on the payment status
+    if ($payment->getStatus() === PaymentStatus::SUCCEEDED) {
+        // Payment successful - fulfill the order
+        error_log('Payment ' . $payment->getId() . ' succeeded. Fulfilling order...');
+        // Update your database, send confirmation email, etc.
+    } else if ($payment->getStatus() === PaymentStatus::FAILED) {
+        // Payment failed - notify the customer
+        error_log('Payment ' . $payment->getId() . ' failed. Notifying customer...');
+        // Log the failure, update your database, etc.
+    } else if ($payment->getStatus() === PaymentStatus::AUTHORIZED) {
+        // Payment is authorized but not yet captured
+        error_log('Payment ' . $payment->getId() . ' authorized. Capture if needed.');
+        // You can capture it later using $monei->payments->capture(...)
+    } else if ($payment->getStatus() === PaymentStatus::CANCELED) {
+        // Payment was canceled
+        error_log('Payment ' . $payment->getId() . ' was canceled.');
+        // Update your database accordingly
+    } else {
+        // Handle other potential statuses if necessary
+        error_log('Unhandled payment status: ' . $payment->getStatus() . ' for Payment ' . $payment->getId());
+    }
+
+    // Acknowledge receipt of the webhook with a 200 OK status
+    http_response_code(200);
+    header('Content-Type: application/json'); // Ensure JSON header
+    echo json_encode(['received' => true]);
+
+} catch (ApiException $e) {
+    // Handle signature verification failure (ApiException specifically)
+    error_log('Invalid webhook signature: ' . $e->getMessage());
+    http_response_code(401); // Respond with 401 Unauthorized
+    header('Content-Type: application/json'); // Ensure JSON header
+    echo json_encode(['error' => 'Invalid signature']);
+    exit(); // Stop script execution after sending error response
+} catch (Exception $e) {
+    // Handle any other unexpected errors during processing
+    error_log('Webhook processing error: ' . $e->getMessage());
+    http_response_code(500); // Respond with 500 Internal Server Error
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Internal server error']);
+    exit();
 }
+?>
+```
 
-echo 'Payload ' . $payload;
+  </TabItem>
+  <TabItem value="python">
 
-http_response_code(200);
+```python title="server.py"
+import os
+import Monei
+from Monei.errors import SignatureVerificationError
+from flask import Flask, request, abort, jsonify
+
+# Replace YOUR_API_KEY with your actual MONEI API key
+monei_client = Monei.MoneiClient(api_key="YOUR_API_KEY")
+
+app = Flask(__name__)
+
+# Update route and function name
+@app.route('/checkout/callback', methods=['POST'])
+def callback():
+    signature = request.headers.get('MONEI-Signature') # Use correct header key
+
+    # Check if signature header exists (optional but good practice)
+    if not signature:
+        print("MONEI-Signature header missing")
+        return jsonify({'error': 'Missing MONEI-Signature header'}), 400
+
+    try:
+        # Verify the signature using raw request data (bytes)
+        payment = monei_client.verify_signature(request.data, signature)
+
+        # Optional: Log the received payment status
+        payment_id = payment.get('id')
+        payment_status = payment.get('status')
+        print(f"Webhook received for Payment ID: {payment_id}, Status: {payment_status}")
+
+        # Update your order status based on the payment status
+        if payment_status == 'SUCCEEDED':
+            # Payment successful - fulfill the order
+            print(f"Payment {payment_id} succeeded. Fulfilling order...")
+            # Update your database, send confirmation email, etc.
+            pass # Placeholder from user snippet
+        elif payment_status == 'FAILED':
+            # Payment failed - notify the customer
+            print(f"Payment {payment_id} failed. Notifying customer...")
+            # Log the failure, update your database, etc.
+            pass # Placeholder from user snippet
+        elif payment_status == 'AUTHORIZED':
+            # Payment is authorized but not yet captured
+            print(f"Payment {payment_id} authorized. Capture if needed.")
+            # You can capture it later
+            pass # Placeholder from user snippet
+        elif payment_status == 'CANCELED':
+            # Payment was canceled
+            print(f"Payment {payment_id} was canceled.")
+            pass # Placeholder from user snippet
+        else:
+             print(f"Unhandled payment status: {payment_status} for Payment {payment_id}")
+
+        # Acknowledge receipt of the webhook
+        return jsonify({'received': True}), 200
+
+    except SignatureVerificationError as e: # Catch specific signature error
+        print(f"Invalid webhook signature: {e}")
+        # Return 401 Unauthorized as requested
+        return jsonify({'error': 'Invalid signature'}), 401
+    except Exception as e: # Catch other potential errors during processing
+        print(f"Webhook processing error: {e}")
+        # Return 500 Internal Server Error for other issues
+        return jsonify({'error': 'Internal server error'}), 500
+
+if __name__ == '__main__':
+    app.run(port=3000)
+
 ```
 
   </TabItem>
@@ -106,7 +253,7 @@ The `signed_payload` string is created by concatenating:
 
 ### Step 3: Determine the expected signature
 
-Compute an HMAC with the SHA256 hash function. Use your account’s API Key as the key, and use the `signed_payload` string as the message.
+Compute an HMAC with the SHA256 hash function. Use your account's API Key as the key, and use the `signed_payload` string as the message.
 
 You can get your accounts password in [MONEI Dashboard → Settings → API](https://dashboard.monei.com/settings/api).
 

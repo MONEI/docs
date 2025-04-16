@@ -7865,6 +7865,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"find-dom-node-polyfill@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "find-dom-node-polyfill@npm:1.0.3"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+  checksum: 10c0/38d19d01a68c7a4c79f0fe93a7ac21abf5258304f20407ab4c127b6e56424fc94d52263c649c917b087c0b669e19dee01cea3c4efbf9704a0f3185e89ff24d9a
+  languageName: node
+  linkType: hard
+
 "find-up@npm:^3.0.0":
   version: 3.0.0
   resolution: "find-up@npm:3.0.0"
@@ -11727,6 +11737,7 @@ __metadata:
     clsx: "npm:^2.1.1"
     docusaurus-plugin-openapi-docs: "npm:4.3.7"
     docusaurus-theme-openapi-docs: "npm:4.3.7"
+    find-dom-node-polyfill: "npm:^1.0.3"
     graphql: "npm:^16.10.0"
     husky: "npm:^9.1.7"
     lint-staged: "npm:^15.5.1"

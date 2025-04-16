@@ -11,7 +11,7 @@ Become an integrated payments partner to quickly and easily provide payment serv
 
 - IPs of your servers so we can add them to our whitelist
 - Email address that we can send the partner API Key to
-- Email address or URL for partner account notifications (choose 1): With the MONEI Connect integration you’ll receive notifications via email or webhook when your users/merchants register for a MONEI account via your linked partner account. When your users/merchants register, you’ll receive the company details and the associated account ID. You’ll receive notifications when the account is pending approval and when it is approved or rejected
+- Email address or URL for partner account notifications (choose 1): With the MONEI Connect integration you'll receive notifications via email or webhook when your users/merchants register for a MONEI account via your linked partner account. When your users/merchants register, you'll receive the company details and the associated account ID. You'll receive notifications when the account is pending approval and when it is approved or rejected
 
 **The following data must be provided for all users that require access to your partner account:**
 
@@ -32,7 +32,7 @@ In the same email to [connect@monei.com](mailto:connect@monei.com) please let us
 - MONEI PLUS 39,99 €/day
   :::
 
-**Once you’ve completed registration for your partner account, you’ll receive:**
+**Once you've completed registration for your partner account, you'll receive:**
 
 - Partner API Key that lets you access our APIs on behalf of each MONEI account bound to your partner account.
 - Unique registration link that lets your users/merchants register their MONEI account. Every user that registers with this link will be bound to your partner account.
@@ -43,6 +43,20 @@ In the same email to [connect@monei.com](mailto:connect@monei.com) please let us
 To access the MONEI APIs, you need to provide your Partner API Key in the `Authorization` header of each request as well as `MONEI-Account-ID` header with the ID of the MONEI Account to indicate which account you are acting on behalf of.
 
 ### [REST API](/apis/rest)
+
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'},
+    {label: 'Python', value: 'python'}
+  ]}>
+<TabItem value="curl">
 
 ```shell script title="POST https://api.monei.com/v1/payments"
 curl --request POST 'https://api.monei.com/v1/payments' \
@@ -56,12 +70,123 @@ curl --request POST 'https://api.monei.com/v1/payments' \
   "orderId": "14379133960355",
   "description": "Test Shop - #14379133960355",
   "customer": {
-    "email": "john.doe@microapps.com"
+    "email": "email@example.com"
    },
   "callbackUrl": "https://example.com/checkout/callback"
 }'
 
 ```
+
+</TabItem>
+<TabItem value="node">
+
+```js title="server.js"
+import {Monei} from '@monei-js/node-sdk';
+
+// Initialize with Partner API Key, Account ID, and User-Agent
+const monei = new Monei('<PARTNER_API_KEY>', {
+  accountId: '<MONEI_ACCOUNT_ID>',
+  userAgent: 'MONEI/<PARTNER_NAME>/0.1.0'
+});
+
+async function createMerchantPayment() {
+  try {
+    const payment = await monei.payments.create({
+      amount: 110,
+      currency: 'EUR',
+      orderId: '14379133960355',
+      description: 'Test Shop - #14379133960355',
+      customer: {
+        email: 'email@example.com'
+      },
+      callbackUrl: 'https://example.com/checkout/callback'
+    });
+    console.log('Payment created:', payment.id);
+    // Handle the payment response (e.g., redirect URL)
+  } catch (error) {
+    console.error('Error creating payment:', error.message);
+  }
+}
+
+createMerchantPayment();
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php title="server.php"
+<?php
+require_once 'vendor/autoload.php';
+
+use Monei\MoneiClient;
+use Monei\Model\CreatePaymentRequest;
+use Monei\Model\PaymentCustomer;
+
+// Initialize with Partner API Key
+$monei = new MoneiClient('<PARTNER_API_KEY>');
+
+// Set Account ID and User-Agent for the specific merchant
+$monei->setAccountId('<MONEI_ACCOUNT_ID>');
+$monei->setUserAgent('MONEI/<PARTNER_NAME>/0.1.0');
+
+try {
+  $payment = $monei->payments->create(
+      new CreatePaymentRequest([
+        'amount' => 110,
+        'currency' => 'EUR',
+        'order_id' => '14379133960355',
+        'description' => 'Test Shop - #14379133960355',
+        'customer' => new PaymentCustomer([
+          'email' => 'email@example.com'
+        ]),
+        'callback_url' => 'https://example.com/checkout/callback'
+      ])
+  );
+  echo 'Payment created: ' . $payment->getId();
+  // Handle the payment response (e.g., redirect URL)
+
+} catch (\Exception $e) {
+  echo 'Error creating payment: ' . $e->getMessage();
+}
+?>
+```
+
+</TabItem>
+<TabItem value="python">
+
+```python title="server.py"
+import Monei
+from Monei import CreatePaymentRequest, PaymentCustomer
+
+# Initialize with Partner API Key
+monei = Monei.MoneiClient(api_key='<PARTNER_API_KEY>')
+
+# Set Account ID and User-Agent for the specific merchant
+monei.set_account_id('<MONEI_ACCOUNT_ID>')
+monei.set_user_agent('MONEI/<PARTNER_NAME>/0.1.0')
+
+try:
+    payment = monei.payments.create(
+        CreatePaymentRequest(
+            amount=110,
+            currency="EUR",
+            order_id="14379133960355",
+            description="Test Shop - #14379133960355",
+            customer=PaymentCustomer(
+                email="email@example.com"
+            ),
+            callback_url="https://example.com/checkout/callback"
+        )
+    )
+    print(f'Payment created: {payment.id}')
+    # Handle the payment response (e.g., redirect URL)
+except Exception as e:
+    print(f'Error creating payment: {e}')
+
+```
+
+</TabItem>
+</Tabs>
 
 ### [GraphQL API](/apis/graphql/)
 
