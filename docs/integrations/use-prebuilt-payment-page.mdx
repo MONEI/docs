@@ -4,7 +4,7 @@ title: Use a prebuilt payment page
 description: MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Cards, PayPal, Bizum, GooglePay, Apple Pay & Click to Pay among others.
 ---
 
-MONEI Hosted Payment Page is the simplest way to securely collect payments from your customers.
+MONEI's Hosted Payment Page offers the simplest, PCI-compliant way to securely collect payments from your customers using various methods.
 
 ![Hosted payments preview](/img/payment-page-preview.png)
 
@@ -18,21 +18,32 @@ MONEI Hosted Payment Page is the simplest way to securely collect payments from 
   </a>
 </p>
 
-MONEI's Hosted payment page makes it easy to build a first-class payments experience:
+**Key Features:**
 
-- **Designed to remove friction** — Real-time card validation with built-in error messaging
-- **Mobile-ready** — Fully responsive design
-- **International** — Supports 13 languages
-- **Multiple payment methods** — Supports [multiple payments methods](https://monei.com/blog/multiple-payment-options/)
-- **Customization and branding** — Customizable logo, buttons and background color
-- **3D Secure** — Supports 3D Secure - SCA verification process
-- **Fraud and compliance** — Simplified PCI compliance and SCA-ready
+- **Designed to remove friction:** Real-time card validation with built-in error messaging.
+- **Mobile-ready:** Fully responsive design.
+- **International:** Supports 13 languages.
+- **Multiple payment methods:** Supports various [payments methods](https://monei.com/blog/multiple-payment-options/).
+- **Customization and branding:** Customizable logo, buttons, and background color via your [MONEI Dashboard](https://dashboard.monei.com/settings/branding).
+- **3D Secure:** Built-in support for SCA verification.
+- **Fraud and compliance:** Simplified PCI compliance and SCA-ready.
 
 You can customize the appearance in your [MONEI Dashboard → Settings → Branding](https://dashboard.monei.com/settings/branding).
 
-## Integration
+## Before You Begin
 
-### 1. Create a new payment on your server.
+- You'll need a MONEI account and your API keys (test or live). Find them in your [MONEI Dashboard](https://dashboard.monei.com/settings/api).
+- Use your [test mode keys](testing.md) for integration testing.
+- Ensure relevant [payment methods](/payment-methods/overview.mdx) are enabled in your account settings.
+- You can monitor test payments in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (ensure Test Mode is active).
+
+## Integration Steps
+
+The integration involves creating a payment on your server, redirecting your customer to MONEI's secure page, and handling their return to your site via redirects and webhooks.
+
+### 1. Create Payment (Server-side)
+
+First, make a server-side API call to create a new [Payment object](/apis/rest/schemas/payment/). This registers the payment intent with MONEI.
 
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
@@ -43,21 +54,33 @@ import Tabs from '@theme/Tabs';
   values={[
     {label: 'cURL', value: 'curl'},
     {label: 'Node.js', value: 'node'},
-    {label: 'PHP', value: 'php'}
+    {label: 'PHP', value: 'php'},
+    {label: 'Python', value: 'python'}
   ]}>
 <TabItem value="curl">
 
 ```shell script title="POST https://api.monei.com/v1/payments"
-curl --request POST 'https://api.monei.com/v1/payments' \
---header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
---header 'Content-Type: application/json' \
+curl --request POST 'https://api.monei.com/v1/payments' \\
+--header 'Authorization: YOUR_API_KEY' \\
+--header 'Content-Type: application/json' \\
 --data-raw '{
     "amount": 110,
     "currency": "EUR",
     "orderId": "14379133960355",
     "description": "Test Shop - #14379133960355",
     "customer": {
-       "email": "john.doe@microapps.com"
+       "name": "John Doe",
+       "email": "email@example.com",
+       "phone": "+34666555444"
+    },
+    "billingDetails": {
+       "name": "John Doe",
+       "address": {
+          "country": "ES",
+          "city": "Malaga",
+          "line1": "Fake Street 123",
+          "zip": "29001"
+       }
     },
     "callbackUrl": "https://example.com/checkout/callback",
     "completeUrl": "https://example.com/checkout/complete",
@@ -65,109 +88,204 @@ curl --request POST 'https://api.monei.com/v1/payments' \
 }'
 ```
 
+(Replace `YOUR_API_KEY` with your actual MONEI API key)
+
 </TabItem>
 
 <TabItem value="node">
 
 ```js title="server.js"
-const {Monei} = require('@monei-js/node-sdk');
-const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-monei.payments.create({
+import {Monei} from '@monei-js/node-sdk';
+
+// Replace YOUR_API_KEY with your actual MONEI API key
+const monei = new Monei('YOUR_API_KEY');
+
+const payment = await monei.payments.create({
   amount: 110,
   currency: 'EUR',
   orderId: '14379133960355',
   description: 'Test Shop - #14379133960355',
   customer: {
-    email: 'john.doe@microapps.com'
+    name: 'John Doe',
+    email: 'email@example.com',
+    phone: '+34666555444'
+  },
+  billingDetails: {
+    name: 'John Doe',
+    address: {
+      country: 'ES',
+      city: 'Malaga',
+      line1: 'Fake Street 123',
+      zip: '29001'
+    }
   },
   callbackUrl: 'https://example.com/checkout/callback',
   completeUrl: 'https://example.com/checkout/complete',
   cancelUrl: 'https://example.com/checkout/cancel'
 });
+
+// You will need the redirectUrl from the response in the next step
+const redirectUrl = payment.nextAction.redirectUrl;
 ```
 
 </TabItem>
 <TabItem value="php">
 
 ```php title="server.php"
-$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-$monei->payments->create([
-  'amount' => 110,
-  'currency' => 'EUR',
-  'orderId' => '14379133960355',
-  'description' => 'Test Shop - #14379133960355',
-  'customer' => [
-    'email' => 'john.doe@microapps.com'
-  ],
-  'callbackUrl' => 'https://example.com/checkout/callback',
-  'completeUrl' => 'https://example.com/checkout/complete',
-  'cancelUrl' => 'https://example.com/checkout/cancel'
-]);
+<?php
+require_once 'vendor/autoload.php';
+
+use Monei\Model\CreatePaymentRequest;
+use Monei\Model\PaymentCustomer;
+use Monei\Model\PaymentBillingDetails;
+use Monei\Model\Address;
+use Monei\MoneiClient;
+
+// Replace YOUR_API_KEY with your actual MONEI API key
+$monei = new MoneiClient('YOUR_API_KEY');
+
+$payment = $monei->payments->create(
+    new CreatePaymentRequest([
+      'amount' => 110,
+      'currency' => 'EUR',
+      'order_id' => '14379133960355',
+      'description' => 'Test Shop - #14379133960355',
+      'customer' => new PaymentCustomer([
+        'name' => 'John Doe',
+        'email' => 'email@example.com',
+        'phone' => '+34666555444'
+      ]),
+      'billing_details' => new PaymentBillingDetails([
+        'name' => 'John Doe',
+        'address' => new Address([
+          'country' => 'ES',
+          'city' => 'Malaga',
+          'line1' => 'Fake Street 123',
+          'zip' => '29001'
+        ])
+      ]),
+      'callback_url' => 'https://example.com/checkout/callback',
+      'complete_url' => 'https://example.com/checkout/complete',
+      'cancel_url' => 'https://example.com/checkout/cancel'
+    ])
+);
+
+// You will need the redirectUrl from the response in the next step
+$redirectUrl = $payment->getNextAction()->getRedirectUrl();
+?>
+```
+
+</TabItem>
+<TabItem value="python">
+
+```python title="server.py"
+import Monei
+from Monei import CreatePaymentRequest, PaymentCustomer, PaymentBillingDetails, Address
+
+# Replace YOUR_API_KEY with your actual MONEI API key
+monei = Monei.MoneiClient(api_key="YOUR_API_KEY")
+
+payment = monei.payments.create(
+    CreatePaymentRequest(
+        amount=110,
+        currency="EUR",
+        order_id="14379133960355",
+        description="Test Shop - #14379133960355",
+        customer=PaymentCustomer(
+            name="John Doe",
+            email="email@example.com",
+            phone="+34666555444"
+        ),
+        billing_details=PaymentBillingDetails(
+            name="John Doe",
+            address=Address(
+                country="ES",
+                city="Malaga",
+                line1="Fake Street 123",
+                zip="29001"
+            )
+        ),
+        callback_url="https://example.com/checkout/callback",
+        complete_url="https://example.com/checkout/complete",
+        cancel_url="https://example.com/checkout/cancel"
+    )
+)
+
+// You will need the redirectUrl from the response in the next step
+redirect_url = payment.next_action.redirect_url
 ```
 
 </TabItem>
 </Tabs>
 
-The following parameters are required:
+**Key Parameters:**
 
-- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
-- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
-- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
-- **completeUrl** `string` - The URL the customer will be directed to after transaction completed (successful or failed).
-- **callbackUrl** `string` - The URL to which a payment result should be sent asynchronously.
-- **cancelUrl** `string` - The URL the customer will be directed to if s/he decided to cancel the payment and return to your website.
+- **amount** `positive integer`: Amount in the smallest currency unit (e.g., 110 for €1.10).
+- **currency** `string`: Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217) (e.g., `EUR`).
+- **orderId** `string`: Your unique order identifier.
+- **completeUrl** `string`: Where the customer is redirected **after** attempting payment (success or failure).
+- **callbackUrl** `string`: Your server endpoint URL for asynchronous webhook notifications (crucial for final status).
+- **cancelUrl** `string**: Where the customer is redirected if they click **cancel** or **"Back to shop"\*\*.
 
 Check all available [request parameters](/apis/rest/payments-create/).
 
-### 2. Redirect the customer to the `redirectUrl` from the response
+The API response includes the `payment.id` and, importantly, `payment.nextAction.redirectUrl`.
 
-In the response from the first request you'll get the following response:
+### 2. Handle Payment Interaction (Client-side via Redirect)
 
-```json
+The API response from Step 1 contains a `nextAction` object with a `redirectUrl`. You **must** redirect your customer's browser to this URL.
+
+```json title="Example Partial API Response"
 {
-  "id": "af6029f80f5fc73a8ad2753eea0b1be0",
-  "amount": 110,
-  "currency": "EUR",
-  "orderId": "84370745531439",
-  "description": "Test Shop - #84370745531439",
-  "accountId": "aa9333ba-82de-400c-9ae7-087b9f8d2242",
-  "livemode": false,
-  "status": "PENDING",
-  "customer": {
-    "email": "john.doe@microapps.com"
-  },
+  "id": "af6029f80f5fc73a8ad2753eea0b1be0", // MONEI Payment ID
+  // ... other fields ...
+  "status": "PENDING", // Initial status
   "nextAction": {
     "type": "CONFIRM",
-    "mustRedirect": false,
-    "redirectUrl": "https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0"
-  },
-  "createdAt": 1594215339
+    "mustRedirect": true, // Indicates redirection is needed
+    "redirectUrl": "https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0" // <-- REDIRECT CUSTOMER HERE
+  }
 }
 ```
 
-Redirect the customer to the `nextAction.redirectUrl` to show him the MONEI Hosted payment page.
+This `redirectUrl` leads the customer to the secure, MONEI-hosted payment page where they will select a payment method and enter their details.
 
-:::note
-As an alternative process you can confirm the payment by using monei.js on the client-side. In this case your customer does not need to leave your website. Check our [payment modal guide](integrations/use-payment-modal.mdx).
+:::note Alternative: Payment Modal
+Instead of a full page redirect, you can use [`monei.js`](/monei-js/reference/) to present payment options within a modal on your own site. See the [Payment Modal Guide](/integrations/use-payment-modal.mdx) for details.
 :::
 
-### 3. Customer completes the payment
+**Customer Actions:**
 
-Customer enters the Card information (or other payment information depending on the selected payment method) and goes through the 3D secure verification process (is redirected to the page provided by the issuer bank of the Card for confirmation of the transaction) if required.
+- The customer completes the payment details on the MONEI page.
+- They might undergo 3D Secure verification if required by their bank.
+- After completion, failure, or cancellation, they are redirected back to your site:
+  - To the `completeUrl` if they attempted payment.
+  - To the `cancelUrl` if they explicitly cancelled.
 
-### 4. Customer is redirected back to your server
+**Important:** The redirect to `completeUrl` **does not** guarantee payment success. You must rely on the webhook (Step 3) for the final status.
 
-- if customer clicks **"Back to \{\{shop.name}}"** link (you can provide `shop.name` parameter when you create a payment or in the [public business details settings](https://dashboard.monei.com/settings)), s/he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
-- in any other case the customer is redirected to the `completeUrl` with **payment_id** query parameter. Use [get payment](/apis/rest/payments-get/) endpoint to get the payment status.
+### 3. Process Webhook Notification (Server-side)
 
-### 5. An asynchronous request is sent to your server
+MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1. The request body contains the full [Payment object](/apis/rest/schemas/payment/) in JSON format.
 
-MONEI will notify you about the payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain the full [payment object](/apis/rest/schemas/payment/) in JSON format.
+This webhook is the **only reliable way** to confirm the definitive payment outcome, regardless of customer browser actions or redirects.
 
-This ensures that you get the payment status even when the customer closed the browser window or lost Internet connection.
+**Crucially, you must:**
 
-The request also contains a `MONEI-Signature` header. [Verify this signature](guides/verify-signature.mdx) to confirm that the received request is sent from MONEI.
+1. **Verify the `MONEI-Signature` header** included in the request. This confirms the webhook genuinely came from MONEI. See the [Verify Signatures guide](/guides/verify-signature.mdx) for implementation details.
+2. **Return a `200 OK` HTTP status code** immediately upon receiving the webhook to acknowledge receipt. Any other status code tells MONEI the notification failed.
 
-To acknowledge the receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
+If MONEI doesn't receive a `200 OK`, it will retry sending the webhook.
 
-If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the request as failed and stops trying to send it to your endpoint.
+Once the signature is verified, inspect the `status` field in the Payment object (`SUCCEEDED`, `FAILED`, `CANCELED`, etc.) to determine whether to fulfill the order or handle the failure.
+
+```json title="Example Webhook Payload (POST to your callbackUrl)"
+{
+  "id": "af6029f80f5fc73a8ad2753eea0b1be0",
+  "amount": 110,
+  // ... other fields ...
+  "status": "SUCCEEDED", // <-- Check this for final status
+  "createdAt": 1594215339,
+  "updatedAt": 1594215345
+}
+```

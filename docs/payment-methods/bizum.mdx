@@ -82,7 +82,7 @@ curl --request POST 'https://api.monei.com/v1/payments' \
   "orderId": "14379133960355",
   "description": "Test Shop - #14379133960355",
   "customer": {
-    "email": "john.doe@microapps.com"
+    "email": "email@example.com"
    },
   "callbackUrl": "https://example.com/checkout/callback"
 }'
@@ -102,7 +102,7 @@ monei.payments.create({
   orderId: '14379133960355',
   description: 'Test Shop - #14379133960355',
   customer: {
-    email: 'john.doe@microapps.com'
+    email: 'email@example.com'
   },
   callbackUrl: 'https://example.com/checkout/callback'
 });
@@ -120,7 +120,7 @@ $monei->payments->create([
   'orderId' => '14379133960355',
   'description' => 'Test Shop - #14379133960355',
   'customer' => [
-    'email' => 'john.doe@microapps.com'
+    'email' => 'email@example.com'
   ],
   'callbackUrl' => 'https://example.com/checkout/callback'
 ]);

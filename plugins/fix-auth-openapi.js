@@ -1,20 +1,20 @@
 /* docusaurus-plugin-openapi-docs: Fix rendering of auth details in endpoint pages using markdown. */
 module.exports = function (context, options) {
-    return {
-        name: 'fix-auth-openapi',
-        injectHtmlTags() {
-            return {
-                postBodyTags: [
-                    {
-                        tagName: 'script',
-                        attributes: {
-                            src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
-                            defer: true,
-                        },
-                    },
-                    {
-                        tagName: 'script',
-                        innerHTML: `
+  return {
+    name: 'fix-auth-openapi',
+    injectHtmlTags() {
+      return {
+        postBodyTags: [
+          {
+            tagName: 'script',
+            attributes: {
+              src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
+              defer: true
+            }
+          },
+          {
+            tagName: 'script',
+            innerHTML: `
                             function renderMarkdownInAuthDetails() {
                                 const detailsSections = document.querySelectorAll('.openapi-security__details pre');
 
@@ -55,10 +55,10 @@ module.exports = function (context, options) {
 
                             window.addEventListener('load', initRender);
                             document.addEventListener('DOMContentLoaded', initRender);
-                        `,
-                    },
-                ],
-            };
-        },
-    };
+                        `
+          }
+        ]
+      };
+    }
+  };
 };

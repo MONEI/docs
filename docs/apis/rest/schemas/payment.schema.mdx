@@ -288,7 +288,7 @@ import Heading from '@theme/Heading';
       shop: {
         type: 'object',
         description:
-          'The information about the shop (used in\n[hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)).\n',
+          'The information about the shop (used in\n[hosted payment page](https://docs.monei.com/integrations/use-prebuilt-payment-page/)).\n',
         properties: {
           name: {type: 'string', example: 'Test Shop', description: 'The shop name.'},
           country: {
@@ -1079,7 +1079,7 @@ import Heading from '@theme/Heading';
             example: 'CONFIRM',
             enum: ['CONFIRM', 'CHALLENGE', 'FRICTIONLESS_CHALLENGE', 'BIZUM_CHALLENGE', 'COMPLETE'],
             description:
-              '- `CONFIRM` - Your customer needs to be redirected to a\n  [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)\n  or confirm payment using\n  [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).\n  The **redirectUrl** will point to the hosted payment page.\n- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless\n   3d secure challenge page provided by the bank. The **redirectUrl**\n   will point to the frictionless 3d secure challenge page provided by the bank.\n- `CHALLENGE` - Your customer needs to be redirected to the\n  3d secure challenge page provided by the bank. The **redirectUrl**\n  will point to the 3d secure challenge page provided by the bank.\n- `COMPLETE` - The payment is completed. The **redirectUrl** will be\n  the **completeUrl** if it was provided when the payment was created.\n- `BIZUM_CHALLENGE` - Your customer will be redirected to the Bizum hosted payment page.\n'
+              '- `CONFIRM` - Your customer needs to be redirected to a\n  [hosted payment page](https://docs.monei.com/integrations/use-prebuilt-payment-page/)\n  or confirm payment using\n  [payment token](https://docs.monei.com/integrations/build-custom-checkout/#3-confirm-the-payment-client-side).\n  The **redirectUrl** will point to the hosted payment page.\n- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless\n   3d secure challenge page provided by the bank. The **redirectUrl**\n   will point to the frictionless 3d secure challenge page provided by the bank.\n- `CHALLENGE` - Your customer needs to be redirected to the\n  3d secure challenge page provided by the bank. The **redirectUrl**\n  will point to the 3d secure challenge page provided by the bank.\n- `COMPLETE` - The payment is completed. The **redirectUrl** will be\n  the **completeUrl** if it was provided when the payment was created.\n- `BIZUM_CHALLENGE` - Your customer will be redirected to the Bizum hosted payment page.\n'
           },
           mustRedirect: {
             type: 'boolean',
