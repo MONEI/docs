@@ -1,6 +1,12 @@
+import {Bizum as MoneiBizum} from '@monei-js/components';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Bizum as MoneiBizum} from '@monei-js/components';
+
+// Import findDOMNode from external library
+import {findDOMNode} from 'find-dom-node-polyfill';
+
+// Set Find DOM Node before driver
+ReactDOM.findDOMNode = findDOMNode;
 
 const BizumComponent = MoneiBizum.driver('react', {
   React: React,
