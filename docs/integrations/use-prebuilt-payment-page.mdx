@@ -30,13 +30,20 @@ MONEI's Hosted Payment Page offers the simplest, PCI-compliant way to securely c
 
 You can customize the appearance in your [MONEI Dashboard → Settings → Branding](https://dashboard.monei.com/settings/branding).
 
-## Integration Flow
+## Before You Begin
 
-The integration involves redirecting your customer to MONEI's secure page and handling their return to your site.
+- You'll need a MONEI account and your API keys (test or live). Find them in your [MONEI Dashboard](https://dashboard.monei.com/settings/api).
+- Use your [test mode keys](testing.md) for integration testing.
+- Ensure relevant [payment methods](/payment-methods/overview.mdx) are enabled in your account settings.
+- You can monitor test payments in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (ensure Test Mode is active).
 
-### 1. Create a Payment Resource on Your Server
+## Integration Steps
 
-First, make a server-side API call to create a new payment object. This registers the payment intent with MONEI.
+The integration involves creating a payment on your server, redirecting your customer to MONEI's secure page, and handling their return to your site via redirects and webhooks.
+
+### 1. Create Payment (Server-side)
+
+First, make a server-side API call to create a new [Payment object](/apis/rest/schemas/payment/). This registers the payment intent with MONEI.
 
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
@@ -204,65 +211,81 @@ payment = monei.payments.create(
     )
 )
 
-# You will need the redirectUrl from the response in the next step
+// You will need the redirectUrl from the response in the next step
 redirect_url = payment.next_action.redirect_url
 ```
 
 </TabItem>
 </Tabs>
 
-**Required Parameters:**
+**Key Parameters:**
 
 - **amount** `positive integer`: Amount in the smallest currency unit (e.g., 110 for €1.10).
 - **currency** `string`: Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217) (e.g., `EUR`).
-- **orderId** `string`: Your unique order identifier for reconciliation.
-- **completeUrl** `string`: The URL the customer is redirected to **after** attempting payment (successful or failed). They return here after interacting with the MONEI page or 3D Secure.
-- **callbackUrl** `string`: Your server endpoint URL where MONEI sends an **asynchronous webhook notification** about the final payment status. This is crucial for confirming payment status reliably.
-- **cancelUrl** `string`: The URL the customer is redirected to if they explicitly click the **cancel** or **"Back to shop"** link on the MONEI payment page before completing the payment.
+- **orderId** `string`: Your unique order identifier.
+- **completeUrl** `string`: Where the customer is redirected **after** attempting payment (success or failure).
+- **callbackUrl** `string`: Your server endpoint URL for asynchronous webhook notifications (crucial for final status).
+- **cancelUrl** `string**: Where the customer is redirected if they click **cancel** or **"Back to shop"\*\*.
 
 Check all available [request parameters](/apis/rest/payments-create/).
 
-### 2. Redirect the Customer to MONEI
+The API response includes the `payment.id` and, importantly, `payment.nextAction.redirectUrl`.
+
+### 2. Handle Payment Interaction (Client-side via Redirect)
 
 The API response from Step 1 contains a `nextAction` object with a `redirectUrl`. You **must** redirect your customer's browser to this URL.
 
-```json
+```json title="Example Partial API Response"
 {
   "id": "af6029f80f5fc73a8ad2753eea0b1be0", // MONEI Payment ID
-  "amount": 110,
   // ... other fields ...
   "status": "PENDING", // Initial status
   "nextAction": {
     "type": "CONFIRM",
     "mustRedirect": true, // Indicates redirection is needed
-    "redirectUrl": "https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0" // <-- REDIRECT HERE
-  },
-  "createdAt": 1594215339
+    "redirectUrl": "https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0" // <-- REDIRECT CUSTOMER HERE
+  }
 }
 ```
 
-This `redirectUrl` leads the customer to the secure, MONEI-hosted payment page.
+This `redirectUrl` leads the customer to the secure, MONEI-hosted payment page where they will select a payment method and enter their details.
 
-:::note Alternative: MONEI.js Payment Modal
-Instead of redirecting, you can use [`monei.js`](/monei-js/reference/) to present the payment options within a modal on your own site. See the [Payment Modal Guide](/integrations/use-payment-modal.mdx) for details.
+:::note Alternative: Payment Modal
+Instead of a full page redirect, you can use [`monei.js`](/monei-js/reference/) to present payment options within a modal on your own site. See the [Payment Modal Guide](/integrations/use-payment-modal.mdx) for details.
 :::
 
-### 3. Customer Interacts with MONEI Page
+**Customer Actions:**
 
-On the MONEI page, the customer selects a payment method, enters their details, and completes any necessary authentication steps (like 3D Secure).
+- The customer completes the payment details on the MONEI page.
+- They might undergo 3D Secure verification if required by their bank.
+- After completion, failure, or cancellation, they are redirected back to your site:
+  - To the `completeUrl` if they attempted payment.
+  - To the `cancelUrl` if they explicitly cancelled.
 
-### 4. Customer is Redirected Back to Your Site
+**Important:** The redirect to `completeUrl` **does not** guarantee payment success. You must rely on the webhook (Step 3) for the final status.
 
-After the customer completes (or cancels) the process on the MONEI page, they are redirected back to one of the URLs you provided in Step 1:
+### 3. Process Webhook Notification (Server-side)
 
-- **Success/Failure (`completeUrl`):** If the payment is attempted (successfully or not), or if 3D Secure is completed, the customer is redirected to your `completeUrl`. The MONEI `paymentId` is appended as a query parameter (e.g., `https://example.com/checkout/complete?paymentId=af6029f80f5fc73a8ad2753eea0b1be0`).
-  - **Action:** Use the `paymentId` from the URL to call the [Get Payment API](/apis/rest/payments-get/) to fetch the final payment status and display an appropriate confirmation or error message to the customer. **Do not rely solely on the redirect to confirm success.**
-- **Cancellation (`cancelUrl`):** If the customer clicks the **"Back to \{shop.name}"** link or a cancel button _before_ attempting payment, they are redirected to your `cancelUrl`.
-  - **Action:** Typically, redirect the user back to their cart or the previous step in your checkout flow.
+MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1. The request body contains the full [Payment object](/apis/rest/schemas/payment/) in JSON format.
 
-### 5. Receive Asynchronous Confirmation via Webhook
+This webhook is the **only reliable way** to confirm the definitive payment outcome, regardless of customer browser actions or redirects.
 
-Independently of the customer's browser redirection, MONEI sends an **asynchronous** HTTP POST request to your `callbackUrl` once the payment reaches a final state (e.g., `SUCCEEDED`, `FAILED`).
+**Crucially, you must:**
 
-- **Payload:** The request body contains the full [Payment object](/apis/rest/schemas/payment/) in JSON format.
-- **Verification:** The request includes a `
+1. **Verify the `MONEI-Signature` header** included in the request. This confirms the webhook genuinely came from MONEI. See the [Verify Signatures guide](/guides/verify-signature.mdx) for implementation details.
+2. **Return a `200 OK` HTTP status code** immediately upon receiving the webhook to acknowledge receipt. Any other status code tells MONEI the notification failed.
+
+If MONEI doesn't receive a `200 OK`, it will retry sending the webhook.
+
+Once the signature is verified, inspect the `status` field in the Payment object (`SUCCEEDED`, `FAILED`, `CANCELED`, etc.) to determine whether to fulfill the order or handle the failure.
+
+```json title="Example Webhook Payload (POST to your callbackUrl)"
+{
+  "id": "af6029f80f5fc73a8ad2753eea0b1be0",
+  "amount": 110,
+  // ... other fields ...
+  "status": "SUCCEEDED", // <-- Check this for final status
+  "createdAt": 1594215339,
+  "updatedAt": 1594215345
+}
+```

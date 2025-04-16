@@ -8,21 +8,26 @@ Send your customers a unique link via email, WhatsApp or SMS to pay online in on
 
 ![Pay By Link](/img/pay-by-link-preview.png)
 
-## Before you begin
+## Overview
 
-This page explains how to create payment links programmatically using [MONEI Payments API](/apis/rest/payments-create/). You can also create payment links in your [MONEI Dashboard](https://dashboard.monei.com/).
+This page explains how to create payment links programmatically using the [MONEI Payments API](/apis/rest/payments-create/). You can also create and manage payment links manually via your [MONEI Dashboard](https://dashboard.monei.com/).
 
-To test your integration:
+Pay By Link generates a unique URL for a specific payment amount that directs the customer to a secure MONEI-hosted payment page.
 
-- Use your [test mode](testing.md) Account ID and API Key.
-- Make sure you have all payment methods configured. Check the [Payment Methods](/payment-methods/card.mdx) section for more details about each payment method.
-- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+## Before You Begin
 
-## Integration
+- You'll need a MONEI account and your API keys (test or live). Find them in your [MONEI Dashboard](https://dashboard.monei.com/settings/api).
+- Use your [test mode keys](testing.md) for integration testing.
+- Ensure relevant [payment methods](/payment-methods/overview.mdx) are enabled in your account settings for the hosted page.
+- You can monitor test payments in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (ensure Test Mode is active).
 
-### 1. Create a Payment `Server-side`
+## Integration Steps
 
-Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount and currency.
+Creating and processing a Pay By Link payment involves creating a payment on your server, sending the generated link to the customer, and processing the final payment status via webhooks.
+
+### 1. Create Payment (Server-side)
+
+Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount, currency, and optionally customer details.
 
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
@@ -33,13 +38,14 @@ import Tabs from '@theme/Tabs';
   values={[
     {label: 'cURL', value: 'curl'},
     {label: 'Node.js', value: 'node'},
-    {label: 'PHP', value: 'php'}
+    {label: 'PHP', value: 'php'},
+    {label: 'Python', value: 'python'}
   ]}>
 <TabItem value="curl">
 
 ```shell script title="POST https://api.monei.com/v1/payments"
 curl --request POST 'https://api.monei.com/v1/payments' \
---header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Authorization: YOUR_API_KEY' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "amount": 110,
@@ -47,28 +53,43 @@ curl --request POST 'https://api.monei.com/v1/payments' \
   "orderId": "14379133960355",
   "description": "Test Shop - #14379133960355",
   "customer": {
-    "email": "email@example.com"
-   }
+    "email": "email@example.com",
+    "phone": "+34666555444"
+   },
+  "callbackUrl": "https://example.com/checkout/callback",
+  "completeUrl": "https://example.com/checkout/complete", // Optional: Redirect after payment attempt
+  "cancelUrl": "https://example.com/checkout/cancel"     // Optional: Redirect if user cancels
 }'
-
 ```
+
+(Replace `YOUR_API_KEY` with your actual MONEI API key)
 
 </TabItem>
 
 <TabItem value="node">
 
 ```js title="server.js"
-const {Monei} = require('@monei-js/node-sdk');
-const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-monei.payments.create({
+import {Monei} from '@monei-js/node-sdk';
+
+// Replace YOUR_API_KEY with your actual MONEI API key
+const monei = new Monei('YOUR_API_KEY');
+
+const payment = await monei.payments.create({
   amount: 110,
   currency: 'EUR',
   orderId: '14379133960355',
   description: 'Test Shop - #14379133960355',
   customer: {
-    email: 'email@example.com'
-  }
+    email: 'email@example.com',
+    phone: '+34666555444'
+  },
+  callbackUrl: 'https://example.com/checkout/callback',
+  completeUrl: 'https://example.com/checkout/complete', // Optional
+  cancelUrl: 'https://example.com/checkout/cancel' // Optional
 });
+
+// You will need the paymentId from the response in the next step
+const paymentId = payment.id;
 ```
 
 </TabItem>
@@ -76,76 +97,125 @@ monei.payments.create({
 <TabItem value="php">
 
 ```php title="server.php"
-$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-$monei->payments->create([
-  'amount' => 110,
-  'currency' => 'EUR',
-  'orderId' => '14379133960355',
-  'description' => 'Test Shop - #14379133960355',
-  'customer' => [
-    'email' => 'email@example.com'
-  ]
-]);
+<?php
+require_once 'vendor/autoload.php';
+
+use Monei\Model\CreatePaymentRequest;
+use Monei\Model\PaymentCustomer;
+use Monei\MoneiClient;
+
+// Replace YOUR_API_KEY with your actual MONEI API key
+$monei = new MoneiClient('YOUR_API_KEY');
+
+$payment = $monei->payments->create(
+  new CreatePaymentRequest([
+    'amount' => 110,
+    'currency' => 'EUR',
+    'order_id' => '14379133960355',
+    'description' => 'Test Shop - #14379133960355',
+    'customer' => new PaymentCustomer([
+      'email' => 'email@example.com',
+      'phone' => '+34666555444'
+    ]),
+    'callback_url' => 'https://example.com/checkout/callback',
+    'complete_url' => 'https://example.com/checkout/complete', // Optional
+    'cancel_url' => 'https://example.com/checkout/cancel'     // Optional
+  ])
+);
+
+// You will need the paymentId from the response in the next step
+$paymentId = $payment->getId();
+?>
 ```
 
-  </TabItem>
+</TabItem>
+
+<TabItem value="python">
+
+```python title="server.py"
+import Monei
+from Monei import CreatePaymentRequest, PaymentCustomer
+
+# Replace YOUR_API_KEY with your actual MONEI API key
+monei = Monei.MoneiClient(api_key="YOUR_API_KEY")
+
+payment = monei.payments.create(
+    CreatePaymentRequest(
+        amount=110,
+        currency="EUR",
+        order_id="14379133960355",
+        description="Test Shop - #14379133960355",
+        customer=PaymentCustomer(
+          email="email@example.com",
+          phone="+34666555444"
+        ),
+        callback_url="https://example.com/checkout/callback",
+        complete_url="https://example.com/checkout/complete", // Optional
+        cancel_url="https://example.com/checkout/cancel"     // Optional
+    )
+)
+
+// You will need the paymentId from the response in the next step
+payment_id = payment.id
+```
+
+</TabItem>
+
 </Tabs>
 
-The following parameters are required:
+**Key Parameters:**
 
-- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
-- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
-- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
+- **amount** `positive integer`: Amount in the smallest currency unit.
+- **currency** `string`: Three-letter ISO currency code.
+- **orderId** `string`: Your unique order identifier.
+- **customer.email** / **customer.phone** `string`: At least one is required if you want MONEI to send the link automatically (Step 2).
+- **callbackUrl** `string`: Your server endpoint for webhook notifications (crucial for final status).
+- **completeUrl** / **cancelUrl** `string` (Optional): URLs for redirecting the customer after interaction.
 
 Check all available [request parameters](/apis/rest/payments-create/).
 
-### 2. Send a payment link to your customer
+The response contains the `payment.id`, needed for the next step.
 
-In the response from the first request you'll get the payment `id`:
+### 2. Send Link & Handle Interaction (Server-side / Client-side)
 
-```json
-{
-  "id": "af6029f80f5fc73a8ad2753eea0b1be0",
-  "amount": 110,
-  "currency": "EUR",
-  "orderId": "84370745531439",
-  ...
-}
-```
+You have two main options to get the link to the customer:
 
-Use payment `id` to send a payment link to your customer. If you provided customer `email` in the first request, MONEI will send the payment link to your customer via email. If you only provided customer `phone`, MONEI will try to send the payment link via WhatsApp, if the phone number is not registered in WhatsApp, MONEI will send the payment link via SMS.
+**Option A: MONEI Sends the Link (Recommended for Simplicity)**
 
-You can also specify the delivery `channel` manually in the request body.
+Make a POST request to the `/v1/payments/{payment_id}/link` endpoint. If you provided `customer.email` or `customer.phone` in Step 1, MONEI will automatically send the link via the appropriate channel (email, WhatsApp, or SMS).
 
 <Tabs
   defaultValue="curl"
-  groupId="code"
+  groupId="code-send"
   values={[
     {label: 'cURL', value: 'curl'},
     {label: 'Node.js', value: 'node'},
-    {label: 'PHP', value: 'php'}
+    {label: 'PHP', value: 'php'},
+    {label: 'Python', value: 'python'}
   ]}>
 <TabItem value="curl">
 
-```shell script title="POST https://api.monei.com/v1/payment/af6029f80f5fc73a8ad2753eea0b1be0/link"
-curl --request POST 'https://api.monei.com/v1/payment/af6029f80f5fc73a8ad2753eea0b1be0/link' \
---header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+```shell script title="POST https://api.monei.com/v1/payments/{payment_id}/link"
+curl --request POST 'https://api.monei.com/v1/payments/{payment_id}/link' \
+--header 'Authorization: YOUR_API_KEY' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "language": "es",
+  "language": "es", // Optional: Set language for email/SMS template
+  "channel": "email" // Optional: Force channel (email, whatsapp, sms)
 }'
-
 ```
+
+(Replace `{payment_id}` and `YOUR_API_KEY`)
 
 </TabItem>
 
 <TabItem value="node">
 
 ```js title="server.js"
-const {Monei} = require('@monei-js/node-sdk');
-const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-monei.payments.sendLink({
-  language: 'es'
+// Assumes paymentId is obtained from the previous step
+await monei.payments.sendLink(paymentId, {
+  language: 'es', // Optional
+  channel: 'email' // Optional
 });
 ```
 
@@ -154,13 +224,64 @@ monei.payments.sendLink({
 <TabItem value="php">
 
 ```php title="server.php"
-$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-$monei->payments->sendLink([
-  'language' => 'es'
+<?php
+// Assumes $paymentId is obtained from the previous step
+$monei->payments->sendLink($paymentId, [
+  'language' => 'es', // Optional
+  'channel' => 'email' // Optional
 ]);
+?>
 ```
 
-  </TabItem>
+</TabItem>
+
+<TabItem value="python">
+
+```python title="server.py"
+# Assumes payment_id is obtained from the previous step
+monei.payments.sendLink(payment_id, language='es', channel='email') # Optional params
+```
+
+</TabItem>
+
 </Tabs>
 
-See the full list of [request parameters](/apis/rest/payments-send-link/).
+**Option B: You Send the Link**
+
+The [Payment object](/apis/rest/schemas/payment/) returned in Step 1 contains `payment.nextAction.redirectUrl`. This is the payment link.
+
+```json title="Example Partial Response from Step 1"
+{
+  "id": "af6029f80f5fc73a8ad2753eea0b1be0",
+  // ... other fields ...
+  "nextAction": {
+    "type": "CONFIRM",
+    "mustRedirect": true,
+    "redirectUrl": "https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0" // <-- This is the Pay By Link URL
+  }
+}
+```
+
+You can take this `redirectUrl` and send it to your customer through your own communication channels (email, SMS, in-app message, etc.).
+
+**Customer Interaction:**
+
+1.  The customer clicks the link.
+2.  They are taken to the secure MONEI payment page.
+3.  They choose a payment method, enter details, and complete any required authentication (like 3D Secure).
+4.  After attempting payment or cancelling, they might be redirected to your `completeUrl` or `cancelUrl` if you provided them in Step 1.
+
+### 3. Process Webhook Notification (Server-side)
+
+Regardless of whether the customer is redirected, MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1. The request body contains the full [Payment object](/apis/rest/schemas/payment/) in JSON format.
+
+This webhook is the **only reliable way** to confirm the definitive payment outcome.
+
+**Crucially, you must:**
+
+1.  **Verify the `MONEI-Signature` header** included in the request. This confirms the webhook genuinely came from MONEI. See the [Verify Signatures guide](/guides/verify-signature.mdx) for implementation details.
+2.  **Return a `200 OK` HTTP status code** immediately upon receiving the webhook to acknowledge receipt. Any other status code tells MONEI the notification failed.
+
+If MONEI doesn't receive a `200 OK`, it will retry sending the webhook.
+
+Once the signature is verified, inspect the `status` field in the Payment object (`SUCCEEDED`, `FAILED`, `CANCELED`, etc.) to determine whether to fulfill the order or handle the failure.

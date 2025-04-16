@@ -4,9 +4,9 @@ title: Build a custom checkout
 description: Use MONEI Components to build your custom checkout and securely accept Cards, PayPal, Bizum, Apple Pay, GooglePay, Click to Pay and other payment methods.
 ---
 
-Build your custom checkout using [MONEI Components](monei-js/overview.mdx) to securely collect payments using different payment methods.
+Build your own custom checkout experience using [MONEI Components](monei-js/overview.mdx) to securely collect payment details for various methods directly on your site.
 
-![MONEI Payments Demo](https://payments-demo.monei.com/images/preview.jpg)
+![MONEI Payments Demo](/img/custom-checkout-demo.png)
 
 <p>
   <a
@@ -26,33 +26,34 @@ Build your custom checkout using [MONEI Components](monei-js/overview.mdx) to se
   </a>
 </p>
 
-**MONEI Components:**
+**MONEI Components Key Features:**
 
-- Generate a one time `paymentToken` that can be used to securely process a payment.
-- Are available in plain JavaScript, React, Vue and Angular.
-- Support different styles, languages and customizations.
-- do not require PCI compliance.
+- Securely collect payment details via iframes hosted by MONEI.
+- Generate a one-time `paymentToken` for secure server-side processing.
+- Available for plain JavaScript, React, Vue, and Angular.
+- Support styling, language customization, and multiple payment methods.
+- Helps meet PCI DSS compliance requirements as sensitive data doesn't touch your server.
 
-Check the detailed guides for each payment method in our [Payment Methods](/payment-methods/card.mdx) section.
+Check the detailed guides for each payment method in our [Payment Methods](/payment-methods/overview.mdx) section.
 
-## Before you begin
+## Before You Begin
 
-This page explains how to add different payment methods to your custom payment page. If you don't need a custom checkout experience we recommend using our [prebuilt payment page](integrations/use-prebuilt-payment-page.mdx). It already supports all available payment methods and does not require coding.
+- This guide covers integrating various payment method Components. If you prefer a simpler, no-code solution, consider the [Prebuilt Payment Page](/integrations/use-prebuilt-payment-page.mdx).
+- You'll need a MONEI account and your API keys (test or live). Find them in your [MONEI Dashboard](https://dashboard.monei.com/settings/api).
+- Use your [test mode keys](testing.md) for integration testing.
+- Ensure relevant [payment methods](/payment-methods/overview.mdx) are enabled in your account settings.
+- You can monitor test payments in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (ensure Test Mode is active).
 
-To test your integration:
+## Integration Steps
 
-- Use your [test mode](testing.md) Account ID and API Key.
-- Make sure you have all payment methods configured. Check the [Payment Methods](/payment-methods/card.mdx) section for more details about each payment method.
-- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
-
-## Integration
+Integrating MONEI Components involves creating a Payment on your server, mounting the Component on your client-side, creating a token, confirming the payment, and processing the webhook notification.
 
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
-### 1. Create a Payment `Server-side`
+### 1. Create Payment (Server-side)
 
-Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount and currency. Always decide how much to charge on the server side, a trusted environment, as opposed to the client-side. This prevents malicious customers from being able to choose their own prices.
+Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount and currency. Always decide the amount on the server side.
 
 <Tabs
   defaultValue="curl"
@@ -60,13 +61,14 @@ Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount an
   values={[
     {label: 'cURL', value: 'curl'},
     {label: 'Node.js', value: 'node'},
-    {label: 'PHP', value: 'php'}
+    {label: 'PHP', value: 'php'},
+    {label: 'Python', value: 'python'}
   ]}>
 <TabItem value="curl">
 
 ```shell script title="POST https://api.monei.com/v1/payments"
 curl --request POST 'https://api.monei.com/v1/payments' \
---header 'Authorization: pk_test_3c140607778e1217f56ccb8b50540e00' \
+--header 'Authorization: YOUR_API_KEY' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "amount": 110,
@@ -78,17 +80,21 @@ curl --request POST 'https://api.monei.com/v1/payments' \
    },
   "callbackUrl": "https://example.com/checkout/callback"
 }'
-
 ```
+
+(Replace `YOUR_API_KEY` with your actual MONEI API key)
 
 </TabItem>
 
 <TabItem value="node">
 
 ```js title="server.js"
-const {Monei} = require('@monei-js/node-sdk');
-const monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-monei.payments.create({
+import {Monei} from '@monei-js/node-sdk';
+
+// Replace YOUR_API_KEY with your actual MONEI API key
+const monei = new Monei('YOUR_API_KEY');
+
+const payment = await monei.payments.create({
   amount: 110,
   currency: 'EUR',
   orderId: '14379133960355',
@@ -98,6 +104,9 @@ monei.payments.create({
   },
   callbackUrl: 'https://example.com/checkout/callback'
 });
+
+// Pass payment.id to your client-side
+const paymentId = payment.id;
 ```
 
 </TabItem>
@@ -105,34 +114,78 @@ monei.payments.create({
 <TabItem value="php">
 
 ```php title="server.php"
-$monei = new Monei\MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');
-$monei->payments->create([
-  'amount' => 110,
-  'currency' => 'EUR',
-  'orderId' => '14379133960355',
-  'description' => 'Test Shop - #14379133960355',
-  'customer' => [
-    'email' => 'email@example.com'
-  ],
-  'callbackUrl' => 'https://example.com/checkout/callback'
-]);
+<?php
+require_once 'vendor/autoload.php';
+
+use Monei\Model\CreatePaymentRequest;
+use Monei\Model\PaymentCustomer;
+use Monei\MoneiClient;
+
+// Replace YOUR_API_KEY with your actual MONEI API key
+$monei = new MoneiClient('YOUR_API_KEY');
+
+$payment = $monei->payments->create(
+  new CreatePaymentRequest([
+    'amount' => 110,
+    'currency' => 'EUR',
+    'order_id' => '14379133960355',
+    'description' => 'Test Shop - #14379133960355',
+    'customer' => new PaymentCustomer([
+      'email' => 'email@example.com'
+    ]),
+    'callback_url' => 'https://example.com/checkout/callback'
+  ])
+);
+
+// Pass payment ID to your client-side
+$paymentId = $payment->getId();
+?>
 ```
 
-  </TabItem>
+</TabItem>
+
+<TabItem value="python">
+
+```python title="server.py"
+import Monei
+from Monei import CreatePaymentRequest, PaymentCustomer
+
+# Replace YOUR_API_KEY with your actual MONEI API key
+monei = Monei.MoneiClient(api_key="YOUR_API_KEY")
+
+payment = monei.payments.create(
+    CreatePaymentRequest(
+        amount=110,
+        currency="EUR",
+        order_id="14379133960355",
+        description="Test Shop - #14379133960355",
+        customer=PaymentCustomer(
+          email="email@example.com"
+        ),
+        callback_url="https://example.com/checkout/callback"
+    )
+)
+
+# Pass payment ID to your client-side
+payment_id = payment.id
+```
+
+</TabItem>
+
 </Tabs>
 
-The following parameters are required:
+**Key Parameters:**
 
-- **amount** `positive integer` - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD)
-- **currency** `string` - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
-- **orderId** `string` - An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system.
-- **callbackUrl** `string` - The URL to which a payment result should be sent asynchronously.
+- **amount** `positive integer`: Amount in the smallest currency unit.
+- **currency** `string`: Three-letter ISO currency code.
+- **orderId** `string`: Your unique order identifier.
+- **callbackUrl** `string`: Your server endpoint for webhook notifications.
 
 Check all available [request parameters](/apis/rest/payments-create/).
 
-Included in the returned Payment object is a payment `id`, which is used on the client side to securely complete the payment process instead of passing the entire Payment object.
+The response contains `payment.id`. Pass this securely to your client-side for the next step.
 
-### 2. Add Component to your payment page `Client-side`
+### 2. Add Component to your payment page (Client-side)
 
 Include `monei.js` on your checkout page by adding the script tag to the `head` of your HTML file.
 
@@ -141,97 +194,110 @@ Include `monei.js` on your checkout page by adding the script tag to the `head` 
   <title>Checkout</title>
   <script src="https://js.monei.com/v2/monei.js"></script>
 </head>
+<body>
+  <!-- Create an empty container for the card input -->
+  <div id="card-element">
+    <!-- A MONEI Card Input Component will be inserted here. -->
+  </div>
+  <!-- Your client-side script -->
+  <script src="client.js"></script>
+</body>
 ```
 
-Create empty DOM nodes (containers) with unique IDs in your checkout page.
-
-```html title="checkout.html"
-<div id="container">
-  <!-- A MONEI Card Input Component will be inserted here. -->
-</div>
-```
-
-Initialize Component
+Create an empty DOM node (container) with a unique ID in your checkout page. Then, initialize the Component:
 
 ```js title="client.js"
-// Create an instance of the Card Input using payment_id.
-const cardInput = monei.CardInput({
-  paymentId: '{{payment_id}}',
-  ...otherOptions
+// Get paymentId passed securely from your server
+const paymentId = '{{payment_id}}'; // Replace with actual paymentId
+
+// Create an instance of the Card Input Component using the paymentId.
+const cardElement = monei.CardInput({
+  paymentId: paymentId
+  // You can add other options like style, onFocus, onChange here
+  // See MONEI Components reference for details
 });
 
-// Render an instance of the Card Input into the `container` <div>.
-cardInput.render('#container');
+// Render the Component into the container
+cardElement.render('#card-element');
+
+// Next step: Confirm the payment (see below)
 ```
 
-If you have a checkout flow that requires you to generate a payment token before you create a payment on your server, you can initialize MONEI Components by providing the following parameters:
+### 3. Confirm the payment (Client-side)
 
-- **accountId** `string` - Your MONEI account ID. Instead of passing **paymentId** you can initialize a card input with the **accountId** and **sessionId** (optional). Generate a payment token before you create the payment itself.
-- **sessionId** `string` - Unique session ID in your system. Provide a different **sessionId** for each customer. Use this parameter to ensure that the customer who generated the token is the same as the one doing the payment. Only required if you pass a token to your server. If you provide a **sessionId** when initializing MONEI component you will need to provide the same value when you [create a payment](/apis/rest/schemas/payment/) on your server.
-- **amount** `positive integer` (not required for CardInput) - Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD). You'll need to pass the same value when creating the payment.
-- **currency** `string` (not required for CardInput) - Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency. You'll need to pass the same value when creating the payment.
+To complete the payment, you need to confirm it using the `monei.confirmPayment` function.
 
-Check the [Payment Methods](/payment-methods/card.mdx) section for more details about how to initialize components for each payment method.
-
-### 3. Confirm the payment `Client-side`
-
-To complete the payment you need to confirm it using monei.js [confirmPayment](monei-js/reference.md#confirmpayment-function) function
-
-You need to provide a `paymentId` (obtained in [step 1](#1-create-a-payment-server-side)) and `paymentToken` generated with Component. Check the [Payment Methods](/payment-methods/card.mdx) section for more details about how to generate `paymentToken` for each payment method.
-
-You can also provide additional parameters like `customer.email`. Check all available [parameters](/apis/rest/payments-confirm/).
+You need to provide the `paymentId` (obtained in Step 1) and a `paymentToken` generated with the Component.
 
 ```js title="client.js"
-monei
-  .createToken(cardInput)
-  .then(function (result) {
-    console.log(result);
-    if (result.error) {
-      // Inform the user if there was an error.
-    } else {
-      // Send the token to MONEI.
-      moneiTokenHandler(result.token);
-    }
-    paymentButton.disabled = false;
-  })
-  .catch(function (error) {
-    paymentButton.disabled = false;
-    console.log(error);
-  });
+// Assumes cardElement is the initialized CardInput component from Step 2
 
-// Confirm the payment
-function moneiTokenHandler(token) {
-  return monei
-    .confirmPayment({paymentId: '{{payment_id}}', paymentToken: token})
+// Function to create a token and then confirm the payment
+function handlePayment() {
+  monei
+    .createToken(cardElement) // Create token from the card input
     .then(function (result) {
-      // At this moment you can show a customer the payment result
-      // But you should always rely on the result passed to the callback endpoint on your server
-      // to update the order status
-      console.log(result);
+      console.log('Token creation result:', result);
+      if (result.error) {
+        // Inform the user if there was an error creating the token.
+        console.error('Token Error:', result.error.message);
+      } else {
+        // Token created successfully, now confirm the payment.
+        confirmPaymentWithToken(result.token);
+      }
     })
     .catch(function (error) {
-      console.log(error);
+      console.error('Error during token creation:', error);
     });
 }
+
+// Function to handle the payment confirmation using the generated token
+function confirmPaymentWithToken(paymentToken) {
+  monei
+    .confirmPayment({paymentId: paymentId, paymentToken: paymentToken})
+    .then(function (result) {
+      console.log('Payment confirmation result:', result);
+      // At this moment you can show a customer the payment result (e.g., redirect)
+      // But you should ALWAYS rely on the result passed to the callback endpoint
+      // on your server (Step 4) to update the final order status.
+      if (result.error) {
+        console.error('Confirmation Error:', result.error.message);
+      } else {
+        console.log('Payment status (client-side):', result.status);
+        // Example: window.location.href = '/thank-you?paymentId=' + paymentId;
+      }
+    })
+    .catch(function (error) {
+      console.error('Error during payment confirmation:', error);
+    });
+}
+
+// You would typically call handlePayment() when the user clicks your pay button.
+// Example: document.getElementById('your-pay-button').addEventListener('click', handlePayment);
 ```
 
-After you confirm the payment, MONEI will automatically show a popup window with a 3d secure confirmation screen (if needed, depending on the payment method).
+After you confirm the payment, MONEI handles any necessary steps like 3D Secure authentication.
 
-:::note
-As an alternative process you can submit generated `paymentToken` to your sever and then [confirm payment](/apis/rest/payments-confirm/) on the server-side.
+:::note Alternative Flow
+As an alternative process, you can submit the generated `paymentToken` to your server and then [confirm the payment server-side](/apis/rest/payments-confirm/).
 :::
 
-### 4. An asynchronous request is sent to your server.
+### 4. Process Webhook Notification (Server-side)
 
-MONEI will notify you about the payment status by sending an HTTP POST request to the `callbackUrl`. The request body will contain full [payment object](/apis/rest/schemas/payment/) in JSON format.
+After the client-side interaction and any necessary background processing (like 3D Secure or bank authorization), MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1.
 
-This ensures that you get the payment status even when a customer closes the browser window or loses internet connection.
+The request body contains the full [Payment object](/apis/rest/schemas/payment/) in JSON format.
 
-The request also contains a `MONEI-Signature` header. [Verify this signature](guides/verify-signature.mdx) to confirm that the received request is sent from MONEI.
+This webhook is the **only reliable way** to confirm the definitive payment outcome.
 
-To acknowledge receipt of the request, your endpoint must return a `200` HTTP status code to MONEI. All other response codes, including `3xx` codes, indicate to MONEI that you did not receive the event.
+**Crucially, you must:**
 
-If MONEI does not receive a `200` HTTP status code, the notification attempt is repeated. After multiple failures to send the notification over multiple days, MONEI marks the request as failed and stops trying to send it to your endpoint.
+1.  **Verify the `MONEI-Signature` header** included in the request. This confirms the webhook genuinely came from MONEI. See the [Verify Signatures guide](/guides/verify-signature.mdx) for implementation details.
+2.  **Return a `200 OK` HTTP status code** immediately upon receiving the webhook to acknowledge receipt. Any other status code tells MONEI the notification failed.
+
+If MONEI doesn't receive a `200 OK`, it will retry sending the webhook.
+
+Once the signature is verified, inspect the `status` field in the Payment object (`SUCCEEDED`, `FAILED`, `CANCELED`, etc.) to determine whether to fulfill the order or handle the failure.
 
 ## Before you go live
 
