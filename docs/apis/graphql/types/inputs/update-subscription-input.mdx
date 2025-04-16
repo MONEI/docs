@@ -1,0 +1,126 @@
+---
+id: update-subscription-input
+title: UpdateSubscriptionInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input UpdateSubscriptionInput {
+  amount: Int
+  intervalCount: Int
+  interval: IntervalInput
+  description: String
+  descriptor: String
+  callbackUrl: String
+  paymentCallbackUrl: String
+  customer: CustomerInput
+  billingDetails: ContactDetailsInput
+  shippingDetails: ContactDetailsInput
+  nextPaymentAt: AWSTimestamp
+  trialPeriodEnd: AWSTimestamp
+  cancelAtPeriodEnd: Boolean
+  pauseIntervalCount: Int
+  pauseAtPeriodEnd: Boolean
+  id: ID!
+  retrySchedule: [RetryScheduleInput!]
+  metadata: [KeyValueInput!]
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>amount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>intervalCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>interval</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>IntervalInput</b></code>](/docs/apis/graphql/types/enums/interval-input.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>description</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>descriptor</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>callbackUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>paymentCallbackUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>customer</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>CustomerInput</b></code>](/docs/apis/graphql/types/inputs/customer-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>billingDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ContactDetailsInput</b></code>](/docs/apis/graphql/types/inputs/contact-details-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>shippingDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ContactDetailsInput</b></code>](/docs/apis/graphql/types/inputs/contact-details-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>nextPaymentAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>trialPeriodEnd</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AWSTimestamp</b></code>](/docs/apis/graphql/types/scalars/awstimestamp.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>cancelAtPeriodEnd</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>pauseIntervalCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>pauseAtPeriodEnd</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>retrySchedule</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[RetryScheduleInput!]</b></code>](/docs/apis/graphql/types/inputs/retry-schedule-input.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>UpdateSubscriptionInput.<b>metadata</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[KeyValueInput!]</b></code>](/docs/apis/graphql/types/inputs/key-value-input.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="input"/>
+
+### Member Of
+
+[`updateSubscription`](/docs/apis/graphql/operations/mutations/update-subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

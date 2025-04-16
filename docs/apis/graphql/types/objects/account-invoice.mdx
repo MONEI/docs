@@ -1,0 +1,148 @@
+---
+id: account-invoice
+title: AccountInvoice
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Invoice that MONEI issues to the account,
+this invoice is generated based on the account transactions
+and includes all the fees for the given period
+
+```graphql
+type AccountInvoice {
+  id: ID!
+  number: String
+  accountId: ID!
+  period: Period!
+  currency: Currencies!
+  amount: Int!
+  tax: Int!
+  totalAmount: Int!
+  lineItems: [AccountInvoiceLineItem!]!
+  business: AccountInvoiceBusiness
+  referralCode: String
+  createdAt: Int!
+  status: AccountInvoiceStatus
+  paymentMethod: AccountInvoicePaymentMethod
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Account invoice ID
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>number</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Account invoice number
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>accountId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Account ID
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>period</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Period!</b></code>](/docs/apis/graphql/types/objects/period.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="object"/>
+
+Invoice period
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>currency</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Currencies!</b></code>](/docs/apis/graphql/types/enums/currencies.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Invoice currency
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>amount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Invoice amount in cents
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>tax</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Invoice tax amount in cents
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>totalAmount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Invoice total amount in cents
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>lineItems</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[AccountInvoiceLineItem!]!</b></code>](/docs/apis/graphql/types/objects/account-invoice-line-item.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="object"/>
+
+Invoice line items
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>business</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountInvoiceBusiness</b></code>](/docs/apis/graphql/types/objects/account-invoice-business.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+Invoice customer details
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>referralCode</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Referral code used to generate the invoice
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Invoice creation date as a unix timestamp
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>status</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountInvoiceStatus</b></code>](/docs/apis/graphql/types/enums/account-invoice-status.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Invoice status
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountInvoice.<b>paymentMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>AccountInvoicePaymentMethod</b></code>](/docs/apis/graphql/types/enums/account-invoice-payment-method.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+Invoice payment method
+
+### Returned By
+
+[`accountInvoice`](/docs/apis/graphql/operations/queries/account-invoice.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/>
+
+### Member Of
+
+[`AccountInvoicesConnection`](/docs/apis/graphql/types/objects/account-invoices-connection.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

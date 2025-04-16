@@ -1,0 +1,69 @@
+---
+id: awstimestamp
+title: AWSTimestamp
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+The `AWSTimestamp` scalar type provided by AWS AppSync, represents the number of seconds that have elapsed since `1970-01-01T00:00Z`. Negative values are also accepted and these represent the number of seconds till `1970-01-01T00:00Z`. Timestamps are serialized and deserialized as integers. The minimum supported timestamp value is **`-31557014167219200`** which corresponds to `-1000000000-01-01T00:00Z`. The maximum supported timestamp value is **`31556889864403199`** which corresponds to `1000000000-12-31T23:59:59.999999999Z`.
+
+```graphql
+scalar AWSTimestamp
+```
+
+### Member Of
+
+[`AccountSettlement`](/docs/apis/graphql/types/objects/account-settlement.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ActivateSubscriptionInput`](/docs/apis/graphql/types/inputs/activate-subscription-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`Charge`](/docs/apis/graphql/types/objects/charge.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ChargeEvent`](/docs/apis/graphql/types/objects/charge-event.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ChargeEventObject`](/docs/apis/graphql/types/objects/charge-event-object.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ChargesDateRangeKPIRow`](/docs/apis/graphql/types/objects/charges-date-range-kpirow.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ChargesExport`](/docs/apis/graphql/types/objects/charges-export.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`CreatePaymentInput`](/docs/apis/graphql/types/inputs/create-payment-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`CreateSubscriptionInput`](/docs/apis/graphql/types/inputs/create-subscription-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`DownloadFile`](/docs/apis/graphql/types/objects/download-file.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`ExportCharges`](/docs/apis/graphql/types/objects/export-charges.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`Payment`](/docs/apis/graphql/types/objects/payment.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`PaymentMethodCard`](/docs/apis/graphql/types/objects/payment-method-card.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`SettlementEvent`](/docs/apis/graphql/types/objects/settlement-event.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`SettlementEventObject`](/docs/apis/graphql/types/objects/settlement-event-object.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`SubscriptionEvent`](/docs/apis/graphql/types/objects/subscription-event.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`SubscriptionEventObject`](/docs/apis/graphql/types/objects/subscription-event-object.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`UpdateChargeInput`](/docs/apis/graphql/types/inputs/update-charge-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`UpdateSubscriptionInput`](/docs/apis/graphql/types/inputs/update-subscription-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`UploadFile`](/docs/apis/graphql/types/objects/upload-file.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

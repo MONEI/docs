@@ -1,0 +1,97 @@
+---
+id: transaction-types
+title: TransactionTypes
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Controls when the funds will be captured.
+
+- `SALE` - **Default**. MONEI automatically captures funds
+  when the customer authorizes the payment.
+- `AUTH` - Place a hold on the funds when the customer authorizes
+  the payment, but don’t capture the funds until later.
+- `PAYOUT` - Send funds to the customer
+- `VERIF` - Verify the card without placing a hold or capturing funds.
+
+```graphql
+enum TransactionTypes {
+  AUTH
+  SALE
+  REFUND
+  CAPTURE
+  CANCEL
+  PAYOUT
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>TransactionTypes.<b>AUTH</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>TransactionTypes.<b>SALE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>TransactionTypes.<b>REFUND</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>TransactionTypes.<b>CAPTURE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>TransactionTypes.<b>CANCEL</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>TransactionTypes.<b>PAYOUT</b></code>](#)
+
+### Member Of
+
+[`CreatePaymentInput`](/docs/apis/graphql/types/inputs/create-payment-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/>

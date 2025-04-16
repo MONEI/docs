@@ -1,0 +1,85 @@
+---
+id: authorized-user-access-level
+title: AuthorizedUserAccessLevel
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Access level for the authorized user
+
+- READ_ACCESS: Read only access, user will not be able to create payments, do refunds, etc.
+- WRITE_ACCESS: Write access, user will be able to create payments, do refunds, but will not have access to admin settings
+- ADMIN_ACCESS: Admin access, user will have access to all settings
+
+```graphql
+enum AuthorizedUserAccessLevel {
+  READ_ACCESS
+  WRITE_ACCESS
+  ADMIN_ACCESS
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUserAccessLevel.<b>READ_ACCESS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUserAccessLevel.<b>WRITE_ACCESS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>AuthorizedUserAccessLevel.<b>ADMIN_ACCESS</b></code>](#)
+
+### Member Of
+
+[`AuthorizedUser`](/docs/apis/graphql/types/objects/authorized-user.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`CreateAuthorizedUserInput`](/docs/apis/graphql/types/inputs/create-authorized-user-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`UpdateAuthorizedUserInput`](/docs/apis/graphql/types/inputs/update-authorized-user-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`UserAccount`](/docs/apis/graphql/types/objects/user-account.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

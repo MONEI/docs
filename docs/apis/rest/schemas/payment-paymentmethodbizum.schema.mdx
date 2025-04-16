@@ -1,0 +1,35 @@
+---
+id: payment-paymentmethodbizum
+title: 'Payment-PaymentMethodBizum'
+description: 'Details about the Bizum account used as payment method at the time of the transaction.'
+sidebar_label: 'Payment-PaymentMethodBizum'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'phoneNumber': null}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-PaymentMethodBizum'}></Heading>
+
+Details about the Bizum account used as payment method at the time of the transaction.
+
+<Schema
+  schema={{
+    type: 'object',
+    description:
+      'Details about the Bizum account used as payment method at the time of the transaction.\n',
+    properties: {
+      phoneNumber: {
+        type: 'string',
+        example: null,
+        description: 'Phone number in E.164 format used to pay with `bizum`.'
+      }
+    },
+    title: 'Payment-PaymentMethodBizum'
+  }}
+  schemaType={'response'}
+></Schema>

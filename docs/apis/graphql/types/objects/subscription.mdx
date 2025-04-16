@@ -1,0 +1,184 @@
+---
+id: subscription
+title: Subscription
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+type Subscription {
+  id: ID!
+  accountId: ID!
+  livemode: Boolean!
+  amount: Int!
+  currency: Currencies
+  description: String
+  descriptor: String
+  cancelAtPeriodEnd: Boolean
+  pauseIntervalCount: Int
+  pauseAtPeriodEnd: Boolean
+  currentPeriodStart: Int
+  currentPeriodEnd: Int
+  trialPeriodDays: Int
+  trialPeriodEnd: Int
+  customerId: ID
+  customer: Customer
+  billingDetails: ContactDetails
+  shippingDetails: ContactDetails
+  sequenceId: ID
+  lastOrderId: ID
+  lastPayment: LastPayment
+  paymentMethod: PaymentMethod
+  nextPaymentAt: Int
+  createdAt: Int
+  updatedAt: Int
+  interval: Interval!
+  intervalCount: Int!
+  retryCount: Int
+  status: SubscriptionStatus!
+  sessionDetails: SessionDetails
+  traceDetails: TraceDetails
+  callbackUrl: String
+  paymentCallbackUrl: String
+  storeId: ID
+  retrySchedule: [RetrySchedule!]
+  metadata: [KeyValueItem!]
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>accountId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>livemode</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean!</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>amount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>currency</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Currencies</b></code>](/docs/apis/graphql/types/enums/currencies.mdx) <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>description</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>descriptor</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>cancelAtPeriodEnd</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>pauseIntervalCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>pauseAtPeriodEnd</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>currentPeriodStart</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>currentPeriodEnd</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>trialPeriodDays</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>trialPeriodEnd</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>customerId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>customer</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Customer</b></code>](/docs/apis/graphql/types/objects/customer.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>billingDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ContactDetails</b></code>](/docs/apis/graphql/types/objects/contact-details.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>shippingDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ContactDetails</b></code>](/docs/apis/graphql/types/objects/contact-details.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>sequenceId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>lastOrderId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>lastPayment</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>LastPayment</b></code>](/docs/apis/graphql/types/objects/last-payment.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>paymentMethod</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>PaymentMethod</b></code>](/docs/apis/graphql/types/objects/payment-method.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>nextPaymentAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>updatedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>interval</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Interval!</b></code>](/docs/apis/graphql/types/enums/interval.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>intervalCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int!</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>retryCount</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Int</b></code>](/docs/apis/graphql/types/scalars/int.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>status</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SubscriptionStatus!</b></code>](/docs/apis/graphql/types/enums/subscription-status.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>sessionDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SessionDetails</b></code>](/docs/apis/graphql/types/objects/session-details.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>traceDetails</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>TraceDetails</b></code>](/docs/apis/graphql/types/objects/trace-details.mdx) <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>callbackUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>paymentCallbackUrl</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>storeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>retrySchedule</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[RetrySchedule!]</b></code>](/docs/apis/graphql/types/objects/retry-schedule.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="object"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>Subscription.<b>metadata</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[KeyValueItem!]</b></code>](/docs/apis/graphql/types/objects/key-value-item.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="object"/>
+
+### Returned By
+
+[`cancelSubscription`](/docs/apis/graphql/operations/mutations/cancel-subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`createSubscription`](/docs/apis/graphql/operations/mutations/create-subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`pauseSubscription`](/docs/apis/graphql/operations/mutations/pause-subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`resumeSubscription`](/docs/apis/graphql/operations/mutations/resume-subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`sendSubscriptionLink`](/docs/apis/graphql/operations/mutations/send-subscription-link.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`sendSubscriptionStatus`](/docs/apis/graphql/operations/mutations/send-subscription-status.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`subscription`](/docs/apis/graphql/operations/queries/subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`updateSubscription`](/docs/apis/graphql/operations/mutations/update-subscription.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>
+
+### Member Of
+
+[`SubscriptionsConnection`](/docs/apis/graphql/types/objects/subscriptions-connection.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

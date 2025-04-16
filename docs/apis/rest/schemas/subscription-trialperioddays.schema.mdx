@@ -1,0 +1,33 @@
+---
+id: subscription-trialperioddays
+title: 'Subscription-TrialPeriodDays'
+description: 'Number of days the trial period lasts.'
+sidebar_label: 'Subscription-TrialPeriodDays'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 7
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Subscription-TrialPeriodDays'}
+></Heading>
+
+Number of days the trial period lasts.
+
+<Schema
+  schema={{
+    type: 'integer',
+    format: 'int32',
+    example: 7,
+    description: 'Number of days the trial period lasts.',
+    title: 'Subscription-TrialPeriodDays'
+  }}
+  schemaType={'response'}
+></Schema>

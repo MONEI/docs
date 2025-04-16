@@ -1,0 +1,74 @@
+---
+id: notfounderror
+title: 'NotFoundError'
+description: ''
+sidebar_label: 'NotFoundError'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'status': 'NotFoundError',
+    'statusCode': 404,
+    'message': 'Resource not found',
+    'requestId': 'df011689-bd3e-4953-95ca-c7bbdacaf6f8',
+    'requestTime': '2025-03-05T10:25:52Z'
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'NotFoundError'}></Heading>
+
+<Schema
+  schema={{
+    allOf: [
+      {
+        type: 'object',
+        required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+        properties: {
+          status: {type: 'string', description: 'Error type identifier'},
+          statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+          message: {type: 'string', description: 'Human-readable error message'},
+          requestId: {
+            type: 'string',
+            description: 'Unique identifier for the request',
+            example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+          },
+          requestTime: {
+            type: 'string',
+            format: 'date-time',
+            description: 'Timestamp when the request was processed',
+            example: '2025-03-05T10:25:52Z'
+          }
+        },
+        title: 'ApiException'
+      },
+      {
+        type: 'object',
+        properties: {
+          status: {
+            type: 'string',
+            example: 'NotFoundError',
+            description: 'Error type identifier'
+          },
+          statusCode: {
+            type: 'integer',
+            format: 'int32',
+            example: 404,
+            description: 'HTTP status code'
+          },
+          message: {
+            type: 'string',
+            example: 'Resource not found',
+            description: 'Human-readable error message'
+          }
+        }
+      }
+    ],
+    title: 'NotFoundError'
+  }}
+  schemaType={'response'}
+></Schema>

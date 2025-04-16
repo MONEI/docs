@@ -1,0 +1,78 @@
+---
+id: card-type
+title: CardType
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Possible device types
+
+```graphql
+enum CardType {
+  debit
+  credit
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>CardType.<b>debit</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>CardType.<b>credit</b></code>](#)
+
+### Member Of
+
+[`PaymentMethodCard`](/docs/apis/graphql/types/objects/payment-method-card.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`PaymentMethodCardInput`](/docs/apis/graphql/types/inputs/payment-method-card-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/><Bullet />[`PaymentMethodCardPresent`](/docs/apis/graphql/types/objects/payment-method-card-present.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/><Bullet />[`PaymentMethodCardPresentInput`](/docs/apis/graphql/types/inputs/payment-method-card-present-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/>

@@ -1,0 +1,48 @@
+---
+id: payment-status
+title: 'Payment-Status'
+description: 'The status of the payment.'
+sidebar_label: 'Payment-Status'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'PENDING'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-Status'}></Heading>
+
+The status of the payment.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'PENDING',
+    enum: [
+      'SUCCEEDED',
+      'PENDING',
+      'FAILED',
+      'CANCELED',
+      'REFUNDED',
+      'PARTIALLY_REFUNDED',
+      'AUTHORIZED',
+      'EXPIRED'
+    ],
+    'x-enumDescriptions': {
+      SUCCEEDED: 'The payment has been successfully processed and funds have been captured',
+      PENDING: 'The payment is being processed and awaiting completion',
+      FAILED: 'The payment attempt was unsuccessful',
+      CANCELED: 'The payment was canceled before completion',
+      REFUNDED: 'The full payment amount has been refunded',
+      PARTIALLY_REFUNDED: 'Only a portion of the payment amount has been refunded',
+      AUTHORIZED: 'The payment has been authorized but funds have not been captured yet',
+      EXPIRED: 'The payment has expired without being completed'
+    },
+    description: 'The status of the payment.',
+    title: 'Payment-Status'
+  }}
+  schemaType={'response'}
+></Schema>

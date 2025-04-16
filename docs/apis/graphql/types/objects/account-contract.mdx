@@ -1,0 +1,96 @@
+---
+id: account-contract
+title: AccountContract
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Account contract information
+
+```graphql
+type AccountContract {
+  envelopeId: ID!
+  status: ContractStatus!
+  path: String @deprecated
+  signedDate: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountContract.<b>envelopeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Contract envelope ID
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountContract.<b>status</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ContractStatus!</b></code>](/docs/apis/graphql/types/enums/contract-status.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="enum"/>
+
+Contract status
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountContract.<b>path</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--deprecated" text="deprecated"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+:::warning[DEPRECATED]
+
+contract is stored as a document
+
+:::
+
+#### [<code style={{ fontWeight: 'normal' }}>AccountContract.<b>signedDate</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Contract signature date in ISO 8601 format
+
+### Member Of
+
+[`Account`](/docs/apis/graphql/types/objects/account.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

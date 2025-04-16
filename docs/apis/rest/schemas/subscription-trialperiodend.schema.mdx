@@ -1,0 +1,33 @@
+---
+id: subscription-trialperiodend
+title: 'Subscription-TrialPeriodEnd'
+description: 'The end date of the trial period. Measured in seconds since the Unix epoch.'
+sidebar_label: 'Subscription-TrialPeriodEnd'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 1636366897
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Subscription-TrialPeriodEnd'}
+></Heading>
+
+The end date of the trial period. Measured in seconds since the Unix epoch.
+
+<Schema
+  schema={{
+    type: 'number',
+    format: 'int64',
+    example: 1636366897,
+    description: 'The end date of the trial period. Measured in seconds since the Unix epoch.',
+    title: 'Subscription-TrialPeriodEnd'
+  }}
+  schemaType={'response'}
+></Schema>

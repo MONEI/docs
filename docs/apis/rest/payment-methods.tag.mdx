@@ -1,0 +1,30 @@
+---
+id: payment-methods
+title: 'Payment Methods'
+description: 'Payment Methods'
+custom_edit_url: null
+---
+
+The Payment Methods API allows you to retrieve available payment methods for an account or a specific payment.
+This information can be used to display appropriate payment options to your customers.
+
+Payment methods vary by country, currency, and merchant configuration. This API helps you dynamically
+determine which payment methods are available for a specific transaction or account.
+
+You can use this API to:
+
+- Get all payment methods available for an account
+- Get payment methods available for a specific payment
+- Display payment options to your customers based on their location and purchase details
+
+## Payment Methods object
+
+See [PaymentMethods](https://docs.monei.com/docs/apis/rest/schemas/paymentmethods/) for more
+information.
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
+```

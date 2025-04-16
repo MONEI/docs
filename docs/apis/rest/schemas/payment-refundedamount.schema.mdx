@@ -1,0 +1,31 @@
+---
+id: payment-refundedamount
+title: 'Payment-RefundedAmount'
+description: 'Amount in cents refunded (can be less than the amount'
+sidebar_label: 'Payment-RefundedAmount'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: null
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-RefundedAmount'}></Heading>
+
+Amount in cents refunded (can be less than the amount
+attribute on the payment if a partial refund was issued).
+
+<Schema
+  schema={{
+    type: 'integer',
+    format: 'int32',
+    example: null,
+    description:
+      'Amount in cents refunded (can be less than the amount\nattribute on the payment if a partial refund was issued).\n',
+    title: 'Payment-RefundedAmount'
+  }}
+  schemaType={'response'}
+></Schema>

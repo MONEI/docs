@@ -1,0 +1,87 @@
+---
+id: searchable-account-settlement-filter-input
+title: SearchableAccountSettlementFilterInput
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+input SearchableAccountSettlementFilterInput {
+  createdAt: SearchableIntFilterInput
+  storeId: SearchableStringFilterInput
+  and: [SearchableAccountSettlementFilterInput]
+  or: [SearchableAccountSettlementFilterInput]
+  not: SearchableAccountSettlementFilterInput
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableAccountSettlementFilterInput.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableIntFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-int-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableAccountSettlementFilterInput.<b>storeId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableStringFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-string-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableAccountSettlementFilterInput.<b>and</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[SearchableAccountSettlementFilterInput]</b></code>](/docs/apis/graphql/types/inputs/searchable-account-settlement-filter-input.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableAccountSettlementFilterInput.<b>or</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[SearchableAccountSettlementFilterInput]</b></code>](/docs/apis/graphql/types/inputs/searchable-account-settlement-filter-input.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="input"/>
+
+#### [<code style={{ fontWeight: 'normal' }}>SearchableAccountSettlementFilterInput.<b>not</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>SearchableAccountSettlementFilterInput</b></code>](/docs/apis/graphql/types/inputs/searchable-account-settlement-filter-input.mdx) <Badge class="badge badge--secondary " text="input"/>
+
+### Member Of
+
+[`accountSettlements`](/docs/apis/graphql/operations/queries/account-settlements.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`SearchableAccountSettlementFilterInput`](/docs/apis/graphql/types/inputs/searchable-account-settlement-filter-input.mdx) <Badge class="badge badge--secondary badge--relation" text="input"/>

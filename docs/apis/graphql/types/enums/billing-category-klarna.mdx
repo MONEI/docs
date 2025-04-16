@@ -1,0 +1,87 @@
+---
+id: billing-category-klarna
+title: BillingCategoryKlarna
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+No description
+
+```graphql
+enum BillingCategoryKlarna {
+  PAY_IN_PARTS
+  PAY_LATER
+  PAY_NOW
+  SLICE_IT
+  SLICE_IT_BY_CARD
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>BillingCategoryKlarna.<b>PAY_IN_PARTS</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BillingCategoryKlarna.<b>PAY_LATER</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BillingCategoryKlarna.<b>PAY_NOW</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BillingCategoryKlarna.<b>SLICE_IT</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>BillingCategoryKlarna.<b>SLICE_IT_BY_CARD</b></code>](#)
+
+### Member Of
+
+[`PaymentMethodKlarna`](/docs/apis/graphql/types/objects/payment-method-klarna.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

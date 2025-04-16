@@ -1,0 +1,62 @@
+---
+id: address
+title: 'Address'
+description: ''
+sidebar_label: 'Address'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'country': 'ES',
+    'city': 'Málaga',
+    'line1': 'Fake Street 123',
+    'line2': null,
+    'zip': '1234',
+    'state': 'Málaga'
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Address'}></Heading>
+
+<Schema
+  schema={{
+    title: 'Address',
+    type: 'object',
+    properties: {
+      country: {
+        type: 'string',
+        example: 'ES',
+        description:
+          'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+        title: 'Country'
+      },
+      city: {
+        type: 'string',
+        example: 'Málaga',
+        description: 'City, district, suburb, town, or village.'
+      },
+      line1: {
+        type: 'string',
+        example: 'Fake Street 123',
+        description: 'Address line 1 (e.g., street, PO Box, or company name).'
+      },
+      line2: {
+        type: 'string',
+        example: null,
+        description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
+      },
+      zip: {type: 'string', example: '1234', description: 'ZIP or postal code.'},
+      state: {
+        type: 'string',
+        example: 'Málaga',
+        description: 'State, county, province, or region.'
+      }
+    }
+  }}
+  schemaType={'response'}
+></Schema>

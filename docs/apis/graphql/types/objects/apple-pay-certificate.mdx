@@ -1,0 +1,114 @@
+---
+id: apple-pay-certificate
+title: ApplePayCertificate
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Custom Apple Pay Certificate needed to enable Apple Pay in the native iOS app.
+Apple only allows certificates that are created by developers to be used in the Apple Pay payment process.
+Register your custom Apple Pay certificate to allow MONEI to decrypt the payment data.
+
+```graphql
+type ApplePayCertificate {
+  id: ID!
+  accountId: ID!
+  expireAt: String!
+  active: Boolean!
+  cert: String
+  csr: String
+  createdAt: String!
+  updatedAt: String
+}
+```
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>ApplePayCertificate.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Apple Pay certificate ID
+
+#### [<code style={{ fontWeight: 'normal' }}>ApplePayCertificate.<b>accountId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/apis/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Account ID
+
+#### [<code style={{ fontWeight: 'normal' }}>ApplePayCertificate.<b>expireAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Expiration date, in ISO 8601 format
+
+#### [<code style={{ fontWeight: 'normal' }}>ApplePayCertificate.<b>active</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean!</b></code>](/docs/apis/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Whether the certificate is active or not
+
+#### [<code style={{ fontWeight: 'normal' }}>ApplePayCertificate.<b>cert</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The base64 encoded PEM certificate
+
+#### [<code style={{ fontWeight: 'normal' }}>ApplePayCertificate.<b>csr</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+The base64 encoded PEM Certificate Signing Request
+
+#### [<code style={{ fontWeight: 'normal' }}>ApplePayCertificate.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/>
+
+Created date, in ISO 8601 format
+
+#### [<code style={{ fontWeight: 'normal' }}>ApplePayCertificate.<b>updatedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String</b></code>](/docs/apis/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="scalar"/>
+
+Updated date, in ISO 8601 format
+
+### Returned By
+
+[`activateApplePayCert`](/docs/apis/graphql/operations/mutations/activate-apple-pay-cert.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`applePayCert`](/docs/apis/graphql/operations/queries/apple-pay-cert.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`applePayCerts`](/docs/apis/graphql/operations/queries/apple-pay-certs.mdx) <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`createApplePayCert`](/docs/apis/graphql/operations/mutations/create-apple-pay-cert.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`updateApplePayCert`](/docs/apis/graphql/operations/mutations/update-apple-pay-cert.mdx) <Badge class="badge badge--secondary badge--relation" text="mutation"/>

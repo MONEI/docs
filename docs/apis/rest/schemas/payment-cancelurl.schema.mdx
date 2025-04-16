@@ -1,0 +1,30 @@
+---
+id: payment-cancelurl
+title: 'Payment-CancelUrl'
+description: 'The URL the customer will be directed to if they decide to cancel'
+sidebar_label: 'Payment-CancelUrl'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'https://example.com/checkout/cancel'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Payment-CancelUrl'}></Heading>
+
+The URL the customer will be directed to if they decide to cancel
+payment and return to your website (used in hosted payment page).
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'https://example.com/checkout/cancel',
+    description:
+      'The URL the customer will be directed to if they decide to cancel\npayment and return to your website (used in hosted payment page).\n',
+    title: 'Payment-CancelUrl'
+  }}
+  schemaType={'response'}
+></Schema>

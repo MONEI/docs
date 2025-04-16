@@ -1,0 +1,102 @@
+---
+id: next-action-types
+title: NextActionTypes
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)'}}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{fontSize: '1.5em', paddingLeft: '4px'}}
+      target="_blank"
+      href={props.url}
+      title={'Specified by ' + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span className={props.class}>{props.text}</span>
+  </>
+);
+
+import {useState} from 'react';
+
+export const Details = ({dataOpen, dataClose, children, startOpen = false}) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details
+      {...(open ? {open: true} : {})}
+      className="details"
+      style={{border: 'none', boxShadow: 'none', background: 'var(--ifm-background-color)'}}
+    >
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{listStyle: 'none'}}
+      >
+        {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+Next action types
+
+- `CONFIRM` - Your customer needs to be redirected to a
+  [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)
+  or confirm payment using
+  [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).
+  The **redirectUrl** will point to the hosted payment page.
+- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless
+  3d secure challenge page provided by the bank. The **redirectUrl**
+  will point to the frictionless 3d secure challenge page provided by the bank.
+- `CHALLENGE` - Your customer needs to be redirected to the
+  3d secure challenge page provided by the bank. The **redirectUrl**
+  will point to the 3d secure challenge page provided by the bank.
+- `COMPLETE` - The payment is completed. The **redirectUrl** will be
+  the **completeUrl** if it was provided when the payment was created.
+- `BIZUM_CHALLENGE` - Your customer will be redirected to the Bizum hosted payment page.
+
+```graphql
+enum NextActionTypes {
+  CONFIRM
+  CHALLENGE
+  COMPLETE
+  FRICTIONLESS_CHALLENGE
+  BIZUM_CHALLENGE
+}
+```
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>NextActionTypes.<b>CONFIRM</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>NextActionTypes.<b>CHALLENGE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>NextActionTypes.<b>COMPLETE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>NextActionTypes.<b>FRICTIONLESS_CHALLENGE</b></code>](#)
+
+#### [<code style={{ fontWeight: 'normal' }}>NextActionTypes.<b>BIZUM_CHALLENGE</b></code>](#)
+
+### Member Of
+
+[`NextAction`](/docs/apis/graphql/types/objects/next-action.mdx) <Badge class="badge badge--secondary badge--relation" text="object"/>

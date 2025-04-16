@@ -1,0 +1,28 @@
+---
+id: devicetype
+title: 'DeviceType'
+description: 'Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`.'
+sidebar_label: 'DeviceType'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 'desktop'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'DeviceType'}></Heading>
+
+Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`.
+
+<Schema
+  schema={{
+    type: 'string',
+    example: 'desktop',
+    description: 'Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`.',
+    title: 'DeviceType'
+  }}
+  schemaType={'response'}
+></Schema>

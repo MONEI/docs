@@ -1,0 +1,3108 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscriptions
+}
+"Long type"
+scalar Long
+"The `AWSTimestamp` scalar type provided by AWS AppSync, represents the number of seconds that have elapsed since `1970-01-01T00:00Z`. Negative values are also accepted and these represent the number of seconds till `1970-01-01T00:00Z`.  Timestamps are serialized and deserialized as integers. The minimum supported timestamp value is **`-31557014167219200`** which corresponds to `-1000000000-01-01T00:00Z`. The maximum supported timestamp value is **`31556889864403199`** which corresponds to `1000000000-12-31T23:59:59.999999999Z`."
+scalar AWSTimestamp
+"""
+The `AWSIPAddress` scalar type provided by AWS AppSync, represents a valid [IPv4](https://en.wikipedia.org/wiki/IPv4#Addressing) or [IPv6](https://en.wikipedia.org/wiki/IPv6_address) address string.  IP addresses with subnet masks are considered valid. However, subnet masks are not necessary. For example, "**127.0.0.1**" and "**127.0.0.1/8**" are both considered valid IP Addresses.
+"""
+scalar AWSIPAddress
+"""
+The `AWSEmail` scalar type provided by AWS AppSync, represents an Email address string that complies with [RFC 822](https://www.ietf.org/rfc/rfc822.txt). For example, "**username@example.com**" is a valid Email address.
+"""
+scalar AWSEmail
+"The `AWSPhone` scalar type provided by AWS AppSync, represents a valid Phone Number. Phone numbers are serialized and deserialized as Strings. Segments of the phone number may be whitespace delimited or hyphenated.  The number can specify a country code at the beginning. However, United States numbers without country codes are still considered to be valid."
+scalar AWSPhone
+type Query {
+  " Account information"
+  account: Account!
+  " List of the account balances"
+  accountBalances: AccountBalancesConnection!
+  " A single account invoice"
+  accountInvoice(id: ID!): AccountInvoice
+  " List of the account invoices"
+  accountInvoices(
+    filter: SearchableAccountInvoiceFilterInput
+    size: Int
+    from: Int
+  ): AccountInvoicesConnection!
+  " A single account settlement"
+  accountSettlement(id: ID!): AccountSettlement
+  " List of the account settlements"
+  accountSettlements(
+    filter: SearchableAccountSettlementFilterInput
+    size: Int
+    from: Int
+  ): AccountSettlementsConnection!
+  " Get Custom Apple Pay certificate by ID"
+  applePayCert(id: ID!): ApplePayCertificate
+  " List of Custom Apple Pay certificates"
+  applePayCerts: [ApplePayCertificate!]
+  " List of the authorized users"
+  authorizedUsers(token: String, pageSize: Int): AuthorizedUsersConnection!
+  " Lists all the available payment methods"
+  availablePaymentMethods: [AvailablePaymentMethod!]
+  " Lists all the available processors for the payment method"
+  availableProcessors(paymentMethod: PaymentMethods!): [AvailableProcessor!]
+  " List of available banks for Bank Account Verification"
+  banks(country: String!): [Bank!]!
+  " Get blacklist item by value"
+  blacklistItem(value: String!): BlacklistItem
+  " List of the blacklist items"
+  blacklistItems(token: String, pageSize: Int, type: BlacklistItemType): BlacklistItemsConnection!
+  " A single charge"
+  charge(id: ID!): Charge
+  " List of the charge events"
+  chargeEvents(chargeId: ID!, size: Int, from: Int): ChargeEventsConnection!
+  " List of possible charge sources"
+  chargeSources: [String!]!
+  " List of the charges"
+  charges(filter: SearchableChargeFilterInput, size: Int, from: Int): ChargesConnection!
+  " Get charges KPI for a date range"
+  chargesDateRangeKPI(
+    start: Int
+    end: Int
+    interval: Interval
+    timezone: String
+    storeId: ID
+    currency: Currencies
+  ): ChargesDateRangeKPI!
+  chargesExport(id: ID!): ChargesExport
+  chargesExports(token: String, pageSize: Int): ChargesExportsConnection!
+  " A single code"
+  code(id: ID!): Code
+  " Lists the available configurations for a code type"
+  codeConfig(codeType: CodeTypes!): CodeConfig
+  " Lists all the codes of the account"
+  codes: [Code!]!
+  " Returns all the countries and the user's current country"
+  countries: Countries!
+  document(id: ID!): Document
+  documents(token: String, pageSize: Int): DocumentsConnection!
+  " List of application events"
+  events(filter: SearchableEventFilterInput, size: Int, from: Int): ChargeEventsConnection!
+  " Live account information, returns production account regardless of the environment"
+  liveAccount: Account!
+  " Link to account notifications preferences"
+  notificationsPortalUrl: Redirect
+  paymentEmailPreview(paymentId: ID!, emailType: PaymentEmailType, language: String): String
+    @deprecated(reason: "Use previewPaymentEmail instead")
+  " A single point of sale"
+  pointOfSale(id: ID!): PointOfSale
+  " Lists all the points of sale of the account or store"
+  pointsOfSale(storeId: ID, token: String, pageSize: Int): PointsOfSaleConnection!
+  posAuthToken: String
+  " Preview payment email"
+  previewPaymentEmail(paymentId: ID!, emailType: PaymentEmailType, language: String): String
+  " Preview subscription email"
+  previewSubscriptionEmail(
+    subscriptionId: ID!
+    emailType: SubscriptionEmailType
+    language: String
+  ): String
+  " A single provider"
+  provider(id: ID!): Provider
+  " Returns the configuration options for the provider"
+  providerConfig(paymentMethod: PaymentMethods!, processor: Processor!): ProviderConfig
+  " Lists all the providers of the account"
+  providers: [Provider!]
+  " Events timeline of a settlement"
+  settlementEvents(settlementId: ID!, size: Int, from: Int): SettlementEventsConnection!
+  " A single store"
+  store(id: ID!): Store
+  " Lists all the stores of the account"
+  stores(token: String, pageSize: Int): StoresConnection!
+  " A single subscription"
+  subscription(id: ID!): Subscription
+  subscriptionEmailPreview(
+    subscriptionId: ID!
+    emailType: SubscriptionEmailType
+    language: String
+  ): String @deprecated(reason: "Use previewSubscriptionEmail instead")
+  " List of the subscriptions events"
+  subscriptionEvents(subscriptionId: ID!, size: Int, from: Int): SubscriptionEventsConnection!
+  " List of the subscriptions"
+  subscriptions(
+    filter: SearchableSubscriptionFilterInput
+    size: Int
+    from: Int
+  ): SubscriptionsConnection!
+  " List of user accounts"
+  userAccounts(token: String, pageSize: Int): UserAccountsConnection!
+  " Store attached to the logged in user"
+  userStore: Store
+  " Get a web report."
+  webReport: WebReport
+  webhook(id: ID!): Webhook
+  webhooks(token: String, pageSize: Int): WebhooksConnection!
+  zendeskAuthToken: String
+}
+" Account information"
+type Account {
+  " Account ID"
+  id: ID!
+  " Account external ID, provided by the partner (master account)"
+  externalId: String
+  " Master account ID, if the account is a sub-account of a partner (master account)"
+  masterAccountId: ID
+  " Account name"
+  name: String
+  paymentMethods: AccountPaymentMethods @deprecated(reason: "not used anymore")
+  " Public business information"
+  publicBusinessDetails: AccountPublicBusinessDetails
+  " Account branding"
+  branding: AccountBranding
+  defaultCurrency: Currencies @deprecated(reason: "not used anymore")
+  " If the account is a test account"
+  test: Boolean
+  " If the account is blocked"
+  blocked: Boolean
+  " Account status"
+  status: AccountStatus!
+  reason: String @deprecated(reason: "Use statusReason instead")
+  " The account default timezone, e.g. Europe/Madrid"
+  timezone: String
+  " Account admin email"
+  adminEmail: String
+  " Account API key, used to authenticate requests to REST and GraphQL APIs"
+  apiKey: String
+  " Account custom domain, this domain will be used for the hosted payment page"
+  customDomain: String
+  " Account custom domain configuration"
+  customDomainConfig: CustomDomainConfig
+  " Account payout terms"
+  payoutTerms: AccountPayoutTerms
+  " Business basic data"
+  business: BusinessData
+  " Legal representatives"
+  representatives: [Representative!]
+  " IBAN number to receive settlements"
+  iban: String
+  " Bank account information"
+  bankAccount: BankAccount
+  " Preferred language"
+  language: String
+  " Tokenization methods"
+  tokenizationMethods: AccountTokenizationMethods
+  " Account notifications"
+  notifications: AccountNotifications
+  " Billing Plan"
+  billingPlan: BillingPlans
+  " Account contract"
+  contract: AccountContract
+  " Account referral code"
+  referralCode: String
+  " Account promo code"
+  promoCode: String
+  " Allow creating API keys, if false, the account will not be able to create new API keys"
+  allowCreateApiKey: Boolean
+  " Access to preview features"
+  previewFeatures: [String!]
+  notConfiguredReason: NotConfiguredReason @deprecated(reason: "Use statusReason instead")
+  notConfiguredNote: String @deprecated(reason: "Use statusNote instead")
+  " User provided note"
+  userNote: String
+  " The date when the account was created in ISO 8601 format"
+  createdAt: String!
+  " The date when the account was approved in ISO 8601 format"
+  approvedAt: String
+  " The date when the account was updated in ISO 8601 format"
+  updatedAt: String
+  rejectedReason: RejectedReason @deprecated(reason: "Use statusReason instead")
+  rejectedNote: String @deprecated(reason: "Use statusNote instead")
+  " The reason why the account status was changed"
+  statusReason: StatusReason
+  " The note about the account status"
+  statusNote: String
+}
+type AccountPaymentMethods {
+  CREDITCARD: AccountPaymentMethodsCreditCard
+  BIZUM: AccountPaymentMethodsBizum
+}
+type AccountPaymentMethodsCreditCard {
+  enabled: Boolean
+  preauthorization: Boolean
+}
+type AccountPaymentMethodsBizum {
+  enabled: Boolean
+}
+" Account public business details"
+type AccountPublicBusinessDetails {
+  " Company name"
+  companyName: String
+  " Company website"
+  website: String
+  " Company phone, E.164 format, e.g. +34666777888"
+  phone: String
+  " Company address"
+  address: Address
+  " Support website"
+  supportWebsite: String
+  " Support email"
+  supportEmail: String
+  " Support phone, E.164 format, e.g. +34666777888"
+  supportPhone: String
+}
+" Full address details"
+type Address {
+  " Address city"
+  city: String
+  " Address country as ISO 3166-1 alpha-2 code"
+  country: String
+  " Address line 1"
+  line1: String
+  " Address line 2"
+  line2: String
+  " Address ZIP code"
+  zip: String
+  " Address state"
+  state: String
+}
+" Account branding"
+type AccountBranding {
+  " Merchant's accent color"
+  accentColor: String
+  " Merchant's background color"
+  bgColor: String
+  " Merchant's logo URL, the logo will be displayed on the payment page"
+  logoUrl: String
+  " Merchant's icon URL, the icon will be used as an icon for the payment page"
+  iconUrl: String
+}
+type CustomDomainConfig {
+  " The custom domain name"
+  domain: String
+  " The DNS record of the SSL/TLS certificate to add to the DNS database"
+  certificateDnsRecord: DnsRecord
+  " The DNS record of the CloudFront distribution to add to the DNS database"
+  distributionDnsRecord: DnsRecord
+  " The status of the custom domain"
+  status: CustomDomainStatus
+}
+type DnsRecord {
+  " The name of the DNS record to create in the domain"
+  name: String
+  " The type of DNS record (e.g.: CNAME)"
+  type: String
+  " The value of the DNS record to add to the DNS database"
+  value: String
+}
+" Account payout terms"
+type AccountPayoutTerms {
+  " IBAN to make settlements to"
+  iban: String
+  " First settlement period in days"
+  firstPeriod: Int
+  " Settlement period in days"
+  period: Int
+  " The percentage of the total amount of the settlement that will be withheld and released with the next settlement"
+  reservePercent: Float
+  " Whether the settlements are suspended"
+  suspended: Boolean
+}
+" Business details"
+type BusinessData {
+  " Country code, ISO 3166-1 alpha-2 code"
+  country: String
+  " Legal form"
+  legalForm: LegalForm
+  " Legal name"
+  legalName: String
+  " Company name, could be different from legal name"
+  companyName: String
+  " Full address"
+  address: Address
+  " Company tax ID (CIF/NIF)"
+  documentNumber: String
+  " Company email"
+  email: String
+  " Phone number in E.164 format, e.g. +34666777888"
+  phone: String
+  " Website"
+  website: String
+  " Expected monthly volume in EUR"
+  monthlyVolume: Long
+  " Confirms that website complies with requirements"
+  confirmWebsite: Boolean
+  " Company Industry"
+  industry: Industries
+  " Merchant Category Codes (MCC) in ISO 18245:2003 format"
+  mcc: String
+  " A list of allowed MCCs"
+  allowedMcc: [String!]
+  " A description of the products or services it provides"
+  servicesDescription: String
+  " Confirms that service complies with requirements"
+  confirmServicesDescription: Boolean
+  " Business status"
+  status: BusinessStatus
+}
+" Account legal representative"
+type Representative {
+  " First name"
+  firstName: String
+  " Last name"
+  lastName: String
+  " Full address"
+  address: Address
+  " Email"
+  email: String
+  " Phone number in E.164 format, e.g. +34666777888"
+  phone: String
+  " Document number (CIF/NIF)"
+  documentNumber: String
+  " Stock percentage (100% if it's an individual or freelancer)"
+  stocksPercentage: Float
+  " Identity verification status"
+  status: IdVerificationStatus
+  " Identity verification status message"
+  statusMessage: String
+  " Identity verification status code"
+  statusCode: Int
+  " Confirms that representative complies with requirements"
+  hasNoPublicActivity: Boolean
+  " Nationality, ISO 3166-1 alpha-2 code"
+  nationality: String
+  " Citizenship, ISO 3166-1 alpha-2 code"
+  citizenship: String
+}
+" Bank account information"
+type BankAccount {
+  " Bank account status"
+  status: BankAccountStatus!
+  " Bank account IBAN"
+  iban: String
+  " Bank account currency"
+  currency: String
+  " Bank account owner name"
+  ownerName: String
+}
+type AccountTokenizationMethods {
+  googlePay: AccountTokenizationMethodsItem
+  applePay: AccountTokenizationMethodsItem
+  clickToPay: AccountTokenizationMethodsClickToPayItem
+}
+type AccountTokenizationMethodsItem {
+  enabled: Boolean
+}
+type AccountTokenizationMethodsClickToPayItem {
+  enabled: Boolean
+  dpaId: ID
+}
+" Account notifications"
+type AccountNotifications {
+  " Whether to send an email to the customer on refund"
+  emailCustomerOnRefund: Boolean
+  " Whether to send an email to the customer on successful payment"
+  emailCustomerOnSuccess: Boolean
+  " Whether to send an email to the customer on successful subscription"
+  emailCustomerOnSubscription: Boolean
+  " Whether to send an email to the admin on every successful payment"
+  emailAdminOnSuccess: Boolean
+  " Whether to send an email to the admin on every successful subscription"
+  emailAdminOnSubscription: Boolean
+  " List of admin emails to send notifications"
+  adminEmails: [String!]
+}
+" Account contract information"
+type AccountContract {
+  " Contract envelope ID"
+  envelopeId: ID!
+  " Contract status"
+  status: ContractStatus!
+  path: String @deprecated(reason: "contract is stored as a document")
+  " Contract signature date in ISO 8601 format"
+  signedDate: String
+}
+type AccountBalancesConnection {
+  " List of the account balances"
+  items: [AccountBalances!]!
+}
+type AccountBalances {
+  " The unique identifier for the account"
+  accountId: ID
+  " The currency of the account"
+  currency: String!
+  " The cleared amount of the account"
+  clearedAmount: Int!
+  " The outstanding amount of the account"
+  outstandingAmount: Int!
+  " The total amount of the account"
+  totalAmount: Int!
+  " The date and time the account was created"
+  createdAt: String!
+  " The date and time the account was last updated"
+  updatedAt: String
+}
+"""
+ Invoice that MONEI issues to the account,
+this invoice is generated based on the account transactions
+and includes all the fees for the given period
+"""
+type AccountInvoice {
+  " Account invoice ID"
+  id: ID!
+  " Account invoice number"
+  number: String
+  " Account ID"
+  accountId: ID!
+  " Invoice period"
+  period: Period!
+  " Invoice currency"
+  currency: Currencies!
+  " Invoice amount in cents"
+  amount: Int!
+  " Invoice tax amount in cents"
+  tax: Int!
+  " Invoice total amount in cents"
+  totalAmount: Int!
+  " Invoice line items"
+  lineItems: [AccountInvoiceLineItem!]!
+  " Invoice customer details"
+  business: AccountInvoiceBusiness
+  " Referral code used to generate the invoice"
+  referralCode: String
+  " Invoice creation date as a unix timestamp"
+  createdAt: Int!
+  " Invoice status"
+  status: AccountInvoiceStatus
+  " Invoice payment method"
+  paymentMethod: AccountInvoicePaymentMethod
+}
+" Account invoice period"
+type Period {
+  " Start date of the period as a unix timestamp"
+  from: Int!
+  " End date of the period as a unix timestamp"
+  to: Int!
+}
+"""
+ Account invoice line item
+- If the `unitType` is `money`, `unitAmount` is the amount in the currency of the invoice in cents
+and the line item amount is calculated as `quantity * unitAmount`
+- If the `unitType` is `percent`, `unitAmount` is the percentage value, quantity is an amount in the currency of the invoice in cents and the line item amount is calculated as `quantity * unitAmount / 100`
+"""
+type AccountInvoiceLineItem {
+  " Line item name"
+  name: String!
+  " Line item quantity"
+  quantity: Int!
+  " Line item unit amount"
+  unitAmount: Float!
+  " Line item unit type"
+  unitType: UnitType!
+  " Line item currency"
+  currency: Currencies!
+  " Line item total amount in cents"
+  amount: Int!
+}
+" Account invoice business details"
+type AccountInvoiceBusiness {
+  " Business legal name"
+  legalName: String
+  " Business IBAN"
+  iban: String
+  " Business tax ID"
+  documentNumber: String
+  " SEPA mandate signature date as a unix timestamp"
+  mandateSignatureTimestamp: Int
+}
+" Account invoices connection"
+type AccountInvoicesConnection {
+  " List of account invoices"
+  items: [AccountInvoice!]!
+  " Total number of account invoices"
+  total: Int!
+}
+type AccountSettlement {
+  " Account ID"
+  accountId: ID!
+  " Fees for the settlement period"
+  acquirerFees: Int!
+  " Gross volume for the settlement period"
+  grossVolume: Int!
+  " IBAN for the settlement bank transfer"
+  iban: String
+  " Settlement ID"
+  id: ID!
+  " Legal name of the store"
+  legalName: String
+  " Net volume for the settlement period"
+  netVolume: Int!
+  " Payment method for the all the transactions in the settlement"
+  payMethod: SettlementPayMethods
+  " Settlement end period"
+  periodEndAt: AWSTimestamp!
+  " Settlement start period"
+  periodStartAt: AWSTimestamp!
+  " Released amount hold in the previous settlement"
+  releasedAmount: Int
+  " Reserve amount hold from the previous settlement"
+  reservedAmount: Int
+  " Settlement completion projected date"
+  scheduledAt: AWSTimestamp!
+  " Settlement status"
+  status: SettlementStatus!
+  " Payout type"
+  settleGross: Boolean
+  " Settlement associated to a specific store in the account"
+  storeId: ID
+}
+type AccountSettlementsConnection {
+  items: [AccountSettlement!]!
+  total: Int!
+}
+"""
+ Custom Apple Pay Certificate needed to enable Apple Pay in the native iOS app.
+Apple only allows certificates that are created by developers to be used in the Apple Pay payment process.
+Register your custom Apple Pay certificate to allow MONEI to decrypt the payment data.
+"""
+type ApplePayCertificate {
+  " Apple Pay certificate ID"
+  id: ID!
+  " Account ID"
+  accountId: ID!
+  " Expiration date, in ISO 8601 format"
+  expireAt: String!
+  " Whether the certificate is active or not"
+  active: Boolean!
+  " The base64 encoded PEM certificate"
+  cert: String
+  " The base64 encoded PEM Certificate Signing Request"
+  csr: String
+  " Created date, in ISO 8601 format"
+  createdAt: String!
+  " Updated date, in ISO 8601 format"
+  updatedAt: String
+}
+type AuthorizedUsersConnection {
+  " List of the authorized users"
+  items: [AuthorizedUser!]!
+  " The string that you use in a subsequent request to get the next page of results in a paginated response."
+  nextToken: String
+}
+"""
+ An authorized user that can access the MONEI dashboard.
+One user can have access to multiple accounts with different access levels.
+"""
+type AuthorizedUser {
+  " Email address of the authorized user"
+  userEmail: String!
+  " ID of the authorized user"
+  id: ID!
+  " Access level for the authorized user"
+  accessLevel: AuthorizedUserAccessLevel!
+  " Limit access to a specific store"
+  storeId: ID
+  " Status of the authorized user"
+  status: AuthorizedUserStatus!
+  " Last login date"
+  lastLoginAt: String
+  " Creation date, in ISO 8601 format"
+  createdAt: String!
+  " Updated date, in ISO 8601 format"
+  updatedAt: String
+}
+type AvailablePaymentMethod {
+  " The specific payment method"
+  paymentMethod: PaymentMethods
+  " Whether there is one provider configured for the payment method"
+  configured: Boolean
+  " Whether there is one provider enabled for the payment method"
+  enabled: Boolean
+}
+type AvailableProcessor {
+  " The requested payment method"
+  paymentMethod: PaymentMethods
+  " The specific processor"
+  processor: Processor
+  " Whether there is one provider configured for the payment method and processor"
+  configured: Boolean
+  " Whether the processor is open to be configured or not"
+  configurable: Boolean
+  " Whether there is one provider enabled for the payment method and processor"
+  enabled: Boolean
+}
+type Bank {
+  id: ID!
+  name: String!
+  logo: String!
+}
+"""
+ Blacklist item, e.g. email, phone, ip, card, bin, fingerprint.
+All payments with this value will be blocked.
+"""
+type BlacklistItem {
+  " The value of the blacklist item, e.g. email, phone, ip, card, bin, fingerprint"
+  value: String!
+  " The type of the blacklist item"
+  type: BlacklistItemType!
+  " The account ID that created the blacklist item"
+  accountId: ID
+  " Creation date in ISO 8601 format"
+  createdAt: String!
+  " Last update date in ISO 8601 format"
+  updatedAt: String
+}
+type BlacklistItemsConnection {
+  " List of the authorized users"
+  items: [BlacklistItem]!
+  " The string that you use in a subsequent request to get the next page of results in a paginated response."
+  nextToken: String
+}
+type Charge {
+  " The charge ID"
+  id: ID!
+  " The account ID"
+  accountId: ID!
+  " The provider ID"
+  providerId: ID
+  checkoutId: ID!
+  providerInternalId: ID
+  providerReferenceId: ID
+  " Created date as a Unix timestamp"
+  createdAt: AWSTimestamp
+  " Updated date as a Unix timestamp"
+  updatedAt: AWSTimestamp
+  """
+   Amount intended to be collected by this payment. A positive integer
+  representing how much to charge in the smallest currency unit (e.g. 100 cents to charge 1.00 USD).
+  """
+  amount: Int
+  " The authorization code"
+  authorizationCode: String
+  " Billing information"
+  billingDetails: ContactDetails
+  " Billing plan"
+  billingPlan: BillingPlans
+  " The currency of the payment"
+  currency: String!
+  " Basic information about the customer"
+  customer: Customer
+  " The payment description"
+  description: String
+  " The payment descriptor that will appear on the customer's statement"
+  descriptor: String
+  " Whether the charge was made in live mode"
+  livemode: Boolean
+  " The order ID in your platform (eg: the invoice number)"
+  orderId: ID
+  " The ID of the store"
+  storeId: ID
+  " The ID of the Point of Sale this payment will be associated to"
+  pointOfSaleId: ID
+  " The ID of the terminal this payment will be associated to"
+  terminalId: ID
+  " The sequence ID"
+  sequenceId: ID
+  " The subscription ID"
+  subscriptionId: ID
+  " The payment method"
+  paymentMethod: PaymentMethod
+  " The reason why the payment is being canceled"
+  cancellationReason: CancellationReason
+  " The last refund amount"
+  lastRefundAmount: Int
+  " The last refund reason"
+  lastRefundReason: RefundReason
+  " Total refunded amount"
+  refundedAmount: Int
+  " Shipping information"
+  shippingDetails: ContactDetails
+  " Shop information"
+  shop: Shop
+  " The charge status"
+  status: ChargeStatus!
+  """
+   The status code, full list of possible values
+  can be found in the [documentation](https://docs.monei.com/api/#tag/Status-codes)
+  """
+  statusCode: String
+  " Human readable status message, can be displayed to a user."
+  statusMessage: String
+  " Session details"
+  sessionDetails: SessionDetails
+  " Trace details"
+  traceDetails: TraceDetails
+  " Time when the payment page was opened by customer as a Unix timestamp"
+  pageOpenedAt: AWSTimestamp
+  " Metadata key-value pairs"
+  metadata: [KeyValueItem!]
+}
+" Contact details"
+type ContactDetails {
+  " Contact email"
+  email: String
+  " Contact name"
+  name: String
+  " Contact company"
+  company: String
+  " Contact phone in E.164 format, e.g. +34666777888"
+  phone: String
+  " Contact address"
+  address: Address
+  " Contact tax ID"
+  taxId: String
+}
+" Customer details"
+type Customer {
+  " Customer email"
+  email: String
+  " Customer name"
+  name: String
+  " Customer phone in E.164 format, e.g. +34666777888"
+  phone: String
+}
+" Payment method details"
+type PaymentMethod {
+  method: PaymentMethods
+  card: PaymentMethodCard
+  cardPresent: PaymentMethodCardPresent
+  bizum: PaymentMethodBizum
+  paypal: PaymentMethodPaypal
+  cofidis: PaymentMethodCofidis
+  cofidisLoan: PaymentMethodCofidisLoan
+  trustly: PaymentMethodTrustly
+  sepa: PaymentMethodSepa
+  klarna: PaymentMethodKlarna
+  mbway: PaymentMethodMBWay
+}
+" Card payment method details"
+type PaymentMethodCard {
+  " Card brand"
+  brand: CardBrand
+  " Card country as ISO 3166-1 alpha-2 code"
+  country: String
+  " Card type"
+  type: CardType
+  " Indicates if transaction was 3D Secure"
+  threeDSecure: Boolean
+  " 3D Secure version"
+  threeDSecureVersion: String
+  " 3D Secure flow"
+  threeDSecureFlow: ThreeDSecureFlow
+  " Card last 4 digits"
+  last4: String
+  " Cardholder name"
+  cardholderName: String
+  " Cardholder email"
+  cardholderEmail: String
+  " Expiration date as unix timestamp"
+  expiration: AWSTimestamp
+  " Card issuing bank"
+  bank: String
+  " Card tokenization method"
+  tokenizationMethod: TokenizationMethods
+}
+type PaymentMethodCardPresent {
+  brand: CardBrand
+  country: String
+  type: CardType
+  bin: String
+  last4: String
+  cardholderName: String
+  cardholderEmail: String
+  expiration: Long
+}
+" Bizum payment method details"
+type PaymentMethodBizum {
+  " Bizum phone number in E.164 format, e.g. +34666777888"
+  phoneNumber: String
+  integrationType: String
+}
+" Paypal payment method details"
+type PaymentMethodPaypal {
+  " Paypal payer ID"
+  orderId: ID
+  " Paypal payer ID"
+  payerId: ID
+  " Paypal payer email"
+  email: String
+  " Paypal payer name"
+  name: String
+}
+type PaymentMethodCofidis {
+  orderId: ID
+}
+type PaymentMethodCofidisLoan {
+  orderId: ID
+}
+type PaymentMethodTrustly {
+  customerId: ID
+}
+type PaymentMethodSepa {
+  accountholderAddress: Address
+  accountholderEmail: String
+  accountholderName: String
+  countryCode: String
+  bankAddress: String
+  bankCode: String
+  bankName: String
+  bic: String
+  last4: String
+}
+type PaymentMethodKlarna {
+  billingCategory: BillingCategoryKlarna
+  authPaymentMethod: AuthPaymentMethodKlarna
+}
+type PaymentMethodMBWay {
+  " MBWay phone number in E.164 format, e.g. +34666777888"
+  phoneNumber: String
+}
+" Shop details"
+type Shop {
+  " Shop name"
+  name: String
+  " Shop country"
+  country: String
+}
+" Session details"
+type SessionDetails {
+  ip: AWSIPAddress
+  userAgent: String
+  countryCode: String
+  lang: String
+  deviceType: DeviceType
+  deviceModel: String
+  browser: String
+  browserVersion: String
+  browserAccept: String
+  browserColorDepth: String
+  browserScreenHeight: String
+  browserScreenWidth: String
+  browserTimezoneOffset: String
+  os: String
+  osVersion: String
+  source: String
+  sourceVersion: String
+}
+type TraceDetails {
+  ip: AWSIPAddress
+  userAgent: String
+  countryCode: String
+  lang: String
+  deviceType: DeviceType
+  deviceModel: String
+  browser: String
+  browserVersion: String
+  browserAccept: String
+  os: String
+  osVersion: String
+  source: String
+  sourceVersion: String
+  userId: ID
+  userEmail: String
+  userName: String
+}
+type KeyValueItem {
+  key: String!
+  value: String
+}
+type ChargeEventsConnection {
+  items: [ChargeEvent!]!
+  total: Int!
+}
+type ChargeEvent {
+  " Charge event ID"
+  id: ID!
+  " Event type"
+  type: String!
+  " Account ID"
+  accountId: ID!
+  " If the event was created in live mode"
+  livemode: Boolean
+  " The event object ID, this is the ID of the charge"
+  objectId: ID!
+  " The event object type, this is always 'charge'"
+  objectType: String!
+  " The event object"
+  object: ChargeEventObject!
+  " Event creation date as a Unix timestamp"
+  createdAt: AWSTimestamp
+}
+type ChargeEventObject {
+  id: ID!
+  accountId: ID!
+  providerId: ID
+  checkoutId: ID!
+  providerInternalId: ID
+  providerReferenceId: ID
+  createdAt: AWSTimestamp
+  updatedAt: AWSTimestamp
+  amount: Int
+  authorizationCode: String
+  billingDetails: ContactDetails
+  billingPlan: BillingPlans
+  currency: String!
+  customer: Customer
+  description: String
+  descriptor: String
+  livemode: Boolean
+  orderId: ID
+  storeId: ID
+  pointOfSaleId: ID
+  sequenceId: ID
+  subscriptionId: ID
+  paymentMethod: PaymentMethod
+  cancellationReason: CancellationReason
+  lastRefundAmount: Int
+  lastRefundReason: RefundReason
+  refundedAmount: Int
+  shippingDetails: ContactDetails
+  shop: Shop
+  status: ChargeStatus!
+  statusCode: String
+  statusMessage: String
+  sessionDetails: SessionDetails
+  traceDetails: TraceDetails
+  pageOpenedAt: AWSTimestamp
+  metadata: [KeyValueItem!]
+}
+type ChargesConnection {
+  items: [Charge!]!
+  total: Int!
+}
+type ChargesDateRangeKPI {
+  currency: Currencies!
+  total: ChargesDateRangeKPITotal!
+  data: [ChargesDateRangeKPIRow!]!
+}
+type ChargesDateRangeKPITotal {
+  succeededAmount: Long!
+  succeededCount: Long!
+  capturedAmount: Long!
+  capturedCount: Long!
+  directAmount: Long!
+  directCount: Long!
+  canceledAmount: Long!
+  canceledCount: Long!
+  refundedAmount: Long!
+  refundedCount: Long!
+  failedAmount: Long!
+  failedCount: Long!
+}
+type ChargesDateRangeKPIRow {
+  timestamp: AWSTimestamp!
+  succeededAmount: Long!
+  succeededCount: Long!
+  capturedAmount: Long!
+  capturedCount: Long!
+  directAmount: Long!
+  directCount: Long!
+  canceledAmount: Long!
+  canceledCount: Long!
+  refundedAmount: Long!
+  refundedCount: Long!
+  failedAmount: Long!
+  failedCount: Long!
+  cuSucceededAmount: Long!
+  cuSucceededCount: Long!
+  cuCapturedAmount: Long!
+  cuCapturedCount: Long!
+  cuDirectAmount: Long!
+  cuDirectCount: Long!
+}
+type ChargesExport {
+  id: ID!
+  status: ExportStatus!
+  expireAt: AWSTimestamp
+  statusCode: String
+  statusMessage: String
+}
+type ChargesExportsConnection {
+  " List of the authorized users"
+  items: [ChargesExport!]!
+  " The string that you use in a subsequent request to get the next page of results in a paginated response."
+  nextToken: String
+}
+type Code {
+  " The Code's ID"
+  id: ID!
+  " The type of the code"
+  type: CodeTypes!
+  " Whether the code is enabled or not"
+  enabled: Boolean
+  " Metadata"
+  metadata: [MetadataItem!]
+}
+type MetadataItem {
+  key: String!
+  value: String
+  type: MetadataItemType!
+  label: String
+  possibleValues: [String!]
+  regex: String
+  secret: Boolean
+  required: Boolean
+  default: String
+  example: String
+  internal: Boolean
+}
+type CodeConfig {
+  " Metadata config"
+  metadataConfig: [MetadataConfigItem!]
+}
+type MetadataConfigItem {
+  key: String!
+  type: MetadataItemType!
+  label: String
+  possibleValues: [String!]
+  regex: String
+  secret: Boolean
+  required: Boolean
+  default: String
+  example: String
+  internal: Boolean
+}
+type Countries {
+  " The list of all supported countries"
+  supportedCountries: [Country!]!
+  " The current user country"
+  currentCountry: Country
+  " The current user country code"
+  currentCountryCode: String
+  " Whether the user's country is supported or not"
+  isSupported: Boolean!
+}
+type Country {
+  name: String!
+  phoneCode: String!
+  code: String!
+}
+type Document {
+  id: ID!
+  accountId: ID!
+  name: String
+  note: String
+  type: DocumentType!
+  status: DocumentStatus!
+  statusCode: String
+  statusMessage: String
+  contentType: String
+  createdAt: String!
+  updatedAt: String
+}
+type DocumentsConnection {
+  " List of the authorized users"
+  items: [Document!]!
+  " The string that you use in a subsequent request to get the next page of results in a paginated response."
+  nextToken: String
+}
+type Redirect {
+  redirectUrl: String!
+}
+type PointOfSale {
+  " The ID of the point of sale"
+  id: ID!
+  " The store's ID where this point of sale belongs"
+  storeId: ID!
+  " Point of sale unique number inside the store"
+  number: Int!
+  " The name that represents the point of sale"
+  name: String
+  " Whether the user can manually enter the amount or not"
+  manualAmount: Boolean
+  " Whether the user must provide an email address or not"
+  requireEmail: Boolean
+  " Whether the user must provide a tax ID or not"
+  requireTaxId: Boolean
+  " Fixed amount to be charged"
+  fixedAmount: Int
+  " Whether the user must provide a fixed amount or not"
+  includeQrCode: Boolean
+  " Fixed currency to be charged"
+  fixedCurrency: Currencies
+  " QR code text"
+  qrCodeText: String
+  " The URL where to notify a success payment (server-to-server HTTP POST request)"
+  paymentCallbackUrl: String
+  " The ID of the current payment"
+  currentPaymentId: ID
+}
+type PointsOfSaleConnection {
+  " List of the authorized users"
+  items: [PointOfSale!]!
+  " The string that you use in a subsequent request to get the next page of results in a paginated response."
+  nextToken: String
+}
+type Provider {
+  " Provider ID"
+  id: ID!
+  " The integrated processor"
+  processor: Processor
+  " Whether the provider is enabled or not"
+  enabled: Boolean
+  " The specific payment method"
+  paymentMethod: PaymentMethods
+  " The acquirer behind the provider"
+  acquirer: Acquirer
+  " Whether the provider is open to be configured or not"
+  configurable: Boolean
+  " Metadata"
+  metadata: [MetadataItem!]
+  " Provider rules"
+  rules: ProviderRules
+}
+type ProviderRules {
+  " Minimum amount for this provider"
+  minAmount: Int
+  " Maximum amount for this provider"
+  maxAmount: Int
+  " Shop name regular expression"
+  shopNameLike: String
+  " Description regular expression"
+  descriptionLike: String
+}
+type ProviderConfig {
+  " The requested payment method"
+  paymentMethod: PaymentMethods
+  " The requested processor"
+  processor: Processor
+  " Which acquirers could be behind the provider"
+  acquirers: [Acquirer!]
+  " Metadata config"
+  metadataConfig: [MetadataConfigItem!]
+}
+type SettlementEventsConnection {
+  items: [SettlementEvent!]!
+  total: Int!
+}
+type SettlementEvent {
+  id: ID!
+  type: String!
+  accountId: ID!
+  objectId: ID!
+  objectType: String!
+  object: SettlementEventObject!
+  createdAt: AWSTimestamp!
+}
+type SettlementEventObject {
+  accountId: ID!
+  acquirerFees: Int!
+  createdAt: AWSTimestamp!
+  grossVolume: Int!
+  iban: String
+  id: ID!
+  legalName: String
+  netVolume: Int!
+  period: Int!
+  payMethod: SettlementPayMethods
+  periodEndAt: AWSTimestamp!
+  periodStartAt: AWSTimestamp!
+  previousNegative: Boolean
+  releasedAmount: Int
+  reservedAmount: Int
+  reservePercent: Int!
+  scheduledAt: AWSTimestamp!
+  status: SettlementStatus!
+  updatedAt: AWSTimestamp!
+  storeId: ID
+}
+type Store {
+  " The Store's ID"
+  id: ID!
+  " A name that represents the store"
+  name: String
+  " The store's address"
+  address: Address
+  " The store's phone number"
+  phone: String
+  " The store's email address"
+  email: String
+  " The store's IBAN"
+  iban: String
+  " The store's website"
+  website: String
+  " Metadata"
+  metadata: [KeyValueItem!]
+  " Whether the store is blocked or not"
+  blocked: Boolean
+}
+type StoresConnection {
+  " List of the authorized users"
+  items: [Store!]!
+  " The string that you use in a subsequent request to get the next page of results in a paginated response."
+  nextToken: String
+}
+type Subscription {
+  id: ID!
+  accountId: ID!
+  livemode: Boolean!
+  amount: Int!
+  currency: Currencies
+  description: String
+  descriptor: String
+  cancelAtPeriodEnd: Boolean
+  pauseIntervalCount: Int
+  pauseAtPeriodEnd: Boolean
+  currentPeriodStart: Int
+  currentPeriodEnd: Int
+  trialPeriodDays: Int
+  trialPeriodEnd: Int
+  customerId: ID
+  customer: Customer
+  billingDetails: ContactDetails
+  shippingDetails: ContactDetails
+  sequenceId: ID
+  lastOrderId: ID
+  lastPayment: LastPayment
+  paymentMethod: PaymentMethod
+  nextPaymentAt: Int
+  createdAt: Int
+  updatedAt: Int
+  interval: Interval!
+  intervalCount: Int!
+  retryCount: Int
+  status: SubscriptionStatus!
+  sessionDetails: SessionDetails
+  traceDetails: TraceDetails
+  callbackUrl: String
+  paymentCallbackUrl: String
+  storeId: ID
+  retrySchedule: [RetrySchedule!]
+  metadata: [KeyValueItem!]
+}
+type LastPayment {
+  id: ID!
+  status: PaymentStatus!
+  statusMessage: String
+  statusCode: String
+}
+type RetrySchedule {
+  interval: Interval!
+  intervalCount: Int!
+}
+type SubscriptionEventsConnection {
+  items: [SubscriptionEvent!]!
+  total: Int!
+}
+type SubscriptionEvent {
+  id: ID!
+  type: String!
+  accountId: ID!
+  livemode: Boolean
+  objectId: ID!
+  objectType: String!
+  object: SubscriptionEventObject!
+  createdAt: AWSTimestamp
+}
+type SubscriptionEventObject {
+  id: ID!
+  accountId: ID!
+  createdAt: AWSTimestamp
+  updatedAt: AWSTimestamp
+  amount: Int
+  billingDetails: ContactDetails
+  currency: String!
+  customer: Customer
+  description: String
+  descriptor: String
+  cancelAtPeriodEnd: Boolean
+  pauseIntervalCount: Int
+  pauseAtPeriodEnd: Boolean
+  currentPeriodStart: Int
+  currentPeriodEnd: Int
+  trialPeriodDays: Int
+  trialPeriodEnd: Int
+  livemode: Boolean
+  storeId: ID
+  pointOfSaleId: ID
+  sequenceId: ID
+  lastOrderId: ID
+  lastPayment: LastPayment
+  paymentMethod: PaymentMethod
+  shippingDetails: ContactDetails
+  status: SubscriptionStatus!
+  traceDetails: TraceDetails
+  interval: Interval!
+  intervalCount: Int!
+  retryCount: Int
+  metadata: [KeyValueItem!]
+}
+type SubscriptionsConnection {
+  items: [Subscription!]!
+  total: Int!
+}
+type UserAccountsConnection {
+  " List of the authorized users"
+  items: [UserAccount!]!
+  " The string that you use in a subsequent request to get the next page of results in a paginated response."
+  nextToken: String
+}
+" An account that can be accessed by the authorized user"
+type UserAccount {
+  " Access level for this account"
+  accessLevel: AuthorizedUserAccessLevel!
+  " Account ID"
+  accountId: ID!
+  " Account name"
+  accountName: String
+}
+" A web report is a report of the website."
+type WebReport {
+  " The base URL of the website."
+  baseUrl: String!
+  " The status of the web report."
+  status: WebReportStatus!
+  " The status code of the web report."
+  statusCode: String
+  " The status message of the web report."
+  statusMessage: String
+  " The risk category of the website."
+  riskCategory: String
+  " Whether the website belongs to a restricted category."
+  restricted: Boolean
+}
+type Webhook {
+  id: ID!
+  accountId: ID!
+  url: String!
+  eventTypes: [WebhookEventType!]!
+  secret: String
+  enabled: Boolean!
+  createdAt: String!
+  updatedAt: String
+  lastResponse: CallbackData
+}
+type CallbackData {
+  status: [CallbackStatus!]!
+  statusCode: String
+  statusMessage: String
+}
+type WebhooksConnection {
+  " List of the authorized users"
+  items: [Webhook]!
+  " The string that you use in a subsequent request to get the next page of results in a paginated response."
+  nextToken: String
+}
+type Mutation {
+  " Requests approval for the account"
+  activateAccount(language: String): ActivateAccount!
+  " Activate Custom Apple Pay certificate"
+  activateApplePayCert(input: ActivateApplePayCertInput): ApplePayCertificate!
+  " Active a subscription"
+  activateSubscription(input: ActivateSubscriptionInput!): Payment
+  " Add a new item to the blacklist"
+  addBlacklistItem(input: BlacklistItemInput!): BlacklistItem
+  " Cancel a payment"
+  cancelPayment(input: CancelPaymentInput!): Payment
+  " Schedule a subscription"
+  cancelSubscription(input: CancelSubscriptionInput!): Subscription!
+  " Capture a payment"
+  capturePayment(input: CapturePaymentInput!): Payment
+  " Connect master account"
+  connectMasterAccount(promoCode: String!, externalId: String, externalHash: String): Account!
+  " Creates a new additional account attached to this account"
+  createAccount(name: String!, copyBusinessDetails: Boolean): Boolean!
+  " Generates the API Key to access REST and GraphQL APIs"
+  createApiKey: String!
+  " Create Custom Apple Pay certificate"
+  createApplePayCert: ApplePayCertificate!
+  " Creates an authorized user"
+  createAuthorizedUser(input: CreateAuthorizedUserInput!): AuthorizedUser
+  " Create a new bank session"
+  createBankSession(bankId: ID!): Session!
+  " Create new document"
+  createDocument(input: CreateDocumentInput!): Document!
+  " Create a new document session"
+  createDocumentSession: Session!
+  " Creates Identity Verification Session"
+  createIdSession(id: Int): Session!
+  " Creates a link to connect PayPal account"
+  createPayPalLink: PayPalLink!
+  " Create a payment"
+  createPayment(input: CreatePaymentInput!): Payment
+  " Creates a new point of sale"
+  createPointOfSale(input: CreatePointOfSaleInput!): PointOfSale!
+  " Creates a new provider for the account"
+  createProvider(input: CreateProviderInput!): Provider!
+  " Creates a new store"
+  createStore(input: CreateStoreInput!): Store!
+  " Create a new subscription"
+  createSubscription(input: CreateSubscriptionInput!): Subscription!
+  " Create new webhook"
+  createWebhook(input: CreateWebhookInput!): Webhook!
+  " Deletes the API Key"
+  deleteApiKey: Boolean
+  " Delete Custom Apple Pay certificate"
+  deleteApplePayCert(id: ID!): Boolean!
+  " Deletes an authorized user"
+  deleteAuthorizedUser(userEmail: String!): Boolean!
+  " Delete blacklist item"
+  deleteBlacklistItem(value: String!): Boolean!
+  " Delete a document"
+  deleteDocument(id: ID!): Boolean!
+  " Deletes an existing point of sale"
+  deletePointOfSale(id: ID!): Boolean!
+  " Deletes a provider"
+  deleteProvider(id: ID!): Provider!
+  " Deletes a store"
+  deleteStore(id: ID!): Boolean!
+  " Delete webhook"
+  deleteWebhook(id: ID!): Boolean!
+  " Deletes a custom domain"
+  disableCustomDomain: Account!
+  " Disable the selected tokenization method for the account"
+  disableTokenizationMethod(method: TokenizationMethods!): Account!
+  " Disconnect master account"
+  disconnectMasterAccount: Account!
+  " Downloads account invoice"
+  downloadAccountInvoice(invoiceId: ID!): DownloadFile
+  " Downloads account contract"
+  downloadContract: DownloadFile
+  " Create a download url for a document"
+  downloadDocument(id: ID!): DownloadFile!
+  " Download the export of a charges"
+  downloadExport(id: ID!): DownloadFile!
+  " Downloads a file with the fees per transaction of a settlement"
+  downloadOperationsFile(settlementId: ID!): DownloadFile
+  " Creates a custom domain"
+  enableCustomDomain(domain: String!): Account!
+  " Updates the status of an existing provider"
+  enableProvider(id: ID!, enabled: Boolean!): Provider!
+  " Enable the selected tokenization method for the account"
+  enableTokenizationMethod(method: TokenizationMethods!): Account!
+  " Export a list of charges"
+  exportCharges(
+    filter: SearchableChargeFilterInput
+    columns: [String!]
+    timezone: String
+  ): ExportCharges!
+  " Pause a subscription"
+  pauseSubscription(input: PauseSubscriptionInput!): Subscription!
+  " Private. For onUpdateAccount subscription."
+  publishUpdateAccount(accountId: ID!): AccountLevelUpdate
+  " Private. For onUpdateAnalytics subscription."
+  publishUpdateAnalytics(accountId: ID!): AccountLevelUpdate
+  " Private. For onUpdateCharge subscription."
+  publishUpdateCharge(accountId: ID!, data: UpdateChargeInput!): Charge
+    @deprecated(reason: "Use publishUpdateChargeV2 instead")
+  " Private. For onUpdateChargeEvents subscription."
+  publishUpdateChargeEvents(accountId: ID!, data: ChargeEventsChangeInput!): ItemLevelUpdate
+    @deprecated(reason: "Use publishUpdateChargeEventsV2 instead")
+  " Private. For onUpdateChargeEventsV2 subscription."
+  publishUpdateChargeEventsV2(accountId: ID!, id: ID!): ItemLevelUpdate
+  " Private. For onUpdateChargeV2 subscription."
+  publishUpdateChargeV2(accountId: ID!, id: ID!): ItemLevelUpdate
+  " Private. For onUpdateCharges subscription."
+  publishUpdateCharges(accountId: ID!): AccountLevelUpdate
+  " Private. For onUpdateDocuments subscription."
+  publishUpdateDocuments(accountId: ID!): AccountLevelUpdate
+  " Private. For onUpdateEvents subscription."
+  publishUpdateEvents(accountId: ID!): AccountLevelUpdate
+  " Private. For onUpdateSubscriptionV2 subscription."
+  publishUpdateSubscription(accountId: ID!, id: ID!): ItemLevelUpdate
+  " Private. For onUpdateSubscriptionEvents subscription."
+  publishUpdateSubscriptionEvents(
+    accountId: ID!
+    data: SubscriptionEventsChangeInput!
+  ): ItemLevelUpdate @deprecated(reason: "Use publishUpdateSubscriptionEventsV2 instead")
+  " Private. For onUpdateSubscriptionEventsV2 subscription."
+  publishUpdateSubscriptionEventsV2(accountId: ID!, id: ID!): ItemLevelUpdate
+  " Private. For onUpdateSubscriptions subscription."
+  publishUpdateSubscriptions(accountId: ID!): AccountLevelUpdate
+  " Private. For onUpdateWebReport subscription."
+  publishUpdateWebReport(accountId: ID!): AccountLevelUpdate
+  " Refund a payment"
+  refundPayment(input: RefundPaymentInput!): Payment
+  " Register domain name for Apple Pay"
+  registerApplePayDomain(input: RegisterApplePayDomainInput!): RegisterApplePayDomain!
+  " Registers a new code"
+  registerCode(input: RegisterCodeInput!): Code!
+  " Request for account review after additional information has been provided"
+  requestAccountReview(note: String): Account!
+  " Resume a subscription"
+  resumeSubscription(input: ResumeSubscriptionInput!): Subscription!
+  " Selects user account"
+  selectUserAccount(accountId: ID!): Boolean!
+  " Send a payment link over email (or sms)"
+  sendPaymentLink(input: SendPaymentMessageInput!): Payment
+  " Send a payment receipt over email"
+  sendPaymentReceipt(input: SendPaymentMessageInput!): Payment
+  " Send a request to pay"
+  sendPaymentRequest(input: SendPaymentRequestInput!): Payment
+  " Send a subscription link over email (or sms)"
+  sendSubscriptionLink(input: SendSubscriptionMessageInput!): Subscription
+  " Send a subscription status over email (or sms)"
+  sendSubscriptionStatus(input: SendSubscriptionMessageInput!): Subscription
+  " Updates existing card provider to make it the only one enabled"
+  setDefaultCardProvider(providerId: ID!): Provider!
+  " Updates the account information during KYC process"
+  setupAccount(input: SetupAccountInput!): Account!
+  " Lookup company in the registry"
+  startCompanyLookup(documentNumber: String!): Account!
+  " Start the export of a list of charges"
+  startExportCharges(
+    filter: SearchableChargeFilterInput
+    columns: [String!]
+    timezone: String
+  ): ChargesExport!
+  " Updates the account information"
+  updateAccount(input: UpdateAccountInput!): Account!
+  " Update Custom Apple Pay certificate"
+  updateApplePayCert(input: UpdateApplePayCertInput): ApplePayCertificate!
+  " Updates an authorized user"
+  updateAuthorizedUser(input: UpdateAuthorizedUserInput!): AuthorizedUser
+  " Updates an existing code"
+  updateCode(input: UpdateCodeInput!): Code!
+  " Updates an existing point of sale"
+  updatePointOfSale(input: UpdatePointOfSaleInput!): PointOfSale!
+  " Updates an existing provider"
+  updateProvider(input: UpdateProviderInput!): Provider!
+  " Updates an existing store"
+  updateStore(input: UpdateStoreInput!): Store!
+  " Schedule a subscription"
+  updateSubscription(input: UpdateSubscriptionInput!): Subscription!
+  " Update webhook"
+  updateWebhook(input: UpdateWebhookInput!): Webhook!
+  " Create an upload url for a document"
+  uploadDocument(id: ID!, contentType: String!): UploadFile!
+  " Validate a website."
+  validateWebsite(website: String!): WebReport
+  " Verifies information about the business and updates it"
+  verifyBusinessDetails(input: SetupAccountInput!): Account!
+  " Verifies a custom domain"
+  verifyCustomDomain: Account!
+}
+" Account activation response"
+type ActivateAccount {
+  " The url of the contract signing session"
+  contractUrl: String
+}
+type Payment {
+  id: ID!
+  amount: Int
+  currency: String!
+  orderId: ID
+  storeId: ID
+  pointOfSaleId: ID
+  description: String
+  descriptor: String
+  accountId: ID!
+  authorizationCode: String
+  livemode: Boolean
+  status: PaymentStatus!
+  statusCode: String
+  statusMessage: String
+  customer: Customer
+  sequenceId: ID
+  subscriptionId: ID
+  paymentToken: String
+  paymentMethod: PaymentMethod
+  shop: Shop
+  billingDetails: ContactDetails
+  shippingDetails: ContactDetails
+  refundedAmount: Int
+  lastRefundAmount: Int
+  lastRefundReason: RefundReason
+  cancellationReason: CancellationReason
+  sessionDetails: SessionDetails
+  traceDetails: TraceDetails
+  nextAction: NextAction
+  createdAt: AWSTimestamp
+  updatedAt: AWSTimestamp
+  pageOpenedAt: AWSTimestamp
+  metadata: [KeyValueItem!]
+}
+type NextAction {
+  """
+   If present, this property tells you what actions you need
+  to take in order for your customer to fulfill a payment
+  using the provided source.
+  """
+  type: NextActionTypes
+  " Redirect your customer to this url to continue payment process."
+  redirectUrl: String
+  """
+   If `true` you have to redirect your customer to the **redirectUrl**
+  to continue payment process.
+  """
+  mustRedirect: Boolean
+}
+type Session {
+  sessionUrl: String!
+}
+type PayPalLink {
+  link: String!
+}
+type DownloadFile {
+  " The URL to download the file. It will only last for 15 minutes."
+  downloadUrl: String!
+  " The expiration time for the downloadUrl"
+  expiresAt: AWSTimestamp!
+}
+type ExportCharges {
+  " The URL to download the charges CSV file. It will only last for 15 minutes."
+  downloadUrl: String!
+  " The expiration time for the downloadUrl"
+  expiresAt: AWSTimestamp!
+}
+type AccountLevelUpdate {
+  accountId: ID
+}
+type ItemLevelUpdate {
+  accountId: ID
+  id: ID
+}
+type RegisterApplePayDomain {
+  " The result of successfully registering the domain"
+  success: Boolean!
+}
+type UploadFile {
+  " The URL to upload the file. It will only last for 15 minutes."
+  uploadUrl: String!
+  " The expiration time for the downloadUrl"
+  expiresAt: AWSTimestamp!
+}
+type Subscriptions {
+  " Notifies new Analytics"
+  onUpdateAnalytics(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateAnalyticsV2 instead")
+  " Notifies new Analytics"
+  onUpdateAnalyticsV2: AccountLevelUpdate
+  " Notifies new Events"
+  onUpdateEvents(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateEventsV2 instead")
+  " Notifies new Events"
+  onUpdateEventsV2: AccountLevelUpdate
+  " Notifies creations and updates of Charges"
+  onUpdateCharges(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateChargesV2 instead")
+  " Notifies creations and updates of Charges"
+  onUpdateChargesV2: AccountLevelUpdate
+  " Notifies updates for one Charge"
+  onUpdateCharge(accountId: ID!, id: ID!): Charge
+    @deprecated(reason: "Use onUpdateChargeV2 instead")
+  " Notifies updates for one Charge"
+  onUpdateChargeV2(id: ID!): ItemLevelUpdate
+  " Notifies new Events for one Charge"
+  onUpdateChargeEvents(accountId: ID!, id: ID!): ItemLevelUpdate
+    @deprecated(reason: "Use onUpdateChargeEventsV2 instead")
+  " Notifies new Events for one Charge"
+  onUpdateChargeEventsV2(id: ID!): ItemLevelUpdate
+  " Notifies about Account updates"
+  onUpdateAccount(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateAccountV2 instead")
+  " Notifies about Account updates"
+  onUpdateAccountV2: AccountLevelUpdate
+  " Notifies about Documents updates"
+  onUpdateDocuments(accountId: ID!): AccountLevelUpdate
+    @deprecated(reason: "Use onUpdateDocumentsV2 instead")
+  " Notifies about Documents updates"
+  onUpdateDocumentsV2: AccountLevelUpdate
+  " Notifies about Subscriptions updates"
+  onUpdateSubscriptions: AccountLevelUpdate
+  " Notifies updates for one Subscription"
+  onUpdateSubscription(id: ID!): ItemLevelUpdate
+  " Notifies new Events for one Subscription"
+  onUpdateSubscriptionEvents(accountId: ID!, id: ID!): ItemLevelUpdate
+    @deprecated(reason: "Use onUpdateSubscriptionEventsV2 instead")
+  " Notifies new Events for one Subscription"
+  onUpdateSubscriptionEventsV2(id: ID!): ItemLevelUpdate
+  " Notifies creations and updates of Website Report"
+  onUpdateWebReport: AccountLevelUpdate
+}
+" Possible currencies"
+enum Currencies {
+  EUR
+  USD
+  GBP
+  JPY
+  CHF
+  SEK
+  DKK
+}
+"""
+ Account status
+- ACTIVE: Account is active and payments are being processed
+- PENDING_CONTRACT: Account is pending contract signature
+- PENDING_APPROVAL: Account is pending approval
+- APPROVED: Account is approved
+- NOT_CONFIGURED: Account needs additional information or documents to be configured, see `statusReason` for more details
+- SUSPENDED: Account is suspended
+- REJECTED: Account is rejected
+- DELETED: Account is deleted
+"""
+enum AccountStatus {
+  ACTIVE
+  PENDING_CONTRACT
+  PENDING_APPROVAL
+  APPROVED
+  NOT_CONFIGURED
+  SUSPENDED
+  REJECTED
+  DELETED
+  PENDING_REVIEW
+}
+enum CustomDomainStatus {
+  FAILED
+  PENDING_DELETION
+  PENDING_VALIDATION
+  SUCCESS
+}
+"""
+ Business legal form
+- INDIVIDUAL: deprecated, use FREELANCE instead
+- FREELANCE: Individual entrepreneur, self-employed
+- COMPANY: Legal entity
+"""
+enum LegalForm {
+  INDIVIDUAL
+  FREELANCE
+  COMPANY
+}
+" Company industry"
+enum Industries {
+  ECOMMERCE
+}
+"""
+ Account business status
+- active: Business is verified to be active
+- under_review: Business requires manual review
+- inactive: Business is inactive
+- dissolved: Business is dissolved
+- renamed: Business is renamed
+- transformed: Business is transformed
+- processing: Business is in the process of verification
+- not_found: Business is not found
+- resubmission_requested: Business details require resubmission
+"""
+enum BusinessStatus {
+  active
+  under_review
+  inactive
+  dissolved
+  renamed
+  transformed
+  processing
+  not_found
+  resubmission_requested
+}
+" Identity verification status"
+enum IdVerificationStatus {
+  submitted
+  approved
+  resubmission_requested
+  declined
+  expired
+  abandoned
+}
+" Bank account status"
+enum BankAccountStatus {
+  enabled
+  deleted
+  blocked
+  pending
+}
+" MONEI Billing Plans"
+enum BillingPlans {
+  MONEI_PLUS
+  MONEI_POS
+  MONEI_X
+}
+" Account contract status"
+enum ContractStatus {
+  completed
+  created
+  declined
+  delivered
+  sent
+  signed
+  voided
+}
+enum NotConfiguredReason {
+  REAL_HOLDERS_DOCS
+  NON_COMMERCIAL_COMPANY_DOCS
+  NON_COMPLIANT_WEBSITE
+  OTHER_COMPANY_WEBSITE
+  HIGH_RISK_GOODS
+  JOINT_OWNERSHIP
+  REPEAT_ONBOARDING
+  CBD_PRODUCTS
+  OTHER
+}
+enum RejectedReason {
+  INCOMPLETE_DOCS
+  NOT_COMPLIANT
+  RESTRICTED_CATEGORY
+  OTHER
+}
+"""
+ The reason why the account status was changed
+- REAL_HOLDERS_DOCS: Real holders documents are required
+- NON_COMMERCIAL_COMPANY_DOCS: Non-commercial company documents are required
+- NON_COMPLIANT_WEBSITE: Website is not compliant
+- OTHER_COMPANY_WEBSITE: Other company website is required
+- HIGH_RISK_GOODS: High risk goods
+- JOINT_OWNERSHIP: Joint ownership, additional documents are required
+- REPEAT_ONBOARDING: Repeat onboarding
+- CBD_PRODUCTS: CBD products
+- INCOMPLETE_DOCS: Incomplete documents
+- NOT_COMPLIANT_BUSINESS: Business is not compliant
+- RESTRICTED_CATEGORY: Restricted category
+- UPDATE_BILLING_INFO: Update billing information
+- SUSPICIOUS_ACTIVITY: Suspicious activity
+- CUSTOMER_COMPLAINTS: Customer complaints
+- CHARGEBACKS: Chargebacks
+- OTHER: Other
+"""
+enum StatusReason {
+  BANK_OWNERSHIP_CERT_REQUIRED
+  REAL_HOLDERS_DOCS
+  NON_COMMERCIAL_COMPANY_DOCS
+  NON_COMPLIANT_WEBSITE
+  OTHER_COMPANY_WEBSITE
+  HIGH_RISK_GOODS
+  JOINT_OWNERSHIP
+  REPEAT_ONBOARDING
+  CBD_PRODUCTS
+  ID_VERIFICATION_REQUIRED
+  INCOMPLETE_DOCS
+  NOT_COMPLIANT_BUSINESS
+  RESTRICTED_CATEGORY
+  UPDATE_BILLING_INFO
+  SUSPICIOUS_ACTIVITY
+  CUSTOMER_COMPLAINTS
+  CHARGEBACKS
+  OTHER
+}
+" Invoice line item unit type"
+enum UnitType {
+  money
+  percent
+}
+" Account invoice status"
+enum AccountInvoiceStatus {
+  PENDING
+  PAST_DUE
+  PAID
+  UNPAID
+}
+" Account invoice payment method"
+enum AccountInvoicePaymentMethod {
+  bank_transfer
+  direct_debit
+}
+enum SettlementPayMethods {
+  bizum
+  card
+}
+enum SettlementStatus {
+  COMPLETED
+  PENDING
+  SUSPENDED
+}
+"""
+ Access level for the authorized user
+- READ_ACCESS: Read only access, user will not be able to create payments, do refunds, etc.
+- WRITE_ACCESS: Write access, user will be able to create payments, do refunds, but will not have access to admin settings
+- ADMIN_ACCESS: Admin access, user will have access to all settings
+"""
+enum AuthorizedUserAccessLevel {
+  READ_ACCESS
+  WRITE_ACCESS
+  ADMIN_ACCESS
+}
+" A status of the authorized user"
+enum AuthorizedUserStatus {
+  UNCONFIRMED
+  CONFIRMED
+  ARCHIVED
+  COMPROMISED
+  UNKNOWN
+  RESET_REQUIRED
+  FORCE_CHANGE_PASSWORD
+}
+" Possible payment methods"
+enum PaymentMethods {
+  alipay
+  card
+  cardPresent
+  bizum
+  paypal
+  cofidis
+  cofidisLoan
+  googlePay
+  applePay
+  clickToPay
+  mbway
+  multibanco
+  iDeal
+  bancontact
+  sofort
+  trustly
+  sepa
+  klarna
+  giropay
+  srtp
+  eps
+  blik
+}
+enum Processor {
+  ADYEN
+  STRIPE
+  REDSYS
+  MONEI_REDSYS
+  MONEIX_F
+  MONEIX_G
+  MONEIX_P
+  PAYPAL
+  COFIDIS
+}
+" The type of the blacklist item"
+enum BlacklistItemType {
+  email
+  phone
+  ip
+  card
+  bin
+  fingerprint
+}
+" Possible card brands"
+enum CardBrand {
+  visa
+  mastercard
+  diners
+  unknown
+  amex
+  jcb
+  unionpay
+  discover
+}
+" Possible device types"
+enum CardType {
+  debit
+  credit
+}
+" 3D Secure flows"
+enum ThreeDSecureFlow {
+  CHALLENGE
+  FRICTIONLESS
+  FRICTIONLESS_CHALLENGE
+  DIRECT
+}
+" Possible tokenization methods for card payments"
+enum TokenizationMethods {
+  googlePay
+  applePay
+  clickToPay
+}
+enum BillingCategoryKlarna {
+  PAY_IN_PARTS
+  PAY_LATER
+  PAY_NOW
+  SLICE_IT
+  SLICE_IT_BY_CARD
+}
+enum AuthPaymentMethodKlarna {
+  invoice
+  fixed_amount
+  pix
+  base_account
+  deferred_interest
+  direct_debit
+  direct_bank_transfer
+  b2b_invoice
+  card
+  slice_it_by_card
+}
+enum CancellationReason {
+  duplicated
+  fraudulent
+  requested_by_customer
+  order_canceled
+}
+enum RefundReason {
+  duplicated
+  fraudulent
+  requested_by_customer
+  order_canceled
+}
+" Charge status"
+enum ChargeStatus {
+  SUCCEEDED
+  PENDING
+  PENDING_PROCESSING
+  FAILED
+  CANCELED
+  REFUNDED
+  PARTIALLY_REFUNDED
+  AUTHORIZED
+  EXPIRED
+  PAID_OUT
+}
+enum DeviceType {
+  desktop
+  mobile
+  smartTV
+  tablet
+}
+enum Interval {
+  minute
+  hour
+  day
+  week
+  month
+  quarter
+  year
+}
+enum ExportStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+enum CodeTypes {
+  POINT_OF_SALE
+}
+enum MetadataItemType {
+  STRING
+  NUMBER
+  BOOLEAN
+  STRING_ARRAY
+  NUMBER_ARRAY
+}
+enum DocumentType {
+  CENSUS_CERT
+  GIPUZKOA_CENSUS_CERT
+  NAVARRA_CENSUS_CERT
+  BIZKAIA_CENSUS_CERT
+  ALAVA_CENSUS_CERT
+  BANK_OWNERSHIP_CERT
+  CONTRACT
+  PASSPORT
+  ID_CARD
+  COMPANY_TAX_ID
+  RESIDENCE_PERMIT
+  DRIVERS_LICENSE
+  DEED_OF_INCORPORATION
+  BENEFICIAL_OWNERSHIP_REPORT
+  DEED_OF_COMPANY_REPRESENTATIVE
+  POWER_OF_ATTORNEY
+  OTHER
+}
+enum DocumentStatus {
+  PENDING
+  PROCESSING
+  APPROVAL_REQUIRED
+  APPROVED
+  REJECTED
+  EXPIRED
+}
+enum PaymentEmailType {
+  PAYMENT_LINK
+  RECEIPT
+}
+enum SubscriptionEmailType {
+  SUBSCRIPTION_LINK
+  SUBSCRIPTION_STATUS
+}
+enum Acquirer {
+  CUSTOM
+  ADYEN
+  STRIPE
+  MONEI_X
+  COFIDIS
+  PAYPAL
+  PAYCOMET
+  ABANCA
+  BANCAMARCH
+  BANKIA
+  BANKINTER
+  BBVA
+  CAJALABORAL
+  CAJAMAR
+  CAJARURAL
+  CAJASUR
+  COMERCIAGLOBALPAY
+  CREDITANDORRA
+  KUTXABANK
+  SABADELL
+  SANTANDER
+  UNICAJA
+  DEUTSCHE_BANK
+}
+enum PaymentStatus {
+  SUCCEEDED
+  PENDING
+  PENDING_PROCESSING
+  FAILED
+  CANCELED
+  REFUNDED
+  PARTIALLY_REFUNDED
+  AUTHORIZED
+  EXPIRED
+  PAID_OUT
+}
+enum SubscriptionStatus {
+  PENDING
+  EXPIRED
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  PAUSED
+  CANCELED
+}
+enum WebReportStatus {
+  PROCESSING
+  SUCCEEDED
+  FAILED
+}
+enum WebhookEventType {
+  CHARGE_PENDING
+  CHARGE_PENDING_PROCESSING
+  CHARGE_UPDATED
+  CHARGE_AUTHORIZED
+  CHARGE_REFUNDED
+  CHARGE_PARTIALLY_REFUNDED
+  CHARGE_CAPTURED
+  CHARGE_CANCELED
+  CHARGE_SUCCEEDED
+  CHARGE_FAILED
+  CHARGE_EXPIRED
+  CHARGE_CHARGEBACK
+  CHARGE_PAID_OUT
+  SETTLEMENT_COMPLETED
+  SETTLEMENT_PENDING
+  SETTLEMENT_SUSPENDED
+  SUBSCRIPTION_PENDING
+  SUBSCRIPTION_EXPIRED
+  SUBSCRIPTION_TRIALING
+  SUBSCRIPTION_ACTIVATED
+  SUBSCRIPTION_CANCELED
+  SUBSCRIPTION_PAUSED
+  SUBSCRIPTION_PAST_DUE
+  SUBSCRIPTION_UPDATED
+  ACCOUNT_INVOICE_PAID
+  ACCOUNT_INVOICE_UNPAID
+  ACCOUNT_INVOICE_PENDING
+  ACCOUNT_INVOICE_PAST_DUE
+}
+enum CallbackStatus {
+  PENDING
+  EXECUTED
+  FAILED
+}
+"""
+ Next action types
+- `CONFIRM` - Your customer needs to be redirected to a
+[hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)
+or confirm payment using
+[payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).
+The **redirectUrl** will point to the hosted payment page.
+- `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless
+3d secure challenge page provided by the bank. The **redirectUrl**
+will point to the frictionless 3d secure challenge page provided by the bank.
+- `CHALLENGE` - Your customer needs to be redirected to the
+3d secure challenge page provided by the bank. The **redirectUrl**
+will point to the 3d secure challenge page provided by the bank.
+- `COMPLETE` - The payment is completed. The **redirectUrl** will be
+the **completeUrl** if it was provided when the payment was created.
+- `BIZUM_CHALLENGE` - Your customer will be redirected to the Bizum hosted payment page.
+"""
+enum NextActionTypes {
+  CONFIRM
+  CHALLENGE
+  COMPLETE
+  FRICTIONLESS_CHALLENGE
+  BIZUM_CHALLENGE
+}
+"""
+ Controls when the funds will be captured.
+- `SALE` - **Default**. MONEI automatically captures funds
+when the customer authorizes the payment.
+- `AUTH` - Place a hold on the funds when the customer authorizes
+the payment, but don’t capture the funds until later.
+- `PAYOUT` - Send funds to the customer
+- `VERIF` - Verify the card without placing a hold or capturing funds.
+"""
+enum TransactionTypes {
+  AUTH
+  SALE
+  REFUND
+  CAPTURE
+  CANCEL
+  PAYOUT
+}
+enum IntervalInput {
+  day
+  week
+  month
+  quarter
+  year
+}
+enum RetryIntervalInput {
+  hour
+  day
+  week
+  month
+  quarter
+  year
+}
+" Available channels to send messages"
+enum MessageChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+}
+"""
+ Filter for account invoices, currently only supports `createdAt`
+the creation date of the account invoice as a unix timestamp
+"""
+input SearchableAccountInvoiceFilterInput {
+  createdAt: SearchableIntFilterInput
+}
+input SearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+input SearchableAccountSettlementFilterInput {
+  createdAt: SearchableIntFilterInput
+  storeId: SearchableStringFilterInput
+  and: [SearchableAccountSettlementFilterInput]
+  or: [SearchableAccountSettlementFilterInput]
+  not: SearchableAccountSettlementFilterInput
+}
+input SearchableStringFilterInput {
+  ne: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+}
+input SearchableChargeFilterInput {
+  id: SearchableIDFilterInput
+  checkoutId: SearchableIDFilterInput
+  providerInternalId: SearchableStringFilterInput
+  providerReferenceId: SearchableStringFilterInput
+  createdAt: SearchableIntFilterInput
+  updatedAt: SearchableIntFilterInput
+  amount: SearchableIntFilterInput
+  authorizationCode: SearchableStringFilterInput
+  currency: SearchableStringFilterInput
+  description: SearchableStringFilterInput
+  descriptor: SearchableStringFilterInput
+  orderId: SearchableStringFilterInput
+  storeId: SearchableStringFilterInput
+  pointOfSaleId: SearchableStringFilterInput
+  sequenceId: SearchableStringFilterInput
+  subscriptionId: SearchableStringFilterInput
+  refundedAmount: SearchableIntFilterInput
+  status: SearchableStringFilterInput
+  statusCode: SearchableStringFilterInput
+  statusMessage: SearchableStringFilterInput
+  customerEmail: SearchableStringFilterInput
+  customerName: SearchableStringFilterInput
+  customerPhone: SearchableStringFilterInput
+  paymentMethodMethod: SearchableStringFilterInput
+  paymentMethodCardBrand: SearchableStringFilterInput
+  paymentMethodCardLast4: SearchableStringFilterInput
+  paymentMethodCardType: SearchableStringFilterInput
+  paymentMethodCardThreeDSecure: SearchableBooleanFilterInput
+  paymentMethodCardThreeDSecureVersion: SearchableStringFilterInput
+  paymentMethodCardTokenizationMethod: SearchableStringFilterInput
+  shopCountry: SearchableStringFilterInput
+  shopName: SearchableStringFilterInput
+  sessionIp: SearchableStringFilterInput
+  sessionCountry: SearchableStringFilterInput
+  traceDetailsSource: SearchableStringFilterInput
+  and: [SearchableChargeFilterInput]
+  or: [SearchableChargeFilterInput]
+  not: SearchableChargeFilterInput
+}
+input SearchableIDFilterInput {
+  ne: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+}
+input SearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+input SearchableEventFilterInput {
+  id: SearchableIDFilterInput
+  objectId: SearchableIDFilterInput
+  type: SearchableStringFilterInput
+  createdAt: SearchableIntFilterInput
+  checkoutId: SearchableIDFilterInput
+  providerInternalId: SearchableStringFilterInput
+  providerReferenceId: SearchableStringFilterInput
+  amount: SearchableIntFilterInput
+  authorizationCode: SearchableStringFilterInput
+  currency: SearchableStringFilterInput
+  description: SearchableStringFilterInput
+  descriptor: SearchableStringFilterInput
+  orderId: SearchableStringFilterInput
+  storeId: SearchableStringFilterInput
+  pointOfSaleId: SearchableStringFilterInput
+  sequenceId: SearchableStringFilterInput
+  subscriptionId: SearchableStringFilterInput
+  refundedAmount: SearchableIntFilterInput
+  status: SearchableStringFilterInput
+  statusCode: SearchableStringFilterInput
+  statusMessage: SearchableStringFilterInput
+  customerEmail: SearchableStringFilterInput
+  customerPhone: SearchableStringFilterInput
+  customerName: SearchableStringFilterInput
+  paymentMethodMethod: SearchableStringFilterInput
+  paymentMethodCardBrand: SearchableStringFilterInput
+  paymentMethodCardLast4: SearchableStringFilterInput
+  paymentMethodCardType: SearchableStringFilterInput
+  paymentMethodCardThreeDSecure: SearchableBooleanFilterInput
+  paymentMethodCardThreeDSecureVersion: SearchableStringFilterInput
+  paymentMethodCardTokenizationMethod: SearchableStringFilterInput
+  shopCountry: SearchableStringFilterInput
+  shopName: SearchableStringFilterInput
+  sessionIp: SearchableStringFilterInput
+  sessionCountry: SearchableStringFilterInput
+  and: [SearchableEventFilterInput]
+  or: [SearchableEventFilterInput]
+  not: SearchableEventFilterInput
+}
+input SearchableSubscriptionFilterInput {
+  id: SearchableIDFilterInput
+  createdAt: SearchableIntFilterInput
+  updatedAt: SearchableIntFilterInput
+  amount: SearchableIntFilterInput
+  currency: SearchableStringFilterInput
+  description: SearchableStringFilterInput
+  descriptor: SearchableStringFilterInput
+  lastOrderId: SearchableStringFilterInput
+  sequenceId: SearchableStringFilterInput
+  status: SearchableStringFilterInput
+  interval: SearchableStringFilterInput
+  intervalCount: SearchableIntFilterInput
+  lastPaymentId: SearchableIDFilterInput
+  lastPaymentStatus: SearchableStringFilterInput
+  lastPaymentStatusCode: SearchableStringFilterInput
+  customerEmail: SearchableStringFilterInput
+  customerName: SearchableStringFilterInput
+  customerPhone: SearchableStringFilterInput
+  paymentMethodMethod: SearchableStringFilterInput
+  paymentMethodCardBrand: SearchableStringFilterInput
+  paymentMethodCardLast4: SearchableStringFilterInput
+  paymentMethodCardType: SearchableStringFilterInput
+  paymentMethodCardThreeDSecure: SearchableBooleanFilterInput
+  paymentMethodCardThreeDSecureVersion: SearchableStringFilterInput
+  paymentMethodCardThreeDSecureFlow: SearchableStringFilterInput
+  paymentMethodCardTokenizationMethod: SearchableStringFilterInput
+  traceDetailsSource: SearchableStringFilterInput
+  storeId: SearchableStringFilterInput
+  and: [SearchableSubscriptionFilterInput]
+  or: [SearchableSubscriptionFilterInput]
+  not: SearchableSubscriptionFilterInput
+}
+input ActivateApplePayCertInput {
+  " Apple Pay certificate ID"
+  id: ID!
+  " Base64 encoded PEM certificate downloaded from Apple Developer Portal"
+  cert: String!
+}
+input ActivateSubscriptionInput {
+  paymentToken: String
+  addAmount: Int
+  sequenceId: ID
+  sessionId: ID
+  completeUrl: String
+  cancelUrl: String
+  failUrl: String
+  id: ID!
+  metadata: [KeyValueInput!]
+  expireAt: AWSTimestamp
+}
+input KeyValueInput {
+  key: String!
+  value: String
+}
+input BlacklistItemInput {
+  " The type of the blacklist item"
+  type: BlacklistItemType!
+  " The value of the blacklist item, e.g. email, phone, ip, card, bin, fingerprint"
+  value: String!
+}
+input CancelPaymentInput {
+  " The ID of the payment to be canceled"
+  paymentId: ID!
+  " The reason why the payment is being canceled"
+  cancellationReason: CancellationReason
+}
+input CancelSubscriptionInput {
+  cancelAtPeriodEnd: Boolean
+  id: ID!
+}
+input CapturePaymentInput {
+  " The ID of the payment to be captured"
+  paymentId: ID!
+  " The amount to be captured (for example 1075 for 10.75€)"
+  amount: Int
+}
+input CreateAuthorizedUserInput {
+  " Email address of the authorized user to be created"
+  userEmail: String!
+  " Access level for the authorized user granted by the authorizer"
+  accessLevel: AuthorizedUserAccessLevel
+  " Limit access to a specific store"
+  storeId: ID
+}
+input CreateDocumentInput {
+  type: DocumentType!
+  name: String
+  note: String
+}
+input CreatePaymentInput {
+  " The ID of the payment to be created"
+  id: ID
+  " The amount to be charged (for example 1075 for 10.75€)"
+  amount: Int!
+  " The order ID in your platform (eg: the invoice number). If not present, MONEI will generate a unique one"
+  orderId: ID
+  " The ID of the store"
+  storeId: ID
+  " The ID of the Point of Sale this payment will be associated to"
+  pointOfSaleId: ID
+  " The payment description"
+  description: String
+  " The payment descriptor"
+  descriptor: String
+  " Basic information about the customer"
+  customer: CustomerInput
+  " Billing information"
+  billingDetails: ContactDetailsInput
+  " Shipping details"
+  shippingDetails: ContactDetailsInput
+  " The currency of the payment"
+  currency: Currencies
+  " Which payment methods are allowed"
+  allowedPaymentMethods: [PaymentMethods]
+  " Transaction type"
+  transactionType: TransactionTypes
+  " The URL where to send the user when the payment has finished"
+  completeUrl: String
+  " The URL where to notify a success payment (server-to-server HTTP POST request)"
+  callbackUrl: String
+  " The URL where to send the user when he/she requests to cancel the payment"
+  cancelUrl: String
+  " The URL where to send the user when the payment has failed"
+  failUrl: String
+  " Time at which the payment will expire. Measured in seconds since the Unix epoch."
+  expireAt: AWSTimestamp
+  " The payment metadata"
+  metadata: [KeyValueInput!]
+}
+input CustomerInput {
+  email: String
+  name: String
+  phone: String
+}
+input ContactDetailsInput {
+  email: String
+  name: String
+  company: String
+  phone: String
+  address: AddressInput
+  taxId: String
+}
+input AddressInput {
+  city: String
+  country: String
+  line1: String
+  line2: String
+  zip: String
+  state: String
+}
+input CreatePointOfSaleInput {
+  " Store's ID where this point of sale belongs"
+  storeId: ID!
+  " A name that represents the point of sale"
+  name: String
+  " Whether the user can manually enter the amount or not"
+  manualAmount: Boolean
+  " Whether the user must provide an email address or not"
+  requireEmail: Boolean
+  " Whether the user must provide a tax ID or not"
+  requireTaxId: Boolean
+  " Fixed amount to be charged"
+  fixedAmount: Int
+  " Fixed currency to be charged"
+  fixedCurrency: Currencies
+  " Whether the user must provide a fixed amount or not"
+  includeQrCode: Boolean
+  " QR code text"
+  qrCodeText: String
+  " The URL where to notify a success payment (server-to-server HTTP POST request)"
+  paymentCallbackUrl: String
+}
+input CreateProviderInput {
+  " The integrated processor"
+  processor: Processor!
+  " Whether the provider is enabled since creation or not"
+  enabled: Boolean
+  " The acquirer"
+  acquirer: Acquirer!
+  " The payment method for the provider"
+  paymentMethod: PaymentMethods!
+  " Metadata"
+  metadata: [MetadataItemInput!]
+  " Rules for the provider"
+  rules: ProviderRulesInput
+}
+input MetadataItemInput {
+  key: String!
+  value: String
+}
+input ProviderRulesInput {
+  " Minimum amount for this provider"
+  minAmount: Int
+  " Maximum amount for this provider"
+  maxAmount: Int
+  " Shop name regular expression"
+  shopNameLike: String
+  " Description regular expression"
+  descriptionLike: String
+}
+input CreateStoreInput {
+  " A name that represents the store"
+  name: String
+  " The store's address"
+  address: AddressInput
+  " The store's phone number"
+  phone: String
+  " The store's email address"
+  email: String
+  " The store's website"
+  website: String
+  " Metadata"
+  metadata: [KeyValueInput!]
+  " Whether the store is blocked or not"
+  blocked: Boolean
+}
+input CreateSubscriptionInput {
+  " The amount to be charged"
+  amount: Int!
+  " The currency of the payment"
+  currency: Currencies
+  " The payment description"
+  description: String
+  " The payment descriptor"
+  descriptor: String
+  " Basic information about the customer"
+  customer: CustomerInput
+  " Billing information"
+  billingDetails: ContactDetailsInput
+  " Shipping details"
+  shippingDetails: ContactDetailsInput
+  " Subscription interval"
+  interval: IntervalInput
+  " Number of intervals between subscription payments"
+  intervalCount: Int
+  " Number of days the trial period lasts"
+  trialPeriodDays: Int
+  " The end date of the trial period. Measured in seconds since the Unix epoch"
+  trialPeriodEnd: AWSTimestamp
+  " The URL where to notify a success payment"
+  callbackUrl: String
+  " The URL will be called each time subscription creates a new payments"
+  paymentCallbackUrl: String
+  " Related Store"
+  storeId: ID
+  " Custom retry schedule"
+  retrySchedule: [RetryScheduleInput!]
+  " Custom metadata"
+  metadata: [KeyValueInput!]
+}
+input RetryScheduleInput {
+  interval: RetryIntervalInput!
+  intervalCount: Int!
+}
+input CreateWebhookInput {
+  url: String!
+  eventTypes: [WebhookEventType!]!
+  enabled: Boolean
+}
+input PauseSubscriptionInput {
+  pauseIntervalCount: Int!
+  pauseAtPeriodEnd: Boolean
+  id: ID!
+}
+input UpdateChargeInput {
+  id: ID!
+  accountId: ID!
+  providerId: ID
+  checkoutId: ID!
+  providerInternalId: ID
+  providerReferenceId: ID
+  subscriptionId: ID
+  createdAt: AWSTimestamp
+  updatedAt: AWSTimestamp
+  amount: Int
+  authorizationCode: String
+  billingDetails: ContactDetailsInput
+  billingPlan: BillingPlans
+  currency: String!
+  customer: CustomerInput
+  description: String
+  descriptor: String
+  livemode: Boolean
+  orderId: ID
+  storeId: ID
+  pointOfSaleId: ID
+  terminalId: ID
+  sequenceId: ID
+  paymentMethod: PaymentMethodInput
+  cancellationReason: CancellationReason
+  lastRefundAmount: Int
+  lastRefundReason: RefundReason
+  refundedAmount: Int
+  shippingDetails: ContactDetailsInput
+  shop: ShopInput
+  status: ChargeStatus!
+  statusCode: String
+  statusMessage: String
+  sessionDetails: SessionDetailsInput
+  traceDetails: TraceDetailsInput
+  pageOpenedAt: AWSTimestamp
+  metadata: [KeyValueInput!]
+}
+input PaymentMethodInput {
+  method: PaymentMethods
+  bizum: PaymentMethodBizumInput
+  card: PaymentMethodCardInput
+  cardPresent: PaymentMethodCardPresentInput
+  cofidis: PaymentMethodCofidisInput
+  cofidisLoan: PaymentMethodCofidisLoanInput
+  paypal: PaymentMethodPaypalInput
+  sepa: PaymentMethodSepaInput
+  trustly: PaymentMethodTrustlyInput
+  klarna: PaymentMethodKlarnaInput
+  mbway: PaymentMethodMBWayInput
+}
+input PaymentMethodBizumInput {
+  phoneNumber: String
+  integrationType: String
+}
+input PaymentMethodCardInput {
+  brand: CardBrand
+  country: String
+  type: CardType
+  threeDSecure: Boolean
+  threeDSecureVersion: String
+  last4: String
+  cardholderName: String
+  cardholderEmail: String
+  bank: String
+  tokenizationMethod: TokenizationMethods
+}
+input PaymentMethodCardPresentInput {
+  brand: CardBrand
+  country: String
+  type: CardType
+  bin: String
+  last4: String
+  cardholderName: String
+  cardholderEmail: String
+  expiration: Long
+}
+input PaymentMethodCofidisInput {
+  orderId: ID
+}
+input PaymentMethodCofidisLoanInput {
+  orderId: ID
+}
+input PaymentMethodPaypalInput {
+  orderId: ID
+  payerId: ID
+  email: String
+  name: String
+}
+input PaymentMethodSepaInput {
+  accountholderAddress: AddressInput
+  accountholderEmail: String
+  accountholderName: String
+  countryCode: String
+  bankAddress: String
+  bankCode: String
+  bankName: String
+  bic: String
+  last4: String
+}
+input PaymentMethodTrustlyInput {
+  customerId: ID
+}
+input PaymentMethodKlarnaInput {
+  billingCategory: String
+  authPaymentMethod: String
+}
+input PaymentMethodMBWayInput {
+  phoneNumber: String
+}
+input ShopInput {
+  name: String
+  country: String
+}
+input SessionDetailsInput {
+  ip: AWSIPAddress
+  userAgent: String
+  countryCode: String
+  lang: String
+  deviceType: DeviceType
+  deviceModel: String
+  browser: String
+  browserVersion: String
+  browserAccept: String
+  browserColorDepth: String
+  browserScreenHeight: String
+  browserScreenWidth: String
+  browserTimezoneOffset: String
+  os: String
+  osVersion: String
+  source: String
+  sourceVersion: String
+}
+input TraceDetailsInput {
+  ip: AWSIPAddress
+  userAgent: String
+  countryCode: String
+  lang: String
+  deviceType: DeviceType
+  deviceModel: String
+  browser: String
+  browserVersion: String
+  browserAccept: String
+  os: String
+  osVersion: String
+  source: String
+  sourceVersion: String
+  userId: ID
+  userEmail: String
+  userName: String
+}
+input ChargeEventsChangeInput {
+  id: ID!
+}
+input SubscriptionEventsChangeInput {
+  id: ID!
+}
+input RefundPaymentInput {
+  " The ID of the payment to be refunded"
+  paymentId: ID!
+  " The amount to be refunded (for example 1075 for 10.75€)"
+  amount: Int!
+  " The reason why the payment is being refunded"
+  refundReason: RefundReason
+}
+input RegisterApplePayDomainInput {
+  " The domain Name"
+  domainName: String!
+}
+input RegisterCodeInput {
+  " The ID of the code to register"
+  codeId: ID
+  " The ID of the Point of Sale this code will be associated to"
+  pointOfSaleId: ID
+}
+input ResumeSubscriptionInput {
+  id: ID!
+}
+input SendPaymentMessageInput {
+  channel: MessageChannel
+  customerEmail: AWSEmail
+  customerPhone: AWSPhone
+  language: String
+  paymentId: ID!
+}
+input SendPaymentRequestInput {
+  paymentId: ID!
+  phoneNumber: String!
+  language: String
+}
+input SendSubscriptionMessageInput {
+  channel: MessageChannel
+  customerEmail: AWSEmail
+  customerPhone: AWSPhone
+  language: String
+  subscriptionId: ID!
+}
+" Setup account input"
+input SetupAccountInput {
+  " The preferred account language"
+  language: String
+  " Business data"
+  business: BusinessDataInput
+  " Legal representatives"
+  representatives: [RepresentativeInput!]
+  " IBAN number to receive payments"
+  iban: String
+  " Billing plan"
+  billingPlan: BillingPlans
+  " User provided note"
+  userNote: String
+}
+" Business data input"
+input BusinessDataInput {
+  " Country code, ISO 3166-1 alpha-2 code"
+  country: String
+  " Legal form"
+  legalForm: LegalForm!
+  " Legal name"
+  legalName: String
+  " Company name"
+  companyName: String
+  " Full address"
+  address: AddressInput
+  " Company's tax ID (CIF/NIF)"
+  documentNumber: String
+  " The constitution date (beginning of activities)"
+  creationDate: String
+  " Email address"
+  email: String
+  " Phone number, E.164 format, e.g. +34666777888"
+  phone: String
+  " Website"
+  website: String
+  " Expected monthly volume in EUR"
+  monthlyVolume: Int
+  " Confirms that website complies with requirements"
+  confirmWebsite: Boolean
+  " Company Industry"
+  industry: Industries
+  " Merchant Category Code (MCC) in ISO 18245:2003 format"
+  mcc: String
+  " A description of the products or services it provides"
+  servicesDescription: String
+  " Confirms that service complies with requirements"
+  confirmServicesDescription: Boolean
+}
+" Legal Representative input"
+input RepresentativeInput {
+  " First name"
+  firstName: String
+  " Last name"
+  lastName: String
+  " Address"
+  address: AddressInput
+  " Email"
+  email: String
+  " Phone number in E.164 format, e.g. +34666777888"
+  phone: String
+  " Document number (DNI/NIE)"
+  documentNumber: String
+  " Stock percentage (100% if it's an individual or freelancer)"
+  stocksPercentage: Float
+  " Confirms that the representative is not a PEP (Politically Exposed Person)"
+  hasNoPublicActivity: Boolean
+  " Nationality, ISO 3166-1 alpha-2 code"
+  nationality: String
+  " Citizenship, ISO 3166-1 alpha-2 code"
+  citizenship: String
+}
+" Update account input"
+input UpdateAccountInput {
+  " branding information"
+  branding: AccountBrandingInput
+  " Public business information"
+  publicBusinessDetails: AccountPublicBusinessDetailsInput
+  " The account default timezone"
+  timezone: String
+  " The preferred account language"
+  language: String
+  " Account notifications"
+  notifications: AccountNotificationsInput
+  " Account name"
+  name: String
+}
+" Account branding input"
+input AccountBrandingInput {
+  " Accent color, used on the payment page"
+  accentColor: String
+  " Background color, used on the payment page"
+  bgColor: String
+  " Logo URL, the logo will be displayed on the payment page"
+  logoUrl: String
+  " icon URL, the icon will be used as an icon for the payment page"
+  iconUrl: String
+}
+" Account public business details input"
+input AccountPublicBusinessDetailsInput {
+  " Company name"
+  companyName: String
+  " Website"
+  website: String
+  " Phone number, E.164 format, e.g. +34666777888"
+  phone: String
+  " Full address"
+  address: AddressInput
+  " Support website"
+  supportWebsite: String
+  " Support email"
+  supportEmail: String
+  " Support phone, E.164 format, e.g. +34666777888"
+  supportPhone: String
+}
+" Account notifications input"
+input AccountNotificationsInput {
+  " Whether to send an email to the customer on refund"
+  emailCustomerOnRefund: Boolean
+  " Whether to send an email to the customer on successful payment"
+  emailCustomerOnSuccess: Boolean
+  " Whether to send an email to the customer on successful subscription"
+  emailCustomerOnSubscription: Boolean
+  " Whether to send an email to the admin on every successful payment"
+  emailAdminOnSuccess: Boolean
+  " Whether to send an email to the admin on every successful subscription"
+  emailAdminOnSubscription: Boolean
+  " List of admin emails to send notifications"
+  adminEmails: [String!]
+}
+input UpdateApplePayCertInput {
+  " Apple Pay certificate ID"
+  id: ID!
+  " Whether the certificate is active or not"
+  active: Boolean
+}
+input UpdateAuthorizedUserInput {
+  " Email address of the authorized user to be updated"
+  userEmail: String!
+  " Access level for the authorized user granted by the authorizer"
+  accessLevel: AuthorizedUserAccessLevel
+  " Limit access to a specific store"
+  storeId: ID
+}
+input UpdateCodeInput {
+  " The Code ID"
+  id: ID!
+  " Whether the code is enabled or not"
+  enabled: Boolean
+}
+input UpdatePointOfSaleInput {
+  " The ID of the point of sale"
+  id: ID!
+  " A name that represents the point of sale"
+  name: String
+  " Whether the user can manually enter the amount or not"
+  manualAmount: Boolean
+  " Whether the user must provide an email address or not"
+  requireEmail: Boolean
+  " Whether the user must provide a tax ID or not"
+  requireTaxId: Boolean
+  " Fixed amount to be charged"
+  fixedAmount: Int
+  " Fixed currency to be charged"
+  fixedCurrency: Currencies
+  " Whether the user must provide a fixed amount or not"
+  includeQrCode: Boolean
+  " QR code text"
+  qrCodeText: String
+  " The URL where to notify a success payment (server-to-server HTTP POST request)"
+  paymentCallbackUrl: String
+}
+input UpdateProviderInput {
+  " The Provider ID"
+  id: ID!
+  " Whether the provider is enabled or not"
+  enabled: Boolean
+  " The acquirer"
+  acquirer: Acquirer
+  " Metadata"
+  metadata: [MetadataItemInput!]
+  " Rules for the provider"
+  rules: ProviderRulesInput
+}
+input UpdateStoreInput {
+  " The Store's ID"
+  id: ID!
+  " A name that represents the store"
+  name: String
+  " The store's address"
+  address: AddressInput
+  " The store's phone number"
+  phone: String
+  " The store's email address"
+  email: String
+  " The store's website"
+  website: String
+  " Metadata"
+  metadata: [KeyValueInput!]
+  " Whether the store is blocked or not"
+  blocked: Boolean
+}
+input UpdateSubscriptionInput {
+  amount: Int
+  intervalCount: Int
+  interval: IntervalInput
+  description: String
+  descriptor: String
+  callbackUrl: String
+  paymentCallbackUrl: String
+  customer: CustomerInput
+  billingDetails: ContactDetailsInput
+  shippingDetails: ContactDetailsInput
+  nextPaymentAt: AWSTimestamp
+  trialPeriodEnd: AWSTimestamp
+  cancelAtPeriodEnd: Boolean
+  pauseIntervalCount: Int
+  pauseAtPeriodEnd: Boolean
+  id: ID!
+  retrySchedule: [RetryScheduleInput!]
+  metadata: [KeyValueInput!]
+}
+input UpdateWebhookInput {
+  id: ID!
+  url: String
+  eventTypes: [WebhookEventType!]
+  enabled: Boolean
+}
+input SearchableFloatFilterInput {
+  ne: Float
+  gt: Float
+  lt: Float
+  gte: Float
+  lte: Float
+  eq: Float
+  range: [Float]
+}
+"This directive allows results to be deferred during execution"
+directive @defer on FIELD
+"Tells the service this field/object has access authorized by a Lambda Authorizer."
+directive @aws_lambda on OBJECT | FIELD_DEFINITION
+"Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead."
+directive @aws_publish(
+  "List of subscriptions which will be published to when this mutation is called."
+  subscriptions: [String]
+) on FIELD_DEFINITION
+"Tells the service this field/object has access authorized by sigv4 signing."
+directive @aws_iam on OBJECT | FIELD_DEFINITION
+"Tells the service this field/object has access authorized by an OIDC token."
+directive @aws_oidc on OBJECT | FIELD_DEFINITION
+"Tells the service this field/object has access authorized by an API key."
+directive @aws_api_key on OBJECT | FIELD_DEFINITION
+"Tells the service which mutation triggers this subscription."
+directive @aws_subscribe(
+  "List of mutations which will trigger this subscription when they are called."
+  mutations: [String]
+) on FIELD_DEFINITION
+"Tells the service this field/object has access authorized by a Cognito User Pools token."
+directive @aws_cognito_user_pools(
+  "List of cognito user pool groups which have access on this field"
+  cognito_groups: [String]
+) on OBJECT | FIELD_DEFINITION
+"Directs the schema to enforce authorization on a field"
+directive @aws_auth(
+  "List of cognito user pool groups which have access on this field"
+  cognito_groups: [String]
+) on FIELD_DEFINITION

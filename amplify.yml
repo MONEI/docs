@@ -6,8 +6,11 @@ frontend:
         - corepack enable
         - yarn --immutable
         - aws s3 cp s3://$JS_BUCKET/api/v1/openapi.json ./openapi.json
+        - yarn rover graph introspect https://graphql.monei.com/ --output schema.graphql
     build:
       commands:
+        - yarn run genapi:rest
+        - yarn run genapi:graphql
         - yarn run build
     postBuild:
       commands:

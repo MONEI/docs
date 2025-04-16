@@ -1,0 +1,28 @@
+---
+id: osversion
+title: 'OsVersion'
+description: 'Operation system version (e.g., `13.5.1`).'
+sidebar_label: 'OsVersion'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: '10.15.4'
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'OsVersion'}></Heading>
+
+Operation system version (e.g., `13.5.1`).
+
+<Schema
+  schema={{
+    type: 'string',
+    example: '10.15.4',
+    description: 'Operation system version (e.g., `13.5.1`).',
+    title: 'OsVersion'
+  }}
+  schemaType={'response'}
+></Schema>

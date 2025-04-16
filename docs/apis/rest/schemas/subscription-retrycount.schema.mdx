@@ -1,0 +1,29 @@
+---
+id: subscription-retrycount
+title: 'Subscription-RetryCount'
+description: 'Number of retries left for the subscription.'
+sidebar_label: 'Subscription-RetryCount'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 1
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Subscription-RetryCount'}></Heading>
+
+Number of retries left for the subscription.
+
+<Schema
+  schema={{
+    type: 'integer',
+    format: 'int32',
+    example: 1,
+    description: 'Number of retries left for the subscription.',
+    title: 'Subscription-RetryCount'
+  }}
+  schemaType={'response'}
+></Schema>
