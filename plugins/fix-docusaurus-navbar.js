@@ -21,6 +21,9 @@ module.exports = function (context, options) {
                   if (hasActiveChild && dropdownLink) {
                     dropdownLink.classList.add('navbar__link--active');
                   }
+                  else {
+                    dropdownLink.classList.remove('navbar__link--active');
+                  }
                 });
               }
 
