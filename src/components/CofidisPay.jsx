@@ -1,6 +1,12 @@
+import {CofidisPay as MoneiCofidisPay} from '@monei-js/components';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {CofidisPay as MoneiCofidisPay} from '@monei-js/components';
+
+// Import findDOMNode from external library
+import {findDOMNode} from 'find-dom-node-polyfill';
+
+// Set Find DOM Node before driver
+ReactDOM.findDOMNode = findDOMNode;
 
 const CofidisPayComponent = MoneiCofidisPay.driver('react', {
   React: React,
@@ -10,7 +16,7 @@ const CofidisPayComponent = MoneiCofidisPay.driver('react', {
 export default function CofidisPay() {
   return (
     <CofidisPayComponent
-      paymentId="0d148f882a96f578c7ce0105eceb079586a0670a"
+      paymentId="470b43ad51a1821057e60c203f74bfc002eb9e42"
       language="en"
       onSubmit={(result) => {
         console.log(result);

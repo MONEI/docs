@@ -16,7 +16,7 @@ const BizumComponent = MoneiBizum.driver('react', {
 export default function Bizum() {
   return (
     <BizumComponent
-      accountId="2975bcfa-7bbc-422d-af48-c66759d87b69"
+      accountId="4cdccd66-938e-44d9-b0c9-9b79397f986d"
       amount={100}
       currency="EUR"
       onSubmit={(result) => {
