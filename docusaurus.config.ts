@@ -73,26 +73,22 @@ const config: Config = {
       {
         highlight: 'bash',
         language: 'curl',
-        logoClass: 'curl',
-        variants: ['curl']
+        logoClass: 'curl'
       },
       {
         highlight: 'javascript',
         language: 'javascript',
-        logoClass: 'javascript',
-        variants: ['node']
+        logoClass: 'javascript'
       },
       {
         highlight: 'python',
         language: 'python',
-        logoClass: 'python',
-        variants: ['python']
+        logoClass: 'python'
       },
       {
         highlight: 'php',
         language: 'php',
-        logoClass: 'php',
-        variants: ['php']
+        logoClass: 'php'
       }
     ],
     footer: {
