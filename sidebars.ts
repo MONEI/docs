@@ -39,8 +39,6 @@ export default {
         'payment-methods/apple-pay',
         'payment-methods/paypal',
         'payment-methods/bizum',
-        'payment-methods/cofidis',
-        'payment-methods/cofidis-pay',
         'payment-methods/click-to-pay',
         'payment-methods/sepa-request-to-pay'
       ],
@@ -52,7 +50,6 @@ export default {
         'guides/payouts',
         'guides/save-payment-method',
         'guides/send-cardholder-name',
-        'guides/setup-cofidis-widget',
         'guides/verify-signature'
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
