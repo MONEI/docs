@@ -218,9 +218,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/rover@npm:^0.28.1":
-  version: 0.28.1
-  resolution: "@apollo/rover@npm:0.28.1"
+"@apollo/rover@npm:^0.29.1":
+  version: 0.29.1
+  resolution: "@apollo/rover@npm:0.29.1"
   dependencies:
     axios: "npm:^1.6.5"
     axios-proxy-builder: "npm:^0.1.1"
@@ -229,7 +229,7 @@ __metadata:
     tar: "npm:^7.0.0"
   bin:
     rover: run.js
-  checksum: 10c0/0501f3efc21163ad0bc6e46261a9cbb52f0e7417a3928b59b0f21ccfd5bdf2b3b69e406bcf8ce2dd492b1f54437a4ddbfd0b52f5e06991d2c35635b2ed1d16e3
+  checksum: 10c0/8b803142e6ce4e3a4f6482e7a678bae56529a81de4dd765089d458d4f756fa171ce6c037977ffa10d725ca8690e8960a597306d20228acf0632f57a13cf75a8f
   languageName: node
   linkType: hard
 
@@ -6946,9 +6946,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-openapi-docs@npm:4.3.7":
-  version: 4.3.7
-  resolution: "docusaurus-plugin-openapi-docs@npm:4.3.7"
+"docusaurus-plugin-openapi-docs@npm:4.4.0":
+  version: 4.4.0
+  resolution: "docusaurus-plugin-openapi-docs@npm:4.4.0"
   dependencies:
     "@apidevtools/json-schema-ref-parser": "npm:^11.5.4"
     "@redocly/openapi-core": "npm:^1.10.5"
@@ -6970,13 +6970,13 @@ __metadata:
     "@docusaurus/utils": ^3.5.0
     "@docusaurus/utils-validation": ^3.5.0
     react: ^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/3427a4c4fbbe0b4452b387d1cab3f7369c181bf50512fe960cf739e7aa32fa912b7b2f2f16fc9a2add1eb831432c5a97ee544e46efa62e70bbffbf8d67a8a37c
+  checksum: 10c0/d1ffd47abe9ce35f3437d51ab28ffe24844e0a149fd5e817a6b2027629ae7fb0ab1228ac072870e6e7be41e9950976a3fdf20fa3913ca1ae531f272043d9d10b
   languageName: node
   linkType: hard
 
-"docusaurus-theme-openapi-docs@npm:4.3.7":
-  version: 4.3.7
-  resolution: "docusaurus-theme-openapi-docs@npm:4.3.7"
+"docusaurus-theme-openapi-docs@npm:4.4.0":
+  version: 4.4.0
+  resolution: "docusaurus-theme-openapi-docs@npm:4.4.0"
   dependencies:
     "@hookform/error-message": "npm:^2.0.1"
     "@reduxjs/toolkit": "npm:^1.7.1"
@@ -7011,7 +7011,7 @@ __metadata:
     docusaurus-plugin-sass: ^0.2.3
     react: ^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/3e3b8c035a49a29ec3c5a1478dd85d967eb972ea692ac48040111f41037267e3844a0a5cb66289f642abd2c9c61977483dbfd3736646a3305ab05b61c3fd4cbe
+  checksum: 10c0/0bbf047c515e831799a76b95664f7a928af2ebdc4189357cc16fedea3779114f3dfcc61adb86041bb1d3c8a9ce684caa9889341729b68d9d91ea335863620788
   languageName: node
   linkType: hard
 
@@ -8394,10 +8394,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.10.0":
-  version: 16.10.0
-  resolution: "graphql@npm:16.10.0"
-  checksum: 10c0/303730675538c8bd6c76b447dc6f03e61242e2d2596b408c34759666ec4877409e5593a7a0467d590ac5407b8c663b093b599556a77f24f281abea69ddc53de6
+"graphql@npm:^16.11.0":
+  version: 16.11.0
+  resolution: "graphql@npm:16.11.0"
+  checksum: 10c0/124da7860a2292e9acf2fed0c71fc0f6a9b9ca865d390d112bdd563c1f474357141501c12891f4164fe984315764736ad67f705219c62f7580681d431a85db88
   languageName: node
   linkType: hard
 
@@ -9902,9 +9902,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^15.5.1":
-  version: 15.5.1
-  resolution: "lint-staged@npm:15.5.1"
+"lint-staged@npm:^15.5.2":
+  version: 15.5.2
+  resolution: "lint-staged@npm:15.5.2"
   dependencies:
     chalk: "npm:^5.4.1"
     commander: "npm:^13.1.0"
@@ -9918,7 +9918,7 @@ __metadata:
     yaml: "npm:^2.7.0"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10c0/86deddb08bf10428f2eb96c02326a9ee403360729225f0b12afb0c0f13c287a75daa01e179d86f64e3432576446d8643d204a47417296f9ef0aa56f1340ff2af
+  checksum: 10c0/618386254600ada3af3672486a9d082250108245e7c0863d9dfe0a21e7764e3b2eb6416b0f8970e548f4e9d368637331598b27df5a1306925feabbaf16a667e1
   languageName: node
   linkType: hard
 
@@ -10143,12 +10143,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^15.0.8":
-  version: 15.0.8
-  resolution: "marked@npm:15.0.8"
+"marked@npm:^15.0.11":
+  version: 15.0.11
+  resolution: "marked@npm:15.0.11"
   bin:
     marked: bin/marked.js
-  checksum: 10c0/79c4958047e1d7405eea3a21d56aa9adf1e579f603711472458b269db02764b1b6cb4acd8d7ecfe368126763af491ebf1283918676c47c397a45d24dac6f7ca4
+  checksum: 10c0/d532db4955c1f2ac6efc65a644725e9e12e7944cb6af40c7148baecfd3b3c2f3564229b3daf12d2125635466448fb9b367ce52357be3aea0273e3d152efdbdcf
   languageName: node
   linkType: hard
 
@@ -11727,7 +11727,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "monei-docs@workspace:."
   dependencies:
-    "@apollo/rover": "npm:^0.28.1"
+    "@apollo/rover": "npm:^0.29.1"
     "@docusaurus/core": "npm:3.7.0"
     "@docusaurus/faster": "npm:^3.7.0"
     "@docusaurus/module-type-aliases": "npm:3.7.0"
@@ -11742,20 +11742,20 @@ __metadata:
     "@mdx-js/react": "npm:^3.1.0"
     "@monei-js/components": "npm:^1.7.7"
     clsx: "npm:^2.1.1"
-    docusaurus-plugin-openapi-docs: "npm:4.3.7"
-    docusaurus-theme-openapi-docs: "npm:4.3.7"
+    docusaurus-plugin-openapi-docs: "npm:4.4.0"
+    docusaurus-theme-openapi-docs: "npm:4.4.0"
     dotenv: "npm:^16.5.0"
     find-dom-node-polyfill: "npm:^1.0.3"
-    graphql: "npm:^16.10.0"
+    graphql: "npm:^16.11.0"
     husky: "npm:^9.1.7"
-    lint-staged: "npm:^15.5.1"
-    marked: "npm:^15.0.8"
+    lint-staged: "npm:^15.5.2"
+    marked: "npm:^15.0.11"
     prettier: "npm:^3.5.3"
     prism-react-renderer: "npm:^2.4.1"
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     redoc: "npm:^2.5.0"
-    styled-components: "npm:^6.1.17"
+    styled-components: "npm:^6.1.18"
   languageName: unknown
   linkType: soft
 
@@ -15649,9 +15649,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.1.17":
-  version: 6.1.17
-  resolution: "styled-components@npm:6.1.17"
+"styled-components@npm:^6.1.18":
+  version: 6.1.18
+  resolution: "styled-components@npm:6.1.18"
   dependencies:
     "@emotion/is-prop-valid": "npm:1.2.2"
     "@emotion/unitless": "npm:0.8.1"
@@ -15665,7 +15665,7 @@ __metadata:
   peerDependencies:
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
-  checksum: 10c0/87f35173c5fc2291ddba7ed8224d19fe6872d056a577f55fe130248f5ea23e5c48c012e881fa1ad93df60b56a12c1c2d553f628e204f090189221734927e50b0
+  checksum: 10c0/067778b8cf9aa24b23590d23210b0e7964c6469630e5ab821c68dac64af6e0c0270c972a836f60a8bbd9753770f0475f911fcd34eeba6bd003c233a79a391e6b
   languageName: node
   linkType: hard
 

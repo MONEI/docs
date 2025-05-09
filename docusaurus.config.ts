@@ -71,6 +71,12 @@ const config: Config = {
     },
     languageTabs: [
       {
+        highlight: 'bash',
+        language: 'curl',
+        logoClass: 'curl',
+        variants: ['curl']
+      },
+      {
         highlight: 'javascript',
         language: 'javascript',
         logoClass: 'javascript',
