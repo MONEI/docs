@@ -10,7 +10,8 @@ const config: Config = {
   baseUrl: '/',
   favicon: 'https://assets.monei.com/images/icon.png',
   future: {
-    experimental_faster: true
+    experimental_faster: true,
+    v4: true
   },
   themeConfig: {
     colorMode: {
