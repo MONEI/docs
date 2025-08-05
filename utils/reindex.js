@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({quiet: true});
 
 async function reindex() {
   const BASIC_AUTH = `${process.env.CRAWLER_USER_ID}:${process.env.CRAWLER_API_KEY}`;
