@@ -44,7 +44,7 @@ export default {
       ],
       Subscriptions: ['subscriptions/integration'],
       Guides: [
-        'guides/ethoca-verify',
+        'guides/ethoca-verifi',
         'guides/managing-stores',
         'guides/migrate-tokens',
         'guides/payouts',
