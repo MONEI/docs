@@ -20,7 +20,8 @@ export default {
             'e-commerce/shopify/monei-onsite',
             'e-commerce/shopify/monei-bizum',
             'e-commerce/shopify/monei-multibanco',
-            'e-commerce/shopify/monei-mbway'
+            'e-commerce/shopify/monei-mbway',
+            'e-commerce/shopify/hide-payment-methods'
           ]
         },
         'e-commerce/wix',
