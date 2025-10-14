@@ -1,0 +1,35 @@
+{
+  "version": "1.2.0",
+  "type": "function_payment_hide",
+  "apiVersion": "2025-01",
+  "f": [
+    "hide"
+  ],
+  "customerTags": [],
+  "collectionIds": [],
+  "attribute1": "",
+  "attribute2": "",
+  "title": "Hide Bizum if not Spain/Andorra",
+  "excl": [],
+  "debugMode": false,
+  "previewMode": false,
+  "markets": [],
+  "methods": [
+    {
+      "name": "Bizum",
+      "rgx": ":=",
+      "when": "and",
+      "rules": [
+        {
+          "r": "co",
+          "c": "neq",
+          "v": [
+            "AD",
+            "ES"
+          ],
+          "pWhen": "any"
+        }
+      ]
+    }
+  ]
+}

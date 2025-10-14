@@ -1,0 +1,49 @@
+{
+  "version": "1.2.0",
+  "type": "function_payment_hide",
+  "apiVersion": "2025-01",
+  "f": [
+    "hide"
+  ],
+  "customerTags": [],
+  "collectionIds": [],
+  "attribute1": "",
+  "attribute2": "",
+  "title": "Hide MB if not Portugal",
+  "excl": [],
+  "debugMode": false,
+  "previewMode": false,
+  "markets": [],
+  "methods": [
+    {
+      "name": "Multibanco",
+      "rgx": ":=",
+      "when": "or",
+      "rules": [
+        {
+          "r": "co",
+          "c": "neq",
+          "v": [
+            "PT"
+          ],
+          "pWhen": "any"
+        }
+      ]
+    },
+    {
+      "name": "MBWay",
+      "rgx": ":=",
+      "when": "and",
+      "rules": [
+        {
+          "r": "co",
+          "c": "neq",
+          "v": [
+            "PT"
+          ],
+          "pWhen": "any"
+        }
+      ]
+    }
+  ]
+}
