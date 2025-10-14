@@ -1,0 +1,204 @@
+---
+id: hide-payment-methods
+title: Hide Payment Methods by Country
+description: Learn how to hide payment methods on your Shopify checkout based on customer country location using Checkout Blocks (Shopify Plus) or Puco (standard Shopify).
+---
+
+You can hide specific payment methods on your Shopify checkout page based on the customer's country location. This is useful when you have region-specific payment methods like MONEI Bizum (Spain) or MONEI Multibanco (Portugal) that should only be shown to customers in those countries.
+
+## Overview
+
+When you have multiple MONEI payment methods installed, you can use conditional logic to show only the relevant payment methods to customers based on their country. The approach depends on your Shopify plan:
+
+- **Shopify Plus**: Use Checkout Blocks (official Shopify app)
+- **Other Plans for Shopify**: Use Puco or ETP Sort Hide Payment Methods (third-party apps)
+
+## Shopify Plus: Using Checkout Blocks
+
+Checkout Blocks is the official Shopify app for customizing checkout experiences and includes conditional payment method functionality.
+
+### Installation
+
+1. Go to [**Shopify App Store**](https://apps.shopify.com/)
+2. Search for "Checkout Blocks"
+3. Install the official app by Shopify
+4. Configure your conditional rules following the [official Shopify documentation](https://help.shopify.com/en/manual/checkout-settings/checkout-blocks/customizations/payment-methods)
+
+Alternatively, install it from [Shopify's apps page](https://apps.shopify.com/partners/shopify)
+
+### Quick Download
+
+Download the pre-configured JSON files to import directly into Checkout Blocks:
+
+<div style={{display: 'flex', gap: '1rem', marginBottom: '2rem'}}>
+  <a href="/checkout-bizum-rule.json" download="checkout-bizum-rule.json" className="button button--primary">
+    📥 Download Bizum Rule
+  </a>
+  <a href="/checkout-mb-rule.json" download="checkout-mb-rule.json" className="button button--primary">
+    📥 Download MB Rule
+  </a>
+</div>
+
+:::tip How to use downloaded JSON files
+1. Download the JSON file(s) you need
+2. Go to **Apps → Checkout Blocks → Functions**
+3. Click **Create function → Payment/Hide → Import from file**
+4. Upload the downloaded JSON file
+5. Review and activate the function
+:::
+
+### Create rule: Hide Bizum
+
+**Use Case:** Hide MONEI Bizum for customers outside Spain or Andorra
+
+**Steps:**
+1. Go to **Apps → Checkout Blocks → Functions**
+2. Click on **Create function → Payment/Hide → Create from blank template**
+3. Create the rule:
+   - **Function title:** Hide Bizum if not Spain/Andorra
+   - **Type:** Advanced rules editor
+   - **Hidden payment methods:** Add method
+        - **Contains:** Bizum
+        - **Add rule:** Shipping country is not
+        - **Select a country:** Andorra, Spain
+4. Save the rule
+5. Change status to **Active**
+
+**The function can also be imported using this JSON file:**
+
+![Hide Bizum](/img/shopify/hide-payment-methods/checkout-bizum-rule.png)
+
+### Create rule: Hide Multibanco and MBWay
+
+**Use Case:** Hide MONEI Multibanco and MONEI MBWay for customers outside Portugal
+
+**Steps:**
+1. Go to **Apps → Checkout Blocks → Functions**
+2. Click on **Create function → Payment/Hide → Create from blank template**
+3. Create the rule:
+   - **Function title:** Hide MB if not Portugal
+   - **Type:** Advanced rules editor
+   - **Hidden payment methods:** Add method
+        - **Contains:** Multibanco
+        - **Add rule:** Shipping country is not
+        - **Select a country:** Portugal
+   - **Hidden payment methods:** Add method
+        - **Contains:** MBWay
+        - **Add rule:** Shipping country is not
+        - **Select a country:** Portugal
+4. Save the rule
+5. Change status to **Active**
+
+**The function can also be imported using this JSON file:**
+
+![Hide Multibanco and MBWay](/img/shopify/hide-payment-methods/checkout-mb-rule.png)
+
+## Other Plans for Shopify: Puco Checkout Rules
+
+Puco is a third-party app specifically designed for conditional payment method management that works on all Shopify plans. It has a free plan that allows for one checkout rule and a paid one that allows infinite rules
+
+### Installation
+
+1. Go to [**Shopify App Store**](https://apps.shopify.com/)
+2. Search for "Puco Checkout Rules"
+3. Install the app
+4. Set up your conditional rules
+
+Alternatively, install it from [Puco.io's Shopify partner page](https://apps.shopify.com/partners/puco)
+
+### Setup: Hide Bizum
+
+**Use Case:** Hide MONEI Bizum for customers outside Spain or Andorra
+
+**Steps:**
+1. Go to **Apps → Puco Checkout Rules → Payment**
+2. Create a new rule:
+   - **Customization title:** Hide Bizum if not Spain/Andorra
+   - **Based on:**
+        - **Condition:** Country Code
+        - **Operator:** does not contain
+        - **Country list:** Es, Ad
+   - **Customization type:** Hide payment methods
+   - **Select payment methods to hide:** Pay with Bizum
+3. Save the rule
+
+![Hide Bizum](/img/shopify/hide-payment-methods/puco-bizum-rule.png)
+
+### Setup: Hide Multibanco and MONEI MBWay
+
+**Use Case:** Hide MONEI Multibanco and MONEI MBWay for customers outside Portugal
+
+**Steps:**
+1. Go to **Apps → Puco Checkout Rules → Payment**
+2. Create a new rule:
+   - **Customization title:** Hide MB if not Portugal
+   - **Based on:**
+        - **Condition:** Country Code
+        - **Operator:** does not contain
+        - **Country list:** Pt
+   - **Customization type:** Hide payment methods
+   - **Select payment methods to hide:** MBWay, Multibanco (add both manually)
+3. Save the rule
+
+![Hide Multibanco and MBWay](/img/shopify/hide-payment-methods/puco-mb-rule.png)
+
+## Other Plans for Shopify: ETP Sort Hide Payment Methods
+
+ETP Sort Hide Payment Methods is a third-party app specifically designed for conditional payment method management that works on all Shopify plans.
+
+### Installation
+
+1. Go to [**Shopify App Store**](https://apps.shopify.com/)
+2. Search for "ETP Hide Sort Payment Methods"
+3. Install the app
+4. Set up your conditional rules
+
+Alternatively, install it from [E-TRADE PARTNER's Shopify partner page](https://apps.shopify.com/partners/e-trade-partner-p-s-a)
+
+### Setup: Hide Bizum
+
+**Use Case:** Hide MONEI Bizum for customers outside Spain or Andorra
+
+**Steps:**
+1. Go to **Apps → Hide & Sort Payments**
+2. Create new:
+   - **General settings:** 
+        - **Status:** Active
+        - **Customization name:** Hide Bizum if not Spain/Andorra
+        - **When do you want this customization to work?:** When certain conditions are met
+        - **Which condition set would you like to use?:** Address conditions
+   - **Conditions:**
+        - **When...:** Country
+        - **Operator:** is not one of
+        - **Country list:** Spain, Andorra
+   - **Customization actions:** 
+        - **Action:** Hide specific payment method(s)
+        - **Operator:** which name(s) contains/contain
+        - **Values:** Bizum
+3. Save the rule
+
+![Hide Bizum](/img/shopify/hide-payment-methods/etp-bizum-rule.png)
+
+### Setup: Hide Multibanco and MONEI MBWay
+
+**Use Case:** Hide MONEI Multibanco and MONEI MBWay for customers outside Portugal
+
+**Steps:**
+1. Go to **Apps → Hide & Sort Payments**
+2. Create new:
+   - **General settings:** 
+        - **Status:** Active
+        - **Customization name:** Hide MB if not Portugal
+        - **When do you want this customization to work?:** When certain conditions are met
+        - **Which condition set would you like to use?:** Address conditions
+   - **Conditions:**
+        - **When...:** Country
+        - **Operator:** is not one of
+        - **Country list:** Portugal
+   - **Customization actions:** 
+        - **Action:** Hide specific payment method(s)
+        - **Operator:** which name(s) contains/contain
+        - **Values:** Multibanco, MBWay
+3. Save the rule
+
+![Hide Multibanco and MBWay](/img/shopify/hide-payment-methods/etp-mb-rule.png)

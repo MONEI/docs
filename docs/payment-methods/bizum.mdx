@@ -46,6 +46,16 @@ Example of a Bizum push notification:
 <img src="/img/bizum-push-notification.png" width={400} alt="Bizum Push Notification" />
 :::
 
+### Subscriptions with Bizum
+
+You can use Bizum to offer subscriptions or recurring payments in a similar way to card-based subscriptions. When creating a subscription or recurring payment through the MONEI API, simply set Bizum as the payment method instead of a card. The overall process is almost identical, with a few specific considerations:
+
+- Currently, only customers of certain issuing banks, specifically BBVA and Santander, can use Bizum for recurring payments. Make sure to confirm this with your customer, as MONEI does not provide information about the issuing bank. If the customer’s bank does not support Bizum subscriptions, the subscription will not work.
+
+- The customer will only be asked to authorize the first payment. All subsequent payments will be processed automatically if you use the MONEI subscriptions engine, or you can manage them manually using MONEI’s recurring payments API.
+
+- Keep in mind that only one recurring payment per month can be made through Bizum, and the subscription amount cannot be changed after the first payment. The initial amount remains fixed for all future billing cycles.
+
 ## Before you begin
 
 This page explains how to add Bizum to your payment page. To accept Bizum payments please contact our [Support Team](https://support.monei.com/hc/requests/new) to configure Bizum.
