@@ -45,6 +45,20 @@ For all Bizum tests, the phone number to be used is +34500000000
 | Between 10 EUR and 15 EUR | E000 (Transaction approved)                                 | REDIRECT |
 | Above 15 EUR              | Phone number is not registered in Bizum                     |          |
 
+## Test Bizum phone numbers
+
+You can also test **Bizum Payout** transactions (outgoing payments to users).  
+In test mode, all Payout transactions with an amount **below 10 EUR** will be **approved automatically**.
+
+| AMOUNT          | STATUS CODE                                                                                                         | FLOW   |
+|-----------------|---------------------------------------------------------------------------------------------------------------------|--------|
+| Below 10 EUR    | E000 (Transaction approved)                                                                                         | RTP    |
+| 10 EUR or above | E103 (Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support) | RTP    |
+
+**Note:**  
+Bizum Payout tests are only available in **test mode** and do not generate real fund transfers.  
+Make sure to use your **test Account ID** and **API key** when sending Payout requests via the API.
+
 :::caution
 **In test environment Bizum only supports transactions below 5 EUR**
 :::
