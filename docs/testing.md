@@ -45,7 +45,7 @@ For all Bizum tests, the phone number to be used is +34500000000
 | Between 10 EUR and 15 EUR | E000 (Transaction approved)                                 | REDIRECT |
 | Above 15 EUR              | Phone number is not registered in Bizum                     |          |
 
-## Test Bizum phone numbers
+### Test Bizum Payout transactions​
 
 You can also test **Bizum Payout** transactions (outgoing payments to users).  
 In test mode, all Payout transactions with an amount **below 10 EUR** will be **approved automatically**.
