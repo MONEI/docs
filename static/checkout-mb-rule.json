@@ -2,9 +2,7 @@
   "version": "1.2.0",
   "type": "function_payment_hide",
   "apiVersion": "2025-01",
-  "f": [
-    "hide"
-  ],
+  "f": ["hide"],
   "customerTags": [],
   "collectionIds": [],
   "attribute1": "",
@@ -23,9 +21,7 @@
         {
           "r": "co",
           "c": "neq",
-          "v": [
-            "PT"
-          ],
+          "v": ["PT"],
           "pWhen": "any"
         }
       ]
@@ -38,9 +34,7 @@
         {
           "r": "co",
           "c": "neq",
-          "v": [
-            "PT"
-          ],
+          "v": ["PT"],
           "pWhen": "any"
         }
       ]
