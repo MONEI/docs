@@ -11,7 +11,7 @@ const features = [
   {
     title: 'Use a prebuilt payment page',
     description:
-      'MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Cards, PayPal, Bizum, GooglePay, Apple Pay & Installments by Cofidis.',
+      'MONEI Hosted payment page is the simplest way to securely collect payments from your customers with multiple payment methods like Cards, PayPal, Bizum, GooglePay and Apple Pay.',
     url: '/integrations/use-prebuilt-payment-page'
   },
   {
