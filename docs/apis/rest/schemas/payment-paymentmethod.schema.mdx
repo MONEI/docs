@@ -31,8 +31,6 @@ sample:
         'email': 'john.doe@example.com',
         'name': 'John Doe'
       },
-    'cofidis': {'orderId': null},
-    'cofidisLoan': {'orderId': null},
     'mbway': {'phoneNumber': null},
     'trustly': {'customerId': null},
     'sepa':
@@ -72,8 +70,6 @@ Details about the payment method at the time of the transaction.
           'card',
           'bizum',
           'paypal',
-          'cofidis',
-          'cofidisLoan',
           'mbway',
           'multibanco',
           'iDeal',
@@ -91,8 +87,6 @@ Details about the payment method at the time of the transaction.
           card: 'Card',
           bizum: 'Bizum',
           paypal: 'PayPal',
-          cofidis: 'Cofidis',
-          cofidisLoan: 'Cofidis Loan',
           mbway: 'MB WAY',
           multibanco: 'Multibanco',
           iDeal: 'iDEAL',
@@ -232,24 +226,6 @@ Details about the payment method at the time of the transaction.
           name: {type: 'string', example: 'John Doe', description: "The Paypal's payer name."}
         },
         title: 'Payment-PaymentMethodPaypal'
-      },
-      cofidis: {
-        type: 'object',
-        description:
-          'Details from Cofidis order used as payment method at the time of the transaction.\n',
-        properties: {
-          orderId: {type: 'string', example: null, description: "The Cofidis' order ID."}
-        },
-        title: 'Payment-PaymentMethodCofidis'
-      },
-      cofidisLoan: {
-        type: 'object',
-        description:
-          'Details from Cofidis order used as payment method at the time of the transaction.\n',
-        properties: {
-          orderId: {type: 'string', example: null, description: "The Cofidis' order ID."}
-        },
-        title: 'Payment-PaymentMethodCofidis'
       },
       mbway: {
         type: 'object',

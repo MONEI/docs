@@ -650,12 +650,6 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: 'doc',
-          id: 'apis/rest/schemas/payment-paymentmethodcofidis',
-          label: 'Payment-PaymentMethodCofidis',
-          className: 'schema'
-        },
-        {
-          type: 'doc',
           id: 'apis/rest/schemas/payment-paymentmethodmbway',
           label: 'Payment-PaymentMethodMbway',
           className: 'schema'
