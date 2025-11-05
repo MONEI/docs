@@ -26,8 +26,7 @@ import Heading from '@theme/Heading';
 <MethodEndpoint
   method={'post'}
   path={'/payments/{id}/capture'}
-  context={'endpoint'}
-></MethodEndpoint>
+  context={'endpoint'}></MethodEndpoint>
 
 Captures funds from a previously authorized payment. This endpoint can only
 be used with payments in `AUTHORIZED` status.
@@ -45,8 +44,7 @@ funds within this timeframe or communicate with your customer about a new paymen
   id={'request'}
   as={'h2'}
   className={'openapi-tabs__heading'}
-  children={'Request'}
-></Heading>
+  children={'Request'}></Heading>
 
 <ParamsDetails
   parameters={[
@@ -62,8 +60,7 @@ funds within this timeframe or communicate with your customer about a new paymen
         title: 'Payment-Id'
       }
     }
-  ]}
-></ParamsDetails>
+  ]}></ParamsDetails>
 
 <RequestSchema
   title={'Body'}
@@ -93,8 +90,7 @@ funds within this timeframe or communicate with your customer about a new paymen
         examples: {full: {value: {amount: 100}}}
       }
     }
-  }}
-></RequestSchema>
+  }}></RequestSchema>
 
 <StatusCodes
   id={undefined}
@@ -817,32 +813,6 @@ funds within this timeframe or communicate with your customer about a new paymen
                     },
                     title: 'Payment-PaymentMethodPaypal'
                   },
-                  cofidis: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
-                  cofidisLoan: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
                   mbway: {
                     type: 'object',
                     description:
@@ -1406,5 +1376,4 @@ funds within this timeframe or communicate with your customer about a new paymen
         }
       }
     }
-  }}
-></StatusCodes>
+  }}></StatusCodes>

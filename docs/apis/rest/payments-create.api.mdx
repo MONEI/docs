@@ -48,8 +48,7 @@ securely store and reuse payment details without requiring customers to re-enter
   id={'request'}
   as={'h2'}
   className={'openapi-tabs__heading'}
-  children={'Request'}
-></Heading>
+  children={'Request'}></Heading>
 
 <ParamsDetails parameters={undefined}></ParamsDetails>
 
@@ -605,8 +604,7 @@ securely store and reuse payment details without requiring customers to re-enter
         }
       }
     }
-  }}
-></RequestSchema>
+  }}></RequestSchema>
 
 <StatusCodes
   id={undefined}
@@ -1329,32 +1327,6 @@ securely store and reuse payment details without requiring customers to re-enter
                     },
                     title: 'Payment-PaymentMethodPaypal'
                   },
-                  cofidis: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
-                  cofidisLoan: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
                   mbway: {
                     type: 'object',
                     description:
@@ -1918,5 +1890,4 @@ securely store and reuse payment details without requiring customers to re-enter
         }
       }
     }
-  }}
-></StatusCodes>
+  }}></StatusCodes>

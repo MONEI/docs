@@ -26,8 +26,7 @@ import Heading from '@theme/Heading';
 <MethodEndpoint
   method={'post'}
   path={'/payments/{id}/confirm'}
-  context={'endpoint'}
-></MethodEndpoint>
+  context={'endpoint'}></MethodEndpoint>
 
 Confirms a payment that was created without payment details. This endpoint can only be used with
 payments in `PENDING` status.
@@ -52,8 +51,7 @@ any corresponding information originally passed in the payment creation request.
   id={'request'}
   as={'h2'}
   className={'openapi-tabs__heading'}
-  children={'Request'}
-></Heading>
+  children={'Request'}></Heading>
 
 <ParamsDetails
   parameters={[
@@ -69,8 +67,7 @@ any corresponding information originally passed in the payment creation request.
         title: 'Payment-Id'
       }
     }
-  ]}
-></ParamsDetails>
+  ]}></ParamsDetails>
 
 <RequestSchema
   title={'Body'}
@@ -281,8 +278,7 @@ any corresponding information originally passed in the payment creation request.
         examples: {full: {value: {paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'}}}
       }
     }
-  }}
-></RequestSchema>
+  }}></RequestSchema>
 
 <StatusCodes
   id={undefined}
@@ -1005,32 +1001,6 @@ any corresponding information originally passed in the payment creation request.
                     },
                     title: 'Payment-PaymentMethodPaypal'
                   },
-                  cofidis: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
-                  cofidisLoan: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
                   mbway: {
                     type: 'object',
                     description:
@@ -1594,5 +1564,4 @@ any corresponding information originally passed in the payment creation request.
         }
       }
     }
-  }}
-></StatusCodes>
+  }}></StatusCodes>

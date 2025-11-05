@@ -26,8 +26,7 @@ import Heading from '@theme/Heading';
 <MethodEndpoint
   method={'post'}
   path={'/payments/{id}/cancel'}
-  context={'endpoint'}
-></MethodEndpoint>
+  context={'endpoint'}></MethodEndpoint>
 
 Releases reserved funds from a previously authorized payment. This endpoint can only
 be used with payments in `AUTHORIZED` status.
@@ -44,8 +43,7 @@ being able to capture those funds in the future. Once cancelled, an authorizatio
   id={'request'}
   as={'h2'}
   className={'openapi-tabs__heading'}
-  children={'Request'}
-></Heading>
+  children={'Request'}></Heading>
 
 <ParamsDetails
   parameters={[
@@ -61,8 +59,7 @@ being able to capture those funds in the future. Once cancelled, an authorizatio
         title: 'Payment-Id'
       }
     }
-  ]}
-></ParamsDetails>
+  ]}></ParamsDetails>
 
 <RequestSchema
   title={'Body'}
@@ -85,8 +82,7 @@ being able to capture those funds in the future. Once cancelled, an authorizatio
         examples: {full: {value: {cancellationReason: 'requested_by_customer'}}}
       }
     }
-  }}
-></RequestSchema>
+  }}></RequestSchema>
 
 <StatusCodes
   id={undefined}
@@ -809,32 +805,6 @@ being able to capture those funds in the future. Once cancelled, an authorizatio
                     },
                     title: 'Payment-PaymentMethodPaypal'
                   },
-                  cofidis: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
-                  cofidisLoan: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
                   mbway: {
                     type: 'object',
                     description:
@@ -1398,5 +1368,4 @@ being able to capture those funds in the future. Once cancelled, an authorizatio
         }
       }
     }
-  }}
-></StatusCodes>
+  }}></StatusCodes>

@@ -26,8 +26,7 @@ import Heading from '@theme/Heading';
 <MethodEndpoint
   method={'post'}
   path={'/payments/{sequenceId}/recurring'}
-  context={'endpoint'}
-></MethodEndpoint>
+  context={'endpoint'}></MethodEndpoint>
 
 Creates a subsequent charge using the payment details from a previous transaction.
 
@@ -54,8 +53,7 @@ instead. It provides a complete solution for creating and managing subscription-
   id={'request'}
   as={'h2'}
   className={'openapi-tabs__heading'}
-  children={'Request'}
-></Heading>
+  children={'Request'}></Heading>
 
 <ParamsDetails
   parameters={[
@@ -72,8 +70,7 @@ instead. It provides a complete solution for creating and managing subscription-
         title: 'Payment-SequenceId'
       }
     }
-  ]}
-></ParamsDetails>
+  ]}></ParamsDetails>
 
 <RequestSchema
   title={'Body'}
@@ -301,8 +298,7 @@ instead. It provides a complete solution for creating and managing subscription-
         }
       }
     }
-  }}
-></RequestSchema>
+  }}></RequestSchema>
 
 <StatusCodes
   id={undefined}
@@ -1025,32 +1021,6 @@ instead. It provides a complete solution for creating and managing subscription-
                     },
                     title: 'Payment-PaymentMethodPaypal'
                   },
-                  cofidis: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
-                  cofidisLoan: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
                   mbway: {
                     type: 'object',
                     description:
@@ -1614,5 +1584,4 @@ instead. It provides a complete solution for creating and managing subscription-
         }
       }
     }
-  }}
-></StatusCodes>
+  }}></StatusCodes>
