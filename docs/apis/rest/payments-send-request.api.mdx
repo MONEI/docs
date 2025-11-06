@@ -41,8 +41,7 @@ with Bizum integration, enabling quick and convenient mobile payments.
   id={'request'}
   as={'h2'}
   className={'openapi-tabs__heading'}
-  children={'Request'}
-></Heading>
+  children={'Request'}></Heading>
 
 <ParamsDetails
   parameters={[
@@ -58,8 +57,7 @@ with Bizum integration, enabling quick and convenient mobile payments.
         title: 'Payment-Id'
       }
     }
-  ]}
-></ParamsDetails>
+  ]}></ParamsDetails>
 
 <RequestSchema
   title={'Body'}
@@ -100,8 +98,7 @@ with Bizum integration, enabling quick and convenient mobile payments.
         examples: {full: {value: {phoneNumber: '+34500000000', language: 'es'}}}
       }
     }
-  }}
-></RequestSchema>
+  }}></RequestSchema>
 
 <StatusCodes
   id={undefined}
@@ -655,8 +652,6 @@ with Bizum integration, enabling quick and convenient mobile payments.
                       'card',
                       'bizum',
                       'paypal',
-                      'cofidis',
-                      'cofidisLoan',
                       'mbway',
                       'multibanco',
                       'iDeal',
@@ -674,8 +669,6 @@ with Bizum integration, enabling quick and convenient mobile payments.
                       card: 'Card',
                       bizum: 'Bizum',
                       paypal: 'PayPal',
-                      cofidis: 'Cofidis',
-                      cofidisLoan: 'Cofidis Loan',
                       mbway: 'MB WAY',
                       multibanco: 'Multibanco',
                       iDeal: 'iDEAL',
@@ -827,32 +820,6 @@ with Bizum integration, enabling quick and convenient mobile payments.
                       }
                     },
                     title: 'Payment-PaymentMethodPaypal'
-                  },
-                  cofidis: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
-                  cofidisLoan: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
                   },
                   mbway: {
                     type: 'object',
@@ -1417,5 +1384,4 @@ with Bizum integration, enabling quick and convenient mobile payments.
         }
       }
     }
-  }}
-></StatusCodes>
+  }}></StatusCodes>
