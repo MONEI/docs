@@ -26,8 +26,7 @@ import Heading from '@theme/Heading';
 <MethodEndpoint
   method={'post'}
   path={'/payments/{id}/refund'}
-  context={'endpoint'}
-></MethodEndpoint>
+  context={'endpoint'}></MethodEndpoint>
 
 Returns funds from a completed payment back to the customer's original payment method.
 
@@ -48,8 +47,7 @@ Returns funds from a completed payment back to the customer's original payment m
   id={'request'}
   as={'h2'}
   className={'openapi-tabs__heading'}
-  children={'Request'}
-></Heading>
+  children={'Request'}></Heading>
 
 <ParamsDetails
   parameters={[
@@ -65,8 +63,7 @@ Returns funds from a completed payment back to the customer's original payment m
         title: 'Payment-Id'
       }
     }
-  ]}
-></ParamsDetails>
+  ]}></ParamsDetails>
 
 <RequestSchema
   title={'Body'}
@@ -103,8 +100,7 @@ Returns funds from a completed payment back to the customer's original payment m
         examples: {full: {value: {amount: 50, refundReason: 'requested_by_customer'}}}
       }
     }
-  }}
-></RequestSchema>
+  }}></RequestSchema>
 
 <StatusCodes
   id={undefined}
@@ -658,8 +654,6 @@ Returns funds from a completed payment back to the customer's original payment m
                       'card',
                       'bizum',
                       'paypal',
-                      'cofidis',
-                      'cofidisLoan',
                       'mbway',
                       'multibanco',
                       'iDeal',
@@ -677,8 +671,6 @@ Returns funds from a completed payment back to the customer's original payment m
                       card: 'Card',
                       bizum: 'Bizum',
                       paypal: 'PayPal',
-                      cofidis: 'Cofidis',
-                      cofidisLoan: 'Cofidis Loan',
                       mbway: 'MB WAY',
                       multibanco: 'Multibanco',
                       iDeal: 'iDEAL',
@@ -830,32 +822,6 @@ Returns funds from a completed payment back to the customer's original payment m
                       }
                     },
                     title: 'Payment-PaymentMethodPaypal'
-                  },
-                  cofidis: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
-                  cofidisLoan: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
                   },
                   mbway: {
                     type: 'object',
@@ -1420,5 +1386,4 @@ Returns funds from a completed payment back to the customer's original payment m
         }
       }
     }
-  }}
-></StatusCodes>
+  }}></StatusCodes>

@@ -764,8 +764,6 @@ type PaymentMethod {
   cardPresent: PaymentMethodCardPresent
   bizum: PaymentMethodBizum
   paypal: PaymentMethodPaypal
-  cofidis: PaymentMethodCofidis
-  cofidisLoan: PaymentMethodCofidisLoan
   trustly: PaymentMethodTrustly
   sepa: PaymentMethodSepa
   klarna: PaymentMethodKlarna
@@ -824,12 +822,6 @@ type PaymentMethodPaypal {
   email: String
   " Paypal payer name"
   name: String
-}
-type PaymentMethodCofidis {
-  orderId: ID
-}
-type PaymentMethodCofidisLoan {
-  orderId: ID
 }
 type PaymentMethodTrustly {
   customerId: ID
@@ -1924,8 +1916,6 @@ enum PaymentMethods {
   cardPresent
   bizum
   paypal
-  cofidis
-  cofidisLoan
   googlePay
   applePay
   clickToPay
@@ -1951,7 +1941,6 @@ enum Processor {
   MONEIX_G
   MONEIX_P
   PAYPAL
-  COFIDIS
 }
 " The type of the blacklist item"
 enum BlacklistItemType {
@@ -2105,7 +2094,6 @@ enum Acquirer {
   ADYEN
   STRIPE
   MONEI_X
-  COFIDIS
   PAYPAL
   PAYCOMET
   ABANCA
@@ -2684,8 +2672,6 @@ input PaymentMethodInput {
   bizum: PaymentMethodBizumInput
   card: PaymentMethodCardInput
   cardPresent: PaymentMethodCardPresentInput
-  cofidis: PaymentMethodCofidisInput
-  cofidisLoan: PaymentMethodCofidisLoanInput
   paypal: PaymentMethodPaypalInput
   sepa: PaymentMethodSepaInput
   trustly: PaymentMethodTrustlyInput
@@ -2717,12 +2703,6 @@ input PaymentMethodCardPresentInput {
   cardholderName: String
   cardholderEmail: String
   expiration: Long
-}
-input PaymentMethodCofidisInput {
-  orderId: ID
-}
-input PaymentMethodCofidisLoanInput {
-  orderId: ID
 }
 input PaymentMethodPaypalInput {
   orderId: ID

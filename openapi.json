@@ -589,8 +589,6 @@
             "card",
             "cardPresent",
             "clickToPay",
-            "cofidis",
-            "cofidisLoan",
             "eps",
             "giropay",
             "googlePay",
@@ -611,8 +609,6 @@
           "alipay",
           "bancontact",
           "blik",
-          "cofidis",
-          "cofidisLoan",
           "eps",
           "iDeal",
           "mbway",
@@ -624,7 +620,7 @@
           "giropay",
           "card"
         ],
-        "description": "An array of available payment methods for the account or payment.\nPossible values include:\n  - `alipay` - Alipay\n  - `applePay` - Apple Pay\n  - `bancontact` - Bancontact\n  - `bizum` - Bizum\n  - `blik` - BLIK\n  - `card` - Credit or debit card\n  - `cardPresent` - Card present (physical POS)\n  - `clickToPay` - Click to Pay\n  - `cofidis` - Cofidis\n  - `cofidisLoan` - Cofidis Loan\n  - `eps` - EPS\n  - `giropay` - Giropay\n  - `googlePay` - Google Pay\n  - `iDeal` - iDEAL\n  - `klarna` - Klarna\n  - `mbway` - MB WAY\n  - `multibanco` - Multibanco\n  - `paypal` - PayPal\n  - `sepa` - SEPA Direct Debit\n  - `sofort` - Sofort\n  - `trustly` - Trustly\n"
+        "description": "An array of available payment methods for the account or payment.\nPossible values include:\n  - `alipay` - Alipay\n  - `applePay` - Apple Pay\n  - `bancontact` - Bancontact\n  - `bizum` - Bizum\n  - `blik` - BLIK\n  - `card` - Credit or debit card\n  - `cardPresent` - Card present (physical POS)\n  - `clickToPay` - Click to Pay\n  - `eps` - EPS\n  - `giropay` - Giropay\n  - `googlePay` - Google Pay\n  - `iDeal` - iDEAL\n  - `klarna` - Klarna\n  - `mbway` - MB WAY\n  - `multibanco` - Multibanco\n  - `paypal` - PayPal\n  - `sepa` - SEPA Direct Debit\n  - `sofort` - Sofort\n  - `trustly` - Trustly\n"
       },
       "PaymentMethods-Metadata": {
         "type": "object",
@@ -1542,8 +1538,6 @@
               "card",
               "bizum",
               "paypal",
-              "cofidis",
-              "cofidisLoan",
               "mbway",
               "multibanco",
               "iDeal",
@@ -1561,8 +1555,6 @@
               "card": "Card",
               "bizum": "Bizum",
               "paypal": "PayPal",
-              "cofidis": "Cofidis",
-              "cofidisLoan": "Cofidis Loan",
               "mbway": "MB WAY",
               "multibanco": "Multibanco",
               "iDeal": "iDEAL",
@@ -1585,12 +1577,6 @@
           },
           "paypal": {
             "$ref": "#/components/schemas/Payment-PaymentMethodPaypal"
-          },
-          "cofidis": {
-            "$ref": "#/components/schemas/Payment-PaymentMethodCofidis"
-          },
-          "cofidisLoan": {
-            "$ref": "#/components/schemas/Payment-PaymentMethodCofidis"
           },
           "mbway": {
             "$ref": "#/components/schemas/Payment-PaymentMethodMbway"
@@ -1719,17 +1705,6 @@
             "type": "string",
             "example": "John Doe",
             "description": "The Paypal's payer name."
-          }
-        }
-      },
-      "Payment-PaymentMethodCofidis": {
-        "type": "object",
-        "description": "Details from Cofidis order used as payment method at the time of the transaction.\n",
-        "properties": {
-          "orderId": {
-            "type": "string",
-            "example": null,
-            "description": "The Cofidis' order ID."
           }
         }
       },
@@ -1912,8 +1887,6 @@
           "card",
           "bizum",
           "paypal",
-          "cofidis",
-          "cofidisLoan",
           "mbway",
           "multibanco",
           "iDeal",
@@ -1931,8 +1904,6 @@
           "card": "Card",
           "bizum": "Bizum",
           "paypal": "PayPal",
-          "cofidis": "Cofidis",
-          "cofidisLoan": "Cofidis Loan",
           "mbway": "MB WAY",
           "multibanco": "Multibanco",
           "iDeal": "iDEAL",

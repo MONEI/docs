@@ -39,8 +39,7 @@ the merchant's configuration and supported payment methods.
   id={'request'}
   as={'h2'}
   className={'openapi-tabs__heading'}
-  children={'Request'}
-></Heading>
+  children={'Request'}></Heading>
 
 <ParamsDetails
   parameters={[
@@ -58,8 +57,7 @@ the merchant's configuration and supported payment methods.
       required: false,
       schema: {type: 'string'}
     }
-  ]}
-></ParamsDetails>
+  ]}></ParamsDetails>
 
 <RequestSchema title={'Body'} body={undefined}></RequestSchema>
 
@@ -95,8 +93,6 @@ the merchant's configuration and supported payment methods.
                     'card',
                     'cardPresent',
                     'clickToPay',
-                    'cofidis',
-                    'cofidisLoan',
                     'eps',
                     'giropay',
                     'googlePay',
@@ -117,8 +113,6 @@ the merchant's configuration and supported payment methods.
                   'alipay',
                   'bancontact',
                   'blik',
-                  'cofidis',
-                  'cofidisLoan',
                   'eps',
                   'iDeal',
                   'mbway',
@@ -131,7 +125,7 @@ the merchant's configuration and supported payment methods.
                   'card'
                 ],
                 description:
-                  'An array of available payment methods for the account or payment.\nPossible values include:\n  - `alipay` - Alipay\n  - `applePay` - Apple Pay\n  - `bancontact` - Bancontact\n  - `bizum` - Bizum\n  - `blik` - BLIK\n  - `card` - Credit or debit card\n  - `cardPresent` - Card present (physical POS)\n  - `clickToPay` - Click to Pay\n  - `cofidis` - Cofidis\n  - `cofidisLoan` - Cofidis Loan\n  - `eps` - EPS\n  - `giropay` - Giropay\n  - `googlePay` - Google Pay\n  - `iDeal` - iDEAL\n  - `klarna` - Klarna\n  - `mbway` - MB WAY\n  - `multibanco` - Multibanco\n  - `paypal` - PayPal\n  - `sepa` - SEPA Direct Debit\n  - `sofort` - Sofort\n  - `trustly` - Trustly\n',
+                  'An array of available payment methods for the account or payment.\nPossible values include:\n  - `alipay` - Alipay\n  - `applePay` - Apple Pay\n  - `bancontact` - Bancontact\n  - `bizum` - Bizum\n  - `blik` - BLIK\n  - `card` - Credit or debit card\n  - `cardPresent` - Card present (physical POS)\n  - `clickToPay` - Click to Pay\n  - `eps` - EPS\n  - `giropay` - Giropay\n  - `googlePay` - Google Pay\n  - `iDeal` - iDEAL\n  - `klarna` - Klarna\n  - `mbway` - MB WAY\n  - `multibanco` - Multibanco\n  - `paypal` - PayPal\n  - `sepa` - SEPA Direct Debit\n  - `sofort` - Sofort\n  - `trustly` - Trustly\n',
                 title: 'PaymentMethods-Methods'
               },
               metadata: {
@@ -816,5 +810,4 @@ the merchant's configuration and supported payment methods.
         }
       }
     }
-  }}
-></StatusCodes>
+  }}></StatusCodes>

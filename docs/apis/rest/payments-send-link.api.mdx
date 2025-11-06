@@ -44,8 +44,7 @@ their preferred payment method on the secure MONEI payment page. If no customer 
   id={'request'}
   as={'h2'}
   className={'openapi-tabs__heading'}
-  children={'Request'}
-></Heading>
+  children={'Request'}></Heading>
 
 <ParamsDetails
   parameters={[
@@ -61,8 +60,7 @@ their preferred payment method on the secure MONEI payment page. If no customer 
         title: 'Payment-Id'
       }
     }
-  ]}
-></ParamsDetails>
+  ]}></ParamsDetails>
 
 <RequestSchema
   title={'Body'}
@@ -118,8 +116,7 @@ their preferred payment method on the secure MONEI payment page. If no customer 
         examples: {full: {value: {customerEmail: 'john.doe@example.com', language: 'es'}}}
       }
     }
-  }}
-></RequestSchema>
+  }}></RequestSchema>
 
 <StatusCodes
   id={undefined}
@@ -673,8 +670,6 @@ their preferred payment method on the secure MONEI payment page. If no customer 
                       'card',
                       'bizum',
                       'paypal',
-                      'cofidis',
-                      'cofidisLoan',
                       'mbway',
                       'multibanco',
                       'iDeal',
@@ -692,8 +687,6 @@ their preferred payment method on the secure MONEI payment page. If no customer 
                       card: 'Card',
                       bizum: 'Bizum',
                       paypal: 'PayPal',
-                      cofidis: 'Cofidis',
-                      cofidisLoan: 'Cofidis Loan',
                       mbway: 'MB WAY',
                       multibanco: 'Multibanco',
                       iDeal: 'iDEAL',
@@ -845,32 +838,6 @@ their preferred payment method on the secure MONEI payment page. If no customer 
                       }
                     },
                     title: 'Payment-PaymentMethodPaypal'
-                  },
-                  cofidis: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
-                  },
-                  cofidisLoan: {
-                    type: 'object',
-                    description:
-                      'Details from Cofidis order used as payment method at the time of the transaction.\n',
-                    properties: {
-                      orderId: {
-                        type: 'string',
-                        example: null,
-                        description: "The Cofidis' order ID."
-                      }
-                    },
-                    title: 'Payment-PaymentMethodCofidis'
                   },
                   mbway: {
                     type: 'object',
@@ -1435,5 +1402,4 @@ their preferred payment method on the secure MONEI payment page. If no customer 
         }
       }
     }
-  }}
-></StatusCodes>
+  }}></StatusCodes>
