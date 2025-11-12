@@ -6,7 +6,7 @@ const config: Config = {
   title: 'MONEI Documentation',
   url: 'https://docs.monei.com',
   tagline: 'Explore our guides and examples to integrate MONEI',
-  trailingSlash: true,
+  trailingSlash: false,
   baseUrl: '/',
   favicon: 'https://assets.monei.com/images/icon.png',
   future: {
