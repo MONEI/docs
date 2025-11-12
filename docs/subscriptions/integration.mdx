@@ -149,7 +149,7 @@ The following parameters are required:
 - **paymentCallbackUrl** `string` - The URL will be called each time subscription creates a new payment.
 - **intervalCount** `number` - Number of intervals between subscription payments.
 
-Check all available [request parameters](/apis/rest/subscriptions-create/).
+Check all available [request parameters](/apis/rest/subscriptions-create).
 
 ### 2. Activate the subscription.
 
@@ -247,11 +247,11 @@ redirect_url = activation.next_action.redirect_url
 </TabItem>
 </Tabs>
 
-Check all available [request parameters](/apis/rest/subscriptions-activate/).
+Check all available [request parameters](/apis/rest/subscriptions-activate).
 
 ### 3. Redirect the customer to the `redirectUrl` from the response
 
-In the response from the [activate subscription](/apis/rest/subscriptions-activate/) request you'll get the following response:
+In the response from the [activate subscription](/apis/rest/subscriptions-activate) request you'll get the following response:
 
 ```json
 {
@@ -277,7 +277,7 @@ In the response from the [activate subscription](/apis/rest/subscriptions-activa
 }
 ```
 
-Redirect the customer to the `nextAction.redirectUrl` to show him the MONEI Hosted payment page. The response object here is actually a [Payment object](/apis/rest/schemas/payment/) associated with the _initial activation_ of the subscription.
+Redirect the customer to the `nextAction.redirectUrl` to show him the MONEI Hosted payment page. The response object here is actually a [Payment object](/apis/rest/schemas/payment) associated with the _initial activation_ of the subscription.
 
 :::note
 As an alternative process you can confirm the payment by using monei.js on the client-side. Check our [build a custom checkout guide](/integrations/build-custom-checkout.mdx).
@@ -290,13 +290,13 @@ Customer enters the Card information and goes through the 3D secure verification
 ### 5. Customer is redirected back to your server
 
 - if customer clicks **"Back to \{\{shop.name}}"** link (you can provide `shop.name` in the [public business details settings](https://dashboard.monei.com/settings)), s/he is redirected to `cancelUrl`. (Usually this url is the checkout page on your website, where the user had started a checkout process)
-- in any other case the customer is redirected to the `completeUrl` with **payment_id** and **subscription_id** query parameters. Use [get payment](/apis/rest/payments-get/) endpoint to check the initial payment status, and [get subscription](/apis/rest/subscriptions-get/) endpoint to get the subscription status (it should move to `ACTIVE` or `TRIALING` if successful).
+- in any other case the customer is redirected to the `completeUrl` with **payment_id** and **subscription_id** query parameters. Use [get payment](/apis/rest/payments-get) endpoint to check the initial payment status, and [get subscription](/apis/rest/subscriptions-get) endpoint to get the subscription status (it should move to `ACTIVE` or `TRIALING` if successful).
 
 ### 6. An asynchronous request is sent to your server
 
-MONEI will notify you about the _initial payment_ status by sending an HTTP POST request to the `callbackUrl` defined in the **create payment** step (this is the `paymentCallbackUrl` from the _create subscription_ request). The request body will contain the full [Payment object](/apis/rest/schemas/payment/).
+MONEI will notify you about the _initial payment_ status by sending an HTTP POST request to the `callbackUrl` defined in the **create payment** step (this is the `paymentCallbackUrl` from the _create subscription_ request). The request body will contain the full [Payment object](/apis/rest/schemas/payment).
 
-Additionally, MONEI will notify you about the _subscription status changes_ (e.g., from `PENDING` to `ACTIVE`) by sending an HTTP POST request to the `callbackUrl` defined in the **create subscription** request. The request body will contain the full [Subscription object](/apis/rest/schemas/subscription/).
+Additionally, MONEI will notify you about the _subscription status changes_ (e.g., from `PENDING` to `ACTIVE`) by sending an HTTP POST request to the `callbackUrl` defined in the **create subscription** request. The request body will contain the full [Subscription object](/apis/rest/schemas/subscription).
 
 This ensures that you get the status updates even when the customer closes the browser window or loses Internet connection.
 

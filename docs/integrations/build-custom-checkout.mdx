@@ -51,7 +51,7 @@ import Tabs from '@theme/Tabs';
 
 ### 1. Create Payment (Server-side)
 
-Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount and currency. Always decide the amount on the server side.
+Create a [Payment](/apis/rest/schemas/payment) on your server with an amount and currency. Always decide the amount on the server side.
 
 <Tabs
   defaultValue="curl"
@@ -179,7 +179,7 @@ payment_id = payment.id
 - **orderId** `string`: Your unique order identifier.
 - **callbackUrl** `string`: Your server endpoint for webhook notifications.
 
-Check all available [request parameters](/apis/rest/payments-create/).
+Check all available [request parameters](/apis/rest/payments-create).
 
 The response contains `payment.id`. Pass this securely to your client-side for the next step.
 
@@ -277,14 +277,14 @@ function confirmPaymentWithToken(paymentToken) {
 After you confirm the payment, MONEI handles any necessary steps like 3D Secure authentication.
 
 :::note Alternative Flow
-As an alternative process, you can submit the generated `paymentToken` to your server and then [confirm the payment server-side](/apis/rest/payments-confirm/).
+As an alternative process, you can submit the generated `paymentToken` to your server and then [confirm the payment server-side](/apis/rest/payments-confirm).
 :::
 
 ### 4. Process Webhook Notification (Server-side)
 
 After the client-side interaction and any necessary background processing (like 3D Secure or bank authorization), MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1.
 
-The request body contains the full [Payment object](/apis/rest/schemas/payment/) in JSON format.
+The request body contains the full [Payment object](/apis/rest/schemas/payment) in JSON format.
 
 This webhook is the **only reliable way** to confirm the definitive payment outcome.
 

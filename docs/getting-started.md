@@ -12,7 +12,7 @@ Choose the integration method that best suits your needs:
   The simplest way to securely collect payments with multiple payment methods.
 - **[Build a custom checkout](/integrations/build-custom-checkout.mdx)**
   Use MONEI Components to build your custom checkout experience.
-- **[Payments API](/apis/rest/payments/)**
+- **[Payments API](/apis/rest/payments)**
   Securely perform server-to-server payments.
 
 ### Become a Partner (MONEI Connect)
