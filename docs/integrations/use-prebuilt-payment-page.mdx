@@ -43,7 +43,7 @@ The integration involves creating a payment on your server, redirecting your cus
 
 ### 1. Create Payment (Server-side)
 
-First, make a server-side API call to create a new [Payment object](/apis/rest/schemas/payment/). This registers the payment intent with MONEI.
+First, make a server-side API call to create a new [Payment object](/apis/rest/schemas/payment). This registers the payment intent with MONEI.
 
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
@@ -227,7 +227,7 @@ redirect_url = payment.next_action.redirect_url
 - **callbackUrl** `string`: Your server endpoint URL for asynchronous webhook notifications (crucial for final status).
 - **cancelUrl** `string**: Where the customer is redirected if they click **cancel** or **"Back to shop"\*\*.
 
-Check all available [request parameters](/apis/rest/payments-create/).
+Check all available [request parameters](/apis/rest/payments-create).
 
 The API response includes the `payment.id` and, importantly, `payment.nextAction.redirectUrl`.
 
@@ -251,7 +251,7 @@ The API response from Step 1 contains a `nextAction` object with a `redirectUrl`
 This `redirectUrl` leads the customer to the secure, MONEI-hosted payment page where they will select a payment method and enter their details.
 
 :::note Alternative: Payment Modal
-Instead of a full page redirect, you can use [`monei.js`](/monei-js/reference/) to present payment options within a modal on your own site. See the [Payment Modal Guide](/integrations/use-payment-modal.mdx) for details.
+Instead of a full page redirect, you can use [`monei.js`](/monei-js/reference) to present payment options within a modal on your own site. See the [Payment Modal Guide](/integrations/use-payment-modal.mdx) for details.
 :::
 
 **Customer Actions:**
@@ -266,7 +266,7 @@ Instead of a full page redirect, you can use [`monei.js`](/monei-js/reference/) 
 
 ### 3. Process Webhook Notification (Server-side)
 
-MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1. The request body contains the full [Payment object](/apis/rest/schemas/payment/) in JSON format.
+MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1. The request body contains the full [Payment object](/apis/rest/schemas/payment) in JSON format.
 
 This webhook is the **only reliable way** to confirm the definitive payment outcome, regardless of customer browser actions or redirects.
 
