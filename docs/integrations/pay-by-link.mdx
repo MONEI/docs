@@ -10,7 +10,7 @@ Send your customers a unique link via email, WhatsApp or SMS to pay online in on
 
 ## Overview
 
-This page explains how to create payment links programmatically using the [MONEI Payments API](/apis/rest/payments-create/). You can also create and manage payment links manually via your [MONEI Dashboard](https://dashboard.monei.com/).
+This page explains how to create payment links programmatically using the [MONEI Payments API](/apis/rest/payments-create). You can also create and manage payment links manually via your [MONEI Dashboard](https://dashboard.monei.com/).
 
 Pay By Link generates a unique URL for a specific payment amount that directs the customer to a secure MONEI-hosted payment page.
 
@@ -27,7 +27,7 @@ Creating and processing a Pay By Link payment involves creating a payment on you
 
 ### 1. Create Payment (Server-side)
 
-Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount, currency, and optionally customer details.
+Create a [Payment](/apis/rest/schemas/payment) on your server with an amount, currency, and optionally customer details.
 
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
@@ -172,7 +172,7 @@ payment_id = payment.id
 - **callbackUrl** `string`: Your server endpoint for webhook notifications (crucial for final status).
 - **completeUrl** / **cancelUrl** `string` (Optional): URLs for redirecting the customer after interaction.
 
-Check all available [request parameters](/apis/rest/payments-create/).
+Check all available [request parameters](/apis/rest/payments-create).
 
 The response contains the `payment.id`, needed for the next step.
 
@@ -248,7 +248,7 @@ monei.payments.sendLink(payment_id, language='es', channel='email') # Optional p
 
 **Option B: You Send the Link**
 
-The [Payment object](/apis/rest/schemas/payment/) returned in Step 1 contains `payment.nextAction.redirectUrl`. This is the payment link.
+The [Payment object](/apis/rest/schemas/payment) returned in Step 1 contains `payment.nextAction.redirectUrl`. This is the payment link.
 
 ```json title="Example Partial Response from Step 1"
 {
@@ -273,7 +273,7 @@ You can take this `redirectUrl` and send it to your customer through your own co
 
 ### 3. Process Webhook Notification (Server-side)
 
-Regardless of whether the customer is redirected, MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1. The request body contains the full [Payment object](/apis/rest/schemas/payment/) in JSON format.
+Regardless of whether the customer is redirected, MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1. The request body contains the full [Payment object](/apis/rest/schemas/payment) in JSON format.
 
 This webhook is the **only reliable way** to confirm the definitive payment outcome.
 

@@ -60,7 +60,7 @@ import {ArrowRightIcon} from '@heroicons/react/24/outline';
 
 ### 1. Create Payment (Server-side)
 
-Create a [Payment](/apis/rest/schemas/payment/) on your server with an amount and currency.
+Create a [Payment](/apis/rest/schemas/payment) on your server with an amount and currency.
 
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
@@ -182,7 +182,7 @@ qr_code_url = f"https://secure.monei.com/payments/{payment_id}/qr"
 - **orderId** `string`: Your unique order identifier.
 - **callbackUrl** `string`: Your server endpoint URL for asynchronous webhook notifications.
 
-Check all available [request parameters](/apis/rest/payments-create/).
+Check all available [request parameters](/apis/rest/payments-create).
 
 The API response includes the `payment.id`, which you'll use in the next step.
 
@@ -213,7 +213,7 @@ You can render it directly on a webpage or display:
 
 **Option 2: Redirect to Hosted Page with QR**
 
-The [Payment object](/apis/rest/schemas/payment/) returned in Step 1 also contains `payment.nextAction.redirectUrl`. Append `?qr=1` to this URL to get a link to a MONEI-hosted page displaying the QR code.
+The [Payment object](/apis/rest/schemas/payment) returned in Step 1 also contains `payment.nextAction.redirectUrl`. Append `?qr=1` to this URL to get a link to a MONEI-hosted page displaying the QR code.
 
 Example: `https://secure.monei.com/payments/{payment_id}?qr=1`
 
@@ -229,7 +229,7 @@ The QR code payment link is valid for **5 minutes**. After that, you must create
 
 ### 3. Process Webhook Notification (Server-side)
 
-MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1. The request body contains the full [Payment object](/apis/rest/schemas/payment/) in JSON format.
+MONEI sends the final, authoritative payment status via an asynchronous HTTP POST request to the `callbackUrl` you provided in Step 1. The request body contains the full [Payment object](/apis/rest/schemas/payment) in JSON format.
 
 This webhook ensures you get the definitive status even if the customer closes their browser or loses connection after scanning.
 
