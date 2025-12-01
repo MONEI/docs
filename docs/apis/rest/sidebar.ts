@@ -8,6 +8,52 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'Apple Pay Certificate',
+      link: {
+        type: 'doc',
+        id: 'apis/rest/apple-pay-certificate'
+      },
+      items: [
+        {
+          type: 'doc',
+          id: 'apis/rest/apple-pay-certificate-create',
+          label: 'Create Certificate',
+          className: 'api-method post'
+        },
+        {
+          type: 'doc',
+          id: 'apis/rest/apple-pay-certificate-list',
+          label: 'List Certificates',
+          className: 'api-method get'
+        },
+        {
+          type: 'doc',
+          id: 'apis/rest/apple-pay-certificate-get',
+          label: 'Get Certificate',
+          className: 'api-method get'
+        },
+        {
+          type: 'doc',
+          id: 'apis/rest/apple-pay-certificate-update',
+          label: 'Update Certificate',
+          className: 'api-method post'
+        },
+        {
+          type: 'doc',
+          id: 'apis/rest/apple-pay-certificate-delete',
+          label: 'Delete Certificate',
+          className: 'api-method delete'
+        },
+        {
+          type: 'doc',
+          id: 'apis/rest/apple-pay-certificate-activate',
+          label: 'Activate Certificate',
+          className: 'api-method post'
+        }
+      ]
+    },
+    {
+      type: 'category',
       label: 'Apple Pay Domain',
       link: {
         type: 'doc',
@@ -382,6 +428,24 @@ const sidebar: SidebarsConfig = {
           type: 'doc',
           id: 'apis/rest/schemas/metadata',
           label: 'Metadata',
+          className: 'schema'
+        },
+        {
+          type: 'doc',
+          id: 'apis/rest/schemas/applepaycertificate',
+          label: 'ApplePayCertificate',
+          className: 'schema'
+        },
+        {
+          type: 'doc',
+          id: 'apis/rest/schemas/updateapplepaycertificaterequest',
+          label: 'UpdateApplePayCertificateRequest',
+          className: 'schema'
+        },
+        {
+          type: 'doc',
+          id: 'apis/rest/schemas/activateapplepaycertificaterequest',
+          label: 'ActivateApplePayCertificateRequest',
           className: 'schema'
         },
         {
@@ -920,6 +984,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'apis/rest/schemas/subscription-skipintervalcount',
+          label: 'Subscription-SkipIntervalCount',
+          className: 'schema'
+        },
+        {
+          type: 'doc',
           id: 'apis/rest/schemas/subscription-lastpayment',
           label: 'Subscription-LastPayment',
           className: 'schema'
@@ -976,6 +1046,12 @@ const sidebar: SidebarsConfig = {
           type: 'doc',
           id: 'apis/rest/schemas/subscription-retryschedule',
           label: 'Subscription-RetrySchedule',
+          className: 'schema'
+        },
+        {
+          type: 'doc',
+          id: 'apis/rest/schemas/subscription-paymentmethods',
+          label: 'Subscription-PaymentMethods',
           className: 'schema'
         }
       ]

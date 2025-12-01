@@ -47,6 +47,26 @@ sample:
             'state': 'Málaga'
           }
       },
+    'sessionDetails':
+      {
+        'ip': '100.100.200.100',
+        'countryCode': 'ES',
+        'lang': 'es',
+        'deviceType': 'desktop',
+        'deviceModel': null,
+        'browser': 'Chrome',
+        'browserVersion': '83.0.4103.116',
+        'os': 'Mac OS',
+        'osVersion': '10.15.4',
+        'source': 'MONEI/PHP',
+        'sourceVersion': '0.1.2',
+        'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...',
+        'browserAccept': 'text/html,application/xhtml+xml,application/json',
+        'browserColorDepth': '24',
+        'browserScreenHeight': '1152',
+        'browserScreenWidth': '2048',
+        'browserTimezoneOffset': '-120'
+      },
     'metadata': {'systemId': '12345'}
   }
 custom_edit_url: null
@@ -249,6 +269,120 @@ import Heading from '@theme/Heading';
           }
         },
         title: 'Payment-ShippingDetails'
+      },
+      sessionDetails: {
+        description:
+          'Information related to the browsing session of the user\nwho initiated the payment.\n',
+        properties: {
+          ip: {
+            type: 'string',
+            example: '100.100.200.100',
+            description: 'The IP address where the operation originated.',
+            title: 'IP'
+          },
+          countryCode: {
+            type: 'string',
+            example: 'ES',
+            description:
+              'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).',
+            title: 'Country'
+          },
+          lang: {
+            type: 'string',
+            example: 'es',
+            description:
+              'Two-letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)).',
+            title: 'Lang'
+          },
+          deviceType: {
+            type: 'string',
+            example: 'desktop',
+            description: 'Device type, could be `desktop`, `mobile`, `smartTV`, `tablet`.',
+            title: 'DeviceType'
+          },
+          deviceModel: {
+            type: 'string',
+            example: null,
+            description:
+              'Information about the device used for the browser session (e.g., `iPhone`).',
+            title: 'DeviceModel'
+          },
+          browser: {
+            type: 'string',
+            example: 'Chrome',
+            description: 'The browser used in this browser session (e.g., `Mobile Safari`).',
+            title: 'Browser'
+          },
+          browserVersion: {
+            type: 'string',
+            example: '83.0.4103.116',
+            description: 'The version for the browser session (e.g., `13.1.1`).',
+            title: 'BrowserVersion'
+          },
+          os: {
+            type: 'string',
+            example: 'Mac OS',
+            description: 'Operation system (e.g., `iOS`).',
+            title: 'Os'
+          },
+          osVersion: {
+            type: 'string',
+            example: '10.15.4',
+            description: 'Operation system version (e.g., `13.5.1`).',
+            title: 'OsVersion'
+          },
+          source: {
+            type: 'string',
+            example: 'MONEI/PHP',
+            description:
+              "The source component from where the operation was generated (mostly for our SDK's).",
+            title: 'Source'
+          },
+          sourceVersion: {
+            type: 'string',
+            example: '0.1.2',
+            description:
+              "The source component version from where the operation was generated (mostly for our SDK's).",
+            title: 'SourceVersion'
+          },
+          userAgent: {
+            type: 'string',
+            example: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...',
+            description: 'Full user agent string of the browser session.',
+            title: 'UserAgent'
+          },
+          browserAccept: {
+            type: 'string',
+            example: 'text/html,application/xhtml+xml,application/json',
+            description: 'Browser accept header.',
+            title: 'BrowserAccept'
+          },
+          browserColorDepth: {
+            type: 'string',
+            example: '24',
+            description: 'The color depth of the browser session (e.g., `24`).',
+            title: 'BrowserColorDepth'
+          },
+          browserScreenHeight: {
+            type: 'string',
+            example: '1152',
+            description: 'The screen height of the browser session (e.g., `1152`).',
+            title: 'BrowserScreenHeight'
+          },
+          browserScreenWidth: {
+            type: 'string',
+            example: '2048',
+            description: 'The screen width of the browser session (e.g., `2048`).',
+            title: 'BrowserScreenWidth'
+          },
+          browserTimezoneOffset: {
+            type: 'string',
+            example: '-120',
+            description: 'The timezone offset of the browser session (e.g., `-120`).',
+            title: 'BrowserTimezoneOffset'
+          }
+        },
+        title: 'Payment-SessionDetails'
       },
       metadata: {
         type: 'object',

@@ -1,0 +1,25 @@
+---
+id: apple-pay-certificate
+title: 'Apple Pay Certificate'
+description: 'Apple Pay Certificate'
+custom_edit_url: null
+---
+
+Manage Apple Pay certificates for iOS app integration.
+
+To accept Apple Pay in your iOS app, you need an Apple Pay Payment Processing Certificate.
+This API provides a complete certificate management workflow:
+
+1. **Create** - Generate a Certificate Signing Request (CSR)
+2. **Upload to Apple** - Use the CSR to create a certificate in Apple Developer Portal
+3. **Activate** - Upload the signed certificate from Apple to enable payment processing
+4. **Manage** - Enable, disable, or delete certificates as needed
+
+The private key is securely generated and stored by MONEI. You never need to handle private keys directly.
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
+```

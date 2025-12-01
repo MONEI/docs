@@ -11,6 +11,7 @@ sample:
     'amount': 110,
     'interval': 'month',
     'intervalCount': 1,
+    'allowedPaymentMethods': ['card', 'bizum'],
     'description': 'MoonMail Monthly Lite',
     'customer': {'email': 'john.doe@example.com', 'name': 'John Doe', 'phone': null},
     'billingDetails':
@@ -53,6 +54,7 @@ sample:
     'pauseAtPeriodEnd': false,
     'cancelAtPeriodEnd': false,
     'pauseIntervalCount': 1,
+    'skipIntervalCount': 1,
     'retrySchedule':
       [
         {'interval': 'day', 'intervalCount': 1},
@@ -86,9 +88,17 @@ import Heading from '@theme/Heading';
       interval: {
         type: 'string',
         example: 'month',
-        enum: ['day', 'week', 'month', 'year'],
-        'x-enumDescriptions': {day: 'Daily', week: 'Weekly', month: 'Monthly', year: 'Yearly'},
-        description: 'Subscription interval.',
+        enum: ['minute', 'hour', 'day', 'week', 'month', 'year'],
+        'x-enumDescriptions': {
+          minute: 'Minutely',
+          hour: 'Hourly',
+          day: 'Daily',
+          week: 'Weekly',
+          month: 'Monthly',
+          year: 'Yearly'
+        },
+        description:
+          'Subscription interval. The `minute` and `hour` intervals are only available in test mode.',
         title: 'Subscription-Interval'
       },
       intervalCount: {
@@ -97,6 +107,15 @@ import Heading from '@theme/Heading';
         example: 1,
         description: 'Number of intervals between subscription payments.',
         title: 'Subscription-IntervalCount'
+      },
+      allowedPaymentMethods: {
+        type: 'array',
+        items: {type: 'string'},
+        enum: ['card', 'bizum'],
+        'x-enumDescriptions': {card: 'Card', bizum: 'Bizum'},
+        example: ['card', 'bizum'],
+        description: 'List of payment methods allowed for subscriptions.\n',
+        title: 'Subscription-PaymentMethods'
       },
       description: {
         type: 'string',
@@ -288,6 +307,14 @@ import Heading from '@theme/Heading';
         description:
           'Number of intervals when subscription will be paused before it activates again.',
         title: 'Subscription-PauseIntervalCount'
+      },
+      skipIntervalCount: {
+        type: 'integer',
+        format: 'int32',
+        example: 1,
+        description:
+          'The number of intervals during which the subscription billing cycle will be skipped without altering the subscription status. This is useful when payment for a specific period is received through different methods.\n',
+        title: 'Subscription-SkipIntervalCount'
       },
       retrySchedule: {
         type: 'array',

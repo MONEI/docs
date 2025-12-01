@@ -1,0 +1,78 @@
+---
+id: applepaycertificate
+title: 'ApplePayCertificate'
+description: 'An Apple Pay certificate for iOS app integration.'
+sidebar_label: 'ApplePayCertificate'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample:
+  {
+    'id': 'a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1',
+    'accountId': 'acct_12345',
+    'csr': 'MIIBEjCBuQIBADBOMRMwE...',
+    'cert': 'MIIEpDCCA4ygAwIBAgIIU...',
+    'active': true,
+    'expireAt': '2026-01-15T12:00:00.000Z',
+    'createdAt': '2024-01-15T12:00:00.000Z'
+  }
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'ApplePayCertificate'}></Heading>
+
+An Apple Pay certificate for iOS app integration.
+
+<Schema
+  schema={{
+    type: 'object',
+    description: 'An Apple Pay certificate for iOS app integration.',
+    properties: {
+      id: {
+        type: 'string',
+        description: 'Unique identifier of the certificate.',
+        example: 'a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1'
+      },
+      accountId: {
+        type: 'string',
+        description: 'The account ID this certificate belongs to.',
+        example: 'acct_12345'
+      },
+      csr: {
+        type: 'string',
+        description:
+          'The Certificate Signing Request in base64url format. Only present before activation. Use this to create a certificate in Apple Developer Portal.',
+        example: 'MIIBEjCBuQIBADBOMRMwE...'
+      },
+      cert: {
+        type: 'string',
+        description: 'The certificate body in base64 format. Only present after activation.',
+        example: 'MIIEpDCCA4ygAwIBAgIIU...'
+      },
+      active: {
+        type: 'boolean',
+        description: 'Whether the certificate is active for payment processing.',
+        example: true
+      },
+      expireAt: {
+        type: 'string',
+        format: 'date-time',
+        description:
+          'The certificate expiration date in ISO 8601 format. Only present after activation.',
+        example: '2026-01-15T12:00:00.000Z'
+      },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+        description: 'The certificate creation date in ISO 8601 format.',
+        example: '2024-01-15T12:00:00.000Z'
+      }
+    },
+    required: ['id', 'accountId', 'active', 'createdAt'],
+    title: 'ApplePayCertificate'
+  }}
+  schemaType={'response'}
+></Schema>

@@ -38,6 +38,28 @@ The Subscriptions API provides a powerful solution for managing recurring billin
 - **Simplified compliance**: Handle recurring billing requirements automatically
 - **Reduced churn**: Automatic billing helps prevent missed payments
 
+## Testing
+
+### Test Mode Limitations
+
+- **Active subscription limit**: In test mode, you can have only three active subscriptions at any time
+- **Automatic cancellation**: All subscriptions are automatically canceled after twelve payments (except when using the 5565 test card)
+
+### Test Mode Intervals
+
+- **Minute and hour intervals**: Only available in test mode for rapid testing of subscription cycles
+
+### Testing Failed Payments
+
+For testing subscription payment failures, use a test card with the following characteristics:
+
+- **Test card ending in 5565**: Use test card that ending in 5565 (see [Test card numbers](https://docs.monei.com/testing/#test-card-numbers))
+- **Payment behavior**:
+  - The first payment for the subscription will be successful
+  - All subsequent payments will fail
+  - After the first failed payment, the subscription status changes to `Past due`
+  - After three consecutive failed payments, the subscription will be automatically cancelled
+
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';

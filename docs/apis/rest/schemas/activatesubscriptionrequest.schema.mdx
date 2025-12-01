@@ -11,6 +11,7 @@ sample:
     'paymentToken': '7cc38b08ff471ccd313ad62b23b9f362b107560b',
     'sessionId': '39603551437913',
     'addAmount': 110,
+    'allowedPaymentMethods': ['card', 'bizum'],
     'sequenceId': '62b23b9f3627cc38b08ff471ccd313ad',
     'completeUrl': 'https://example.com/checkout/complete',
     'failUrl': 'https://example.com/checkout/fail',
@@ -67,6 +68,15 @@ import Heading from '@theme/Heading';
         ],
         description:
           "The amount to be added to the subscription's initial payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n"
+      },
+      allowedPaymentMethods: {
+        type: 'array',
+        items: {type: 'string'},
+        enum: ['card', 'bizum'],
+        'x-enumDescriptions': {card: 'Card', bizum: 'Bizum'},
+        example: ['card', 'bizum'],
+        description: 'List of payment methods allowed for subscriptions.\n',
+        title: 'Subscription-PaymentMethods'
       },
       sequenceId: {
         type: 'string',

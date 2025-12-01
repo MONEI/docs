@@ -11,6 +11,7 @@ sample:
     'id': '575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa',
     'amount': 110,
     'currency': 'EUR',
+    'allowedPaymentMethods': ['card', 'bizum'],
     'description': 'MoonMail Monthly Lite',
     'accountId': 'aa9333ba-82de-400c-9ae7-087b9f8d2242',
     'livemode': false,
@@ -53,6 +54,7 @@ sample:
     'interval': 'month',
     'intervalCount': 1,
     'pauseIntervalCount': 1,
+    'skipIntervalCount': 1,
     'lastOrderId': '14379133960355',
     'lastPayment':
       {
@@ -77,7 +79,8 @@ sample:
             'tokenizationMethod': 'applePay',
             'cardholderName': 'John Doe',
             'cardholderEmail': 'email@example.com'
-          }
+          },
+        'bizum': {'phoneNumber': null}
       },
     'currentPeriodStart': 1636366897,
     'currentPeriodEnd': 1636366897,
@@ -133,6 +136,7 @@ import Heading from '@theme/Heading';
   schema={{
     title: 'Subscription',
     type: 'object',
+    required: ['id', 'accountId', 'livemode', 'amount', 'interval', 'intervalCount', 'status'],
     properties: {
       id: {
         type: 'string',
@@ -154,6 +158,15 @@ import Heading from '@theme/Heading';
         description:
           'Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217),\nin uppercase. Must be a supported currency.\n',
         title: 'Payment-Currency'
+      },
+      allowedPaymentMethods: {
+        type: 'array',
+        items: {type: 'string'},
+        enum: ['card', 'bizum'],
+        'x-enumDescriptions': {card: 'Card', bizum: 'Bizum'},
+        example: ['card', 'bizum'],
+        description: 'List of payment methods allowed for subscriptions.\n',
+        title: 'Subscription-PaymentMethods'
       },
       description: {
         type: 'string',
@@ -341,9 +354,17 @@ import Heading from '@theme/Heading';
       interval: {
         type: 'string',
         example: 'month',
-        enum: ['day', 'week', 'month', 'year'],
-        'x-enumDescriptions': {day: 'Daily', week: 'Weekly', month: 'Monthly', year: 'Yearly'},
-        description: 'Subscription interval.',
+        enum: ['minute', 'hour', 'day', 'week', 'month', 'year'],
+        'x-enumDescriptions': {
+          minute: 'Minutely',
+          hour: 'Hourly',
+          day: 'Daily',
+          week: 'Weekly',
+          month: 'Monthly',
+          year: 'Yearly'
+        },
+        description:
+          'Subscription interval. The `minute` and `hour` intervals are only available in test mode.',
         title: 'Subscription-Interval'
       },
       intervalCount: {
@@ -360,6 +381,14 @@ import Heading from '@theme/Heading';
         description:
           'Number of intervals when subscription will be paused before it activates again.',
         title: 'Subscription-PauseIntervalCount'
+      },
+      skipIntervalCount: {
+        type: 'integer',
+        format: 'int32',
+        example: 1,
+        description:
+          'The number of intervals during which the subscription billing cycle will be skipped without altering the subscription status. This is useful when payment for a specific period is received through different methods.\n',
+        title: 'Subscription-SkipIntervalCount'
       },
       lastOrderId: {
         type: 'string',
@@ -425,8 +454,8 @@ import Heading from '@theme/Heading';
           method: {
             type: 'string',
             example: 'card',
-            enum: ['card'],
-            'x-enumDescriptions': {card: 'Card'},
+            enum: ['card', 'bizum'],
+            'x-enumDescriptions': {card: 'Card', bizum: 'Bizum'},
             description: 'Subscription method type.'
           },
           card: {
@@ -517,6 +546,19 @@ import Heading from '@theme/Heading';
               }
             },
             title: 'Payment-PaymentMethodCard'
+          },
+          bizum: {
+            type: 'object',
+            description:
+              'Details about the Bizum account used as payment method at the time of the transaction.\n',
+            properties: {
+              phoneNumber: {
+                type: 'string',
+                example: null,
+                description: 'Phone number in E.164 format used to pay with `bizum`.'
+              }
+            },
+            title: 'Payment-PaymentMethodBizum'
           }
         },
         title: 'Subscription-PaymentMethod'

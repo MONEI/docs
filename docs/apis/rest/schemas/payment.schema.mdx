@@ -169,6 +169,7 @@ import Heading from '@theme/Heading';
   schema={{
     title: 'Payment',
     type: 'object',
+    required: ['id', 'accountId', 'amount', 'currency', 'livemode', 'status'],
     properties: {
       id: {
         type: 'string',

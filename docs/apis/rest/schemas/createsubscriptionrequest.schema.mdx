@@ -12,6 +12,7 @@ sample:
     'currency': 'EUR',
     'interval': 'month',
     'intervalCount': 1,
+    'allowedPaymentMethods': ['card', 'bizum'],
     'description': 'MoonMail Monthly Lite',
     'customer': {'email': 'john.doe@example.com', 'name': 'John Doe', 'phone': null},
     'billingDetails':
@@ -92,9 +93,17 @@ import Heading from '@theme/Heading';
       interval: {
         type: 'string',
         example: 'month',
-        enum: ['day', 'week', 'month', 'year'],
-        'x-enumDescriptions': {day: 'Daily', week: 'Weekly', month: 'Monthly', year: 'Yearly'},
-        description: 'Subscription interval.',
+        enum: ['minute', 'hour', 'day', 'week', 'month', 'year'],
+        'x-enumDescriptions': {
+          minute: 'Minutely',
+          hour: 'Hourly',
+          day: 'Daily',
+          week: 'Weekly',
+          month: 'Monthly',
+          year: 'Yearly'
+        },
+        description:
+          'Subscription interval. The `minute` and `hour` intervals are only available in test mode.',
         title: 'Subscription-Interval'
       },
       intervalCount: {
@@ -103,6 +112,15 @@ import Heading from '@theme/Heading';
         example: 1,
         description: 'Number of intervals between subscription payments.',
         title: 'Subscription-IntervalCount'
+      },
+      allowedPaymentMethods: {
+        type: 'array',
+        items: {type: 'string'},
+        enum: ['card', 'bizum'],
+        'x-enumDescriptions': {card: 'Card', bizum: 'Bizum'},
+        example: ['card', 'bizum'],
+        description: 'List of payment methods allowed for subscriptions.\n',
+        title: 'Subscription-PaymentMethods'
       },
       description: {
         type: 'string',
