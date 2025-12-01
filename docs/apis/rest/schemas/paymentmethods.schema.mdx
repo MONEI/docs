@@ -144,6 +144,14 @@ import Heading from '@theme/Heading';
   schema={{
     title: 'PaymentMethods',
     type: 'object',
+    required: [
+      'livemode',
+      'paymentMethods',
+      'metadata',
+      'merchantName',
+      'merchantUrl',
+      'countryCode'
+    ],
     properties: {
       livemode: {
         type: 'boolean',

@@ -32,7 +32,7 @@
     "docusaurus-theme-openapi-docs": "4.5.1",
     "find-dom-node-polyfill": "^1.0.3",
     "graphql": "^16.12.0",
-    "marked": "^16.4.1",
+    "marked": "^17.0.1",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -55,8 +55,8 @@
     "@docusaurus/types": "3.9.2",
     "dotenv": "^17.2.3",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.6",
-    "prettier": "^3.6.2"
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.3"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,md,mdx,json,css,scss}": [
@@ -66,5 +66,5 @@
   "engines": {
     "node": ">=22.0"
   },
-  "packageManager": "yarn@4.10.3"
+  "packageManager": "yarn@4.12.0"
 }

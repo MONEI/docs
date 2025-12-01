@@ -1,0 +1,35 @@
+---
+id: subscription-paymentmethods
+title: 'Subscription-PaymentMethods'
+description: 'List of payment methods allowed for subscriptions.'
+sidebar_label: 'Subscription-PaymentMethods'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: ['card', 'bizum']
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Subscription-PaymentMethods'}
+></Heading>
+
+List of payment methods allowed for subscriptions.
+
+<Schema
+  schema={{
+    type: 'array',
+    items: {type: 'string'},
+    enum: ['card', 'bizum'],
+    'x-enumDescriptions': {card: 'Card', bizum: 'Bizum'},
+    example: ['card', 'bizum'],
+    description: 'List of payment methods allowed for subscriptions.\n',
+    title: 'Subscription-PaymentMethods'
+  }}
+  schemaType={'response'}
+></Schema>

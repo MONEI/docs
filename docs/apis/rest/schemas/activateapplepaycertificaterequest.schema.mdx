@@ -1,0 +1,37 @@
+---
+id: activateapplepaycertificaterequest
+title: 'ActivateApplePayCertificateRequest'
+description: ''
+sidebar_label: 'ActivateApplePayCertificateRequest'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'cert': 'MIIEpDCCA4ygAwIBAgIIU...'}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'ActivateApplePayCertificateRequest'}
+></Heading>
+
+<Schema
+  schema={{
+    type: 'object',
+    properties: {
+      cert: {
+        type: 'string',
+        description:
+          'The signed certificate from Apple in base64 format. Download this from Apple Developer Portal after creating the certificate with your CSR.',
+        example: 'MIIEpDCCA4ygAwIBAgIIU...'
+      }
+    },
+    required: ['cert'],
+    title: 'ActivateApplePayCertificateRequest'
+  }}
+  schemaType={'response'}
+></Schema>

@@ -23,6 +23,7 @@ import Heading from '@theme/Heading';
 <Schema
   schema={{
     type: 'object',
+    required: ['accountId', 'phoneNumber'],
     properties: {
       accountId: {
         type: 'string',
@@ -42,7 +43,6 @@ import Heading from '@theme/Heading';
         description: 'Phone number in E.164 format.'
       }
     },
-    required: ['accountId', 'phoneNumber'],
     title: 'ValidateBizumPhoneRequest'
   }}
   schemaType={'response'}

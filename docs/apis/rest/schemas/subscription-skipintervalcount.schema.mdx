@@ -1,0 +1,34 @@
+---
+id: subscription-skipintervalcount
+title: 'Subscription-SkipIntervalCount'
+description: 'The number of intervals during which the subscription billing cycle will be skipped without altering the subscription status. This is useful when payment for a specific period is received through different methods.'
+sidebar_label: 'Subscription-SkipIntervalCount'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: 1
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'Subscription-SkipIntervalCount'}
+></Heading>
+
+The number of intervals during which the subscription billing cycle will be skipped without altering the subscription status. This is useful when payment for a specific period is received through different methods.
+
+<Schema
+  schema={{
+    type: 'integer',
+    format: 'int32',
+    example: 1,
+    description:
+      'The number of intervals during which the subscription billing cycle will be skipped without altering the subscription status. This is useful when payment for a specific period is received through different methods.\n',
+    title: 'Subscription-SkipIntervalCount'
+  }}
+  schemaType={'response'}
+></Schema>

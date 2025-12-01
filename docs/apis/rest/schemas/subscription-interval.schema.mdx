@@ -1,7 +1,7 @@
 ---
 id: subscription-interval
 title: 'Subscription-Interval'
-description: 'Subscription interval.'
+description: 'Subscription interval. The `minute` and `hour` intervals are only available in test mode.'
 sidebar_label: 'Subscription-Interval'
 hide_title: true
 hide_table_of_contents: true
@@ -15,15 +15,23 @@ import Heading from '@theme/Heading';
 
 <Heading as={'h1'} className={'openapi__heading'} children={'Subscription-Interval'}></Heading>
 
-Subscription interval.
+Subscription interval. The `minute` and `hour` intervals are only available in test mode.
 
 <Schema
   schema={{
     type: 'string',
     example: 'month',
-    enum: ['day', 'week', 'month', 'year'],
-    'x-enumDescriptions': {day: 'Daily', week: 'Weekly', month: 'Monthly', year: 'Yearly'},
-    description: 'Subscription interval.',
+    enum: ['minute', 'hour', 'day', 'week', 'month', 'year'],
+    'x-enumDescriptions': {
+      minute: 'Minutely',
+      hour: 'Hourly',
+      day: 'Daily',
+      week: 'Weekly',
+      month: 'Monthly',
+      year: 'Yearly'
+    },
+    description:
+      'Subscription interval. The `minute` and `hour` intervals are only available in test mode.',
     title: 'Subscription-Interval'
   }}
   schemaType={'response'}

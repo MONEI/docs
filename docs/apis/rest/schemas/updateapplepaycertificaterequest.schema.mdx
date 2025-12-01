@@ -1,0 +1,36 @@
+---
+id: updateapplepaycertificaterequest
+title: 'UpdateApplePayCertificateRequest'
+description: ''
+sidebar_label: 'UpdateApplePayCertificateRequest'
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {'active': true}
+custom_edit_url: null
+---
+
+import Schema from '@theme/Schema';
+import Heading from '@theme/Heading';
+
+<Heading
+  as={'h1'}
+  className={'openapi__heading'}
+  children={'UpdateApplePayCertificateRequest'}
+></Heading>
+
+<Schema
+  schema={{
+    type: 'object',
+    properties: {
+      active: {
+        type: 'boolean',
+        description: 'Set to true to enable or false to disable the certificate.',
+        example: true
+      }
+    },
+    required: ['active'],
+    title: 'UpdateApplePayCertificateRequest'
+  }}
+  schemaType={'response'}
+></Schema>

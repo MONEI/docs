@@ -22,7 +22,8 @@ sample:
         'tokenizationMethod': 'applePay',
         'cardholderName': 'John Doe',
         'cardholderEmail': 'email@example.com'
-      }
+      },
+    'bizum': {'phoneNumber': null}
   }
 custom_edit_url: null
 ---
@@ -42,8 +43,8 @@ Details about the payment method at the time of the transaction.
       method: {
         type: 'string',
         example: 'card',
-        enum: ['card'],
-        'x-enumDescriptions': {card: 'Card'},
+        enum: ['card', 'bizum'],
+        'x-enumDescriptions': {card: 'Card', bizum: 'Bizum'},
         description: 'Subscription method type.'
       },
       card: {
@@ -134,6 +135,19 @@ Details about the payment method at the time of the transaction.
           }
         },
         title: 'Payment-PaymentMethodCard'
+      },
+      bizum: {
+        type: 'object',
+        description:
+          'Details about the Bizum account used as payment method at the time of the transaction.\n',
+        properties: {
+          phoneNumber: {
+            type: 'string',
+            example: null,
+            description: 'Phone number in E.164 format used to pay with `bizum`.'
+          }
+        },
+        title: 'Payment-PaymentMethodBizum'
       }
     },
     title: 'Subscription-PaymentMethod'

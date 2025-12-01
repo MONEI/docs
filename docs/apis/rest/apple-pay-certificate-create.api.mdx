@@ -1,0 +1,348 @@
+---
+id: apple-pay-certificate-create
+title: 'Create Certificate'
+description: 'Creates a new Apple Pay certificate by generating a Certificate Signing Request (CSR).'
+sidebar_label: 'Create Certificate'
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: 'post api-method'
+info_path: docs/apis/rest/monei-api-v-1
+custom_edit_url: null
+hide_send_button: true
+show_extensions: true
+---
+
+import MethodEndpoint from '@theme/ApiExplorer/MethodEndpoint';
+import ParamsDetails from '@theme/ParamsDetails';
+import RequestSchema from '@theme/RequestSchema';
+import StatusCodes from '@theme/StatusCodes';
+import OperationTabs from '@theme/OperationTabs';
+import TabItem from '@theme/TabItem';
+import Heading from '@theme/Heading';
+
+<Heading as={'h1'} className={'openapi__heading'} children={'Create Certificate'}></Heading>
+
+<MethodEndpoint
+  method={'post'}
+  path={'/apple-pay/certificates'}
+  context={'endpoint'}
+></MethodEndpoint>
+
+Creates a new Apple Pay certificate by generating a Certificate Signing Request (CSR).
+
+Use this endpoint to start the certificate creation process for accepting Apple Pay in your iOS app.
+
+## Setup workflow
+
+1. **Call this endpoint** to generate a CSR. The response includes the `csr` field in base64url format.
+
+2. **Decode the CSR** and save it as a `.certSigningRequest` file:
+
+   ```bash
+   echo "CSR_VALUE" | base64 -d > apple_pay.certSigningRequest
+   ```
+
+3. **Go to [Apple Developer Portal](https://developer.apple.com/account/resources/certificates/list)**:
+   - Navigate to Certificates, Identifiers & Profiles
+   - Select your Merchant ID under Identifiers
+   - In the "Apple Pay Payment Processing Certificate" section, click "Create Certificate"
+   - Upload the `.certSigningRequest` file from step 2
+   - Download the signed certificate (`.cer` file)
+
+4. **Convert the certificate to base64**:
+
+   ```bash
+   base64 -i apple_pay.cer
+   ```
+
+5. **Activate the certificate** using the [Activate Certificate](/api#tag/Apple-Pay-Domain/operation/applePayCertificate_activate) endpoint with the base64 value.
+
+## Important notes
+
+- Each CSR can only be used once. If you need a new certificate, create a new CSR.
+- The private key is securely generated and stored by MONEI using AWS KMS encryption.
+- You must be enrolled in the [Apple Developer Program](https://developer.apple.com/programs/) to create certificates.
+- The CSR is cleared from the response after the certificate is activated.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={'Body'} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    '200': {
+      description: 'A certificate object',
+      content: {
+        'application/json': {
+          schema: {
+            type: 'object',
+            description: 'An Apple Pay certificate for iOS app integration.',
+            properties: {
+              id: {
+                type: 'string',
+                description: 'Unique identifier of the certificate.',
+                example: 'a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1'
+              },
+              accountId: {
+                type: 'string',
+                description: 'The account ID this certificate belongs to.',
+                example: 'acct_12345'
+              },
+              csr: {
+                type: 'string',
+                description:
+                  'The Certificate Signing Request in base64url format. Only present before activation. Use this to create a certificate in Apple Developer Portal.',
+                example: 'MIIBEjCBuQIBADBOMRMwE...'
+              },
+              cert: {
+                type: 'string',
+                description:
+                  'The certificate body in base64 format. Only present after activation.',
+                example: 'MIIEpDCCA4ygAwIBAgIIU...'
+              },
+              active: {
+                type: 'boolean',
+                description: 'Whether the certificate is active for payment processing.',
+                example: true
+              },
+              expireAt: {
+                type: 'string',
+                format: 'date-time',
+                description:
+                  'The certificate expiration date in ISO 8601 format. Only present after activation.',
+                example: '2026-01-15T12:00:00.000Z'
+              },
+              createdAt: {
+                type: 'string',
+                format: 'date-time',
+                description: 'The certificate creation date in ISO 8601 format.',
+                example: '2024-01-15T12:00:00.000Z'
+              }
+            },
+            required: ['id', 'accountId', 'active', 'createdAt'],
+            title: 'ApplePayCertificate'
+          }
+        }
+      }
+    },
+    '400': {
+      description: 'The request is incorrect or could not be processed',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'BadRequestError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 400,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Bad request',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'BadRequestError'
+          }
+        }
+      }
+    },
+    '401': {
+      description: 'Unauthorized error. Please check your auth credentials',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'UnauthorizedError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 401,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Unauthorized access',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'UnauthorizedError'
+          }
+        }
+      }
+    },
+    '500': {
+      description: 'Unexpected server error',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'InternalServerError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 500,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'An unexpected error occurred',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'InternalServerError'
+          }
+        }
+      }
+    },
+    '503': {
+      description: 'The service is temporarily unavailable',
+      content: {
+        'application/json': {
+          schema: {
+            allOf: [
+              {
+                type: 'object',
+                required: ['status', 'statusCode', 'message', 'requestId', 'requestTime'],
+                properties: {
+                  status: {type: 'string', description: 'Error type identifier'},
+                  statusCode: {type: 'integer', format: 'int32', description: 'HTTP status code'},
+                  message: {type: 'string', description: 'Human-readable error message'},
+                  requestId: {
+                    type: 'string',
+                    description: 'Unique identifier for the request',
+                    example: 'df011689-bd3e-4953-95ca-c7bbdacaf6f8'
+                  },
+                  requestTime: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Timestamp when the request was processed',
+                    example: '2025-03-05T10:25:52Z'
+                  }
+                },
+                title: 'ApiException'
+              },
+              {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    example: 'ServiceUnavailableError',
+                    description: 'Error type identifier'
+                  },
+                  statusCode: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 503,
+                    description: 'HTTP status code'
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Upstream service is unavailable',
+                    description: 'Human-readable error message'
+                  }
+                }
+              }
+            ],
+            title: 'ServiceUnavailableError'
+          }
+        }
+      }
+    }
+  }}
+></StatusCodes>
