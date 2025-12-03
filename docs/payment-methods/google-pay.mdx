@@ -4,6 +4,14 @@ title: Google Pay
 description: Learn how to accept Google Pay payments with MONEI.
 ---
 
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+
+<Tabs>
+<TabItem value="web" label="Web" default>
+
+## Web Integration
+
 You can start accepting Google Pay payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Payment Request Component](monei-js/payment-request.mdx). No additional configuration is required.
 
 Our [Payment Request Component](monei-js/payment-request.mdx) gives you a single integration for Apple Pay and Google Pay. Customers see a Google Pay or an Apple Pay button, depending on what their device and browser combination supports.
@@ -17,11 +25,11 @@ Our [Payment Request Component](monei-js/payment-request.mdx) gives you a single
   />
 </p>
 
-If you prefer to integrate directly against the Google Pay API, follow our [Google Pay direct API integration guide](#google-pay-direct-api-integration).
+If you prefer to integrate directly against the Google Pay API, follow the [direct API integration guide](#direct-api-integration) below.
 
-## Before you begin
+### Before you begin
 
-This page explains how to add Google Pay to your payment page. To accept Google Pay payments you need to have at least one configured card processor.
+To accept Google Pay payments you need to have at least one configured card processor.
 
 To configure card processors go to [MONEI Dashboard → Settings → Payment Methods → Card payments](https://dashboard.monei.com/settings/payment-methods/card).
 
@@ -41,11 +49,11 @@ To test your integration:
 By integrating Google Pay™, you adhere to the Google Pay APIs [Acceptable Use Policy](https://payments.developers.google.com/terms/aup) and accept the terms defined in the Google Pay API [Terms of Service](https://payments.developers.google.com/terms/sellertos).
 :::
 
-## Google Pay direct API integration
+### Direct API Integration
 
 If you prefer to integrate directly against the Google Pay API, follow [Google's instructions](https://developers.google.com/pay/api/web/guides/setup).
 
-Specify following tokenization specification
+Specify following tokenization specification:
 
 ```javascript
 const tokenizationSpecification = {
@@ -57,7 +65,7 @@ const tokenizationSpecification = {
 };
 ```
 
-To use Google Pay API directly you need to [request production access](https://developers.google.com/pay/api/web/guides/test-and-deploy/request-prod-access) and obtain your `merchantId` in Google Console (this step is not required if you are using our Google Pay Сomponent).
+To use Google Pay API directly you need to [request production access](https://developers.google.com/pay/api/web/guides/test-and-deploy/request-prod-access) and obtain your `merchantId` in Google Console (this step is not required if you are using our Google Pay Component).
 
 ```javascript
 paymentDataRequest.merchantInfo = {
@@ -66,7 +74,7 @@ paymentDataRequest.merchantInfo = {
 };
 ```
 
-Exchange Google Pay token for MONEI Payment Token that can be used to confirm payment as described in [step 3](#3-confirm-the-payment-client-side).
+Exchange Google Pay token for MONEI Payment Token that can be used to confirm payment:
 
 ```javascript
 function processPayment(paymentData) {
@@ -82,12 +90,12 @@ function processPayment(paymentData) {
       }
     })
     .then(function (result) {
-      return moneiTokenHandler(result.token);
+      return moneiTokenHandler(result.paymentToken);
     });
 }
 ```
 
-## 3. Confirm the payment client-side
+### Confirm the Payment
 
 After you have obtained the MONEI Payment Token, you can confirm the payment using the token.
 
@@ -107,8 +115,204 @@ function moneiTokenHandler(token) {
 }
 ```
 
+</TabItem>
+<TabItem value="android" label="Native Android App">
+
+## Native Android App Integration
+
+Google Pay works out of the box on Android with no additional certificate setup required. Simply integrate the Google Pay API and use MONEI as your payment gateway.
+
+### Prerequisites
+
+- Google Pay enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods)
+- At least one configured card processor in [MONEI Dashboard](https://dashboard.monei.com/settings/payment-methods/card)
+- Android device or emulator with Google Play Services
+
+### Add Dependencies
+
+Add the Google Pay library to your app's `build.gradle`:
+
+```groovy
+dependencies {
+    implementation 'com.google.android.gms:play-services-wallet:19.2.1'
+}
+```
+
+Add the Google Pay API meta-data to your `AndroidManifest.xml`:
+
+```xml
+<meta-data
+    android:name="com.google.android.gms.wallet.api.enabled"
+    android:value="true" />
+```
+
+### Check Google Pay Availability
+
+Before showing the Google Pay button, verify it's available on the device:
+
+```kotlin
+val paymentsClient = Wallet.getPaymentsClient(
+    this,
+    Wallet.WalletOptions.Builder()
+        .setEnvironment(WalletConstants.ENVIRONMENT_TEST) // Use ENVIRONMENT_PRODUCTION for live
+        .build()
+)
+
+val isReadyToPayRequest = IsReadyToPayRequest.fromJson("""
+    {
+        "apiVersion": 2,
+        "apiVersionMinor": 0,
+        "allowedPaymentMethods": [{
+            "type": "CARD",
+            "parameters": {
+                "allowedAuthMethods": ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                "allowedCardNetworks": ["VISA", "MASTERCARD", "AMEX", "DISCOVER", "JCB"]
+            }
+        }]
+    }
+""")
+
+paymentsClient.isReadyToPay(isReadyToPayRequest)
+    .addOnCompleteListener { task ->
+        if (task.isSuccessful) {
+            // Show Google Pay button
+        }
+    }
+```
+
+### Configure Payment Request
+
+Create a payment request with MONEI as the gateway:
+
+```kotlin
+val paymentDataRequest = PaymentDataRequest.fromJson("""
+    {
+        "apiVersion": 2,
+        "apiVersionMinor": 0,
+        "allowedPaymentMethods": [{
+            "type": "CARD",
+            "parameters": {
+                "allowedAuthMethods": ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                "allowedCardNetworks": ["VISA", "MASTERCARD", "AMEX", "DISCOVER", "JCB"]
+            },
+            "tokenizationSpecification": {
+                "type": "PAYMENT_GATEWAY",
+                "parameters": {
+                    "gateway": "monei",
+                    "gatewayMerchantId": "YOUR_MONEI_ACCOUNT_ID"
+                }
+            }
+        }],
+        "merchantInfo": {
+            "merchantName": "Your Store Name",
+            "merchantId": "YOUR_GOOGLE_MERCHANT_ID"
+        },
+        "transactionInfo": {
+            "totalPrice": "10.00",
+            "totalPriceStatus": "FINAL",
+            "currencyCode": "EUR",
+            "countryCode": "ES"
+        }
+    }
+""")
+```
+
+### Launch Google Pay
+
+Launch the Google Pay payment sheet when the user taps the button:
+
+```kotlin
+private val googlePayLauncher = registerForActivityResult(
+    ActivityResultContracts.StartActivityForResult()
+) { result ->
+    when (result.resultCode) {
+        Activity.RESULT_OK -> {
+            result.data?.let { intent ->
+                val paymentData = PaymentData.getFromIntent(intent)
+                handlePaymentSuccess(paymentData)
+            }
+        }
+        Activity.RESULT_CANCELED -> {
+            // User cancelled
+        }
+        AutoResolveHelper.RESULT_ERROR -> {
+            // Handle error
+        }
+    }
+}
+
+fun requestPayment() {
+    val task = paymentsClient.loadPaymentData(paymentDataRequest)
+    AutoResolveHelper.resolveTask(task, this, GOOGLE_PAY_REQUEST_CODE)
+}
+```
+
+### Process the Payment
+
+Extract the token from the payment data and send it to your backend:
+
+```kotlin
+private fun handlePaymentSuccess(paymentData: PaymentData?) {
+    val paymentInfo = paymentData?.toJson() ?: return
+    val json = JSONObject(paymentInfo)
+
+    // Extract the Google Pay token
+    val token = json
+        .getJSONObject("paymentMethodData")
+        .getJSONObject("tokenizationData")
+        .getString("token")
+
+    // Base64 encode the token
+    val encodedToken = Base64.encodeToString(token.toByteArray(), Base64.NO_WRAP)
+
+    // Send to your backend to create MONEI payment token and confirm payment
+    sendToBackend(encodedToken)
+}
+```
+
+### Backend Integration
+
+On your backend, exchange the Google Pay token for a MONEI payment token:
+
+```bash
+# 1. Create a payment
+curl -X POST https://api.monei.com/v1/payments \
+  -H "Authorization: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 1000,
+    "currency": "EUR",
+    "orderId": "order_123"
+  }'
+
+# 2. Create a token from Google Pay token
+curl -X POST https://api.monei.com/v1/payment-tokens \
+  -H "Authorization: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "paymentId": "PAYMENT_ID_FROM_STEP_1",
+    "paymentMethod": {
+      "googlePay": {
+        "token": "BASE64_ENCODED_GOOGLE_PAY_TOKEN"
+      }
+    }
+  }'
+
+# 3. Confirm the payment
+curl -X POST https://api.monei.com/v1/payments/PAYMENT_ID/confirm \
+  -H "Authorization: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "paymentToken": "MONEI_TOKEN_FROM_STEP_2"
+  }'
+```
+
+</TabItem>
+</Tabs>
+
 ## Before you go live
 
 - Make sure that you are using [live (production) mode](testing.md) Account ID and API Key.
 - Make sure that you have at least one [enabled card processor](https://dashboard.monei.com/settings/payment-methods/card).
 - Make sure that you have Google Pay enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods).
+- For direct API integration, [request production access](https://developers.google.com/pay/api/web/guides/test-and-deploy/request-prod-access) from Google and obtain your `merchantId`.

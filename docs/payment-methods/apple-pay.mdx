@@ -85,7 +85,7 @@ session.onpaymentauthorized = async (event) => {
     session.completePayment({
       status: window.ApplePaySession.STATUS_SUCCESS
     });
-    return moneiTokenHandler(result.token);
+    return moneiTokenHandler(result.paymentToken);
   } catch (error) {
     session.completePayment({
       status: window.ApplePaySession.STATUS_FAILURE
@@ -160,7 +160,7 @@ paymentRequest.paymentSummaryItems = [
 Once the user authorizes the payment, you'll receive a `PKPayment` object. Send the payment token to your backend, then use the MONEI API to process it:
 
 1. Base64 encode the Apple Pay token from `payment.token.paymentData`
-2. Create a MONEI payment token using the [Create Token API](apis/rest/tokens-create.api.mdx)
+2. Create a MONEI payment token using the Create Token API
 3. Confirm the payment using the token
 
 ```swift
