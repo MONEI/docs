@@ -44,7 +44,7 @@ An Apple Pay certificate for iOS app integration.
       csr: {
         type: 'string',
         description:
-          'The Certificate Signing Request in base64url format. Only present before activation. Use this to create a certificate in Apple Developer Portal.',
+          'The Certificate Signing Request in base64url format (URL-safe base64). Only present before activation. To decode, replace - with + and _ with /, then use standard base64 decoder. Use this to create a certificate in Apple Developer Portal.',
         example: 'MIIBEjCBuQIBADBOMRMwE...'
       },
       cert: {

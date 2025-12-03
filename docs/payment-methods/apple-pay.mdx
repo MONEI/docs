@@ -4,6 +4,14 @@ title: Apple Pay
 description: Learn how to accept Apple Pay payments with MONEI.
 ---
 
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+
+<Tabs>
+<TabItem value="web" label="Web" default>
+
+## Web Integration
+
 You can start accepting Apple Pay payments on the Web using [Hosted Payment Page](integrations/use-prebuilt-payment-page.mdx) or [Payment Request Component](monei-js/payment-request.mdx). No additional configuration is required to use Apple Pay in Hosted Payment Page.
 
 Our [Payment Request Component](monei-js/payment-request.mdx) gives you a single integration for Apple Pay and Google Pay. Customers see a Google Pay or an Apple Pay button, depending on what their device and browser combination supports.
@@ -21,9 +29,9 @@ Open this page in Safari to see the Apple Pay button.
   />
 </p>
 
-If you prefer to integrate directly against the Apple Pay API, follow our [Apple Pay direct API integration guide](#apple-pay-direct-api-integration).
+If you prefer to integrate directly against the Apple Pay API, follow the [direct API integration guide](#direct-api-integration) below.
 
-## Apple Pay direct API integration
+### Direct API Integration
 
 Before you start, you need to:
 
@@ -60,7 +68,7 @@ session.onvalidatemerchant = async (event: any) => {
 };
 ```
 
-Exchange Apple Pay token for MONEI Payment Token that can be used to confirm payment as described in [step 3](#3-confirm-the-payment-client-side).
+Exchange Apple Pay token for MONEI Payment Token that can be used to confirm payment.
 
 ```javascript
 session.onpaymentauthorized = async (event) => {
@@ -87,7 +95,7 @@ session.onpaymentauthorized = async (event) => {
 session.begin();
 ```
 
-## 3. Confirm the payment client-side
+### Confirm the Payment
 
 After you have obtained the MONEI Payment Token, you can confirm the payment using the token.
 
@@ -106,6 +114,72 @@ function moneiTokenHandler(token) {
     });
 }
 ```
+
+</TabItem>
+<TabItem value="ios" label="Native iOS App">
+
+## Native iOS App Integration
+
+If you're building a native iOS application with Apple Pay, you need to create a custom Apple Pay Payment Processing Certificate. This certificate allows your app to decrypt Apple Pay tokens and process payments through MONEI.
+
+### Create a Custom Certificate
+
+1. Go to [Apple Pay Certificates Settings](https://dashboard.monei.com/settings/apple-pay-certificates) in your MONEI Dashboard
+2. Click **Create certificate** to generate a Certificate Signing Request (CSR)
+3. Download the CSR file
+4. Go to [Apple Developer Portal - Certificates](https://developer.apple.com/account/resources/certificates/list)
+5. Click the **+** button to create a new certificate
+6. Select **Apple Pay Payment Processing Certificate**
+7. Select your Merchant ID and click Continue
+8. Upload the CSR file you downloaded from MONEI
+9. Download the generated certificate (.cer file)
+10. Return to [MONEI Dashboard](https://dashboard.monei.com/settings/apple-pay-certificates) and upload the certificate to activate it
+
+:::info
+The private key is securely generated and stored by MONEI. You never need to handle private keys directly.
+:::
+
+### Initialize Apple Pay
+
+Create your `PKPaymentRequest` in Swift using the MONEI merchant identifier:
+
+```swift
+let paymentRequest = PKPaymentRequest()
+paymentRequest.merchantIdentifier = "merchant.com.monei"
+paymentRequest.countryCode = "ES"
+paymentRequest.currencyCode = "EUR"
+paymentRequest.supportedNetworks = [.visa, .masterCard, .amex]
+paymentRequest.merchantCapabilities = .capability3DS
+paymentRequest.paymentSummaryItems = [
+    PKPaymentSummaryItem(label: "Your Store Name", amount: NSDecimalNumber(value: 10.00))
+]
+```
+
+### Process Payments
+
+Once the user authorizes the payment, you'll receive a `PKPayment` object. Send the payment token to your backend, then use the MONEI API to process it:
+
+1. Base64 encode the Apple Pay token from `payment.token.paymentData`
+2. Create a MONEI payment token using the [Create Token API](apis/rest/tokens-create.api.mdx)
+3. Confirm the payment using the token
+
+```swift
+// In your PKPaymentAuthorizationViewControllerDelegate
+func paymentAuthorizationViewController(
+    _ controller: PKPaymentAuthorizationViewController,
+    didAuthorizePayment payment: PKPayment,
+    handler completion: @escaping (PKPaymentAuthorizationResult) -> Void
+) {
+    // Send payment.token.paymentData to your backend
+    let tokenData = payment.token.paymentData.base64EncodedString()
+    // Your backend calls MONEI API to process the payment
+}
+```
+
+On your backend, exchange the Apple Pay token for a MONEI payment token and confirm the payment.
+
+</TabItem>
+</Tabs>
 
 ## Before you go live
 
