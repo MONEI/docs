@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.6.1",
+    "version": "1.7.4",
     "title": "MONEI API v1",
     "description": "The MONEI API is organized around REST principles. Our API is designed to be intuitive and developer-friendly.\n\n### Base URL\n\nAll API requests should be made to:\n\n```\nhttps://api.monei.com/v1\n```\n\n### Environment\n\nMONEI provides two environments:\n\n- **Test Environment**: For development and testing without processing real payments\n- **Live Environment**: For processing real transactions in production\n\n### Client Libraries\n\nWe provide official SDKs to simplify integration:\n\n- [PHP SDK](https://github.com/MONEI/monei-php-sdk)\n- [Python SDK](https://github.com/MONEI/monei-python-sdk)\n- [Node.js SDK](https://github.com/MONEI/monei-node-sdk)\n- [Postman Collection](https://postman.monei.com/)\n\nOur SDKs handle authentication, error handling, and request formatting automatically.\n\nYou can download the OpenAPI specification from the https://js.monei.com/api/v1/openapi.json and generate your own client library using the [OpenAPI Generator](https://openapi-generator.tech/).\n\n### Important Requirements\n\n- All API requests must be made over HTTPS\n- If you are not using our official SDKs, you **must provide a valid `User-Agent` header** with each request\n- Requests without proper authentication will return a `401 Unauthorized` error\n\n### Error Handling\n\nThe API returns consistent error codes and messages to help you troubleshoot issues. Each response includes a `statusCode` attribute indicating the outcome of your request.\n\n### Rate Limits\n\nThe API implements rate limiting to ensure stability. If you exceed the limits, requests will return a `429 Too Many Requests` status code.\n"
   },
@@ -92,6 +92,45 @@
           }
         }
       },
+      "ApplePayCertificateResponse": {
+        "description": "A certificate object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApplePayCertificate"
+            }
+          }
+        }
+      },
+      "ApplePayCertificateListResponse": {
+        "description": "A list of certificates",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ApplePayCertificate"
+              }
+            }
+          }
+        }
+      },
+      "DeleteApplePayCertificateResponse": {
+        "description": "A successful deletion response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          }
+        }
+      },
       "RegisterApplePayDomainResponse": {
         "description": "A successful response",
         "content": {
@@ -114,6 +153,7 @@
           "application/json": {
             "schema": {
               "type": "object",
+              "required": ["isValid"],
               "properties": {
                 "isValid": {
                   "type": "boolean",
@@ -512,6 +552,72 @@
         },
         "description": "A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format."
       },
+      "ApplePayCertificate": {
+        "type": "object",
+        "description": "An Apple Pay certificate for iOS app integration.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the certificate.",
+            "example": "a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "The account ID this certificate belongs to.",
+            "example": "acct_12345"
+          },
+          "csr": {
+            "type": "string",
+            "description": "The Certificate Signing Request in base64url format (URL-safe base64). Only present before activation. To decode, replace - with + and _ with /, then use standard base64 decoder. Use this to create a certificate in Apple Developer Portal.",
+            "example": "MIIBEjCBuQIBADBOMRMwE..."
+          },
+          "cert": {
+            "type": "string",
+            "description": "The certificate body in base64 format. Only present after activation.",
+            "example": "MIIEpDCCA4ygAwIBAgIIU..."
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether the certificate is active for payment processing.",
+            "example": true
+          },
+          "expireAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The certificate expiration date in ISO 8601 format. Only present after activation.",
+            "example": "2026-01-15T12:00:00.000Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The certificate creation date in ISO 8601 format.",
+            "example": "2024-01-15T12:00:00.000Z"
+          }
+        },
+        "required": ["id", "accountId", "active", "createdAt"]
+      },
+      "UpdateApplePayCertificateRequest": {
+        "type": "object",
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "description": "Set to true to enable or false to disable the certificate.",
+            "example": true
+          }
+        },
+        "required": ["active"]
+      },
+      "ActivateApplePayCertificateRequest": {
+        "type": "object",
+        "properties": {
+          "cert": {
+            "type": "string",
+            "description": "The signed certificate from Apple in base64 format. Download this from Apple Developer Portal after creating the certificate with your CSR.",
+            "example": "MIIEpDCCA4ygAwIBAgIIU..."
+          }
+        },
+        "required": ["cert"]
+      },
       "RegisterApplePayDomainRequest": {
         "type": "object",
         "properties": {
@@ -528,6 +634,7 @@
       },
       "ValidateBizumPhoneRequest": {
         "type": "object",
+        "required": ["accountId", "phoneNumber"],
         "properties": {
           "accountId": {
             "$ref": "#/components/schemas/AccountId"
@@ -540,12 +647,19 @@
             "example": "+34500000000",
             "description": "Phone number in E.164 format."
           }
-        },
-        "required": ["accountId", "phoneNumber"]
+        }
       },
       "PaymentMethods": {
         "title": "PaymentMethods",
         "type": "object",
+        "required": [
+          "livemode",
+          "paymentMethods",
+          "metadata",
+          "merchantName",
+          "merchantUrl",
+          "countryCode"
+        ],
         "properties": {
           "livemode": {
             "$ref": "#/components/schemas/Livemode"
@@ -986,6 +1100,7 @@
       "Payment": {
         "title": "Payment",
         "type": "object",
+        "required": ["id", "accountId", "amount", "currency", "livemode", "status"],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/Payment-Id"
@@ -1211,6 +1326,9 @@
           },
           "shippingDetails": {
             "$ref": "#/components/schemas/Payment-ShippingDetails"
+          },
+          "sessionDetails": {
+            "$ref": "#/components/schemas/Payment-SessionDetails"
           },
           "metadata": {
             "$ref": "#/components/schemas/Metadata"
@@ -2245,6 +2363,15 @@
       "Subscription": {
         "title": "Subscription",
         "type": "object",
+        "required": [
+          "id",
+          "accountId",
+          "livemode",
+          "amount",
+          "interval",
+          "intervalCount",
+          "status"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/Subscription-Id"
@@ -2254,6 +2381,9 @@
           },
           "currency": {
             "$ref": "#/components/schemas/Payment-Currency"
+          },
+          "allowedPaymentMethods": {
+            "$ref": "#/components/schemas/Subscription-PaymentMethods"
           },
           "description": {
             "$ref": "#/components/schemas/Subscription-Description"
@@ -2284,6 +2414,9 @@
           },
           "pauseIntervalCount": {
             "$ref": "#/components/schemas/Subscription-PauseIntervalCount"
+          },
+          "skipIntervalCount": {
+            "$ref": "#/components/schemas/Subscription-SkipIntervalCount"
           },
           "lastOrderId": {
             "$ref": "#/components/schemas/Payment-OrderId"
@@ -2358,6 +2491,9 @@
           "intervalCount": {
             "$ref": "#/components/schemas/Subscription-IntervalCount"
           },
+          "allowedPaymentMethods": {
+            "$ref": "#/components/schemas/Subscription-PaymentMethods"
+          },
           "description": {
             "$ref": "#/components/schemas/Subscription-Description"
           },
@@ -2404,6 +2540,9 @@
           "intervalCount": {
             "$ref": "#/components/schemas/Subscription-IntervalCount"
           },
+          "allowedPaymentMethods": {
+            "$ref": "#/components/schemas/Subscription-PaymentMethods"
+          },
           "description": {
             "$ref": "#/components/schemas/Subscription-Description"
           },
@@ -2433,6 +2572,9 @@
           },
           "pauseIntervalCount": {
             "$ref": "#/components/schemas/Subscription-PauseIntervalCount"
+          },
+          "skipIntervalCount": {
+            "$ref": "#/components/schemas/Subscription-SkipIntervalCount"
           },
           "retrySchedule": {
             "$ref": "#/components/schemas/Subscription-RetrySchedule"
@@ -2464,6 +2606,9 @@
               }
             ],
             "description": "The amount to be added to the subscription's initial payment. A positive integer\nrepresenting how much to charge in the smallest currency unit (e.g.,\n100 cents to charge 1.00 USD).\n"
+          },
+          "allowedPaymentMethods": {
+            "$ref": "#/components/schemas/Subscription-PaymentMethods"
           },
           "sequenceId": {
             "$ref": "#/components/schemas/Payment-SequenceId"
@@ -2593,14 +2738,18 @@
           "method": {
             "type": "string",
             "example": "card",
-            "enum": ["card"],
+            "enum": ["card", "bizum"],
             "x-enumDescriptions": {
-              "card": "Card"
+              "card": "Card",
+              "bizum": "Bizum"
             },
             "description": "Subscription method type."
           },
           "card": {
             "$ref": "#/components/schemas/Payment-PaymentMethodCard"
+          },
+          "bizum": {
+            "$ref": "#/components/schemas/Payment-PaymentMethodBizum"
           }
         }
       },
@@ -2672,14 +2821,16 @@
       "Subscription-Interval": {
         "type": "string",
         "example": "month",
-        "enum": ["day", "week", "month", "year"],
+        "enum": ["minute", "hour", "day", "week", "month", "year"],
         "x-enumDescriptions": {
+          "minute": "Minutely",
+          "hour": "Hourly",
           "day": "Daily",
           "week": "Weekly",
           "month": "Monthly",
           "year": "Yearly"
         },
-        "description": "Subscription interval."
+        "description": "Subscription interval. The `minute` and `hour` intervals are only available in test mode."
       },
       "Subscription-IntervalCount": {
         "type": "integer",
@@ -2692,6 +2843,12 @@
         "format": "int32",
         "example": 1,
         "description": "Number of intervals when subscription will be paused before it activates again."
+      },
+      "Subscription-SkipIntervalCount": {
+        "type": "integer",
+        "format": "int32",
+        "example": 1,
+        "description": "The number of intervals during which the subscription billing cycle will be skipped without altering the subscription status. This is useful when payment for a specific period is received through different methods.\n"
       },
       "Subscription-LastPayment": {
         "type": "object",
@@ -2799,9 +2956,32 @@
           }
         ],
         "description": "Defines a custom schedule for retrying failed subscription payments. Each entry in the array specifies how long to wait before attempting the next payment retry.\nIf not specified, the system's default retry schedule will be used.\n"
+      },
+      "Subscription-PaymentMethods": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "enum": ["card", "bizum"],
+        "x-enumDescriptions": {
+          "card": "Card",
+          "bizum": "Bizum"
+        },
+        "example": ["card", "bizum"],
+        "description": "List of payment methods allowed for subscriptions.\n"
       }
     },
     "parameters": {
+      "CertificateId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The unique identifier of the certificate.",
+        "schema": {
+          "type": "string",
+          "example": "a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1"
+        }
+      },
       "paymentId": {
         "name": "id",
         "in": "path",
@@ -2939,6 +3119,10 @@
   },
   "tags": [
     {
+      "name": "Apple Pay Certificate",
+      "description": "Manage Apple Pay certificates for iOS app integration.\n\nTo accept Apple Pay in your iOS app, you need an Apple Pay Payment Processing Certificate.\nThis API provides a complete certificate management workflow:\n\n1. **Create** - Generate a Certificate Signing Request (CSR)\n2. **Upload to Apple** - Use the CSR to create a certificate in Apple Developer Portal\n3. **Activate** - Upload the signed certificate from Apple to enable payment processing\n4. **Manage** - Enable, disable, or delete certificates as needed\n\nThe private key is securely generated and stored by MONEI. You never need to handle private keys directly.\n"
+    },
+    {
       "name": "Apple Pay Domain",
       "description": "The Apple Pay Domain API allows you to register and manage domains for Apple Pay integration.\n\nWith the Apple Pay Domain API, you can:\n\n- Register domains to use with Apple Pay\n- View currently registered domains\n- Ensure your website is properly configured for Apple Pay payments\n\nApple requires domain verification before you can accept Apple Pay payments on your website.\nThis API simplifies the process of registering your domains with Apple Pay and maintaining\nyour domain verification status.\n\n## Domain registration process\n\nTo accept Apple Pay on your website, you must register your domain with Apple. This process:\n\n1. Verifies that you control the domain\n2. Allows Apple Pay buttons to be displayed on your website\n3. Enables secure payment processing through Apple Pay\n\nOnce registered, your domain will be authorized to display Apple Pay payment options to customers.\n"
     },
@@ -2952,14 +3136,327 @@
     },
     {
       "name": "Payments",
-      "description": "The Payments API provides a comprehensive platform for processing transactions and managing the complete payment lifecycle.\n\n### Core Payment Operations\n\n- Create and process payments with multiple payment methods\n- Authorize payments and capture funds later\n- Cancel authorized payments to release reserved funds\n- Refund payments partially or in full\n- Generate detailed receipts for completed payments\n\n### Customer Experience Features\n\n- Send payment requests via WhatsApp, SMS, or Bizum\n- Create and distribute payment links through various channels\n- Generate permanent payment tokens for one-click checkout experiences\n- Support recurring billing and subscription payments\n\n### Implementation Best Practices\n\n- Create one payment per order or customer session for clear transaction records\n- Use the unique payment ID for all subsequent operations on a payment\n- Generate permanent payment tokens (with `generatePaymentToken: true`) for returning customers\n- Implement webhook notifications to receive real-time payment status updates\n\n## Payment Status Codes\n\nThe MONEI API returns a `statusCode` attribute in the Payment response to indicate the outcome of your request. This helps you understand whether an operation was successful or why it failed.\n\n### Success Codes\n\nSuccessful transactions return the following codes:\n\n| Code | Message                            |\n| ---- | ---------------------------------- |\n| E000 | Transaction approved               |\n| E001 | Transaction pending processing     |\n| E002 | Transaction pending authentication |\n| E003 | Transaction pending authorization  |\n\n### Error Codes\n\nError codes are grouped by category to help you quickly identify the type of issue:\n\n#### Configuration Errors (E1xx)\n\nThese errors relate to account configuration issues:\n\n| Code | Message                                                                                                      |\n| ---- | ------------------------------------------------------------------------------------------------------------ |\n| E101 | Error with payment processor configuration. Check this in your dashboard or contact MONEI for support        |\n| E102 | Invalid or inactive MID. Please contact the acquiring entity                                                 |\n| E103 | Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support |\n| E104 | Partial captures are not enabled in your account, please contact MONEI support                               |\n| E105 | MOTO Payment are not enabled in your account, please contact MONEI support                                   |\n\n#### Authentication and Request Errors (E15x)\n\nThese errors indicate issues with your API request format or authentication:\n\n| Code | Message                                                                       |\n| ---- | ----------------------------------------------------------------------------- |\n| E150 | Invalid or malformed request. Please check the message format                 |\n| E151 | Missing or malformed signature/auth                                           |\n| E152 | Error while decrypting request                                                |\n| E153 | Pre-authorization is expired and cannot be canceled or captured               |\n| E154 | The payment date cannot be less than the cancellation or capture date         |\n| E155 | The cancellation date exceeded the date allowed for pre-authorized operations |\n| E156 | Unauthorized token                                                            |\n\n#### Transaction Processing Errors (E2xx)\n\nThese errors occur during payment processing:\n\n| Code | Message                                                           |\n| ---- | ----------------------------------------------------------------- |\n| E200 | Transaction failed during payment processing                      |\n| E201 | Transaction declined by the card-issuing bank                     |\n| E202 | Transaction declined by the issuing bank                          |\n| E203 | Payment method not allowed                                        |\n| E204 | Wrong or not allowed currency                                     |\n| E205 | Incorrect reference / transaction does not exist                  |\n| E206 | Invalid payment method                                            |\n| E207 | Transaction failed: process time exceeded                         |\n| E208 | Transaction is currently being processed                          |\n| E209 | Duplicated operation                                              |\n| E210 | Wrong or not allowed payment amount                               |\n| E211 | Refund declined by processor                                      |\n| E212 | Transaction has already been captured                             |\n| E213 | Transaction has already been canceled                             |\n| E214 | The amount to be captured cannot exceed the pre-authorized amount |\n| E215 | The transaction to be captured has not been pre-authorized yet    |\n| E216 | The transaction to be canceled has not been pre-authorized yet    |\n| E217 | Transaction denied by processor to avoid duplicated operations    |\n| E218 | Error during payment request validation                           |\n| E219 | Refund declined due to exceeded amount                            |\n| E220 | Transaction has already been fully refunded                       |\n| E221 | Transaction declined due to insufficient funds                    |\n| E222 | The user has canceled the payment                                 |\n| E223 | Waiting for the transaction to be completed                       |\n| E224 | No reason to decline                                              |\n| E225 | Refund not allowed                                                |\n| E226 | Transaction cannot be completed, violation of law                 |\n| E227 | Stop Payment Order                                                |\n| E228 | Strong Customer Authentication required                           |\n| E229 | Expired payment method                                            |\n\n#### 3D Secure Related Errors (E3xx)\n\nThese errors are related to 3D Secure authentication:\n\n| Code | Message                                            |\n| ---- | -------------------------------------------------- |\n| E300 | Transaction declined due to security restrictions  |\n| E301 | 3D Secure authentication failed                    |\n| E302 | Authentication process timed out. Please try again |\n| E303 | An error occurred during the 3D Secure process     |\n| E304 | Invalid or malformed 3D Secure request             |\n| E305 | Exemption not allowed                              |\n| E306 | Exemption error                                    |\n| E307 | Fraud control error                                |\n| E308 | External MPI received wrong. Please check the data |\n| E309 | External MPI not enabled. Please contact support   |\n| E310 | Transaction confirmation rejected by the merchant  |\n\n#### Card Related Errors (E5xx)\n\nThese errors are specific to card payments:\n\n| Code | Message                                                            |\n| ---- | ------------------------------------------------------------------ |\n| E500 | Transaction declined during card payment process                   |\n| E501 | Card rejected: invalid card number                                 |\n| E502 | Card rejected: wrong expiration date                               |\n| E503 | Card rejected: wrong CVC/CVV2 number                               |\n| E504 | Card number not registered                                         |\n| E505 | Card is expired                                                    |\n| E506 | Error during payment authorization. Please try again               |\n| E507 | Cardholder has canceled the payment                                |\n| E508 | Transaction declined: AMEX cards not accepted by payment processor |\n| E509 | Card blocked temporarily or under suspicion of fraud               |\n| E510 | Card does not allow pre-authorization operations                   |\n| E511 | CVC/CVV2 number is required                                        |\n| E512 | Unsupported card type                                              |\n| E513 | Transaction type not allowed for this type of card                 |\n| E514 | Transaction declined by card issuer                                |\n| E515 | Implausible card data                                              |\n| E516 | Incorrect PIN                                                      |\n| E517 | Transaction not allowed for cardholder                             |\n| E518 | The amount exceeds the card limit                                  |\n\n#### Digital Wallet Errors (E6xx)\n\nThese errors are related to digital wallet payments:\n\n| Code | Message                                                        |\n| ---- | -------------------------------------------------------------- |\n| E600 | Transaction declined during ApplePay/GooglePay payment process |\n| E601 | Incorrect ApplePay or GooglePay configuration                  |\n\n#### PayPal Related Errors (E62x)\n\nThese errors are specific to PayPal payments:\n\n| Code | Message                                                              |\n| ---- | -------------------------------------------------------------------- |\n| E620 | Transaction declined during PayPal payment process                   |\n| E621 | Transaction declined during PayPal payment process: invalid currency |\n\n#### Bizum Related Errors (E64x-E65x)\n\nThese errors are specific to Bizum payments:\n\n| Code | Message                                                                    |\n| ---- | -------------------------------------------------------------------------- |\n| E640 | Bizum transaction declined after three authentication attempts             |\n| E641 | Bizum transaction declined due to failed authorization                     |\n| E642 | Bizum transaction declined due to insufficient funds                       |\n| E643 | Bizum transaction canceled: the user does not want to continue             |\n| E644 | Bizum transaction rejected by destination bank                             |\n| E645 | Bizum transaction rejected by origin bank                                  |\n| E646 | Bizum transaction rejected by processor                                    |\n| E647 | Bizum transaction failed while connecting with processor. Please try again |\n| E648 | Bizum transaction failed, payee is not found                               |\n| E649 | Bizum transaction failed, payer is not found                               |\n| E650 | Bizum REST not implemented                                                 |\n| E651 | Bizum transaction declined due to failed authentication                    |\n| E652 | The customer has disabled Bizum, please use another payment method         |\n\n#### Click To Pay Related Errors (E68x)\n\nThese errors are specific to ClickToPay payments:\n\n| Code | Message                                                |\n| ---- | ------------------------------------------------------ |\n| E680 | Transaction declined during ClickToPay payment process |\n| E681 | Incorrect ClickToPay configuration                     |\n\n#### Cofidis Related Errors (E7xx)\n\nThese errors are specific to Cofidis payments:\n\n| Code | Message                                             |\n| ---- | --------------------------------------------------- |\n| E700 | Transaction declined during Cofidis payment process |\n\n#### System Errors (E9xx)\n\nThese errors indicate system-level issues:\n\n| Code | Message                                        |\n| ---- | ---------------------------------------------- |\n| E999 | Service internal error. Please contact support |\n"
+      "description": "The Payments API provides a comprehensive platform for processing transactions and managing the complete payment lifecycle.\n\n### Core Payment Operations\n\n- Create and process payments with multiple payment methods\n- Authorize payments and capture funds later\n- Cancel authorized payments to release reserved funds\n- Refund payments partially or in full\n- Generate detailed receipts for completed payments\n\n### Customer Experience Features\n\n- Send payment requests via WhatsApp, SMS, or Bizum\n- Create and distribute payment links through various channels\n- Generate permanent payment tokens for one-click checkout experiences\n- Support recurring billing and subscription payments\n\n### Implementation Best Practices\n\n- Create one payment per order or customer session for clear transaction records\n- Use the unique payment ID for all subsequent operations on a payment\n- Generate permanent payment tokens (with `generatePaymentToken: true`) for returning customers\n- Implement webhook notifications to receive real-time payment status updates\n\n## Payment Status Codes\n\nThe MONEI API returns a `statusCode` attribute in the Payment response to indicate the outcome of your request. This helps you understand whether an operation was successful or why it failed.\n\n### Success Codes\n\nSuccessful transactions return the following codes:\n\n| Code | Message                            |\n| ---- | ---------------------------------- |\n| E000 | Transaction approved               |\n| E001 | Transaction pending processing     |\n| E002 | Transaction pending authentication |\n| E003 | Transaction pending authorization  |\n\n### Error Codes\n\nError codes are grouped by category to help you quickly identify the type of issue:\n\n#### Configuration Errors (E1xx)\n\nThese errors relate to account configuration issues:\n\n| Code | Message                                                                                                      |\n| ---- | ------------------------------------------------------------------------------------------------------------ |\n| E101 | Error with payment processor configuration. Check this in your dashboard or contact MONEI for support        |\n| E102 | Invalid or inactive MID. Please contact the acquiring entity                                                 |\n| E103 | Operation not allowed/configured for this merchant. Please contact the acquiring entity or MONEI for support |\n| E104 | Partial captures are not enabled in your account, please contact MONEI support                               |\n| E105 | MOTO Payment are not enabled in your account, please contact MONEI support                                   |\n\n#### Authentication and Request Errors (E15x)\n\nThese errors indicate issues with your API request format or authentication:\n\n| Code | Message                                                                       |\n| ---- | ----------------------------------------------------------------------------- |\n| E150 | Invalid or malformed request. Please check the message format                 |\n| E151 | Missing or malformed signature/auth                                           |\n| E152 | Error while decrypting request                                                |\n| E153 | Pre-authorization is expired and cannot be canceled or captured               |\n| E154 | The payment date cannot be less than the cancellation or capture date         |\n| E155 | The cancellation date exceeded the date allowed for pre-authorized operations |\n| E156 | Unauthorized token                                                            |\n\n#### Transaction Processing Errors (E2xx)\n\nThese errors occur during payment processing:\n\n| Code | Message                                                           |\n| ---- | ----------------------------------------------------------------- |\n| E200 | Transaction failed during payment processing                      |\n| E201 | Transaction declined by the card-issuing bank                     |\n| E202 | Transaction declined by the issuing bank                          |\n| E203 | Payment method not allowed                                        |\n| E204 | Wrong or not allowed currency                                     |\n| E205 | Incorrect reference / transaction does not exist                  |\n| E206 | Invalid payment method                                            |\n| E207 | Transaction failed: process time exceeded                         |\n| E208 | Transaction is currently being processed                          |\n| E209 | Duplicated operation                                              |\n| E210 | Wrong or not allowed payment amount                               |\n| E211 | Refund declined by processor                                      |\n| E212 | Transaction has already been captured                             |\n| E213 | Transaction has already been canceled                             |\n| E214 | The amount to be captured cannot exceed the pre-authorized amount |\n| E215 | The transaction to be captured has not been pre-authorized yet    |\n| E216 | The transaction to be canceled has not been pre-authorized yet    |\n| E217 | Transaction denied by processor to avoid duplicated operations    |\n| E218 | Error during payment request validation                           |\n| E219 | Refund declined due to exceeded amount                            |\n| E220 | Transaction has already been fully refunded                       |\n| E221 | Transaction declined due to insufficient funds                    |\n| E222 | The user has canceled the payment                                 |\n| E223 | Waiting for the transaction to be completed                       |\n| E224 | No reason to decline                                              |\n| E225 | Refund not allowed                                                |\n| E226 | Transaction cannot be completed, violation of law                 |\n| E227 | Stop Payment Order                                                |\n| E228 | Strong Customer Authentication required                           |\n| E229 | Expired payment method                                            |\n\n#### 3D Secure Related Errors (E3xx)\n\nThese errors are related to 3D Secure authentication:\n\n| Code | Message                                            |\n| ---- | -------------------------------------------------- |\n| E300 | Transaction declined due to security restrictions  |\n| E301 | 3D Secure authentication failed                    |\n| E302 | Authentication process timed out. Please try again |\n| E303 | An error occurred during the 3D Secure process     |\n| E304 | Invalid or malformed 3D Secure request             |\n| E305 | Exemption not allowed                              |\n| E306 | Exemption error                                    |\n| E307 | Fraud control error                                |\n| E308 | External MPI received wrong. Please check the data |\n| E309 | External MPI not enabled. Please contact support   |\n| E310 | Transaction confirmation rejected by the merchant  |\n\n#### Card Related Errors (E5xx)\n\nThese errors are specific to card payments:\n\n| Code | Message                                                            |\n| ---- | ------------------------------------------------------------------ |\n| E500 | Transaction declined during card payment process                   |\n| E501 | Card rejected: invalid card number                                 |\n| E502 | Card rejected: wrong expiration date                               |\n| E503 | Card rejected: wrong CVC/CVV2 number                               |\n| E504 | Card number not registered                                         |\n| E505 | Card is expired                                                    |\n| E506 | Error during payment authorization. Please try again               |\n| E507 | Cardholder has canceled the payment                                |\n| E508 | Transaction declined: AMEX cards not accepted by payment processor |\n| E509 | Card blocked temporarily or under suspicion of fraud               |\n| E510 | Card does not allow pre-authorization operations                   |\n| E511 | CVC/CVV2 number is required                                        |\n| E512 | Unsupported card type                                              |\n| E513 | Transaction type not allowed for this type of card                 |\n| E514 | Transaction declined by card issuer                                |\n| E515 | Implausible card data                                              |\n| E516 | Incorrect PIN                                                      |\n| E517 | Transaction not allowed for cardholder                             |\n| E518 | The amount exceeds the card limit                                  |\n\n#### Digital Wallet Errors (E6xx)\n\nThese errors are related to digital wallet payments:\n\n| Code | Message                                                        |\n| ---- | -------------------------------------------------------------- |\n| E600 | Transaction declined during ApplePay/GooglePay payment process |\n| E601 | Incorrect ApplePay or GooglePay configuration                  |\n\n#### PayPal Related Errors (E62x)\n\nThese errors are specific to PayPal payments:\n\n| Code | Message                                                              |\n| ---- | -------------------------------------------------------------------- |\n| E620 | Transaction declined during PayPal payment process                   |\n| E621 | Transaction declined during PayPal payment process: invalid currency |\n\n#### Bizum Related Errors (E64x-E65x)\n\nThese errors are specific to Bizum payments:\n\n| Code | Message                                                                    |\n| ---- | -------------------------------------------------------------------------- |\n| E640 | Bizum transaction declined after three authentication attempts             |\n| E641 | Bizum transaction declined due to failed authorization                     |\n| E642 | Bizum transaction declined due to insufficient funds                       |\n| E643 | Bizum transaction canceled: the user does not want to continue             |\n| E644 | Bizum transaction rejected by destination bank                             |\n| E645 | Bizum transaction rejected by origin bank                                  |\n| E646 | Bizum transaction rejected by processor                                    |\n| E647 | Bizum transaction failed while connecting with processor. Please try again |\n| E648 | Bizum transaction failed, payee is not found                               |\n| E649 | Bizum transaction failed, payer is not found                               |\n| E650 | Bizum REST not implemented                                                 |\n| E651 | Bizum transaction declined due to failed authentication                    |\n| E652 | The customer has disabled Bizum, please use another payment method         |\n\n#### Click To Pay Related Errors (E68x)\n\nThese errors are specific to ClickToPay payments:\n\n| Code | Message                                                |\n| ---- | ------------------------------------------------------ |\n| E680 | Transaction declined during ClickToPay payment process |\n| E681 | Incorrect ClickToPay configuration                     |\n\n#### System Errors (E9xx)\n\nThese errors indicate system-level issues:\n\n| Code | Message                                        |\n| ---- | ---------------------------------------------- |\n| E999 | Service internal error. Please contact support |\n"
     },
     {
       "name": "Subscriptions",
-      "description": "The Subscriptions API provides a powerful solution for managing recurring billing and subscription-based business models.\n\n## Key Features\n\n### Flexible Billing Options\n\n- **Multiple billing intervals**: Daily, weekly, monthly, or yearly billing cycles\n- **Custom intervals**: Configure non-standard periods using intervalCount (e.g., every 3 months)\n- **Trial periods**: Offer free trials before the first billing cycle begins\n- **Variable amounts**: Update subscription amounts for pricing changes or upgrades\n\n### Complete Lifecycle Management\n\n- **Create subscriptions**: Set up recurring billing plans with customizable parameters\n- **Activate subscriptions**: Begin billing cycles with customer payment information\n- **Pause/Resume**: Temporarily halt billing without cancellation\n- **Update subscriptions**: Modify pricing, billing details, or subscription parameters\n- **Cancel subscriptions**: End recurring billing permanently or at period end\n\n### Customer-Friendly Features\n\n- **Automated recurring payments**: No manual action required for subsequent billing\n- **Consistent billing dates**: Predictable billing on the same day of each period\n- **Payment retry mechanism**: Automatic retries for failed payments\n- **Customer control**: Enable customers to manage their own subscriptions\n\n### Integration Benefits\n\n- **Webhook notifications**: Get real-time updates on subscription status changes\n- **Detailed reporting**: Track subscription metrics and performance\n- **Simplified compliance**: Handle recurring billing requirements automatically\n- **Reduced churn**: Automatic billing helps prevent missed payments\n"
+      "description": "The Subscriptions API provides a powerful solution for managing recurring billing and subscription-based business models.\n\n## Key Features\n\n### Flexible Billing Options\n\n- **Multiple billing intervals**: Daily, weekly, monthly, or yearly billing cycles\n- **Custom intervals**: Configure non-standard periods using intervalCount (e.g., every 3 months)\n- **Trial periods**: Offer free trials before the first billing cycle begins\n- **Variable amounts**: Update subscription amounts for pricing changes or upgrades\n\n### Complete Lifecycle Management\n\n- **Create subscriptions**: Set up recurring billing plans with customizable parameters\n- **Activate subscriptions**: Begin billing cycles with customer payment information\n- **Pause/Resume**: Temporarily halt billing without cancellation\n- **Update subscriptions**: Modify pricing, billing details, or subscription parameters\n- **Cancel subscriptions**: End recurring billing permanently or at period end\n\n### Customer-Friendly Features\n\n- **Automated recurring payments**: No manual action required for subsequent billing\n- **Consistent billing dates**: Predictable billing on the same day of each period\n- **Payment retry mechanism**: Automatic retries for failed payments\n- **Customer control**: Enable customers to manage their own subscriptions\n\n### Integration Benefits\n\n- **Webhook notifications**: Get real-time updates on subscription status changes\n- **Detailed reporting**: Track subscription metrics and performance\n- **Simplified compliance**: Handle recurring billing requirements automatically\n- **Reduced churn**: Automatic billing helps prevent missed payments\n\n## Testing\n\n### Test Mode Limitations\n\n- **Active subscription limit**: In test mode, you can have only three active subscriptions at any time\n- **Automatic cancellation**: All subscriptions are automatically canceled after twelve payments (except when using the 5565 test card)\n\n### Test Mode Intervals\n\n- **Minute and hour intervals**: Only available in test mode for rapid testing of subscription cycles\n\n### Testing Failed Payments\n\nFor testing subscription payment failures, use a test card with the following characteristics:\n\n- **Test card ending in 5565**: Use test card that ending in 5565 (see [Test card numbers](https://docs.monei.com/testing/#test-card-numbers))\n- **Payment behavior**:\n  - The first payment for the subscription will be successful\n  - All subsequent payments will fail\n  - After the first failed payment, the subscription status changes to `Past due`\n  - After three consecutive failed payments, the subscription will be automatically cancelled\n"
     }
   ],
   "paths": {
+    "/apple-pay/certificates": {
+      "post": {
+        "operationId": "applePayCertificate_create",
+        "summary": "Create Certificate",
+        "description": "Creates a new Apple Pay certificate by generating a Certificate Signing Request (CSR).\n\nUse this endpoint to start the certificate creation process for accepting Apple Pay in your iOS app.\n\n## Setup workflow\n\n1. **Call this endpoint** to generate a CSR. The response includes the `csr` field in base64url format.\n\n2. **Decode the CSR** and save it as a `.certSigningRequest` file.\n   Base64url uses `-` and `_` instead of `+` and `/`. Convert and decode:\n\n   ```bash\n   echo \"CSR_VALUE\" | tr '_-' '/+' | base64 -d > apple_pay.certSigningRequest\n   ```\n\n3. **Go to [Apple Developer Portal](https://developer.apple.com/account/resources/certificates/list)**:\n   - Navigate to Certificates, Identifiers & Profiles\n   - Select your Merchant ID under Identifiers\n   - In the \"Apple Pay Payment Processing Certificate\" section, click \"Create Certificate\"\n   - Upload the `.certSigningRequest` file from step 2\n   - Download the signed certificate (`.cer` file)\n\n4. **Convert the certificate to base64**:\n\n   ```bash\n   base64 -i apple_pay.cer\n   ```\n\n5. **Activate the certificate** using the [Activate Certificate](https://docs.monei.com/apis/rest/apple-pay-certificate-activate/) endpoint with the base64 value.\n\n## Important notes\n\n- **CSRs expire after 24 hours.** Complete the certificate creation in Apple Developer Portal within this window, or generate a new CSR.\n- Each CSR can only be used once. If you need a new certificate, create a new CSR.\n- The private key is securely generated and stored by MONEI. You never need to handle private keys directly.\n- You must be enrolled in the [Apple Developer Program](https://developer.apple.com/programs/) to create certificates.\n- The CSR is cleared from the response after the certificate is activated.\n",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": ["Apple Pay Certificate"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ApplePayCertificateResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "JavaScript",
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.applePayCertificate.create();\n",
+            "label": "NodeJS"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\nrequire_once __DIR__ . '/vendor/autoload.php';\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n$monei->applePayCertificate->create();\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\nmonei.apple_pay_certificate.create()\n"
+          }
+        ]
+      },
+      "get": {
+        "operationId": "applePayCertificate_list",
+        "summary": "List Certificates",
+        "description": "Retrieves all Apple Pay certificates for your account.\n\nReturns an array of certificate objects, including both active and inactive certificates.\nUse this to view all certificates and their status.\n",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": ["Apple Pay Certificate"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ApplePayCertificateListResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "JavaScript",
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.applePayCertificate.list();\n",
+            "label": "NodeJS"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\nrequire_once __DIR__ . '/vendor/autoload.php';\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n$monei->applePayCertificate->list();\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\nmonei.apple_pay_certificate.list()\n"
+          }
+        ]
+      }
+    },
+    "/apple-pay/certificates/{id}": {
+      "get": {
+        "operationId": "applePayCertificate_get",
+        "summary": "Get Certificate",
+        "description": "Retrieves a specific Apple Pay certificate by its ID.\n\nReturns the certificate object with its current status, CSR (if not yet activated),\nand expiration date (if activated).\n",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": ["Apple Pay Certificate"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CertificateId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ApplePayCertificateResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "JavaScript",
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.applePayCertificate.get('a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1');\n",
+            "label": "NodeJS"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\nrequire_once __DIR__ . '/vendor/autoload.php';\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n$monei->applePayCertificate->get('a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1');\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\nmonei.apple_pay_certificate.get(\"a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1\")\n"
+          }
+        ]
+      },
+      "post": {
+        "operationId": "applePayCertificate_update",
+        "summary": "Update Certificate",
+        "description": "Updates an Apple Pay certificate's active status.\n\nUse this endpoint to enable or disable a certificate. Disabling a certificate\nprevents it from being used for payment token decryption while keeping it available\nfor future use.\n",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": ["Apple Pay Certificate"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CertificateId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApplePayCertificateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ApplePayCertificateResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "JavaScript",
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.applePayCertificate.update('a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1', {\n  active: true\n});\n",
+            "label": "NodeJS"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\nrequire_once __DIR__ . '/vendor/autoload.php';\n\nuse Monei\\Model\\UpdateApplePayCertificateRequest;\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n$monei->applePayCertificate->update(\n    'a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1',\n    new UpdateApplePayCertificateRequest(\n        [\n            'active' => true\n        ]\n    )\n);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\nmonei.apple_pay_certificate.update(\n    \"a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1\",\n    active=True\n)\n"
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "applePayCertificate_delete",
+        "summary": "Delete Certificate",
+        "description": "Deletes an Apple Pay certificate.\n\nThis permanently removes the certificate and its associated private key.\nThe certificate will no longer be available for payment processing.\n\n**Warning**: This action cannot be undone. If you only want to temporarily disable\na certificate, use the [Update Certificate](https://docs.monei.com/apis/rest/apple-pay-certificate-update/) endpoint instead.\n",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": ["Apple Pay Certificate"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CertificateId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DeleteApplePayCertificateResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "JavaScript",
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.applePayCertificate.delete('a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1');\n",
+            "label": "NodeJS"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\nrequire_once __DIR__ . '/vendor/autoload.php';\n\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n$monei->applePayCertificate->delete('a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1');\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\nmonei.apple_pay_certificate.delete(\"a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1\")\n"
+          }
+        ]
+      }
+    },
+    "/apple-pay/certificates/{id}/activate": {
+      "post": {
+        "operationId": "applePayCertificate_activate",
+        "summary": "Activate Certificate",
+        "description": "Activates an Apple Pay certificate by uploading the signed certificate from Apple.\n\nAfter creating a certificate in the Apple Developer Portal using your CSR, download\nthe signed certificate and upload it here to activate payment processing.\n\n## Activation process\n\n1. Ensure you have downloaded the signed certificate (`.cer` file) from Apple Developer Portal.\n\n2. Convert the certificate to base64:\n\n   ```bash\n   base64 -i apple_pay.cer\n   ```\n\n3. Call this endpoint with the base64-encoded certificate in the `cert` field.\n\n## Validation\n\nThe certificate is validated to ensure:\n\n- It matches the private key generated when creating the CSR\n- It has a valid expiration date\n\nOnce activated, the certificate becomes available for decrypting Apple Pay payment tokens\nin your iOS app.\n\n## Notes\n\n- A certificate can only be activated once.\n- The CSR is cleared after successful activation.\n- The expiration date is extracted and stored for monitoring.\n",
+        "security": [
+          {
+            "APIKey": []
+          }
+        ],
+        "tags": ["Apple Pay Certificate"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CertificateId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivateApplePayCertificateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ApplePayCertificateResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "JavaScript",
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.applePayCertificate.activate('a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1', {\n  cert: 'MIIEpDCCA4ygAwIBAgIIU...'\n});\n",
+            "label": "NodeJS"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\nrequire_once __DIR__ . '/vendor/autoload.php';\n\nuse Monei\\Model\\ActivateApplePayCertificateRequest;\nuse Monei\\MoneiClient;\n\n$monei = new MoneiClient('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n$monei->applePayCertificate->activate(\n    'a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1',\n    new ActivateApplePayCertificateRequest(\n        [\n            'cert' => 'MIIEpDCCA4ygAwIBAgIIU...'\n        ]\n    )\n);\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import Monei\n\nmonei = Monei.MoneiClient(api_key=\"pk_test_36cf3e8a15eff3f5be983562ea6b13ec\")\n\nmonei.apple_pay_certificate.activate(\n    \"a6ea0c67-d061-4f7c-9e3b-4a96a6e1e8b1\",\n    cert=\"MIIEpDCCA4ygAwIBAgIIU...\"\n)\n"
+          }
+        ]
+      }
+    },
     "/apple-pay/domains": {
       "post": {
         "operationId": "applePayDomain_register",
@@ -3007,7 +3504,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.applePayDomain.register({\n  domainName: 'example.com'\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.applePayDomain.register({\n  domainName: 'example.com'\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3067,7 +3565,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.bizum.validatePhone({\n  accountId: '6dccce85-b290-40c2-bb9c-57bc7ecfaf04',\n  phoneNumber: '+34600000000'\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.bizum.validatePhone({\n  accountId: '6dccce85-b290-40c2-bb9c-57bc7ecfaf04',\n  phoneNumber: '+34600000000'\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3132,7 +3631,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.paymentMethods.get({accountId: '6dccce85-b290-40c2-bb9c-57bc7ecfaf04'});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.paymentMethods.get({accountId: '6dccce85-b290-40c2-bb9c-57bc7ecfaf04'});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3197,7 +3697,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '000001',\n  callbackUrl: 'https://example.com/checkout/callback',\n  completeUrl: 'https://example.com/checkout/complete'\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.create({\n  amount: 110, // 1.10 EUR\n  currency: 'EUR',\n  orderId: '000001',\n  callbackUrl: 'https://example.com/checkout/callback',\n  completeUrl: 'https://example.com/checkout/complete'\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3252,7 +3753,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.get('832b77d1a4b372349a7ae0bb1b2af059');\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.get('832b77d1a4b372349a7ae0bb1b2af059');\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3321,7 +3823,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.confirm('832b77d1a4b372349a7ae0bb1b2af059', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.confirm('832b77d1a4b372349a7ae0bb1b2af059', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3390,7 +3893,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Capture a payment providing the payment id.\n// Optionally you can specify the amount to capture.\n// If amount is not specified, the total amount of the payment will be captured.\nmonei.payments.capture('832b77d1a4b372349a7ae0bb1b2af059', {\n  amount: 100 // 1.00 EUR\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\n// Capture a payment providing the payment id.\n// Optionally you can specify the amount to capture.\n// If amount is not specified, the total amount of the payment will be captured.\nmonei.payments.capture('832b77d1a4b372349a7ae0bb1b2af059', {\n  amount: 100 // 1.00 EUR\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3459,7 +3963,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei, PaymentCancellationReason} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.cancel('832b77d1a4b372349a7ae0bb1b2af059', {\n  cancellationReason: PaymentCancellationReason.REQUESTED_BY_CUSTOMER\n});\n"
+            "source": "import {Monei, PaymentCancellationReason} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.cancel('832b77d1a4b372349a7ae0bb1b2af059', {\n  cancellationReason: PaymentCancellationReason.REQUESTED_BY_CUSTOMER\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3528,7 +4033,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei, PaymentRefundReason} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.refund('832b77d1a4b372349a7ae0bb1b2af059', {\n  refundReason: PaymentRefundReason.REQUESTED_BY_CUSTOMER\n});\n"
+            "source": "import {Monei, PaymentRefundReason} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.refund('832b77d1a4b372349a7ae0bb1b2af059', {\n  refundReason: PaymentRefundReason.REQUESTED_BY_CUSTOMER\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3597,7 +4103,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', {\n  orderId: '000001',\n  callbackUrl: 'https://example.com/checkout/callback'\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.recurring('7cc38b08ff471ccd313ad62b23b9f362b107560b', {\n  orderId: '000001',\n  callbackUrl: 'https://example.com/checkout/callback'\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3667,7 +4174,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei, PaymentMessageLanguage} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.sendRequest('832b77d1a4b372349a7ae0bb1b2af059', {\n  phoneNumber: '+34500000000',\n  language: PaymentMessageLanguage.ES\n});\n"
+            "source": "import {Monei, PaymentMessageLanguage} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.sendRequest('832b77d1a4b372349a7ae0bb1b2af059', {\n  phoneNumber: '+34500000000',\n  language: PaymentMessageLanguage.ES\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3736,7 +4244,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei, PaymentMessageLanguage} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.sendLink('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: PaymentMessageLanguage.ES\n});\n"
+            "source": "import {Monei, PaymentMessageLanguage} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.sendLink('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: PaymentMessageLanguage.ES\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3805,7 +4314,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei, PaymentMessageLanguage} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.sendReceipt('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: PaymentMessageLanguage.ES\n});\n"
+            "source": "import {Monei, PaymentMessageLanguage} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.payments.sendReceipt('832b77d1a4b372349a7ae0bb1b2af059', {\n  customerEmail: 'john.doe@example.com',\n  language: PaymentMessageLanguage.ES\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3822,7 +4332,7 @@
       "post": {
         "operationId": "subscriptions_create",
         "summary": "Create Subscription",
-        "description": "Creates a new subscription with the specified parameters.\n\n**Subscription Lifecycle**:\n\n1. When first created, the subscription has a `PENDING` status\n2. To initiate billing, you must call the [activate endpoint](https://docs.monei.com/apis/rest/subscriptions-activate/) with payment details\n3. Once activated, the subscription will automatically bill according to the configured interval\n\n**Key Configuration Parameters**:\n\n- **Billing settings**: Amount, currency, interval (daily, weekly, monthly, yearly)\n- **Schedule customization**: Interval count, trial period duration\n- **Customer information**: Contact details, billing and shipping addresses\n- **Communication**: Callback URLs for webhook notifications about subscription events\n\n**Best Practices**:\n\n- Set clear, descriptive names for subscriptions to help with identification\n- Configure appropriate webhook notifications to monitor subscription status changes\n- Consider offering trial periods to increase customer conversion rates\n- Use metadata to store additional information relevant to your business logic\n",
+        "description": "Creates a new subscription with the specified parameters.\n\n**Subscription Lifecycle**:\n\n1. When first created, the subscription has a `PENDING` status\n2. To initiate billing, you must call the [activate endpoint](https://docs.monei.com/apis/rest/subscriptions-activate/) with payment details\n3. Once activated, the subscription will automatically bill according to the configured interval\n\n**Key Configuration Parameters**:\n\n- **Billing settings**: Amount, currency, interval (daily, weekly, monthly, yearly)\n- **Schedule customization**: Interval count, trial period duration\n- **Allowed payment methods**: An array of strings specifying which payment methods are allowed for this subscription (e.g., `card`, `bizum`)\n- **Customer information**: Contact details, billing and shipping addresses\n- **Communication**: Callback URLs for webhook notifications about subscription events\n\n**Best Practices**:\n\n- Set clear, descriptive names for subscriptions to help with identification\n- Configure appropriate webhook notifications to monitor subscription status changes\n- Consider offering trial periods to increase customer conversion rates\n- Use metadata to store additional information relevant to your business logic\n",
         "security": [
           {
             "APIKey": []
@@ -3870,7 +4380,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.create({\n  customer: {\n    name: 'John Doe',\n    email: 'john.doe@monei.com'\n  },\n  amount: 110,\n  currency: 'EUR',\n  interval: 'month',\n  intervalCount: 1,\n  description: 'MoonMail Lite Monthly',\n  callbackUrl: 'https://example.com/subscription/callback',\n  paymentCallbackUrl: 'https://example.com/payment/callback'\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.create({\n  customer: {\n    name: 'John Doe',\n    email: 'john.doe@monei.com'\n  },\n  amount: 110,\n  currency: 'EUR',\n  interval: 'month',\n  intervalCount: 1,\n  description: 'MoonMail Lite Monthly',\n  callbackUrl: 'https://example.com/subscription/callback',\n  paymentCallbackUrl: 'https://example.com/payment/callback'\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3925,7 +4436,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.get('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.get('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -3940,7 +4452,7 @@
       "put": {
         "operationId": "subscriptions_update",
         "summary": "Update Subscription",
-        "description": "Updates the configuration of an existing subscription.\n\n**Modifiable Parameters**:\n\n- Billing information (amount, description)\n- Customer details (contact information, billing/shipping addresses)\n- Subscription settings (cancelAtPeriodEnd, pauseAtPeriodEnd)\n- Metadata (for your internal tracking)\n\n**Update Effects**:\n\n- Amount changes apply to the next billing cycle\n- Customer information updates take effect immediately\n- Setting `cancelAtPeriodEnd` to true will end the subscription after the current period\n- Setting `pauseAtPeriodEnd` to true will pause billing after the current period\n\n**Note**: Some fundamental properties cannot be changed once a subscription is created,\nincluding currency and billing interval. To modify these, you would need to cancel the\nexisting subscription and create a new one.\n",
+        "description": "Updates the configuration of an existing subscription.\n\n**Modifiable Parameters**:\n\n- Billing information (amount, description, allowedPaymentMethods)\n- Customer details (contact information, billing/shipping addresses)\n- Subscription settings (cancelAtPeriodEnd, pauseAtPeriodEnd, skipIntervalCount)\n- Metadata (for your internal tracking)\n\n**Update Effects**:\n\n- Amount changes apply to the next billing cycle\n- Customer information updates take effect immediately\n- Setting `cancelAtPeriodEnd` to true will end the subscription after the current period\n- Setting `pauseAtPeriodEnd` to true will pause billing after the current period\n- Setting `skipIntervalCount` skips billing for the specified number of intervals without changing subscription status\n\n**Note**: Some fundamental properties cannot be changed once a subscription is created,\nincluding currency and billing interval. To modify these, you would need to cancel the\nexisting subscription and create a new one.\n",
         "security": [
           {
             "APIKey": []
@@ -3988,7 +4500,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.update('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {amount: 990});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.update('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {amount: 990});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -4010,7 +4523,7 @@
       "post": {
         "operationId": "subscriptions_activate",
         "summary": "Activate Subscription",
-        "description": "Activates a subscription by attaching a payment method and initiating the billing cycle.\n\n**Activation Process**:\n\n1. This endpoint transitions a `PENDING` subscription to `ACTIVE` status\n2. An initial payment is created to validate the payment method:\n   - For regular subscriptions: First billing cycle payment is processed immediately\n   - For trial subscriptions: A zero-amount payment is created to verify the payment method\n\n**Payment Method Updates**:\nIf the subscription is already active, this endpoint can be used to update the payment method.\nThe update process creates a zero-amount payment to verify the new payment method works correctly.\n\n**Important Notes**:\n\n- Subscription billing begins immediately upon successful activation (unless in trial period)\n- The payment method provided will be used for all future recurring charges\n- Activation failures (due to invalid payment method) will keep the subscription in `PENDING` status\n",
+        "description": "Activates a subscription by attaching a payment method and initiating the billing cycle.\n\n**Activation Process**:\n\n1. This endpoint transitions a `PENDING` subscription to `ACTIVE` status\n2. An initial payment is created to validate the payment method:\n   - For regular subscriptions: First billing cycle payment is processed immediately\n   - For trial subscriptions: A zero-amount payment is created to verify the payment method\n\n**Payment Method Updates**:\nIf the subscription is already active, this endpoint can be used to update the payment method.\nThe update process creates a zero-amount payment to verify the new payment method works correctly.\n\n**Important Notes**:\n\n- Subscription billing begins immediately upon successful activation (unless in trial period)\n- The payment method provided will be used for all future recurring charges\n- Activation failures (due to invalid payment method) will keep the subscription in `PENDING` status\n- You can specify `allowedPaymentMethods` to restrict which payment methods (e.g., `card`, `bizum`) are accepted for the subscription\n",
         "security": [
           {
             "APIKey": []
@@ -4033,7 +4546,7 @@
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Subscription"
+            "$ref": "#/components/responses/Payment"
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -4057,7 +4570,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.activate('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.activate('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {\n  paymentToken: '7cc38b08ff471ccd313ad62b23b9f362b107560b'\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -4126,7 +4640,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.cancel('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {cancelAtPeriodEnd: true});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.cancel('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {cancelAtPeriodEnd: true});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -4195,7 +4710,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.pause('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {pauseAtPeriodEnd: true});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.pause('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa', {pauseAtPeriodEnd: true});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -4250,7 +4766,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.resume('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.resume('575bcd84-09fc-4a6e-8c4c-f88b8eb90bfa');\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -4319,7 +4836,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.sendLink('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.sendLink('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
@@ -4388,7 +4906,8 @@
         "x-codeSamples": [
           {
             "lang": "JavaScript",
-            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.sendStatus('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n"
+            "source": "import {Monei} from '@monei-js/node-sdk';\n\nconst monei = new Monei('pk_test_36cf3e8a15eff3f5be983562ea6b13ec');\n\nmonei.subscriptions.sendStatus('sub_7cc38b08ff471ccd313ad62b23b9f362', {\n  email: 'customer@example.com',\n  language: 'en'\n});\n",
+            "label": "NodeJS"
           },
           {
             "lang": "PHP",
