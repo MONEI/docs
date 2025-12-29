@@ -270,18 +270,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/rover@npm:^0.36.2":
-  version: 0.36.2
-  resolution: "@apollo/rover@npm:0.36.2"
+"@apollo/rover@npm:^0.37.0":
+  version: 0.37.0
+  resolution: "@apollo/rover@npm:0.37.0"
   dependencies:
-    axios: "npm:^1.6.5"
+    axios: "npm:^1.13.1"
     axios-proxy-builder: "npm:^0.1.1"
     console.table: "npm:^0.10.0"
     detect-libc: "npm:^2.0.0"
     tar: "npm:^7.0.0"
   bin:
     rover: run.js
-  checksum: 10c0/a11f2c85ca353205fb9460c13638985101addcf10b4e33f133e99f422f4367eff79f1320dd0c2c609c243d7b3f2512aab28f5151d647076a2ae59779e10b2b05
+  checksum: 10c0/64193a1f855c045fbbbd3d56ff83d101346874df783056aa0199cf422a81c49a150b97bc149138a254f78168500ba278af56ef13a2be9bf8538fda816d87d6e4
   languageName: node
   linkType: hard
 
@@ -5750,14 +5750,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.5":
-  version: 1.8.4
-  resolution: "axios@npm:1.8.4"
+"axios@npm:^1.13.1":
+  version: 1.13.2
+  resolution: "axios@npm:1.13.2"
   dependencies:
     follow-redirects: "npm:^1.15.6"
-    form-data: "npm:^4.0.0"
+    form-data: "npm:^4.0.4"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/450993c2ba975ffccaf0d480b68839a3b2435a5469a71fa2fb0b8a55cdb2c2ae47e609360b9c1e2b2534b73dfd69e2733a1cf9f8215bee0bcd729b72f801b0ce
+  checksum: 10c0/e8a42e37e5568ae9c7a28c348db0e8cf3e43d06fcbef73f0048669edfe4f71219664da7b6cc991b0c0f01c28a48f037c515263cb79be1f1ae8ff034cd813867b
   languageName: node
   linkType: hard
 
@@ -8313,15 +8313,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^4.0.0":
-  version: 4.0.2
-  resolution: "form-data@npm:4.0.2"
+"form-data@npm:^4.0.4":
+  version: 4.0.5
+  resolution: "form-data@npm:4.0.5"
   dependencies:
     asynckit: "npm:^0.4.0"
     combined-stream: "npm:^1.0.8"
     es-set-tostringtag: "npm:^2.1.0"
+    hasown: "npm:^2.0.2"
     mime-types: "npm:^2.1.12"
-  checksum: 10c0/e534b0cf025c831a0929bf4b9bbe1a9a6b03e273a8161f9947286b9b13bf8fb279c6944aae0070c4c311100c6d6dbb815cd955dc217728caf73fad8dc5b8ee9c
+  checksum: 10c0/dd6b767ee0bbd6d84039db12a0fa5a2028160ffbfaba1800695713b46ae974a5f6e08b3356c3195137f8530dcd9dfcb5d5ae1eeff53d0db1e5aad863b619ce3b
   languageName: node
   linkType: hard
 
@@ -11966,7 +11967,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "monei-docs@workspace:."
   dependencies:
-    "@apollo/rover": "npm:^0.36.2"
+    "@apollo/rover": "npm:^0.37.0"
     "@docusaurus/core": "npm:3.9.2"
     "@docusaurus/faster": "npm:^3.9.2"
     "@docusaurus/module-type-aliases": "npm:3.9.2"
@@ -11989,10 +11990,10 @@ __metadata:
     husky: "npm:^9.1.7"
     lint-staged: "npm:^16.2.7"
     marked: "npm:^17.0.1"
-    prettier: "npm:^3.7.3"
+    prettier: "npm:^3.7.4"
     prism-react-renderer: "npm:^2.4.1"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
+    react: "npm:^19.2.3"
+    react-dom: "npm:^19.2.3"
     styled-components: "npm:^6.1.19"
   languageName: unknown
   linkType: soft
@@ -13768,12 +13769,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.7.3":
-  version: 3.7.3
-  resolution: "prettier@npm:3.7.3"
+"prettier@npm:^3.7.4":
+  version: 3.7.4
+  resolution: "prettier@npm:3.7.4"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/ee86bb06121c74dadc54f30b6f99aff6288966d9b842ce501d6991e20d20c6ce2d45028651b3b0955ca6e5fa89c1bee1e72b6f810243a93cef8bc69737972ef7
+  checksum: 10c0/9675d2cd08eacb1faf1d1a2dbfe24bfab6a912b059fc9defdb380a408893d88213e794a40a2700bd29b140eb3172e0b07c852853f6e22f16f3374659a1a13389
   languageName: node
   linkType: hard
 
@@ -14007,14 +14008,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^19.2.0":
-  version: 19.2.0
-  resolution: "react-dom@npm:19.2.0"
+"react-dom@npm:^19.2.3":
+  version: 19.2.3
+  resolution: "react-dom@npm:19.2.3"
   dependencies:
     scheduler: "npm:^0.27.0"
   peerDependencies:
-    react: ^19.2.0
-  checksum: 10c0/fa2cae05248d01288e91523b590ce4e7635b1e13f1344e225f850d722a8da037bf0782f63b1c1d46353334e0c696909b82e582f8cad607948fde6f7646cc18d9
+    react: ^19.2.3
+  checksum: 10c0/dc43f7ede06f46f3acc16ee83107c925530de9b91d1d0b3824583814746ff4c498ea64fd65cd83aba363205268adff52e2827c582634ae7b15069deaeabc4892
   languageName: node
   linkType: hard
 
@@ -14241,10 +14242,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^19.2.0":
-  version: 19.2.0
-  resolution: "react@npm:19.2.0"
-  checksum: 10c0/1b6d64eacb9324725bfe1e7860cb7a6b8a34bc89a482920765ebff5c10578eb487e6b46b2f0df263bd27a25edbdae2c45e5ea5d81ae61404301c1a7192c38330
+"react@npm:^19.2.3":
+  version: 19.2.3
+  resolution: "react@npm:19.2.3"
+  checksum: 10c0/094220b3ba3a76c1b668f972ace1dd15509b157aead1b40391d1c8e657e720c201d9719537375eff08f5e0514748c0319063392a6f000e31303aafc4471f1436
   languageName: node
   linkType: hard
 
