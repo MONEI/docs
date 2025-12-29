@@ -65,12 +65,14 @@ const tokenizationSpecification = {
 };
 ```
 
-To use Google Pay API directly you need to [request production access](https://developers.google.com/pay/api/web/guides/test-and-deploy/request-prod-access) and obtain your `merchantId` in Google Console (this step is not required if you are using our Google Pay Component).
+Use MONEI's `merchantId` from the [Get PaymentMethods](/docs/apis/rest/payment-methods-get.api.mdx) API (`metadata.googlePay.merchantId`). No separate registration with Google is required.
 
 ```javascript
 paymentDataRequest.merchantInfo = {
-  merchantName: 'Example Merchant',
-  merchantId: 'GOOGLE_MERCHANT_ID'
+  merchantName: 'Your Business Name',
+  // Get merchantId from Get PaymentMethods API (metadata.googlePay.merchantId)
+  // Test: 12345678901234567890, Production: BCR2DN6T37ENLJ3M
+  merchantId: 'MONEI_GOOGLE_PAY_MERCHANT_ID'
 };
 ```
 
@@ -182,7 +184,7 @@ paymentsClient.isReadyToPay(isReadyToPayRequest)
 
 ### Configure Payment Request
 
-Create a payment request with MONEI as the gateway:
+Create a payment request with MONEI as the gateway. Use the `merchantId` from the [Get PaymentMethods](/docs/apis/rest/payment-methods-get.api.mdx) API (`metadata.googlePay.merchantId`). No separate registration with Google is required:
 
 ```kotlin
 val paymentDataRequest = PaymentDataRequest.fromJson("""
@@ -205,7 +207,7 @@ val paymentDataRequest = PaymentDataRequest.fromJson("""
         }],
         "merchantInfo": {
             "merchantName": "Your Store Name",
-            "merchantId": "YOUR_GOOGLE_MERCHANT_ID"
+            "merchantId": "MONEI_GOOGLE_PAY_MERCHANT_ID"
         },
         "transactionInfo": {
             "totalPrice": "10.00",
@@ -315,4 +317,4 @@ curl -X POST https://api.monei.com/v1/payments/PAYMENT_ID/confirm \
 - Make sure that you are using [live (production) mode](testing.md) Account ID and API Key.
 - Make sure that you have at least one [enabled card processor](https://dashboard.monei.com/settings/payment-methods/card).
 - Make sure that you have Google Pay enabled in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods).
-- For direct API integration, [request production access](https://developers.google.com/pay/api/web/guides/test-and-deploy/request-prod-access) from Google and obtain your `merchantId`.
+- For direct API integration, use the `merchantId` from the [Get PaymentMethods](/docs/apis/rest/payment-methods-get.api.mdx) API.
