@@ -141,11 +141,11 @@ The private key is securely generated and stored by MONEI. You never need to han
 
 ### Initialize Apple Pay
 
-Create your `PKPaymentRequest` in Swift using the MONEI merchant identifier:
+Create your `PKPaymentRequest` in Swift. The `merchantIdentifier` is provided by MONEI - obtain it from the [Get PaymentMethods](/docs/apis/rest/payment-methods-get.api.mdx) API under `metadata.applePay.merchantId` (both test and production: `merchant.com.monei`):
 
 ```swift
 let paymentRequest = PKPaymentRequest()
-paymentRequest.merchantIdentifier = "merchant.com.monei"
+paymentRequest.merchantIdentifier = "merchant.com.monei" // From MONEI API
 paymentRequest.countryCode = "ES"
 paymentRequest.currencyCode = "EUR"
 paymentRequest.supportedNetworks = [.visa, .masterCard, .amex]
