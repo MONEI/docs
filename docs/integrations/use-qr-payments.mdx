@@ -12,14 +12,14 @@ Accept in-store contactless payments with QR codes. Choose between the MONEI Pay
 
 ## Permanent vs One-Time QR Codes
 
-|                 | Permanent (No-code)                        | One-Time (API)                                      |
+|                 | Permanent                                  | One-Time                                            |
 | --------------- | ------------------------------------------ | --------------------------------------------------- |
-| **Created via** | Dashboard / MONEI Pay App                  | Payments API                                        |
+| **Created via** | Dashboard Points of Sale                   | MONEI Pay App / Payments API                        |
 | **URL format**  | `https://secure.monei.com/codes/{code_id}` | `https://secure.monei.com/payments/{payment_id}/qr` |
 | **Reusable**    | Yes, same QR for multiple transactions     | No, one payment per QR                              |
-| **Amount**      | Customer enters (manual) or fixed          | Pre-set in API call                                 |
-| **Expiration**  | Never (can be disabled)                    | 5 minutes (or custom `expireAt`)                    |
-| **Best for**    | Static displays, printed materials, tables | Dynamic checkout, invoices, kiosks                  |
+| **Amount**      | Customer enters (manual) or fixed          | Pre-set per payment                                 |
+| **Expiration**  | Never (can be disabled)                    | 5 minutes (or custom `expireAt` via API)            |
+| **Best for**    | Static displays, printed materials, tables | Dynamic checkout, invoices, mobile POS              |
 
 ## Before You Begin
 
