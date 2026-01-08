@@ -106,6 +106,16 @@ Each POS can have multiple QR codes. From the POS detail page:
 - **Table service**: Create multiple POS per store for tracking
 - **Kiosk**: Fixed amount, restrict to card-only
 
+### User Access Control & Payment Grouping
+
+Stores and Points of Sale enable user access control and payment grouping:
+
+- **Assign users to stores/POS**: In [Dashboard → Settings → Users](https://dashboard.monei.com/settings/users), bind users (e.g., waiters, cashiers) to a store or POS
+- **Restricted visibility**: Bound users only see payments from their assigned store/POS
+- **Automatic inheritance**: When a bound user creates a payment via Dashboard or MONEI Pay, it inherits their store/POS ID
+- **API grouping**: Pass `storeId` or `pointOfSaleId` when creating payments via API to group them for reporting
+- **Traceability**: Admins can filter and track payments by store or POS origin
+
 </TabItem>
 <TabItem value="api" label="Payments API">
 
@@ -246,8 +256,8 @@ qr_code_url = f"https://secure.monei.com/payments/{payment_id}/qr"
 - **description** `string`: Payment description shown on the payment page
 - **customer** `object`: Pre-fill customer info (`email`, `name`, `phone`)
 - **metadata** `object`: Custom key-value pairs for tracking/reconciliation
-- **storeId** `string`: Associate payment with a specific store
-- **pointOfSaleId** `string`: Link payment to a dashboard-configured POS
+- **storeId** `string`: Associate payment with a store (for grouping and user access control)
+- **pointOfSaleId** `string`: Link payment to a POS (for grouping and user access control)
 - **expireAt** `integer`: Unix timestamp for custom expiration (default: 5 minutes from creation)
 
 Check all available [request parameters](/apis/rest/payments-create).
