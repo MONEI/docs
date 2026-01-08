@@ -126,6 +126,7 @@ const config: Config = {
     path.resolve(__dirname, './plugins/inject-scripts.js'),
     path.resolve(__dirname, './plugins/fix-docusaurus-navbar.js'),
     path.resolve(__dirname, './plugins/fix-auth-openapi.js'),
+    path.resolve(__dirname, './plugins/dynamic-copyright-year.js'),
     [
       'docusaurus-plugin-openapi-docs',
       {
