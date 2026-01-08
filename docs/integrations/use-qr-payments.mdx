@@ -106,16 +106,15 @@ Each POS can have multiple QR codes. From the POS detail page:
 - **Table service**: Create multiple POS per store for tracking
 - **Kiosk**: Fixed amount, restrict to card-only
 
-### User Access Control
+### User Access Control & Payment Grouping
 
-Stores and Points of Sale can be used to control user access and group payments:
+Stores and Points of Sale enable user access control and payment grouping:
 
-- **Assign users to stores/POS**: In [Dashboard → Settings → Users](https://dashboard.monei.com/settings/users), bind specific users (e.g., waiters, cashiers) to a store or POS
+- **Assign users to stores/POS**: In [Dashboard → Settings → Users](https://dashboard.monei.com/settings/users), bind users (e.g., waiters, cashiers) to a store or POS
 - **Restricted visibility**: Bound users only see payments from their assigned store/POS
-- **Automatic inheritance**: When a bound user creates a payment via Dashboard or MONEI Pay, the payment automatically inherits their store/POS ID
-- **Traceability**: Admins can track which store or POS originated each payment
-
-This enables merchants to give staff limited access while maintaining full oversight.
+- **Automatic inheritance**: When a bound user creates a payment via Dashboard or MONEI Pay, it inherits their store/POS ID
+- **API grouping**: Pass `storeId` or `pointOfSaleId` when creating payments via API to group them for reporting
+- **Traceability**: Admins can filter and track payments by store or POS origin
 
 </TabItem>
 <TabItem value="api" label="Payments API">
