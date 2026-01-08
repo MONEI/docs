@@ -1,12 +1,37 @@
 ---
 id: use-qr-payments
-title: Use QR code payments with MONEI Pay
-description: MONEI Pay is the simplest way to securely accept in-store contactless payments and support all the most popular payment methods with QR codes.
+title: Use QR code payments
+description: Accept in-store contactless payments with QR codes using the MONEI Pay app, Dashboard Points of Sale, or the Payments API.
 ---
 
-Accept in-store contactless payments and support all the most popular payment methods with QR codes using MONEI Pay.
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import {ArrowRightIcon} from '@heroicons/react/24/outline';
 
-## Getting started with MONEI Pay App
+Accept in-store contactless payments with QR codes. Choose between the MONEI Pay app, Dashboard Points of Sale, or the Payments API.
+
+## Permanent vs One-Time QR Codes
+
+|                 | Permanent (No-code)                        | One-Time (API)                                      |
+| --------------- | ------------------------------------------ | --------------------------------------------------- |
+| **Created via** | Dashboard / MONEI Pay App                  | Payments API                                        |
+| **URL format**  | `https://secure.monei.com/codes/{code_id}` | `https://secure.monei.com/payments/{payment_id}/qr` |
+| **Reusable**    | Yes, same QR for multiple transactions     | No, one payment per QR                              |
+| **Amount**      | Customer enters (manual) or fixed          | Pre-set in API call                                 |
+| **Expiration**  | Never (can be disabled)                    | 5 minutes (or custom `expireAt`)                    |
+| **Best for**    | Static displays, printed materials, tables | Dynamic checkout, invoices, kiosks                  |
+
+## Before You Begin
+
+- You'll need a MONEI account. Find your API keys in [MONEI Dashboard → Settings → API](https://dashboard.monei.com/settings/api).
+- Use [test mode keys](testing.md) for integration testing.
+- Ensure relevant payment methods are enabled in your account settings.
+- Monitor test payments in [Dashboard → Payments](https://dashboard.monei.com/payments) (enable Test Mode toggle).
+
+<Tabs groupId="integration-type">
+<TabItem value="no-code" label="MONEI Pay & Dashboard" default>
+
+## MONEI Pay App
 
 MONEI Pay provides the easiest way to accept payments in-store using a dedicated app.
 
@@ -37,11 +62,56 @@ Login into [pay.monei.com](https://pay.monei.com/) or download the **MONEI Pay**
   </a>
 </div>
 
+## Dashboard Points of Sale
+
+Create and manage QR-based Points of Sale directly in your MONEI Dashboard.
+
+### Creating a Point of Sale
+
+1. Go to [Dashboard → Settings → Points of Sale](https://dashboard.monei.com/settings/points-of-sale)
+2. Click **Create Point of Sale**
+3. Select **QR Code** as the type
+4. Configure your POS settings (see options below)
+
+### Configuration Options
+
+| Option                      | Description                                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Name**                    | Identifier for this POS (e.g., "Store Entrance", "Table 5")                                             |
+| **Store**                   | Associate with a store for multi-location tracking                                                      |
+| **Payment Flow**            | **Manual Amount**: Customer enters amount each time. **Fixed Amount**: Same amount for all transactions |
+| **Fixed Amount/Currency**   | Pre-set amount when using Fixed Amount flow                                                             |
+| **Allowed Payment Methods** | Restrict which payment methods appear (Card, Bizum, PayPal, etc.)                                       |
+| **Manual Capture**          | Place hold on funds (auth-only), capture later. Only for Card and PayPal                                |
+| **Require Email**           | Force customers to enter email before paying                                                            |
+| **Require Tax ID**          | Require NIF/CIF for invoicing purposes                                                                  |
+| **Callback URL**            | Webhook URL for payment notifications                                                                   |
+| **Include QR in Email**     | Add QR code containing order ID to confirmation email (useful for ticketing/events)                     |
+| **QR Code Text**            | Custom text shown alongside QR in confirmation email                                                    |
+| **Description**             | Description passed to all payments from this POS                                                        |
+
+### Managing QR Codes
+
+Each POS can have multiple QR codes. From the POS detail page:
+
+- **Generate new codes** for different locations or displays
+- **Download QR codes** as SVG or PNG (300px, 500px, or 1000px)
+- **Enable/disable codes** without deleting them
+- **Copy permalink** for embedding: `https://secure.monei.com/codes/{code_id}`
+
+### Use Cases
+
+- **Retail**: Manual amount flow, enable multiple payment methods
+- **Events/Ticketing**: Fixed amount, require email, enable "QR in confirmation email"
+- **Table service**: Create multiple POS per store for tracking
+- **Kiosk**: Fixed amount, restrict to card-only
+
+</TabItem>
+<TabItem value="api" label="Payments API">
+
 ## Creating QR Payments Programmatically
 
-This section covers how to generate QR payment codes using the MONEI API for custom integrations.
-
-import {ArrowRightIcon} from '@heroicons/react/24/outline';
+Generate QR payment codes using the MONEI API for custom integrations.
 
 <div className="flex-container">
   <img src="/img/qr.png" alt="QR" width="300" height="300" />
@@ -49,21 +119,9 @@ import {ArrowRightIcon} from '@heroicons/react/24/outline';
   <img src="/img/qr-demo.png" alt="QR demo" width="300" />
 </div>
 
-## Before You Begin
-
-- You'll need a MONEI account and your API keys (test or live). Find them in your [MONEI Dashboard](https://dashboard.monei.com/settings/api).
-- Use your [test mode keys](testing.md) for integration testing.
-- Ensure relevant payment methods are enabled in your account settings.
-- You can monitor test payments in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (ensure Test Mode is active).
-
-## Integration Steps
-
 ### 1. Create Payment (Server-side)
 
 Create a [Payment](/apis/rest/schemas/payment) on your server with an amount and currency.
-
-import TabItem from '@theme/TabItem';
-import Tabs from '@theme/Tabs';
 
 <Tabs
   defaultValue="curl"
@@ -175,12 +233,22 @@ qr_code_url = f"https://secure.monei.com/payments/{payment_id}/qr"
 
 </Tabs>
 
-**Key Parameters:**
+**Required Parameters:**
 
 - **amount** `positive integer`: Amount in the smallest currency unit (e.g., 110 for €1.10).
 - **currency** `string`: Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217) (e.g., `EUR`).
 - **orderId** `string`: Your unique order identifier.
 - **callbackUrl** `string`: Your server endpoint URL for asynchronous webhook notifications.
+
+**Optional Parameters:**
+
+- **allowedPaymentMethods** `array`: Restrict available payment methods (e.g., `["card", "bizum"]`)
+- **description** `string`: Payment description shown on the payment page
+- **customer** `object`: Pre-fill customer info (`email`, `name`, `phone`)
+- **metadata** `object`: Custom key-value pairs for tracking/reconciliation
+- **storeId** `string`: Associate payment with a specific store
+- **pointOfSaleId** `string`: Link payment to a dashboard-configured POS
+- **expireAt** `integer`: Unix timestamp for custom expiration (default: 5 minutes from creation)
 
 Check all available [request parameters](/apis/rest/payments-create).
 
@@ -242,6 +310,82 @@ If MONEI doesn't receive a `200 OK`, it will retry sending the webhook.
 
 Once the signature is verified, inspect the `status` field in the Payment object to confirm payment success (`SUCCEEDED`) and fulfill the order, or handle failures.
 
+### Alternative: Poll Payment Status
+
+For kiosk or display scenarios where you need real-time status updates, poll the payment status instead of (or in addition to) webhooks.
+
+<Tabs
+  defaultValue="curl"
+  groupId="code"
+  values={[
+    {label: 'cURL', value: 'curl'},
+    {label: 'Node.js', value: 'node'},
+    {label: 'PHP', value: 'php'},
+    {label: 'Python', value: 'python'}
+  ]}>
+<TabItem value="curl">
+
+```shell script title="GET https://api.monei.com/v1/payments/{payment_id}"
+curl --request GET 'https://api.monei.com/v1/payments/{payment_id}' \
+--header 'Authorization: YOUR_API_KEY'
+```
+
+</TabItem>
+<TabItem value="node">
+
+```js title="server.js"
+const payment = await monei.payments.get(paymentId);
+console.log(payment.status);
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php title="server.php"
+<?php
+$payment = $monei->payments->get($paymentId);
+echo $payment->getStatus();
+?>
+```
+
+</TabItem>
+<TabItem value="python">
+
+```python title="server.py"
+payment = monei.payments.get(payment_id)
+print(payment.status)
+```
+
+</TabItem>
+</Tabs>
+
+**Status values:** `PENDING`, `PENDING_PROCESSING`, `SUCCEEDED`, `FAILED`, `CANCELED`, `EXPIRED`
+
+:::tip Polling Best Practice
+Poll every 2-3 seconds. Stop when status is no longer `PENDING`/`PENDING_PROCESSING` or when the QR expires.
+:::
+
+</TabItem>
+</Tabs>
+
 ## Customization
 
 You can customize the appearance of the QR code (color, icon) and the hosted payment page in your [MONEI Dashboard → Settings → Branding](https://dashboard.monei.com/settings/branding).
+
+## Testing
+
+- Use your [test mode API keys](testing.md) for development
+- Enable **Test Mode** in your [Dashboard](https://dashboard.monei.com/payments) to view test payments
+- Use [test card numbers](testing.md#test-card-numbers) to simulate different scenarios
+- Verify webhook delivery in Dashboard → Developers → Webhooks
+
+## Troubleshooting
+
+**QR code expired**
+QR codes are valid for 5 minutes. Create a new payment if the code expires.
+
+**Payment method not showing**
+Check that the method is enabled in your account and not filtered by `allowedPaymentMethods`.
+
+**Webhook not received**
+Verify your `callbackUrl` is publicly accessible, returns `200 OK`, and check webhook logs in Dashboard.
