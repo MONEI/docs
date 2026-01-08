@@ -270,18 +270,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/rover@npm:^0.37.0":
-  version: 0.37.0
-  resolution: "@apollo/rover@npm:0.37.0"
+"@apollo/rover@npm:^0.36.2":
+  version: 0.36.2
+  resolution: "@apollo/rover@npm:0.36.2"
   dependencies:
-    axios: "npm:^1.13.1"
+    axios: "npm:^1.6.5"
     axios-proxy-builder: "npm:^0.1.1"
     console.table: "npm:^0.10.0"
     detect-libc: "npm:^2.0.0"
     tar: "npm:^7.0.0"
   bin:
     rover: run.js
-  checksum: 10c0/64193a1f855c045fbbbd3d56ff83d101346874df783056aa0199cf422a81c49a150b97bc149138a254f78168500ba278af56ef13a2be9bf8538fda816d87d6e4
+  checksum: 10c0/a11f2c85ca353205fb9460c13638985101addcf10b4e33f133e99f422f4367eff79f1320dd0c2c609c243d7b3f2512aab28f5151d647076a2ae59779e10b2b05
   languageName: node
   linkType: hard
 
@@ -5750,7 +5750,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.13.1":
+"axios@npm:^1.6.5":
   version: 1.13.2
   resolution: "axios@npm:1.13.2"
   dependencies:
@@ -11967,7 +11967,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "monei-docs@workspace:."
   dependencies:
-    "@apollo/rover": "npm:^0.37.0"
+    "@apollo/rover": "npm:^0.36.2"
     "@docusaurus/core": "npm:3.9.2"
     "@docusaurus/faster": "npm:^3.9.2"
     "@docusaurus/module-type-aliases": "npm:3.9.2"
