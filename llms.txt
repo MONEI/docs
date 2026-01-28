@@ -1,0 +1,55 @@
+# MONEI Documentation (llms.txt)
+
+## Project summary
+- Documentation site for MONEI built with Docusaurus 3.
+- Covers product guides, integration examples, and API references (REST + GraphQL).
+- Public site: https://docs.monei.com
+
+## Key URLs and endpoints
+- MONEI Dashboard: https://dashboard.monei.com
+- Support: https://support.monei.com
+- REST API base URL: https://api.monei.com/v1
+- OpenAPI download: https://js.monei.com/api/v1/openapi.json
+- GraphQL endpoint (introspection): https://graphql.monei.com/
+- SDKs: https://github.com/MONEI/monei-php-sdk | https://github.com/MONEI/monei-python-sdk | https://github.com/MONEI/monei-node-sdk
+- Postman collection: https://postman.monei.com/
+
+## Tech stack
+- Docusaurus 3 (preset-classic), React 19, MDX
+- API docs: docusaurus-plugin-openapi-docs, docusaurus-theme-openapi-docs
+- GraphQL docs: @graphql-markdown/docusaurus
+- Search: Algolia (index: monei)
+- Tooling: Prettier, Husky, lint-staged
+
+## Repository structure
+- `docs/`: MDX content for guides and API references
+- `docs/apis/rest`: generated from `openapi.json`
+- `docs/apis/graphql`: generated from `schema.graphql`
+- `openapi.json`: REST API specification (downloaded in production builds)
+- `schema.graphql`: GraphQL schema (downloaded via Rover in production builds)
+- `plugins/`: custom Docusaurus plugins
+- `src/`: custom React components, pages, and CSS
+- `static/`: static assets and examples (HTML, images)
+- `scripts/`: generation helpers for REST/GraphQL docs
+- `utils/`: utility scripts (e.g., search reindexing)
+
+## Local development
+Prerequisites:
+- Node.js >= 22
+- Yarn >= 4.7.0 (packageManager: yarn@4.12.0)
+
+Commands:
+- `yarn`: install dependencies
+- `yarn start`: run local dev server
+- `yarn build`: build static site
+- `yarn serve`: serve build output
+- `yarn deploy`: deploy using Docusaurus config
+- `yarn genapi:rest`: regenerate REST API docs from `openapi.json`
+- `yarn genapi:graphql`: regenerate GraphQL docs from `schema.graphql`
+- `yarn reindex`: rebuild search index
+
+## Formatting and quality
+- Prettier runs on staged files via lint-staged and Husky.
+
+## License
+- MIT
