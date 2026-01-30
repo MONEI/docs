@@ -39,3 +39,13 @@ Connect with hotel booking systems:
 
 - **[Siteminder](/channel-tokenization)**
 - **[Channex](/channel-tokenization)**
+
+### AI-Friendly Documentation
+
+Use our machine-readable documentation with LLMs and AI coding assistants:
+
+- **[llms.txt](https://docs.monei.com/llms.txt)** — index of all documentation pages in markdown format
+- **[llms-full.txt](https://docs.monei.com/llms-full.txt)** — all documentation concatenated into a single file
+- **[openapi.json](https://docs.monei.com/openapi.json)** — OpenAPI spec with full REST API schemas, parameters, and responses
+- Use the **"Copy page"** button on any page to copy its content as markdown
+- Feed the copied markdown to your AI assistant for context-aware help with MONEI integration

@@ -56,7 +56,17 @@ export default {
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },
-    'testing'
+    'testing',
+    {
+      type: 'link',
+      label: 'llms.txt',
+      href: 'https://docs.monei.com/llms.txt'
+    },
+    {
+      type: 'link',
+      label: 'llms-full.txt',
+      href: 'https://docs.monei.com/llms-full.txt'
+    }
   ],
   rest: [
     {
