@@ -4187,9 +4187,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@signalwire/docusaurus-plugin-llms-txt@npm:2.0.0-alpha.2":
-  version: 2.0.0-alpha.2
-  resolution: "@signalwire/docusaurus-plugin-llms-txt@npm:2.0.0-alpha.2"
+"@signalwire/docusaurus-plugin-llms-txt@npm:1.2.2":
+  version: 1.2.2
+  resolution: "@signalwire/docusaurus-plugin-llms-txt@npm:1.2.2"
   dependencies:
     fs-extra: "npm:^11.0.0"
     hast-util-select: "npm:^6.0.4"
@@ -4205,7 +4205,7 @@ __metadata:
     unist-util-visit: "npm:^5"
   peerDependencies:
     "@docusaurus/core": ^3.0.0
-  checksum: 10c0/8c9fe930b96c0e42815720db216105d7717a587a7afc32782ee2c6ba9d50670cd88e363421617cb10fd36f2b28fd0d5bdf3275ce53fbde201036b2855b455caf
+  checksum: 10c0/f9c47749357fd781b092705860367482383e8d8a92e76d9d77f95f38ed7041a4b3fc5e177ef3dc97423637101dc1a24ae63aafed89a22a0de27acb74ae3552b5
   languageName: node
   linkType: hard
 
@@ -12199,7 +12199,7 @@ __metadata:
     "@mdx-js/mdx": "npm:^3.1.1"
     "@mdx-js/react": "npm:^3.1.1"
     "@monei-js/components": "npm:^1.7.7"
-    "@signalwire/docusaurus-plugin-llms-txt": "npm:2.0.0-alpha.2"
+    "@signalwire/docusaurus-plugin-llms-txt": "npm:1.2.2"
     clsx: "npm:^2.1.1"
     docusaurus-plugin-openapi-docs: "npm:4.5.1"
     docusaurus-theme-openapi-docs: "npm:4.5.1"

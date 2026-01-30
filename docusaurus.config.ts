@@ -126,33 +126,31 @@ const config: Config = {
     [
       '@signalwire/docusaurus-plugin-llms-txt',
       {
-        generate: {
+        content: {
           enableMarkdownFiles: true,
           enableLlmsFullTxt: false,
           relativePaths: false
         },
-        structure: {
-          siteTitle: 'MONEI Documentation',
-          siteDescription: 'Explore our guides and examples to integrate MONEI.',
-          enableDescriptions: true,
-          optionalLinks: [
-            {
-              title: 'REST API OpenAPI',
-              url: 'https://js.monei.com/api/v1/openapi.json',
-              description: 'Official OpenAPI specification for MONEI API v1.'
-            },
-            {
-              title: 'GraphQL Endpoint',
-              url: 'https://graphql.monei.com/',
-              description: 'GraphQL endpoint for schema introspection.'
-            },
-            {
-              title: 'Postman Collection',
-              url: 'https://postman.monei.com/',
-              description: 'Prebuilt requests for testing the REST API.'
-            }
-          ]
-        },
+        siteTitle: 'MONEI Documentation',
+        siteDescription: 'Explore our guides and examples to integrate MONEI.',
+        enableDescriptions: true,
+        optionalLinks: [
+          {
+            title: 'REST API OpenAPI',
+            url: 'https://js.monei.com/api/v1/openapi.json',
+            description: 'Official OpenAPI specification for MONEI API v1.'
+          },
+          {
+            title: 'GraphQL Endpoint',
+            url: 'https://graphql.monei.com/',
+            description: 'GraphQL endpoint for schema introspection.'
+          },
+          {
+            title: 'Postman Collection',
+            url: 'https://postman.monei.com/',
+            description: 'Prebuilt requests for testing the REST API.'
+          }
+        ],
         runOnPostBuild: true
       }
     ],
