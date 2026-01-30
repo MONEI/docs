@@ -9,6 +9,15 @@ const config: Config = {
   baseUrl: '/',
   trailingSlash: true,
   favicon: 'https://assets.monei.com/images/icon.png',
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'llms-txt',
+        href: '/llms.txt'
+      }
+    }
+  ],
   future: {
     experimental_faster: true,
     v4: true
@@ -128,7 +137,7 @@ const config: Config = {
       {
         content: {
           enableMarkdownFiles: true,
-          enableLlmsFullTxt: false,
+          enableLlmsFullTxt: true,
           relativePaths: false
         },
         siteTitle: 'MONEI Documentation',
@@ -165,7 +174,7 @@ const config: Config = {
         docsPluginId: 'rest',
         config: {
           api: {
-            specPath: 'openapi.json',
+            specPath: 'static/openapi.json',
             outputDir: 'docs/apis/rest',
             downloadUrl: 'https://js.monei.com/api/v1/openapi.json',
             hideSendButton: true,
