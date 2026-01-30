@@ -1,6 +1,7 @@
 ---
 id: verify-signature
 title: Verify signature
+description: Verify MONEI webhook signatures to ensure request authenticity.
 ---
 
 The `MONEI-Signature` header included in each signed request contains a timestamp and one or more signatures. The timestamp is prefixed by `t=`, and each signature is prefixed by a scheme. Schemes start with `v`, followed by an integer. Currently, the only valid live signature scheme is `v1`.

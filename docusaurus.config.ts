@@ -9,6 +9,15 @@ const config: Config = {
   baseUrl: '/',
   trailingSlash: true,
   favicon: 'https://assets.monei.com/images/icon.png',
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'llms-txt',
+        href: '/llms.txt'
+      }
+    }
+  ],
   future: {
     experimental_faster: true,
     v4: true
@@ -123,6 +132,37 @@ const config: Config = {
     ]
   ],
   plugins: [
+    [
+      '@signalwire/docusaurus-plugin-llms-txt',
+      {
+        content: {
+          enableMarkdownFiles: true,
+          enableLlmsFullTxt: true,
+          relativePaths: false
+        },
+        siteTitle: 'MONEI Documentation',
+        siteDescription: 'Explore our guides and examples to integrate MONEI.',
+        enableDescriptions: true,
+        optionalLinks: [
+          {
+            title: 'REST API OpenAPI',
+            url: 'https://js.monei.com/api/v1/openapi.json',
+            description: 'Official OpenAPI specification for MONEI API v1.'
+          },
+          {
+            title: 'GraphQL Endpoint',
+            url: 'https://graphql.monei.com/',
+            description: 'GraphQL endpoint for schema introspection.'
+          },
+          {
+            title: 'Postman Collection',
+            url: 'https://postman.monei.com/',
+            description: 'Prebuilt requests for testing the REST API.'
+          }
+        ],
+        runOnPostBuild: true
+      }
+    ],
     path.resolve(__dirname, './plugins/inject-scripts.js'),
     path.resolve(__dirname, './plugins/fix-docusaurus-navbar.js'),
     path.resolve(__dirname, './plugins/fix-auth-openapi.js'),
@@ -134,7 +174,7 @@ const config: Config = {
         docsPluginId: 'rest',
         config: {
           api: {
-            specPath: 'openapi.json',
+            specPath: 'static/openapi.json',
             outputDir: 'docs/apis/rest',
             downloadUrl: 'https://js.monei.com/api/v1/openapi.json',
             hideSendButton: true,

@@ -263,6 +263,59 @@ body {
   font-size: 0.9rem !important;
 }
 
+/* Copy page markdown button */
+.breadcrumbs-copy-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copy-md-button {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--ifm-color-primary);
+  background: transparent;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: var(--ifm-global-radius);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.copy-md-button:hover {
+  background: var(--ifm-color-primary);
+  color: #fff;
+}
+
+.copy-md-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.copy-md-button--success {
+  color: #16a34a;
+  border-color: #16a34a;
+}
+
+.copy-md-button--success:hover {
+  background: #16a34a;
+  color: #fff;
+}
+
+.copy-md-button--error {
+  color: #dc2626;
+  border-color: #dc2626;
+}
+
 /* docusaurus-plugin-openapi-docs: Customize embedded schema */
 .embedded-schema {
   margin-top: 1rem;
