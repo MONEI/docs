@@ -16,83 +16,62 @@ Password: `demo`
 
 ## Before you begin
 
-To test your integration:
+Before installing, make sure that:
 
-- Use your [test mode](testing.md) API Key. You can find them in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api)
-- You can check the status of a test payment in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (in test mode).
+- **At least one payment method is enabled** in your [MONEI Dashboard → Profile (top-right) → Settings → Payment configuration → Payment methods](https://dashboard.monei.com/settings/payment-methods).
+- **You are in the correct mode**: The app connects to the **test or live mode** you are currently using in the MONEI dashboard. Use the mode switcher in the dashboard header to [switch between test and live mode](testing.md), then install the app when you are already in the mode you want. If you are not yet approved for live, you can switch to test mode to try out the apps.
+
+To verify test payments, check [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (switch to test mode to see test payments).
 
 ## Install
 
 <p>
   <a
-    href="https://apps.shopify.com/monei-onsite"
+    href="https://accounts.shopify.com/store-login?no_redirect=true&redirect=%2Fadmin%2Fsettings%2Fpayments%2Falternative-providers%2F44761089"
     target="_blank"
     className="button button--primary"
   >
-    Install from Shopify App Store
+    Install app
   </a>
 </p>
 
+### Installation steps
+
+1. Click the link above to install the app directly.
+2. You will be redirected to the **MONEI dashboard**. Log in if you are not already logged in. On the **Connect** screen for MONEI Onsite, complete the connection.
+
+   ![Connect MONEI Pay · Bizum](/img/shopify/onsite/connect.png)
+
+3. You will then be redirected to **Shopify → Settings → Payments**. Click **Activate** to enable the payment method.
+
+   ![Activate MONEI Onsite](/img/shopify/onsite/activate.png)
+
 ## Configure
 
-### First time install
+### Accessing configuration from the dashboard
 
-When you install the app for the first time:
+Go to **Profile (top-right) → Settings → Integrations → Shopify** and click **Configure**.
 
-1. You will be automatically redirected to the configuration page
-2. Enter your API Key. You can find your API Key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api)
+![MONEI Shopify apps list](/img/shopify/integrations-apps-list.png)
 
-   ![Configure MONEI App](/img/shopify/onsite/configuration.png)
+This opens the list of MONEI apps installed in your **current** test or live mode (use the mode switcher to see apps in the other mode). From the list:
 
-3. After saving your API Key, you will be redirected to the Payments Settings
-4. Click on **Activate** to enable the payment method
+- **Actions → Configure** — opens the configuration screen for that app (switch between test and live mode, or add and manage stores per country).
+- **Actions → Open in Shopify** — opens the Shopify activation screen for that app.
 
-   ![Configure MONEI Payments](/img/shopify/onsite/activate.png)
+![MONEI app configuration screen](/img/shopify/integrations-app-configuration.png)
 
-### Modify configuration
+### Accessing from Shopify Admin
 
-To modify payment method settings or switch between test/live mode:
+You can also open the MONEI integration from Shopify:
 
-1. Go to **Shopify Admin → Settings**
-
-   ![Shopify Settings](/img/shopify/settings-button.png)
-
-2. Navigate to **Payments → MONEI Onsite**
-
-   ![Shopify Payments](/img/shopify/onsite/payments-section.png)
-
-3. Modify your configuration as needed
-4. Click on **Activate** to apply your changes
-
-   ![Configure MONEI Payments](/img/shopify/onsite/activate.png)
-
-### Modify API Key
-
-To change your API Key:
-
-1. Go to **Shopify Admin → Settings**
-
-   ![Shopify Settings](/img/shopify/settings-button.png)
-
-2. Navigate to **Payments → MONEI Onsite**
-
-   ![Shopify Payments](/img/shopify/onsite/payments-section.png)
-
-3. Click on the **More actions** dropdown menu in the top right corner and select **Manage**
-
-   ![Shopify Manage App](/img/shopify/onsite/manage-app-button.png)
-
-4. Enter your new API Key
-
-   ![Configure MONEI App](/img/shopify/onsite/configuration.png)
-
-5. After saving, you will be redirected to the Payments Settings
-6. Click on **Activate** to apply your changes
+- **Settings → Apps → MONEI Onsite** → **Open App**, or
+- **Settings → Payments → MONEI Onsite** → **More actions** → **Manage**
 
 ## Before you go live
 
-- Make sure that you are using [live (production) mode](testing.md) API Key.
-- Make sure that you have at least one active [payment method](https://dashboard.monei.com/settings/payment-methods)
+- Switch to [live (production) mode](testing.md) in the MONEI dashboard and ensure the app is configured for live mode.
+- Ensure you have at least one active [payment method](https://dashboard.monei.com/settings/payment-methods) (Profile → Settings → Payment configuration) in your MONEI account.
 
 ## How to find the Shopify Order
 
