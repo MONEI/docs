@@ -51,8 +51,7 @@ export default {
         'guides/payouts',
         'guides/save-payment-method',
         'guides/send-cardholder-name',
-        'guides/verify-signature',
-        'guides/monei-pod-wifi'
+        'guides/verify-signature'
       ],
       'MONEI JS': ['monei-js/overview', 'monei-js/payment-request', 'monei-js/reference']
     },
