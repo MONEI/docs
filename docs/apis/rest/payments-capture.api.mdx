@@ -30,16 +30,19 @@ import Heading from '@theme/Heading';
 ></MethodEndpoint>
 
 Captures funds from a previously authorized payment. This endpoint can only
-be used with payments in `AUTHORIZED` status.
+be used with payments in `AUTHORIZED` status. Both full and partial captures are supported — specify an `amount` less than or equal to the original authorized amount to perform a partial capture.
 
 This operation completes the two-step authorization flow:
 
-1. **Authorize**: Create a payment with `transactionType: AUTH` to reserve funds
-2. **Capture**: Transfer the reserved funds to your account when ready to fulfill the order
+1. **Authorize**: Create a payment with `transactionType: AUTH` to hold or validate funds
+2. **Capture**: Transfer the funds to your account when ready to fulfill the order
 
-**Important**: Authorized payments expire after exactly seven days. After expiration,
-they will be marked as `EXPIRED` and can no longer be captured. Be sure to capture
-funds within this timeframe or communicate with your customer about a new payment.
+**Important**: The capture window depends on the payment method:
+- **Card payments**: Authorized payments expire after **7 days**.
+- **Bizum payments**: Authorized payments expire after **30 days**.
+
+After expiration, they will be marked as `EXPIRED` and can no longer be captured. Be sure to capture
+funds within the applicable timeframe or communicate with your customer about a new payment.
 
 <Heading
   id={'request'}
