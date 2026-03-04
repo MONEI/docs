@@ -6,24 +6,125 @@ description: Use Pay By Link to send your customers a link to pay online in one 
 
 Send your customers a unique link via email, WhatsApp or SMS to pay online in one click!
 
-![Pay By Link](/img/pay-by-link-preview.png)
+<div style={{textAlign: 'center'}}>
+  <img src="/img/pay-by-link-preview.png" alt="Pay By Link" width={760} />
+</div>
 
 ## Overview
 
-This page explains how to create payment links programmatically using the [MONEI Payments API](/apis/rest/payments-create). You can also create and manage payment links manually via your [MONEI Dashboard](https://dashboard.monei.com/).
+This page explains how to create payment links from the [MONEI Dashboard](#create-from-dashboard) or programmatically using the [MONEI Payments API](#integration-steps).
 
 Pay By Link generates a unique URL for a specific payment amount that directs the customer to a secure MONEI-hosted payment page.
 
-## Before You Begin
+## Create from Dashboard
+
+You can create payment links directly from the MONEI Dashboard without writing any code.
+
+### 1. Navigate to Payments
+
+Go to [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) and click the **Pay By Link** button.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/img/pay-by-link/dashboard-payments.png" alt="Dashboard Payments" width={760} />
+</div>
+
+### 2. Fill in the payment form
+
+Fill in the payment details. Some fields are always required, while others depend on the selected payment methods.
+
+:::tip Quick Summary
+
+- **Always required**: Amount, Allowed payment methods.
+- **Conditionally required**: Customer email and Billing Address (for specific methods).
+- **Optional**: Expiration date, Order ID, customer details, description, store, shipping address.
+  :::
+
+| Field                       | Status        | Notes                                                   |
+| --------------------------- | ------------- | ------------------------------------------------------- |
+| **Amount**                  | `Required`    | Payment amount in your account currency                 |
+| **Allowed payment methods** | `Required`    | At least one method must be selected                    |
+| **Expiration date**         | `Optional`    | Defaults to 7 days from creation; must be a future date |
+| **Order ID**                | `Optional`    | Alphanumeric identifier, max 40 characters              |
+| **Customer name**           | `Optional`    |                                                         |
+| **Customer email**          | `Conditional` | Required when Multibanco or MB WAY is selected          |
+| **Customer phone**          | `Optional`    |                                                         |
+| **Description**             | `Optional`    | Custom description attached to the payment              |
+| **Store**                   | `Optional`    | Only visible if you have multiple stores configured     |
+| **Billing Address**         | `Conditional` | Required when Multibanco or MB WAY is selected          |
+| **Shipping Address**        | `Optional`    | Optional, collapsible section                           |
+
+<div style={{textAlign: 'center'}}>
+  <img src="/img/pay-by-link/create-payment-form.png" alt="Create Payment Form" width={520} />
+</div>
+
+#### Conditional behavior by payment method
+
+The form adapts automatically based on the selected payment methods.
+
+**Billing Address and Customer Email become required** when any of these payment methods is selected:
+
+- Multibanco
+- MB WAY
+
+<div style={{textAlign: 'center'}}>
+  <img src="/img/pay-by-link/billing-address.png" alt="Billing Address" width={540} />
+</div>
+
+**Manually capture payment** checkbox appears only when **all** selected payment methods support manual capture:
+
+- Card
+- PayPal
+- Bizum
+
+If any other method is included (e.g. Multibanco), the manual capture option is hidden.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/img/pay-by-link/manual-capture.png" alt="Manual Capture" width={540} />
+</div>
+
+### 3. Review and send the payment link
+
+After clicking **Create payment**, a **Send payment request** modal appears where you can review the payment details before sending the link to your customer.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/img/pay-by-link/send-payment-request.png" alt="Send Payment Request" width={400} />
+</div>
+
+From this modal you can configure:
+
+- **Delivery channel** — Choose how to deliver the link: Email, WhatsApp, SMS, or Payment request.
+- **Send to** — The recipient's email address or phone number, depending on the selected channel.
+- **Customer language** — The language for the payment page and notification (English, Español, Català, Português, Deutsch, Italiano, Français).
+
+<div style={{textAlign: 'center'}}>
+  <img src="/img/pay-by-link/delivery-channel.png" alt="Delivery Channel" width={540} />
+</div>
+
+<div style={{textAlign: 'center'}}>
+  <img src="/img/pay-by-link/customer-language.png" alt="Customer Language" width={540} />
+</div>
+
+The modal also shows:
+
+- A **preview** of the payment notification with order ID, amount, date, and billing details.
+- A **Permalink** and **Get short link** option to copy the payment URL directly without sending a notification.
+
+Click **Send payment request** to deliver the link to the customer through the selected channel.
+
+## API Integration
+
+The following section explains the **API flow** (server-side implementation).
+
+### Before You Begin (API)
 
 - You'll need a MONEI account and your API keys (test or live). Find them in your [MONEI Dashboard](https://dashboard.monei.com/settings/api).
 - Use your [test mode keys](testing.md) for integration testing.
 - Ensure relevant payment methods are enabled in your account settings for the hosted page.
 - You can monitor test payments in your [MONEI Dashboard → Payments](https://dashboard.monei.com/payments) (ensure Test Mode is active).
 
-## Integration Steps
+### Integration Steps
 
-Creating and processing a Pay By Link payment involves creating a payment on your server, sending the generated link to the customer, and processing the final payment status via webhooks.
+Creating and processing a Pay By Link payment via API involves creating a payment on your server, sending the generated link to the customer, and processing the final payment status via webhooks.
 
 ### 1. Create Payment (Server-side)
 
