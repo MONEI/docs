@@ -53,8 +53,16 @@ function hasExistingOgImage(html) {
 function startServer() {
   return new Promise((resolve) => {
     const server = http.createServer((req, res) => {
+      let decoded;
       try {
-        let filePath = path.resolve(path.join(BUILD_DIR, decodeURIComponent(req.url || '/')));
+        decoded = decodeURIComponent(req.url || '/');
+      } catch {
+        res.writeHead(400);
+        res.end();
+        return;
+      }
+      try {
+        let filePath = path.resolve(path.join(BUILD_DIR, decoded));
         if (!filePath.startsWith(path.resolve(BUILD_DIR))) {
           res.writeHead(403);
           res.end();
@@ -83,12 +91,12 @@ function startServer() {
         res.writeHead(200, {'Content-Type': mimeTypes[ext] || 'application/octet-stream'});
         const stream = fs.createReadStream(filePath);
         stream.on('error', () => {
-          res.writeHead(500);
+          if (!res.headersSent) res.writeHead(500);
           res.end();
         });
         stream.pipe(res);
       } catch {
-        res.writeHead(500);
+        if (!res.headersSent) res.writeHead(500);
         res.end();
       }
     });
