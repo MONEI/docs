@@ -12,6 +12,7 @@ frontend:
         - yarn run genapi:rest
         - yarn run genapi:graphql
         - yarn run build
+        - node scripts/generate-og-images.mjs
     postBuild:
       commands:
         - aws amplify update-app --app-id $AWS_APP_ID --custom-rules file://redirects.json
