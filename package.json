@@ -11,7 +11,8 @@
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
     "reindex": "node utils/reindex.js",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generate-og-images": "node scripts/generate-og-images.mjs"
   },
   "license": "MIT",
   "dependencies": {
@@ -57,7 +58,8 @@
     "dotenv": "^17.2.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.7.4"
+    "prettier": "^3.7.4",
+    "puppeteer": "^24.39.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,md,mdx,json,css,scss}": [
