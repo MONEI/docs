@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "docusaurus build && node scripts/generate-og-images.mjs",
     "genapi:rest": "docusaurus clean-api-docs all && docusaurus gen-api-docs all && node scripts/fix-rest-api-docs.js",
     "genapi:graphql": "node scripts/clean-graphql.js && docusaurus graphql-to-doc",
     "swizzle": "docusaurus swizzle",
