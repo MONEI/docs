@@ -35,7 +35,7 @@ function renderCard(title, description, breadcrumb) {
     breadcrumb &&
       h(
         'div',
-        {style: {display: 'flex', fontSize: 20, color: '#7c5696', letterSpacing: '0.02em'}},
+        {style: {display: 'flex', fontSize: 32, color: '#7c5696', letterSpacing: '0.02em'}},
         breadcrumb
       ),
     h(
@@ -54,27 +54,27 @@ function renderCard(title, description, breadcrumb) {
         {
           style: {
             display: 'flex',
-            fontSize: 52,
+            fontSize: 72,
             fontWeight: 600,
             color: '#1a1a2e',
             lineHeight: 1.2,
             letterSpacing: '-0.02em'
           }
         },
-        title.length > 60 ? title.slice(0, 57) + '...' : title
+        title.length > 40 ? title.slice(0, 37) + '...' : title
       ),
       description &&
         h(
           'div',
-          {style: {display: 'flex', fontSize: 24, color: '#555', lineHeight: 1.4}},
+          {style: {display: 'flex', fontSize: 36, color: '#555', lineHeight: 1.4}},
           description
         )
     ),
     h(
       'div',
       {style: {display: 'flex', alignItems: 'center', justifyContent: 'space-between'}},
-      h('img', {src: LOGO_DATA_URI, width: 140, height: 31, style: {display: 'flex'}}),
-      h('div', {style: {display: 'flex', fontSize: 18, color: '#999'}}, 'docs.monei.com')
+      h('img', {src: LOGO_DATA_URI, width: 200, height: 44, style: {display: 'flex'}}),
+      h('div', {style: {display: 'flex', fontSize: 28, color: '#999'}}, 'docs.monei.com')
     )
   );
 }
