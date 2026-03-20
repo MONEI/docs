@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@apollo/rover':
-        specifier: ^0.37.0
-        version: 0.37.0
+        specifier: ^0.36.2
+        version: 0.36.2
       '@docusaurus/core':
         specifier: 3.9.2
         version: 3.9.2(@docusaurus/faster@3.9.2(@docusaurus/types@3.9.2(@swc/core@1.15.18)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)))(@mdx-js/react@3.1.1(@types/react@19.2.14)(react@19.2.4))(@rspack/core@1.7.9)(@swc/core@1.15.18)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -182,8 +182,8 @@ packages:
     resolution: {integrity: sha512-60vepv88RwcJtSHrD6MjIL6Ta3SOYbgfnkHb+ppAVK+o9mXprRtulx7VlRl3lN3bbvysAfCS7WMVfhUYemB0IQ==}
     engines: {node: '>= 16'}
 
-  '@apollo/rover@0.37.0':
-    resolution: {integrity: sha512-3/VqSmoku5fiG71sZqU3tBlFGhvIwAkVG465kD+wEXmZsPX6tlTQtGbv56NXqKWtUISlioRha+EAoVXITmI6LA==}
+  '@apollo/rover@0.36.2':
+    resolution: {integrity: sha512-64D1AkHpkzEYCBUzaQsOLcHcGNVI1XTQgKp+X1wL3wMAdCrT4YgtkNhe7Ov0h1P6qm6FD6pwenY2X03njwVkaw==}
     engines: {node: '>=14', npm: '>=6'}
     hasBin: true
 
@@ -7074,7 +7074,7 @@ snapshots:
       '@types/json-schema': 7.0.15
       js-yaml: 4.1.1
 
-  '@apollo/rover@0.37.0':
+  '@apollo/rover@0.36.2':
     dependencies:
       axios: 1.13.6
       axios-proxy-builder: 0.1.2
