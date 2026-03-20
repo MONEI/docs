@@ -6,6 +6,11 @@ const OG_DIR = 'og-images';
 const WIDTH = 1200;
 const HEIGHT = 630;
 const SKIP_PREFIXES = ['/apis/rest/', '/apis/graphql/'];
+const LOGO_SVG = fs.readFileSync(
+  path.join(__dirname, '..', 'static', 'img', 'monei-logo.svg'),
+  'utf-8'
+);
+const LOGO_DATA_URI = `data:image/svg+xml;base64,${Buffer.from(LOGO_SVG).toString('base64')}`;
 
 function shouldSkip(permalink) {
   return SKIP_PREFIXES.some((p) => permalink.startsWith(p));
@@ -62,18 +67,13 @@ function renderCard(title, description, breadcrumb) {
         h(
           'div',
           {style: {display: 'flex', fontSize: 24, color: '#555', lineHeight: 1.4}},
-          description.length > 120 ? description.slice(0, 117) + '...' : description
+          description
         )
     ),
     h(
       'div',
       {style: {display: 'flex', alignItems: 'center', justifyContent: 'space-between'}},
-      h(
-        'div',
-        {style: {display: 'flex', alignItems: 'center', gap: 12}},
-        h('div', {style: {width: 36, height: 36, backgroundColor: '#8961a5', borderRadius: 8}}),
-        h('div', {style: {fontSize: 28, fontWeight: 600, color: '#8961a5'}}, 'MONEI')
-      ),
+      h('img', {src: LOGO_DATA_URI, width: 140, height: 31, style: {display: 'flex'}}),
       h('div', {style: {display: 'flex', fontSize: 18, color: '#999'}}, 'docs.monei.com')
     )
   );
@@ -105,8 +105,8 @@ function extractTitle(html) {
 
 function extractDescription(html) {
   const m =
-    html.match(/<meta[^>]*name="description"[^>]*content="([^"]*)"/) ||
-    html.match(/<meta[^>]*content="([^"]*)"[^>]*name="description"/);
+    html.match(/<meta[^>]*name=["']?description["']?[^>]*content="([^"]*)"/) ||
+    html.match(/<meta[^>]*content="([^"]*)"[^>]*name=["']?description["']?/);
   return m ? m[1] : null;
 }
 
