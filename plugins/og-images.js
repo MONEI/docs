@@ -5,7 +5,7 @@ const SITE_URL = 'https://docs.monei.com';
 const OG_DIR = 'og-images';
 const WIDTH = 1200;
 const HEIGHT = 630;
-const SKIP_PREFIXES = ['/apis/rest/', '/apis/graphql/'];
+const SKIP_PREFIXES = [];
 const LOGO_SVG = fs.readFileSync(
   path.join(__dirname, '..', 'static', 'img', 'monei-logo.svg'),
   'utf-8'
