@@ -6,7 +6,7 @@ This repository contains the documentation website for MONEI, built using [Docus
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) version 22.0 or above
+- [Node.js](https://nodejs.org/) version 24.0 or above
 - [pnpm](https://pnpm.io/) version 10 or above
 
 ### Installation
