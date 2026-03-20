@@ -7,18 +7,18 @@ This repository contains the documentation website for MONEI, built using [Docus
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) version 22.0 or above
-- [Yarn](https://yarnpkg.com/) version 4.7.0 or above
+- [pnpm](https://pnpm.io/) version 10 or above
 
 ### Installation
 
 ```bash
-yarn
+pnpm
 ```
 
 ### Local Development
 
 ```bash
-yarn start
+pnpm start
 ```
 
 This command starts a local development server and opens a browser window. Most changes are reflected live without having to restart the server.
@@ -28,7 +28,7 @@ This command starts a local development server and opens a browser window. Most 
 #### REST
 
 ```bash
-yarn genapi:rest
+pnpm genapi:rest
 ```
 
 This command generates REST API documentation from the `openapi.json` file and outputs it as MDX files in the `docs/apis/rest` folder.
@@ -42,7 +42,7 @@ aws s3 cp s3://$JS_BUCKET/api/v1/openapi.json ./openapi.json
 #### GraphQL
 
 ```bash
-yarn genapi:graphql
+pnpm genapi:graphql
 ```
 
 This command generates GraphQL API documentation from the `schema.graphql` file and outputs it as MDX files in the `docs/apis/graphql` folder.
@@ -50,13 +50,13 @@ This command generates GraphQL API documentation from the `schema.graphql` file 
 During [production builds](.amplify.yml), the latest version of the GraphQL schema is downloaded with the following command:
 
 ```bash
-yarn rover graph introspect https://graphql.monei.com/ --output schema.graphql
+pnpm rover graph introspect https://graphql.monei.com/ --output schema.graphql
 ```
 
 ### Build
 
 ```bash
-yarn build
+pnpm build
 ```
 
 This command generates static content into the `build` directory and can be served using any static content hosting service.
@@ -64,7 +64,7 @@ This command generates static content into the `build` directory and can be serv
 ### Deployment
 
 ```bash
-yarn deploy
+pnpm run deploy
 ```
 
 This command builds the website and deploys it according to the configuration in your `docusaurus.config.js` file.

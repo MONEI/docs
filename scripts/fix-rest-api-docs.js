@@ -59,6 +59,19 @@ async function formatMDX(content) {
   }
 }
 
+// Fix DocCardList usage in tag pages to not use deprecated useCurrentSidebarCategory import
+function fixDocCardList(content) {
+  return content
+    .replace(
+      /import \{useCurrentSidebarCategory\} from ['"]@docusaurus\/theme-common['"];?\n?/g,
+      ''
+    )
+    .replace(
+      /<DocCardList items=\{useCurrentSidebarCategory\(\)\.items\}\s*\/>/g,
+      '<DocCardList />'
+    );
+}
+
 // Transform schema definitions into markdown tables
 function transformSchemaDefinitions(content) {
   return content.replace(
@@ -84,6 +97,7 @@ async function processFile(filePath) {
     const content = fs.readFileSync(filePath, 'utf8');
     let fixedContent = fixXmlEncoding(content);
     fixedContent = stripPTags(fixedContent);
+    fixedContent = fixDocCardList(fixedContent);
     fixedContent = transformSchemaDefinitions(fixedContent);
     fixedContent = await formatMDX(fixedContent);
     fs.writeFileSync(filePath, fixedContent);
